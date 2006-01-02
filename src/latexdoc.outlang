@@ -1,0 +1,18 @@
+include "latex.outlang"
+
+doctemplate
+"% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\documentclass{article}
+$header
+\title{$title}
+\date{}
+\begin{document}
+\maketitle
+\noindent
+"
+"
+$footer
+\end{document}
+"
+end
+

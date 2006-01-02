@@ -1,0 +1,88 @@
+# Copyright (C) 2001 Bruce Korb <bkorb@pacbell.net>
+#  
+# This file is free software; as a special exception the author gives
+# unlimited permission to copy and/or distribute it, with or without 
+# modifications, as long as this notice is preserved.
+# 
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+# Originally written by Bruce Korb <bkorb@pacbell.net>
+# Modified by Lorenzo Bettini <http://www.lorenzobettini.it>
+
+#! /bin/sh
+
+sdir=`cd $1 ; pwd`
+
+if [ ! -d "${sdir}" ] || [ $# -eq 0 ] || [ $# -gt 2 ]
+then
+  echo "USAGE:  $0 <src-dir> [ <dest-dir> ]" >&2
+  echo "        <dest-dir> defaults to <src-dir>.html" >&2
+  exit 1
+fi
+
+if [ $# -eq 2 ]
+then
+  ddir=$2
+else
+  ddir=${sdir}.html
+fi
+
+if [ -d ${ddir} ]
+then
+  ( rd=".XX$$"
+    mkdir ${rd}
+    mv ${ddir} ${rd}
+    chmod -R u+w ${rd}
+    rm -rf ${rd} & )
+fi
+
+mkdir ${ddir}
+( cd ${sdir}
+  find . -type d ) | \
+( cd ${ddir}
+  while read f ; do mkdir -p $f ; done ) 2> /dev/null
+
+( cd ${sdir}
+  find . -type f ) | \
+  egrep '\.(c|h|C|H|cc|hh|cpp|hpp)$' | \
+while read f
+do
+  cmd="cpp2html -d -t4 --input=${sdir}/${f} --output=${ddir}/${f}.html"
+  echo $f
+  eval $cmd
+done
+
+cd ${ddir}
+find * -name '*.html' | sort > .LIST
+
+exec 4> index.html
+cat >&4 <<_EOF_
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Source Index">
+<TITLE>`pwd`</TITLE>
+</HEAD>
+<BODY bgcolor="#FFFFFF" text="#000000" link="#0000EE"
+      vlink="#551A8B" alink="#FF0000">
+<PRE>
+_EOF_
+
+d=""
+while read f
+do
+  dir=`dirname $f`
+  if [ X"$dir" = X"$d" ] ; then :
+  else
+	echo "<P>Directory $dir" >&4
+    d=$dir
+  fi
+
+  f=${f%.html}
+  echo "    <A HREF=\"${f}.html\">${f}</A>" >&4
+done < .LIST
+rm -f .LIST
+echo "</PRE></BODY>" >&4
+exec 4>&-

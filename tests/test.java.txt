@@ -1,0 +1,49 @@
+[33m01:[m [31m/*[m
+[33m02:[m [31m  This is a classical Hello program[m
+[33m03:[m [31m  to test source-highlight with Java programs.[m
+[33m04:[m [31m  [m
+[33m05:[m [31m  to have an html translation type[m
+[33m06:[m 
+[33m07:[m [31m        source-highlight -s java -f html --input Hello.java --output Hello.html[m
+[33m08:[m [31m        source-highlight -s java -f html < Hello.java > Hello.html[m
+[33m09:[m 
+[33m10:[m [31m  or type source-highlight --help for the list of options[m
+[33m11:[m 
+[33m12:[m [31m  written by[m
+[33m13:[m [31m  Lorenzo Bettini[m
+[33m14:[m [31m  [mhttp://www.lorenzobettini.it
+[33m15:[m [31m  [mhttp://www.gnu.org/software/src-highlite
+[33m16:[m [31m*/[m
+[33m17:[m 
+[33m18:[m [01;34mpackage[m hello[31m;[m
+[33m19:[m 
+[33m20:[m [01;34mimport[m java[31m.[mio[31m.*[m [31m;[m
+[33m21:[m 
+[33m22:[m [31m/**[m
+[33m23:[m [31m * [m[01;34m<p>[m
+[33m24:[m [31m * A simple Hello World class, used to demonstrate some[m
+[33m25:[m [31m * features of Java source highlighting.[m
+[33m26:[m [31m * [m[01;34m</p>[m
+[33m27:[m [31m * [mTODO:[31m nothing, just to show an highlighted [mTODO[31m or [mFIXME
+[33m28:[m [31m *[m
+[33m29:[m [31m * [m[32m@author[m[31m Lorenzo Bettini[m
+[33m30:[m [31m * [m[32m@version[m[31m 2.0[m
+[33m31:[m [31m */[m
+[33m32:[m [01;34mpublic[m [01;34mclass[m Hello [31m{[m
+[33m33:[m     [32mint[m foo [31m=[m [35m1998[m [31m;[m
+[33m34:[m     [32mint[m hex_foo [31m=[m [35m0xCAFEBABE[m[31m;[m
+[33m35:[m     [32mboolean[m b [31m=[m [01;34mfalse[m[31m;[m
+[33m36:[m     Integer i [31m=[m [01;34mnull[m [31m;[m
+[33m37:[m     [32mchar[m c [31m=[m [31m'[m[35m\'[m[31m'[m[31m,[m d [31m=[m [31m'n'[m[31m,[m e [31m=[m [31m'[m[35m\\[m[31m'[m [31m;[m
+[33m38:[m     String xml [31m=[m [31m"<tag attr=[m[35m\"[m[31mvalue[m[35m\"[m[31m>&auml;</tag>"[m[31m,[m foo2 [31m=[m [31m"[m[35m\\[m[31m"[m [31m;[m
+[33m39:[m     
+[33m40:[m     [01;34mpublic[m [01;34mstatic[m [32mvoid[m [01;30mmain[m[31m([m String args[31m[][m [31m)[m [31m{[m
+[33m41:[m         [31m// just some greetings ;-)  /*[m
+[33m42:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"Hello from java2html :-)"[m [31m)[m [31m;[m
+[33m43:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"[m[35m\t[m[31mby Lorenzo Bettini"[m [31m)[m [31m;[m
+[33m44:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"[m[35m\t[m[31mhttp://www.lorenzobettini.it"[m [31m)[m [31m;[m
+[33m45:[m         [01;34mif[m [31m([margc [31m>[m [35m0[m[31m)[m
+[33m46:[m             String param [31m=[m argc[31m[[m[35m0[m[31m];[m
+[33m47:[m         [31m//System.out.println( "bye bye... :-D" ) ; // see you soon[m
+[33m48:[m     [31m}[m
+[33m49:[m [31m}[m

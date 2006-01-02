@@ -1,0 +1,10 @@
+If you got the sources of source-highlight through the CVS repository,
+please remember to run the following command before anything else:
+
+	sh reconf
+
+This will run all the autotools in the correct order.  You should have
+installed recent versions of automake and autoconf in order for this
+to succeed.
+
+Notice that you will also need Flex and Bison.

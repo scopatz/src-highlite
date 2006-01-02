@@ -1,0 +1,132 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#000080">%{</font></b>
+<i><font color="#9A1900">/*</font></i>
+<i><font color="#9A1900"> * Copyright (C) 1999, 2000, 2001 Lorenzo Bettini &lt;</font></i><u><font color="#0000FF">http://www.lorenzobettini.it</font></u><i><font color="#9A1900">&gt;</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * This program is free software; you can redistribute it and/or modify</font></i>
+<i><font color="#9A1900"> * it under the terms of the GNU General Public License as published by</font></i>
+<i><font color="#9A1900"> * the Free Software Foundation; either version 2 of the License, or</font></i>
+<i><font color="#9A1900"> * (at your option) any later version.</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * This program is distributed in the hope that it will be useful,</font></i>
+<i><font color="#9A1900"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</font></i>
+<i><font color="#9A1900"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</font></i>
+<i><font color="#9A1900"> * GNU General Public License for more details.</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * You should have received a copy of the GNU General Public License</font></i>
+<i><font color="#9A1900"> * along with this program; if not, write to the Free Software</font></i>
+<i><font color="#9A1900"> * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> */</font></i>
+
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;stdio.h&gt;</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;stdlib.h&gt;</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string.h&gt;</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"my_sstream.h"</font>
+
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"tags.h"</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"colors.h"</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"keys.h"</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"messages.h"</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"parsetags.h"</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"fileutil.h"</font>
+
+<b><font color="#0000FF">using</font></b> std<font color="#990000">::</font>cerr<font color="#990000">;</font>
+
+<b><font color="#0000FF">static</font></b> <font color="#009900">int</font> <b><font color="#000000">yyparse</font></b><font color="#990000">()</font> <font color="#990000">;</font>
+<b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">yyerror</font></b><font color="#990000">(</font> <font color="#009900">char</font> <font color="#990000">*</font>s <font color="#990000">)</font> <font color="#990000">;</font>
+
+<font color="#009900">int</font> line <font color="#990000">=</font> <font color="#993399">1</font> <font color="#990000">;</font>
+
+<b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">add_tag</font></b><font color="#990000">(</font>Tags <font color="#990000">*</font>tags<font color="#990000">,</font> Tag <font color="#990000">*</font>t<font color="#990000">);</font>
+
+<b><font color="#0000FF">extern</font></b> <font color="#009900">int</font> <b><font color="#000000">opsc_lex</font></b><font color="#990000">()</font> <font color="#990000">;</font>
+<b><font color="#0000FF">extern</font></b> FILE <font color="#990000">*</font>opsc_in <font color="#990000">;</font>
+
+<b><font color="#000080">%}</font></b>
+
+%<b><font color="#000080">union</font></b> {
+  <b><font color="#000080">int</font></b> tok <font color="#990000">;</font> <font color="#990000">/*</font> command <font color="#990000">*/</font>
+  <b><font color="#000080">char</font></b> <font color="#990000">*</font> string <font color="#990000">;</font> <font color="#990000">/*</font> string <font color="#990000">:</font> id<font color="#990000">,</font> <font color="#990000">...</font> <font color="#990000">*/</font>
+  <b><font color="#000080">int</font></b> flag <font color="#990000">;</font>
+  <b><font color="#000080">Tag</font></b> <font color="#990000">*</font>tag <font color="#990000">;</font>
+  <b><font color="#000080">Tags</font></b> <font color="#990000">*</font>tags <font color="#990000">;</font>
+} ;
+
+%<b><font color="#000080">token</font></b> <font color="#990000">&lt;</font>flag<font color="#990000">&gt;</font> BOLD ITALICS UNDERLINE
+%<b><font color="#000080">token</font></b> <font color="#990000">&lt;</font>string<font color="#990000">&gt;</font> KEY COLOR
+
+%<b><font color="#000080">type</font></b> <font color="#990000">&lt;</font>tag<font color="#990000">&gt;</font> option
+%<b><font color="#000080">type</font></b> <font color="#990000">&lt;</font>tags<font color="#990000">&gt;</font> options
+%<b><font color="#000080">type</font></b> <font color="#990000">&lt;</font>flag<font color="#990000">&gt;</font> values value
+
+<b><font color="#000080">%%</font></b>
+
+globaltags <font color="#990000">:</font> options <font color="#FF0000">{</font> <b><font color="#000000">setTags</font></b><font color="#990000">(</font> <font color="#009900">$1</font> <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<font color="#990000">;</font>
+
+options <font color="#990000">:</font> options option <font color="#FF0000">{</font> <b><font color="#000000">add_tag</font></b><font color="#990000">(</font> <font color="#009900">$1</font><font color="#990000">,</font> <font color="#009900">$2</font> <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+        <font color="#990000">|</font> option <font color="#FF0000">{</font> <font color="#009900">$$</font> <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Tags</font></b><font color="#990000">()</font> <font color="#990000">;</font> <font color="#009900">$$</font><font color="#990000">-&gt;</font><b><font color="#000000">AddTag</font></b><font color="#990000">(</font> <font color="#009900">$1</font> <font color="#990000">)</font> <font color="#990000">;</font>  <font color="#FF0000">}</font>
+        <font color="#990000">;</font>
+
+option <font color="#990000">:</font> KEY COLOR
+             <font color="#FF0000">{</font>
+                 <b><font color="#000000">printMessage</font></b><font color="#990000">(</font> <font color="#009900">$1</font> <font color="#990000">)</font> <font color="#990000">;</font>
+                 <b><font color="#000000">printMessage</font></b><font color="#990000">(</font> <font color="#009900">$2</font> <font color="#990000">)</font> <font color="#990000">;</font>
+             <font color="#FF0000">}</font>
+         values '<font color="#990000">;</font>'
+             <font color="#FF0000">{</font>
+	       <font color="#009900">$$</font> <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Tag</font></b><font color="#990000">(</font> <font color="#009900">$1</font><font color="#990000">,</font> <font color="#009900">$2</font> <font color="#990000">)</font> <font color="#990000">;</font>
+               <font color="#009900">$$</font><font color="#990000">-&gt;</font><b><font color="#000000">SetFlags</font></b><font color="#990000">(</font><font color="#009900">$4</font><font color="#990000">)</font> <font color="#990000">;</font>
+	     <font color="#FF0000">}</font>
+       <font color="#990000">;</font>
+
+values <font color="#990000">:</font> values '<font color="#990000">,</font>' value <font color="#FF0000">{</font> <font color="#009900">$$</font> <font color="#990000">=</font> <font color="#009900">$1</font> <font color="#990000">|</font> <font color="#009900">$3</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+       <font color="#990000">|</font> value
+       <font color="#990000">;</font>
+
+value <font color="#990000">:</font> <font color="#FF0000">{</font> <font color="#009900">$$</font> <font color="#990000">=</font> <font color="#993399">0</font> <font color="#990000">;</font> <b><font color="#000000">printMessage</font></b><font color="#990000">(</font> <font color="#FF0000">" (no options) "</font> <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+      <font color="#990000">|</font> BOLD <font color="#FF0000">{</font> <b><font color="#000000">printMessage</font></b><font color="#990000">(</font> <font color="#FF0000">" - bold"</font> <font color="#990000">)</font> <font color="#990000">;</font> <font color="#009900">$$</font> <font color="#990000">=</font> ISBOLD <font color="#990000">;</font> <font color="#FF0000">}</font>
+      <font color="#990000">|</font> ITALICS <font color="#FF0000">{</font> <b><font color="#000000">printMessage</font></b><font color="#990000">(</font> <font color="#FF0000">" - italics"</font> <font color="#990000">)</font> <font color="#990000">;</font> <font color="#009900">$$</font> <font color="#990000">=</font> ISITALIC <font color="#990000">;</font> <font color="#FF0000">}</font>
+      <font color="#990000">|</font> UNDERLINE <font color="#FF0000">{</font> <b><font color="#000000">printMessage</font></b><font color="#990000">(</font> <font color="#FF0000">" - underline"</font> <font color="#990000">)</font> <font color="#990000">;</font> <font color="#009900">$$</font> <font color="#990000">=</font> ISUNDERLINE <font color="#990000">;</font> <font color="#FF0000">}</font>
+      <font color="#990000">;</font>
+
+<b><font color="#000080">%%</font></b>
+
+<font color="#009900">char</font> <font color="#990000">*</font>current_file <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+
+<font color="#009900">void</font>
+<b><font color="#000000">parseTags</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> string <font color="#990000">&amp;</font>path<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> string <font color="#990000">&amp;</font>name<font color="#990000">)</font>
+<font color="#FF0000">{</font>
+  <i><font color="#9A1900">// opens the file for yylex</font></i>
+  opsc_in <font color="#990000">=</font> <b><font color="#000000">open_data_file_stream</font></b><font color="#990000">(</font>path<font color="#990000">,</font> name<font color="#990000">);</font>
+
+  <b><font color="#000000">printMessage_noln</font></b><font color="#990000">(</font> <font color="#FF0000">"Parsing "</font><font color="#990000">,</font> cerr <font color="#990000">)</font> <font color="#990000">;</font>
+  <b><font color="#000000">printMessage_noln </font></b><font color="#990000">(</font>name<font color="#990000">,</font> cerr<font color="#990000">);</font>
+  <b><font color="#000000">printMessage</font></b><font color="#990000">(</font> <font color="#FF0000">" file ..."</font><font color="#990000">,</font> cerr <font color="#990000">)</font> <font color="#990000">;</font>
+  <b><font color="#000000">yyparse</font></b><font color="#990000">()</font> <font color="#990000">;</font>
+  <b><font color="#000000">printMessage</font></b><font color="#990000">(</font> <font color="#FF0000">"Parsing done!"</font><font color="#990000">,</font> cerr <font color="#990000">)</font> <font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#009900">void</font>
+<b><font color="#000000">yyerror</font></b><font color="#990000">(</font> <font color="#009900">char</font> <font color="#990000">*</font>s <font color="#990000">)</font>
+<font color="#FF0000">{</font>
+  ostringstream str <font color="#990000">;</font>
+  str <font color="#990000">&lt;&lt;</font> current_file <font color="#990000">&lt;&lt;</font> <font color="#FF0000">":"</font> <font color="#990000">&lt;&lt;</font> line <font color="#990000">&lt;&lt;</font> <font color="#FF0000">": "</font> <font color="#990000">&lt;&lt;</font> s <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", in option declaration"</font><font color="#990000">;</font>
+  <b><font color="#000000">printError</font></b><font color="#990000">(</font> str<font color="#990000">.</font><b><font color="#000000">str</font></b><font color="#990000">().</font><b><font color="#000000">c_str</font></b><font color="#990000">(),</font> cerr <font color="#990000">)</font> <font color="#990000">;</font>
+  <b><font color="#000000">exit</font></b><font color="#990000">(</font>EXIT_FAILURE<font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#009900">void</font>
+<b><font color="#000000">add_tag</font></b><font color="#990000">(</font>Tags <font color="#990000">*</font>tags<font color="#990000">,</font> Tag <font color="#990000">*</font>t<font color="#990000">)</font>
+<font color="#FF0000">{</font>
+  <b><font color="#0000FF">if</font></b> <font color="#990000">(!</font> tags<font color="#990000">-&gt;</font><b><font color="#000000">AddTag</font></b><font color="#990000">(</font>t<font color="#990000">))</font>
+  <font color="#FF0000">{</font>
+    <b><font color="#000000">yyerror</font></b><font color="#990000">(</font><font color="#FF0000">"already defined"</font><font color="#990000">);</font>
+  <font color="#FF0000">}</font>
+<font color="#FF0000">}</font></tt></pre>

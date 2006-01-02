@@ -1,0 +1,304 @@
+{
+   regex lib
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZNSt24__default_alloc_templateILb1ELi0EE14_S_chunk_allocEjRi
+   fun:_ZNSt24__default_alloc_templateILb1ELi0EE9_S_refillEj
+   fun:_ZNSt24__default_alloc_templateILb1ELi0EE8allocateEj
+}
+
+{
+   option scanner
+   Memcheck:Leak
+   fun:malloc
+   fun:_Z10opsc_allocj
+   fun:_Z24opsc_ensure_buffer_stackv
+   fun:_Z8opsc_lexv
+}
+
+{
+   option scanner 2
+   Memcheck:Leak
+   fun:calloc
+   obj:/lib/tls/libdl-2.3.2.so
+   fun:dlsym
+   fun:__errno_location
+}
+
+{
+   option scanner 3
+   Memcheck:Leak
+   fun:malloc
+   fun:_Z10opsc_allocj
+   fun:_Z19opsc__create_bufferP8_IO_FILEi
+   fun:_Z8opsc_lexv
+}
+
+{
+   option scanner 4
+   Memcheck:Leak
+   fun:malloc
+   fun:_Z10opsc_allocj
+   fun:_Z13yy_push_statei
+   fun:_Z8opsc_lexv
+}
+
+{
+   regex
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN104_GLOBAL__N__home_cavok_archive_debian_working_boost_boost_1.32.0_libs_regex_src_c_regex_traits.cppkxwU9a15re_init_collateEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+}
+
+{
+   regex 2
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN104_GLOBAL__N__home_cavok_archive_debian_working_boost_boost_1.32.0_libs_regex_src_c_regex_traits.cppkxwU9a15re_init_classesEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+}
+
+{
+   regex 3
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN104_GLOBAL__N__home_cavok_archive_debian_working_boost_boost_1.32.0_libs_regex_src_c_regex_traits.cppkxwU9a15re_message_initEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+}
+
+{
+   regex 4
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+}
+
+{
+   regex 5
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost9re_detail15re_init_threadsEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+}
+
+{
+   regex 6
+   Memcheck:Leak
+   fun:_Znaj
+   fun:_ZN104_GLOBAL__N__home_cavok_archive_debian_working_boost_boost_1.32.0_libs_regex_src_c_regex_traits.cppkxwU9a15re_init_classesEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+}
+
+{
+   ostrstream
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZNSt24__default_alloc_templateILb1ELi0EE8allocateEj
+   fun:_ZNSs4_Rep9_S_createEjRKSaIcE
+   fun:_ZNSs4_Rep8_M_cloneERKSaIcEj
+}
+
+{
+   regex 7
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN104_GLOBAL__N__home_cavok_archive_debian_working_boost_boost_1.32.0_libs_regex_src_c_regex_traits.cpptcwOma15re_init_collateEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/lib/ld-2.3.2.so
+   fun:_dl_init
+   obj:/lib/ld-2.3.2.so
+}
+
+{
+   regex 8
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN104_GLOBAL__N__home_cavok_archive_debian_working_boost_boost_1.32.0_libs_regex_src_c_regex_traits.cpptcwOma15re_init_classesEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/lib/ld-2.3.2.so
+   fun:_dl_init
+   obj:/lib/ld-2.3.2.so
+}
+
+{
+   regex 9
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN104_GLOBAL__N__home_cavok_archive_debian_working_boost_boost_1.32.0_libs_regex_src_c_regex_traits.cpptcwOma15re_message_initEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/lib/ld-2.3.2.so
+   fun:_dl_init
+   obj:/lib/ld-2.3.2.so
+}
+
+{
+   regex 10
+   Memcheck:Leak
+   fun:_Znaj
+   fun:_ZN104_GLOBAL__N__home_cavok_archive_debian_working_boost_boost_1.32.0_libs_regex_src_c_regex_traits.cpptcwOma15re_init_classesEv
+   fun:_ZN5boost14c_regex_traitsIcE4initEv
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/usr/lib/libboost_regex-gcc-mt-1_32.so.1.32.0
+   obj:/lib/ld-2.3.2.so
+   fun:_dl_init
+   obj:/lib/ld-2.3.2.so
+}
+
+{
+   scanner
+   Memcheck:Leak
+   fun:malloc
+   fun:_Z13langdef_allocj
+   fun:_Z27langdef_ensure_buffer_stackv
+   fun:_Z11langdef_lexv
+   fun:_Z13langdef_parsev
+   fun:_Z14parse_lang_defPKcS0_
+   fun:_ZN13LangDefLoader12get_lang_defERKSsS1_
+   fun:_Z12process_filePKcP13TextFormatterRKSsS4_
+   fun:_ZN8StartApp11processFileERKSsS1_
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
+}
+
+{
+   scanner
+   Memcheck:Leak
+   fun:realloc
+   fun:_Z15langdef_reallocPvj
+   fun:_Z27langdef_ensure_buffer_stackv
+   fun:_Z25langdef_push_buffer_stateP15yy_buffer_state
+   fun:_Z11langdef_lexv
+   fun:_Z13langdef_parsev
+   fun:_Z14parse_lang_defPKcS0_
+   fun:_ZN13LangDefLoader12get_lang_defERKSsS1_
+   fun:_Z12process_filePKcP13TextFormatterRKSsS4_
+   fun:_ZN8StartApp11processFileERKSsS1_
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
+}
+
+{
+   out scanner
+   Memcheck:Leak
+   fun:realloc
+   fun:_Z18outlangdef_reallocPvj
+   fun:_Z30outlangdef_ensure_buffer_stackv
+   fun:_Z28outlangdef_push_buffer_stateP15yy_buffer_state
+   fun:_Z14outlangdef_lexv
+   fun:_Z16outlangdef_parsev
+   fun:_Z17parse_outlang_defPKcS0_
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
+}
+
+{
+   realloc langdef scanner
+   Memcheck:Leak
+   fun:realloc
+   fun:_Z15langdef_reallocPvj
+   fun:_Z27langdef_ensure_buffer_stackv
+   fun:_Z25langdef_push_buffer_stateP15yy_buffer_state
+   fun:_Z11langdef_lexv
+   fun:_Z13langdef_parsev
+   fun:_Z14parse_lang_defPKcS0_
+   fun:_ZN13LangDefLoader12get_lang_defERKSsS1_
+   fun:_Z12process_filePKcP13TextFormatterRKSsS4_S4_
+   fun:_ZN8StartApp11processFileERKSsS1_S1_
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
+}
+
+{
+   realloc langdef scanner
+   Memcheck:Leak
+   fun:realloc
+   fun:_Z15langdef_reallocPvj
+   fun:_Z27langdef_ensure_buffer_stackv
+   fun:_Z25langdef_push_buffer_stateP15yy_buffer_state
+   fun:_Z11langdef_lexv
+   fun:_Z13langdef_parsev
+   fun:_Z14parse_lang_defPKcS0_
+   fun:_ZN13LangDefLoader12get_lang_defERKSsS1_
+   fun:_Z12process_filePKcP13TextFormatterRKSsS4_P8FileInfo
+   fun:_ZN8StartApp11processFileERKSsS1_S1_
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
+}
+
+{
+   libdl
+   Memcheck:Leak
+   fun:calloc
+   obj:/lib/tls/i686/cmov/libdl-2.3.2.so
+   fun:dlsym
+   fun:__errno_location
+}
+
+{
+   ostream
+   Memcheck:Leak
+   fun:malloc
+   fun:__cxa_get_globals
+   fun:_ZSt18uncaught_exceptionv
+   fun:_ZNSo6sentryD1Ev
+}
+
+{
+   <insert a suppression name here>
+   Memcheck:Cond
+   obj:/lib/ld-2.3.5.so
+   obj:/lib/ld-2.3.5.so
+   obj:/lib/ld-2.3.5.so
+   obj:/lib/ld-2.3.5.so
+   obj:/lib/ld-2.3.5.so
+}
+
+{
+   <insert a suppression name here>
+   Memcheck:Leak
+   fun:realloc
+   fun:_Z15langdef_reallocPvj
+   fun:_Z27langdef_ensure_buffer_stackv
+   fun:_Z25langdef_push_buffer_stateP15yy_buffer_state
+   fun:_Z11langdef_lexv
+   fun:_Z13langdef_parsev
+   fun:_Z14parse_lang_defPKcS0_
+   fun:_ZN13LangDefLoader12get_lang_defERKSsS1_
+   fun:_Z12process_filePKcP13TextFormatterRKSsS4_P8FileInfob
+   fun:_ZN8StartApp11processFileERKSsS1_S1_
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
+}
+
+{
+   <insert a suppression name here>
+   Memcheck:Leak
+   fun:malloc
+   fun:__cxa_get_globals
+   fun:_ZSt18uncaught_exceptionv
+   fun:_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
+}

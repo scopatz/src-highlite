@@ -1,0 +1,48 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>diff -rc2P source-highlight-2.1.1/source-highlight.spec source-highlight-2.1.2/source-highlight.spec
+<font color="#FF6600">*** source-highlight-2.1.1/source-highlight.spec	2005-08-03 14:54:18.000000000 +0200</font>
+<font color="#009900">--- source-highlight-2.1.2/source-highlight.spec	2005-08-25 16:11:37.000000000 +0200</font>
+<font color="#FF6600">***************</font>
+<font color="#FF6600">*** 7,12 ****</font>
+  Summary:   syntax highlighting for source documents
+  Name:      source-highlight
+<font color="#FF6600">! Version:   2.1.1</font>
+<font color="#FF6600">! Release:   2.1.1</font>
+  License:   GPL
+  Group:     Utilities/Console
+<font color="#009900">--- 7,12 ----</font>
+  Summary:   syntax highlighting for source documents
+  Name:      source-highlight
+<font color="#009900">! Version:   2.1.2</font>
+<font color="#009900">! Release:   2.1.2</font>
+  License:   GPL
+  Group:     Utilities/Console
+diff -rc2P source-highlight-2.1.1/src/latex.outlang source-highlight-2.1.2/src/latex.outlang
+<font color="#FF6600">*** source-highlight-2.1.1/src/latex.outlang	2005-07-12 22:21:46.000000000 +0200</font>
+<font color="#009900">--- source-highlight-2.1.2/src/latex.outlang	2005-08-25 16:15:53.000000000 +0200</font>
+<font color="#FF6600">***************</font>
+<font color="#FF6600">*** 35,37 ****</font>
+<font color="#009900">--- 35,38 ----</font>
+  "--" "-\\/-"
+  "---" "-\\/-\\/-"
+<font color="#009900">+ "\"" "\"{}" # avoids problems with some inputenc</font>
+  end
+<font color="#009900">\ No newline at end of file</font>
+diff -rc2P source-highlight-2.1.1/src/lib/messages.cc source-highlight-2.1.2/src/lib/messages.cc
+<font color="#FF6600">*** source-highlight-2.1.1/src/lib/messages.cc	2005-07-12 12:18:59.000000000 +0200</font>
+<font color="#009900">--- source-highlight-2.1.2/src/lib/messages.cc	2005-08-25 16:08:44.000000000 +0200</font>
+<font color="#FF6600">***************</font>
+<font color="#FF6600">*** 86,87 ****</font>
+<font color="#009900">--- 86,93 ----</font>
+    exit(EXIT_FAILURE);
+  }
+<font color="#009900">+ </font>
+<font color="#009900">+ void foundBug(const std::string &amp;error, const std::string &amp;file, int line)</font>
+<font color="#009900">+ {</font>
+<font color="#009900">+   cerr &lt;&lt; PACKAGE &lt;&lt; ": " &lt;&lt; error &lt;&lt; ", " &lt;&lt; file &lt;&lt; ":" &lt;&lt; line &lt;&lt; endl;</font>
+<font color="#009900">+   exit(EXIT_FAILURE);</font>
+<font color="#009900">+ }</font>
+</tt></pre>

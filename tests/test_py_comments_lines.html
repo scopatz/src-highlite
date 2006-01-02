@@ -1,0 +1,63 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><font color="#000000">01:</font> <i><font color="#9A1900">#! /usr/bin/python</font></i>
+<font color="#000000">02:</font> 
+<font color="#000000">03:</font> <i><font color="#9A1900">"""</font></i>
+<font color="#000000">04:</font> <i><font color="#9A1900">This is a test for the handling of</font></i>
+<font color="#000000">05:</font> <i><font color="#9A1900">comments and string literals in Python</font></i>
+<font color="#000000">06:</font> <i><font color="#9A1900">"""</font></i>
+<font color="#000000">07:</font> 
+<font color="#000000">08:</font> <i><font color="#9A1900">'''</font></i>
+<font color="#000000">09:</font> <i><font color="#9A1900">This is a test for the handling of</font></i>
+<font color="#000000">10:</font> <i><font color="#9A1900">comments and string literals in Python</font></i>
+<font color="#000000">11:</font> <i><font color="#9A1900">'''</font></i>
+<font color="#000000">12:</font> 
+<font color="#000000">13:</font> <i><font color="#9A1900">"And this is a string meant as comment"</font></i>
+<font color="#000000">14:</font> 
+<font color="#000000">15:</font> <b><font color="#0000FF">def</font></b> <b><font color="#000000">test</font></b><font color="#990000">():</font>             <i><font color="#9A1900"># The test routine</font></i>
+<font color="#000000">16:</font> <i><font color="#9A1900">  '''</font></i>
+<font color="#000000">17:</font> <i><font color="#9A1900">  It does nothing but printing different strings</font></i>
+<font color="#000000">18:</font> <i><font color="#9A1900">  '''</font></i>
+<font color="#000000">19:</font> 
+<font color="#000000">20:</font> <i><font color="#9A1900">  """</font></i>
+<font color="#000000">21:</font> <i><font color="#9A1900">  It does nothing but printing different strings</font></i>
+<font color="#000000">22:</font> <i><font color="#9A1900">  """</font></i>
+<font color="#000000">23:</font> 
+<font color="#000000">24:</font>   <b><font color="#0000FF">print</font></b> <font color="#FF0000">"This is the first test"</font><font color="#990000">,</font>
+<font color="#000000">25:</font>   <b><font color="#0000FF">print</font></b> <font color="#FF0000">'and this the second'</font>
+<font color="#000000">26:</font> 
+<font color="#000000">27:</font> <i><font color="#9A1900">  'Here start the multi-lined outputs'</font></i>
+<font color="#000000">28:</font> 
+<font color="#000000">29:</font>   <b><font color="#0000FF">print</font></b><font color="#FF0000"> '''</font>
+<font color="#000000">30:</font> <font color="#FF0000">Here we have</font>
+<font color="#000000">31:</font> <font color="#FF0000">a multi-line</font>
+<font color="#000000">32:</font> <font color="#FF0000">string.</font>
+<font color="#000000">33:</font> <font color="#FF0000">'''</font>
+<font color="#000000">34:</font> 
+<font color="#000000">35:</font>   <b><font color="#0000FF">print</font></b><font color="#FF0000"> """</font>
+<font color="#000000">36:</font> <font color="#FF0000">Here we have</font>
+<font color="#000000">37:</font> <font color="#FF0000">a multi-line</font>
+<font color="#000000">38:</font> <font color="#FF0000">string.</font>
+<font color="#000000">39:</font> <font color="#FF0000">"""</font>
+<font color="#000000">40:</font>   <b><font color="#0000FF">print</font></b><font color="#FF0000"> '''</font>
+<font color="#000000">41:</font> <font color="#FF0000">And this is a</font>
+<font color="#000000">42:</font> <font color="#FF0000">second one</font>
+<font color="#000000">43:</font> <font color="#FF0000">'''</font>
+<font color="#000000">44:</font>   <i><font color="#9A1900"># End of printing</font></i>
+<font color="#000000">45:</font>   <b><font color="#0000FF">pass</font></b>                  <i><font color="#9A1900"># A NOP at last</font></i>
+<font color="#000000">46:</font> 
+<font color="#000000">47:</font> <i><font color="#9A1900">"""</font></i>
+<font color="#000000">48:</font> <i><font color="#9A1900">"""</font></i>
+<font color="#000000">49:</font> <i><font color="#9A1900">'And here the fun starts'</font></i>
+<font color="#000000">50:</font> <b><font color="#000000">test</font></b><font color="#990000">()</font>
+<font color="#000000">51:</font> 
+<font color="#000000">52:</font> table <font color="#990000">=</font> <font color="#990000">{</font> <font color="#FF0000">'S'</font>  <font color="#990000">:</font> <font color="#990000">[</font><font color="#FF0000">'5'</font><font color="#990000">],</font>
+<font color="#000000">53:</font>  <font color="#FF0000">'a'</font>  <font color="#990000">:</font> <font color="#990000">[</font><font color="#FF0000">'4'</font><font color="#990000">,</font><font color="#FF0000">'a'</font><font color="#990000">,</font><font color="#FF0000">'@'</font><font color="#990000">],</font>
+<font color="#000000">54:</font>  <font color="#FF0000">'b'</font>  <font color="#990000">:</font> <font color="#990000">[</font><font color="#FF0000">'8'</font><font color="#990000">,</font><font color="#FF0000">'B'</font><font color="#990000">],</font>
+<font color="#000000">55:</font>  <font color="#FF0000">"ps"</font> <font color="#990000">:</font> <font color="#990000">[</font><font color="#FF0000">"Pz"</font><font color="#990000">],</font>
+<font color="#000000">56:</font>  <font color="#FF0000">'ss'</font> <font color="#990000">:</font> <font color="#990000">[</font><font color="#FF0000">'5S'</font><font color="#990000">,</font><font color="#FF0000">'S5'</font><font color="#990000">],</font>
+<font color="#000000">57:</font>  <font color="#FF0000">'es'</font> <font color="#990000">:</font> <font color="#990000">[</font><font color="#FF0000">'3Z'</font><font color="#990000">,</font><font color="#FF0000">'3z'</font><font color="#990000">],</font>
+<font color="#000000">58:</font>  <font color="#FF0000">'ou'</font> <font color="#990000">:</font> <font color="#990000">[</font><font color="#FF0000">'00'</font><font color="#990000">]</font> <font color="#990000">}</font>
+</tt></pre>

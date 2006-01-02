@@ -1,0 +1,23 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>diff -rP source-highlight-2.1.1/source-highlight.spec source-highlight-2.1.2/source-highlight.spec
+<font color="#0000FF">9,10c9,10</font>
+<font color="#FF6600">&lt; Version:   2.1.1</font>
+<font color="#FF6600">&lt; Release:   2.1.1</font>
+---
+<font color="#009900">&gt; Version:   2.1.2</font>
+<font color="#009900">&gt; Release:   2.1.2</font>
+diff -rP source-highlight-2.1.1/src/latex.outlang source-highlight-2.1.2/src/latex.outlang
+<font color="#0000FF">36a37</font>
+<font color="#009900">&gt; "\"" "\"{}" # avoids problems with some inputenc</font>
+diff -rP source-highlight-2.1.1/src/lib/messages.cc source-highlight-2.1.2/src/lib/messages.cc
+<font color="#0000FF">87a88,93</font>
+<font color="#009900">&gt; </font>
+<font color="#009900">&gt; void foundBug(const std::string &amp;error, const std::string &amp;file, int line)</font>
+<font color="#009900">&gt; {</font>
+<font color="#009900">&gt;   cerr &lt;&lt; PACKAGE &lt;&lt; ": " &lt;&lt; error &lt;&lt; ", " &lt;&lt; file &lt;&lt; ":" &lt;&lt; line &lt;&lt; endl;</font>
+<font color="#009900">&gt;   exit(EXIT_FAILURE);</font>
+<font color="#009900">&gt; }</font>
+</tt></pre>

@@ -1,0 +1,53 @@
+@c Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+@example
+@t{01:} @r{@i{/*}}
+@t{02:} @r{@i{  This is a classical Hello program}}
+@t{03:} @r{@i{  to test source-highlight with Java programs.}}
+@t{04:} @r{@i{  }}
+@t{05:} @r{@i{  to have an html translation type}}
+@t{06:} 
+@t{07:} @r{@i{        source-highlight -s java -f html --input Hello.java --output Hello.html}}
+@t{08:} @r{@i{        source-highlight -s java -f html < Hello.java > Hello.html}}
+@t{09:} 
+@t{10:} @r{@i{  or type source-highlight --help for the list of options}}
+@t{11:} 
+@t{12:} @r{@i{  written by}}
+@t{13:} @r{@i{  Lorenzo Bettini}}
+@t{14:} @r{@i{  }}@t{http://www.lorenzobettini.it}
+@t{15:} @r{@i{  }}@t{http://www.gnu.org/software/src-highlite}
+@t{16:} @r{@i{*/}}
+@t{17:} 
+@t{18:} @b{package} hello;
+@t{19:} 
+@t{20:} @b{import} java.io.* ;
+@t{21:} 
+@t{22:} @r{@i{/**}}
+@t{23:} @r{@i{ * }}@b{<p>}
+@t{24:} @r{@i{ * A simple Hello World class, used to demonstrate some}}
+@t{25:} @r{@i{ * features of Java source highlighting.}}
+@t{26:} @r{@i{ * }}@b{</p>}
+@t{27:} @r{@i{ * }}TODO:@r{@i{ nothing, just to show an highlighted }}TODO@r{@i{ or }}FIXME
+@t{28:} @r{@i{ *}}
+@t{29:} @r{@i{ * }}@b{@@author}@r{@i{ Lorenzo Bettini}}
+@t{30:} @r{@i{ * }}@b{@@version}@r{@i{ 2.0}}
+@t{31:} @r{@i{ */}}
+@t{32:} @b{public} @b{class} Hello @{
+@t{33:}     @b{int} foo = 1998 ;
+@t{34:}     @b{int} hex_foo = 0xCAFEBABE;
+@t{35:}     @b{boolean} b = @b{false};
+@t{36:}     Integer i = @b{null} ;
+@t{37:}     @b{char} c = @t{'}\'@t{'}, d = @t{'n'}, e = @t{'}\\@t{'} ;
+@t{38:}     String xml = @t{"<tag attr=}\"@t{value}\"@t{>&auml;</tag>"}, foo2 = @t{"}\\@t{"} ;
+@t{39:}     
+@t{40:}     @b{public} @b{static} @b{void} main( String args[] ) @{
+@t{41:}         @r{@i{// just some greetings ;-)  /*}}
+@t{42:}         System.out.println( @t{"Hello from java2html :-)"} ) ;
+@t{43:}         System.out.println( @t{"}\t@t{by Lorenzo Bettini"} ) ;
+@t{44:}         System.out.println( @t{"}\t@t{http://www.lorenzobettini.it"} ) ;
+@t{45:}         @b{if} (argc > 0)
+@t{46:}             String param = argc[0];
+@t{47:}         @r{@i{//System.out.println( "bye bye... :-D" ) ; // see you soon}}
+@t{48:}     @}
+@t{49:} @}
+
+@end example

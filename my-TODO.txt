@@ -1,0 +1,54 @@
+REG_EXP
+
+in C++ dopo # preprocessor ci possono anche essere commenti, quindi
+ci deve essere la possibilita' di non mascherare l'espressione piu' esterna!
+
+In Flex implementare {var} e [regexp] come erano prima.
+implementare "regexp"
+
+FORMATTAZIONE SOTTOESPRESSIONI, ad esempio
+variable $1: bold red $2: green
+in questo modo, ad es. in flex, si possono implementare {var} e [regex]
+come erano prima!
+
+Differenziare fra \< e \> controllando isalnum
+
+in PHP le $var vanno evidenziate anche nelle stringhe?
+
+per le multiline mettere comunque anche la versione single-line
+
+aggiungere email e url in ogni commento in ogni linguaggio
+
+cosa avviene se si fa exit e non siamo in uno state?
+
+email e url anche all'interno di commenti //
+
+OUTPUTLANG
+
+c'e' sempre il problema di dove ricercare il file
+
+c'e' da trovare un modo piu' elegante per comporre i TextStyle
+in particolare TextStyleBuilder::add e' da rivedere.
+
+risolvere il problema della dipendenza di libcgi
+
+ci vuole la possibilita' di specificare sottoespressioni e la possibilita'
+di dire ognuna come va formattata.  Quindi bisogna estendere la sintassi
+dei language definitions.
+
+CTAGS
+
+segnalare il bug in tagOpen che non controlla se info e' null o meno!
+
+stile per anchor e reference
+
+GeneratorFactory non dovrebbe generare le GeneratorMap?
+cosi' si evita la dipendenza da RefGeneratorMap.
+
+in bison e flex fare l'highlighting dei commenti anche al di fuori
+di %{ vedere ad esempio parser.yy di gengetopt
+
+linewrap=80
+
+per effettuare il wrapping senza pero' generare un nuono line
+number.

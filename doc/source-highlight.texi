@@ -1,0 +1,175 @@
+\input texinfo   @c -*-texinfo-*-
+@c %**start of header
+@setfilename java2html.info
+@settitle Java2html
+@c %**end of header
+
+@c @setchapternewpage odd
+
+@ifinfo
+This is the documentation of GNU java2html.
+
+Copyright 2000 Lorenzo Bettini
+@end ifinfo
+
+@finalout
+@titlepage
+@title GNU java2html
+@subtitle An html generator with syntax highlighting for Java sources
+@subtitle Version 1.6
+  
+@author by Lorenzo Bettini
+@page
+@vskip 0pt plus 1filll
+Copyright @copyright{} 2000 Lorenzo Bettini
+ 
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+@ignore
+Permission is granted to process this file through TeX and print the
+results, provided the printed document carries copying permission
+notice identical to this one except for the removal of this paragraph
+(this paragraph not being relevant to the printed manual).
+@end ignore
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided also that the
+section entitled ``Copying'' is included exactly as in the original, and
+provided that the entire resulting derived work is distributed under the
+terms of a permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the Free Software Foundation.
+@end titlepage
+@page
+
+@iftex
+\sloppy
+@end iftex
+
+@node    Top,  Introduction, , (dir)
+@comment node-name, next,previous, up
+
+@menu
+* Introduction::                What is java2html for?
+* Installation::                Let's set it up!
+* Usage::                       The first chapter is the
+ only chapter in this sample.
+* Concept Index::               This index has two entries.
+@end menu
+
+@node Introduction, Installation, Top, top
+@chapter Introduction
+
+Java2html is a simple program that, given a source java file, produces an html
+source with syntax highlighting. The colors and the styles can be
+specified (bold, italics, underline) by means of a configuration
+file, and some other options can be
+specified at the command line.
+
+@node Installation, Usage, Introduction, top
+@chapter Installation
+
+See the file @file{INSTALL} for detailed building and 
+installation instructions;
+anyway if you're used to compiling Linux software that comes with sources
+you may simply follow the usual procedure, i.e. untar the file
+you downloaded in a directory and then:
+
+@example
+cd <source code main directory>
+./configure
+make
+make install
+@end example
+
+Note: unless you specify a different install directory by 
+@code{--prefix} option of
+configure (e.g. @code{./configure --prefix=<your home>}), 
+you must be root to run @code{make install}.
+
+Files will be installed in the following directories:
+
+@table @code
+@item Executables
+        @code{/prefix/bin}
+@item docs and samples
+        @code{/prefix/share/doc/java2html}
+@item conf files           
+        @code{/prefix/share/java2html}
+@end table
+
+Default value for prefix is @code{/usr/local} 
+but you may change it with @code{--prefix}
+option to configure.
+
+@section What you need to build java2html
+
+Actually you need nothing more than a Unix C/C++ compiler
+
+java2html has been developed under Linux, using @emph{gcc} (C++), 
+and @emph{bison} (yacc)
+and @emph{flex} (lex), and ported under Win32 with 
+@emph{Cygnus C/C++ compiler}, available at 
+@file{http://www.cygnus.com/}
+@ifhtml
+<a href="http://www.cygnus.com/">http://www.cygnus.com/</a>
+@end ifhtml
+(a .DLL is also distributed togheter with the
+.exe: you may simply copy it in the same place of the .exe). I used the
+excellent GNU @emph{Autoconf} and @emph{Automake}. I also used 
+@emph{Autotools}
+available at @file{ftp://ftp.ugcs.caltech.edu/pub/elef/autotools}
+@ifhtml
+<a href="ftp://ftp.ugcs.caltech.edu/pub/elef/autotools">ftp://ftp.ugcs.caltech.edu/pub/elef/autotools</a>
+@end ifhtml
+which creates a starting
+source tree (according to GNU standards) with autoconf, automake starting
+files, and finally 
+@emph{getopt_long} (for command line parsing).
+
+Actually, unless you want to develop java2html, you don't need all these
+tools to build java2html because I provide generated sources; you don't need
+neither bison (yacc) nor flex (lex), for the same reason. Actually programs
+that use lex generated files need to link with library libfl (or libl for
+lex); anyway configuration phase can discover if this library is missing and
+in that case it sets the program to link with a source file I provide. This
+hack works for flex: I don't know about lex generated scanners. But, again,
+this is a problem only if you develop java2html and you use lex.
+
+
+@node    Usage, Concept Index, Installation, Top
+@comment node-name,next,previous, up
+@chapter First Chapter
+@cindex Sample index entry
+
+This is the contents of the first chapter.
+@cindex Another sample index entry
+
+Here is a numbered list.
+
+@enumerate
+@item
+This is the first item.
+
+@item
+This is the second item.
+@end enumerate
+
+The @code{makeinfo} and @code{texinfo-format-buffer}
+commands transform a Texinfo file such as this into
+an Info file; and @TeX{} typesets it for a printed
+manual.
+
+@node    Concept Index,    ,  Usage, Top
+@comment node-name,    next,  previous, up
+@unnumbered Concept Index
+
+@printindex cp
+
+@contents
+@bye

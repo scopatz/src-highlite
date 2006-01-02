@@ -1,0 +1,17 @@
+keyword b ;
+type b ;
+variable f, i ;
+string f ;
+comment nf, i, noref ;
+preproc b ;
+
+// line numbers
+linenum f;
+
+// Internet related
+url f;
+
+// for diffs
+oldfile i;
+newfile i;
+difflines b; 

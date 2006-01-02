@@ -1,0 +1,47 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#0000FF">2002-08-08</font></b>  <font color="#009900">Lorenzo</font> <font color="#009900">Bettini</font>  <u><font color="#0000FF">&lt;lb-bl@foo&gt;</font></u>
+
+<font color="#990000">	* </font><b><font color="#000080">src/Makefile.am (source_highlight_SOURCES):</font></b> correctly include
+	changelog_scanner.ll
+
+<font color="#990000">        * </font>this is a comment without a file name
+
+<b><font color="#0000FF">2002-08-02</font></b>  <font color="#009900">John</font> <font color="#009900">Millaway</font>  <u><font color="#0000FF">&lt;millaway-bar@foo_bar-com&gt;</font></u>
+
+<font color="#990000">	* </font><b><font color="#000080">src/flex_scanner.ll:</font></b> Added scanner for flex
+
+<font color="#990000">	* </font><b><font color="#000080">src/changelog_scanner.ll:</font></b> Added scanner for ChangeLog
+
+<font color="#990000">	* </font><b><font color="#000080">src/Makefile.am:</font></b> do not use .stamp files anymore, use flex's prefix
+
+<b><font color="#0000FF">2002-07-30</font></b>  <font color="#009900">Lorenzo</font> <font color="#009900">Bettini</font>  <u><font color="#0000FF">&lt;lb@foo&gt;</font></u>
+
+<font color="#990000">	* </font><b><font color="#000080">acinclude.m4 (LF_PROG_TXTC):</font></b> fixed a little bug that shows up
+	only now with the new version of autoconf
+
+<font color="#990000">	* </font><b><font color="#000080">acconfig.h:</font></b> removed, no longer needed with autoconf
+
+<font color="#990000">	* </font><b><font color="#000080">configure.in:</font></b> use the new AC_LIBOBJ
+
+<font color="#990000">	* </font><b><font color="#000080">doc/Makefile.am:</font></b> removed an extra EXTRA_DIST
+
+<b><font color="#0000FF">2002-07-21</font></b>  <font color="#009900">Lorenzo</font> <font color="#009900">Bettini</font>  <u><font color="#0000FF">&lt;lb@foo&gt;</font></u>
+
+<font color="#990000">	* </font><b><font color="#000080">src/python_scanner.ll:</font></b> fixed a problem with string comments
+
+<font color="#990000">	* </font><b><font color="#000080">src/lib/genfun.cc (processFile):</font></b> correctly set deleteOStream
+
+<font color="#990000">	* </font><b><font color="#000080">src/lib/startapp.cc (start):</font></b> default to stdout also when -i
+	option is used.
+	<b><font color="#000080">(start):</font></b> check whether "STDOUT" was specified as output
+
+<font color="#990000">	* </font><b><font color="#000080">src/lib/genfun.cc (print_xtop):</font></b> always generate the correct header
+	for XHTML
+        <b><font color="#000080">(processFile):</font></b> call LineNumberDecorator::reset so that if many
+        files are processed the current line number is correctly reset
+
+<b><font color="#0000FF">2002-07-10</font></b>  <font color="#009900">Lorenzo</font> <font color="#009900">Bettini</font>  <u><font color="#0000FF">&lt;lb@foo&gt;</font></u>
+</tt></pre>

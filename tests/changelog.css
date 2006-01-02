@@ -1,0 +1,37 @@
+body {
+    color: black;
+    background-color: white;
+    font-family: monospace
+}
+
+.comment {
+    color: gray;
+    font-style: italic;
+}
+
+.date {
+    color: maroon;
+    font-weight: bold;
+}
+
+.time {
+    color: maroon;
+    font-weight: bold;
+}
+
+.url {
+    color: green
+}
+
+.name {
+    color: teal;
+}
+
+.symbol {
+    color: orange;
+}
+
+.file {
+    color: blue;
+    text-decoration: underline;
+}

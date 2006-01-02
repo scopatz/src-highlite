@@ -1,0 +1,50 @@
+ STATE 1
+  0: normal  (exit level: 0, exit_all: 0, next: none)
+  1: comment (//) (exit level: 0, exit_all: 0, next: 2)
+     STATE 2
+      0: comment  (exit level: 0, exit_all: 0, next: none)
+      1: comment (\z) (exit level: 1, exit_all: 0, next: none)
+  2: comment (/\*\*) (exit level: 0, exit_all: 0, next: 3)
+     STATE 3
+      0: comment  (exit level: 0, exit_all: 0, next: none)
+      1: comment (\*/) (exit level: 1, exit_all: 0, next: none)
+      2: comment (/\*\*) (exit level: 0, exit_all: 0, next: 3)
+      3: url ((?:(?:(?:<?)(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*@(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*(?:>?)))) (exit level: 0, exit_all: 0, next: none)
+      4: url ((?:(?:[[:word:]]+://(?:[[:word:]]+[\./\-_]?)+))) (exit level: 0, exit_all: 0, next: none)
+      5: preproc (<!DOCTYPE) (exit level: 0, exit_all: 0, next: 4)
+         STATE 4
+          0: normal  (exit level: 0, exit_all: 0, next: none)
+          1: preproc (>) (exit level: 1, exit_all: 0, next: none)
+          2: string (\") (exit level: 0, exit_all: 0, next: 5)
+             STATE 5
+              0: string  (exit level: 0, exit_all: 0, next: none)
+              1: string (\") (exit level: 1, exit_all: 0, next: none)
+              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
+      6: comment (<!--) (exit level: 0, exit_all: 0, next: 6)
+         STATE 6
+          0: comment  (exit level: 0, exit_all: 0, next: none)
+          1: comment (-->) (exit level: 1, exit_all: 0, next: none)
+          2: comment (<!--) (exit level: 0, exit_all: 0, next: 6)
+      7: keyword ((?:<(?:/)?[[:alpha:]]+(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
+      8: keyword (<(?:/)?[[:alpha:]]+) (exit level: 0, exit_all: 0, next: 7)
+         STATE 7
+          0: normal  (exit level: 0, exit_all: 0, next: none)
+          1: keyword ((?:/)?>) (exit level: 1, exit_all: 0, next: none)
+          2: type ((?:[^="[:blank:]]+)) (exit level: 0, exit_all: 0, next: none)
+          3: symbol ((?:=)) (exit level: 0, exit_all: 0, next: none)
+          4: string (\") (exit level: 0, exit_all: 0, next: 8)
+             STATE 8
+              0: string  (exit level: 0, exit_all: 0, next: none)
+              1: string (\") (exit level: 1, exit_all: 0, next: none)
+              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
+      9: preproc ((?:&(?:[[:alnum:]]+);)) (exit level: 0, exit_all: 0, next: none)
+      10: type ((?:@[[:alpha:]]+)) (exit level: 0, exit_all: 0, next: none)
+      11: todo ((?:(?:TODO|FIXME)(?:[:]?))) (exit level: 0, exit_all: 0, next: none)
+  3: comment (/\*) (exit level: 0, exit_all: 0, next: 9)
+     STATE 9
+      0: comment  (exit level: 0, exit_all: 0, next: none)
+      1: comment (\*/) (exit level: 1, exit_all: 0, next: none)
+      2: comment (/\*) (exit level: 0, exit_all: 0, next: 9)
+      3: url ((?:(?:(?:<?)(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*@(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*(?:>?)))) (exit level: 0, exit_all: 0, next: none)
+      4: url ((?:(?:[[:word:]]+://(?:[[:word:]]+[\./\-_]?)+))) (exit level: 0, exit_all: 0, next: none)
+      5: todo ((?:(?:TODO|FIXME)(?:[:]?))) (exit level: 0, exit_all: 0, next: none)

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"
+    "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite">
+<title>ChangeLog with css</title>
+<link rel="stylesheet" href="./changelog.css" type="text/css">
+</head>
+<body>
+<pre><tt><span class="date">2002-08-08</span><span class="normal">  </span><span class="name">Lorenzo</span><span class="normal"> </span><span class="name">Bettini</span><span class="normal">  </span><span class="url">&lt;lb-bl@foo&gt;</span>
+
+<span class="symbol">	* </span><span class="file">src/Makefile.am (source_highlight_SOURCES):</span><span class="normal"> correctly include</span>
+<span class="normal">	changelog_scanner.ll</span>
+
+<span class="symbol">        * </span><span class="normal">this is a comment without a file name</span>
+
+<span class="date">2002-08-02</span><span class="normal">  </span><span class="name">John</span><span class="normal"> </span><span class="name">Millaway</span><span class="normal">  </span><span class="url">&lt;millaway-bar@foo_bar-com&gt;</span>
+
+<span class="symbol">	* </span><span class="file">src/flex_scanner.ll:</span><span class="normal"> Added scanner for flex</span>
+
+<span class="symbol">	* </span><span class="file">src/changelog_scanner.ll:</span><span class="normal"> Added scanner for ChangeLog</span>
+
+<span class="symbol">	* </span><span class="file">src/Makefile.am:</span><span class="normal"> do not use .stamp files anymore, use flex's prefix</span>
+
+<span class="date">2002-07-30</span><span class="normal">  </span><span class="name">Lorenzo</span><span class="normal"> </span><span class="name">Bettini</span><span class="normal">  </span><span class="url">&lt;lb@foo&gt;</span>
+
+<span class="symbol">	* </span><span class="file">acinclude.m4 (LF_PROG_TXTC):</span><span class="normal"> fixed a little bug that shows up</span>
+<span class="normal">	only now with the new version of autoconf</span>
+
+<span class="symbol">	* </span><span class="file">acconfig.h:</span><span class="normal"> removed, no longer needed with autoconf</span>
+
+<span class="symbol">	* </span><span class="file">configure.in:</span><span class="normal"> use the new AC_LIBOBJ</span>
+
+<span class="symbol">	* </span><span class="file">doc/Makefile.am:</span><span class="normal"> removed an extra EXTRA_DIST</span>
+
+<span class="date">2002-07-21</span><span class="normal">  </span><span class="name">Lorenzo</span><span class="normal"> </span><span class="name">Bettini</span><span class="normal">  </span><span class="url">&lt;lb@foo&gt;</span>
+
+<span class="symbol">	* </span><span class="file">src/python_scanner.ll:</span><span class="normal"> fixed a problem with string comments</span>
+
+<span class="symbol">	* </span><span class="file">src/lib/genfun.cc (processFile):</span><span class="normal"> correctly set deleteOStream</span>
+
+<span class="symbol">	* </span><span class="file">src/lib/startapp.cc (start):</span><span class="normal"> default to stdout also when -i</span>
+<span class="normal">	option is used.</span>
+<span class="normal">	</span><span class="file">(start):</span><span class="normal"> check whether "STDOUT" was specified as output</span>
+
+<span class="symbol">	* </span><span class="file">src/lib/genfun.cc (print_xtop):</span><span class="normal"> always generate the correct header</span>
+<span class="normal">	for XHTML</span>
+<span class="normal">        </span><span class="file">(processFile):</span><span class="normal"> call LineNumberDecorator::reset so that if many</span>
+<span class="normal">        files are processed the current line number is correctly reset</span>
+
+<span class="date">2002-07-10</span><span class="normal">  </span><span class="name">Lorenzo</span><span class="normal"> </span><span class="name">Bettini</span><span class="normal">  </span><span class="url">&lt;lb@foo&gt;</span>
+</tt></pre>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">% this is just to test latex highlighting</font></i>
+<i><font color="#9A1900">% it will not compile with latex though :-)</font></i>
+
+<b><font color="#0000FF">\runningheads</font></b><font color="#009900">{L.~Bettini, S.~Capecchi and B.~Venneri}</font>
+<font color="#009900">{Double Dispatch in \CC}</font>
+
+This is an higlighted <b><font color="#0000FF">\command</font></b>.
+
+<b><font color="#0000FF">\lstdefinelanguage</font></b><font color="#009900">{xklaim}</font><i><font color="#9A1900">%</font></i>
+  <font color="#009900">{morekeywords={if,else,then,endif,while,do,enddo,begin,end,rec,ref,declare,%</font>
+<font color="#009900">      int,str,loc,process,bool,locname,ts,var,within,in,out,read,eval,newloc,%</font>
+<font color="#009900">      go,true,false,not,and,or,nil,add,rm,newc,extern,%</font>
+<font color="#009900">      inp,readp,forall,const,nodes,endnodes,on,print,logloc,phyloc,%</font>
+<font color="#009900">      login,logout,accept,disconnected,accept,subscribe,unsubscribe,%</font>
+<font color="#009900">      dirconnect,acceptconn,%</font>
+<font color="#009900">      register,unregister,nodecoord,port,start,cons,%</font>
+<font color="#009900">      return,new,object,class,mixin,def,redef,expect,next,this,red,exp,type},%</font>
+<font color="#009900">    keywords=[2]{self},%</font>
+<font color="#009900">    keywordstyle=[2]\ttfamily,%</font>
+<font color="#009900">    alsoother=@,%</font>
+<font color="#009900">    morecomment=[l]\#,%</font>
+<font color="#009900">    sensitive=f,%</font>
+<font color="#009900">    morestring=[b]"%</font>
+<font color="#009900">   }</font><font color="#993399">[keywords,strings]</font>
+
+<b><font color="#0000FF">\frame</font></b>{
+<b><font color="#0000FF">\frametitle</font></b><font color="#009900">{Tuples and Pattern Matching}</font>
+  <b><font color="#0000FF">\begin</font></b><font color="#009900">{itemize}</font>
+  <b><font color="#0000FF">\item</font></b> Tuples and Templates
+    <font color="#FF6600">\[</font>
+    (<font color="#FF0000">"foo"</font>, 10+5, !x)
+    <font color="#FF6600">\]</font>
+    <b><font color="#0000FF">\begin</font></b><font color="#009900">{itemize}</font>
+    <b><font color="#0000FF">\item</font></b> Formal Fields
+    <b><font color="#0000FF">\item</font></b> Actual Fields
+    <b><font color="#0000FF">\end</font></b><font color="#009900">{itemize}</font>
+  <b><font color="#0000FF">\item</font></b> Pattern Matching:
+    <b><font color="#0000FF">\begin</font></b><font color="#009900">{itemize}</font>
+    <b><font color="#0000FF">\item</font></b> Formal fields match any field of the same type
+    <b><font color="#0000FF">\item</font></b> Actual fields
+      match if identical
+    <b><font color="#0000FF">\end</font></b><font color="#009900">{itemize}</font>
+  <b><font color="#0000FF">\end</font></b><font color="#009900">{itemize}</font>
+<b><font color="#0000FF">\vspace</font></b><font color="#009900">{0.4cm}</font>
+<b><font color="#0000FF">\begin</font></b><font color="#009900">{block}{}</font>
+<b><font color="#0000FF">\begin</font></b><font color="#009900">{center}</font>
+<font color="#FF6600">$("foo", 10+5, true)$</font> <b><font color="#0000FF">\alert</font></b><font color="#009900">{matches}</font> <font color="#FF6600">$(!s, 15, !b)$</font>
+<b><font color="#0000FF">\end</font></b><font color="#009900">{center}</font>
+<b><font color="#0000FF">\end</font></b><font color="#009900">{block}</font>
+}
+
+This is mathematic with <font color="#990000">\$\$</font>:
+
+<font color="#FF6600">$$</font>
+i = j
+<font color="#FF6600">$$</font>
+
+the same but with <font color="#FF6600">\[</font> <font color="#FF6600">\]</font>:
+
+<font color="#FF6600">\[</font>
+i = j
+<font color="#FF6600">\]</font>
+
+<font color="#FF0000">`Private, Protected and Virtual Methods'</font>).
+This line's body shouldn't have the highlighted '.
+
+These <font color="#990000">\`</font>e <font color="#990000">\'</font>e <font color="#990000">\"</font>e are accents and not a string
+
+L.<font color="#990000">~</font>Bettini
+
+<b><font color="#0000FF">\paragraph</font></b><font color="#990000">*</font><font color="#009900">{Typing rule for multi method invocation.}</font>
+</tt></pre>

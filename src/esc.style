@@ -1,0 +1,15 @@
+keyword blue b ;
+type darkgreen ;
+string red ;
+specialchar pink ;
+comment brown i ;
+number purple ;
+preproc darkblue b ;
+symbol darkred ;
+function black b;
+cbracket red;
+variable darkgreen ;
+
+// line numbers
+linenum yellow;
+

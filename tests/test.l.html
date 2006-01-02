@@ -1,0 +1,153 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#000080">%{</font></b>
+<i><font color="#9A1900">/*</font></i>
+<i><font color="#9A1900"> * Copyright (C) 1999, 2000, 2001  Lorenzo Bettini</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * This program is free software; you can redistribute it and/or modify</font></i>
+<i><font color="#9A1900"> * it under the terms of the GNU General Public License as published by</font></i>
+<i><font color="#9A1900"> * the Free Software Foundation; either version 2 of the License, or</font></i>
+<i><font color="#9A1900"> * (at your option) any later version.</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * This program is distributed in the hope that it will be useful,</font></i>
+<i><font color="#9A1900"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</font></i>
+<i><font color="#9A1900"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</font></i>
+<i><font color="#9A1900"> * GNU General Public License for more details.</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * You should have received a copy of the GNU General Public License</font></i>
+<i><font color="#9A1900"> * along with this program; if not, write to the Free Software</font></i>
+<i><font color="#9A1900"> * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> */</font></i>
+
+<b><font color="#0000FF">static</font></b> <font color="#009900">int</font> lineno <font color="#990000">=</font> <font color="#993399">1</font> <font color="#990000">;</font> <i><font color="#9A1900">/* number of scanned lines */</font></i>
+<font color="#009900">char</font> linebuf<font color="#990000">[</font><font color="#993399">1024</font><font color="#990000">]</font> <font color="#990000">;</font> <i><font color="#9A1900">/* current code line in the source */</font></i>
+<font color="#009900">int</font> tokenpos <font color="#990000">=</font> <font color="#993399">0</font> <font color="#990000">;</font> <i><font color="#9A1900">// current token position in the current line</font></i>
+
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"tags.h"</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"tokens.h"</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"colors.h"</font>
+
+<b><font color="#000080">#include</font></b> <font color="#FF0000">"genfun.h"</font>
+
+<b><font color="#000080">%}</font></b>
+<b><font color="#000080">%option</font></b> <b><font color="#0000FF">prefix</font></b><font color="#990000">=</font><font color="#FF0000">"java_scanner_"</font>
+<b><font color="#000080">%option</font></b> <b><font color="#0000FF">noyywrap</font></b>
+
+<b><font color="#000080">ws</font></b> <font color="#990000">[</font> <font color="#990000">]+</font>
+<b><font color="#000080">tabs</font></b> <font color="#990000">[\</font>t<font color="#990000">]+</font>
+
+<b><font color="#000080">nl</font></b> <font color="#990000">\</font>n
+<b><font color="#000080">cr</font></b> <font color="#990000">\</font>r
+<b><font color="#000080">IDE</font></b> <font color="#990000">[</font>a<font color="#990000">-</font>zA<font color="#990000">-</font>Z_<font color="#990000">]([</font>a<font color="#990000">-</font>zA<font color="#990000">-</font>Z0<font color="#990000">-</font>9_<font color="#990000">])*</font>
+<b><font color="#000080">wspace</font></b> <font color="#990000">[</font> <font color="#990000">\</font>t<font color="#990000">\</font>n<font color="#990000">\</font>r<font color="#990000">]</font>
+
+<b><font color="#000080">STRING</font></b> <font color="#990000">\</font>"<font color="#990000">[^\</font>"<font color="#990000">\</font>n<font color="#990000">]*\</font>"
+
+<b><font color="#000080">not_alpha</font></b> <font color="#990000">[^</font>a<font color="#990000">-</font>zA<font color="#990000">-</font>Z0<font color="#990000">-</font>9<font color="#990000">]</font>
+
+<b><font color="#000080">%s</font></b> <b><font color="#000000">COMMENT_STATE</font></b>
+<b><font color="#000080">%s</font></b> <b><font color="#000000">SINGLELINE_COMMENT</font></b>
+<b><font color="#000080">%s</font></b> <b><font color="#000000">STRING_STATE</font></b>
+<b><font color="#000080">%s</font></b> <b><font color="#000000">CHAR_STATE</font></b>
+
+<b><font color="#000080">keyword</font></b> <font color="#990000">(</font>abstract<font color="#990000">|</font>assert<font color="#990000">|</font>break<font color="#990000">|</font>case<font color="#990000">|</font>catch<font color="#990000">|</font>class<font color="#990000">|</font>const<font color="#990000">|</font>continue<font color="#990000">|</font>default<font color="#990000">|</font>do<font color="#990000">|</font>else<font color="#990000">|</font>extends<font color="#990000">|</font>final<font color="#990000">|</font>finally<font color="#990000">|</font>for<font color="#990000">|</font>goto<font color="#990000">|</font>if<font color="#990000">|</font>implements<font color="#990000">|</font>instanceof<font color="#990000">|</font>interface<font color="#990000">|</font>native<font color="#990000">|</font>new<font color="#990000">|</font>null<font color="#990000">|</font>package<font color="#990000">|</font>private<font color="#990000">|</font>protected<font color="#990000">|</font>public<font color="#990000">|</font>return<font color="#990000">|</font>static<font color="#990000">|</font>super<font color="#990000">|</font>switch<font color="#990000">|</font>synchronized<font color="#990000">|</font>throw<font color="#990000">|</font>throws<font color="#990000">|</font>this<font color="#990000">|</font>transient<font color="#990000">|</font>try<font color="#990000">|</font>volatile<font color="#990000">|</font>while<font color="#990000">)</font>
+<b><font color="#000080">basetype</font></b> <font color="#990000">(</font>int<font color="#990000">|</font>byte<font color="#990000">|</font>boolean<font color="#990000">|</font>char<font color="#990000">|</font>long<font color="#990000">|</font>float<font color="#990000">|</font>double<font color="#990000">|</font>short<font color="#990000">|</font>void<font color="#990000">)</font>
+<b><font color="#000080">symbol</font></b> <font color="#990000">[\~\!\%\^\*\(\)\-\+\=\[\]\|\\\:\;\,\.\/\?\&amp;\&lt;\&gt;]</font>
+<b><font color="#000080">funccall</font></b> <font color="#009900">{IDE}</font><font color="#990000">/</font><font color="#009900">{wspace}</font><font color="#990000">*\(</font>
+
+<b><font color="#000080">%%</font></b>
+
+
+
+<b><font color="#000080">\r</font></b> <font color="#FF0000">{}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#FF0000">"/*"</font> <font color="#FF0000">{</font> BEGIN COMMENT_STATE <font color="#990000">;</font>
+ <b><font color="#000000">startComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font>      
+<font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#FF0000">"/*"</font><font color="#990000">.*</font><font color="#FF0000">"*/"</font> <font color="#FF0000">{</font> <b><font color="#000000">generateComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font>  <font color="#FF0000">}</font>
+
+
+<b><font color="#000000">&lt;COMMENT_STATE&gt;</font></b><b><font color="#000080">\n</font></b> <font color="#FF0000">{</font> 
+   <b><font color="#000000">endComment </font></b><font color="#990000">(</font><font color="#FF0000">""</font><font color="#990000">);</font> 
+   <font color="#990000">++</font>lineno<font color="#990000">;</font>
+   <b><font color="#000000">generateNewLine</font></b><font color="#990000">()</font> <font color="#990000">;</font>
+   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">true</font></b><font color="#990000">)</font> <font color="#FF0000">{</font>
+      <b><font color="#000000">startComment </font></b><font color="#990000">(</font><font color="#FF0000">""</font><font color="#990000">);</font>
+   <font color="#FF0000">}</font> <b><font color="#0000FF">else</font></b> <font color="#FF0000">{</font>
+     <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">10</font><font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> <font color="#FF0000">{</font>
+       <font color="#990000">;</font> <i><font color="#9A1900">// do nothing, just to test the { }</font></i>
+     <font color="#FF0000">}</font>
+   <font color="#FF0000">}</font>
+   <i><font color="#9A1900">/* if we encounter another // during a comment we simply</font></i>
+<i><font color="#9A1900">      treat it as a ordinary string */</font></i>
+ <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;COMMENT_STATE&gt;</font></b><font color="#FF0000">"*/"</font> <font color="#FF0000">{</font> <b><font color="#000000">endComment</font></b><font color="#990000">(</font>yytext<font color="#990000">)</font> <font color="#990000">;</font>
+                      BEGIN INITIAL <font color="#990000">;</font> <i><font color="#9A1900">/* end of the comment */</font></i> <font color="#FF0000">}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#FF0000">"//"</font> <font color="#FF0000">{</font> BEGIN SINGLELINE_COMMENT <font color="#990000">;</font> <b><font color="#000000">startComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;SINGLELINE_COMMENT&gt;</font></b><b><font color="#000080">\n</font></b> <font color="#FF0000">{</font> 
+   BEGIN INITIAL <font color="#990000">;</font>
+   <b><font color="#000000">yyless </font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">);</font> <i><font color="#9A1900">// put the \n back</font></i>
+   <b><font color="#000000">endComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> 
+   <i><font color="#9A1900">/* if we encounter another // during a comment we simply</font></i>
+<i><font color="#9A1900">      treat it as a ordinary string */</font></i>
+ <font color="#FF0000">}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><b><font color="#000080">\"</font></b> <font color="#FF0000">{</font> BEGIN STRING_STATE <font color="#990000">;</font> <b><font color="#000000">startString</font></b><font color="#990000">(</font> yytext <font color="#990000">);</font>  <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;STRING_STATE&gt;</font></b><b><font color="#000080">\\\\</font></b> <font color="#FF0000">{</font>  <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;STRING_STATE&gt;</font></b><font color="#FF0000">"\\\""</font> <font color="#FF0000">{</font>  <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;STRING_STATE&gt;</font></b><b><font color="#000080">\n</font></b> <font color="#FF0000">{</font> 
+   <b><font color="#000000">endString </font></b><font color="#990000">(</font><font color="#FF0000">""</font><font color="#990000">);</font> 
+   <font color="#990000">++</font>lineno<font color="#990000">;</font>
+   <b><font color="#000000">generateNewLine</font></b><font color="#990000">()</font> <font color="#990000">;</font>
+   <b><font color="#000000">startString </font></b><font color="#990000">(</font><font color="#FF0000">""</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+<b><font color="#000000">&lt;STRING_STATE&gt;</font></b><b><font color="#000080">\"</font></b> <font color="#FF0000">{</font> BEGIN INITIAL <font color="#990000">;</font> <b><font color="#000000">endString</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><b><font color="#000080">\'</font></b> <font color="#FF0000">{</font> BEGIN CHAR_STATE <font color="#990000">;</font> <b><font color="#000000">startString</font></b><font color="#990000">(</font> yytext <font color="#990000">);</font>  <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;CHAR_STATE&gt;</font></b><b><font color="#000080">\\\\</font></b> <font color="#FF0000">{</font>  <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;CHAR_STATE&gt;</font></b><font color="#FF0000">"\\\'"</font> <font color="#FF0000">{</font>  <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;CHAR_STATE&gt;</font></b><b><font color="#000080">\'</font></b> <font color="#FF0000">{</font> BEGIN INITIAL <font color="#990000">;</font> <b><font color="#000000">endString</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#009900">{keyword}</font>  <font color="#FF0000">{</font> <b><font color="#000000">generateKeyWord</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#009900">{basetype}</font> <font color="#FF0000">{</font> <b><font color="#000000">generateBaseType</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#009900">{symbol}</font> <font color="#FF0000">{</font> <b><font color="#000000">generateSymbol</font></b><font color="#990000">(</font> yytext <font color="#990000">);</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#990000">[</font><b><font color="#000080">\{\}</font></b><font color="#990000">]</font> <font color="#FF0000">{</font> <b><font color="#000000">generateCBracket </font></b><font color="#990000">(</font> yytext <font color="#990000">);</font> <font color="#FF0000">}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b>0<font color="#990000">[</font>xX<font color="#990000">][</font>0<font color="#990000">-</font>9a<font color="#990000">-</font>fA<font color="#990000">-</font>F<font color="#990000">]*</font> <font color="#FF0000">{</font> <b><font color="#000000">generateNumber</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#990000">[</font>0<font color="#990000">-</font>9<font color="#990000">][</font>0<font color="#990000">-</font>9<font color="#990000">]*(</font><b><font color="#000080">\.</font></b><font color="#990000">[</font>0<font color="#990000">-</font>9<font color="#990000">]*[</font>eE<font color="#990000">]?[-+]?[</font>0<font color="#990000">-</font>9<font color="#990000">]*)?</font> <font color="#FF0000">{</font> <b><font color="#000000">generateNumber</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#009900">{keyword}</font><font color="#990000">/</font><font color="#009900">{wspace}</font><font color="#990000">*</font><b><font color="#000080">\(</font></b> <font color="#FF0000">{</font> <b><font color="#000000">generateKeyWord</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#009900">{basetype}</font><font color="#990000">/</font><font color="#009900">{wspace}</font><font color="#990000">*</font><b><font color="#000080">\(</font></b> <font color="#FF0000">{</font> <b><font color="#000000">generateBaseType</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#009900">{funccall}</font> <font color="#FF0000">{</font> <b><font color="#000000">generateFunction </font></b><font color="#990000">(</font> yytext <font color="#990000">);</font> <font color="#FF0000">}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b>import <font color="#FF0000">{</font> <b><font color="#000000">generatePreProc</font></b><font color="#990000">(</font> yytext<font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#990000">[</font>a<font color="#990000">-</font>zA<font color="#990000">-</font>Z_<font color="#990000">]([</font>a<font color="#990000">-</font>zA<font color="#990000">-</font>Z0<font color="#990000">-</font>9_<font color="#990000">])*</font> <font color="#FF0000">{</font> <b><font color="#000000">generate_normal</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+
+<b><font color="#000080">\t</font></b> <font color="#FF0000">{</font>
+        <b><font color="#000000">generateTab</font></b><font color="#990000">()</font> <font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#990000">.</font> <font color="#FF0000">{</font> <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <i><font color="#9A1900">/* anything else */</font></i> <font color="#FF0000">}</font>
+
+<b><font color="#000080">\n</font></b> <font color="#FF0000">{</font> 
+       <font color="#990000">++</font>lineno<font color="#990000">;</font>
+       <b><font color="#000000">generateNewLine</font></b><font color="#990000">()</font> <font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#000080">%%</font></b>
+
+<font color="#009900">void</font> <b><font color="#000000">yyerror</font></b><font color="#990000">(</font> <font color="#009900">char</font> <font color="#990000">*</font>s <font color="#990000">)</font> <font color="#990000">;</font>
+
+<font color="#009900">void</font> <b><font color="#000000">yyerror</font></b><font color="#990000">(</font> <font color="#009900">char</font> <font color="#990000">*</font>s <font color="#990000">)</font>
+<font color="#FF0000">{</font>  
+  <b><font color="#000000">fprintf</font></b><font color="#990000">(</font> stderr<font color="#990000">,</font> <font color="#FF0000">"%d: %s: %s</font><font color="#CC33CC">\n</font><font color="#FF0000">%s</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">,</font> lineno<font color="#990000">,</font> s<font color="#990000">,</font> yytext<font color="#990000">,</font> linebuf <font color="#990000">)</font> <font color="#990000">;</font>
+  <b><font color="#000000">fprintf</font></b><font color="#990000">(</font> stderr<font color="#990000">,</font> <font color="#FF0000">"%*s</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">,</font> tokenpos<font color="#990000">,</font> <font color="#FF0000">"^"</font> <font color="#990000">)</font> <font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<i><font color="#9A1900">/* vim:set ft=flex expandtab cindent tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0: */</font></i>
+</tt></pre>

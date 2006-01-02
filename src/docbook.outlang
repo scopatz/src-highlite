@@ -1,0 +1,13 @@
+# by Stuart Rackham
+# http://www.methods.co.nz/asciidoc/source-highlight-filter.html
+
+extension "xml"
+
+bold "<emphasis role=\"strong\">$text</emphasis>"
+italics "<emphasis>$text</emphasis>"
+
+translations
+"&" "&amp;"
+"<" "&lt;"
+">" "&gt;"
+end

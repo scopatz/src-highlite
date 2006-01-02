@@ -1,0 +1,19 @@
+include "latexcolor.outlang"
+
+doctemplate
+"% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\documentclass{article}
+\usepackage[usenames,dvipsnames]{color}
+$header
+\title{$title}
+\date{}
+\begin{document}
+\maketitle
+\noindent
+"
+"
+$footer
+\end{document}
+"
+end
+

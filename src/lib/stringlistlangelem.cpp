@@ -1,0 +1,36 @@
+//
+// C++ Implementation: stringlistlangelem
+//
+// Description:
+//
+//
+// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+//
+#include "stringlistlangelem.h"
+
+#include "stringdef.h"
+#include "tostringcollection.h"
+
+using namespace std;
+
+StringListLangElem::StringListLangElem(const string &n, StringDefs *al, bool nons)
+ : StateStartLangElem(n), alternatives(al), nonsensitive(nons)
+{
+}
+
+
+StringListLangElem::~StringListLangElem()
+{
+  delete alternatives;
+}
+
+const std::string
+StringListLangElem::toString() const
+{
+  string res = StateStartLangElem::toString() + " " + toStringCollection<StringDefs>(alternatives);;
+  return res;
+}
+

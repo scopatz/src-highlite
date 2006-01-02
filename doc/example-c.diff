@@ -1,0 +1,28 @@
+diff -rc2P source-highlight-2.1.1/source-highlight.spec ...
+*** source-highlight-2.1.1/source-highlight.spec ...
+--- source-highlight-2.1.2/source-highlight.spec ...
+***************
+*** 7,12 ****
+  Summary:   syntax highlighting for source documents
+  Name:      source-highlight
+! Version:   2.1.1
+! Release:   2.1.1
+  License:   GPL
+  Group:     Utilities/Console
+--- 7,12 ----
+  Summary:   syntax highlighting for source documents
+  Name:      source-highlight
+! Version:   2.1.2
+! Release:   2.1.2
+  License:   GPL
+  Group:     Utilities/Console
+diff -rc2P source-highlight-2.1.1/src/latex.outlang ...
+*** source-highlight-2.1.1/src/latex.outlang ...
+--- source-highlight-2.1.2/src/latex.outlang ...
+***************
+*** 35,37 ****
+--- 35,38 ----
+  "--" "-\\/-"
+  "---" "-\\/-\\/-"
++ "\"" "\"{}" # avoids problems with some inputenc
+  end

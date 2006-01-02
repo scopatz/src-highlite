@@ -1,0 +1,4 @@
+This is a file
+just to test the behavior of source-highlight
+
+when the input language is not known and the --failsafe option is given

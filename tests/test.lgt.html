@@ -1,0 +1,66 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>
+<i><font color="#9A1900">% sort code adopted from an example in the SICStus Prolog User Manual</font></i>
+<i><font color="#9A1900">% metapredicate example taken from Prolog Part 2, Modules - Committee Draft</font></i>
+
+
+<b><font color="#000080">:- object</font></b>(sort(<font color="#009900">_Type</font>)).
+
+
+<b><font color="#000080">	:- info</font></b>([
+		version <b><font color="#0000FF">is</font></b> <font color="#993399">1.0</font>,
+		author <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Paulo Moura'</font>,
+		date <b><font color="#0000FF">is</font></b> <font color="#993399">2000</font><font color="#990000">/</font><font color="#993399">7</font><font color="#990000">/</font><font color="#993399">24</font>,
+		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'List sorting parameterized by the type of the list elements.'</font>]).
+
+
+<b><font color="#000080">	:- uses</font></b>(list).
+<b><font color="#000080">	:- uses</font></b>(tracer).
+
+<b><font color="#000080">	:- calls</font></b>(comparingp).
+
+
+<b><font color="#000080">	:- public</font></b>(sort<font color="#990000">/</font><font color="#993399">2</font>).
+
+<b><font color="#000080">	:- mode</font></b>(sort(<font color="#990000">+</font>list, <font color="#990000">-</font>list), one).
+
+<b><font color="#000080">	:- info</font></b>(sort<font color="#990000">/</font><font color="#993399">2</font>, [
+		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Sorts a list in ascending order.'</font>,
+		argnames <b><font color="#0000FF">is</font></b> [<font color="#FF0000">'List'</font>, <font color="#FF0000">'Sorted'</font>]]).
+
+
+<b><font color="#000080">	:- private</font></b>(partition<font color="#990000">/</font><font color="#993399">4</font>).
+
+<b><font color="#000080">	:- mode</font></b>(partition(<font color="#990000">+</font>list, <font color="#990000">+</font>nonvar, <font color="#990000">-</font>list, <font color="#990000">-</font>list), one).
+
+<b><font color="#000080">	:- info</font></b>(partition<font color="#990000">/</font><font color="#993399">4</font>, [
+		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Partition a list in two lists containing the elements smaller and larger than a pivot.'</font>,
+		argnames <b><font color="#0000FF">is</font></b> [<font color="#FF0000">'List'</font>, <font color="#FF0000">'Pivot'</font>, <font color="#FF0000">'Small'</font>, <font color="#FF0000">'Large'</font>]]).
+
+
+	sort([], []).
+
+	sort([<font color="#009900">Head</font>| <font color="#009900">Tail</font>], <font color="#009900">Sorted</font>) <font color="#990000">:-</font>
+		tracer<font color="#990000">::</font>(
+			trace(partition(<font color="#009900">Tail</font>, <font color="#009900">Head</font>, <font color="#009900">Small</font>, <font color="#009900">Large</font>)),
+			trace(sort(<font color="#009900">Small</font>, <font color="#009900">Sorted1</font>)),
+			trace(sort(<font color="#009900">Large</font>, <font color="#009900">Sorted2</font>))),
+		list<font color="#990000">::</font>append(<font color="#009900">Sorted1</font>, [<font color="#009900">Head</font>| <font color="#009900">Sorted2</font>], <font color="#009900">Sorted</font>).
+
+
+	partition([], <font color="#009900">_</font>, [], []).
+
+	partition([<font color="#009900">Head</font>| <font color="#009900">Tail</font>], <font color="#009900">Pivot</font>, <font color="#009900">Small</font>, <font color="#009900">Large</font>) <font color="#990000">:-</font>
+		<b><font color="#0000FF">parameter</font></b>(<font color="#993399">1</font>, <font color="#009900">Type</font>),
+		(	<font color="#009900">Type</font><font color="#990000">::</font>(<font color="#009900">Head</font> <font color="#990000">&lt;</font> <font color="#009900">Pivot</font>) <font color="#990000">-&gt;</font>
+			<font color="#009900">Small</font> <font color="#990000">=</font> [<font color="#009900">Head</font>| <font color="#009900">Small1</font>], <font color="#009900">Large</font> <font color="#990000">=</font> <font color="#009900">Large1</font>
+		<font color="#990000">;</font>	<font color="#009900">Small</font> <font color="#990000">=</font> <font color="#009900">Small1</font>, <font color="#009900">Large</font> <font color="#990000">=</font> [<font color="#009900">Head</font>| <font color="#009900">Large1</font>]
+		),
+		partition(<font color="#009900">Tail</font>, <font color="#009900">Pivot</font>, <font color="#009900">Small1</font>, <font color="#009900">Large1</font>).
+
+
+<b><font color="#000080">:- end_object.</font></b>
+</tt></pre>
