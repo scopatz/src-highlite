@@ -1,0 +1,15 @@
+Jul  7 22:58:29 localhost su(pam_unix)[6540]: session closed for user root
+Jul  7 22:58:30 localhost gdm(pam_unix)[16823]: session closed for user jan
+Jul  7 22:58:44 localhost sshd[19224]: Received signal 15; terminating.
+Jul  8 19:51:34 localhost portmap[10226]: user rpc not found, reverting to user bin
+Jul  8 19:54:10 localhost gdm(pam_unix)[17343]: session opened for user jan by (uid=0)
+Jul  8 19:55:05 localhost sshd[20022]: Server listening on 0.0.0.0 port 22.
+Jul  8 20:23:13 localhost su(pam_unix)[20443]: session opened for user root by jan(uid=1003)
+Jul  8 20:39:29 localhost sshd[20022]: Received signal 15; terminating.
+Jul  8 20:39:29 localhost portmap[23153]: user rpc not found, reverting to user bin
+Jul  8 20:39:43 localhost sshd[25013]: Server listening on 0.0.0.0 port 22.
+Jul  8 21:41:24 localhost su(pam_unix)[18559]: authentication failure; logname=jan uid=1003 euid=0 tty=pts/2 ruser=jan rhost=  user=root
+Jul  8 21:41:26 localhost su[18559]: pam_authenticate: Authentication failure
+Jul  8 21:41:29 localhost su(pam_unix)[19276]: authentication failure; logname=jan uid=1003 euid=0 tty=pts/2 ruser=jan rhost=  user=root
+Jul  8 21:41:31 localhost su[19276]: pam_authenticate: Authentication failure
+Jul  8 21:41:38 localhost su(pam_unix)[21069]: session opened for user root by jan(uid=1003)

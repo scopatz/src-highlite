@@ -1,0 +1,107 @@
+Jul  8 19:51:34 localhost kernel: EXT3-fs warning: maximal mount count reached, running e2fsck is recommended
+Jul  8 19:51:34 localhost kernel: EXT3 FS on dm-7, internal journal
+Jul  8 19:51:34 localhost kernel: EXT3-fs: mounted filesystem with ordered data mode.
+Jul  8 19:51:34 localhost kernel: Adding 1048568k swap on /dev/vg/swap.  Priority:-2 extents:1
+Jul  8 19:51:38 localhost kernel: bootsplash 3.1.4-2004/02/19: looking for picture.... found (1280x1024, 27515 bytes, v3).
+Jul  8 19:51:38 localhost kernel: bootsplash: status on console 0 changed to on
+Jul  8 19:51:39 localhost kernel: bootsplash 3.1.4-2004/02/19: looking for picture.... found (1280x1024, 27515 bytes, v3).
+Jul  8 19:51:39 localhost kernel: bootsplash: status on console 1 changed to on
+Jul  8 19:51:39 localhost kernel: bootsplash 3.1.4-2004/02/19: looking for picture.... found (1280x1024, 27515 bytes, v3).
+Jul  8 19:51:39 localhost kernel: bootsplash: status on console 2 changed to on
+Jul  8 19:51:39 localhost kernel: bootsplash 3.1.4-2004/02/19: looking for picture.... found (1280x1024, 27515 bytes, v3).
+Jul  8 19:51:39 localhost kernel: bootsplash: status on console 3 changed to on
+Jul  8 19:51:39 localhost kernel: bootsplash 3.1.4-2004/02/19: looking for picture.... found (1280x1024, 27515 bytes, v3).
+Jul  8 19:51:39 localhost kernel: bootsplash: status on console 4 changed to on
+Jul  8 19:51:39 localhost kernel: bootsplash 3.1.4-2004/02/19: looking for picture.... found (1280x1024, 27515 bytes, v3).
+Jul  8 19:51:39 localhost kernel: bootsplash: status on console 5 changed to on
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/Type1 (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/Speedo (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/CID (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/util (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/local (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/Speedo (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/truetype (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/freefont (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/sharefont (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/default/Type1 (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/ttf/decoratives (unreadable) 
+Jul  8 19:51:41 localhost xfs: ignoring font path element /usr/share/fonts/ttf/western (unreadable) 
+Jul  8 19:51:44 localhost kernel: [fglrx] Maximum main memory to use for locked dma buffers: 929 MBytes.
+Jul  8 19:51:44 localhost kernel: [fglrx] module loaded - fglrx 3.9.0 [May 11 2004] on minor 0
+Jul  8 19:51:44 localhost kernel: mtrr: 0xd0000000,0x8000000 overlaps existing 0xd0000000,0x400000
+Jul  8 19:51:44 localhost kernel: [fglrx] Maximum main memory to use for locked dma buffers: 929 MBytes.
+Jul  8 19:51:44 localhost kernel: [fglrx] AGP detected, AgpState   = 0x1f000217 (hardware caps of chipset)
+Jul  8 19:51:44 localhost kernel: agpgart: Found an AGP 2.0 compliant device at 0000:00:00.0.
+Jul  8 19:51:44 localhost kernel: agpgart: Putting AGP V2 device at 0000:00:00.0 into 4x mode
+Jul  8 19:51:44 localhost kernel: agpgart: Putting AGP V2 device at 0000:01:00.0 into 4x mode
+Jul  8 19:51:44 localhost kernel: [fglrx] AGP enabled,  AgpCommand = 0x1f000314 (selected caps)
+Jul  8 19:51:44 localhost kernel: [fglrx] free  AGP = 121909248
+Jul  8 19:51:44 localhost kernel: [fglrx] max   AGP = 121909248
+Jul  8 19:51:44 localhost kernel: [fglrx] free  LFB = 104349696
+Jul  8 19:51:44 localhost kernel: [fglrx] max   LFB = 104349696
+Jul  8 19:51:44 localhost kernel: [fglrx] free  Inv = 0
+Jul  8 19:51:44 localhost kernel: [fglrx] max   Inv = 0
+Jul  8 19:51:44 localhost kernel: [fglrx] total Inv = 0
+Jul  8 19:51:44 localhost kernel: [fglrx] total TIM = 0
+Jul  8 19:51:44 localhost kernel: [fglrx] total FB  = 0
+Jul  8 19:51:44 localhost kernel: [fglrx] total AGP = 32768
+Jul  8 19:54:12 localhost gconfd (jan-17500): starting (version 2.6.1), pid 17500 user 'jan'
+Jul  8 19:54:12 localhost gconfd (jan-17500): Resolved address "xml:readonly:/etc/gconf/gconf.xml.mandatory" to a read-only config source at position 0
+Jul  8 19:54:12 localhost gconfd (jan-17500): Resolved address "xml:readwrite:/home/jan/.gconf" to a writable config source at position 1
+Jul  8 19:54:12 localhost gconfd (jan-17500): Resolved address "xml:readonly:/etc/gconf/gconf.xml.defaults" to a read-only config source at position 2
+Jul  8 19:54:14 localhost bonobo-activation-server (jan-17505): iid OAFIID:BrokenNoType:20000808 has a NULL type
+Jul  8 19:54:14 localhost bonobo-activation-server (jan-17505): invalid character '#' in iid 'OAFIID:This#!!%$iid%^$%_|~!OAFIID_ContainsBadChars'
+Jul  8 19:54:20 localhost bonobo-activation-server (jan-17505): iid OAFIID:BrokenNoType:20000808 has a NULL type
+Jul  8 19:54:20 localhost bonobo-activation-server (jan-17505): invalid character '#' in iid 'OAFIID:This#!!%$iid%^$%_|~!OAFIID_ContainsBadChars'
+Jul  8 19:54:49 localhost sudo:      jan : TTY=unknown ; PWD=/home/jan ; USER=root ; COMMAND=/usr/bin/switch_net
+Jul  8 19:54:58 localhost kernel: ip_tables: (C) 2000-2002 Netfilter core team
+Jul  8 19:54:58 localhost kernel: bootsplash 3.1.4-2004/02/19: looking for picture.... found (1280x1024, 27515 bytes, v3).
+Jul  8 19:54:58 localhost kernel: bootsplash: status on console 0 changed to on
+Jul  8 19:55:02 localhost kernel: bootsplash 3.1.4-2004/02/19: looking for picture.... found (1280x1024, 27515 bytes, v3).
+Jul  8 19:55:02 localhost kernel: bootsplash: status on console 0 changed to on
+Jul  8 20:36:12 localhost acpi_hdl[22520]: group battery - action N/A - args BAT0 00000080 00000001 
+Jul  8 20:36:12 localhost acpi_hdl[22520]: unhandled group 
+Jul  8 20:38:56 localhost kernel: kjournald starting.  Commit interval 5 seconds
+Jul  8 20:38:56 localhost kernel: EXT3 FS on dm-18, internal journal
+Jul  8 20:38:56 localhost kernel: EXT3-fs: mounted filesystem with ordered data mode.
+Jul  8 20:39:28 localhost sudo:      jan : TTY=unknown ; PWD=/home/jan ; USER=root ; COMMAND=/usr/bin/switch_net
+Jul  8 20:39:42 localhost kernel: ip_conntrack version 2.1 (8189 buckets, 65512 max) - 296 bytes per conntrack
+Jul  8 20:39:56 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=84 TOS=0x00 PREC=0x00 TTL=64 ID=0 DF PROTO=ICMP TYPE=8 CODE=0 ID=44099 SEQ=1 
+Jul  8 20:39:57 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=84 TOS=0x00 PREC=0x00 TTL=64 ID=1 DF PROTO=ICMP TYPE=8 CODE=0 ID=44099 SEQ=2 
+Jul  8 20:39:58 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=84 TOS=0x00 PREC=0x00 TTL=64 ID=2 DF PROTO=ICMP TYPE=8 CODE=0 ID=44099 SEQ=3 
+Jul  8 20:39:59 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=84 TOS=0x00 PREC=0x00 TTL=64 ID=3 DF PROTO=ICMP TYPE=8 CODE=0 ID=44099 SEQ=4 
+Jul  8 20:40:00 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=84 TOS=0x00 PREC=0x00 TTL=64 ID=4 DF PROTO=ICMP TYPE=8 CODE=0 ID=44099 SEQ=5 
+Jul  8 21:10:21 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=33204 DF PROTO=TCP SPT=32771 DPT=80 WINDOW=5840 RES=0x00 SYN URGP=0 
+Jul  8 21:10:24 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=33205 DF PROTO=TCP SPT=32771 DPT=80 WINDOW=5840 RES=0x00 SYN URGP=0 
+Jul  8 21:18:09 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=28 TOS=0x00 PREC=0x00 TTL=43 ID=46587 PROTO=ICMP TYPE=8 CODE=0 ID=43114 SEQ=19025 
+Jul  8 21:18:09 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=41 ID=660 PROTO=TCP SPT=58533 DPT=80 WINDOW=2048 RES=0x00 ACK URGP=0 
+Jul  8 21:18:15 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=28 TOS=0x00 PREC=0x00 TTL=45 ID=11546 PROTO=ICMP TYPE=8 CODE=0 ID=43114 SEQ=19281 
+Jul  8 21:18:15 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=48 ID=36003 PROTO=TCP SPT=58534 DPT=80 WINDOW=1024 RES=0x00 ACK URGP=0 
+Jul  8 21:19:12 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=46 ID=47257 PROTO=TCP SPT=43468 DPT=397 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:19:12 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=41 ID=31952 PROTO=TCP SPT=43468 DPT=518 WINDOW=2048 RES=0x00 FIN URGP=0 
+Jul  8 21:19:12 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=57 ID=31495 PROTO=TCP SPT=43468 DPT=578 WINDOW=2048 RES=0x00 FIN URGP=0 
+Jul  8 21:19:12 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=38 ID=45362 PROTO=TCP SPT=43468 DPT=289 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:19:30 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=48 ID=50669 PROTO=TCP SPT=43469 DPT=1527 WINDOW=1024 RES=0x00 FIN URGP=0 
+Jul  8 21:19:54 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=50 ID=3825 PROTO=TCP SPT=43469 DPT=1050 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:20:12 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=54 ID=45487 PROTO=TCP SPT=43468 DPT=341 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:20:30 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=49 ID=56253 PROTO=TCP SPT=43469 DPT=621 WINDOW=2048 RES=0x00 FIN URGP=0 
+Jul  8 21:20:54 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=51 ID=10985 PROTO=TCP SPT=43469 DPT=1361 WINDOW=4096 RES=0x00 FIN URGP=0 
+Jul  8 21:21:12 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=48 ID=52746 PROTO=TCP SPT=43468 DPT=5902 WINDOW=1024 RES=0x00 FIN URGP=0 
+Jul  8 21:21:30 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=58 ID=9564 PROTO=TCP SPT=43469 DPT=3421 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:21:54 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=41 ID=10835 PROTO=TCP SPT=43469 DPT=1473 WINDOW=2048 RES=0x00 FIN URGP=0 
+Jul  8 21:22:12 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=43 ID=15162 PROTO=TCP SPT=43468 DPT=1367 WINDOW=4096 RES=0x00 FIN URGP=0 
+Jul  8 21:22:30 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=44 ID=65487 PROTO=TCP SPT=43469 DPT=63 WINDOW=1024 RES=0x00 FIN URGP=0 
+Jul  8 21:22:54 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=57 ID=33141 PROTO=TCP SPT=43469 DPT=2015 WINDOW=2048 RES=0x00 FIN URGP=0 
+Jul  8 21:23:12 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=58 ID=457 PROTO=TCP SPT=43468 DPT=705 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:23:30 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=46 ID=42856 PROTO=TCP SPT=43469 DPT=1392 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:23:54 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=59 ID=53226 PROTO=TCP SPT=43469 DPT=1 WINDOW=4096 RES=0x00 FIN URGP=0 
+Jul  8 21:24:13 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=50 ID=32431 PROTO=TCP SPT=43468 DPT=137 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:24:31 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=55 ID=27450 PROTO=TCP SPT=43469 DPT=572 WINDOW=4096 RES=0x00 FIN URGP=0 
+Jul  8 21:24:55 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=38 ID=1027 PROTO=TCP SPT=43469 DPT=2000 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:25:13 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=43 ID=2049 PROTO=TCP SPT=43468 DPT=903 WINDOW=4096 RES=0x00 FIN URGP=0 
+Jul  8 21:25:31 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=57 ID=42167 PROTO=TCP SPT=43469 DPT=1387 WINDOW=2048 RES=0x00 FIN URGP=0 
+Jul  8 21:25:55 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=39 ID=33875 PROTO=TCP SPT=43469 DPT=830 WINDOW=4096 RES=0x00 FIN URGP=0 
+Jul  8 21:26:13 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=43 ID=50858 PROTO=TCP SPT=43468 DPT=2014 WINDOW=4096 RES=0x00 FIN URGP=0 
+Jul  8 21:26:31 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=50 ID=40002 PROTO=TCP SPT=43469 DPT=3264 WINDOW=3072 RES=0x00 FIN URGP=0 
+Jul  8 21:26:55 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=51 ID=33356 PROTO=TCP SPT=43469 DPT=61 WINDOW=4096 RES=0x00 FIN URGP=0 
+Jul  8 21:27:13 localhost kernel: IPT-ROUTE IN=wlan0 OUT= MAC=00:04:23:a3:33:6c:00:04:e2:a9:9c:0f:08:00 SRC=1.1.1.1 DST=1.1.1.2 LEN=40 TOS=0x00 PREC=0x00 TTL=38 ID=58755 PROTO=TCP SPT=43468 DPT=801 WINDOW=3072 RES=0x00 FIN URGP=0 

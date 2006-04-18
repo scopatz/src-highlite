@@ -1,0 +1,95 @@
+[Wed May 19 23:50:20 2004] [notice] Digest: generating secret for digest authentication ...
+[Wed May 19 23:50:20 2004] [notice] Digest: done
+[Wed May 19 23:50:21 2004] [notice] Apache/2.0.49 (Gentoo/Linux) configured -- resuming normal operations
+[Wed May 19 23:50:35 2004] [error] [client 127.0.0.1] client denied by server configuration: /var/www/localhost/validator
+[Wed May 19 23:51:44 2004] [notice] caught SIGTERM, shutting down
+[Wed May 19 23:51:46 2004] [notice] Digest: generating secret for digest authentication ...
+[Wed May 19 23:51:46 2004] [notice] Digest: done
+[Wed May 19 23:51:47 2004] [notice] Apache/2.0.49 (Gentoo/Linux) configured -- resuming normal operations
+[Wed May 19 23:53:35 2004] [notice] caught SIGTERM, shutting down
+[Wed May 19 23:53:37 2004] [notice] Digest: generating secret for digest authentication ...
+[Wed May 19 23:53:37 2004] [notice] Digest: done
+[Wed May 19 23:53:38 2004] [notice] Apache/2.0.49 (Gentoo/Linux) configured -- resuming normal operations
+[Wed May 19 23:56:07 2004] [notice] caught SIGTERM, shutting down
+[Wed May 19 23:56:09 2004] [notice] Apache/2.0.49 (Gentoo/Linux) configured -- resuming normal operations
+[Wed May 19 23:56:38 2004] [error] [client 127.0.0.1] [Wed May 19 23:56:38 2004] check: Can't locate Config/General.pm in @INC (@INC contains: /etc/perl /usr/lib/perl5/site_perl/5.8.2/i686-linux /usr/lib/perl5/site_perl/5.8.2 /usr/lib/perl5/site_perl /usr/lib/perl5/vendor_perl/5.8.2/i686-linux /usr/lib/perl5/vendor_perl/5.8.2 /usr/lib/perl5/vendor_perl /usr/lib/perl5/5.8.2/i686-linux /usr/lib/perl5/5.8.2 /usr/local/lib/site_perl) at /var/www/localhost/validator/htdocs/check line 46., referer: http://localhost/validator/
+[Wed May 19 23:56:38 2004] [error] [client 127.0.0.1] [Wed May 19 23:56:38 2004] check: BEGIN failed--compilation aborted at /var/www/localhost/validator/htdocs/check line 46., referer: http://localhost/validator/
+[Wed May 19 23:57:13 2004] [error] [client 127.0.0.1] [Wed May 19 23:57:13 2004] check: Can't locate Net/IP.pm in @INC (@INC contains: /etc/perl /usr/lib/perl5/site_perl/5.8.2/i686-linux /usr/lib/perl5/site_perl/5.8.2 /usr/lib/perl5/site_perl /usr/lib/perl5/vendor_perl/5.8.2/i686-linux /usr/lib/perl5/vendor_perl/5.8.2 /usr/lib/perl5/vendor_perl /usr/lib/perl5/5.8.2/i686-linux /usr/lib/perl5/5.8.2 /usr/local/lib/site_perl) at /var/www/localhost/validator/htdocs/check line 53., referer: http://localhost/validator/
+[Wed May 19 23:57:13 2004] [error] [client 127.0.0.1] [Wed May 19 23:57:13 2004] check: BEGIN failed--compilation aborted at /var/www/localhost/validator/htdocs/check line 53., referer: http://localhost/validator/
+[Wed May 19 23:58:03 2004] [error] [client 127.0.0.1] [Wed May 19 23:58:03 2004] check: Can't locate Set/IntSpan.pm in @INC (@INC contains: /etc/perl /usr/lib/perl5/site_perl/5.8.2/i686-linux /usr/lib/perl5/site_perl/5.8.2 /usr/lib/perl5/site_perl /usr/lib/perl5/vendor_perl/5.8.2/i686-linux /usr/lib/perl5/vendor_perl/5.8.2 /usr/lib/perl5/vendor_perl /usr/lib/perl5/5.8.2/i686-linux /usr/lib/perl5/5.8.2 /usr/local/lib/site_perl) at /var/www/localhost/validator/htdocs/check line 54., referer: http://localhost/validator/
+[Wed May 19 23:58:03 2004] [error] [client 127.0.0.1] [Wed May 19 23:58:03 2004] check: BEGIN failed--compilation aborted at /var/www/localhost/validator/htdocs/check line 54., referer: http://localhost/validator/
+[Wed May 19 23:58:41 2004] [error] [client 127.0.0.1] [Wed May 19 23:58:41 2004] check: open(/etc/w3c/validator.conf) returned: No such file or directory, referer: http://localhost/validator/
+[Wed May 19 23:58:41 2004] [error] [client 127.0.0.1] [Wed May 19 23:58:41 2004] check: (Did you forget to set $ENV{W3C_VALIDATOR_CFG}, referer: http://localhost/validator/
+[Wed May 19 23:58:41 2004] [error] [client 127.0.0.1] [Wed May 19 23:58:41 2004] check:  or to copy validator.conf to /etc/w3c/validator.conf?), referer: http://localhost/validator/
+[Wed May 19 23:58:41 2004] [error] [client 127.0.0.1] [Wed May 19 23:58:41 2004] check: BEGIN failed--compilation aborted at /var/www/localhost/validator/htdocs/check line 190., referer: http://localhost/validator/
+[Thu May 20 00:03:37 2004] [error] [client 127.0.0.1] [Thu May 20 00:03:37 2004] check: Use of uninitialized value in substitution (s///) at /var/www/localhost/validator/htdocs/check line 2261., referer: http://localhost/validator/check?uri=http%3A%2F%2Flocalhost%2Fvalidator&charset=%28detect+automatically%29&doctype=Inline&outline=1&verbose=1
+[Thu May 20 00:03:37 2004] [error] [client 127.0.0.1] [Thu May 20 00:03:37 2004] check: Use of uninitialized value in substitution (s///) at /var/www/localhost/validator/htdocs/check line 2262., referer: http://localhost/validator/check?uri=http%3A%2F%2Flocalhost%2Fvalidator&charset=%28detect+automatically%29&doctype=Inline&outline=1&verbose=1
+[Thu May 20 00:03:37 2004] [error] [client 127.0.0.1] [Thu May 20 00:03:37 2004] check: Use of uninitialized value in substitution (s///) at /var/www/localhost/validator/htdocs/check line 2263., referer: http://localhost/validator/check?uri=http%3A%2F%2Flocalhost%2Fvalidator&charset=%28detect+automatically%29&doctype=Inline&outline=1&verbose=1
+[Thu May 20 00:03:37 2004] [error] [client 127.0.0.1] [Thu May 20 00:03:37 2004] check: Use of uninitialized value in substitution (s///) at /var/www/localhost/validator/htdocs/check line 2264., referer: http://localhost/validator/check?uri=http%3A%2F%2Flocalhost%2Fvalidator&charset=%28detect+automatically%29&doctype=Inline&outline=1&verbose=1
+[Thu May 20 00:03:37 2004] [error] [client 127.0.0.1] [Thu May 20 00:03:37 2004] check: Use of uninitialized value in pattern match (m//) at /var/www/localhost/validator/htdocs/check line 2265., referer: http://localhost/validator/check?uri=http%3A%2F%2Flocalhost%2Fvalidator&charset=%28detect+automatically%29&doctype=Inline&outline=1&verbose=1
+[Thu May 20 00:03:37 2004] [error] [client 127.0.0.1] [Thu May 20 00:03:37 2004] check: Use of uninitialized value in pattern match (m//) at /var/www/localhost/validator/htdocs/check line 2267., referer: http://localhost/validator/check?uri=http%3A%2F%2Flocalhost%2Fvalidator&charset=%28detect+automatically%29&doctype=Inline&outline=1&verbose=1
+[Thu May 20 00:04:07 2004] [notice] caught SIGTERM, shutting down
+[Tue Jun 01 20:56:40 2004] [notice] Digest: generating secret for digest authentication ...
+[Tue Jun 01 20:56:40 2004] [notice] Digest: done
+[Tue Jun 01 20:56:41 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 configured -- resuming normal operations
+[Tue Jun 01 20:57:43 2004] [error] [client 127.0.0.1] File does not exist: /var/www/localhost/htdocs/manual, referer: http://localhost/
+[Sat Jun 19 17:22:46 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Sat Jun 19 17:23:21 2004] [error] [client 1.1.1.1] File does not exist: /var/www/localhost/htdocs/favicon.ico
+[Sat Jun 19 17:25:55 2004] [error] [client 1.1.1.1] client denied by server configuration: /var/www/localhost/WebSVN/index.php, referer: http://localhost/svn/
+[Sat Jun 19 17:25:55 2004] [error] [client 1.1.1.1] Negotiation: discovered file(s) matching request: /var/www/localhost/WebSVN/index (None could be negotiated)., referer: http://localhost/svn/
+[Sat Jun 19 17:26:15 2004] [error] [client 1.1.1.1] client denied by server configuration: /var/www/localhost/WebSVN/index.php, referer: http://localhost/svn/
+[Sat Jun 19 17:26:15 2004] [error] [client 1.1.1.1] Negotiation: discovered file(s) matching request: /var/www/localhost/WebSVN/index (None could be negotiated)., referer: http://localhost/svn/
+[Sat Jun 19 17:26:36 2004] [error] [client 1.1.1.1] client denied by server configuration: /var/www/localhost/WebSVN/index.php, referer: http://localhost/svn/
+[Sat Jun 19 17:26:36 2004] [error] [client 1.1.1.1] Negotiation: discovered file(s) matching request: /var/www/localhost/WebSVN/index (None could be negotiated)., referer: http://localhost/svn/
+[Sat Jun 19 17:41:11 2004] [error] [client 1.1.1.1] File does not exist: /var/www/localhost/htdocs/~jan
+[Sat Jun 19 17:41:50 2004] [notice] caught SIGTERM, shutting down
+[Sat Jun 19 17:41:53 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Sat Jun 19 17:42:43 2004] [error] [client 1.1.1.1] (13)Permission denied: access to /~jan/WebSVN denied
+[Sat Jun 19 17:43:22 2004] [error] [client 1.1.1.1] (13)Permission denied: access to /~jan/ denied
+[Sat Jun 19 18:22:56 2004] [notice] caught SIGTERM, shutting down
+[Sat Jun 19 18:22:58 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Sat Jun 19 18:23:08 2004] [error] [client 1.1.1.1] (13)Permission denied: access to /~jan/ denied
+[Sat Jun 19 18:23:11 2004] [error] [client 1.1.1.1] (13)Permission denied: access to /~jan/ denied
+[Sat Jun 19 18:29:35 2004] [notice] caught SIGTERM, shutting down
+[Sat Jun 19 18:29:37 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Sat Jun 19 18:29:59 2004] [error] [client 1.1.1.1] (13)Permission denied: access to /~jan/ denied
+[Sat Jun 19 18:30:08 2004] [error] [client 1.1.1.1] (13)Permission denied: access to /~jan/index.html denied
+[Sat Jun 19 18:39:32 2004] [notice] caught SIGTERM, shutting down
+[Sat Jun 19 18:39:34 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Sat Jun 19 18:39:39 2004] [error] [client 1.1.1.1] (13)Permission denied: access to /~jan/index.html denied
+[Sat Jun 19 18:39:43 2004] [error] [client 1.1.1.1] (13)Permission denied: access to /~jan/index.html denied
+[Sat Jun 19 18:43:44 2004] [notice] caught SIGTERM, shutting down
+[Sat Jun 19 18:43:46 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+
+[Sat Jun 19 18:56:49 2004] [error] [client 1.1.1.1] File does not exist: /var/www/localhost/htdocs/favicon.ico
+[Sat Jun 19 19:04:32 2004] [notice] caught SIGTERM, shutting down
+[Sat Jun 19 19:04:34 2004] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec2)
+[Sat Jun 19 19:04:35 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Sat Jun 19 23:30:02 2004] [notice] caught SIGTERM, shutting down
+[Wed Jun 23 19:43:32 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Wed Jun 23 23:06:06 2004] [notice] caught SIGTERM, shutting down
+[Sat Jun 26 21:05:26 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Sat Jun 26 21:05:41 2004] [error] [client 1.1.1.1] File does not exist: /var/www/localhost/htdocs/WebSVN
+[Sun Jun 27 00:32:47 2004] [notice] caught SIGTERM, shutting down
+[Wed Jun 30 22:03:31 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Wed Jun 30 22:16:44 2004] [error] [client 1.1.1.1] File does not exist: /var/www/localhost/htdocs/trac, referer: http://localhost/cgi-bin/trac.cgi
+[Wed Jun 30 22:32:22 2004] [notice] caught SIGTERM, shutting down
+[Wed Jun 30 22:32:26 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Wed Jun 30 22:32:39 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/css/trac.css, referer: http://localhost/cgi-bin/trac.cgi
+[Wed Jun 30 22:32:40 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/css/code.css, referer: http://localhost/cgi-bin/trac.cgi
+[Wed Jun 30 22:32:40 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/css/changeset.css, referer: http://localhost/cgi-bin/trac.cgi
+[Wed Jun 30 22:32:40 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/trac.js, referer: http://localhost/cgi-bin/trac.cgi
+[Wed Jun 30 22:32:40 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/trac_banner.png, referer: http://localhost/cgi-bin/trac.cgi
+[Wed Jun 30 22:32:40 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/trac_logo_mini.png, referer: http://localhost/cgi-bin/trac.cgi
+[Wed Jun 30 22:32:45 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/css/trac.css, referer: http://localhost/cgi-bin/trac.cgi/wiki/TracAdmin
+[Wed Jun 30 22:32:45 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/css/code.css, referer: http://localhost/cgi-bin/trac.cgi/wiki/TracAdmin
+[Wed Jun 30 22:32:45 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/css/changeset.css, referer: http://localhost/cgi-bin/trac.cgi/wiki/TracAdmin
+[Wed Jun 30 22:32:45 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/trac.js, referer: http://localhost/cgi-bin/trac.cgi/wiki/TracAdmin
+[Wed Jun 30 22:32:45 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/trac_banner.png, referer: http://localhost/cgi-bin/trac.cgi/wiki/TracAdmin
+[Wed Jun 30 22:32:45 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/trac_logo_mini.png, referer: http://localhost/cgi-bin/trac.cgi/wiki/TracAdmin
+[Wed Jun 30 22:33:22 2004] [error] [client 1.1.1.1] client denied by server configuration: /usr/share/webapps/trac/0.7.1/htdocs/css/trac.css
+[Wed Jun 30 22:34:11 2004] [notice] caught SIGTERM, shutting down
+[Wed Jun 30 22:34:16 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Thu Jul 01 00:05:11 2004] [notice] caught SIGTERM, shutting down
+[Thu Jul 01 00:08:05 2004] [notice] Apache/2.0.49 (Gentoo/Linux) mod_perl/1.99_11 Perl/v5.8.2 PHP/4.3.6 configured -- resuming normal operations
+[Thu Jul 01 00:20:20 2004] [notice] caught SIGTERM, shutting down
