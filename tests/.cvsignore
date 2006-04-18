@@ -13,7 +13,6 @@ valgrind_summary.log
 *.aux
 *.dvi
 *.pdf
-*.log
 *.out.tex
 *.out.texinfo
 *.out.debug
@@ -21,3 +20,9 @@ valgrind_summary.log
 *.tags
 *tmp*
 auto
+test.java.log
+test.java.out.log
+test_ref.log
+test_ref.out.log
+test_ref_post.log
+test_ref_post.out.log
