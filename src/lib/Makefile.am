@@ -1,4 +1,4 @@
-# Copyright (C) 1999, 2000, 2001 Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2006 Lorenzo Bettini <http://www.lorenzobettini.it>
 #
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without
@@ -114,7 +114,7 @@ test_langmap_SOURCES = test_langmap_main.cpp langmap.cpp fileutil.cc messages.cc
 test_textstyle_SOURCES = textstyle.cpp test_textstyle_main.cpp substfun.cpp
 test_textgenerator_SOURCES = test_textgenerator_main.cpp textstylebuilder.cpp
 
-test_outlangparser_SOURCES = test_outlangparser_main.cpp
+test_outlangparser_SOURCES = textstyle.cpp test_outlangparser_main.cpp
 test_outlangparser_DEPENDENCIES = outlangtest.outlang
 
 test_readtags_SOURCES = test_readtags_main.cpp readtags.c readtags.h
