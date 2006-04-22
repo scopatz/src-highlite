@@ -13,7 +13,7 @@ AC_INIT(reconf)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(source-highlight,2.3)
+AM_INIT_AUTOMAKE(source-highlight,2.4rc)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)

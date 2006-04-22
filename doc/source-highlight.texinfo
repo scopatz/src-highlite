@@ -10,32 +10,27 @@
 
 @set myhomepage @uref{http://www.lorenzobettini.it}
 
-@ifinfo
-This file documents the @command{source-highlight} command which given a source file, produces a document with syntax highlighting.
+@copying
+This manual is for GNU Source-highlight 
+(version @value{VERSION}, @value{UPDATED}),
+which given a source file, produces a document with syntax highlighting.
 
-Copyright (C) 2004, 2005 Lorenzo Bettini
+Copyright @copyright{} 2005, 2006 Lorenzo Bettini.
 
-Permission is granted to make and distribute verbatim copies of
-this manual provided the copyright notice and this permission notice
-are preserved on all copies.
+@quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with the Front-Cover Texts being ``A GNU Manual,''
+and with the Back-Cover Texts as in (a) below.  A copy of the
+license is included in the section entitled ``GNU Free Documentation
+License.''
 
-@ignore
-Permission is granted to process this file through TeX and print the
-results, provided the printed document carries copying permission
-notice identical to this one except for the removal of this paragraph
-(this paragraph not being relevant to the printed manual).
-
-@end ignore
-Permission is granted to copy and distribute modified versions of this
-manual under the conditions for verbatim copying, provided that the entire
-resulting derived work is distributed under the terms of a permission
-notice identical to this one.
-
-Permission is granted to copy and distribute translations of this manual
-into another language, under the above conditions for modified versions,
-except that this permission notice may be stated in a translation approved
-by the Foundation.
-@end ifinfo
+(a) The FSF's Back-Cover Text is: ``You have freedom to copy and modify
+this GNU Manual, like GNU software.  Copies published by the Free
+Software Foundation raise funds for GNU development.''
+@end quotation
+@end copying
 
 @titlepage
 @title GNU Source-highlight
@@ -45,30 +40,21 @@ by the Foundation.
 
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} 2004, 2005 Lorenzo Bettini
-
-Permission is granted to make and distribute verbatim copies of
-this manual provided the copyright notice and this permission notice
-are preserved on all copies.
-
-Permission is granted to copy and distribute modified versions of this
-manual under the conditions for verbatim copying, provided that the entire
-resulting derived work is distributed under the terms of a permission
-notice identical to this one.
-
-Permission is granted to copy and distribute translations of this manual
-into another language, under the above conditions for modified versions,
-except that this permission notice may be stated in a translation approved
-by the Foundation.
+@insertcopying
 @end titlepage
+
+@contents
+
+@ifnottex
+@node Top, Introduction, (dir), (dir)
+@top GNU Source-highlight
+
+@insertcopying
+@end ifnottex
 
 @c All the nodes can be updated using the EMACS command
 @c texinfo-every-node-update, which is normally bound to C-c C-u C-e.
-@node Top, Introduction, (dir), (dir)
-
-@ifinfo
-This file documents the @command{source-highlight} command that, given a source file, produces a document with syntax highlighting..
-@end ifinfo
+@c @node Top, Introduction, (dir), (dir)
 
 @c All the menus can be updated with the EMACS command
 @c texinfo-all-menus-update, which is normally bound to C-c C-u C-a.
@@ -1206,6 +1192,7 @@ with some changes.  Typically you @code{include} another
 language definition file and you redefine/substitute some
 elements.
 
+@cindex redef
 When you use @code{redef} you erase all the previous
 definitions of that language elements with the new one.
 The new language element definition will be placed exactly
@@ -1247,6 +1234,7 @@ type = "int"
 keyword = "myfoo"
 @end example
 
+@cindex subst
 If this is not what you want, you can use @code{subst},
 which is similar to @code{redef} apart from that it
 replaces the previous first definition of that language
@@ -1280,11 +1268,12 @@ subst keyword = "abstract|break|case|catch|class|if..."
 @end example
 
 @noindent
-Here using @code{redef} would have led to the unwanted
-behavior that @code{if (exp)} would have been highlighted
-as a function call, since the function element definition
-would have come first (and then matched first)
-than the redefinition of @code{if} as a keyword.
+Here using @code{redef} would have led to the unwanted behavior that
+@code{if (exp)} would have been highlighted as a function call, since
+the function element definition would have come first (and then
+matched first) than the redefinition of @code{if} as a keyword.
+Another example is the language definition for C# by reusing the one
+for C/C++, @ref{Highlighting C/C++ and C#}.
 
 @node Notes on regular expressions, Concluding Remarks, Redefinitions and Substitutions, Language Definitions
 @section Notes on regular expressions
@@ -1555,13 +1544,13 @@ definition syntax is simple.  In the next examples we will see how to
 use more complex features to highlight more complex language syntaxes.
 
 @menu
-* Highlighting C/C++::          
+* Highlighting C/C++ and C#::   
 * Highlighting Diff files::     
 * Pseudo semantic analysis::    
 @end menu
 
-@node Highlighting C/C++, Highlighting Diff files, Tutorials on Language Definitions, Tutorials on Language Definitions
-@subsection Highlighting C/C++
+@node Highlighting C/C++ and C#, Highlighting Diff files, Tutorials on Language Definitions, Tutorials on Language Definitions
+@subsection Highlighting C/C++ and C#
 
 This is the language definition for C/C++, included in the file
 @file{cpp.lang}:
@@ -1577,13 +1566,13 @@ files).  In particular the comments definitions:
 @include c_comment.lang.texinfo
 
 @noindent
-Here we have the definitions for line-wide comments (@code{//}) and for
-multi line comments where we highlight also URL addresses and e-mail
-addresses (defined in the file @file{url.lang} not shown here).
+Here we have the definitions for line-wide comments (@code{//}) and
+for multi line comments where we highlight also URL addresses and
+e-mail addresses (defined in the file @file{url.lang} not shown here).
 Moreover, for comments that are used in automatic documentation
 generation tools (such as Doxygen or Javadoc), i.e., those that start
-with @code{/**}) we also highlight the complete HTML syntax (defined in
-the file @file{html.lang} not shown here).
+with @code{/**} or @code{///}) we also highlight the complete HTML
+syntax (defined in the file @file{html.lang} not shown here).
 
 Going back to @file{cpp.lang} we see that for preprocessor directives
 @code{#include} we use a state definition since in this case the file
@@ -1629,7 +1618,15 @@ parenthesis (see @ref{Notes on regular expressions}).  As noted in
 @ref{File inclusion}, it is crucial that this file is included after the
 keyword definition.
 
-@node Highlighting Diff files, Pseudo semantic analysis, Highlighting C/C++, Tutorials on Language Definitions
+Now that we wrote the language definition for C/C++, writing the one
+for C# is straightforward, since we only need to add the keyword
+@code{using} as a preprocessor element, and redefine  (or better,
+``substitute'', @ref{Redefinitions and Substitutions}) the keywords
+and types:
+
+@include csharp.lang.texinfo
+
+@node Highlighting Diff files, Pseudo semantic analysis, Highlighting C/C++ and C#, Tutorials on Language Definitions
 @subsection Highlighting Diff files
 
 Now we want to highlight files that are generated by @code{diff}
@@ -2489,7 +2486,6 @@ the instructions, or send me an e-mail and I'll subscribe you.
 @printindex cp
 
 @shortcontents
-@contents
 
 
 @bye

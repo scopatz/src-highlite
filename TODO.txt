@@ -6,3 +6,4 @@ and its output).  Actually this is due to possible ambiguities.
 
 Use a class for printing errors
 
+maintainer mode

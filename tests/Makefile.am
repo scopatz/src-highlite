@@ -48,6 +48,8 @@ JAVA2HTMLCSSNODOC = $(PROGNAME) -s java -f html --css ../doc/mono.css --no-doc -
 
 CPP2HTML = $(PROGNAME) -s cpp $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/cpp.lang
 
+CSHARP2HTML = $(PROGNAME) -s csharp $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/csharp.lang
+
 PROLOG2HTML = $(PROGNAME) -s prolog $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/prolog.lang
 
 PERL2HTML = $(PROGNAME) -s perl $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/perl.lang
@@ -143,6 +145,7 @@ default.style.html \
 lang.map \
 debug.debug debug.java \
 test_extreme_comment.cpp test_extreme_comment2.cpp test_extreme_comment3.cpp \
+test.cs test.cs.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
@@ -155,6 +158,9 @@ c_comment.show
 
 %.cc.html: %.cc
 	$(CPP2HTML) -i $< -o $@
+
+%.cs.html: %.cs
+	$(CSHARP2HTML) -i $< -o $@
 
 %.h.html: %.h
 	$(CPP2HTML) -i $< -o $@
@@ -330,7 +336,7 @@ test_python_lines.html: test.py
 test_py_comments_lines.html: test_comments.py
 	$(PYTHON2HTML) --line-number -i test_comments.py -o $@
 
-check: check_java2html check_cpp2html \
+check: check_java2html check_cpp2html check_csharp2html \
 check_prolog2html check_logtalk2html \
 check_perl2html \
 check_php32html check_python2html check_changelog check_flex check_bison \
@@ -379,6 +385,11 @@ check_cpp2html: test.h.html test_comments.cc.html test_template.cc.html test_hea
 	diff $(srcdir)/test_template.cc.html test_template.cc.out.html
 	diff $(srcdir)/test_header.html test_header.out.html
 	diff $(srcdir)/test_cpp_lines.html test_cpp_lines.out.html
+
+check_csharp2html: test.cs.html 
+	$(CSHARP2HTML) -i $(srcdir)/test.cs > test.cs.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.cs.html test.cs.out.html
 
 check_prolog2html: test.pl.html test_pl_lines.html
 	$(PROLOG2HTML) < $(srcdir)/test.pl > test.pl.out.html
@@ -613,6 +624,6 @@ check-valgrind:
 CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html
 
 DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo

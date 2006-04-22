@@ -60,7 +60,7 @@ changelog.lang  java.lang      number.lang      python.lang  url.lang \
 pascal.lang fortran.lang html.lang latex.lang logtalk.lang \
 diff.lang c_string.lang langdef.lang outlang.lang style.lang \
 extreme_comment.lang extreme_comment2.lang extreme_comment3.lang \
-postscript.lang
+postscript.lang csharp.lang
 
 OUTLANGFILES = \
 css_common.outlang \

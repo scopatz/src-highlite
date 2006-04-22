@@ -8,6 +8,10 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 2.4
+
+   * language definition for C# (thanks to Hemmi Shigeru)
+
 Version 2.3
 
    * the regex automaton is printed on the standard output
