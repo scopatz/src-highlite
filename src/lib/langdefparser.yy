@@ -253,18 +253,3 @@ parse_lang_def(const char *path, const char *name)
   return current_lang_elems;
 }
 
-LangElems *
-parse_lang_def_file(const char *path, const char *name)
-{
-  vardefinitions = new VarDefinitions;
-  // the struct stores the path for further includes but...
-  parsestruct = new ParseStruct(path, name);
-  // when we open the first file the path is not used
-  open_file_to_scan("", name);
-  langdef_parse();
-  delete parsestruct;
-  delete vardefinitions;
-  parsestruct = 0;
-  vardefinitions = 0;
-  return current_lang_elems;
-}

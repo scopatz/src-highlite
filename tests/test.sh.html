@@ -1,0 +1,37 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">#! /bin/sh</font></i>
+
+<i><font color="#9A1900"># this shell script is for test purpose only</font></i>
+<i><font color="#9A1900"># so it should not be executed</font></i>
+
+<b><font color="#0000FF">for</font></b> <b><font color="#0000FF">source</font></b> <b><font color="#0000FF">in</font></b> $<font color="#993399">1</font><font color="#990000">;</font> <b><font color="#0000FF">do</font></b>
+        source-highlight --failsafe -f esc -i <font color="#009900">$source</font><font color="#990000">;</font>
+<b><font color="#0000FF">done</font></b>
+
+<b><font color="#0000FF">for</font></b> as_dir <b><font color="#0000FF">in</font></b> /bin<font color="#009900">$PATH_SEPARATOR</font>/usr/bin<font color="#009900">$PATH_SEPARATOR$PATH</font>
+<b><font color="#0000FF">do</font></b>
+  <font color="#009900">IFS</font><font color="#990000">=</font><font color="#009900">$as_save_IFS</font>
+  <b><font color="#0000FF">test</font></b> -z <font color="#FF0000">"$as_dir"</font> <font color="#990000">&amp;&amp;</font> <font color="#009900">as_dir</font><font color="#990000">=.</font>
+  <b><font color="#0000FF">for</font></b> as_base <b><font color="#0000FF">in</font></b> sh bash ksh sh5<font color="#990000">;</font> <b><font color="#0000FF">do</font></b>
+         <b><font color="#0000FF">case</font></b> <font color="#009900">$as_dir</font> <b><font color="#0000FF">in</font></b>
+         <font color="#990000">/*)</font>
+           <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#FF0000">"$as_dir/$as_base"</font> -c <font color="#FF0000">'</font>
+<font color="#FF0000">  as_lineno_1=$LINENO</font>
+<font color="#FF0000">  as_lineno_2=$LINENO</font>
+<font color="#FF0000">  as_lineno_3=`(expr $as_lineno_1 + 1) 2&gt;/dev/null`</font>
+<font color="#FF0000">  test "x$as_lineno_1" != "x$as_lineno_2" &amp;&amp;</font>
+<font color="#FF0000">  test "x$as_lineno_3"  = "x$as_lineno_2" '</font><font color="#990000">)</font> <font color="#993399">2</font><font color="#990000">&gt;</font>/dev/null<font color="#990000">;</font> <b><font color="#0000FF">then</font></b>
+             <font color="#009900">$as_unset</font> BASH_ENV <font color="#990000">||</font> <b><font color="#0000FF">test</font></b> <font color="#FF0000">"${BASH_ENV+set}"</font> <font color="#990000">!=</font> <b><font color="#0000FF">set</font></b> <font color="#990000">||</font> { <font color="#009900">BASH_ENV</font><font color="#990000">=;</font> <b><font color="#0000FF">export</font></b> BASH_ENV<font color="#990000">;</font> }
+             <font color="#009900">$as_unset</font> ENV <font color="#990000">||</font> <b><font color="#0000FF">test</font></b> <font color="#FF0000">"${ENV+set}"</font> <font color="#990000">!=</font> <b><font color="#0000FF">set</font></b> <font color="#990000">||</font> { <font color="#009900">ENV</font><font color="#990000">=;</font> <b><font color="#0000FF">export</font></b> ENV<font color="#990000">;</font> }
+             <font color="#009900">CONFIG_SHELL</font><font color="#990000">=</font><font color="#009900">$as_dir</font><font color="#990000">/</font><font color="#009900">$as_base</font>
+             <b><font color="#0000FF">export</font></b> CONFIG_SHELL
+             <b><font color="#0000FF">exec</font></b> <font color="#FF0000">"$CONFIG_SHELL"</font> <font color="#FF0000">"$0"</font> ${<font color="#993399">1</font><font color="#990000">+</font><font color="#FF0000">"$@"</font>}
+           <b><font color="#0000FF">fi</font></b><font color="#990000">;;</font>
+         <b><font color="#0000FF">esac</font></b>
+       <b><font color="#0000FF">done</font></b>
+<b><font color="#0000FF">done</font></b>
+<font color="#990000">;;</font>
+  <b><font color="#0000FF">esac</font></b></tt></pre>

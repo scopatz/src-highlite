@@ -1,10 +1,10 @@
 c_comment.lang:24: (/\*)
 formatting: "/*" as comment
-entering: (\*/)|(/\*)|((?:(?:(?:<?)(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*@(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*(?:>?))))|((?:(?:[[:word:]]+://(?:[[:word:]]+[\./\-_]?)+)))|((?:(?:TODO|FIXME)(?:[:]?)))
+entering: (\*/)|(/\*)|((?:(?:<?)[[:word:]\./\-_]+@[[:word:]\./\-_]+(?:>?)))|((?:[[:word:]]+://[[:word:]\./\-_]+))|((?:(?:TODO|FIXME)(?:[:]?)))
 formatting: "" as comment
 formatting: "  This is to demonstrate --debug-lang" as comment
 formatting: "  " as comment
-url.lang:2: ((?:(?:[[:word:]]+://(?:[[:word:]]+[\./\-_]?)+)))
+url.lang:3: ((?:[[:word:]]+://[[:word:]\./\-_]+))
 formatting: "http://www.lorenzobettini.it" as url
 formatting: "" as comment
 c_comment.lang:24: (\*/)

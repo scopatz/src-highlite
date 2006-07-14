@@ -1,5 +1,9 @@
 #! @SHELL@
 
 for source in $1; do
-	source-highlight --failsafe -f esc -i $source;
+    case $source in
+	ChangeLog|changelog) 
+        source-highlight --failsafe -f esc --lang-def=changelog.lang --style-file=esc.style -i $source ;;
+        *) source-highlight --failsafe -f esc --style-file=esc.style -i $source ;;
+    esac
 done

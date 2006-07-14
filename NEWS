@@ -1,6 +1,6 @@
 source-highlight -- History of visible changes.
 
-Copyright (C) 1999-2005 Lorenzo Bettini
+Copyright (C) 1999-2006 Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite
 
@@ -11,6 +11,18 @@ Please send source-highlight bug reports to bug-source-highlight at gnu.org
 Version 2.4
 
    * language definition for C# (thanks to Hemmi Shigeru)
+   * language definition for XML (thanks to Andy Buckley)
+   * language definition for shell scripts (thanks to Dirk Jagdmann)
+   * fixed language definition for HTML (tags with numbers are highlighted,
+     e.g., <h1>)
+   * updated language definition for logtalk (thanks to Paulo Moura)
+   * produces the list of elements of a language definition file
+     (--show-lang-elements)
+   * output format definition for HTML where fonts by default are
+     not fixed width.
+   * bug fix in url regular expressions
+   * bug fix with nonsensitive keywords (thanks to Andrea Ercolino)
+   * improved documentation concerning installation of Boost regex library
 
 Version 2.3
 
@@ -56,7 +68,7 @@ Version 2.1
    * renamed --tags-file option in --style-file
    * allows to specify a prefix for the generated line number anchors
    * --header and --footer do not imply --doc
-   * language definition for LogTalk and LaTeX
+   * language definition for LogTalk (thanks to Paulo Moura) and LaTeX
 
 Version 2.0
 

@@ -13,6 +13,7 @@ Hello_h_f.html
 Hello_lines.html
 Hello_xhtml.html
 Hello_xhtml2.html
+Hello_notfixed.html
 java2html.html
 startapp.cc.html
 cmdline.c.html
@@ -46,6 +47,7 @@ debug.java.texinfo
 *.outlang.texinfo
 *.diff.texinfo
 *.show.texinfo
+*.langelems.texinfo
 *_comment*.texinfo
 mdate-sh
 texinfo.tex

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite">
+<title>xml formatted in html</title>
+</head>
+<body>
+<pre><tt><b><font color="#000080">&lt;?xml</font></b> version=<font color="#FF0000">"1.0"</font> encoding=<font color="#FF0000">"UTF-8"</font><b><font color="#000080">?&gt;</font></b>
+
+<b><font color="#0000FF">&lt;xs:schema</font></b> <font color="#009900">targetNamespace</font><font color="#990000">=</font><font color="#FF0000">"http://www.cedar.ac.uk/hepml/hepdata/0.1/"</font>
+           <font color="#009900">xmlns</font><font color="#990000">=</font><font color="#FF0000">"http://www.cedar.ac.uk/hepml/hepdata/0.1/"</font>
+           <font color="#009900">xmlns:xs</font><font color="#990000">=</font><font color="#FF0000">"http://www.w3.org/2001/XMLSchema"</font>
+           <font color="#009900">elementFormDefault</font><font color="#990000">=</font><font color="#FF0000">"qualified"</font>
+           <font color="#009900">attributeFormDefault</font><font color="#990000">=</font><font color="#FF0000">"unqualified"</font><b><font color="#0000FF">&gt;</font></b>
+
+  <b><font color="#0000FF">&lt;xs:simpleType</font></b> <font color="#009900">name</font><font color="#990000">=</font><font color="#FF0000">"errSourceType"</font><b><font color="#0000FF">&gt;</font></b>
+    <b><font color="#0000FF">&lt;xs:annotation&gt;</font></b>
+      <b><font color="#0000FF">&lt;xs:documentation&gt;</font></b>Possible error sources<b><font color="#0000FF">&lt;/xs:documentation&gt;</font></b>
+    <b><font color="#0000FF">&lt;/xs:annotation&gt;</font></b>
+    <b><font color="#0000FF">&lt;xs:restriction</font></b> <font color="#009900">base</font><font color="#990000">=</font><font color="#FF0000">"xs:string"</font><b><font color="#0000FF">&gt;</font></b>
+      <b><font color="#0000FF">&lt;xs:enumeration</font></b> <font color="#009900">value</font><font color="#990000">=</font><font color="#FF0000">"stat"</font><b><font color="#0000FF">/&gt;</font></b>
+      <b><font color="#0000FF">&lt;xs:enumeration</font></b> <font color="#009900">value</font><font color="#990000">=</font><font color="#FF0000">"sys"</font><b><font color="#0000FF">/&gt;</font></b>
+
+      <b><font color="#0000FF">&lt;xs:enumeration</font></b> <font color="#009900">value</font><font color="#990000">=</font><font color="#FF0000">"total"</font><b><font color="#0000FF">/&gt;</font></b>
+      <b><font color="#0000FF">&lt;xs:enumeration</font></b> <font color="#009900">value</font><font color="#990000">=</font><font color="#FF0000">"unknown"</font><b><font color="#0000FF">/&gt;</font></b>
+    <b><font color="#0000FF">&lt;/xs:restriction&gt;</font></b>
+  <b><font color="#0000FF">&lt;/xs:simpleType&gt;</font></b>
+</tt></pre>
+</body>
+</html>

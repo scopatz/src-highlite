@@ -20,11 +20,17 @@ PROGNAME = $(PROGEXE) --gen-version $(DATADIROPTION)
 
 CHECKLANG = $(top_builddir)/src/$(PACKAGE)$(EXEEXT) --check-lang
 
+CHECKOUTLANG = $(top_builddir)/src/$(PACKAGE)$(EXEEXT) --check-outlang
+
 JAVA2HTML = $(PROGNAME) -s java $(STD_STYLE_HTML) 
 
 JS2HTML = $(PROGNAME) -s javascript $(STD_STYLE_HTML) 
 
+URL2HTML = $(PROGNAME) --lang-def=url.lang $(STD_STYLE_HTML) 
+
 JAVA2XHTML = $(PROGNAME) -s java -f xhtml $(STD_STYLE) --doc --lang-def=$(srcdir)/../src/java.lang
+
+JAVA2HTMLNOTFIXED = $(PROGNAME) -s java --outlang-def=$(srcdir)/../src/html_notfixed.outlang $(STD_STYLE) --doc --lang-def=$(srcdir)/../src/java.lang
 
 JAVA2ESC = $(PROGNAME) -s java -f esc --style-file=$(top_srcdir)/src/esc.style --doc --lang-def=$(srcdir)/../src/java.lang
 
@@ -92,8 +98,8 @@ SIMPLE = $(PROGEXE) --gen-version --outlang-def=$(srcdir)/simple.outlang --lang-
 
 DEBUGLANG = $(PROGNAME) -s java $(STD_STYLE_HTML) --debug-lang
 
-WRONGFILES = wrong_exp.lang wrong_var.lang
-WRONGFILESOUT = wrong_exp.err wrong_var.err missing_langmap.err missing_extension.err
+WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang
+WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err
 WRONGSTYLES = wrong_dircolor.style
 WRONGSTYLESOUT = wrong_dircolor.err
 # missing_langmap2.err
@@ -110,7 +116,7 @@ test_perl_lines.html \
 test.php3 test.php3.html test_php3_lines.html \
 test.py test.py.html test_python_lines.html \
 test_comments.py test_comments.py.html test_py_comments_lines.html \
-test_xhtml.html test_css.html test_css_nodoc.html \
+test_xhtml.html test_css.html test_css_nodoc.html test_notfixed.html \
 test.chlog test.chlog.html test.chlog_css.html \
 test.l test.l.html \
 test.y test.y.html \
@@ -128,6 +134,7 @@ error.log error.log.html \
 syslog.log syslog.log.html \
 test.pas test.pas.html \
 test.htm test.htm.html \
+test2.htm test2.htm.html \
 test.diff test.diff.html \
 test2.diff test2.diff.html \
 test3.diff test3.diff.html \
@@ -146,15 +153,22 @@ lang.map \
 debug.debug debug.java \
 test_extreme_comment.cpp test_extreme_comment2.cpp test_extreme_comment3.cpp \
 test.cs test.cs.html \
+test.xml test.xml.html \
+test.sh test.sh.html \
+test.url test.url.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
 valgrind_tests.sh.in valgrind_test.sh.in suppressions.supp \
 erasedir.sed erasedir2.sed \
-c_comment.show
+c_comment.show \
+cpp.langelems
 
 %.show: $(top_srcdir)/src/%.lang
 	$(PROGEXE) --show-regex=$< > $@
+
+%.langelems: $(top_srcdir)/src/%.lang
+	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$< > $@
 
 %.cc.html: %.cc
 	$(CPP2HTML) -i $< -o $@
@@ -237,6 +251,15 @@ c_comment.show
 %.htm.html: %.htm
 	$(PROGNAME) $< --title="html output formatted in html"
 
+%.xml.html: %.xml
+	$(PROGNAME) $< --title="xml formatted in html"
+
+%.sh.html: %.sh
+	$(PROGNAME) $< 
+
+%.url.html: %.url
+	$(URL2HTML) $< 
+
 %.lang.html: $(top_srcdir)/src/%.lang
 	$(LANG2HTML) -i $< -o $@
 
@@ -255,6 +278,9 @@ c_comment.show
 
 %.err: %.lang
 	$(CHECKLANG) $< 2> $@ || true
+
+%.err: %.outlang
+	$(CHECKOUTLANG) $< 2> $@ || true
 
 %.err: %.style
 	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true
@@ -312,6 +338,9 @@ test_java_lines.html: test.java
 test_xhtml.html: test.java
 	$(JAVA2XHTML) < $(srcdir)/test.java > $@
 
+test_notfixed.html: test.java
+	$(JAVA2HTMLNOTFIXED) < $(srcdir)/test.java > $@
+
 test_css.html: test.java
 	$(JAVA2HTMLCSS) < test.java > $@
 
@@ -341,6 +370,9 @@ check_prolog2html check_logtalk2html \
 check_perl2html \
 check_php32html check_python2html check_changelog check_flex check_bison \
 check_ruby check_lua check_ml check_sml check_log check_pascal check_html \
+check_xml \
+check_sh \
+check_url \
 check_latex \
 check_diff \
 check_simple \
@@ -350,10 +382,11 @@ check_debug \
 check_ref \
 check_show
 
-check_java2html: test.java.html test.js.html test.java.txt test.java.tex test.java.texinfo test_xhtml.html test_css.html test_css_nodoc.html test_comments.java.html test_java_lines.html 
+check_java2html: test.java.html test.js.html test.java.txt test.java.tex test.java.texinfo test_xhtml.html test_notfixed.html test_css.html test_css_nodoc.html test_comments.java.html test_java_lines.html 
 	$(JAVA2HTML) -i $(srcdir)/test.java -o test.java.out.html
 	$(JS2HTML) < $(srcdir)/test.js > test.js.out.html
 	$(JAVA2XHTML) < $(srcdir)/test.java > test_xhtml.out.html
+	$(JAVA2HTMLNOTFIXED) < $(srcdir)/test.java > test_notfixed.out.html
 	$(JAVA2HTMLCSS) < $(srcdir)/test.java > test_css.out.html
 	$(JAVA2HTMLCSSNODOC) < $(srcdir)/test.java > test_css_nodoc.out.html
 	$(JAVA2HTML) -i $(srcdir)/test_comments.java -o test_comments.java.out.html
@@ -365,6 +398,7 @@ check_java2html: test.java.html test.js.html test.java.txt test.java.tex test.ja
 	diff $(srcdir)/test.java.html test.java.out.html
 	diff $(srcdir)/test.js.html test.js.out.html
 	diff $(srcdir)/test_xhtml.html test_xhtml.out.html
+	diff $(srcdir)/test_notfixed.html test_notfixed.out.html
 	diff $(srcdir)/test_css.html test_css.out.html
 	diff $(srcdir)/test_css_nodoc.html test_css_nodoc.out.html
 	diff $(srcdir)/test_comments.java.html test_comments.java.out.html
@@ -496,10 +530,27 @@ check_pascal: test.pas.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.pas.html test.pas.out.html
 
-check_html: test.htm.html
+check_html: test.htm.html test2.htm.html
 	$(PROGNAME) -i $(srcdir)/test.htm --title="html output formatted in html" > test.htm.out.html
+	$(PROGNAME) -i $(srcdir)/test2.htm --title="html output formatted in html" > test2.htm.out.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.htm.html test.htm.out.html
+	diff $(srcdir)/test2.htm.html test2.htm.out.html
+
+check_xml: test.xml.html
+	$(PROGNAME) -i $(srcdir)/test.xml --title="xml formatted in html" > test.xml.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.xml.html test.xml.out.html
+
+check_sh: test.sh.html
+	$(PROGNAME) -i $(srcdir)/test.sh > test.sh.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.sh.html test.sh.out.html
+
+check_url: test.url.html
+	$(URL2HTML) -i $(srcdir)/test.url > test.url.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.url.html test.url.out.html
 
 check_latex: test.tex.html test.java.tex.html
 	$(PROGNAME) -i $(srcdir)/test.tex  > test.tex.out.html
@@ -526,6 +577,10 @@ check_simple: test.simple.html
 	$(CHECKLANG) ./$< 2> $@ || true; 
 	sed -r -i -f $(srcdir)/erasedir.sed $@ 
 
+%.err_out: %.outlang
+	$(CHECKOUTLANG) ./$< 2> $@ || true; 
+	sed -r -i -f $(srcdir)/erasedir.sed $@ 
+
 %.err_out: %.style
 	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=$(srcdir)/$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true;
 	sed -r -i -f $(srcdir)/erasedir.sed $@ 
@@ -534,10 +589,12 @@ check_wrong:
 	rm -f *.err_out
 	$(MAKE) wrong_exp.err_out
 	$(MAKE) wrong_var.err_out
+	$(MAKE) wrong_trans.err_out
 	$(MAKE) wrong_dircolor.err_out
 	@echo expect no output from diff
 	diff $(srcdir)/wrong_exp.err wrong_exp.err_out
 	diff $(srcdir)/wrong_var.err wrong_var.err_out
+	diff $(srcdir)/wrong_trans.err wrong_trans.err_out
 	diff $(srcdir)/wrong_dircolor.err wrong_dircolor.err_out
 
 #$(PROG_NOOUTLANGDEF) -i $(srcdir)/test.simple -o test.err_out --data-dir=/tmp 2> missing_langmap2.err_out || true
@@ -597,6 +654,11 @@ check_show: $(srcdir)/c_comment.show
 	@echo expect no output from diff
 	diff $(srcdir)/c_comment.show c_comment.out.show
 
+check_langelems: $(srcdir)/cpp.langelems
+	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$(top_srcdir)/src/cpp.lang > cpp.out.langelems
+	@echo expect no output from diff
+	diff $(srcdir)/cpp.langelems cpp.out.langelems
+
 clean_ref: 
 	rm -f $(OUTPUTWREFS)
 
@@ -624,6 +686,6 @@ check-valgrind:
 CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html
 
 DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo

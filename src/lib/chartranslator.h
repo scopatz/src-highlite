@@ -36,6 +36,7 @@ class CharTranslator : public PreFormatter
    std::string translation_exp; // what to translate
    std::string translation_format; // translate into
    boost::regex *reg_exp;
+   bool bol; // whether we are at the beginning of a new line
 
    virtual const std::string doPreformat(const std::string &text);
 

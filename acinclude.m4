@@ -232,7 +232,7 @@ if test "$ax_cv_boost_regex" = yes; then
   AC_DEFINE(HAVE_BOOST_REGEX,,[define if the Boost::Regex library is available])
   dnl Now determine the appropriate file names
   AC_ARG_WITH([boost-regex],AS_HELP_STRING([--with-boost-regex],
-  [specify the boost regex library or suffix to use]),
+  [specify the boost regex library or suffix to use, e.g., --with-boost-regex=boost_regex-gcc-1_31]),
   [if test "x$with_boost_regex" != "xno"; then
     ax_regex_lib=$with_boost_regex
     ax_boost_regex_lib=boost_regex-$with_boost_regex

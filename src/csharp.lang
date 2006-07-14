@@ -2,6 +2,8 @@
 # by S. HEMMI, updated by L. Bettini.
 preproc = "using"
 
+number = '\<[+-]?((0x[[:xdigit:]]+)|(([[:digit:]]*\.)?[[:digit:]]+([eE][+-]?[[:digit:]]+)?))([FfDdMmUulL]+)?\>'
+
 include "cpp.lang"
 
 subst keyword = "abstract|event|new|struct ",

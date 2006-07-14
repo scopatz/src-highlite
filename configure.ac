@@ -13,7 +13,7 @@ AC_INIT(reconf)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(source-highlight,2.4rc)
+AM_INIT_AUTOMAKE(source-highlight,2.4)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)
@@ -194,6 +194,8 @@ AC_DEFINE_DIR([ABSOLUTEDATADIR], [datadir/source-highlight],
                    [Define to the source-highlight
                    data directory absolute to installation path.])
 
+AM_MAINTAINER_MODE
+
 AC_OUTPUT(
 [Makefile
 txtc.sh
@@ -243,5 +245,7 @@ if test -z "$ac_cv_path_CTAGS"; then
    AC_MSG_WARN([
 
 ctags is not installed so you won't be able to
-generate references (--gen-references).])
+generate references (--gen-references).
+Furthermore, if you run make check, then some
+tests are going to fail.])
 fi

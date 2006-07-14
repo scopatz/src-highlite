@@ -23,7 +23,7 @@
 using namespace std;
 
 CharTranslator::CharTranslator(PreFormatterPtr f)
-  : PreFormatter(f), counter(0), reg_exp(0)
+  : PreFormatter(f), counter(0), reg_exp(0), bol(true)
 {
 }
 
@@ -59,10 +59,22 @@ CharTranslator::doPreformat(const string &text)
   if (! reg_exp)
     reg_exp = new boost::regex(translation_exp);
 
+  boost::match_flag_type flags = boost::match_default | boost::format_all;
+  if (!bol)
+      flags |= boost::match_not_bol;
+  // if we're not at the beginning of the line, then we must not match the
+  // beginning of the string as the beginning of a line
+  
   std::ostringstream preformat_text(std::ios::out | std::ios::binary);
   std::ostream_iterator<char, char> oi(preformat_text);
   boost::regex_replace(oi, text.begin(), text.end(), *reg_exp,
-                       translation_format, boost::match_default | boost::format_all);
+                       translation_format, flags);
 
+  // keep track of the fact that we begin a new line
+  if (text.find('\n') != string::npos)
+      bol = true;
+  else
+      bol = false;
+  
   return preformat_text.str();
 }

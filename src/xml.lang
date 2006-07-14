@@ -1,12 +1,12 @@
-state preproc delim "<!DOCTYPE" ">" multiline begin
+state preproc delim "<?xml" "?>" multiline begin
   string delim "\"" "\"" escape "\\" multiline
 end
 
 comment delim "<!--" "-->" multiline nested
 
-keyword = '<(/)?[[:alnum:]]+(/)?>'
+keyword = '<(/)?[[:alnum:]:]+(/)?>'
 
-state keyword delim '<(/)?[[:alnum:]]+' '(/)?>' multiline begin
+state keyword delim '<(/)?[[:alnum:]:]+' '(/)?>' multiline begin
   type = '[^="[:blank:]]+'
   symbol = "="
   string delim "\"" "\"" escape "\\" multiline

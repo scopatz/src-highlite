@@ -120,6 +120,11 @@ const string buildex(const string &s)
   return "(" + s + ")";
 }
 
+/**
+ * Build a subexpression starting from s, after preprocessing s
+ * @param s
+ * @return
+ */
 const string buildex_pre(const string &s)
 {
   return buildex(RegexPreProcessor::preprocess(s));
@@ -127,7 +132,7 @@ const string buildex_pre(const string &s)
 
 /**
  * Build a regular expression that must be matched
- * with a null string before and after (operator \< and \>
+ * with a null string before and after (operator \< and \>)
  * @param s
  * @return
  */
@@ -174,10 +179,14 @@ RegExpStateBuilder::build(StringListLangElem *elem, RegExpStatePointer state)
 
   //printMessage("building " + name + " " + stringdef);
 
+  // check this at this point, since, stringdef might be modified
+  // e.g., if it must be case insensitive
+  bool isToIsolate = is_to_isolate(stringdef);
+
   if (!elem->isCaseSensitive())
     stringdef = RegexPreProcessor::make_nonsensitive(stringdef);
   string exp_string = buildex_pre(stringdef);
-  if (is_to_isolate(stringdef))
+  if (isToIsolate)
     exp_string = buildex_isolated(exp_string);
 
   RegExpFormatterPtr formatter(new RegExpFormatter(name));

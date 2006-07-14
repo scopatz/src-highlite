@@ -69,11 +69,11 @@ STRING \"[^\n"]+\"
 
 %option stack
 
-%s COMMENT_STATE STRING_STATE INCLUDE_STATE TRANSLATION_STATE REGEX_STATE
+%s COMMENT_STATE STRING_STATE INCLUDE_STATE TRANSLATION_STATE REGEX_STATE LITERAL_STATE TRANSLATED_STATE
 
 %%
 
-<INITIAL,TRANSLATION_STATE>[ \t] {}
+<INITIAL,TRANSLATION_STATE,TRANSLATED_STATE>[ \t] {}
 
 \r {}
 
@@ -146,12 +146,24 @@ STRING \"[^\n"]+\"
 <STRING_STATE>[^\n]|" " {  buffer( yytext ) ; }
 <STRING_STATE>\n {  buffer( "\n" ) ; }
 
-<TRANSLATION_STATE>\" { BEGIN(REGEX_STATE) ; }
-<REGEX_STATE>("*"|"."|"?"|"+"|"("|")"|"{"|"}"|"["|"]"|"^"|"$"|"|") {  buffer_escape( yytext ) ; }
+<TRANSLATION_STATE,TRANSLATED_STATE>\" { BEGIN(LITERAL_STATE) ; }
+<LITERAL_STATE>("*"|"."|"?"|"+"|"("|")"|"{"|"}"|"["|"]"|"^"|"$"|"|") {  buffer_escape( yytext ) ; }
+<LITERAL_STATE>\\\\ {  buffer( yytext ) ; }
+<LITERAL_STATE>"\\\"" {  buffer( yytext ) ; }
+<LITERAL_STATE>\" { BEGIN(TRANSLATION_STATE) ; outlangdef_lval.string = flush_buffer() ; DEB2("STRINGDEF",loutlangdef_lval.string); return REGEXDEF; }
+<LITERAL_STATE>[^\n]|" " {  buffer( yytext ) ; }
+
+<TRANSLATION_STATE>\' { BEGIN(REGEX_STATE) ; }
 <REGEX_STATE>\\\\ {  buffer( yytext ) ; }
-<REGEX_STATE>"\\\"" {  buffer( yytext ) ; }
-<REGEX_STATE>\" { BEGIN(TRANSLATION_STATE) ; outlangdef_lval.string = flush_buffer() ; DEB2("STRINGDEF",langdef_lval.string); return REGEXDEF; }
-<REGEX_STATE>[^\n]|" " {  buffer( yytext ) ; }
+<REGEX_STATE>"\\'" {  buffer( "'" ) ; }
+<REGEX_STATE>\' {
+    BEGIN(TRANSLATED_STATE) ;
+    // entering TRANSLATED_STATE makes sure that 'regex' is used only
+    // for specifying the sequence to be translated, and not the translated sequence
+    outlangdef_lval.string = flush_buffer() ;
+    DEB2("STRINGDEF",outlangdef_lval.string); return REGEXDEF;
+}
+<REGEX_STATE>[^\n] {  buffer( yytext ) ; }
 
 <INITIAL,TRANSLATION_STATE>{nl} { DEB("NEWLINE"); ++(outlang_parsestruct->line) ; }
 

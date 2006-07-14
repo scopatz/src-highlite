@@ -11,8 +11,8 @@
 [33m11:[m 
 [33m12:[m [31m  written by[m
 [33m13:[m [31m  Lorenzo Bettini[m
-[33m14:[m [31m  [mhttp://www.lorenzobettini.it
-[33m15:[m [31m  [mhttp://www.gnu.org/software/src-highlite
+[33m14:[m [31m  [m[04;34mhttp://www.lorenzobettini.it[m
+[33m15:[m [31m  [m[04;34mhttp://www.gnu.org/software/src-highlite[m
 [33m16:[m [31m*/[m
 [33m17:[m 
 [33m18:[m [01;34mpackage[m hello[31m;[m

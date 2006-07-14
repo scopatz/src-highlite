@@ -246,6 +246,15 @@ StartApp::start(int argc, char * argv[])
     return (EXIT_SUCCESS);
   }
 
+  if (args_info.show_lang_elements_given) {
+      // we simply printe all the language elements defined in the
+      // language definition file
+      if (LangDefLoader::show_lang_elements(data_dir, args_info.show_lang_elements_arg))
+          return EXIT_SUCCESS;
+
+      return EXIT_FAILURE;
+  }
+
   string lang_map = args_info.lang_map_arg;
   assert(lang_map.size());
   if (! args_info.lang_def_given)

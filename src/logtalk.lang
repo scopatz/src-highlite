@@ -17,7 +17,7 @@ keyword =	'\<(abolish|c(urrent|reate))_(object|protocol|category)(?=\()',
 keyword =	'\<(after|before)(?=\()',
 			'\<(parameter|this|se(lf|nder))(?=\()',
 			'\<(current_predicate|predicate_property)(?=\()',
-			'\<(expand_term|phrase)(?=\()',
+			'\<(expand_term|term_expansion|phrase)(?=\()',
 			'\<(clause|retract(all)?)(?=\()',
 			'\<a(bolish|ssert(a|z))(?=\()',
 			'\<(ca(ll|tch)|throw)(?=\()',
@@ -55,7 +55,7 @@ variable =	'\<[A-Z_][A-Za-z0-9_]*'
 
 cbracket =	"{|}"
 
-preproc =	'^[[:blank:]]*:-[[:blank:]](ca(lls|tegory) | p(ublic|r(ot(ocol|ected)|ivate)) | encoding | in(fo|itialization) | alias | d(ynamic|iscontiguous) | m(etapredicate|ode|ultifile) | o(bject|p) | uses)(?=\()',
+preproc =	'^[[:blank:]]*:-[[:blank:]](ca(lls|tegory) | p(ublic|r(ot(ocol|ected)|ivate)) | e(ncoding|xports) | in(fo|itialization) | alias | d(ynamic|iscontiguous) | meta_predicate | m(etapredicate|od(e|ule)|ultifile) | o(bject|p) | use(s|_module))(?=\()',
 			'^[[:blank:]]*:-[[:blank:]](end_(category|object|protocol) | dynamic)\.'
 
 preproc =	'\<(extends|i(nstantiates|mp(lements|orts))|specializes)(?=\()'

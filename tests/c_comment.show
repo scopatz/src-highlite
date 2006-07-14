@@ -4,8 +4,8 @@
      STATE 2
       0: comment  (exit level: 0, exit_all: 0, next: none)
       1: comment (\z) (exit level: 1, exit_all: 0, next: none)
-      2: url ((?:(?:(?:<?)(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*@(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*(?:>?)))) (exit level: 0, exit_all: 0, next: none)
-      3: url ((?:(?:[[:word:]]+://(?:[[:word:]]+[\./\-_]?)+))) (exit level: 0, exit_all: 0, next: none)
+      2: url ((?:(?:<?)[[:word:]\./\-_]+@[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
+      3: url ((?:[[:word:]]+://[[:word:]\./\-_]+)) (exit level: 0, exit_all: 0, next: none)
       4: preproc (<!DOCTYPE) (exit level: 0, exit_all: 0, next: 3)
          STATE 3
           0: normal  (exit level: 0, exit_all: 0, next: none)
@@ -20,8 +20,8 @@
           0: comment  (exit level: 0, exit_all: 0, next: none)
           1: comment (-->) (exit level: 1, exit_all: 0, next: none)
           2: comment (<!--) (exit level: 0, exit_all: 0, next: 5)
-      6: keyword ((?:<(?:/)?[[:alpha:]]+(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
-      7: keyword (<(?:/)?[[:alpha:]]+) (exit level: 0, exit_all: 0, next: 6)
+      6: keyword ((?:<(?:/)?[[:alnum:]]+(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
+      7: keyword (<(?:/)?[[:alnum:]]+) (exit level: 0, exit_all: 0, next: 6)
          STATE 6
           0: normal  (exit level: 0, exit_all: 0, next: none)
           1: keyword ((?:/)?>) (exit level: 1, exit_all: 0, next: none)
@@ -44,8 +44,8 @@
       0: comment  (exit level: 0, exit_all: 0, next: none)
       1: comment (\*/) (exit level: 1, exit_all: 0, next: none)
       2: comment (/\*\*) (exit level: 0, exit_all: 0, next: 9)
-      3: url ((?:(?:(?:<?)(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*@(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*(?:>?)))) (exit level: 0, exit_all: 0, next: none)
-      4: url ((?:(?:[[:word:]]+://(?:[[:word:]]+[\./\-_]?)+))) (exit level: 0, exit_all: 0, next: none)
+      3: url ((?:(?:<?)[[:word:]\./\-_]+@[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
+      4: url ((?:[[:word:]]+://[[:word:]\./\-_]+)) (exit level: 0, exit_all: 0, next: none)
       5: preproc (<!DOCTYPE) (exit level: 0, exit_all: 0, next: 10)
          STATE 10
           0: normal  (exit level: 0, exit_all: 0, next: none)
@@ -60,8 +60,8 @@
           0: comment  (exit level: 0, exit_all: 0, next: none)
           1: comment (-->) (exit level: 1, exit_all: 0, next: none)
           2: comment (<!--) (exit level: 0, exit_all: 0, next: 12)
-      7: keyword ((?:<(?:/)?[[:alpha:]]+(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
-      8: keyword (<(?:/)?[[:alpha:]]+) (exit level: 0, exit_all: 0, next: 13)
+      7: keyword ((?:<(?:/)?[[:alnum:]]+(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
+      8: keyword (<(?:/)?[[:alnum:]]+) (exit level: 0, exit_all: 0, next: 13)
          STATE 13
           0: normal  (exit level: 0, exit_all: 0, next: none)
           1: keyword ((?:/)?>) (exit level: 1, exit_all: 0, next: none)
@@ -80,6 +80,6 @@
       0: comment  (exit level: 0, exit_all: 0, next: none)
       1: comment (\*/) (exit level: 1, exit_all: 0, next: none)
       2: comment (/\*) (exit level: 0, exit_all: 0, next: 15)
-      3: url ((?:(?:(?:<?)(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*@(?:[[:word:]]+)(?:[\.\-_][[:word:]]+)*(?:>?)))) (exit level: 0, exit_all: 0, next: none)
-      4: url ((?:(?:[[:word:]]+://(?:[[:word:]]+[\./\-_]?)+))) (exit level: 0, exit_all: 0, next: none)
+      3: url ((?:(?:<?)[[:word:]\./\-_]+@[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
+      4: url ((?:[[:word:]]+://[[:word:]\./\-_]+)) (exit level: 0, exit_all: 0, next: none)
       5: todo ((?:(?:TODO|FIXME)(?:[:]?))) (exit level: 0, exit_all: 0, next: none)

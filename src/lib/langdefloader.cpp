@@ -17,6 +17,7 @@
 #include "regexpstatebuilder.H"
 #include "messages.h"
 #include "regexpstateprinter.h"
+#include "langelemsprinter.H"
 
 #include <map>
 
@@ -46,7 +47,7 @@ LangDefLoader::~LangDefLoader()
 RegExpStatePtr
 LangDefLoader::get_lang_def(const string &path, const string &file)
 {
-  const string key = path + file;
+  const string key = (path.size() ? path + "/" : "") + file;
   RegExpStateCache::const_iterator it = regexpstatecache.find(key);
   if (it == regexpstatecache.end()) {
     printMessage("building regex automaton for " + key);
@@ -72,6 +73,18 @@ LangDefLoader::check_lang_def(const string &path, const string &file)
   }
 
   return false;
+}
+
+bool
+LangDefLoader::show_lang_elements(const string &path, const string &file)
+{
+    const LangElems *elems = parse_lang_def(path.c_str(), file.c_str());
+
+    LangElemsPrinter langelemsprinter;
+    langelemsprinter.print(elems);
+
+    delete elems;
+    return true;
 }
 
 bool

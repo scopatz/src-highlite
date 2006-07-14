@@ -56,3 +56,7 @@ style = style.lang
 ps = postscript.lang
 eps = postscript.lang
 postscript = postscript.lang
+xml = xml.lang
+xhtml = xml.lang
+sh = sh.lang
+shell = sh.lang

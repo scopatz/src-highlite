@@ -30,6 +30,7 @@ class LangDefLoader
 
     static RegExpStatePtr get_lang_def(const std::string &path, const std::string &file);
     static bool check_lang_def(const std::string &path, const std::string &file);
+    static bool show_lang_elements(const std::string &path, const std::string &file);
     static bool show_regex(const std::string &path, const std::string &file);
 };
 

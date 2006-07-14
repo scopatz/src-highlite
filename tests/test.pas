@@ -10,3 +10,8 @@ Begin
 End
 
 (* Probably it is not even correct :-) *)
+
+(* the IF and VAR inside MYIFVAR must not be highlighted as keyword *)
+IF MYIFVAR THEN
+   WRITELN "Hello World";
+END

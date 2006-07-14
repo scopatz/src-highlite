@@ -56,6 +56,7 @@ option "data-dir" - "directory where language definition files and language maps
 option "output-dir"     -  "output directory" string typestr="path" no
 option "lang-def" - "language definition file" string typestr="filename" no
 option "lang-map" - "language map file" string typestr="filename" default="lang.map" no
+option "show-lang-elements" - "prints the language elements that are defined in the language definition file" optional string typestr="filename"
 
 section "reference generation"
 option "line-number"    n  "number all output lines" no

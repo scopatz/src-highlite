@@ -17,8 +17,5 @@
 
 LangElems *parse_lang_def();
 LangElems *parse_lang_def(const char *path, const char *name);
-LangElems *parse_lang_def_file(const char *path, const char *name);
-// the second version, does not use the path for the very file,
-// but only for further possible includes.
 
 #endif
