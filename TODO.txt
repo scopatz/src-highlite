@@ -16,3 +16,11 @@ of having different files.
 notfixed also for xhtml output.
 
 avoid ctags tests if this is not installed.
+
+test for always flush (together with line number), and command line option
+
+in style file:
+keyword2 like keyword
+i.e., default a specific element to another one
+
+aggiungere in texinfo la descrizione come preso da gengetopt.

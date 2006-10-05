@@ -36,6 +36,8 @@ Software Foundation raise funds for GNU development.''
 @title GNU Source-highlight
 @subtitle given a source file, produces a document with syntax highlighting.
 @subtitle for GNU Source-highlight Version @value{VERSION}
+@subtitle updated on @value{UPDATED-MONTH}
+
 @author by Lorenzo Bettini
 
 @page
@@ -97,6 +99,14 @@ later in this manual (@ref{Output Language Definitions}).  Since version
 field names, etc.) by relying on the program @emph{ctags},
 @url{http://ctags.sourceforge.net} (@ref{Generating References}).
 
+@menu
+* Supported languages::         
+* Using source-highlight as a simple formatter::  
+@end menu
+
+@node Supported languages, Using source-highlight as a simple formatter, Introduction, Introduction
+@section Supported languages
+
 The complete list of languages (indeed, file extensions) natively
 supported by this version of Source-highlight (@value{VERSION}), as
 reported by @code{--lang-list}, is the following:
@@ -128,6 +138,59 @@ definition is not precise, please let me know.  Moreover, if you have a
 program example in a language that's not included in the @file{tests}
 directory, please send it to me so that I can include it in the test
 suite.
+
+@node Using source-highlight as a simple formatter,  , Supported languages, Introduction
+@section Using source-highlight as a simple formatter
+
+You can also use source-highlight as a simple formatter of input file,
+i.e., without performing any highlighting@footnote{Although this might
+have been achieved with previous version, it is an official supported
+feature since version 2.5.}.
+
+@cindex nohilite.lang
+You can achieve this by using, as the language definition file for input
+sources the file @file{nohilite.lang}, using the command line option
+@code{--lang-def} (@ref{Invoking source-highlight}).  Since that
+language definition is empty, no highlighting will be performed;
+however, source-highlight will transform the input file in the output
+format.  Notice, in the input language associations in @ref{Supported
+languages}, that @file{nohilite.lang} is also associated to txt files.
+
+This, for instance, makes source-highlight useful in cases you want to
+transform a text file into HTML or @LaTeX{}.  During the output, in
+fact, source-highlight will correctly generate characters that have a
+specific meanings in the output format.
+
+@include txt2texinfo.txt
+
+This is the Texinfo source of the above sentence:
+
+@include txt2texinfo.txt.texinfo
+
+@noindent
+This was processed by source-highlight as a simple text file, without no
+highlighting; however since it was formatted in Texinfo, all the
+necessary escaping was automatically performed.  This way, it is very
+easy to insert, in the same document, a code, and its result (as in this
+example).
+
+This is actually the formatting performed by source-highlight; except
+for the comment, this is basically what you should have written yourself
+to do all the escaping stuff manually:
+
+@include txt2texinfo.txt.texinfo.texinfo
+
+@cindex failsafe
+In case source-highlight does not handle a specific input language, you
+can still use the option @code{--failsafe} (@ref{Invoking
+source-highlight}) and also in that case no highlighting will be
+performed, but source-highlight will transform the input file in the
+output format.
+
+@cindex default.lang
+Notice, however, that if the input language cannot be established, the
+@file{default.lang} will be used: an empty language definition file
+which you might want to customize.
 
 @node Installation, Copying, Introduction, Top
 @chapter Installation
@@ -544,7 +607,8 @@ the output is forced to the standard output anyway.
 
 If @code{-s (--src-lang)} is not specified, the source language is
 inferred by the extension of the input file (this, of course, does not
-work with standard input redirection).
+work with standard input redirection).  For further details, see
+@ref{How the input language is discovered}.
 
 If @code{-f (--out-format)} is not specified, the output will be
 produced in HTML.
@@ -927,6 +991,12 @@ into the directory where you invoked the command from; if you want the
 output files to be generated into a different directory you can use this
 option.
 
+@item --infer-lang
+@cindex language inference
+@cindex --infer-lang
+Force the inference mechanism for detecting the input language.  This is
+detailed in @ref{How the input language is discovered}.
+
 @item --line-number-ref
 As @code{--line-number}, this option numbers all the output lines, and,
 additionally, generates an anchor for each line.  The anchor consists of
@@ -938,12 +1008,23 @@ case).  See @ref{Anchors and References} for defining how to generate an
 anchor in a specific output language.
 
 @item --failsafe
+@cindex failsafe
 If no language specification is found, an error will be printed and the
 program exits.  With this option, instead, in such situations, the input
-is simply copied as it is to the output.  This is useful when
+is simply formatted in the output format.  This is useful when
 @command{source-highlight} is used with many input files, and it is also
-used in the @file{src-hilite-lesspipe.sh} script, @ref{Using
-source-highlight with less}.
+used in the @file{src-hilite-lesspipe.sh} script.  Actually I failed to
+find a good reason why one should not always use this option.  So my
+suggestion is to always use it when you run source-highlight (and
+indeed, in the future, this option might become the default one).  See
+also @ref{Using source-highlight with less}, @ref{Using source-highlight
+as a simple formatter}.
+
+@cindex default.lang
+When using @code{--failsafe}, if no input language can be established,
+source-highlight will use the input language definition file
+@file{default.lang}, which is an empty file.  You might want to
+customize such file, though.
 
 @item --debug-lang
 @item --show-regex
@@ -953,6 +1034,53 @@ Allows to debug a language definition file, @ref{Debugging}.
 
 The other command line options dealing with references are explained in
 more details in @ref{Generating References}.
+
+@menu
+* How the input language is discovered::  
+@end menu
+
+@node How the input language is discovered,  , Invoking source-highlight, Invoking source-highlight
+@section How the input language is discovered
+
+As already explained, @ref{Simple Usage}, source-highlight uses a
+language definition file according the language specified with the
+option @code{--src-lang}, or @code{--lang-def}, or by using the input
+file extension.
+
+Since version 2.5, source-highlight can use an inference mechanism to
+deduce the input language.  For the moment, it can detect script
+languages based on the ``sha-bang'' mechanism, i.e., when the first line
+of a script contains a line such as, e.g.,
+
+@example
+#!/bin/sh
+@end example
+
+It also recognizes the Emacs convention, of declaring the Emacs major
+mode using the format @code{-*- lang -*-}.
+
+For instance, a script starting as the following one:
+
+@example
+#!/bin/bash
+# -*- Tcl -*-
+@end example
+
+@noindent
+will be interpreted as a Tcl script, and not as bash script.
+
+This inference mechanism is performed, by default, in case the input
+language is neither explicitly specified nor found in the language map
+file by using the input file extension (the input file may also have no
+extension at all).
+
+@cindex --infer-lang
+Furthermore, this mechanism can be given priority with the command line
+option @code{--infer-lang}.  For instance, this is used in the script
+@file{src-hilite-lesspipe.sh} (@ref{Using source-highlight with less})
+when running source-highlight, in order to avoid the problem of
+formatting a Perl script as a Prolog program (since the extension
+@file{.pl} is associated to Prolog programs in the language map file).
 
 @node Language Definitions, Output Language Definitions, Invoking source-highlight, Top
 @chapter Language Definitions
@@ -1449,6 +1577,7 @@ sub-expression,  you can use a @emph{non-marking parenthesis}
 syntax: even though you use standard parenthesis, source-highlight will
 transform it into a non-marking parenthesis.
 
+@cindex lookahead asserts
 A useful regular expression form is the @emph{Forward Lookahead Asserts}
 that come in two forms, one for positive forward lookahead asserts, and
 one for negative lookahead asserts:
@@ -1511,6 +1640,20 @@ end
 @noindent
 but a cut-and-paste error had its way ;-)
 
+@cindex lookbehind asserts
+You can also use @emph{Lookabehind Asserts}:
+
+@table @code
+@item (?<=pattern)
+ consumes zero characters, only if pattern could be matched against the
+ characters preceding the current position (pattern must be of fixed
+ length).
+@item (?<!pattern) 
+ consumes zero characters, only if pattern could not be matched against the
+ characters preceding the current position (pattern must be of fixed
+ length).
+@end table
+
 @node Listing Language Elements, Concluding Remarks, Notes on regular expressions, Language Definitions
 @section Listing Language Elements
 
@@ -1525,7 +1668,7 @@ Instead of having to look inside the language definition file itself
 @cindex @code{--show-lang-elements}
 option @code{--show-lang-elements}@footnote{Since version 2.4.}, that
 simply prints to the standard output all the language elements that
-can be highilighted with a specific language definition file.
+can be highlighted with a specific language definition file.
 
 For instance, for @code{cpp.lang} you get:
 
@@ -1576,7 +1719,21 @@ When writing a language definition file, it is quite useful to be able
 to debug it (by using complex regular expressions one may experience
 unwanted behaviors).  Since version 2.1 the command line option
 @code{--debug-lang} is available.  When using this option, some
-additional information are printed to the standard output.
+additional information are printed to the standard output.  
+
+Since version 2.5 this option also accepts the a sub specification (see
+@ref{Invoking source-highlight}).  When using @code{dump} (the default)
+all the additional information explained below will be dumped without
+interaction with the user.  When using @code{interactive}, for each
+formatted string the program will stop waiting for a command from the
+user.  In this very primordial version of interactive debug, the user
+will only have to press @code{ENTER} to make the program continue until
+the next formatted string.  This way, the programmer will have the
+chance to step the highlighting of each part of the input file.
+Moreover, when debugging is enabled, no buffering will be performed by
+the program, thus each formatted element will be immediately available
+in the output.  For instance, you can use the command @command{tail -f}
+to see the modifications on the output file on-the-fly.
 
 When using this command line option the additional information produced
 has the following format:
@@ -1894,7 +2051,7 @@ be straightforward by now.
 @node Pseudo semantic analysis,  , Highlighting Diff files, Tutorials on Language Definitions
 @subsection Pseudo semantic analysis
 
-Source-hihglight, by means of regular expressions can only perform
+Source-highlight, by means of regular expressions can only perform
 lexical analysis of the input source.  In particular, it is based on the
 assumption that the input source is syntactically correct with respect
 to the input language.  However, by using the language definition syntax
@@ -1919,7 +2076,7 @@ We then write another language definition file, based on the file
 We intentionally included an error in this first version:
 we used the @code{start} element to start the environment,
 but such element has the scope of a single line, thus,
-it does not have the desidered behavior:
+it does not have the desired behavior:
 
 @include test_extreme_comment_wrong.texinfo
 
@@ -2395,7 +2552,7 @@ end
 @noindent
 The difference between @code{"original sequence"} and
 @code{'regex'}@footnote{Since version 2.4.} is that with the former
-you specify a character sequence that will be matched literarly, apart
+you specify a character sequence that will be matched literally, apart
 from special characters such as @code{\} (which, if needed to be
 inserted, must be escaped), @code{\n} (new line) and @code{\t} (tab
 character).  Instead, with the latter, you can specify a regular
@@ -2436,7 +2593,7 @@ we want to actually insert a new line in the output file @code{\n}.
 
 For HTML with not fixed font by default, @file{html_notfixed.outlang}
 (see @ref{HTML output}), we need two translate two space sequence
-(i.e., two adiacent spaces, since in HTML more adiacent spaces are
+(i.e., two adjacent spaces, since in HTML more adjacent spaces are
 rendered as only one space@footnote{Unless they are inside a
 @code{<tt>...</tt>}.}, while we want them as they are), and we also
 need to translate a space starting a new line in the source (thus we
@@ -2469,8 +2626,9 @@ For instance, for HTML we have
 
 @example
 doctemplate
-"<pre><tt>"
-"</tt></pre>
+"<!-- Generator: $additional -->
+$header<pre><tt>"
+"</tt></pre>$footer
 "
 end
 @end example
@@ -2539,7 +2697,7 @@ The javadoc output format is useful to format code snippets that have to
 be included inside a javadoc comment of another Java
 file@footnote{Although I haven't tested it, I think this will work also
 for Doxygen comments.}.  Apart from being formatted nicely in the
-generated HTML documentation, this also releaves the programmer from
+generated HTML documentation, this also releases the programmer from
 escaping specific characters in the code snippet (i.e., @code{&},
 @code{<} and @code{>}).  Notice also that it also avoids the
 sequence @code{*/} to be interpreted as the closing of the 

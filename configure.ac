@@ -13,7 +13,7 @@ AC_INIT(reconf)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(source-highlight,2.4)
+AM_INIT_AUTOMAKE(source-highlight,2.5rc)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)
@@ -209,8 +209,10 @@ src/lib/Makefile
 tests/Makefile
 tests/valgrind_tests.sh
 tests/valgrind_test.sh
+tests/valgrind_suppressions.sh
 source-highlight.spec],
 [chmod +x tests/valgrind_tests.sh
+ chmod +x tests/valgrind_suppressions.sh
  chmod +x tests/valgrind_test.sh]
 )
 

@@ -64,6 +64,12 @@ debug.java.texinfo: $(top_srcdir)/tests/debug.java
 %.langelems.texinfo: $(top_srcdir)/src/%.lang
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ --show-lang-elements=$< > $@
 
+%.txt.texinfo: $(srcdir)/%.txt
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+%.txt.texinfo.texinfo: $(srcdir)/%.txt.texinfo
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@ --lang-def=nohilite.lang
+
 %.outlang.texinfo: $(top_srcdir)/src/%.outlang
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
@@ -119,7 +125,7 @@ endif
 
 AM_MAKEINFOHTMLFLAGS=--no-split
 
-GENERATEDINFOS = help-output.texinfo lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo test_ref.h.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo
+GENERATEDINFOS = help-output.texinfo lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo test_ref.h.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo
 
 EXTRA_DIST = colors.html source-highlight.html \
              Hello.java \
@@ -133,6 +139,7 @@ EXTRA_DIST = colors.html source-highlight.html \
              source-highlight.1 index.html \
 	     comment-show.lang \
 	     SimpleClass.java SimpleClass-doc.html UsageExample.java \
+	     txt2texinfo.txt.texinfo \
              $(GENERATEDINFOS)
 
 source_highlightdoc_DATA = colors.html source-highlight.html \
