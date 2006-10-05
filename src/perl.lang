@@ -1,6 +1,6 @@
 preproc = "import"
 
-comment start "#"
+include "script_comment.lang"
 
 include "number.lang"
 

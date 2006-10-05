@@ -12,6 +12,7 @@
     <description/>
     <secondaryLanguages/>
     <versioncontrol>kdevcvsservice</versioncontrol>
+    <defaultencoding/>
   </general>
   <kdevautoproject>
     <general>
@@ -69,7 +70,7 @@
   <kdevdebugger>
     <general>
       <dbgshell/>
-      <programargs>--data-dir=../src --check-lang=c_string.lang --verbose</programargs>
+      <programargs>--data-dir=../src -i $HOME/tmp/prova.cc --header=$HOME/tmp/head.html --footer=$HOME/tmp/foot.html</programargs>
       <gdbpath/>
       <configGdbScript/>
       <runShellScript/>
@@ -164,6 +165,14 @@
       <codeCompletionDelay>250</codeCompletionDelay>
       <argumentsHintDelay>400</argumentsHintDelay>
       <headerCompletionDelay>250</headerCompletionDelay>
+      <showOnlyAccessibleItems>false</showOnlyAccessibleItems>
+      <completionBoxItemOrder>0</completionBoxItemOrder>
+      <howEvaluationContextMenu>true</howEvaluationContextMenu>
+      <showCommentWithArgumentHint>true</showCommentWithArgumentHint>
+      <statusBarTypeEvaluation>false</statusBarTypeEvaluation>
+      <namespaceAliases>std=_GLIBCXX_STD</namespaceAliases>
+      <processPrimaryTypes>true</processPrimaryTypes>
+      <processFunctionArguments>false</processFunctionArguments>
     </codecompletion>
     <creategettersetter>
       <prefixGet/>
@@ -173,6 +182,18 @@
       <inlineGet>true</inlineGet>
       <inlineSet>true</inlineSet>
     </creategettersetter>
+    <qt>
+      <used>false</used>
+      <version>3</version>
+      <includestyle>3</includestyle>
+      <root/>
+      <designerintegration>EmbeddedKDevDesigner</designerintegration>
+    </qt>
+    <splitheadersource>
+      <enabled>false</enabled>
+      <synchronize>true</synchronize>
+      <orientation>Vertical</orientation>
+    </splitheadersource>
   </kdevcppsupport>
   <kdevfileview>
     <groups>

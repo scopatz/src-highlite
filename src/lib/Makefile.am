@@ -46,17 +46,17 @@ EXTRA_LIBRARIES = libcgi.a
 
 libcommon_a_AR = @ar_to_use@
 libcommon_a_SOURCES = copyright.text reportbugs.text cmdline.c styles.cc \
-			messages.cc fileutil.cc chartranslator.cc generatorfactory.cc docgenerator.cc \
-			optparser.yy optscanner.ll langdefparser.yy langdefscanner.ll outlangdefparser.yy \
-			outlangdefscanner.ll srcuntabifier.cpp generatormap.cpp maingeneratormap.cpp \
-			outputbuffer.cpp outputgenerator.cpp mainoutputbuffer.cpp lineoutputgenerator.cpp \
-			stringdef.cpp langelem.cpp statelangelem.cpp langelems.cpp regexpreprocessor.cpp \
-			regexpstatebuilder.H regexpstatebuilder_dbtab.cc regexpstatebuilder.cpp langdefloader.cpp \
-			langmap.cpp statestartlangelem.cpp stringlistlangelem.cpp delimitedlangelem.cpp \
-			vardefinitions.cpp textformatter.cpp textstyle.cpp textgenerator.cpp textstylebuilder.cpp \
-			doctemplate.cpp substfun.cpp refgeneratormap.cpp readtags.c fileinfo.cpp linebuffer.cpp \
-			preformatter.cpp regexpstateprinter.cpp langelemsprinter.cpp \
-langelemsprinter.H langelemsprinter_dbtab.cc
+						messages.cc fileutil.cc chartranslator.cc generatorfactory.cc docgenerator.cc \
+						optparser.yy optscanner.ll langdefparser.yy langdefscanner.ll outlangdefparser.yy \
+						outlangdefscanner.ll srcuntabifier.cpp generatormap.cpp maingeneratormap.cpp \
+						outputbuffer.cpp outputgenerator.cpp mainoutputbuffer.cpp lineoutputgenerator.cpp \
+						stringdef.cpp langelem.cpp statelangelem.cpp langelems.cpp regexpreprocessor.cpp \
+						regexpstatebuilder.H regexpstatebuilder_dbtab.cc regexpstatebuilder.cpp langdefloader.cpp \
+						langmap.cpp statestartlangelem.cpp stringlistlangelem.cpp delimitedlangelem.cpp \
+						vardefinitions.cpp textformatter.cpp textstyle.cpp textgenerator.cpp textstylebuilder.cpp \
+						doctemplate.cpp substfun.cpp refgeneratormap.cpp readtags.c fileinfo.cpp linebuffer.cpp \
+						preformatter.cpp regexpstateprinter.cpp langelemsprinter.cpp langelemsprinter.H \
+			langelemsprinter_dbtab.cc languageinfer.cpp stopwatch.cpp utils.cpp utils.h
 
 libcgi_a_AR = @ar_to_use@
 libcgi_a_SOURCES = $(libcommon_a_SOURCES) envmapper.c
@@ -107,9 +107,10 @@ optscanner.cc: $(srcdir)/optscanner.ll
 optparser.cc optparser.h: $(srcdir)/optparser.yy
 	$(YACC) -p opsc_ -o $@ $(srcdir)/optparser.yy --defines=$*.h
 
-TESTS = test_textstyle test_textgenerator test_outlangparser test_readtags
+TESTS = test_textstyle test_textgenerator test_outlangparser test_readtags \
+test_langinfer
 
-check_PROGRAMS = test_langdefparser test_langmap test_textstyle test_textgenerator test_outlangparser test_readtags
+check_PROGRAMS = test_langdefparser test_langmap test_textstyle test_textgenerator test_outlangparser test_readtags test_langinfer
 
 test_langdefparser_SOURCES = test_langdefparser_main.cpp
 test_langmap_SOURCES = test_langmap_main.cpp langmap.cpp fileutil.cc messages.cc
@@ -121,6 +122,9 @@ test_outlangparser_DEPENDENCIES = outlangtest.outlang
 
 test_readtags_SOURCES = test_readtags_main.cpp readtags.c readtags.h
 test_readtags_DEPENDENCIES = mytags
+
+test_langinfer_SOURCES = test_langinfer.cpp
+test_langinfer_LDADD = libcommon.a -l$(BOOST_REGEX_LIB)
 
 mytags: $(srcdir)/test_readtags_main.cpp
 	ctags --excmd=n --fields=+n -o mytags $(srcdir)/test_readtags_main.cpp $(srcdir)/readtags.h
@@ -136,14 +140,14 @@ langdefparser.cc langdefparser.h langdefscanner.cc \
 outlangdefparser.cc outlangdefparser.h outlangdefscanner.cc
 
 noinst_HEADERS = parsestyles.h generatormap.h maingeneratormap.h outputbuffer.h \
-			outputgenerator.h mainoutputbuffer.h lineoutputgenerator.h stringdef.h langelem.h \
-			statelangelem.h langelems.h langdefparserfun.h outlangdefparserfun.h \
-			tostringcollection.h regexpreprocessor.h regexpstatebuilder.h langdefloader.h \
-			langdefscanner.h outlangdefscanner.h parsestruct.h langmap.h 		statestartlangelem.h \
-	stringlistlangelem.h delimitedlangelem.h vardefinitions.h 		textformatter.h textstyle.h \
-	textstyles.h textgenerator.h textstylebuilder.h 		doctemplate.h substfun.h \
-	parserinfo.h refgeneratormap.h readtags.h fileinfo.h 		linebuffer.h preformatter.h \
-	regexpstateprinter.h langelemsprinter.h
+					outputgenerator.h mainoutputbuffer.h lineoutputgenerator.h stringdef.h langelem.h \
+					statelangelem.h langelems.h langdefparserfun.h outlangdefparserfun.h \
+					tostringcollection.h regexpreprocessor.h regexpstatebuilder.h langdefloader.h \
+					langdefscanner.h outlangdefscanner.h parsestruct.h langmap.h 		statestartlangelem.h \
+			stringlistlangelem.h delimitedlangelem.h vardefinitions.h 		textformatter.h textstyle.h \
+			textstyles.h textgenerator.h textstylebuilder.h 		doctemplate.h substfun.h \
+			parserinfo.h refgeneratormap.h readtags.h fileinfo.h 		linebuffer.h preformatter.h \
+			regexpstateprinter.h langelemsprinter.h languageinfer.h stopwatch.h
 
 test_langdefparser_LDADD = -l$(BOOST_REGEX_LIB) libcommon.a
 test_langmap_LDADD = -l$(BOOST_REGEX_LIB)

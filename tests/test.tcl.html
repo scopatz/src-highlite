@@ -1,0 +1,28 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">#!/bin/sh</font></i>
+<i><font color="#9A1900"># Emacs like specification -*- Tcl script -*-</font></i>
+<i><font color="#9A1900"># the next line restarts using wish \</font></i>
+<b><font color="#0000FF">exec</font></b> wish <font color="#FF0000">"$0"</font> <font color="#FF0000">"$@"</font>
+
+<i><font color="#9A1900"># hello -- example</font></i>
+<i><font color="#9A1900"># Simple Tk script to create a button that prints "Hello, world".</font></i>
+<i><font color="#9A1900"># Click on the button to terminate the program.</font></i>
+<i><font color="#9A1900">#</font></i>
+<i><font color="#9A1900"># The first line below creates the button, and the second line</font></i>
+<i><font color="#9A1900"># asks the packer to shrink-wrap the application's main window</font></i>
+<i><font color="#9A1900"># around the button.</font></i>
+
+button <font color="#990000">.</font>hello <font color="#990000">-</font>text <font color="#FF0000">"Hello, world"</font> <font color="#990000">-</font>command <font color="#FF0000">{</font>
+    <b><font color="#0000FF">puts</font></b> stdout <font color="#FF0000">"Hello, world"</font><font color="#990000">;</font> destroy <font color="#990000">.</font>
+<font color="#FF0000">}</font>
+pack <font color="#990000">.</font>hello
+
+<font color="#009900">$myvar</font>
+
+<i><font color="#9A1900"># Local Variables:</font></i>
+<i><font color="#9A1900"># mode: tcl</font></i>
+<i><font color="#9A1900"># End:</font></i>
+</tt></pre>

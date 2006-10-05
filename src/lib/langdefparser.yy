@@ -94,7 +94,16 @@ struct Key : public ParserInfo
 
 %%
 
-allelements : elemdefs { current_lang_elems = $1; }
+allelements : 
+        { 
+          /* no definitions */
+          /* synthetize a normal elem that catches everything */ 
+          current_lang_elems = new LangElems; 
+          StringDefs *defs = new StringDefs;
+          defs->push_back (new StringDef("(.*)"));
+          current_lang_elems->add(new StringListLangElem("normal", defs, false));
+        }
+        | elemdefs { current_lang_elems = $1; }
 ;
 
 elemdefs : elemdefs elemdef {

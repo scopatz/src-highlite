@@ -139,7 +139,7 @@ EXTRA_DIST = colors.html source-highlight.html \
              source-highlight.1 index.html \
 	     comment-show.lang \
 	     SimpleClass.java SimpleClass-doc.html UsageExample.java \
-	     txt2texinfo.txt.texinfo \
+	     txt2texinfo.txt \
              $(GENERATEDINFOS)
 
 source_highlightdoc_DATA = colors.html source-highlight.html \

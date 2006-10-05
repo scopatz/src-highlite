@@ -43,4 +43,5 @@ test_textgenerator
 test_outlangparser
 outlangtest.outlang
 test_readtags
+test_langinfer
 mytags

@@ -70,7 +70,7 @@ struct RegExpState
 
   const std::string &get_elem(int index = -1);
   void add_exp(const std::string &s, ParserInfo *parserInfo, RegExpFormatterPtr f);
-  void freeze() throw(boost::bad_expression);
+  void freeze();
   void set_default_formatter(RegExpFormatterPtr f);
   RegExpFormatterPtr getLastFormatter() const { return formatters[formatters.size()-1];}
 };

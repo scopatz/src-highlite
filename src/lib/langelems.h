@@ -48,6 +48,7 @@ class LangElems : protected list<LangElem *>
     using base::const_iterator;
     using base::begin;
     using base::end;
+    using base::size;
     
     LangElems();
 

@@ -1,7 +1,7 @@
 preproc = "include|include_once|require|require_once"
 
 comment start "//"
-comment start "#"
+include "script_comment.lang"
 
 include "number.lang"
 

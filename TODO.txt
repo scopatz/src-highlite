@@ -23,4 +23,3 @@ in style file:
 keyword2 like keyword
 i.e., default a specific element to another one
 
-aggiungere in texinfo la descrizione come preso da gengetopt.

@@ -7,6 +7,12 @@ for source in $1; do
         source-highlight --failsafe -f esc -i $source;
 done
 
+# these are variables
+$abc, $(abc) and ${abc} ${abc)
+
+# and also these are variables
+($myvar) {$myvar} {$myvar)
+
 for as_dir in /bin$PATH_SEPARATOR/usr/bin$PATH_SEPARATOR$PATH
 do
   IFS=$as_save_IFS

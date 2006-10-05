@@ -8,6 +8,25 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 2.5
+
+   * fixed lang.map for php files
+   * fixed url.lang
+   * --debug-langdef can be interactive
+   * nohilite.lang that does not perform any highlighting, but
+     only formats the input file into the output format (dealing
+     with output format special characters)
+   * default.lang to which source-highlight falls back when no
+     input language is specified or available
+   * infer script languages
+   * --header and --footer options do not require --doc option
+   * --statistics print elapsed time
+   * highlight cls, dtx and sty LaTeX files
+   * language definition for Tcl
+   * language definition for Sql
+   * language definition for bibtex
+   * infer language of script files
+
 Version 2.4
 
    * language definition for C# (thanks to Hemmi Shigeru)

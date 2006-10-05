@@ -7,7 +7,7 @@ comment delim "<!--" "-->" multiline nested
 keyword = '<(/)?[[:alnum:]:]+(/)?>'
 
 state keyword delim '<(/)?[[:alnum:]:]+' '(/)?>' multiline begin
-  type = '[^="[:blank:]]+'
+  type = '[^="[:blank:]>]+'
   symbol = "="
   string delim "\"" "\"" escape "\\" multiline
 end

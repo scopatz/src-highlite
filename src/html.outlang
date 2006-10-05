@@ -2,8 +2,8 @@ include "html_common.outlang"
 
 doctemplate
 "<!-- Generator: $additional -->
-<pre><tt>"
-"</tt></pre>
+$header<pre><tt>"
+"</tt></pre>$footer
 "
 end
 

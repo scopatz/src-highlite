@@ -36,12 +36,17 @@ class PreFormatter;
 class GeneratorFactory
 {
  protected:
-  TextStylesPtr textStyles; // contains all the styles for formatting
+  /// contains all the styles for formatting
+  TextStylesPtr textStyles;
   Styles *styles;
-  PreFormatter *preformatter; // to preformat text
-  bool generate_references; // whether to generate references using ctags
+  /// to preformat text
+  PreFormatter *preformatter;
+  /// whether to generate references using ctags
+  bool generate_references;
   string ctags_file;
   RefPosition refposition;
+  /// whether to turn off optimizations for generating output (default false)
+  bool noOptimizations;
 
   TextGenerator *createGenerator(const string &key);
   TextGenerator *createGenerator(const Style *style);
@@ -54,7 +59,10 @@ class GeneratorFactory
                    bool gen_references,
                    const string &ctags_file, RefPosition position);
   ~GeneratorFactory();
+
   void createGenerators();
+
+  void setNoOptimizations(bool n) { noOptimizations = n; }
 };
 
 #endif // GENERATORFACTORY_H

@@ -1,0 +1,68 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">#! /bin/perl</font></i>
+
+<b><font color="#0000FF">package</font></b> MIME<font color="#990000">::</font>Lite<font color="#990000">::</font>HTML<font color="#990000">;</font>
+
+<i><font color="#9A1900"># source-highlight associates .pl to Prolog, but this is a perl file</font></i>
+<i><font color="#9A1900"># this tests --infer-lang command line option, that overrides the</font></i>
+<i><font color="#9A1900"># standard language specification</font></i>
+
+<b><font color="#0000FF">use</font></b> LWP<font color="#990000">::</font>UserAgent<font color="#990000">;</font>
+<b><font color="#0000FF">use</font></b> HTML<font color="#990000">::</font>LinkExtor<font color="#990000">;</font>
+<b><font color="#0000FF">use</font></b> URI<font color="#990000">::</font>URL<font color="#990000">;</font>
+<b><font color="#0000FF">use</font></b> MIME<font color="#990000">::</font>Lite<font color="#990000">;</font>
+<b><font color="#0000FF">use</font></b> strict<font color="#990000">;</font>
+<b><font color="#0000FF">use</font></b> vars <b><font color="#0000FF">qw</font></b><font color="#990000">(</font><font color="#009900">$VERSION</font> <font color="#009900">@ISA</font> <font color="#009900">@EXPORT</font> <font color="#009900">@EXPORT_OK</font><font color="#990000">);</font>
+
+<b><font color="#0000FF">require</font></b> Exporter<font color="#990000">;</font>
+
+<font color="#009900">@ISA</font> <font color="#990000">=</font> <b><font color="#0000FF">qw</font></b><font color="#990000">(</font>Exporter<font color="#990000">);</font>
+<font color="#009900">@EXPORT</font> <font color="#990000">=</font> <b><font color="#0000FF">qw</font></b><font color="#990000">();</font>
+
+<b><font color="#0000FF">my</font></b> <font color="#009900">$LOGINDETAILS</font><font color="#990000">;</font>
+
+<i><font color="#9A1900">#------------------------------------------------------------------------------</font></i>
+<i><font color="#9A1900"># redefine get_basic_credentials</font></i>
+<i><font color="#9A1900">#------------------------------------------------------------------------------</font></i>
+<font color="#FF0000">{</font>
+    <b><font color="#0000FF">package</font></b> RequestAgent<font color="#990000">;</font>
+    <b><font color="#0000FF">use</font></b> vars <b><font color="#0000FF">qw</font></b><font color="#990000">(</font><font color="#009900">@ISA</font><font color="#990000">);</font>
+    <font color="#009900">@ISA</font> <font color="#990000">=</font> <b><font color="#0000FF">qw</font></b><font color="#990000">(</font>LWP<font color="#990000">::</font>UserAgent<font color="#990000">);</font>
+
+    <b><font color="#0000FF">sub</font></b> new
+    <font color="#FF0000">{</font> 
+	<b><font color="#0000FF">my</font></b> <font color="#009900">$self</font> <font color="#990000">=</font> LWP<font color="#990000">::</font>UserAgent<font color="#990000">::</font><b><font color="#000000">new</font></b><font color="#990000">(</font><font color="#009900">@_</font><font color="#990000">);</font>
+	<font color="#009900">$self</font><font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+
+    <b><font color="#0000FF">sub</font></b> get_basic_credentials
+	<font color="#FF0000">{</font>	
+	  <b><font color="#0000FF">my</font></b><font color="#990000">(</font><font color="#009900">$self</font><font color="#990000">,</font> <font color="#009900">$realm</font><font color="#990000">,</font> <font color="#009900">$uri</font><font color="#990000">)</font> <font color="#990000">=</font> <font color="#009900">@_</font><font color="#990000">;</font>
+	  <i><font color="#9A1900"># Use parameter of MIME-Lite-HTML, key LoginDetails</font></i>
+	  <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">defined</font></b> <font color="#009900">$LOGINDETAILS</font><font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">split</font></b><font color="#990000">(</font><font color="#FF0000">':'</font><font color="#990000">,</font> <font color="#009900">$LOGINDETAILS</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">);</font> <font color="#FF0000">}</font> 
+	  <i><font color="#9A1900"># Ask user on STDIN</font></i>
+	  <b><font color="#0000FF">elsif</font></b> <font color="#990000">(-</font>t<font color="#990000">)</font> 
+	    <font color="#FF0000">{</font>
+		<b><font color="#0000FF">my</font></b> <font color="#009900">$netloc</font> <font color="#990000">=</font> <font color="#009900">$uri</font><font color="#990000">-&gt;</font>host_port<font color="#990000">;</font>
+		<b><font color="#0000FF">print</font></b> <font color="#FF0000">"Enter username for $realm at $netloc: "</font><font color="#990000">;</font>
+		<b><font color="#0000FF">my</font></b> <font color="#009900">$user</font> <font color="#990000">=</font> <font color="#FF0000">&lt;STDIN&gt;</font><font color="#990000">;</font>
+		<b><font color="#0000FF">chomp</font></b><font color="#990000">(</font><font color="#009900">$user</font><font color="#990000">);</font>
+		<i><font color="#9A1900"># 403 if no user given</font></i>
+		<b><font color="#0000FF">return</font></b> <font color="#990000">(</font><b><font color="#0000FF">undef</font></b><font color="#990000">,</font> <b><font color="#0000FF">undef</font></b><font color="#990000">)</font> <b><font color="#0000FF">unless</font></b> <b><font color="#0000FF">length</font></b> <font color="#009900">$user</font><font color="#990000">;</font>
+		<b><font color="#0000FF">print</font></b> <font color="#FF0000">"Password: "</font><font color="#990000">;</font>
+		<b><font color="#0000FF">system</font></b><font color="#990000">(</font><font color="#FF0000">"stty -echo"</font><font color="#990000">);</font>
+		<b><font color="#0000FF">my</font></b> <font color="#009900">$password</font> <font color="#990000">=</font> <font color="#FF0000">&lt;STDIN&gt;</font><font color="#990000">;</font>
+		<b><font color="#0000FF">system</font></b><font color="#990000">(</font><font color="#FF0000">"stty echo"</font><font color="#990000">);</font>
+		<b><font color="#0000FF">print</font></b> <font color="#FF0000">"\n"</font><font color="#990000">;</font>  <i><font color="#9A1900"># because we disabled echo</font></i>
+		<b><font color="#0000FF">chomp</font></b><font color="#990000">(</font><font color="#009900">$password</font><font color="#990000">);</font>
+		<b><font color="#0000FF">return</font></b> <font color="#990000">(</font><font color="#009900">$user</font><font color="#990000">,</font> <font color="#009900">$password</font><font color="#990000">);</font>
+	    <font color="#FF0000">}</font>
+	  <i><font color="#9A1900"># Damm we got 403 with CGI (use param LoginDetails)  ...</font></i>
+	  <b><font color="#0000FF">else</font></b> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#990000">(</font><b><font color="#0000FF">undef</font></b><font color="#990000">,</font> <b><font color="#0000FF">undef</font></b><font color="#990000">)</font> <font color="#FF0000">}</font>
+	<font color="#FF0000">}</font>
+  <font color="#FF0000">}</font>
+
+</tt></pre>

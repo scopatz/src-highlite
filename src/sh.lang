@@ -1,6 +1,6 @@
 preproc = "import"
 
-comment start "#"
+include "script_comment.lang"
 
 include "number.lang"
 
@@ -21,7 +21,8 @@ keyword = "alias|bg|bind|break|builtin|caller|case|command|compgen",
 
 # it is considered a variable if there's a =, which is discarded anyway
 variable = '([[:alpha:]]|_)[[:word:]]*(?==)'
-variable = '\$(\{|\()?([[:alpha:]]|_)[[:word:]]*(\}|\))?'
+variable = '\$(\{|\()([[:alpha:]]|_)[[:word:]]*(\}|\))'
+variable = '\$([[:alpha:]]|_)[[:word:]]*'
 
 symbol = "~","!","%","^","*","(",")","+","=","[",
         "]","\\",":",";",",",".","/","?","&","<",">","\|"

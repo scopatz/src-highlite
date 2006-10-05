@@ -19,7 +19,7 @@ using namespace std;
 
 GeneratorMap::GeneratorMap(PreFormatter *pf) :
   default_generator (new TextGenerator),
-  preformatter(pf)
+  preformatter(pf), noOptimizations(false)
 {
 }
 
@@ -84,6 +84,21 @@ void
 GeneratorMap::generateEntire( const std::string &elem, const std::string &s,
   const FileInfo *p )
 {
+  if (noOptimizations) {
+    // we generate the element right now, since during debugging
+    // we want to be very responsive
+    if (s.size())
+      output(generateString(elem, s, p));
+
+    return;
+  }
+
+  // otherwise we optmize output generation: delay formatting a specific
+  // element until we deal with another element; this way strings that belong
+  // to the same element are formatted using only one tag: e.g.,
+  // <comment>/* mycomment */</comment>
+  // instead of
+  // <comment>/*</comment><comment>mycomment</comment><comment>*/</comment>
   if (elem == current_elem) {
     elem_buffer << s;
   } else {

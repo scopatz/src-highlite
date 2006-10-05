@@ -18,7 +18,8 @@
 using namespace std;
 
 OutputBuffer::OutputBuffer() :
-    linebuffer(new LineBuffer), outputGenerator(0)
+    linebuffer(new LineBuffer), outputGenerator(0), alwaysFlush(false),
+    newLine(true)
 {
 }
 
@@ -30,8 +31,13 @@ OutputBuffer::~OutputBuffer()
 void
 OutputBuffer::output_ln(const string &s)
 {
-  linebuffer->output(s);
-  outputGenerator->generateLine(linebuffer->getContents());
+  if (alwaysFlush) {
+    outputAndFlush( s );
+    newLine = true;
+  } else {
+    linebuffer->output(s);
+    outputGenerator->generateLine(linebuffer->getContents());
+  }
   const LineBuffer::PostContents &post = linebuffer->getPostContents();
   if (post.size()) {
     for (LineBuffer::PostContents::const_iterator it = post.begin();
@@ -44,7 +50,21 @@ OutputBuffer::output_ln(const string &s)
 void
 OutputBuffer::output(const string &s)
 {
-  linebuffer->output(s);
+  if (alwaysFlush)
+    outputAndFlush( s );
+  else
+    linebuffer->output(s);
+}
+
+void
+OutputBuffer::outputAndFlush(const string &s)
+{
+  if (newLine) {
+    outputGenerator->outputLine( s );
+    newLine = false;
+  } else {
+    outputGenerator->output_string( s );
+  }
 }
 
 void

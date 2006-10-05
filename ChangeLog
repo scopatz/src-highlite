@@ -1,3 +1,25 @@
+2006-08-31  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/html.lang: fix of type definition (excluding also the
+	char >)
+
+	* src/html.outlang: generate also header and footer
+
+2006-08-23  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/startapp.cc (processFile): use default.lang if it does not
+	know the input language and it is in failsafe mode
+
+	* src/lib/langdefparser.yy: accept empty language definitions
+
+2006-08-21  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/regexpenginedebug.cpp (step): for interactive debugging
+
+2006-07-16  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lang.map: fixed name php.lang (instead of php3.lang)
+
 2006-06-25  Lorenzo Bettini  <bettini@lorelap>
 
 	* src/lib/regexpstatebuilder.cpp (build): "isolate" correctly

@@ -34,6 +34,7 @@ fixed green f;
 argument darkgreen;
 optionalargument purple;
 math orange;
+bibtex blue;
 
 // for diffs
 oldfile orange;

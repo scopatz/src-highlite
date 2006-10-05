@@ -65,14 +65,14 @@ RegExpState::add_exp(const std::string &s, ParserInfo *parserInfo, RegExpFormatt
 }
 
 void
-RegExpState::freeze() throw(boost::bad_expression)
+RegExpState::freeze()
 {
   const string &buffered = buffer.str();
   try {
     reg_exp.assign(buffered);
   } catch (boost::bad_expression &e) {
     printError("bad expression: " + buffered);
-    throw e;
+    throw;
   }
 }
 

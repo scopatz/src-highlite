@@ -28,3 +28,5 @@ test_ref_post.log
 test_ref_post.out.log
 valgrind_test.sh
 valgrind_tests.sh
+valgrind_suppressions.sh
+myscript*

@@ -16,7 +16,7 @@
 
 using namespace std;
 
-RegExpEngineDebug::RegExpEngineDebug(RegExpStatePtr v, TextFormatter* pre, FileInfo *f): RegExpEngine(v, pre, f)
+RegExpEngineDebug::RegExpEngineDebug(RegExpStatePtr v, TextFormatter* pre, FileInfo *f): RegExpEngine(v, pre, f), interactive (false)
 {
 }
 
@@ -30,12 +30,14 @@ void RegExpEngineDebug::enterState(int index)
 {
   cout << "entering: " << currentstate->formatters[index]->getNextState()->reg_exp << endl;
   RegExpEngine::enterState(index);
+  //step();
 }
 
 void RegExpEngineDebug::exitAll()
 {
     RegExpEngine::exitAll();
     cout << "exitingall: " << endl;
+    //step();
 }
 
 void RegExpEngineDebug::exitState(int level)
@@ -43,6 +45,7 @@ void RegExpEngineDebug::exitState(int level)
   RegExpEngine::exitState(level);
 
   cout << "exiting " << level << " level(s): " << currentstate->reg_exp << endl;
+  //step();
 }
 
 void printInfo(const SubExpressionInfo &e)
@@ -62,5 +65,15 @@ void RegExpEngineDebug::format(int index, const std::string& s)
       printInfo(currentstate->subExpressions[i-1]);
     }
     cout << "formatting: \"" << s << "\" as " << currentstate->get_elem(index) << endl;
+    step();
 }
 
+void RegExpEngineDebug::step()
+{
+  if (!interactive)
+    return;
+
+  // this is only a quick solution to perform interaction
+  string cmd;
+  getline(cin, cmd);
+}

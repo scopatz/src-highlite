@@ -32,6 +32,11 @@ Software Foundation raise funds for GNU development.''
 @end quotation
 @end copying
 
+@dircategory Utilities
+@direntry
+* Source-highlight: (source-highlight).  Highlights contents
+@end direntry
+
 @titlepage
 @title GNU Source-highlight
 @subtitle given a source file, produces a document with syntax highlighting.
@@ -50,6 +55,13 @@ Software Foundation raise funds for GNU development.''
 @ifnottex
 @node Top, Introduction, (dir), (dir)
 @top GNU Source-highlight
+
+GNU Source-highlight, given a source file, produces a document with
+syntax highlighting.
+
+This is Edition @value{EDITION} of the Source-highlight manual.
+
+This file documents GNU Source-highlight version @value{VERSION}.
 
 @insertcopying
 @end ifnottex
@@ -1641,7 +1653,7 @@ end
 but a cut-and-paste error had its way ;-)
 
 @cindex lookbehind asserts
-You can also use @emph{Lookabehind Asserts}:
+You can also use @emph{Lookbehind Asserts}:
 
 @table @code
 @item (?<=pattern)

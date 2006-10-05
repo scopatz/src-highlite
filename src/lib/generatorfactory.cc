@@ -37,7 +37,8 @@ GeneratorFactory::GeneratorFactory(TextStylesPtr tstyles, Styles *sts,
     const string &_ctags_file, RefPosition position) :
   textStyles(tstyles), styles(sts), preformatter(pf),
   generate_references(gen_ref),
-  ctags_file(_ctags_file), refposition(position)
+  ctags_file(_ctags_file), refposition(position),
+  noOptimizations(false)
 {
 }
 
@@ -61,6 +62,8 @@ void
 GeneratorFactory::createGenerators()
 {
   generatormap = createGeneratorMap();
+
+  generatormap->setNoOptimizations(noOptimizations);
 
   TextGenerator *text_gen;
   for (Styles::const_iterator it = styles->begin(); it != styles->end(); ++it)

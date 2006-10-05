@@ -32,12 +32,18 @@ class GeneratorMap
   typedef std::map<std::string, TextGenerator *> MapType;
   typedef std::set<std::string> NoRefType;
   MapType generatormap;
-  NoRefType noreferences; // those elements for which no reference info is generated
+  /// those elements for which no reference info is generated
+  NoRefType noreferences;
   TextGenerator *default_generator;
   PreFormatter *preformatter;
-  std::ostringstream elem_buffer; // where we buffer strings for the current elem
-  std::string current_elem; // the element that is currently buffered.
-  const FileInfo *current_file_info; // concerns the element currently buffered
+  /// where we buffer strings for the current elem
+  std::ostringstream elem_buffer;
+  /// the element that is currently buffered
+  std::string current_elem;
+  /// concerns the element currently buffered
+  const FileInfo *current_file_info;
+  /// whether to turn off optimizazionts (such as buffering), default: false
+  bool noOptimizations;
 
   virtual const std::string generateString(const std::string &elem,
     const std::string &s, const FileInfo *);
@@ -58,6 +64,8 @@ class GeneratorMap
     const std::string &s, const FileInfo * );
   void generateNL( const std::string &s );
   void flush();
+
+  void setNoOptimizations(bool n) { noOptimizations = n; }
 };
 
 #endif

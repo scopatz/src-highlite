@@ -1,0 +1,8 @@
+For instance, in this Texinfo manual, 
+if I want to insert a @@ or a @{
+I have to ``escape'' them to make them appear literally
+since they have a special meaning in Texinfo.  
+The same holds, e.g., 
+for @code{<}, @code{>} or @code{&} in HTML.  
+If you use source-highlight,
+it will take care of this, automatically for you.

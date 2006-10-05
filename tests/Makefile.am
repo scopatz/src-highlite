@@ -92,11 +92,18 @@ LANG2HTML = $(PROGNAME) -s langdef $(STD_STYLE_HTML)
 
 STYLE2HTML = $(PROGNAME) -s style $(STD_STYLE_HTML)
 
+TXT2HTML = $(PROGNAME) -s style $(STD_STYLE_HTML) --lang-def=default.lang
+
 FAILSAFE = $(PROGNAME) --failsafe
+
+INFER = $(PROGNAME) --infer-lang
+
+# language inference is performed implicitly if everything else failed
+INFERIMPLICIT = $(PROGNAME)
 
 SIMPLE = $(PROGEXE) --gen-version --outlang-def=$(srcdir)/simple.outlang --lang-def=$(srcdir)/simple.lang $(STD_STYLE)
 
-DEBUGLANG = $(PROGNAME) -s java $(STD_STYLE_HTML) --debug-lang
+DEBUGLANG = $(PROGNAME) -s java $(STD_STYLE_HTML) --debug-lang=dump
 
 WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang
 WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err
@@ -139,7 +146,7 @@ test.diff test.diff.html \
 test2.diff test2.diff.html \
 test3.diff test3.diff.html \
 test.simple test.simple.html \
-test.unknown \
+test.unknown test.unknown.html \
 syslog.style \
 test.tex test.tex.html \
 test.lgt test.lgt.html \
@@ -150,16 +157,22 @@ simple.lang simple.outlang \
 log.lang.html cpp.lang.html \
 default.style.html \
 lang.map \
-debug.debug debug.java \
+debug.debug debug.java debug.java.html \
 test_extreme_comment.cpp test_extreme_comment2.cpp test_extreme_comment3.cpp \
 test.cs test.cs.html \
 test.xml test.xml.html \
 test.sh test.sh.html \
 test.url test.url.html \
+test.txt test.txt.html \
+test2.pl test2.pl.html \
+test.tcl test.tcl.html \
+test.sql test.sql.html \
+test.bib test.bib.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
-valgrind_tests.sh.in valgrind_test.sh.in suppressions.supp \
+valgrind_tests.sh.in valgrind_suppressions.sh.in \
+valgrind_test.sh.in suppressions.supp \
 erasedir.sed erasedir2.sed \
 c_comment.show \
 cpp.langelems
@@ -182,8 +195,11 @@ cpp.langelems
 %.java.html: %.java
 	$(JAVA2HTML) -i $< -o $@
 
+debug.java.html: debug.java
+	$(DEBUGLANG) -i $(srcdir)/debug.java -o debug.java.html > /dev/null
+
 %.debug: %.java
-	$(DEBUGLANG) -i $< -o /dev/null > $@
+	$(DEBUGLANG) -i $< -o debug.java.html > $@
 
 %.js.html: %.js
 	$(JS2HTML) $< 
@@ -259,6 +275,12 @@ cpp.langelems
 
 %.url.html: %.url
 	$(URL2HTML) $< 
+
+%.txt.html: %.txt
+	$(TXT2HTML) $< 
+
+%.unknown.html: %.unknown
+	$(FAILSAFE) $< 
 
 %.lang.html: $(top_srcdir)/src/%.lang
 	$(LANG2HTML) -i $< -o $@
@@ -353,6 +375,18 @@ test_cpp_lines.html: test.h
 test_pl_lines.html: test.pl
 	$(PROLOG2HTML) --line-number -i test.pl -o $@
 
+test2.pl.html: test2.pl
+	$(INFER) -i test2.pl -o $@
+
+test.tcl.html: test.tcl
+	$(INFER) -i test.tcl -o $@
+
+test.sql.html: test.sql
+	$(PROGNAME) -i test.sql -o $@
+
+test.bib.html: test.bib
+	$(PROGNAME) -i test.bib -o $@
+
 test_perl_lines.html: test.pm
 	$(PERL2HTML) --line-number -i test.pm -o $@
 
@@ -377,6 +411,10 @@ check_latex \
 check_diff \
 check_simple \
 check_lang \
+check_txt \
+check_sql \
+check_bib \
+check_infer \
 check_wrong check_failsafe check_missing \
 check_debug \
 check_ref \
@@ -552,12 +590,40 @@ check_url: test.url.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.url.html test.url.out.html
 
+check_txt: test.txt.html
+	$(TXT2HTML) -i $(srcdir)/test.txt > test.txt.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.txt.html test.txt.out.html
+
+myscript: test.sh
+	cp $(srcdir)/test.sh $@
+
+check_infer: test2.pl.html myscript test.sh.html test.tcl.html
+	rm -f myscript.html
+	$(INFER) -i $(srcdir)/test2.pl > test2.pl.out.html
+	$(INFER) -i $(srcdir)/test.tcl > test.tcl.out.html
+	$(INFERIMPLICIT) -i myscript > myscript.html
+	@echo expect no output from diff
+	diff $(srcdir)/test2.pl.html test2.pl.out.html
+	diff $(srcdir)/test.tcl.html test.tcl.out.html
+	diff $(srcdir)/test.sh.html myscript.html
+
 check_latex: test.tex.html test.java.tex.html
 	$(PROGNAME) -i $(srcdir)/test.tex  > test.tex.out.html
 	$(PROGNAME) -i $(srcdir)/test.java.tex  > test.java.tex.out.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.tex.html test.tex.out.html
 	diff $(srcdir)/test.java.tex.html test.java.tex.out.html
+
+check_sql: test.sql.html
+	$(PROGNAME) -i $(srcdir)/test.sql > test.sql.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.sql.html test.sql.out.html
+
+check_bib: test.bib.html
+	$(PROGNAME) -i $(srcdir)/test.bib > test.bib.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.bib.html test.bib.out.html
 
 check_lang: log.lang.html cpp.lang.html default.style.html
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o log.lang.out.html
@@ -601,7 +667,7 @@ check_wrong:
 #sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap2.err_out
 #diff $(srcdir)/missing_langmap2.err missing_langmap2.err_out
 
-check_missing: 
+check_missing: missing_extension.err missing_langmap.err
 	rm -f *.err_out
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap.err_out || true
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple 2> missing_extension.err_out || true
@@ -611,17 +677,17 @@ check_missing:
 	diff $(srcdir)/missing_langmap.err missing_langmap.err_out
 	diff $(srcdir)/missing_extension.err missing_extension.err_out
 
-check_failsafe:
-	rm -f *.unknown_out
-	$(FAILSAFE) -i $(srcdir)/test.unknown -o test.unknown_out
+check_failsafe: test.unknown.html
+	$(FAILSAFE) -i $(srcdir)/test.unknown -o test.unknown.out.html
 	@echo expect no output from diff
-	diff $(srcdir)/test.unknown test.unknown_out
+	diff $(srcdir)/test.unknown.html test.unknown.out.html
 
-check_debug: debug.debug
+check_debug: debug.debug debug.java.html
 	rm -f *.out.debug
-	$(DEBUGLANG) -i $(srcdir)/debug.java -o /dev/null > debug.out.debug
+	$(DEBUGLANG) -i $(srcdir)/debug.java -o debug.java.out.html > debug.out.debug
 	@echo expect no output from diff
 	diff $(srcdir)/debug.debug debug.out.debug
+	diff $(srcdir)/debug.java.html debug.java.out.html
 
 check_ref: $(OUTPUTWREFS)
 	$(CPP2HTML_WREFS) --ctags-file=my_test_ref.tags -i $(srcdir)/test.h -o test_ref.out.html
@@ -683,9 +749,9 @@ check-valgrind:
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp
 	rm -f test_refs_tmp.*
 
-CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show
+CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript*
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html
 
 DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo

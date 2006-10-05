@@ -33,6 +33,7 @@
 #include "colors.h"
 #include "cmdline.h"
 #include "fileutil.h"
+#include "utils.h"
 #include "messages.h"
 
 #include "copyright.h"
@@ -52,6 +53,9 @@
 #include "textstyles.h"
 #include "outlangdefparserfun.h"
 #include "fileinfo.h"
+#include "stopwatch.h"
+
+#include "languageinfer.h"
 
 // for globals
 #include "linenumdigit.h"
@@ -191,12 +195,12 @@ StartApp::start(int argc, char * argv[])
   printMessage( PACKAGE ) ;
   printMessage( VERSION ) ;
   printMessage( argv[0] ) ;
-  
+
   if (verbose) {
     printMessage("command line arguments: ");
     for (int i = 0; i < argc; ++i) {
       printMessage(argv[i]);
-    }    
+    }
   }
 
   /*
@@ -280,6 +284,8 @@ StartApp::start(int argc, char * argv[])
   Styles *sts = parseStyles(data_dir, style_file);
 
   outputbuffer = new OutputBuffer;
+  // when debugging, always flush the output
+  outputbuffer->setAlwaysFlush( args_info.debug_langdef_given );
 
   string title;
   string doc_header;
@@ -382,6 +388,9 @@ StartApp::start(int argc, char * argv[])
       args_info.ctags_file_arg,
       refposition);
 
+  // turn off optimizations when debugging
+  generator_factory->setNoOptimizations( args_info.debug_langdef_given );
+
   generator_factory->createGenerators ();
   docgenerator = new DocGenerator(title, inputFileName,
                                   doc_header, doc_footer,
@@ -406,6 +415,13 @@ StartApp::start(int argc, char * argv[])
   if (args_info.src_lang_given)
     source_language = args_info.src_lang_arg;
 
+  // if a stopwatch is created, when it is deleted (automatically
+  // since we're using a shared pointer, it will print the
+  // elapsed seconds.
+  boost::shared_ptr<StopWatch> stopwatch;
+  if (args_info.statistics_given)
+    stopwatch = boost::shared_ptr<StopWatch>(new StopWatch);
+
   // first the --input file
   if ( ! args_info.inputs_num ) {
     result = processFile(inputFileName, (generate_to_stdout ? "" : outputFileName), ext) ;
@@ -414,14 +430,16 @@ StartApp::start(int argc, char * argv[])
   // let's process other files, if there are any
   if ( args_info.inputs_num && !is_cgi ) {
     for ( i = 0 ; i < (args_info.inputs_num) ; ++i ) {
+      cerr << "Processing " << args_info.inputs[i] << " ... " ;
+      const string &outputFileName = createOutputFileName (args_info.inputs[i],
+          args_info.output_dir_arg, ext);
       result = processFile
         ( args_info.inputs[i],
-          (generate_to_stdout ? "" : createOutputFileName (args_info.inputs[i],
-                                                    args_info.output_dir_arg, ext)),
+          (generate_to_stdout ? "" : outputFileName),
           ext) ;
       if (result == EXIT_FAILURE)
         break;
-      cerr << "Processed " << args_info.inputs[i] << endl ;
+      cerr << "created " << outputFileName << endl ;
     }
   }
 
@@ -467,10 +485,13 @@ int process_file(const char *file, TextFormatter *pre, const string &path,
     printMessage("Processing " + string((file ? file : "standard input")) + " with regex");
     printMessage("Using language definition " + lang_file);
     RegExpEnginePtr engine;
-    if (args_info.debug_langdef_given)
-      engine = RegExpEnginePtr(new RegExpEngineDebug(initial_state, pre, fileinfo));
-    else
+    if (args_info.debug_langdef_given) {
+      RegExpEngineDebug *debugEngine = new RegExpEngineDebug(initial_state, pre, fileinfo);
+      debugEngine->setInteractive( strcmp(args_info.debug_langdef_arg, "interactive" ) == 0);
+      engine = RegExpEnginePtr(debugEngine);
+    } else {
       engine = RegExpEnginePtr(new RegExpEngine(initial_state, pre, fileinfo));
+    }
     engine->process_file(file);
   }
   catch(...)
@@ -478,6 +499,39 @@ int process_file(const char *file, TextFormatter *pre, const string &path,
     exitError("error during regex processing");
   }
   return 0;
+}
+
+string StartApp::inferLang(const string &inputFileName)
+{
+  printMessage("inferring input language...", cerr);
+  if (!inputFileName.size()) {
+    cerr << PACKAGE << ": ";
+    cerr << "missing feature: language inference requires input file" << endl;
+    return "";
+  }
+
+  LanguageInfer languageInfer;
+
+  const string &result = languageInfer.infer(inputFileName);
+  if (result.size()) {
+    printMessage( "inferred input language: " + result, cerr ) ;
+
+      // OK now map it into a .lang file
+    string mapped_lang = langmap->get_file(result);
+
+    if (!mapped_lang.size()) {
+        // try the lower version
+      mapped_lang = langmap->get_file(Utils::tolower(result));
+    }
+
+    if (mapped_lang.size()) {
+      return mapped_lang;
+    }
+  } else {
+    printMessage( "couldn't infer input language", cerr ) ;
+  }
+
+  return "";
 }
 
 int
@@ -501,7 +555,7 @@ StartApp::processFile(const string &inputFileName, const string &outputFileName,
     {
       unsigned int lines = get_line_count (inputFileName);
       printMessage("input file: " + inputFileName);
-      
+
       line_num_digit = 0;
       while (lines)
         {
@@ -537,6 +591,9 @@ StartApp::processFile(const string &inputFileName, const string &outputFileName,
   else
     outputgenerator = new OutputGenerator(*sout, textstyles->line_prefix);
 
+  // when debugging, always flush the output
+  outputgenerator->setAlwaysFlush( args_info.debug_langdef_given );
+
   outputbuffer->setOutputGenerator(outputgenerator);
 
   docgenerator->set_gen_version (gen_version);
@@ -545,7 +602,15 @@ StartApp::processFile(const string &inputFileName, const string &outputFileName,
 
   string langfile = lang_file;
 
-  if (!langfile.size()) {
+  if (args_info.infer_lang_given) {
+    langfile = inferLang(inputFileName);
+
+    if (langfile.size())
+      langSpecFound = true;
+  }
+
+  // language inference has the precedence (if it succeeds)
+  if (!langfile.size() && !langSpecFound) {
     // find the language definition file associated to a language
     if (source_language.size()) {
       langfile = langmap->get_file(source_language);
@@ -575,33 +640,31 @@ StartApp::processFile(const string &inputFileName, const string &outputFileName,
 
       string file_ext = get_file_extension (inputFileName);
 
-      if (file_ext == "")
-        {
-          if (! args_info.failsafe_given)
-          {
-            cerr << PACKAGE << ": ";
-            cerr << "no file extension; please specify a source language"
-                  << endl;
-            return EXIT_FAILURE ;
-          }
-        }
+      if (file_ext != "")
+        langfile = langmap->get_file(file_ext);
 
-      langfile = langmap->get_file(file_ext);
-      if (! langfile.size())
-        {
-          if (! args_info.failsafe_given)
-          {
-            cerr << PACKAGE << ": ";
-            cerr << "unknown file extension " << file_ext << endl;
-            return EXIT_FAILURE ;
-          }
-        }
-      else
+      if (langfile.size())
         langSpecFound = true;
     }
   }
   else
     langSpecFound = true;
+
+  // language inference is always performed, if the other attempts failed
+  // if --infer-lang was specified at command line, then the inference
+  // has already been performed, otherwise we perform it now
+  if (!langSpecFound && !args_info.infer_lang_given) {
+    langfile = inferLang(inputFileName);
+
+    if (langfile.size())
+      langSpecFound = true;
+  }
+
+  if (!langSpecFound && args_info.failsafe_given) {
+    // OK we use default.lang
+    langfile = "default.lang";
+    langSpecFound = true;
+  }
 
   if (langSpecFound)
   {
@@ -619,7 +682,14 @@ StartApp::processFile(const string &inputFileName, const string &outputFileName,
     docgenerator->generate_end_doc ();
 
     printMessage( "done !", cerr ) ;
+  } else {
+    cerr << PACKAGE << ": ";
+    cerr << "unknown input language for "
+        << (inputFileName.size() ? inputFileName : "(stdin)") << endl;
+    return EXIT_FAILURE ;
   }
+
+  /*
   else // we're in failsafe mode so we simply copy the file to the output
   {
     istream *input;
@@ -633,6 +703,7 @@ StartApp::processFile(const string &inputFileName, const string &outputFileName,
     if (input != &cin)
       delete input;
   }
+  */
 
   sout->flush ();
 

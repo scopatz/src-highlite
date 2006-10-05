@@ -60,6 +60,14 @@ class StartApp
   int processFile(const std::string &inputFileName, const std::string &outputFileName,
     const std::string &file_extension = "") ;
 
+  /**
+   * Try to infer the input language by inspecting the file
+   * @ref LanguageInfer
+   * @param inputFileName The name of the file to inspect
+   * @return the inferred language or an empty string upon failure
+   */
+  std::string inferLang(const std::string &inputFileName);
+
  public:
   StartApp();
   virtual ~StartApp();

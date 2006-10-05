@@ -14,7 +14,7 @@
 using namespace std;
 
 OutputGenerator::OutputGenerator(ostream &os, const std::string &pref) :
-  output(os), line_prefix(pref)
+    output(os), line_prefix(pref), alwaysFlush(false)
 {
 }
 
@@ -26,6 +26,9 @@ void
 OutputGenerator::output_string(const string &s)
 {
     output << s;
+
+    if (alwaysFlush)
+      flush();
 }
 
 void
@@ -50,4 +53,10 @@ void
 OutputGenerator::generate_line(const string &line)
 {
   output_string(line);
+}
+
+void
+OutputGenerator::flush()
+{
+  output << std::flush;
 }

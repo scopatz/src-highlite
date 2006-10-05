@@ -1,25 +1,8 @@
 <!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
 <html>
 <head>
-
-
-  
-  
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-
-
-  
-  
-  <meta name="GENERATOR" content="Mozilla/4.79 [en] (X11; U; Linux 2.4.18-6mdk i686) [Netscape]">
-
-
-  
-  
   <meta name="Author" content="Lorenzo Bettini">
-
-
-  
-  
   <title>GNU Source-highlight - GNU Project - Free Software Foundation (FSF)</title>
 </head>
 
@@ -27,14 +10,22 @@
 <body style="background-color: rgb(255, 255, 255);">
 
 
-<h1> GNU Source-highlight 2.4</h1>
+
+
+<h1> GNU Source-highlight 2.5</h1>
+
+
 
 
 <p>by <a href="http://www.lorenzobettini.it">Lorenzo Bettini</a> </p>
 
 
+
+
 <p>This program, <i>given a source file, produces a document with
 syntax highlighting</i>. </p>
+
+
 
 
 <p>
@@ -44,8 +35,15 @@ the sources) for handling new languages.
 It also reads output format specifications dynamically, and
 thus it can be easily extended (without recompiling
 the sources) for handling new output formats.
-The syntax for these specifications is quite easy (take a look at the manual).
-</p>
+The syntax for these specifications is quite easy (take a look at the manual).</p>
+
+<p>Notice that source-highlight can also be used as a formatter (i.e.,
+without highlighting): you can, for instance, format a txt file in HTML
+(and it will take care of translating special characters, such as,
+&lt;, &gt;, &amp;).
+ </p>
+
+
 
 
 <p>
@@ -56,119 +54,203 @@ references; in order to do this it relies on
 </p>
 
 
+
+
 <p>These are the output formats already supported:<br>
+
+
 
 
 </p>
 
 
+
+
 <ul>
+
+
 
 
   <li> <i>HTML</i></li>
 
 
+
+
   <li> <i>XHTML</i></li>
+
+
 
 
   <li> <i>LATEX</i></li>
 
 
+
+
   <li> <i>TEXINFO</i></li>
+
+
 
 
   <li><i>ANSI color escape sequences</i> (you can
 use this feature with less)</li>
 
+
+
   <li><span style="font-style: italic;">DocBook</span></li>
 
 
 
+
+
 </ul>
+
+
 
 
 <p>These are the input languages (or input formats) already supported
 (in alphabetical order):<br>
 
 
+
+
 </p>
+
+
 
 
 <ul>
 
 
+
+
   <li> <i>C/C++</i></li>
 
 
-  <li> <i>C#</i>&nbsp; &nbsp; &nbsp; (new)</li>
+
+
+  <li> <i>C#</i></li>
+
+  <li> <i>Bib</i>&nbsp; &nbsp; &nbsp; (new)</li>
 
 
   <li> <i>Bison</i></li>
 
 
+
+
   <li> <i>Caml</i></li>
+
+
 
 
   <li> <i>Changelog</i></li>
 
 
+
+
   <li> <i>Diff</i></li>
+
+
 
 
   <li> <i>Flex</i></li>
 
 
+
+
   <li> <i>Fortran</i></li>
+
+
 
 
   <li> <i>Html</i></li>
 
 
+
+
   <li> <i>Java</i></li>
+
+
 
 
   <li> <i>Javascript</i></li>
 
 
+
+
   <li> <i>Latex</i></li>
+
+
 
 
   <li> <i>Logtalk</i></li>
 
 
+
+
   <li> <i>Log files</i></li>
+
+
 
 
   <li> <i>Lua</i></li>
 
 
+
+
   <li> <i>ML</i></li>
+
+
 
 
   <li> <i>Pascal</i></li>
 
 
+
+
   <li> <i>Perl</i></li>
+
+
 
 
   <li> <i>PHP</i></li>
 
+
+
   <li><i>Postscript</i></li>
+
+
 
 
   <li> <i>Prolog</i></li>
 
 
+
+
   <li> <i>Python</i></li>
+
+
 
 
   <li> <i>Ruby</i></li>
 
-  <li> <i>Shell</i>&nbsp; &nbsp; &nbsp; (new)</li>
 
-  <li> <i>XML</i>&nbsp; &nbsp; &nbsp; (new)</li>
+
+  <li> <i>Shell</i></li>
+
+
+  <li> <i>Sql</i>&nbsp; &nbsp; &nbsp; (new)</li>
+  <li> <i>Tcl</i>&nbsp; &nbsp; &nbsp; (new)</li>
+
+
+
+  <li> <i>XML</i></li>
+
+
 
 </ul>
+
+
 
 
 <p><font color="#990000">NOTICE: now the name of the program is </font><b><i><font color="#663366">source-highlight</font></i></b><font color="#990000">:
@@ -178,32 +260,50 @@ in order to facilitate the migration (however their use is not
 advised).</font> </p>
 
 
+
+
 <p>GNU Source-highlight is <b><font color="#009900">free software</font></b>.
 Please see the file <a href="COPYING">COPYING</a> for details. For
 documentation, please read this file. </p>
+
+
 
 
 <p>GNU Source-highlight is a <a href="http://www.gnu.org">GNU</a>
 program and its main home page is at GNU site: <br>
 
 
+
+
 <a href="http://www.gnu.org/software/src-highlite">http://www.gnu.org/software/src-highlite</a>
 </p>
+
+
 
 
 For further information, please consult the <a href="source-highlight.html">manual</a>.<br>
 
 
+
+
 <h2><a href="source-highlight.html">On-line Manual</a><br>
+
+
 
 
 </h2>
 
 
+
+
 <h2> Download</h2>
 
 
+
+
 You can download it from GNU's ftp site: <br>
+
+
 
 
 <a href="ftp://ftp.gnu.org/gnu/src-highlite/">ftp://ftp.gnu.org/gnu/src-highlite/</a>
@@ -215,18 +315,28 @@ binaries directly to me, by e-mail (find my e-mail at my <a href="http://www.lor
 and I can send them to you. <br>
 
 
+
+
 An MS-Windows port of Source-highlight is available from <a href="http://gnuwin32.sourceforge.net/">http://gnuwin32.sourceforge.net/</a>.<br>
+
+
 
 
 </p>
 
 
+
+
 <h3> Anonymous CVS Access</h3>
+
+
 
 
 This project's CVS repository can be checked out through anonymous
 (pserver) CVS with the following instruction:
 <pre>cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/src-highlite co src-highlite</pre>
+
+
 
 
 Further instructions can be found at the address: <a href="http://savannah.gnu.org/projects/src-highlite">http://savannah.gnu.org/projects/src-highlite</a>.
@@ -239,11 +349,15 @@ patches against the latest cvs repository sources.</p>
 
 
 
+
+
    
 <p>If, on the contrary, you want to get the sources of a given release,
 through cvs, say, e.g., version X.Y.Z, you must specify the tag
 <tt>rel_X_Y_Z</tt> when you run the cvs command or the <tt>cvs update</tt>
 command.</p>
+
+
 
 
 
@@ -254,7 +368,11 @@ should, at least the first time, run the command:</p>
 
 
 
+
+
 <pre>     sh reconf<br></pre>
+
+
 
 
    
@@ -266,8 +384,12 @@ You will also need <tt>flex</tt> and <tt>bison</tt>.</p>
 
 
 
+
+
    
 <p>NOTICE: This convention holds since release 2.1.</p>
+
+
 
 
 
@@ -275,7 +397,11 @@ You will also need <tt>flex</tt> and <tt>bison</tt>.</p>
 <h2> Changes in this release</h2>
 
 
+
+
 <ul>
+
+
 
 
   <li> see <a href="NEWS">NEWS</a> file for a summary of new features
@@ -283,16 +409,26 @@ in
 this release and</li>
 
 
+
+
   <li> see ChangeLog for the complete list of changes sources<br>
+
+
 
 
   </li>
 
 
+
+
 </ul>
 
 
+
+
 <h2>What you need to build source-highlight</h2>
+
+
 
 
 Since version 2.0 Source-highlight relies on regular expressions as
@@ -302,14 +438,22 @@ Most GNU/Linux distributions provide this library already in a compiled
 form.<br>
 
 
+
+
 <h2>Usage and examples</h2>
+
+
 
 
 source-highlight only does a lexical analysis of the source code, so
 the program source is assumed to be correct!<br>
 
 
+
+
 <br>
+
+
 
 
 Finally, there is texinfo documentation.&nbsp; It is also available as
@@ -317,53 +461,81 @@ an html file, and it is also <a href="source-highlight.html">available
 on-line</a>.<br>
 
 
+
+
 <p>Here we only show some examples of generated files.<br>
 
 
+
+
 </p>
+
+
 
 
 <p>Here are some links to some of the C and C++ sources of
 source-highlight colored with source-highlight itself: </p>
 
 
+
+
 <blockquote><a href="startapp.cc.html">startapp.cc.html</a></blockquote>
+
+
 
 
 generated with the following command
 <blockquote>
   
   
+  
+  
   <pre>source-highlight -s cpp -f html --doc startapp.cc</pre>
 
 
+
+
 </blockquote>
+
+
 
 
 And obviously it works with header file as well:
 <blockquote><a href="cmdline.h.html">cmdline.h.html</a></blockquote>
 
 
+
+
 created with the command:
 <blockquote>
+  
+  
   
   
   <pre>source-highlight -s cpp -f html *.h --css="mono.css"</pre>
 
 
+
+
 </blockquote>
 
 
+
+
 Here are some examples of Java files processed with source-highlight
-(in most of them we have used the <a href="default.style.html%3Edefault.style%3C/a%3E%29:%0AUse%20%3Ca%20href=" hello.java="">Hello.java</a> to make some test). Here's how <a href="Hello1.html">Hello1.html</a>, <a href="Hello2.html">Hello2.html</a>, <a href="Hello3.html">Hello3.html</a>,
+(in most of them we have used the <a href="Hello.java" hello.java="">Hello.java</a> to make some test). Here's how <a href="Hello1.html">Hello1.html</a>, <a href="Hello2.html">Hello2.html</a>, <a href="Hello3.html">Hello3.html</a>,
 <a href="Hello4.html">Hello4.html</a>, <a href="Hello5.html">Hello5.html</a>,
 <a href="Hello_h_f.html">Hello_h_f.html</a>, <a href="Hello_lines.html">Hello_lines.html</a>,
 <a href="Hello_xhtml.html">Hello_xhtml.html</a>, <a href="Hello_xhtml2.html">Hello_xhtml2.html</a>, <a href="Hello_notfixed.html">Hello_notfixed.html</a> were created:
 <pre>source-highlight -s java -f html -i Hello.java -o Hello1.html<br>source-highlight -s java -f html --input Hello.java --output Hello2.html --doc<br>source-highlight -s java -f html -i Hello.java -o Hello3.html --title "Happy Java with java2html :-)" --tab 3<br>source-highlight -s java -f html &lt; Hello.java &gt; Hello4.html --title "and what about CSS :-)" --css "Hello.css"<br>source-highlight -s java -f html &lt; Hello.java &gt; Hello5.html --title "Wooo... this is quite dark ;-D" --css "mono-alt.css"<br>source-highlight -s java -f html --doc *.java<br>Processed Hello.java&nbsp;&nbsp; <i>(creates Hello.java.html)<br></i>source-highlight -s java -f html --doc -i Hello.java -o Hello_h_f.html --style-file="default.style" --header="header.html" --footer="footer.html"<br>source-highlight -s java -f html --line-number --doc -i Hello.java -o Hello_lines.html<br>source-highlight -s java -f xhtml --doc -i Hello.java -o Hello_xhtml.html --css xhtml.css<br>source-highlight -s java -f xhtml --doc -i Hello.java -o Hello_xhtml2.html --style-file default.style<br>source-highlight -s java --outlang-def=html_notfixed.outlang -i Hello.java -o Hello_notfixed.html --style-file default.style</pre>
 
 
+
+
 Here's another example:
 <blockquote><a href="Hello_h_f.html">Hello_h_f.html</a></blockquote>
+
+
 
 
 Created with the command (notice that this one uses both CSS file and
@@ -371,10 +543,16 @@ headers and footers):
 <blockquote>
   
   
+  
+  
   <pre>source-highlight -s java -f html -i Hello.java -o Hello_h_f.html&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --css="cpp2html.css"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --header="./header.html" --footer="./footer.html"</pre>
 
 
+
+
 </blockquote>
+
+
 
 Source-highlight can also generate HTML code to be
 embedded (i.e., copied and pasted) inside a Javadoc comment (or another
@@ -387,7 +565,11 @@ like to embed this code (formatted) into a javadoc comment of
 SimpleClass, so we process it with the option <span style="font-family: monospace;">-f javadoc</span> and we copy the result into the comment, as illustrated in <a href="SimpleClass.html">SimpleClass.java</a>. When we process this file with javadoc, we obtain that code formatted in the documentation html file: <a href="SimpleClass-doc.html">SimpleClass-doc.html</a>. &nbsp;Doesn't it look nice :-)<br>
 
 
+
+
 <br>
+
+
 
 
 Here's the output of source-highlight applied to a Prolog program
@@ -407,31 +589,51 @@ is an Sml test program <a href="test.sml.html">test.sml.html</a>.&nbsp;
 <br>
 
 
+
+
 <br>
+
+
 
 
 Here are some log files formatted using the color file <a href="syslog.style">syslog.style</a>: <br>
 
 
+
+
 <ul>
+
+
 
 
   <li><a href="test.log.html">test.log.html</a>,</li>
 
 
+
+
   <li><a href="access.log.html">access.log.html</a>,</li>
+
+
 
 
   <li><a href="auth.log.html">auth.log.html</a>,</li>
 
 
+
+
   <li><a href="error.log.html">error.log.html</a>,</li>
+
+
 
 
   <li><a href="syslog.log.html">syslog.log.html</a>.</li>
 
 
+
+
 </ul>
+
+
 
 
 <p>
@@ -442,17 +644,25 @@ and the language definition file for the language definition
 syntax itself: <a href="langdef.lang.html">langdef.lang.html</a>.
 </p>
 
+
+
 <p>
 Here's the html output of test.java.html formatted in html
 itself: <a href="test.htm.html">test.htm.html</a>.<br>
 
 
+
+
 <br>
+
+
 
 
 and here's the output of test.java.tex formatted in
 html: <a href="test.java.tex.html">test.java.tex.html</a>
 </p>
+
+
 
 <p>Finally, these HTML outputs contain cross references,
 <a href="test_refs.h.html">test_refs.h.html</a>,
@@ -460,19 +670,31 @@ html: <a href="test.java.tex.html">test.java.tex.html</a>
 generated with the following command:
 </p>
 
+
+
 <blockquote>
+  
+  
   
   
   <pre>source-highlight -s cpp -f html --title="Contains references to tags" <br>                        --gen-references=inline test_refs.h test_refs.cpp</pre>
 
 
+
+
 </blockquote>
+
+
 
 
 <p></p>
 
 
+
+
 <h2>Credits</h2>
+
+
 
 
 See CREDITS for detailed contributions and THANKS&nbsp; for a complete
@@ -481,22 +703,34 @@ helped me with Source-highlight :-)
 <h2> Feedback</h2>
 
 
+
+
 Please tell me if you like this software :-)
 <p>Actually I want to extend it, so if you have some ideas... <br>
+
+
 
 
 The most import one will be to make source-highlight more powerful
 :-) </p>
 
 
+
+
 <p>Please send all bug reports by electronic mail to: <br>
+
+
 
 
 <font color="#3333ff">bug-source-highlight at gnu dot org</font>
 </p>
 
 
+
+
 <h1> TODO</h1>
+
+
 
 
 Here's the <a href="TODO.txt">list of TODO stuff</a>, if you'd like to
@@ -504,8 +738,12 @@ contribute :-)
 <h1> Mailing Lists</h1>
 
 
+
+
 The following mailing lists are available:
 <ul>
+
+
 
 
   <li> <font color="#3333ff">help-source-highlight at gnu dot org</font>,
@@ -513,12 +751,18 @@ for generic discussions about the program and for asking for help about
 it (open mailing list), <a href="http://mail.gnu.org/mailman/listinfo/help-source-highlight">http://mail.gnu.org/mailman/listinfo/help-source-highlight</a></li>
 
 
+
+
   <li> <font color="#3333ff">info-source-highlight at gnu dot org</font>,
 for receiving information about new releases and features (read-only
 mailing list), <a href="http://mail.gnu.org/mailman/listinfo/info-source-highlight">http://mail.gnu.org/mailman/listinfo/info-source-highlight</a></li>
 
 
+
+
 </ul>
+
+
 
 
 if you want to subscribe to a mailing list just go to the URL and
@@ -528,55 +772,87 @@ you.
 </p>
 
 
+
+
 <p>source-highlight is free software. See the file COPYING for copying
 conditions. Anyway I won't get offended if you send me a postcard :-) </p>
 
 
+
+
 <p> </p>
+
+
 
 
 <hr>
 <p>Return to <a href="/home.html">GNU's home page</a>. </p>
 
 
+
+
 <p>Please send FSF &amp; GNU inquiries &amp; questions to <i><a href="mailto:gnu@gnu.org">gnu@gnu.org</a></i>. There are also <a href="http://www.gnu.org/home.html#ContactInfo">other ways to contact</a>
 the FSF. </p>
+
+
 
 
 <p>Please send comments on these web pages to <i><a href="mailto:webmasters@gnu.org">webmasters@gnu.org</a></i>, send
 other questions to <i><a href="mailto:gnu@gnu.org">gnu@gnu.org</a></i>.</p>
 
 
+
+
 <p>Copyright (C) 2001 Free Software Foundation, Inc., 59 Temple Place -
 Suite 330, Boston, MA 02111, USA </p>
+
+
 
 
 <p>Verbatim copying and distribution of this entire article is
 permitted in any medium, provided this notice is preserved. </p>
 
 
+
+
 <p>Updated:<!-- hhmts start -->9 Jan 2001 mhw<!-- hhmts end --> <br>
+
+
 
 
 </p>
 
 
+
+
 <hr> <br>
 
 
-<br>
 
 
 <br>
 
 
-<br>
 
 
 <br>
 
 
+
+
 <br>
+
+
+
+
+<br>
+
+
+
+
+<br>
+
+
 
 
 </body>

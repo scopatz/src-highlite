@@ -47,6 +47,8 @@ debug.java.texinfo
 *.outlang.texinfo
 *.diff.texinfo
 *.show.texinfo
+*.txt.texinfo
+*.txt.texinfo.texinfo
 *.langelems.texinfo
 *_comment*.texinfo
 mdate-sh

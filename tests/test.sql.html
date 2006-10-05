@@ -1,0 +1,19 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900"># Table structure for table `authors`</font></i>
+<i><font color="#9A1900">#</font></i>
+
+<i><font color="#9A1900">-- just to test sql highlighting</font></i>
+
+<b><font color="#0000FF">DROP</font></b> <b><font color="#0000FF">TABLE</font></b> <b><font color="#0000FF">IF</font></b> <b><font color="#0000FF">EXISTS</font></b> <font color="#FF0000">`authors`</font><font color="#990000">;</font>
+<b><font color="#0000FF">CREATE</font></b> <b><font color="#0000FF">TABLE</font></b> <font color="#FF0000">`authors`</font> <font color="#990000">(</font>
+  <font color="#FF0000">`idauthor`</font> <font color="#009900">int</font><font color="#990000">(</font><font color="#993399">11</font><font color="#990000">)</font> <font color="#009900">unsigned</font> <b><font color="#0000FF">NOT</font></b> <b><font color="#0000FF">NULL</font></b> <b><font color="#0000FF">auto_increment</font></b><font color="#990000">,</font>
+  <font color="#FF0000">`surname`</font> <font color="#009900">varchar</font><font color="#990000">(</font><font color="#993399">40</font><font color="#990000">)</font> <b><font color="#0000FF">NOT</font></b> <b><font color="#0000FF">NULL</font></b> <b><font color="#0000FF">default</font></b> <font color="#FF0000">''</font><font color="#990000">,</font>
+  <font color="#FF0000">`name`</font> <font color="#009900">varchar</font><font color="#990000">(</font><font color="#993399">40</font><font color="#990000">)</font> <b><font color="#0000FF">NOT</font></b> <b><font color="#0000FF">NULL</font></b> <b><font color="#0000FF">default</font></b> <font color="#FF0000">''</font><font color="#990000">,</font>
+  <b><font color="#0000FF">PRIMARY</font></b> <b><font color="#0000FF">KEY</font></b>  <font color="#990000">(</font><font color="#FF0000">`idauthor`</font><font color="#990000">),</font>
+  <b><font color="#0000FF">key</font></b> <font color="#FF0000">`surname`</font> <font color="#990000">(</font><font color="#FF0000">`surname`</font><font color="#990000">)</font>
+<font color="#990000">)</font> <b><font color="#0000FF">TYPE</font></b><font color="#990000">=</font>InnoDB <b><font color="#0000FF">AUTO_INCREMENT</font></b><font color="#990000">=</font><font color="#993399">13</font> <font color="#990000">;</font>
+
+<i><font color="#9A1900">/* a C like comment */</font></i></tt></pre>
