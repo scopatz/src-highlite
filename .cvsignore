@@ -26,3 +26,4 @@ depcomp
 install-sh
 missing
 ylwrap
+libtool

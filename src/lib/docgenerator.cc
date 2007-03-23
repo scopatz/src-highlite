@@ -53,7 +53,8 @@ DocGenerator::generate_start_doc()
             "GNU " PACKAGE " " + string((gen_source_highlight_version ? VERSION : "")) +
             "\nby Lorenzo Bettini\nhttp://www.lorenzobettini.it\nhttp://www.gnu.org/software/src-highlite",
             doc_header,
-            doc_footer
+            doc_footer,
+            doc_background
         )
     );
 }
@@ -67,7 +68,8 @@ DocGenerator::generate_end_doc()
             css_url,
             "\nby Lorenzo Bettini\nhttp://www.lorenzobettini.it\nhttp://www.gnu.org/software/src-highlite",
             doc_header,
-            doc_footer
+            doc_footer,
+            doc_background
         )
     );
 }

@@ -91,3 +91,8 @@ void foundBug(const std::string &error, const std::string &file, int line)
   cerr << PACKAGE << ": " << error << ", " << file << ":" << line << endl;
   exit(EXIT_FAILURE);
 }
+
+bool shouldPrint()
+{
+  return (_messager && !_messager->dontPrint);
+}

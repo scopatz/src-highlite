@@ -1,11 +1,13 @@
 html = html.outlang
+htmltable = htmltable.outlang
 html-doc = htmldoc.outlang
 html-css = css_common.outlang
-html-css-doc = cssdoc.outlang
+html-css-doc = htmlcss.outlang
 xhtml = xhtml.outlang
+xhtmltable = xhtmltable.outlang
 xhtml-doc = xhtmldoc.outlang
-xhtml-css-doc = xhtmldoc.outlang
-xhtml-css = xhtmlcss.outlang
+xhtml-css = css_common.outlang
+xhtml-css-doc = xhtmlcss.outlang
 esc = esc.outlang
 esc-doc = esc.outlang
 latex = latex.outlang

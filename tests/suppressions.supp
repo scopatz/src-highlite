@@ -266,17 +266,7 @@
 }
 
 {
-   <insert a suppression name here>
-   Memcheck:Cond
-   obj:/lib/ld-2.3.5.so
-   obj:/lib/ld-2.3.5.so
-   obj:/lib/ld-2.3.5.so
-   obj:/lib/ld-2.3.5.so
-   obj:/lib/ld-2.3.5.so
-}
-
-{
-   <insert a suppression name here>
+   langdef flex scanner
    Memcheck:Leak
    fun:realloc
    fun:_Z15langdef_reallocPvj
@@ -293,24 +283,43 @@
 }
 
 {
-   <insert a suppression name here>
+   langdef_scanner
    Memcheck:Leak
    fun:malloc
-   fun:__cxa_get_globals
-   fun:_ZSt18uncaught_exceptionv
-   fun:_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
+   fun:_Z13langdef_allocj
+   fun:_Z27langdef_ensure_buffer_stackv
+   fun:_Z15langdef_restartP8_IO_FILE
+   fun:_Z17open_file_to_scanRKSsS0_
+   fun:_Z14parse_lang_defPKcS0_
+   fun:_ZN13LangDefLoader12get_lang_defERKSsS1_
+   fun:_Z12process_filePKcP13TextFormatterRKSsS4_P8FileInfob
+   fun:_ZN8StartApp11processFileERKSsS1_S1_
    fun:_ZN8StartApp5startEiPPc
    fun:main
 }
 
 {
-   <insert a suppression name here>
-   Memcheck:Cond
-   fun:strstr
-   fun:__pthread_initialize_minimal
-   obj:/lib/tls/libpthread-2.3.6.so
-   obj:/lib/tls/libpthread-2.3.6.so
-   obj:/lib/ld-2.3.6.so
-   obj:/lib/ld-2.3.6.so
-   obj:/lib/ld-2.3.6.so
+   style_scanner_2
+   Memcheck:Leak
+   fun:malloc
+   fun:_Z13stylesc_allocj
+   fun:_Z27stylesc_ensure_buffer_stackv
+   fun:_Z11stylesc_lexv
+   fun:_Z13stylesc_parsev
+   fun:_Z11parseStylesRKSsS0_P16GeneratorFactoryRSs
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
+}
+
+{
+   css_style_scanner_2
+   Memcheck:Leak
+   fun:malloc
+   fun:_Z16stylecsssc_allocj
+   fun:_Z30stylecsssc_ensure_buffer_stackv
+   fun:_Z14stylecsssc_lexv
+   fun:_Z16stylecsssc_parsev
+   fun:_Z14parseCssStylesRKSsS0_P16GeneratorFactoryRSs
+   fun:_ZN8StartApp5startEiPPc
+   fun:main
 }

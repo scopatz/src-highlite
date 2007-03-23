@@ -1,5 +1,4 @@
-keyword b ;
-type b ;
+keyword, type b ;
 variable f, i ;
 string f ;
 comment nf, i, noref ;
@@ -12,6 +11,9 @@ linenum f;
 url f;
 
 // for diffs
-oldfile i;
-newfile i;
+oldfile, newfile i;
 difflines b; 
+
+// for css
+selector, property b;
+value i;

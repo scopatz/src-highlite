@@ -1,10 +1,9 @@
-date yellow b ;
+date, keyword yellow b ;
 time "#9999FF" ;
-ip cyan b ;
+ip "lightblue" b ;
 
-keyword yellow b ;
 type cyan b ;
-string "#996633" b ;
+string "brown" b ;
 comment teal ;
 number red ;
 preproc cyan ;

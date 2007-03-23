@@ -18,7 +18,7 @@
 using namespace std;
 
 GeneratorMap::GeneratorMap(PreFormatter *pf) :
-  default_generator (new TextGenerator),
+  default_generator (0),
   preformatter(pf), noOptimizations(false)
 {
 }
@@ -27,14 +27,11 @@ GeneratorMap::~GeneratorMap()
 {
   for (MapType::const_iterator it = generatormap.begin(); it != generatormap.end(); ++it)
     delete it->second;
-  delete default_generator;
 }
 
 void
 GeneratorMap::setDefaultGenerator(TextGenerator *gen)
 {
-    if (default_generator)
-        delete default_generator;
     default_generator = gen;
 }
 
@@ -42,6 +39,15 @@ void
 GeneratorMap::addGenerator(const std::string &elem, TextGenerator *gen)
 {
   generatormap[elem] = gen;
+}
+
+TextGenerator *GeneratorMap::hasGenerator(const string &elem)
+{
+  MapType::const_iterator it = generatormap.find(elem);
+  if (it == generatormap.end())
+    return 0;
+  
+  return it->second;
 }
 
 TextGenerator *

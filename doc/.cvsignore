@@ -50,6 +50,7 @@ debug.java.texinfo
 *.txt.texinfo
 *.txt.texinfo.texinfo
 *.langelems.texinfo
+*.css.texinfo
 *_comment*.texinfo
 mdate-sh
 texinfo.tex
@@ -58,3 +59,6 @@ test_refs.cpp.html
 my_test_ref.tags
 UsageExample.html
 SimpleClass.html
+shjs_css_transform.sh
+style_examples.html
+gen_style_example.sh

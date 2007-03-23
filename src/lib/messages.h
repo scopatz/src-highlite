@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <string>
+#include <iterator>
 
 using std::ostream;
 using std::cerr;
@@ -12,6 +13,9 @@ using std::endl;
 
 class Messages {
  public:
+  /// whether to print anything
+  bool dontPrint;
+
   virtual void printMessage( const char *s, ostream & stream = cerr ) = 0 ;
   virtual void printMessage( const std::string &s, ostream & stream = cerr ) = 0 ;
 
@@ -21,7 +25,8 @@ class Messages {
                                   ostream & stream = cerr ) = 0 ;
   virtual void printWarning( const char *s, ostream & stream = cerr ) = 0 ;
   virtual void printError( const char *s, ostream & stream = cerr ) = 0 ;
-
+  
+  Messages(bool dontPrint_ = true) : dontPrint(dontPrint_) {}
   virtual ~Messages() {}
 } ;
 
@@ -49,6 +54,8 @@ class DefaultMessages : public Messages {
     { _print(s,stream); }
   virtual void printError( const char *s, ostream &stream )
     { _print(s,stream); }
+    
+  DefaultMessages() : Messages(false) {}
 } ;
 
 // prefer functions? ;-)
@@ -63,7 +70,18 @@ void printError(const std::string &filename, unsigned int line, const std::strin
 void memory_exhausted();
 void exitError(const std::string &error);
 void foundBug(const std::string &error, const std::string &file, int line);
+bool shouldPrint();
 
 void setMessager( Messages *m ) ;
+
+template <class T>
+void printSequence( const T *seq, ostream & stream = cerr )
+{
+  if (shouldPrint() && seq) {
+    std::copy(seq->begin(), seq->end(), 
+      std::ostream_iterator<typename T::value_type>(stream, " "));
+  }
+}
+
 
 #endif // _MESSAGES_H

@@ -3,6 +3,13 @@
 # this shell script is for test purpose only
 # so it should not be executed
 
+case $revision in
+        0|[1-9]|[1-9][0-9]|[
+1-9][0-9][0-9]|[1-9][0-9][
+0-9][0-9]|[1-9][0-9][0-9
+][0-9][0-9]) ;;
+
+
 for source in $1; do
         source-highlight --failsafe -f esc -i $source;
 done
@@ -12,6 +19,17 @@ $abc, $(abc) and ${abc} ${abc)
 
 # and also these are variables
 ($myvar) {$myvar} {$myvar)
+
+eval std_shrext=\"$shrext_cmds\"
+
+disable_libs=no
+
+    if test -n "$shlibpath_var"; then
+      # get the directories listed in $shlibpath_var
+      eval shlib_search_path=\`\$echo \"X\${$shlibpath_var}\" \| \$Xsed -e \'s/:/ /g\'\`
+    else
+      shlib_search_path=
+    fi
 
 for as_dir in /bin$PATH_SEPARATOR/usr/bin$PATH_SEPARATOR$PATH
 do

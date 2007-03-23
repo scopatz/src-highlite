@@ -71,8 +71,8 @@ main()
     string expected_end = "\nFOOTER";
     DocTemplate docTemplate(start, end);
 
-    string transformed_start = docTemplate.output_begin("TITLE", "CSS", "ADDITIONAL", "HEADER\n", "\nFOOTER");
-    string transformed_end = docTemplate.output_end("TITLE", "CSS", "ADDITIONAL", "HEADER\n", "\nFOOTER");
+    string transformed_start = docTemplate.output_begin("TITLE", "CSS", "ADDITIONAL", "HEADER\n", "\nFOOTER", "");
+    string transformed_end = docTemplate.output_end("TITLE", "CSS", "ADDITIONAL", "HEADER\n", "\nFOOTER", "");
     
     cout << "orig start : " << start << endl;
     cout << "transformed: " << transformed_start << endl;

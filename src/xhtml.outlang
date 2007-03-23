@@ -1,13 +1,8 @@
-include "html_common.outlang"
+include "xhtml_common.outlang"
 
 doctemplate
 "<!-- Generator: $additional -->
-<pre><tt>"
-"</tt></pre>
+$header<pre><tt>"
+"</tt></pre>$footer
 "
 end
-
-bold "<span style=\"font-weight: bold\">$text</span>"
-italics "<span style=\"font-style: italic\">$text</span>"
-underline "<span style=\"text-decoration: underline\">$text</span>"
-color "<span style=\"color: $style\">$text</span>"

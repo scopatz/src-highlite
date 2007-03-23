@@ -1,8 +1,11 @@
 preproc = "import"
 
-include "script_comment.lang"
+#number = '(?<=-)([[:digit:]]+)'
 
 include "number.lang"
+
+normal = '\\"'
+normal = '\\\''
 
 include "c_string.lang"
 
@@ -10,7 +13,7 @@ function = 'function[[:blank:]]+([[:alpha:]]|_)[[:word:]]*[[:blank:]]*(\(\))?'
 function = '([[:alpha:]]|_)[[:word:]]*[[:blank:]]*\(\)'
 
 # avoids, in things such as --bind, that words are highlighted as keywords
-normal = '([[:word:]]*[-/]+[[:word:]]+)+'
+normal = '([[:alpha:]]*[-/]+[[:alpha:]]+)+'
 
 keyword = "alias|bg|bind|break|builtin|caller|case|command|compgen",
           "complete|continue|declare|dirs|disown|do|done|elif|else|enable",
@@ -21,8 +24,14 @@ keyword = "alias|bg|bind|break|builtin|caller|case|command|compgen",
 
 # it is considered a variable if there's a =, which is discarded anyway
 variable = '([[:alpha:]]|_)[[:word:]]*(?==)'
-variable = '\$(\{|\()([[:alpha:]]|_)[[:word:]]*(\}|\))'
+variable = '\$\{([^[:blank:]]+)\}'
+variable = '\$\(([^[:blank:]]+)\)'
 variable = '\$([[:alpha:]]|_)[[:word:]]*'
+variable = '\$([^[:blank:]]{1})'
 
+# notice that - is not a symbol since it can be used in command line parameters
 symbol = "~","!","%","^","*","(",")","+","=","[",
-        "]","\\",":",";",",",".","/","?","&","<",">","\|"
+        "]","\\",":",";",",",".","/","?","&","<",">","\|",'(##){2}',"%%"
+
+include "script_comment.lang"
+

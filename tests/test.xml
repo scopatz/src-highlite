@@ -18,3 +18,7 @@
       <xs:enumeration value="unknown"/>
     </xs:restriction>
   </xs:simpleType>
+
+<tomcat-user_lore>
+ foo
+</tomcat-user_lore>

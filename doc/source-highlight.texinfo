@@ -15,7 +15,7 @@ This manual is for GNU Source-highlight
 (version @value{VERSION}, @value{UPDATED}),
 which given a source file, produces a document with syntax highlighting.
 
-Copyright @copyright{} 2005, 2006 Lorenzo Bettini.
+Copyright @copyright{} 2005-2007 Lorenzo Bettini.
 
 @quotation
 Permission is granted to copy, distribute and/or modify this document
@@ -140,16 +140,16 @@ The meaning of the suffixes @code{-doc}, @code{-css} and @code{-css-doc}
 is explained in @ref{Output Language map}.
 
 Please, keep in mind, that I haven't tested personally all these
-language definitions: I actually checked that the definition file is
-correct (with the command line option @code{--check-lang}, @ref{Invoking
-source-highlight}), but I'm not sure their definition actually respects
-that language syntax (e.g., I've put up together some language
-definitions by searching for information in the Internet, but I've never
-programmed in that language).  So, if you find that a language
-definition is not precise, please let me know.  Moreover, if you have a
-program example in a language that's not included in the @file{tests}
-directory, please send it to me so that I can include it in the test
-suite.
+language definitions: I actually checked that the definition files are
+syntactically correct (with the command line option @code{--check-lang},
+@ref{Invoking source-highlight}), but I'm not sure their definition
+actually respects that language syntax (e.g., I've put up together some
+language definitions by searching for information in the Internet, but
+I've never programmed in that language).  So, if you find that a
+language definition is not precise, please let me know.  Moreover, if
+you have a program example in a language that's not included in the
+@file{tests} directory, please send it to me so that I can include it in
+the test suite.
 
 @node Using source-highlight as a simple formatter,  , Supported languages, Introduction
 @section Using source-highlight as a simple formatter
@@ -229,6 +229,7 @@ Note: unless you specify a different install directory by
 configure (e.g. @code{./configure --prefix=<your home>}), 
 you must be root to run @code{make install}.
 
+@cindex directories
 Files will be installed in the following directories:
 
 @table @code
@@ -244,6 +245,8 @@ Default value for prefix is @code{/usr/local}
 but you may change it with @code{--prefix}
 option to configure.
 
+@cindex java2html
+@cindex cpp2html
 NOTICE: Originally, instead of Source-highlight, there were  two
 separate programs, namely @emph{GNU java2html} and @emph{GNU cpp2html}.
 There are two shell scripts with the same name that will be installed
@@ -257,6 +260,7 @@ together with Source-highlight in order to facilitate the migration
 * Tips on installing Boost Regex library::  
 * Patching from a previous version::  
 * Using source-highlight with less::  
+* Using source-highlight as a CGI::  
 * Building .rpm::               
 * Related Software and Links::  
 @end menu
@@ -309,21 +313,25 @@ through cvs, say, e.g., version X.Y.Z, you must specify the tag
 @code{rel_X_Y_Z} when you run the cvs command or the @code{cvs update}
 command.
 
+NOTICE: This convention holds since release 2.1.
+
 When you compile the sources that you get through the cvs repository,
 before running the @code{configure} and @code{make} commands, you
 should, at least the first time, run the command:
 
+@cindex autogen.sh
 @example
-sh reconf
+sh autogen.sh
 @end example
 
 @noindent
 This will run the autotools commands in the correct order, and also copy
 possibly missing files.  You should have installed recent versions of
-@code{automake} and @code{autoconf} in order for this to succeed.
-You will also need @code{flex} and @code{bison}.
-
-NOTICE: This convention holds since release 2.1.
+@cindex automake
+@cindex autoconf
+@cindex libtool
+@code{automake}, @code{autoconf} and @code{libtool} in order for this to
+succeed.  You will also need @code{flex} and @code{bison}.
 
 @node What you need to build source-highlight, Tips on installing Boost Regex library, Anonymous CVS Access, Installation
 @section What you need to build source-highlight
@@ -353,16 +361,28 @@ If you want to use a specific version of the Boost regex library
 
 Source-highlight has been developed under GNU/Linux, using gcc (C++),
 and bison (yacc) and flex (lex), and ported under Win32 with Cygnus
-C/C++compiler, available at @uref{http://www.cygwin.com}.  I used the
-excellent GNU Autoconf and GNU Automake.  I also used Autotools
-(@uref{ftp://ftp.ugcs.caltech.edu/pub/elef/autotools}) which creates a
-starting source tree (according to GNU standards) with autoconf,
-automake starting files.  Finally I used @emph{GNU gengetopt}
+C/C++compiler, available at @uref{http://www.cygwin.com}.  
+
+I use the excellent 
+@cindex automake
+@cindex autoconf
+@cindex libtool
+GNU Autoconf@footnote{@uref{http://www.gnu.org/software/autoconf}},
+GNU Automake@footnote{@uref{http://www.gnu.org/software/automake}} and
+GNU Libtool@footnote{@uref{http://www.gnu.org/software/libtool}}.
+@cindex gnulib
+Since version 2.6 I also started to use Gnulib - The GNU Portability
+Library@footnote{@uref{http://www.gnu.org/software/gnulib}}, ``a central
+location for common GNU code, intended to be shared among GNU packages''
+(for instance, I rely on Gnulib for checking for the presence and
+correctness of @code{getopt_long} function).
+
+Finally I used @emph{GNU gengetopt}
 (@uref{http://www.gnu.org/software/gengetopt}), for command line parsing.
 
 I started to use also @emph{doublecpp}
-(@uref{http://www.lorenzobettini.it/software/doublecpp}) that permits
-achieving dynamic overloading.
+(@uref{http://doublecpp.sourceforge.net}) that permits achieving dynamic
+overloading.
 
 Actually, apart from the boost regex library, you don't need the other
 tools above to build source-highlight (indeed I provide the output
@@ -509,7 +529,7 @@ gunzip -cd ../source-highlight-1.3-1.3.1.patch.gz | patch -p1
 and restart the compilation process (if you had already run configure a
 simple make should do).
 
-@node Using source-highlight with less, Building .rpm, Patching from a previous version, Installation
+@node Using source-highlight with less, Using source-highlight as a CGI, Patching from a previous version, Installation
 @section Using source-highlight with less
 
 This was suggested by Konstantine Serebriany.   The script
@@ -524,7 +544,25 @@ export LESS=' -R '
 This way, when you use less to browse a file, if it is a source file
 handled by source-highlight, it will be automatically highlighted.
 
-@node Building .rpm, Related Software and Links, Using source-highlight with less, Installation
+@node Using source-highlight as a CGI, Building .rpm, Using source-highlight with less, Installation
+@section Using source-highlight as a CGI
+
+@cindex CGI
+CGI support was enabled thanks to Robert Wetzel; I haven't tested it
+personally.  If you want to use source-highlight as a CGI program, you
+have to use the executable source-highlight-cgi.  You can build such
+executable by issuing
+
+@example
+make source-highlight-cgi
+@end example
+
+@noindent
+in the @file{src} directory.
+
+
+
+@node Building .rpm, Related Software and Links, Using source-highlight as a CGI, Installation
 @section Building .rpm
 @cindex rpm
 
@@ -546,27 +584,56 @@ for building an .rpm.src with sources.
 @node Related Software and Links,  , Building .rpm, Installation
 @section Related Software and Links
 
-Martin Gebert is also implementing a KDE interface to source-highlight
-programs (and he did a wonderful job!), and it is called ksrc2html; if
-you want to test it: @uref{http://www.mgebert.de}.
+Here we list some software related to source-highlight in the sense that
+it uses it as a backend (i.e., provides an interface to
+source-highlight) or it uses some of its features (e.g., definition
+files):
 
-@cindex CGI
-CGI support was enabled thanks to Robert Wetzel; I haven't tested it
-personally yet, so you may ask him directly.  Moreover he set up some
-examples at the page
-@uref{http://www.inf.tu-dresden.de/~rw8/java2.html}.  If you want to use
-source-highlight as a CGI program, you have to use the executable
-source-highlight-cgi.  You can build such executable by issuing
+@itemize
+@item 
+@cindex Ksrc2highlight
+Martin Gebert implemented a KDE interface to source-highlight programs
+(and he did a wonderful job!), and it is called @emph{Ksrc2highlight};
+if you want to test it: 
 
-@example
-make source-highlight-cgi
-@end example
+@uref{http://www.mgebert.de/Ksrc2highlight}.
 
-@noindent
-in the @file{src} directory.
+@item
+@cindex java2html
+There's also a Java version of java2html, you can find it at
 
-Moreover there's also a Java version of java2html, you can find it at
 @uref{http://www.generationjava.com/projects/Java2Html.shtml}.
+
+@item
+This web site provides a web interface to source-highlight
+so that you can highlight your code on-line:
+
+@uref{http://www.alaide.com/outils_colorsyntaxe.php}
+
+@item
+@cindex SHJS
+SHJS is a JavaScript program that highlights source code passages in
+HTML documents. Documents using SHJS are highlighted on the client side
+by the web browser.  SHJS uses language definitions from
+Source-highlight.
+
+@uref{http://shjs.sourceforge.net}
+
+@item
+@cindex code2blog
+Code2blog is a pyGTK front-end to source-highlight for easy conversion
+from source code to HTML.
+
+@uref{http://code.google.com/p/code2blog}
+
+@item
+Andy Buckley wrote a wrapper around source-highlight, which can be used
+as an Apache filter to highlight source code in Web pages on the fly.
+
+@uref{http://www.insectnation.org/projects/filter-src-highlight}
+
+@end itemize
+
 
 @node Copying, Simple Usage, Installation, Top
 @chapter Copying Conditions
@@ -649,6 +716,11 @@ like to have not fixed fonts by default (as it happens, e.g., with
 @LaTeX{} output) you can use the file @file{html_notfixed.outlang}
 with the command line argument @code{--outlang-def}.
 
+Furthermore, the file @file{htmltable.outlang} can be used to generate
+HTML output enclosed in an HTML table (which will use also a background
+color if specified in the style file).   The file
+@file{xhtmltable.outlang} does the same but for XHTML output.
+
 @node LaTeX output, Texinfo output, HTML output, Simple Usage
 @section @LaTeX{} output
 @cindex @LaTeX{}
@@ -713,6 +785,7 @@ execution, you can use the command line option @code{--verbose}.
 
 @menu
 * Output format style::         
+* Output format style using CSS::  
 * Language map::                
 * Language definition files::   
 * Output Language map::         
@@ -720,15 +793,10 @@ execution, you can use the command line option @code{--verbose}.
 * Developing your own definition files::  
 @end menu
 
-@node Output format style, Language map, Configuration files, Configuration files
+@node Output format style, Output format style using CSS, Configuration files, Configuration files
 @section Output format style
 @cindex output style
 @cindex default.style
-@cindex bold
-@cindex italics
-@cindex underline
-@cindex fixed
-@cindex notfixed
 
 You must specify your options for syntax highlighting in the file
 @file{default.style}@footnote{Before version 2.1, this file was called
@@ -738,16 +806,29 @@ You can specify formatting options for each element defined
 by a language definition file (you can get the list of such elements,
 @cindex @code{--show-lang-elements}
 by using @code{--show-lang-elements}, see @ref{Listing Language
-Elements}).  Here's the one that comes with this distribution (this is
-formatted by using the @file{style.lang} that is shown in
+Elements}).
+
+@cindex @code{bgcolor}
+@cindex background color
+Since version 2.6, you can also specify the background color for the
+output document, using the keyword @code{bgcolor} (this might be visible
+only when the @code{--doc} command line option is used).
+
+If many elements share the same formatting options, you can specify
+these elements in the same line, separated by a comma@footnote{Since
+version 2.6.}.
+
+Here's the @file{default.style} that comes with this distribution (this
+is formatted by using the @file{style.lang} that is shown in
 @ref{Tutorials on Language Definitions}):
 
 @include default.style.texinfo
 
-This files tries to define a style for most elements defined in the
+This file tries to define a style for most elements defined in the
 language definition files that comes with Source-highlight
 distribution.
 
+@cindex @code{--style-file}
 You can specify your own file (it doesn't have to be named
 @file{default.style}) with the command line option
 @code{--style-file}@footnote{Before version 2.1, this command line
@@ -761,7 +842,26 @@ You can also specify the color of normal text by adding this line
 normal darkblue ;
 @end example
 
-As you might see the syntax of this file is quite straightforward: 
+@cindex color
+@cindex background color
+As you might see the syntax of this file is quite straightforward: after
+the element (or elements, separated by commas) you can specify the
+color, and the background color@footnote{Since version 2.6.} by using
+the prefix @code{bg:} (for instance, in the @file{default.style} above
+the background color is specified for the @code{todo} element).
+
+Notice that the background color might not be available for all ouput
+formats: it is available for XHTML and @LaTeX{} but not for
+HTML@footnote{Of course, if you use HTML and an external CSS file you
+will achieve the same result.}.
+
+@cindex bold
+@cindex italics
+@cindex underline
+@cindex fixed
+@cindex notfixed
+Then, you can specify further formatting options such as bold, italics,
+etc.; these are the keywords that can be used:
 
 @example
 b = bold
@@ -773,7 +873,6 @@ noref = no reference information is generated for these elements
 @end example
 
 @cindex color
-@noindent
 Since version 2.2, the color specification is not required.  For
 instance, the @file{texinfo.style} is as follows (we avoid colors for
 Texinfo outputs):
@@ -826,13 +925,82 @@ gray
 darkblue 
 @end example
 
+@cindex direct color scheme
 You can also use the direct color scheme for the specific output format,
 by using double quotes, such as, e.g., @code{"#00FF00"} in
 HTML@footnote{Notice that, since version 2.2, you must use double
-quotes.}.  Of course, the double quotes will be discarded during the
-generation.
+quotes.} or even string colors in double quotes@footnote{Since version
+2.6.}, such as @code{"lightblue"}.  Of course, the double quotes will be
+discarded during the generation.
 
-@node Language map, Language definition files, Output format style, Configuration files
+For instance, this is the @file{syslog.style} used in the @file{tests}
+directory.  This uses direct color schemes.
+
+@include syslog.style.texinfo
+
+Notice that, if you use direct color schemes, source-highlight will
+perform no transformation, and will output exactly the color scheme you
+specified.  For instance, the specification @code{"brown"} is different
+from @code{brown}: the former will be output as it is, while the latter
+will be translated in the corresponding color of the output format (for
+HTML the visible result is likely to be the same).
+
+It is up to you to specify a color scheme string that is handled by the
+specific output format.  Thus, direct color schemes might not be
+portable in different output formats; for instance, @code{"#00FF00"} is
+valid in HTML but not in @LaTeX{}.
+
+@node Output format style using CSS, Language map, Output format style, Configuration files
+@section Output format style using CSS
+
+@cindex CSS
+Since version 2.6 you can specify the output format style also using
+a limited CSS syntax.  Please, notice that this has nothing to do
+with output produced by source-highlight using the @code{--css} option.
+
+@cindex @code{--style-css-file}
+By using a CSS file as the style file (i.e., passing it to the
+@code{--style-css-file} command line option) you will only specify the
+output format style using the same syntax of CSS.  This means that you
+can use a css syntax for specifying the output format style
+independently from the actual output (this is what the output format
+style is for).  Thus, you can use a css file as the output format style
+also for @LaTeX{} output (just like you would do with a source-hihglight
+output format style, @ref{Output format style}).
+
+This feature is provided basically for code re-use: you can specify the
+output format style using a css file, and then re-use the same css file
+as the actual style sheet of other HTML pages (or even output files
+produced by source-highlight using the @code{--css} option).
+
+Notice that this feature is quite primordial, so only a limited subset
+of CSS syntax is recognized.  In particular, selectors are always
+intended as CSS class selectors, so they must start with a dot.
+@code{/* */} comments are handled.  Properties (and their values) not
+handled by source-highlight are simply (and silently) discarded).
+
+This is an example of CSS specification handled correctly by
+source-highlight as a style format specification:
+
+@include css_example.css.texinfo
+
+Finally, this is the @file{default.css} that corresponds to
+@file{default.style} presented in @ref{Output format style}:
+
+@include default.css.texinfo
+
+If you pass this file to the @code{--style-css-file} command line option
+and you produce an output file, you will get the same result of using
+@file{default.style}.
+
+Source-highlight comes with a lot of CSS files that can be used either
+as standard CSS files for HTML documents, or as style files to pass to
+@code{--style-css-file}.  In the documentation installation directory
+(see @ref{Installation}) you will find the file
+@file{style_examples.html} which shows many output examples, each one
+with a different CSS style.
+
+@node Language map, Language definition files, Output format style using CSS, Configuration files
 @section Language map
 @cindex language map
 
@@ -861,7 +1029,7 @@ These files are crucial for source-highlight since they specify the
 source elements that have to be highlighted.   These files also allow to
 specify your own language definitions in order to deal with a language
 that is not handled by source-highlight@footnote{This is the main
-difference introduced in version 2.0 with respect the the previous
+difference introduced in version 2.0 with respect the previous
 version.}.  The syntax for these files is explained in @ref{Language
 Definitions}.
 
@@ -987,13 +1155,24 @@ style sheet), you can disable this by using @code{--no-doc}.
 Specify the style sheet file (e.g., a @file{.css} for HTML@footnote{As
 explained before, originally Source-highlight was thought mainly for
 generating HTML output, this is why the term @emph{css} is used for
-style sheets.}) for the output document.
+style sheets.}) for the output document.  Notice that source-highlight
+will not use this file: it will simply use this file name when
+generating the output file, so to specify that the output file uses this
+file as the style sheet (e.g., if the generated HTML relies on this file
+as the CSS file).
 
 @item --tab
 @itemx -t
 With this options, tab characters will be converted into specified
 number of space characters (tabulation points will be preserved).  This
 option is automatically selected when generating line numbers.
+
+@item --style-file
+@itemx --style-css-file
+Specify the file that source-highlight will use to produce (i.e.,
+format) the output (e.g., colors and other styles for each  language
+element).  The formats of these files are detailed in @ref{Output format
+style} and in @ref{Output format style using CSS}, respectively.
 
 @item --output-dir
 You can pass to source-highlight more than one input file (see
@@ -2262,17 +2441,44 @@ and then the text @code{<b>class</b>} will be substituted for
 @cindex $style
 
 The definition for using colors during formatting requires
-the definition for the color style:
+the definition for the @code{color} style
 
 @example
 color "..."
 @end example
 
+@cindex background color
 @noindent
-For instance, for HTML we have:
+and for the @code{bgcolor} style@footnote{Since verison 2.16.}:
+
+@example
+bgcolor "..."
+@end example
+
+This definition concerns only the background color for a specific
+highlighted element, i.e., the color specified in the style file with
+the prefix @code{bg:} (see @ref{Output format style}) or the property
+@code{background-color} specified in a CSS file passed to
+@code{--style-css-file} (see @ref{Output format style using CSS}).
+Thus it should not be confused with the background color of the entire
+output (i.e., the one specified using @code{bgcolor} in a style file or
+the property @code{background-color} of the @code{body} selector in a
+CSS).  The background color for the entire document is explained in
+@ref{Document template}.
+
+Notice that the background color might not be available for all ouput
+formats.   For instance, for HTML we only have:
 
 @example
 color "<font color=\"$style\">$text</font>"
+@end example
+
+@noindent
+while for XHTML we have:
+
+@example
+color "<span style=\"color: $style\">$text</span>"
+bgcolor "<span style=\"background-color: $style\">$text</span>"
 @end example
 
 Apart from the variable @code{$text} that we already saw, we
@@ -2666,6 +2872,12 @@ the value passed with the command line option @code{--css};
 @item $additional
 other additional information.  Source-highlight replaces this with its
 name and its version.
+@item $docbgcolor@footnote{Since version 2.6.}
+the background color for the output document.  Source-highlight replaces
+this with the value specified in the @code{bgcolor} of the @file{.style}
+file (see @ref{Output format style}) or in the @code{body} selector of
+the CSS file passed with @code{--style-css-file} (see @ref{Output format
+style using CSS}).
 @end table
 
 For instance, for an HTML document with css, (file
@@ -2691,6 +2903,43 @@ $footer</body>
 "
 end
 @end example
+
+For an HTML document with header and footer, (file
+@file{htmldoc.outlang}) we have (notice the use of @code{$docbgcolor}):
+
+@example
+doctemplate
+"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">
+<html>
+<head>
+<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">
+<meta name=\"GENERATOR\" content=\"$additional\">
+<title>$title</title>
+</head>
+<body bgcolor=\"$docbgcolor\">
+$header<pre><tt>"
+"</tt></pre>
+$footer</body>
+</html>
+"
+end
+@end example
+
+And for an HTML table output (file @file{htmltable.outlang}):
+
+@example
+doctemplate
+"<table  BGCOLOR=\"$docbgcolor\" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<pre><tt>"
+"</tt></pre>
+</td>
+</tr>
+</table>
+"
+end
+@end example 
 
 @node Generating HTML output,  , Document template, Output Language Definitions
 @section Generating HTML output
@@ -2883,6 +3132,11 @@ mailing list),
  
 If you want to subscribe to a mailing list just go to the URL and follow
 the instructions, or send me an e-mail and I'll subscribe you.
+
+I'll describe new features in new releases also in my blog, at
+this URL:
+
+@uref{http://tronprog.blogspot.com/search/label/source-highlight}
 
 @node Concept Index,  , Mailing Lists, Top
 @unnumbered Concept Index

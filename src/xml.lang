@@ -4,9 +4,9 @@ end
 
 comment delim "<!--" "-->" multiline nested
 
-keyword = '<(/)?[[:alnum:]:]+(/)?>'
+keyword = '<(/)?[[:word:]:-]+(/)?>'
 
-state keyword delim '<(/)?[[:alnum:]:]+' '(/)?>' multiline begin
+state keyword delim '<(/)?[[:word:]:-]+' '(/)?>' multiline begin
   type = '[^="[:blank:]>]+'
   symbol = "="
   string delim "\"" "\"" escape "\\" multiline

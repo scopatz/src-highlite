@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 1999, 2000, 2002 Lorenzo Bettini <http://www.lorenzobettini.it>
+** Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -23,13 +23,19 @@
 #define GENERATORFACTORY_H
 
 #include <string>
+#include <list>
+#include <boost/shared_ptr.hpp>
+
 #include "textstyles.h"
 #include "refgeneratormap.h"
 
+typedef enum { ISBOLD=1, ISITALIC, ISUNDERLINE, ISFIXED, ISNOTFIXED, ISNOREF } StyleConstant;
+typedef std::list<StyleConstant> StyleConstants;
+typedef boost::shared_ptr<StyleConstants> StyleConstantsPtr;
+typedef StyleConstants::const_iterator StyleConstantsIterator;
+
 using std::string;
 
-class Style;
-class Styles;
 class TextGenerator;
 class PreFormatter;
 
@@ -38,7 +44,6 @@ class GeneratorFactory
  protected:
   /// contains all the styles for formatting
   TextStylesPtr textStyles;
-  Styles *styles;
   /// to preformat text
   PreFormatter *preformatter;
   /// whether to generate references using ctags
@@ -48,21 +53,43 @@ class GeneratorFactory
   /// whether to turn off optimizations for generating output (default false)
   bool noOptimizations;
 
-  TextGenerator *createGenerator(const string &key);
-  TextGenerator *createGenerator(const Style *style);
-  TextGenerator *createDefaultGenerator();
-
   GeneratorMap *createGeneratorMap();
 
  public:
-  GeneratorFactory(TextStylesPtr tstyles, Styles *sts, PreFormatter *pf,
+  GeneratorFactory(TextStylesPtr tstyles, PreFormatter *pf,
                    bool gen_references,
-                   const string &ctags_file, RefPosition position);
+                   const string &ctags_file, RefPosition position,
+                   bool optimizations);
+  
   ~GeneratorFactory();
 
-  void createGenerators();
+  /**
+   * Creates a generator for the specific language element (identifed by
+   * key) with the passed style parameters
+   * 
+   * @param key 
+   * @param color 
+   * @param bgcolor 
+   * @param styleconstants 
+   * @return false if a generator for the specific key is already present
+   */
+  bool createGenerator(const string &key, const string &color,
+    const string &bgcolor, StyleConstantsPtr styleconstants);
+  
+  /**
+   * Adds the generator for the normal style if not already present.
+   * 
+   * This must be called after all the generators for the language elements
+   */
+  void addDefaultGenerator();
 
-  void setNoOptimizations(bool n) { noOptimizations = n; }
+  /**
+   * Check whether the color must be translated with the color map or
+   * left as it is (in that case, remove the ")
+   * @param color
+   * @return
+     */
+  string preprocessColor(const string &color);
 };
 
 #endif // GENERATORFACTORY_H

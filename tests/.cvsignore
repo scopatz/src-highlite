@@ -30,3 +30,8 @@ valgrind_test.sh
 valgrind_tests.sh
 valgrind_suppressions.sh
 myscript*
+*.css.java.html
+*.css_xhtml.java.html
+*.css_doc.java.html
+*.nf_css.java.html
+syslog.style.html

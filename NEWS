@@ -8,6 +8,26 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 2.6
+
+   * language definition for makefiles
+   * language definition for css files
+   * language definition for m4 files
+   * fixed some problems in xml.lang
+   * fixed some problems in sh.lang
+   * the ctags found during configure is correctly used in makefiles
+   * --quiet option showing no progress information
+     (thanks to C. Michael Pilato)
+   * handle direct color specifications in double quotes in style files
+   * in style files can specify formatting options for more than one
+     element on the same line
+   * accept css specifications as style specifications (limited support)
+   * handle background color for some output formats (e.g., xhtml)
+   * in style files the background color (for the entire output)
+     can be specified
+   * fixed a problem in configure script on some BSD systems
+     (thanks to Thomas Klausner)
+
 Version 2.5
 
    * fixed lang.map for php files

@@ -1,0 +1,12 @@
+body { 
+  background-color: <color specification>;
+ }
+
+.selector { 
+  color: <color specification>;
+  background-color: <color specification>;
+  font-weight: bold; /* this is a comment */
+  font-family: monospace;
+  font-style: italic;
+  text-decoration: underline;
+ }

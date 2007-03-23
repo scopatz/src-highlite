@@ -1,3 +1,77 @@
+2007-03-23    <bettini@work>
+
+	* src/lib/styles.h: removed, no longer needed
+
+	* src/lib/stylecssparser.yy: use GeneratorFactory directly without
+	using Style
+
+	* src/lib/styleparser.yy: use GeneratorFactory directly without
+	using Style
+
+2007-03-18  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/styles.h (class Styles): store also the background color
+
+	* src/lib/doctemplate.h: handle also the background property
+
+2007-03-15    <bettini@work>
+
+	* src/lib/stylecssscanner.ll: added to handle css as style file
+
+	* src/lib/stylecssparser.yy: added to handle css as style file
+
+2007-03-13    <bettini@work>
+
+	* src/lib/stylescanner.ll: renames optscanner.ll
+
+	* src/lib/styleparser.yy: renames optparser.yy
+
+2007-03-12    <bettini@work>
+
+	* src/lib/optparser.yy (option): can assign formatting options to
+	more than one element on the same line
+
+2007-03-11  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lang.map: maps other shell files, csh, tcsh, ksh to sh.lang
+
+2007-03-08  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/esc.style: updated with style for diff files
+
+	* src/css.lang: added language definition for css files
+
+	* acinclude.m4 (AX_BOOST_REGEX): updated to new version of the macro
+
+2007-03-03  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/outlang.lang: highlight ' as strings
+
+	* src/xml.lang: also handles - and _ chars
+
+	* src/makefile.lang: added (based on the file of Maurizio Loreti)
+
+	* src/sh.lang: handles $ variables better
+
+2007-02-23  Lorenzo Bettini  <bettini@work>
+
+	* src/php.lang (comment): uses c_comment.lang
+
+2007-02-02  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/outlang.map: fixed xhtml doc and css output (thanks to
+	C. Michael Pilato)
+
+	* src/lib/cmdline.ggo: --quiet option showing no progress information
+
+2007-01-20  Lorenzo Bettini  <bettini@lorelap>
+
+	* configure.ac: use libtool and gnulib
+
+2006-12-23  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/php.lang: highlight "<?php" as a symbol
+
 2006-08-31  Lorenzo Bettini  <bettini@lorelap>
 
 	* src/html.lang: fix of type definition (excluding also the

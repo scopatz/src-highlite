@@ -53,6 +53,21 @@ class GeneratorMap
   GeneratorMap(PreFormatter *);
   virtual ~GeneratorMap();
 
+  /**
+   * Returns the generator for the specific element name or null if
+   * there's no generator for the element
+   * @param elem 
+   * @return 
+   */
+  TextGenerator *hasGenerator(const std::string &elem);
+  
+  /**
+   * Retrieves the generator for a specific element; if it doesn't find it,
+   * it creates a generator for that element, using the default generator
+   * (i.e., the one for "normal" element)
+   * @param elem 
+   * @return 
+   */
   TextGenerator *getGenerator(const std::string &elem);
   void addGenerator(const std::string &elem, TextGenerator *gen);
   void addNoReference(const std::string &elem);

@@ -80,6 +80,18 @@ gengetopt_args_info args_info ;     // command line structure
 static void print_cgi_header();
 static void run_ctags(const string &cmd);
 
+/**
+ * Print progress status information (provided --quiet is not specified)
+ * @param message
+ */
+static void progressInfo(const string &message)
+{
+  if (args_info.quiet_given)
+    return;
+
+  cerr << message;
+}
+
 StartApp::StartApp() :
     docgenerator(0), formatter(0), preformatter(0),
   langmap(new LangMap), outlangmap(new LangMap), generator_factory(0),
@@ -281,8 +293,6 @@ StartApp::start(int argc, char * argv[])
     return (EXIT_SUCCESS);
   }
 
-  Styles *sts = parseStyles(data_dir, style_file);
-
   outputbuffer = new OutputBuffer;
   // when debugging, always flush the output
   outputbuffer->setAlwaysFlush( args_info.debug_langdef_given );
@@ -382,19 +392,28 @@ StartApp::start(int argc, char * argv[])
   PreFormatterPtr chartranslator(textstyles->charTranslator);
   preformatter->setFormatter(chartranslator);
 
+  string background_color;
+  
   generator_factory =
-    new GeneratorFactory(textstyles, sts, preformatter,
-      args_info.gen_references_given,
-      args_info.ctags_file_arg,
-      refposition);
+      new GeneratorFactory(textstyles, preformatter,
+                           args_info.gen_references_given,
+                           args_info.ctags_file_arg,
+                           refposition, args_info.debug_langdef_given);
+    
+  if (args_info.style_css_file_given) {
+    parseCssStyles(data_dir, args_info.style_css_file_arg, generator_factory, background_color);
+  } else {
+    parseStyles(data_dir, style_file, generator_factory, background_color);
+  }
 
-  // turn off optimizations when debugging
-  generator_factory->setNoOptimizations( args_info.debug_langdef_given );
+  generator_factory->addDefaultGenerator();
+  
+  if (background_color != "")
+    background_color = generator_factory->preprocessColor( background_color );
 
-  generator_factory->createGenerators ();
   docgenerator = new DocGenerator(title, inputFileName,
                                   doc_header, doc_footer,
-                                  css_url, entire_doc,
+                                  css_url, background_color, entire_doc,
                                   textstyles->docTemplate.toStringBegin(),
                                   textstyles->docTemplate.toStringEnd());;
 
@@ -430,7 +449,7 @@ StartApp::start(int argc, char * argv[])
   // let's process other files, if there are any
   if ( args_info.inputs_num && !is_cgi ) {
     for ( i = 0 ; i < (args_info.inputs_num) ; ++i ) {
-      cerr << "Processing " << args_info.inputs[i] << " ... " ;
+      progressInfo(string("Processing ") + args_info.inputs[i] + " ... ");
       const string &outputFileName = createOutputFileName (args_info.inputs[i],
           args_info.output_dir_arg, ext);
       result = processFile
@@ -439,15 +458,12 @@ StartApp::start(int argc, char * argv[])
           ext) ;
       if (result == EXIT_FAILURE)
         break;
-      cerr << "created " << outputFileName << endl ;
+      progressInfo("created " + outputFileName + "\n");
     }
   }
 
   delete outputbuffer;
   outputbuffer = 0;
-
-  if (sts)
-    delete sts;
 
   return (result);
 }

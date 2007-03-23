@@ -6,10 +6,6 @@ and its output).  Actually this is due to possible ambiguities.
 
 Use a class for printing errors
 
-maintainer mode
-
-test xml
-
 change the _doc, _nodoc, _css so that these definitions are part of only one file, instead
 of having different files.
 
@@ -22,4 +18,33 @@ test for always flush (together with line number), and command line option
 in style file:
 keyword2 like keyword
 i.e., default a specific element to another one
+if, then, the style is specified, this will override the default one
+(possibily in another style file)
 
+use <ol> lists and css for changing colors of lines,
+see http://shiflett.org/code/highlight.php
+
+normal = '\\("|\')' generates a failure
+
+tests for .m4 files
+
+pattern matching:
+class,classname,inheritance = '(class) ([[:word:]]+) (extends)?'
+
+Running ../src/source-highlight --gen-version --data-dir ../src/ --failsafe -i ./test.unknown -o test.unknown_out ... LEAKS! (this is the usual problem with flex scanner, that does not
+seem to show when there's file inclusion...)
+
+shjs_css_transform.sh in share
+
+background color in some .css in doc (for TODO)
+
+CODE CLEANUP
+
+the style file is always parsed even for output formats that don't need it...
+but how to infer whether the style must be read or not?
+
+create generatormap externally from generator factory
+
+instead of LineOutputGenerator, implement everything in OutputGenerator?
+This would also allow to keep track of lines in OutputGenerator for
+implementing line-range.

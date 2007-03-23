@@ -10,19 +10,22 @@
 
 bin_PROGRAMS = source-highlight
 bin_SCRIPTS = java2html cpp2html src-hilite-lesspipe.sh
-noinst_LIBRARIES = libsh.a
-EXTRA_PROGRAMS = source-highlight-cgi source-highlight-efence
+noinst_LTLIBRARIES = libsh.la
+libsh_la_LIBADD = $(BOOST_REGEX_LIB) $(LDADD) lib/libcommon.la 
+EXTRA_PROGRAMS = source-highlight-cgi 
 
 SRCHILITE = $(top_builddir)/src/source-highlight$(EXEEXT)
-
-libsh_a_AR = @ar_to_use@
 
 LIBSUBDIR = $(SUBDIRS)
 
 INCLUDES = -I@top_srcdir@/src/lib
-LDADD = @LEXLIB@ @LIBOBJS@
-source_highlight_LDADD = -l$(BOOST_REGEX_LIB) $(LDADD) lib/libcommon.a
-source_highlight_cgi_LDADD = -l$(BOOST_REGEX_LIB) $(LDADD) lib/libcgi.a
+
+AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl
+
+LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
+
+source_highlight_LDADD = libsh.la 
+source_highlight_cgi_LDADD = libsh.la 
 
 SUBDIRS = \
 	lib \
@@ -32,15 +35,12 @@ DIST_SUBDIRS = \
 	lib \
 	includes
 
-libsh_a_SOURCES = cxxconfig.h source-highlight.cc regexpengine.cpp regexpstate.cpp regexpenginedebug.cpp
+libsh_la_SOURCES = source-highlight.cc regexpengine.cpp regexpstate.cpp regexpenginedebug.cpp
 
 # for most rules, we use one file per line. `diffs' are more clear this way
-source_highlight_SOURCES = startapp.cc $(libsh_a_SOURCES) 
+source_highlight_SOURCES = startapp.cc 
 
-source_highlight_cgi_SOURCES = startapp-cgi.cc $(libsh_a_SOURCES)
-
-startapp-cgi.cc:
-	cd @top_srcdir@/src/lib && $(MAKE) libcgi.a
+source_highlight_cgi_SOURCES = startapp-cgi.cc envmapper.c
 
 # files that we don't want automake/autoconf to touch ever.
 # just stick them in the distribution as-is
@@ -49,7 +49,7 @@ java2html.in \
 cpp2html.in \
 src-hilite-lesspipe.sh.in \
 startapp.h \
-gnugetopt.h \
+envmapper.h \
 $(source_highlightdata_DATA)
 
 LANGFILES = \
@@ -61,24 +61,27 @@ pascal.lang fortran.lang html.lang latex.lang logtalk.lang \
 diff.lang c_string.lang langdef.lang outlang.lang style.lang \
 extreme_comment.lang extreme_comment2.lang extreme_comment3.lang \
 postscript.lang csharp.lang xml.lang sh.lang script_comment.lang \
-tcl.lang sql.lang bib.lang \
+tcl.lang sql.lang bib.lang makefile.lang css.lang m4.lang \
 default.lang nohilite.lang
 
 OUTLANGFILES = \
 css_common.outlang \
-cssdoc.outlang \
 esc.outlang \
 html_common.outlang \
 html_notfixed.outlang \
+htmlcss.outlang \
 htmldoc.outlang \
+htmltable.outlang \
 html.outlang \
 latexdoc.outlang \
 latex.outlang \
 latexcolordoc.outlang \
 latexcolor.outlang \
+xhtml_common.outlang \
 xhtmlcss.outlang \
 xhtmldoc.outlang \
 xhtml.outlang \
+xhtmltable.outlang \
 texinfo.outlang \
 javadoc.outlang \
 docbook.outlang
@@ -89,11 +92,8 @@ source_highlightdata_DATA = \
 $(LANGFILES) $(OUTLANGFILES) \
 $(STYLEFILES) \
 default.style style2.style style3.style \
-lang.map outlang.map
-
-source_highlight_efence_SOURCES = startapp-cgi.cc $(source_highlight_SOURCES)
-
-source_highlight_efence_LDADD = $(source_highlight_LDADD) -lefence
+lang.map outlang.map \
+default.css
 
 # files that are built before distribution gets built
 #MAINTAINERCLEANFILES = $(BUILT_SOURCES)

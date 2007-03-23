@@ -8,14 +8,14 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-SUBDIRS = src doc tests
+SUBDIRS = gl src doc tests
 
 EXTRA_DIST = \
 	source-highlight.spec.in \
 	source-highlight.spec \
-	reconf \
+	autogen.sh \
 	TODO.txt \
-	CREDITS
+	CREDITS gl/m4/gnulib-cache.m4
 
 source_highlightdoc_DATA = \
 	ChangeLog \
@@ -27,3 +27,4 @@ source_highlightdoc_DATA = \
 	TODO.txt \
 	CREDITS
 
+ACLOCAL_AMFLAGS = -I gl/m4

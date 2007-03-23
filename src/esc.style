@@ -2,7 +2,7 @@ keyword blue b ;
 type darkgreen ;
 string red ;
 specialchar pink ;
-comment brown i ;
+comment cyan i ;
 number purple ;
 preproc darkblue b ;
 symbol darkred ;
@@ -22,3 +22,13 @@ name darkgreen ;
 
 // Internet related
 url blue u;
+
+// for diffs
+oldfile orange;
+newfile darkgreen;
+difflines blue; 
+
+// for css
+selector purple;
+property blue;
+value darkgreen i;

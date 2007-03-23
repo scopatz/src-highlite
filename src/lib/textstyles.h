@@ -18,7 +18,7 @@
 struct TextStyles
 {
     TextStyle bold, italics, underline, notfixed, fixed,
-    color, onestyle;
+    color, bg_color, onestyle;
 
     struct RefTextStyle
     {

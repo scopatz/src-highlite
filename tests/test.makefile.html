@@ -1,0 +1,77 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><font color="#990000">ID:</font> <font color="#009900">$(HEADERS)</font> <font color="#009900">$(SOURCES)</font> <font color="#009900">$(LISP)</font> <font color="#009900">$(TAGS_FILES)</font>
+        <font color="#009900">list</font><font color="#990000">=</font><font color="#FF0000">'$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'</font><font color="#990000">;</font> <font color="#990000">\</font>
+        <font color="#009900">unique</font><font color="#990000">=</font>`<b><font color="#0000FF">for</font></b> i <b><font color="#0000FF">in</font></b> <font color="#009900">$$</font>list<font color="#990000">;</font> <b><font color="#0000FF">do</font></b> <font color="#990000">\</font>
+            <b><font color="#0000FF">if</font></b> <b><font color="#0000FF">test</font></b> -f <font color="#FF0000">"$$i"</font><font color="#990000">;</font> <b><font color="#0000FF">then</font></b> echo <font color="#009900">$$</font>i<font color="#990000">;</font> <b><font color="#0000FF">else</font></b> echo <font color="#009900">$(srcdir)</font><font color="#990000">/</font><font color="#009900">$$</font>i<font color="#990000">;</font> <b><font color="#0000FF">fi</font></b><font color="#990000">;</font> <font color="#990000">\</font>
+          <b><font color="#0000FF">done</font></b> <font color="#990000">|</font> <font color="#990000">\</font>
+          <font color="#009900">$(AWK)</font> <font color="#FF0000">'    { files[$$0] = 1; } \</font>
+<font color="#FF0000">               END { for (i in files) print i; }'</font>`<font color="#990000">;</font> <font color="#990000">\</font>
+        mkid -fID <font color="#009900">$$</font>unique
+
+<font color="#990000">foo.o foo.z:</font> foo.c
+
+<font color="#009900">LDADD =</font> <b><font color="#000080">@LEXLIB@</font></b> <font color="#009900">$(top_builddir)</font>/gl/libgnu.la
+
+<font color="#009900">$(source_highlightdata_DATA)</font>
+
+<font color="#009900">LANGFILES =</font> <font color="#990000">\</font>
+bison.lang      cpp.lang       javascript.lang  perl.lang    ruby.lang <font color="#990000">\</font>
+c_comment.lang  flex.lang      log.lang         php.lang     sml.lang <font color="#990000">\</font>
+caml.lang       function.lang  lua.lang         prolog.lang  symbols.lang <font color="#990000">\</font>
+changelog.lang  java.lang      number.lang      python.lang  url.lang <font color="#990000">\</font>
+pascal.lang fortran.lang html.lang latex.lang logtalk.lang <font color="#990000">\</font>
+diff.lang c_string.lang langdef.lang outlang.lang style.lang <font color="#990000">\</font>
+extreme_comment.lang extreme_comment2.lang extreme_comment3.lang <font color="#990000">\</font>
+postscript.lang csharp.lang xml.lang sh.lang script_comment.lang <font color="#990000">\</font>
+tcl.lang sql.lang bib.lang makefile.lang <font color="#990000">\</font>
+default.lang nohilite.lang
+
+<font color="#009900">OUTLANGFILES =</font> <font color="#990000">\</font>
+css_common.outlang <font color="#990000">\</font>
+esc.outlang <font color="#990000">\</font>
+html_common.outlang <font color="#990000">\</font>
+html_notfixed.outlang <font color="#990000">\</font>
+htmlcss.outlang <font color="#990000">\</font>
+htmldoc.outlang <font color="#990000">\</font>
+html.outlang <font color="#990000">\</font>
+latexdoc.outlang <font color="#990000">\</font>
+latex.outlang <font color="#990000">\</font>
+latexcolordoc.outlang <font color="#990000">\</font>
+latexcolor.outlang <font color="#990000">\</font>
+xhtml_common.outlang <font color="#990000">\</font>
+xhtmlcss.outlang <font color="#990000">\</font>
+xhtmldoc.outlang <font color="#990000">\</font>
+xhtml.outlang <font color="#990000">\</font>
+texinfo.outlang <font color="#990000">\</font>
+javadoc.outlang <font color="#990000">\</font>
+docbook.outlang
+
+<font color="#009900">STYLEFILES =</font> texinfo.style esc.style
+
+<font color="#009900">source_highlightdata_DATA =</font> <font color="#990000">\</font>
+<font color="#009900">$(LANGFILES)</font> <font color="#009900">$(OUTLANGFILES)</font> <font color="#990000">\</font>
+<font color="#009900">$(STYLEFILES)</font> <font color="#990000">\</font>
+default.style style2.style style3.style <font color="#990000">\</font>
+lang.map outlang.map
+
+<i><font color="#9A1900"># files that are built before distribution gets built</font></i>
+<i><font color="#9A1900">#MAINTAINERCLEANFILES = $(BUILT_SOURCES)</font></i>
+
+<font color="#990000">check:</font>
+	<b><font color="#0000FF">for</font></b> langfile <b><font color="#0000FF">in</font></b> <font color="#009900">$(LANGFILES)</font><font color="#990000">;</font> <b><font color="#0000FF">do</font></b> <font color="#990000">\</font>
+	  <font color="#009900">$(SRCHILITE)</font> --data-dir<font color="#990000">=</font><font color="#009900">$(srcdir)</font> --check-lang <font color="#009900">$(srcdir)</font><font color="#990000">/</font><font color="#009900">$$</font>langfile <font color="#990000">;</font> <font color="#990000">\</font>
+	<b><font color="#0000FF">done</font></b> <font color="#990000">&amp;&amp;</font> <font color="#990000">\</font>
+	<b><font color="#0000FF">for</font></b> outlangfile <b><font color="#0000FF">in</font></b> <font color="#009900">$(OUTLANGFILES)</font><font color="#990000">;</font> <b><font color="#0000FF">do</font></b> <font color="#990000">\</font>
+	  <font color="#009900">$(SRCHILITE)</font> --data-dir<font color="#990000">=</font><font color="#009900">$(srcdir)</font> --check-outlang <font color="#009900">$(srcdir)</font><font color="#990000">/</font><font color="#009900">$$</font>outlangfile <font color="#990000">;</font> <font color="#990000">\</font>
+	<b><font color="#0000FF">done</font></b>
+
+<font color="#990000">tags:</font>
+	ctags --c-types<font color="#990000">=</font><font color="#FF0000">'defgmstuv'</font> --recurse<font color="#990000">=</font>yes <font color="#009900">$(srcdir)</font><font color="#990000">/*</font>
+
+<b><font color="#000080">.PHONY:</font></b> tags
+
+<font color="#009900">noinst_HEADERS =</font> regexpengine.h regexpstate.h asserttest.h regexpenginedebug.h
+</tt></pre>

@@ -35,9 +35,6 @@
 #define DEB2(s,s2)
 #endif
 
-#define PUSH(s) yy_push_state(s);
-#define POP() yy_pop_state();
-
 static std::ostringstream buff;
 
 static void buffer(const char *s);
@@ -72,8 +69,6 @@ IDE [a-zA-Z_]([a-zA-Z0-9_])*
 
 STRING \"[^\n"]+\"
 
-%option stack
-
 %s COMMENT_STATE STRING_STATE REGEXP_STATE INCLUDE_STATE
 
 %%
@@ -104,6 +99,8 @@ STRING \"[^\n"]+\"
 
 <INITIAL>"include" { BEGIN(INCLUDE_STATE); }
 <INCLUDE_STATE>{STRING} {
+  DEB2("inclusion of ", yytext);
+  
   char *file_name = &yytext[1];
   file_name[strlen(file_name)-1] = '\0';
 
@@ -115,6 +112,8 @@ STRING \"[^\n"]+\"
 }
 
 <<EOF>> {
+  DEB("END OF FILE");
+  
   fclose(langdef_in);
   yypop_buffer_state();
 

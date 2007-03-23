@@ -1,4 +1,4 @@
-# Copyright (C) 1999, 2000, 2001, 2002 Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
 #  
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without 
@@ -9,6 +9,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 STD_STYLE = --style-file $(top_srcdir)/src/default.style
+STD_CSS_STYLE = --style-css-file $(top_srcdir)/src/default.css
 STD_STYLE_HTML = -f html $(STD_STYLE)
 DATADIROPTION = --data-dir $(top_srcdir)/src/
 
@@ -17,6 +18,7 @@ PROGEXE = $(top_builddir)/src/$(PACKAGE)$(EXEEXT)
 # we disable the generation of the version of source-highlight
 # so that the version does not interfere with the diffing
 PROGNAME = $(PROGEXE) --gen-version $(DATADIROPTION)
+PROGNAME_CSSSTYLE = $(PROGEXE) --gen-version $(DATADIROPTION) $(STD_CSS_STYLE)
 
 CHECKLANG = $(top_builddir)/src/$(PACKAGE)$(EXEEXT) --check-lang
 
@@ -24,11 +26,19 @@ CHECKOUTLANG = $(top_builddir)/src/$(PACKAGE)$(EXEEXT) --check-outlang
 
 JAVA2HTML = $(PROGNAME) -s java $(STD_STYLE_HTML) 
 
+JAVA2HTMLDOC = $(JAVA2HTML) --title="This is the title"
+
 JS2HTML = $(PROGNAME) -s javascript $(STD_STYLE_HTML) 
 
 URL2HTML = $(PROGNAME) --lang-def=url.lang $(STD_STYLE_HTML) 
 
-JAVA2XHTML = $(PROGNAME) -s java -f xhtml $(STD_STYLE) --doc --lang-def=$(srcdir)/../src/java.lang
+JAVA2XHTML = $(PROGNAME) -s java -f xhtml $(STD_STYLE) --lang-def=$(srcdir)/../src/java.lang
+
+JAVA2XHTMLDOC = $(JAVA2XHTML) --doc
+
+JAVA2XHTMLCSS = $(JAVA2XHTML) --css ../doc/mono.css --no-doc
+
+JAVA2XHTMLCSSDOC = $(JAVA2XHTML) --css ../doc/mono.css
 
 JAVA2HTMLNOTFIXED = $(PROGNAME) -s java --outlang-def=$(srcdir)/../src/html_notfixed.outlang $(STD_STYLE) --doc --lang-def=$(srcdir)/../src/java.lang
 
@@ -113,7 +123,8 @@ WRONGSTYLESOUT = wrong_dircolor.err
 
 OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_ref_post.tex test_ref.texinfo
 
-EXTRA_DIST = test.java test.java.html test.js test.js.html test.h test.h.html \
+EXTRA_DIST = test.java test.java.html test.java.doc.html \
+test.js test.js.html test.h test.h.html \
 test_comments.cc test_comments.cc.html test_comments.java \
 test_comments.java.html test_template.cc test_template.cc.html \
 test.pl test.pl.html header.html footer.html test_header.html \
@@ -123,7 +134,9 @@ test_perl_lines.html \
 test.php3 test.php3.html test_php3_lines.html \
 test.py test.py.html test_python_lines.html \
 test_comments.py test_comments.py.html test_py_comments_lines.html \
-test_xhtml.html test_css.html test_css_nodoc.html test_notfixed.html \
+test_xhtml.html test_xhtml_doc.html \
+test_xhtml_css.html test_xhtml_css_doc.html \
+test_css.html test_css_nodoc.html test_notfixed.html \
 test.chlog test.chlog.html test.chlog_css.html \
 test.l test.l.html \
 test.y test.y.html \
@@ -162,12 +175,15 @@ test_extreme_comment.cpp test_extreme_comment2.cpp test_extreme_comment3.cpp \
 test.cs test.cs.html \
 test.xml test.xml.html \
 test.sh test.sh.html \
+test2.sh test2.sh.html \
 test.url test.url.html \
 test.txt test.txt.html \
 test2.pl test2.pl.html \
 test.tcl test.tcl.html \
 test.sql test.sql.html \
 test.bib test.bib.html \
+test.makefile test.makefile.html \
+test.css test.css.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
@@ -194,6 +210,25 @@ cpp.langelems
 
 %.java.html: %.java
 	$(JAVA2HTML) -i $< -o $@
+
+%.java.doc.html: %.java
+	$(JAVA2HTMLDOC) -i $< -o $@
+
+# these are files processed using a css as the style file
+%.css.java.html: %.java
+	$(PROGNAME_CSSSTYLE) -i $< -o $@
+
+# these are files processed using a css as the style file
+%.css_xhtml.java.html: %.java
+	$(PROGNAME_CSSSTYLE) -i $< -o $@ -f xhtml
+
+# these are files processed using a css as the style file
+%.css_doc.java.html: %.java
+	$(PROGNAME_CSSSTYLE) -i $< -o $@ --title="This is the title"
+
+# these are files processed using a css as the style file and a non fixed html
+%.nf_css.java.html: %.java
+	$(PROGNAME_CSSSTYLE) -i $< -o $@ --outlang-def=$(srcdir)/../src/html_notfixed.outlang
 
 debug.java.html: debug.java
 	$(DEBUGLANG) -i $(srcdir)/debug.java -o debug.java.html > /dev/null
@@ -288,6 +323,9 @@ debug.java.html: debug.java
 %.style.html: $(top_srcdir)/src/%.style
 	$(STYLE2HTML) -i $< -o $@
 
+%.style.html: $(srcdir)/%.style
+	$(STYLE2HTML) -i $< -o $@
+
 %.htm: %.java
 	$(JAVA2HTML) -i $< --title="Java formatted in html" > $@
 	echo "" >> $@
@@ -320,15 +358,15 @@ missing_extension.err: test.simple
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple 2> missing_extension.err || true;
 	sed -r -i -f $(srcdir)/erasedir2.sed missing_extension.err
 
-CPP2HTML_WHEADERS = $(CPP2HTML) --header=$(srcdir)/header.html --footer=$(srcdir)/footer.html --title="Header and footer test"
+CPP2HTML_WHEADERS = $(CPP2HTML) --header=$(srcdir)/header.html --footer=$(srcdir)/footer.html
 
-CPP2HTML_WREFS = $(CPP2HTML) --title="Contains references to tags" --gen-references=inline --ctags="ctags --excmd=n --tag-relative=yes -o my_test_ref.tags"
+CPP2HTML_WREFS = $(CPP2HTML) --title="Contains references to tags" --gen-references=inline --ctags="$(CTAGS) --excmd=number --tag-relative=yes -o my_test_ref.tags"
 
 CPP2LATEX_WREFS = $(CPP2TEX) --title="Contains references to tags" --gen-references=postline --line-number --ctags=""
 
 CPP2LATEX_WREFSPOST = $(CPP2TEX) --title="Contains references to tags" --gen-references=postdoc --line-number --ctags=""
 
-CTAGS_CMD=$(CTAGS) --excmd=n --tag-relative=yes 
+CTAGS_CMD=$(CTAGS) --excmd=number --tag-relative=yes 
 
 test_header.html: test.h
 	$(CPP2HTML_WHEADERS) -i test.h -o $@
@@ -360,6 +398,15 @@ test_java_lines.html: test.java
 test_xhtml.html: test.java
 	$(JAVA2XHTML) < $(srcdir)/test.java > $@
 
+test_xhtml_doc.html: test.java
+	$(JAVA2XHTMLDOC) < $(srcdir)/test.java > $@
+
+test_xhtml_css.html: test.java
+	$(JAVA2XHTMLCSS) < $(srcdir)/test.java > $@
+
+test_xhtml_css_doc.html: test.java
+	$(JAVA2XHTMLCSSDOC) < $(srcdir)/test.java > $@
+
 test_notfixed.html: test.java
 	$(JAVA2HTMLNOTFIXED) < $(srcdir)/test.java > $@
 
@@ -387,6 +434,12 @@ test.sql.html: test.sql
 test.bib.html: test.bib
 	$(PROGNAME) -i test.bib -o $@
 
+test.makefile.html: test.makefile
+	$(PROGNAME) -i test.makefile -o $@
+
+test.css.html: test.css
+	$(PROGNAME) -i test.css -o $@
+
 test_perl_lines.html: test.pm
 	$(PERL2HTML) --line-number -i test.pm -o $@
 
@@ -399,7 +452,7 @@ test_python_lines.html: test.py
 test_py_comments_lines.html: test_comments.py
 	$(PYTHON2HTML) --line-number -i test_comments.py -o $@
 
-check: check_java2html check_cpp2html check_csharp2html \
+check: check_java2html check_java2xhtml check_cpp2html check_csharp2html \
 check_prolog2html check_logtalk2html \
 check_perl2html \
 check_php32html check_python2html check_changelog check_flex check_bison \
@@ -418,12 +471,23 @@ check_infer \
 check_wrong check_failsafe check_missing \
 check_debug \
 check_ref \
-check_show
+check_show \
+check_makefile \
+check_css
 
-check_java2html: test.java.html test.js.html test.java.txt test.java.tex test.java.texinfo test_xhtml.html test_notfixed.html test_css.html test_css_nodoc.html test_comments.java.html test_java_lines.html 
+remove_css_html_files:
+	rm -f *.css.java.html *.nf_css.java.html
+
+remove_css_xhtml_files:
+	rm -f *.css_xhtml.java.html
+
+remove_css_doc_files:
+	rm -f *.css_doc.java.html
+
+check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.java.doc.html test.js.html test.java.txt test.java.tex test.java.texinfo test_notfixed.html test_css.html test_css_nodoc.html test_comments.java.html test_java_lines.html test.css.java.html test.nf_css.java.html test.css_doc.java.html
 	$(JAVA2HTML) -i $(srcdir)/test.java -o test.java.out.html
+	$(JAVA2HTMLDOC) -i $(srcdir)/test.java -o test.java.doc.out.html
 	$(JS2HTML) < $(srcdir)/test.js > test.js.out.html
-	$(JAVA2XHTML) < $(srcdir)/test.java > test_xhtml.out.html
 	$(JAVA2HTMLNOTFIXED) < $(srcdir)/test.java > test_notfixed.out.html
 	$(JAVA2HTMLCSS) < $(srcdir)/test.java > test_css.out.html
 	$(JAVA2HTMLCSSNODOC) < $(srcdir)/test.java > test_css_nodoc.out.html
@@ -434,8 +498,8 @@ check_java2html: test.java.html test.js.html test.java.txt test.java.tex test.ja
 	$(JAVA2TEXINFO) -n -i $(srcdir)/test.java -o test.java.out.texinfo
 	@echo expect no output from diff
 	diff $(srcdir)/test.java.html test.java.out.html
+	diff $(srcdir)/test.java.doc.html test.java.doc.out.html
 	diff $(srcdir)/test.js.html test.js.out.html
-	diff $(srcdir)/test_xhtml.html test_xhtml.out.html
 	diff $(srcdir)/test_notfixed.html test_notfixed.out.html
 	diff $(srcdir)/test_css.html test_css.out.html
 	diff $(srcdir)/test_css_nodoc.html test_css_nodoc.out.html
@@ -444,6 +508,21 @@ check_java2html: test.java.html test.js.html test.java.txt test.java.tex test.ja
 	diff $(srcdir)/test.java.txt test.java.out.txt
 	diff $(srcdir)/test.java.tex test.java.out.tex
 	diff $(srcdir)/test.java.texinfo test.java.out.texinfo
+	diff $(srcdir)/test.java.html test.css.java.html
+	diff $(srcdir)/test_notfixed.html test.nf_css.java.html
+	diff $(srcdir)/test.java.doc.html test.css_doc.java.html
+
+check_java2xhtml: remove_css_xhtml_files test_xhtml.html test_xhtml_doc.html test_xhtml_css.html test_xhtml_css_doc.html test.css_xhtml.java.html
+	$(JAVA2XHTML) < $(srcdir)/test.java > test_xhtml.out.html
+	$(JAVA2XHTMLDOC) < $(srcdir)/test.java > test_xhtml_doc.out.html
+	$(JAVA2XHTMLCSS) < $(srcdir)/test.java > test_xhtml_css.out.html
+	$(JAVA2XHTMLCSSDOC) < $(srcdir)/test.java > test_xhtml_css_doc.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test_xhtml.html test_xhtml.out.html
+	diff $(srcdir)/test_xhtml_doc.html test_xhtml_doc.out.html
+	diff $(srcdir)/test_xhtml_css.html test_xhtml_css.out.html
+	diff $(srcdir)/test_xhtml_css_doc.html test_xhtml_css_doc.out.html
+	diff $(srcdir)/test_xhtml.html test.css_xhtml.java.html
 
 check_cpp2html: test.h.html test_comments.cc.html test_template.cc.html test_header.html test_cpp_lines.html
 	$(CPP2HTML) -i $(srcdir)/test.h > test.h.out.html
@@ -541,7 +620,7 @@ check_sml: test.sml.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.sml.html test.sml.out.html
 
-check_log: test.log.html
+check_log: test.log.html access.log.html auth.log.html error.log.html syslog.log.html
 	$(LOG2HTML) < $(srcdir)/test.log > test.log.out.html
 	$(LOG2HTML) < $(srcdir)/access.log > access.log.out.html
 	$(LOG2HTML) < $(srcdir)/auth.log > auth.log.out.html
@@ -580,10 +659,12 @@ check_xml: test.xml.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.xml.html test.xml.out.html
 
-check_sh: test.sh.html
+check_sh: test.sh.html test2.sh.html
 	$(PROGNAME) -i $(srcdir)/test.sh > test.sh.out.html
+	$(PROGNAME) -i $(srcdir)/test2.sh > test2.sh.out.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.sh.html test.sh.out.html
+	diff $(srcdir)/test2.sh.html test2.sh.out.html
 
 check_url: test.url.html
 	$(URL2HTML) -i $(srcdir)/test.url > test.url.out.html
@@ -624,6 +705,16 @@ check_bib: test.bib.html
 	$(PROGNAME) -i $(srcdir)/test.bib > test.bib.out.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.bib.html test.bib.out.html
+
+check_makefile: test.makefile.html
+	$(PROGNAME) -i $(srcdir)/test.makefile > test.makefile.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.makefile.html test.makefile.out.html
+
+check_css: test.css.html
+	$(PROGNAME) -i $(srcdir)/test.css > test.css.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.css.html test.css.out.html
 
 check_lang: log.lang.html cpp.lang.html default.style.html
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o log.lang.out.html
@@ -731,7 +822,7 @@ clean_ref:
 source_highlightdoc_DATA = test.php3.html test.pl.html test.pm.html \
 test.py.html test.rb.html test.js.html test.lua.html test.ml.html \
 test.sml.html test.log.html access.log.html auth.log.html error.log.html syslog.log.html test.htm.html test.java.tex.html \
-syslog.style \
+syslog.style.html \
 log.lang.html cpp.lang.html default.style.html
 
 VALGRINDTESTS = $(top_builddir)/tests/valgrind_tests.sh
@@ -741,7 +832,9 @@ check-valgrind:
 	$(VALGRINDTEST) $(PROGEXE) --help
 	$(VALGRINDTEST) $(PROGEXE) --version
 	$(VALGRINDTEST) $(JAVA2HTML) -i $(srcdir)/test.java -o test.java.out.html
+	$(VALGRINDTEST) $(PROGNAME_CSSSTYLE) -i $(srcdir)/test.java -o test.css.java.html
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline -i $(srcdir)/test.h -o test_ref.out.html
+	$(VALGRINDTEST) $(FAILSAFE) -i $(srcdir)/test.unknown -s cpp -o test.unknown_out
 	$(VALGRINDTEST) $(FAILSAFE) -i $(srcdir)/test.unknown -o test.unknown_out
 	cp -f $(srcdir)/test_refs.h test_refs_tmp.h
 	cp -f $(srcdir)/test_refs.cpp test_refs_tmp.cpp
@@ -749,9 +842,9 @@ check-valgrind:
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp
 	rm -f test_refs_tmp.*
 
-CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript*
+CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html 
 
-DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo
+DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html

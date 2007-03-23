@@ -90,6 +90,7 @@ STRING \"[^\n"]+\"
 <INITIAL>"notfixed" { return NOTFIXED_T ; }
 <INITIAL>"fixed" { return FIXED_T ; }
 <INITIAL>"colormap" { return COLORMAP_T ; }
+<INITIAL>"bgcolor" { return BG_COLOR_T ; }
 <INITIAL>"color" { return COLOR_T ; }
 <INITIAL>"default" { return DEFAULT_T ; }
 <INITIAL>"onestyle" { return ONESTYLE_T ; }

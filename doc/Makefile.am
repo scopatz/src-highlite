@@ -79,10 +79,22 @@ debug.java.texinfo: $(top_srcdir)/tests/debug.java
 %.lang.texinfo: $(srcdir)/%.lang
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
+%.lang.texinfo: $(top_srcdir)/src/%.lang
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
 %.style.texinfo: $(top_srcdir)/src/%.style
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
+%.style.texinfo: $(top_srcdir)/tests/%.style
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
 %.diff.texinfo: %.diff
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+%.css.texinfo: %.css
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+%.css.texinfo: $(top_srcdir)/src/%.css
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
 %.cpp.texinfo: $(top_srcdir)/tests/%.cpp
@@ -125,12 +137,26 @@ endif
 
 AM_MAKEINFOHTMLFLAGS=--no-split
 
-GENERATEDINFOS = help-output.texinfo lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo test_ref.h.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo
+GENERATEDINFOS = help-output.texinfo lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo test_ref.h.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo
+
+CSS_FILES = Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
+            xhtml.css \
+sh_acid.css           sh_golden.css           sh_night.css \
+sh_berries-dark.css   sh_greenlcd.css         sh_pablo.css \
+sh_berries-light.css  sh_ide-anjuta.css       sh_peachpuff.css \
+sh_bipolar.css        sh_ide-codewarrior.css  sh_print.css \
+sh_blacknblue.css     sh_ide-devcpp.css       sh_rand01.css \
+sh_bright.css         sh_ide-eclipse.css      sh_the.css \
+sh_contrast.css       sh_ide-kdev.css         sh_typical.css \
+sh_darkblue.css       sh_ide-msvcpp.css       sh_vampire.css \
+sh_darkness.css       sh_kwrite.css           sh_vim-dark.css \
+sh_desert.css         sh_matlab.css           sh_vim.css \
+sh_dull.css           sh_navy.css             sh_whatis.css \
+sh_easter.css         sh_nedit.css            sh_whitengrey.css \
+sh_emacs.css          sh_neon.css             sh_zellner.css
 
 EXTRA_DIST = colors.html source-highlight.html \
              Hello.java \
-             Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
-             xhtml.css \
              header.html footer.html \
              test_refs.h.html test_refs.cpp.html \
              test_refs.h test_refs.cpp \
@@ -140,20 +166,22 @@ EXTRA_DIST = colors.html source-highlight.html \
 	     comment-show.lang \
 	     SimpleClass.java SimpleClass-doc.html UsageExample.java \
 	     txt2texinfo.txt \
-             $(GENERATEDINFOS)
+             $(GENERATEDINFOS) $(CSS_FILES) \
+style_examples_footer.html style_examples_header.html
 
 source_highlightdoc_DATA = colors.html source-highlight.html \
     Hello.java Hello1.html Hello2.html Hello3.html Hello4.html Hello5.html \
     Hello.java.html Hello_h_f.html Hello_lines.html Hello_xhtml.html \
     Hello_xhtml2.html Hello_notfixed.html \
-    Hello.css Hello2.css mono-alt.css mono.css cpp2html.css xhtml.css \
+    $(CSS_FILES) \
     startapp.cc.html cmdline.h.html test_refs.h.html test_refs.cpp.html \
     flex_scanner.ll.html \
     header.html footer.html \
     langdef.lang.html \
     index.html \
     SimpleClass.java SimpleClass.html SimpleClass-doc.html \
-    UsageExample.java UsageExample.html
+    UsageExample.java UsageExample.html \
+    style_examples.html
 
 # man page
 man_MANS = source-highlight.1
@@ -248,6 +276,14 @@ Hello_xhtml2.html: $(srcdir)/Hello.java
 Hello_notfixed.html: $(srcdir)/Hello.java
 	$(BUILD_HELLO_HTMLNOTFIXED)
 
+style_examples.html: $(srcdir)/Hello.java
+	cat $(srcdir)/style_examples_header.html > style_examples.html
+	./gen_style_example.sh $(top_srcdir)/src/default.css >> style_examples.html
+	for style in $(CSS_FILES); do \
+	  ./gen_style_example.sh $$style >> style_examples.html ; \
+	done ; \
+	cat $(srcdir)/style_examples_footer.html >> style_examples.html
+
 check:
 	$(BUILD_HELLO1)
 	$(BUILD_HELLO2)
@@ -265,7 +301,8 @@ HTML_GENERATED_FILES = Hello1.html Hello2.html Hello3.html Hello4.html \
 Hello5.html Hello.java.html Hello_h_f.html startapp.cc.html \
 cmdline.h.html Hello_lines.html Hello_xhtml.html Hello_xhtml2.html \
 flex_scanner.ll.html test_refs.h.html test_refs.cpp.html SimpleClass.html \
-UsageExample.html Hello_notfixed.html
+UsageExample.html Hello_notfixed.html \
+style_examples.html
 
 html-clean:
 	rm -f $(HTML_GENERATED_FILES)

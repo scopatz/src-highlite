@@ -1,3 +1,5 @@
+bgcolor "white"; // the background color for documents
+
 keyword blue b ; // for language keywords
 type darkgreen ; // for basic types
 string red f ; // for strings and chars
@@ -8,7 +10,7 @@ preproc darkblue b ; // for preproc directives (e.g. #include, import)
 symbol darkred ; // for simbols (e.g. <, >, +)
 function black b; // for function calls and declarations
 cbracket red; // for block brackets (e.g. {, })
-todo b;	// for TODO and FIXME
+todo bg:cyan b;	// for TODO and FIXME
 
 // line numbers
 linenum black f;
@@ -18,10 +20,8 @@ url blue u, f;
 
 // other elements for ChangeLog and Log files
 date blue b ;
-time darkblue b ;
-ip darkgreen ;
-file darkblue b ;
-name darkgreen ;
+time, file darkblue b ;
+ip, name darkgreen ;
 
 // for Prolog, Perl...
 variable darkgreen ;
@@ -40,3 +40,8 @@ bibtex blue;
 oldfile orange;
 newfile darkgreen;
 difflines blue; 
+
+// for css
+selector purple;
+property blue;
+value darkgreen i;

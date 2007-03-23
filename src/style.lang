@@ -4,11 +4,12 @@ comment start "//"
 
 string delim "\"" "\"" escape "\\"
 
-keyword = "purple|orange|brightorange|brightgreen|darkgreen",
+keyword = "bgcolor|purple|orange|brightorange|brightgreen|darkgreen",
           "green|darkred|red|brown|pink|yellow|cyan",
           "black|teal|gray|darkblue|blue",
           "normal|linenum",
           "noref|nf|f|u|i|b"
+keyword = 'bg\:'
 
 symbol = ",|;"
 

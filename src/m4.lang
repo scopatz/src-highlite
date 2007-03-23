@@ -1,0 +1,17 @@
+# language definition for m4 files
+
+state keyword start "dnl" begin
+  include "url.lang"
+  include "html.lang"
+  type = '@[[:alpha:]]+'
+  # the following is similar to .+ but does not exclude the
+  # url, html, type defined above
+  comment = '[^[:blank:]]+'
+  comment = '[[:blank:]]+'
+end
+
+# since ## is not a comment in shell scripts, but it is in m4
+# we kind of redefine multiple #'s as comments
+comment start '#+'
+
+include "sh.lang"

@@ -7,15 +7,33 @@ http://www.gnu.org/software/src-highlite -->
 <i><font color="#9A1900"># this shell script is for test purpose only</font></i>
 <i><font color="#9A1900"># so it should not be executed</font></i>
 
-<b><font color="#0000FF">for</font></b> <b><font color="#0000FF">source</font></b> <b><font color="#0000FF">in</font></b> $<font color="#993399">1</font><font color="#990000">;</font> <b><font color="#0000FF">do</font></b>
+<b><font color="#0000FF">case</font></b> <font color="#009900">$revision</font> <b><font color="#0000FF">in</font></b>
+        <font color="#993399">0</font><font color="#990000">|[</font><font color="#993399">1</font>-<font color="#993399">9</font><font color="#990000">]|[</font><font color="#993399">1</font>-<font color="#993399">9</font><font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">]|[</font>
+<font color="#993399">1</font>-<font color="#993399">9</font><font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">]|[</font><font color="#993399">1</font>-<font color="#993399">9</font><font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">][</font>
+<font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">]|[</font><font color="#993399">1</font>-<font color="#993399">9</font><font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font>
+<font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">][</font><font color="#993399">0</font>-<font color="#993399">9</font><font color="#990000">])</font> <font color="#990000">;;</font>
+
+
+<b><font color="#0000FF">for</font></b> <b><font color="#0000FF">source</font></b> <b><font color="#0000FF">in</font></b> <font color="#009900">$1</font><font color="#990000">;</font> <b><font color="#0000FF">do</font></b>
         source-highlight --failsafe -f esc -i <font color="#009900">$source</font><font color="#990000">;</font>
 <b><font color="#0000FF">done</font></b>
 
 <i><font color="#9A1900"># these are variables</font></i>
-<font color="#009900">$abc</font><font color="#990000">,</font> <font color="#009900">$(abc)</font> and <font color="#009900">${abc}</font> <font color="#009900">${abc)</font>
+<font color="#009900">$abc</font><font color="#990000">,</font> <font color="#009900">$(abc)</font> and <font color="#009900">${abc}</font> <font color="#009900">${</font>abc<font color="#990000">)</font>
 
 <i><font color="#9A1900"># and also these are variables</font></i>
 <font color="#990000">(</font><font color="#009900">$myvar</font><font color="#990000">)</font> {<font color="#009900">$myvar</font>} {<font color="#009900">$myvar</font><font color="#990000">)</font>
+
+<b><font color="#0000FF">eval</font></b> <font color="#009900">std_shrext</font><font color="#990000">=</font>\"<font color="#009900">$shrext_cmds</font>\"
+
+<font color="#009900">disable_libs</font><font color="#990000">=</font>no
+
+    <b><font color="#0000FF">if</font></b> <b><font color="#0000FF">test</font></b> -n <font color="#FF0000">"$shlibpath_var"</font><font color="#990000">;</font> <b><font color="#0000FF">then</font></b>
+      <i><font color="#9A1900"># get the directories listed in $shlibpath_var</font></i>
+      <b><font color="#0000FF">eval</font></b> <font color="#009900">shlib_search_path</font><font color="#990000">=\</font>`<font color="#990000">\</font><font color="#009900">$echo</font> \"X<font color="#990000">\</font><font color="#009900">${$shlibpath_var}</font>\" <font color="#990000">\|</font> <font color="#990000">\</font><font color="#009900">$Xsed</font> -e \'s<font color="#990000">/:/</font> /g\'<font color="#990000">\</font>`
+    <b><font color="#0000FF">else</font></b>
+      <font color="#009900">shlib_search_path</font><font color="#990000">=</font>
+    <b><font color="#0000FF">fi</font></b>
 
 <b><font color="#0000FF">for</font></b> as_dir <b><font color="#0000FF">in</font></b> /bin<font color="#009900">$PATH_SEPARATOR</font>/usr/bin<font color="#009900">$PATH_SEPARATOR$PATH</font>
 <b><font color="#0000FF">do</font></b>
@@ -34,7 +52,7 @@ http://www.gnu.org/software/src-highlite -->
              <font color="#009900">$as_unset</font> ENV <font color="#990000">||</font> <b><font color="#0000FF">test</font></b> <font color="#FF0000">"${ENV+set}"</font> <font color="#990000">!=</font> <b><font color="#0000FF">set</font></b> <font color="#990000">||</font> { <font color="#009900">ENV</font><font color="#990000">=;</font> <b><font color="#0000FF">export</font></b> ENV<font color="#990000">;</font> }
              <font color="#009900">CONFIG_SHELL</font><font color="#990000">=</font><font color="#009900">$as_dir</font><font color="#990000">/</font><font color="#009900">$as_base</font>
              <b><font color="#0000FF">export</font></b> CONFIG_SHELL
-             <b><font color="#0000FF">exec</font></b> <font color="#FF0000">"$CONFIG_SHELL"</font> <font color="#FF0000">"$0"</font> ${<font color="#993399">1</font><font color="#990000">+</font><font color="#FF0000">"$@"</font>}
+             <b><font color="#0000FF">exec</font></b> <font color="#FF0000">"$CONFIG_SHELL"</font> <font color="#FF0000">"$0"</font> <font color="#009900">${1+"$@"}</font>
            <b><font color="#0000FF">fi</font></b><font color="#990000">;;</font>
          <b><font color="#0000FF">esac</font></b>
        <b><font color="#0000FF">done</font></b>

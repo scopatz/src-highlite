@@ -25,9 +25,9 @@ main()
   cout << "DocTemplate start:\n" << textstyles->docTemplate.toStringBegin() << endl;
   cout << "DocTemplate end:\n" << textstyles->docTemplate.toStringEnd() << endl;
   cout << "DocTemplate start:\n" << textstyles->docTemplate.output_begin
-      ("title", "css", "additional", "header", "footer") << endl;
+    ("title", "css", "additional", "header", "footer", "") << endl;
   cout << "DocTemplate end:\n" << textstyles->docTemplate.output_end
-      ("title", "css", "additional", "header", "footer") << endl;
+    ("title", "css", "additional", "header", "footer", "") << endl;
 
   cout << "Style template:\n" << textstyles->starting_template << endl;
   cout << "Style separator: " << textstyles->style_separator << endl;

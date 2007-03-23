@@ -1,0 +1,30 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">#!/bin/sh</font></i>
+
+  <i><font color="#9A1900">#.*$         - comment</font></i>
+
+echo <font color="#009900">${variable##*i}</font> <i><font color="#9A1900"># prints "s bob"</font></i>
+
+  <i><font color="#9A1900">#.*$         - comment</font></i>
+
+echo <font color="#009900">${variable#*n}</font>  <i><font color="#9A1900"># prints "ame is bob"</font></i>
+
+
+echo <font color="#009900">${#variable}</font>    <i><font color="#9A1900"># prints 17</font></i>
+
+echo <font color="#009900">${#array[*]}</font> <i><font color="#9A1900"># prints 4</font></i>
+
+
+echo <font color="#009900">$#</font> <font color="#990000">+</font> <font color="#993399">1</font> <i><font color="#9A1900"># prints 0</font></i>
+
+<i><font color="#9A1900"># Incidentally, all of the $ variables should be variable markup </font></i>
+<i><font color="#9A1900"># (i.e. $#, $@, $?, $!, $*, $-, $$, $[0-9] and ${[0-9][0-9]*})</font></i>
+
+echo <font color="#009900">$#</font>  
+echo <font color="#009900">$@</font> <font color="#009900">$?</font>  <font color="#009900">$!</font> <font color="#009900">$*</font>  <font color="#009900">$-</font>  <font color="#009900">$$</font>  <font color="#009900">$8</font> <font color="#009900">${12}</font>
+
+echo <font color="#FF0000">"comment"</font> <i><font color="#9A1900">### this is a comment</font></i>
+</tt></pre>

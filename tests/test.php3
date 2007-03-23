@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 CircaLib.php3 : provide function to perform search on Circa with PHP
 Copyright 2000 A.Barbet alian@alianwebserver.com.  All rights reserved.

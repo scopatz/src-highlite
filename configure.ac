@@ -1,4 +1,4 @@
-# Copyright (C) 1999-2005 Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
 #
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without
@@ -9,11 +9,11 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(reconf)
+AC_INIT(autogen.sh)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(source-highlight,2.5)
+AM_INIT_AUTOMAKE(source-highlight,2.6)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)
@@ -24,34 +24,13 @@ source_highlightdocdir=$datadir/doc/source-highlight
 dnl Checks for C compiler.
 AC_PROG_CC
 
+dnl Use of GnuLib
+gl_EARLY
+
 dnl add options for non GNU compilers
 AC_NONGNU_FLAGS
 
-dnl Test for a gotcha in the Sun Forte Developer and, more recently the
-dnl Sun ONE Studio, C++ compiler that causes an undef at link time if
-dnl the code uses templates and "libx.a" archives are built using the
-dnl standard `ar' technique.  `CC' creates a subdirectory set starting
-dnl with one named "SunWC_cache" to build additional "*.o" files for the
-dnl instantiated templates(?).  The normal way 'ar' is used doesn't work
-dnl when generating archive ("libx.a") libraries and `CC' itself must be
-dnl used.  The following is a hack provided by Paul Townsend <aab@purdue.edu>.
-dnl
-AC_MSG_CHECKING( checking whether to use ar cru or CC -xar -o )
-cat <<EOF >conftest.c
-int conftest(void){return 0;}
-EOF
-${CXX} -xar -o conftest.a conftest.c >/dev/null 2>&1
-if test $? == 0; then
-  ar_to_use="\$(CXX) -xar -o"
-else
-  ar_to_use="\$(AR) cru"
-fi
-AC_SUBST(ar_to_use)dnl
-AC_MSG_RESULT( $ar_to_use )
-rm -fr conftest.*
-
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
 AC_TYPE_SIZE_T
 AC_CHECK_HEADERS([libintl.h])
 AC_CHECK_HEADERS([stddef.h])
@@ -71,8 +50,7 @@ AC_PROG_AWK
 
 AC_PROG_INSTALL
 
-dnl check for ranlib, for building common code
-AC_PROG_RANLIB
+AM_PROG_LIBTOOL
 
 dnl test for --enable-warnings command line option
 AC_ARG_ENABLE( warnings, [  --enable-warnings       enable compiler warnings], AC_COMPILE_WARNINGS )
@@ -123,11 +101,8 @@ dnl Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS(unistd.h)
 
-dnl Checks for library functions.
-AC_CHECK_FUNCS(strdup)
-
-dnl check for getopt in standard library
-adl_FUNC_GETOPT_LONG
+# For gnulib.
+gl_INIT
 
 dnl needed by readtags.c
 AC_TYPE_OFF_T
@@ -177,7 +152,6 @@ AC_PATH_PROGS(TAR, tar gtar)
 AC_PATH_PROGS(TEXI2HTML, texi2html)
 
 AH_TEMPLATE(CHROOT_INPUT_DIR)
-AH_BOTTOM([#include "cxxconfig.h"])
 
 dnl compute relative paths
 dnl adl_COMPUTE_STANDARD_RELATIVE_PATHS
@@ -199,11 +173,14 @@ AM_MAINTAINER_MODE
 AC_OUTPUT(
 [Makefile
 txtc.sh
+gl/Makefile
 src/Makefile
 src/java2html
 src/cpp2html
 src/src-hilite-lesspipe.sh
 doc/Makefile
+doc/shjs_css_transform.sh
+doc/gen_style_example.sh
 src/includes/Makefile
 src/lib/Makefile
 tests/Makefile
@@ -213,7 +190,9 @@ tests/valgrind_suppressions.sh
 source-highlight.spec],
 [chmod +x tests/valgrind_tests.sh
  chmod +x tests/valgrind_suppressions.sh
- chmod +x tests/valgrind_test.sh]
+ chmod +x tests/valgrind_test.sh
+ chmod +x doc/shjs_css_transform.sh
+ chmod +x doc/gen_style_example.sh]
 )
 
 if test "$ax_cv_boost_regex" = "yes"; then

@@ -56,7 +56,7 @@ const char *anchor_vars[] = {"linenum", "infilename", "infile", 0};
 };
 
 %token <tok> BEGIN_T END_T DOC_TEMPLATE_T STYLE_TEMPLATE_T STYLE_SEPARATOR_T
-%token <tok> BOLD_T ITALICS_T UNDERLINE_T COLOR_T FIXED_T NOTFIXED_T
+%token <tok> BOLD_T ITALICS_T UNDERLINE_T COLOR_T BG_COLOR_T FIXED_T NOTFIXED_T
 %token <tok> COLORMAP_T DEFAULT_T ONESTYLE_T TRANSLATIONS_T EXTENSION_T ANCHOR_T
 %token <tok> REFERENCE_T INLINE_REFERENCE_T POSTLINE_REFERENCE_T POSTDOC_REFERENCE_T
 %token <string> KEY STRINGDEF REGEXDEF LINE_PREFIX_T
@@ -123,6 +123,12 @@ outputlangdef : DOC_TEMPLATE_T STRINGDEF STRINGDEF END_T
   COLOR_T STRINGDEF
 {
   textstyles->color = *$2;
+  delete $2;
+}
+|
+  BG_COLOR_T STRINGDEF
+{
+  textstyles->bg_color = *$2;
   delete $2;
 }
 |
