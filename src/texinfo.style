@@ -1,6 +1,7 @@
 keyword, type b ;
 variable f, i ;
 string f ;
+regexp f ;
 comment nf, i, noref ;
 preproc b ;
 

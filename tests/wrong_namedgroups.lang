@@ -1,0 +1,4 @@
+# contains an error since number of marked subexpressions and
+# number of elements don't match
+
+(keyboard,symbol) = `(foo)(bar)(another)`

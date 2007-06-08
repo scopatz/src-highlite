@@ -8,6 +8,14 @@ http://www.gnu.org/software/src-highlite -->
 
 <b><font color="#000080">require</font></b> <font color="#FF0000">"English"</font>
 
+<font color="#990000">#</font><font color="#FF0000">{</font>expression<font color="#FF0000">}</font>
+
+<font color="#990000">#</font><font color="#FF0000">{</font>
+  expression
+<font color="#FF0000">}</font> 
+
+cnf<font color="#990000">.</font>marked<font color="#990000">.</font>any? <font color="#990000">?</font> cnf<font color="#990000">.</font>marked<font color="#990000">.</font>to_a<font color="#990000">.</font>join!<font color="#990000">(</font><font color="#FF0000">','</font><font color="#990000">)</font> <font color="#990000">:</font> <font color="#FF0000">"nothing"</font>
+
 <b><font color="#0000FF">BEGIN</font></b> <font color="#FF0000">{</font>
   puts <font color="#FF0000">"Hello! in \"BEGIN\""</font> <i><font color="#9A1900"># comment</font></i>
   puts <font color="#FF0000">'World! in \'BEGIN\''</font> <i><font color="#9A1900"># comment</font></i>
@@ -24,11 +32,11 @@ puts <b><font color="#0000FF">__LINE__</font></b>
 puts <b><font color="#0000FF">__FILE__</font></b>
 
 a <font color="#990000">=</font> <font color="#990000">[</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#FF0000">"foo"</font><font color="#990000">,</font> <font color="#FF0000">"bar"</font><font color="#990000">]</font>
-a <font color="#990000">=</font> <font color="#990000">%</font><b><font color="#000000">w</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#FF0000">"foo"</font><font color="#990000">,</font> <font color="#FF0000">"bar"</font><font color="#990000">)</font>
+a <font color="#990000">=</font> <font color="#990000">%</font>w<font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#FF0000">"foo"</font><font color="#990000">,</font> <font color="#FF0000">"bar"</font><font color="#990000">)</font>
 h <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#FF0000">"foo"</font> <font color="#990000">=&gt;</font> <font color="#993399">1</font><font color="#990000">,</font> <font color="#FF0000">"bar"</font> <font color="#990000">=&gt;</font> <font color="#993399">3</font><font color="#FF0000">}</font>
 <font color="#009900">$global</font> <font color="#990000">=</font> <font color="#993399">1</font>
 
-<b><font color="#000000">print</font></b><font color="#990000">(</font><font color="#FF0000">"with parenthesis\n"</font><font color="#990000">)</font>
+print<font color="#990000">(</font><font color="#FF0000">"with parenthesis\n"</font><font color="#990000">)</font>
 print <font color="#FF0000">"without parenthesis\n"</font>
 print <font color="#993399">12345678</font><font color="#990000">,</font> <font color="#FF0000">"\n"</font>
 print <font color="#993399">1.2345678</font><font color="#990000">,</font> <font color="#FF0000">"\n"</font>
@@ -63,18 +71,23 @@ EOM
 <b><font color="#0000FF">end</font></b>
 
 foo
-<b><font color="#000000">foo</font></b><font color="#990000">()</font>
+foo<font color="#990000">()</font>
 
 k <font color="#990000">=</font> Klass<font color="#990000">.</font>new
 k<font color="#990000">.</font>foo
-k<font color="#990000">.</font><b><font color="#000000">foo</font></b><font color="#990000">()</font>
+k<font color="#990000">.</font>foo<font color="#990000">()</font>
 
 p <font color="#990000">[(</font><font color="#993399">1</font> <b><font color="#0000FF">and</font></b> <font color="#993399">2</font><font color="#990000">),</font> <font color="#990000">(</font><font color="#993399">1</font> <b><font color="#0000FF">or</font></b> <font color="#993399">2</font><font color="#990000">),</font> <font color="#990000">(</font><b><font color="#0000FF">not</font></b> <b><font color="#0000FF">nil</font></b><font color="#990000">)]</font>
 
 str <font color="#990000">=</font> <font color="#FF0000">"abc"</font>
-p <font color="#FF0000">/d/</font> <font color="#990000">=~</font> str
+p <font color="#FF6600">/d/</font> <font color="#990000">=~</font> str
 p <font color="#990000">%</font>r<font color="#990000">|</font>a<font color="#990000">|</font> <font color="#990000">=~</font> str
-p <font color="#990000">%</font>r<font color="#990000">!</font>a<font color="#990000">!</font> <font color="#990000">=~</font> str
-<font color="#FF0000">/"d/</font> <font color="#990000">=~</font> str <i><font color="#9A1900"># problem " in Regexp</font></i>
-<font color="#FF0000">/'d/</font> <font color="#990000">=~</font> str <i><font color="#9A1900"># problem ' in Regexp</font></i>
+p <font color="#990000">%</font>r!a! <font color="#990000">=~</font> str
+<font color="#FF6600">/"d/</font> <font color="#990000">=~</font> str <i><font color="#9A1900"># problem " in Regexp</font></i>
+<font color="#FF6600">/'d/</font> <font color="#990000">=~</font> str <i><font color="#9A1900"># problem ' in Regexp</font></i>
+
+<b><font color="#0000FF">if</font></b> <font color="#990000">%r</font><font color="#FF6600">{foo(\{?\}?[A-Z]\{?\}?bar#{myvar})}</font> <font color="#990000">=~</font> <font color="#FF0000">'foo{A}bar'</font>
+  puts <font color="#FF0000">'foo'</font>
+<b><font color="#0000FF">end</font></b>
+
 </tt></pre>

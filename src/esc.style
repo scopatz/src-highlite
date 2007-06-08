@@ -1,6 +1,7 @@
 keyword blue b ;
 type darkgreen ;
 string red ;
+regexp orange ;
 specialchar pink ;
 comment cyan i ;
 number purple ;

@@ -4,6 +4,8 @@
 
 #include "statelangelem.h"
 
+#include "namedsubexpslangelem.h"
+
 #include "delimitedlangelem.h"
 
 #include "langelems.h"
@@ -38,6 +40,12 @@ LangElem::dispatch_build(RegExpStateBuilder *RegExpStateBuilder_o, RegExpStatePo
 
 void
 LangElems::dispatch_build(RegExpStateBuilder *RegExpStateBuilder_o, RegExpStatePointer state)
+{
+  RegExpStateBuilder_o->_forward_build(this, state);
+}
+
+void
+NamedSubExpsLangElem::dispatch_build(RegExpStateBuilder *RegExpStateBuilder_o, RegExpStatePointer state)
 {
   RegExpStateBuilder_o->_forward_build(this, state);
 }

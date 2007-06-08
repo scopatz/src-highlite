@@ -1,3 +1,3 @@
-bad expression: ((?:(?:notclosed))
-bad expression: 
-source-highlight: problem in this expression: keyword (notclosed
+bad expression: (\<(?:ok)\>)|((?:(?:notclosed))
+bad expression: (\<(?:ok)\>)|((?:(?:notclosed))
+wrong_exp.lang:2: problem in this expression: keyword (notclosed

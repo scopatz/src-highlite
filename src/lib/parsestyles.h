@@ -19,7 +19,7 @@ class GeneratorFactory;
 void parseStyles(const std::string &path, const std::string &name,
                    GeneratorFactory *generatorFactory,
                    std::string &bodyBgColor) ;
-void parseStyleError(const std::string &error) ;
+void parseStyleError(const std::string &error, bool exit = true) ;
 
 /// for css style files
 void parseCssStyles(const std::string &path, const std::string &name,

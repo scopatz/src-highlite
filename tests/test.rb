@@ -4,6 +4,14 @@
 
 require "English"
 
+#{expression}
+
+#{
+  expression
+} 
+
+cnf.marked.any? ? cnf.marked.to_a.join!(',') : "nothing"
+
 BEGIN {
   puts "Hello! in \"BEGIN\"" # comment
   puts 'World! in \'BEGIN\'' # comment
@@ -73,3 +81,8 @@ p %r|a| =~ str
 p %r!a! =~ str
 /"d/ =~ str # problem " in Regexp
 /'d/ =~ str # problem ' in Regexp
+
+if %r{foo(\{?\}?[A-Z]\{?\}?bar#{myvar})} =~ 'foo{A}bar'
+  puts 'foo'
+end
+

@@ -14,6 +14,9 @@
 
 #include <iostream>
 
+class TextGenerator;
+class TextStyle;
+
 /**
 base class that actually writes the generated output to the output stream
 
@@ -28,11 +31,26 @@ class OutputGenerator
     std::string line_prefix;
     /// whether to flush the stream at each output (default = false)
     bool alwaysFlush;
+    
+    /// whether to generate line information
+    bool generateLineInfo;
+    
+    // for line information
+
+    bool generate_ref;
+    TextStyle *anchor;
+    std::string anchor_line_prefix;
+    unsigned int line_num;
+    TextGenerator *line_num_generator;
 
   public:
     OutputGenerator(std::ostream &os, const std::string &pref);
+    
+    OutputGenerator(std::ostream& os, TextGenerator *linegen,
+                TextStyle *anch, bool genref, const std::string &prefix,
+                const std::string &line_pref);
 
-    virtual ~OutputGenerator();
+    ~OutputGenerator();
 
     void setAlwaysFlush(bool b) { alwaysFlush = b; }
 
@@ -61,10 +79,9 @@ class OutputGenerator
     void flush();
 
     /**
-     * Resets the generator.  By default it does nothing, but it can be
-     * overidden by subclasses
+     * Resets the generator (i.e., resets line number)
      */
-    virtual void reset() {}
+    void reset();
 
   protected:
     /**
@@ -73,7 +90,12 @@ class OutputGenerator
      *
      * @param s
      */
-    virtual void generate_line(const std::string &s);
+    void generate_line(const std::string &s);
+    
+    /**
+     * Generates line information
+     */
+    void generate_line_info();
 };
 
 #endif

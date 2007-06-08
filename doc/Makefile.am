@@ -30,21 +30,7 @@ OUTPUT_HERE = --output-dir=$(top_builddir)/doc
 
 info_TEXINFOS = source-highlight.texinfo
 
-source-highlight.texinfo: $(GENERATEDINFOS)
-
-# the following rules have to do only with maintainance of the package
-if MAINTAINER_MODE
-
-# help-output.texinfo: $(top_srcdir)/src/lib/cmdline.ggo
-#	$(SRCHILITEEXE) --help | sed -e 's/@/@@/' > $@
-
-if NO_GENGETOPT
-help-output.texinfo: $(top_srcdir)/src/lib/cmdline.ggo
-	touch $@
-else
-help-output.texinfo: $(top_srcdir)/src/lib/cmdline.ggo
-	$(GENGETOPT) --show-help -i $(top_srcdir)/src/lib/cmdline.ggo --set-package="source-highlight" --set-version="" > $@
-endif
+source-highlight.texinfo: $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
 
 lang-list.texinfo: $(top_srcdir)/src/lang.map
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ --lang-list | sed -e 's/@/@@/' > $@
@@ -117,7 +103,21 @@ test_extreme_comment_3.texinfo: $(top_srcdir)/tests/test_extreme_comment3.cpp
 
 %.show.texinfo: %.lang
 	$(SRCHILITEEXE) --show-regex=$< > $@
-	sed -i -e 's/@/@@/g' $@
+	sed -itesttmp -e 's/@/@@/g' $@ && rm -f *testtmp
+
+# the following rules have to do only with maintainance of the package
+if MAINTAINER_MODE
+
+# help-output.texinfo: $(top_srcdir)/src/lib/cmdline.ggo
+#	$(SRCHILITEEXE) --help | sed -e 's/@/@@/' > $@
+
+if NO_GENGETOPT
+help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
+	touch $@
+else
+help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
+	$(GENGETOPT) --show-help -i $(top_srcdir)/src/cmdline.ggo --set-package="source-highlight" --set-version="" > $@
+endif
 
 test_ref.h.texinfo: $(top_srcdir)/tests/test.h
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.h --style-file=$(top_srcdir)/src/texinfo.style -n --gen-references=postline > $@
@@ -125,10 +125,10 @@ test_ref.h.texinfo: $(top_srcdir)/tests/test.h
 # the dependence on config.h is to ensure the correct version number
 # in the generated man file
 if NO_HELP2MAN
-source-highlight.1: $(top_srcdir)/src/lib/cmdline.ggo $(top_builddir)/config.h
+source-highlight.1: $(top_srcdir)/src/cmdline.ggo $(top_builddir)/config.h
 	touch $@
 else
-source-highlight.1: $(top_srcdir)/src/lib/cmdline.ggo $(top_builddir)/config.h
+source-highlight.1: $(top_srcdir)/src/cmdline.ggo $(top_builddir)/config.h
 	$(HELP2MAN) $(SRCHILITEEXE) > $@
 endif
 
@@ -137,7 +137,10 @@ endif
 
 AM_MAKEINFOHTMLFLAGS=--no-split
 
-GENERATEDINFOS = help-output.texinfo lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo test_ref.h.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo
+# these are distributed since they might depend on other programs
+DISTRIBUTEDINFOS = help-output.texinfo test_ref.h.texinfo 
+
+GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo
 
 CSS_FILES = Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
             xhtml.css \
@@ -163,11 +166,12 @@ EXTRA_DIST = colors.html source-highlight.html \
              gpl.texinfo flex_scanner.ll \
              example-u.diff example-c.diff example-n.diff \
              source-highlight.1 index.html \
-	     comment-show.lang \
+	     comment-show.lang comment-show2.lang \
 	     SimpleClass.java SimpleClass-doc.html UsageExample.java \
 	     txt2texinfo.txt \
-             $(GENERATEDINFOS) $(CSS_FILES) \
-style_examples_footer.html style_examples_header.html
+             $(DISTRIBUTEDINFOS) $(CSS_FILES) \
+style_examples_footer.html style_examples_header.html \
+css_example.css
 
 source_highlightdoc_DATA = colors.html source-highlight.html \
     Hello.java Hello1.html Hello2.html Hello3.html Hello4.html Hello5.html \
@@ -203,8 +207,8 @@ flex_scanner.ll.html: $(srcdir)/flex_scanner.ll
 # cmdline.c.html: $(top_srcdir)/src/lib/cmdline.c
 #	$(CPP2HTML) --doc $(OUTPUT_HERE) --css="$(srcdir)/cpp2html.css" --header="$(srcdir)/header.html" --footer="$(srcdir)/footer.html" $(top_srcdir)/src/lib/cmdline.c
 
-cmdline.h.html: $(top_srcdir)/src/lib/cmdline.h
-	$(CPP2HTML) --doc $(OUTPUT_HERE) --css="$(srcdir)/mono.css" $(top_srcdir)/src/lib/cmdline.h
+cmdline.h.html: $(top_srcdir)/src/cmdline.h
+	$(CPP2HTML) --doc $(OUTPUT_HERE) --css="$(srcdir)/mono.css" $(top_srcdir)/src/cmdline.h
 
 BUILD_HELLO1 = $(PROGNAME) -i $(srcdir)/Hello.java -o Hello1.html
 BUILD_HELLO2 = $(PROGNAME) --input $(srcdir)/Hello.java --output Hello2.html --doc
@@ -217,6 +221,7 @@ BUILD_HELLO_LINES = $(PROGNAME) --line-number --doc -i $(srcdir)/Hello.java -o H
 BUILD_HELLO_XHTML = $(SRCHILITEPROG) -s java -f xhtml --doc -i $(srcdir)/Hello.java -o Hello_xhtml.html --css $(srcdir)/xhtml.css
 BUILD_HELLO_XHTML2 = $(SRCHILITEPROG) -s java -f xhtml --doc -i $(srcdir)/Hello.java -o Hello_xhtml2.html $(STD_STYLE)
 BUILD_HELLO_HTMLNOTFIXED = $(SRCHILITEPROG) -s java --outlang-def=$(srcdir)/../src/html_notfixed.outlang -i $(srcdir)/Hello.java -o Hello_notfixed.html
+
 BUILD_REFS = $(CPP2HTML_WREFS) --ctags-file=my_test_ref.tags --line-number $(srcdir)/test_refs.h $(srcdir)/test_refs.cpp 
 
 SimpleClass.html: $(srcdir)/SimpleClass.java
@@ -234,10 +239,7 @@ test_refs.cpp.html: test_refs.h.html
 else
 test_refs.h.html: test_refs.h
 	$(BUILD_REFS)
-	sed -r 's/\"([^[:blank:]]*)\/([[:alnum:]\._]*\#[[:alnum:]\._]+)\"/\"\2\"/g' test_refs.h.html > temp.html # eliminate leading paths
-	mv -f temp.html test_refs.h.html
-	sed -r 's/\"([^[:blank:]]*)\/([[:alnum:]\._]*\#[[:alnum:]\._]+)\"/\"\2\"/g' test_refs.cpp.html > temp.html # eliminate leading paths
-	mv -f temp.html test_refs.cpp.html
+	sed -itesttmp -f $(top_srcdir)/tests/erasedir3.sed test_refs.h.html test_refs.cpp.html && rm -f *testtmp # eliminate leading paths
 
 test_refs.cpp.html: test_refs.h.html
 
@@ -310,4 +312,4 @@ html-clean:
 texinfo-clean:
 	rm -f $(GENERATEDINFOS)
 
-DISTCLEANFILES = $(HTML_GENERATED_FILES) source-highlight.1 $(GENERATEDINFOS) tags langdef.lang.html
+DISTCLEANFILES = $(HTML_GENERATED_FILES) $(GENERATEDINFOS) tags langdef.lang.html

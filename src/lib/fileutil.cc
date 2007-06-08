@@ -17,11 +17,14 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <iostream>
 #include <fstream>
 
 #include "fileutil.h"
-#include "my_string.h"
 #include "messages.h" // for verbosity
 
 using namespace std;

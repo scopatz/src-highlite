@@ -1,0 +1,3 @@
+symbol = "ok"
+wrong "foo"
+type = "ok"

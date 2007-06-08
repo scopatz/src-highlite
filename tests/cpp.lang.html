@@ -5,17 +5,20 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><i><font color="#9A1900"># definitions for C/C++</font></i>
 <b><font color="#000080">include</font></b> <font color="#FF0000">"c_comment.lang"</font>
 
-<b><font color="#0000FF">state</font></b> <font color="#009900">preproc</font> <b><font color="#0000FF">start</font></b> <font color="#FF0000">'^[[:blank:]]*#(?:[[:blank:]]*include)'</font> <b><font color="#0000FF">begin</font></b>
+<b><font color="#0000FF">state</font></b> <font color="#009900">preproc</font> <b><font color="#0000FF">start</font></b> <font color="#FF6600">'^[[:blank:]]*#(?:[[:blank:]]*include)'</font> <b><font color="#0000FF">begin</font></b>
         <font color="#009900">string</font> <b><font color="#0000FF">delim</font></b> <font color="#FF0000">"&lt;"</font> <font color="#FF0000">"&gt;"</font> 
         <font color="#009900">string</font> <b><font color="#0000FF">delim</font></b> <font color="#FF0000">"\""</font> <font color="#FF0000">"\""</font> <b><font color="#0000FF">escape</font></b> <font color="#FF0000">"\\"</font>
         <b><font color="#000080">include</font></b> <font color="#FF0000">"c_comment.lang"</font>
 <b><font color="#0000FF">end</font></b>
 
-<font color="#009900">preproc</font> <font color="#990000">=</font> <font color="#FF0000">'^[[:blank:]]*#([[:blank:]]*[[:word:]]*)'</font>
+<font color="#009900">preproc</font> <font color="#990000">=</font> <font color="#FF6600">'^[[:blank:]]*#([[:blank:]]*[[:word:]]*)'</font>
 
 <b><font color="#000080">include</font></b> <font color="#FF0000">"number.lang"</font>
 
 <b><font color="#000080">include</font></b> <font color="#FF0000">"c_string.lang"</font>
+
+<font color="#990000">(</font><font color="#009900">keyword</font><font color="#990000">,</font><font color="#009900">normal</font><font color="#990000">,</font><font color="#009900">type</font><font color="#990000">)</font> <font color="#990000">=</font> 
+  <font color="#FF6600">`(\&lt;(?:class|struct|typename))([[:blank:]]+)([[:alnum:]]+)`</font>
 
 <font color="#009900">keyword</font> <font color="#990000">=</font> <font color="#FF0000">"__asm|__cdecl|__declspec|__export|__far16"</font><font color="#990000">,</font>
   <font color="#FF0000">"__fastcall|__fortran|__import"</font><font color="#990000">,</font>

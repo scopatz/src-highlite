@@ -11,6 +11,9 @@ using std::ostream;
 using std::cerr;
 using std::endl;
 
+class ParserInfo;
+class ParseStruct;
+
 class Messages {
  public:
   /// whether to print anything
@@ -66,9 +69,13 @@ void printMessage_noln( const std::string &s, ostream &stream = cerr ) ;
 void printWarning( const char *s, ostream &stream = cerr ) ;
 void printError( const char *s, ostream &stream = cerr ) ;
 void printError( const std::string &s, ostream &stream = cerr ) ;
+void printError( const std::string &s, const ParserInfo *pinfo, ostream &stream = cerr ) ;
 void printError(const std::string &filename, unsigned int line, const std::string &error, ostream & stream = cerr );
 void memory_exhausted();
 void exitError(const std::string &error);
+void exitError(const std::string &error, const ParserInfo *pinfo);
+void exitError(const std::string &error, const ParseStruct *pinfo);
+void exitError(const std::string &filename, unsigned int line, const std::string &error);
 void foundBug(const std::string &error, const std::string &file, int line);
 bool shouldPrint();
 

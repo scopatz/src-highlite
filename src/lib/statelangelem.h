@@ -48,6 +48,8 @@ public:
     
     virtual const std::string toString() const;
     
+    virtual const std::string toStringOriginal() const;
+    
     StateStartLangElem *getStateStart() const { return statestartlangelem; }
     bool isState() const { return state; }
     LangElems *getElems() const { return langelems; }

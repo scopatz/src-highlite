@@ -33,6 +33,12 @@ LangElems::toString() const
   return toStringCollection<LangElems>(this, '\n');
 }
 
+const string
+LangElems::toStringOriginal() const
+{
+  return toStringOriginalCollection<LangElems>(this, '\n');
+}
+
 void LangElems::add(LangElem *el)
 {
   push_back(el);

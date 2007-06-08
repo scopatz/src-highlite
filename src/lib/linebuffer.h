@@ -33,8 +33,8 @@ class LineBuffer
     PostContents post; // to be generated after the line
 
   public:
-    LineBuffer();
-    ~LineBuffer();
+    LineBuffer() {}
+    ~LineBuffer() {}
 
     void output(const std::string &s) { buffer << s; }
     void output_post(const std::string &s) { post.insert(s); }
@@ -42,7 +42,7 @@ class LineBuffer
     const std::string getContents() const { return buffer.str(); }
     const PostContents &getPostContents() const { return post; }
 
-    bool empty() const;
+    bool empty() const { return (buffer.str().size() == 0 && post.size() == 0); }
 };
 
 typedef boost::shared_ptr<LineBuffer> LineBufferPtr;

@@ -246,22 +246,22 @@ http://www.gnu.org/software/src-highlite -->
 <font color="#000000">242:</font>     <b><font color="#0000FF">my</font></b> <font color="#009900">$class</font> <font color="#990000">=</font> <b><font color="#0000FF">shift</font></b><font color="#990000">;</font>
 <font color="#000000">243:</font>     <b><font color="#0000FF">my</font></b> <font color="#009900">$self</font> <font color="#990000">=</font> <font color="#FF0000">{}</font><font color="#990000">;</font>
 <font color="#000000">244:</font>     <b><font color="#0000FF">bless</font></b> <font color="#009900">$self</font><font color="#990000">,</font> <font color="#009900">$class</font><font color="#990000">;</font>
-<font color="#000000">245:</font>     <font color="#009900">$content</font> <font color="#990000">=~</font> <font color="#FF0000">s/^.*content:.*?\"//i</font><font color="#990000">;</font>
+<font color="#000000">245:</font>     <font color="#009900">$content</font> <font color="#990000">=~</font> <font color="#FF6600">s/^.*content:.*?\"//i</font><font color="#990000">;</font>
 <font color="#000000">246:</font>   <font color="#FF0000">}</font>
 <font color="#000000">247:</font> 
 <font color="#000000">248:</font> 
-<font color="#000000">249:</font> <font color="#009900">$theline</font> <font color="#990000">=~</font> <font color="#FF0000">s/(&lt;=|=&gt;|=|\-|\+|\*|\/|\*\*|;|:|\\|\'|\"|,|\.|\(|\)|\[|\]|\{|\}|&lt;|&gt;)/\&lt;span class\=\"op\"\&gt;$1\&lt;\/span&gt;/g</font><font color="#990000">;</font>
+<font color="#000000">249:</font> <font color="#009900">$theline</font> <font color="#990000">=~</font> <font color="#FF6600">s/(&lt;=|=&gt;|=|\-|\+|\*|\/|\*\*|;|:|\\|\'|\"|,|\.|\(|\)|\[|\]|\{|\}|&lt;|&gt;)/\&lt;span class\=\"op\"\&gt;$1\&lt;\/span&gt;/g</font><font color="#990000">;</font>
 <font color="#000000">250:</font> 
-<font color="#000000">251:</font> <font color="#009900">$theline</font> <font color="#990000">=~</font> <font color="#FF0000">s/(&lt;=|=&gt;|=|\-|\+|\*|\/|\*\*|;|:|\\|\'|\"|,|\.|\(|\)|\[|\]|\{|\}|&lt;|&gt;)/g</font><font color="#990000">;</font>
+<font color="#000000">251:</font> <font color="#009900">$theline</font> <font color="#990000">=~</font> <font color="#FF6600">s/(&lt;=|=&gt;|=|\-|\+|\*|\/|\*\*|;|:|\\|\'|\"|,|\.|\(|\)|\[|\]|\{|\}|&lt;|&gt;)/g</font><font color="#990000">;</font>
 <font color="#000000">252:</font> 
 <font color="#000000">253:</font> <b><font color="#0000FF">if</font></b><font color="#990000">(</font><font color="#009900">$#ARGV</font><font color="#990000">==</font><font color="#993399">2</font><font color="#990000">)</font><font color="#FF0000">{}</font>
 <font color="#000000">254:</font> 
-<font color="#000000">255:</font> <font color="#009900">$someString</font> <font color="#990000">=~</font> <font color="#FF0000">m/anything/gix</font> <font color="#990000">;</font>
+<font color="#000000">255:</font> <font color="#009900">$someString</font> <font color="#990000">=~</font> <b><font color="#0000FF">m</font></b><font color="#FF6600">/anything/</font>gix <font color="#990000">;</font>
 <font color="#000000">256:</font> <font color="#009900">$someString</font> <font color="#990000">=~</font>  <font color="#FF0000">/anything/</font>    <font color="#990000">;</font>
 <font color="#000000">257:</font> <b><font color="#0000FF">if</font></b><font color="#990000">(</font><font color="#009900">$someString</font> <font color="#990000">=~</font>  <font color="#FF0000">/anything/g</font>   <font color="#990000">)</font><font color="#FF0000">{}</font>
 <font color="#000000">258:</font> <b><font color="#0000FF">if</font></b><font color="#990000">(</font>                <font color="#FF0000">/anything/</font>    <font color="#990000">)</font><font color="#FF0000">{}</font>
 <font color="#000000">259:</font> 
-<font color="#000000">260:</font> <b><font color="#0000FF">if</font></b><font color="#990000">(</font><font color="#009900">$somestring</font> <font color="#990000">=~</font>  <font color="#FF0000">s/something/something else/gi</font> <font color="#990000">)</font><font color="#FF0000">{}</font>
+<font color="#000000">260:</font> <b><font color="#0000FF">if</font></b><font color="#990000">(</font><font color="#009900">$somestring</font> <font color="#990000">=~</font>  <font color="#FF6600">s/something/something else/gi</font> <font color="#990000">)</font><font color="#FF0000">{}</font>
 <font color="#000000">261:</font> <font color="#009900">$somestring</font> <font color="#990000">=~</font>   <font color="#FF0000">/something/something else/</font>   <font color="#990000">;</font>
-<font color="#000000">262:</font> <font color="#009900">$somestring</font> <font color="#990000">=~</font> <font color="#FF0000">qr/something/something else/</font>   <font color="#990000">;</font>
+<font color="#000000">262:</font> <font color="#009900">$somestring</font> <font color="#990000">=~</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">/something/</font>something <b><font color="#0000FF">else</font></b><font color="#990000">/</font>   <font color="#990000">;</font>
 </tt></pre>

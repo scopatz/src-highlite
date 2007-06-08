@@ -38,6 +38,8 @@ public:
     virtual ~StringListLangElem();
 
     virtual const std::string toString() const;
+    
+    virtual const std::string toStringOriginal() const;
 
     StringDefs *getAlternatives() const { return alternatives; }
     bool isCaseSensitive() const { return !nonsensitive; }

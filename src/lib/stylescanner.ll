@@ -60,7 +60,7 @@ IDE [a-zA-Z_]([a-zA-Z0-9_])*
 
 STRING \"[^\"\n]*\"
 
-%s COMMENT_STATE STRING_STATE 
+%s COMMENT_STATE STRING_STATE
 
 %%
 
@@ -76,7 +76,7 @@ STRING \"[^\"\n]*\"
 
 <INITIAL>\#[a-fA-F0-9]{6} {
   const std::string wrong = yytext ;
-  parseStyleError("use of direct colors has changed");
+  parseStyleError("use of direct colors has changed", false);
   parseStyleError("use double quoted syntax: \"" +  wrong + "\" instead of " + wrong);
   exit(EXIT_FAILURE);
   return COLOR ;
@@ -107,16 +107,6 @@ STRING \"[^\"\n]*\"
 <STRING_STATE>\n {  buffer( "\n" ) ; }
 
 \n { ++line ; }
-
-<<EOF>> {
-  DEB("reached EOF of the style file");
-
-  DEB("freeing scanner memory");
-  /* For non-reentrant C scanner only. */
-  yy_delete_buffer(YY_CURRENT_BUFFER);
-
-  yyterminate();
-}
 
 <INITIAL>.  { /* anything else will generate a parsing error */ return yytext[0] ; }
 

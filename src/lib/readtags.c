@@ -1,5 +1,5 @@
 /*
-*   $Id: readtags.c,v 1.7 2007/03/23 18:13:11 bettini Exp $
+*   $Id: readtags.c,v 1.8 2007/06/08 10:11:30 bettini Exp $
 *
 *   Copyright (c) 1996-2003, Darren Hiebert
 *

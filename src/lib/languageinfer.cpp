@@ -43,6 +43,10 @@ const string LanguageInfer::infer( istream &stream )
   boost::regex langRegEx("#[[:blank:]]*![[:blank:]]*(?:[\\./]*)(?:[[:alnum:]]+[\\./]+)*([[:alnum:]]+)");
 
   // the regular expression for finding the language specification in a script file
+  // this such as #! /usr/bin/env perl
+  boost::regex langEnvRegEx("#[[:blank:]]*![[:blank:]]*(?:[\\./]*)(?:[[:alnum:]]+[\\./]+)*(?:env)[[:blank:]]+([[:alnum:]]+)");
+  
+  // the regular expression for finding the language specification in a script file
   // according to Emacs convention: # -*- language -*-
   boost::regex langRegExEmacs("-\\*-[[:blank:]]*([[:alnum:]]+).*-\\*-");
 
@@ -61,6 +65,7 @@ const string LanguageInfer::infer( istream &stream )
   read_line(&stream, secondLine);
 
   boost::match_results<std::string::const_iterator> what;
+  boost::match_results<std::string::const_iterator> whatEnv;
   boost::match_results<std::string::const_iterator> whatEamcs;
 
   // first try the emacs specification
@@ -77,12 +82,19 @@ const string LanguageInfer::infer( istream &stream )
       return whatEamcs[1];
   }
 
-  // try the sha-bang specification
+  // try also the env specification
+  boost::regex_search(firstLine,
+                      whatEnv, langEnvRegEx, boost::match_default);
+
+  if (whatEnv[1].matched)
+    return whatEnv[1];
+  
+  // finally try the sha-bang specification
   boost::regex_search(firstLine,
                       what, langRegEx, boost::match_default);
 
   if (what[1].matched)
     return what[1];
-
+  
   return "";
 }

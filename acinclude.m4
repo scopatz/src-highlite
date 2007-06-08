@@ -1,3 +1,19 @@
+dnl @synopsis AC_CTAGS_FLAGS
+dnl
+dnl check whether it's the correct version of ctags
+
+AC_DEFUN([AC_CTAGS_FLAGS],
+[AC_CACHE_CHECK(whether ${CTAGS} accept --excmd, ac_ctags_flags,
+[echo 'void f(){}' > conftest.c
+if test -z "`${CTAGS} --excmd=n -f conftags conftest.c 2>&1`"; then
+  ac_ctags_flags=yes
+else
+  ac_ctags_flags=no
+fi
+rm -f conftest*
+rm -f conftags*
+])])
+
 dnl Copyright (C) 1998 Eleftherios Gkioulekas <lf@amath.washington.edu>
 dnl  
 dnl This program is free software; you can redistribute it and/or modify
@@ -177,24 +193,6 @@ if test "$ac_cv_cxx_have_sstream" = yes; then
   AC_DEFINE(HAVE_SSTREAM,,[define if the compiler has stringstream])
 fi
 ])
-
-dnl Available from the GNU Autoconf Macro Archive at:
-dnl http://www.gnu.org/software/ac-archive/htmldoc/adl_func_getopt_long.html
-dnl
-AC_PREREQ(2.49)
-
-AC_DEFUN([adl_FUNC_GETOPT_LONG],
- [# clean out junk possibly left behind by a previous configuration
-  rm -f lib/getopt.h
-  # Check for getopt_long support
-  AC_CHECK_HEADERS([getopt.h])
-  AC_CHECK_FUNCS([getopt_long],,
-   [# FreeBSD has a gnugetopt library for this
-    AC_CHECK_LIB([gnugetopt],[getopt_long],[AC_DEFINE([HAVE_GETOPT_LONG])],
-     [# use the GNU replacement
-      AC_LIBOBJ(getopt)
-      AC_LIBOBJ(getopt1)
-      AC_CONFIG_LINKS([src/getopt.h:src/gnugetopt.h])])])])
 
 
 dnl Check whether ios_base is defined, otherwise use ios

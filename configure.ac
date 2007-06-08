@@ -13,7 +13,7 @@ AC_INIT(autogen.sh)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(source-highlight,2.6)
+AM_INIT_AUTOMAKE(source-highlight,2.7)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)
@@ -125,8 +125,13 @@ AC_PATH_PROGS(HELP2MAN, help2man)
 AM_CONDITIONAL(NO_HELP2MAN, test -z "$ac_cv_path_HELP2MAN" )
 
 dnl this is for generating references
-AC_PATH_PROGS(CTAGS, ctags)
+AC_PATH_PROGS(CTAGS, ctags exuberant-ctags)
+if test -n "$ac_cv_path_CTAGS"; then
+AC_CTAGS_FLAGS
+AM_CONDITIONAL(NO_CTAGS, test "$ac_ctags_flags" = "no" )
+else
 AM_CONDITIONAL(NO_CTAGS, test -z "$ac_cv_path_CTAGS" )
+fi
 
 dnl *******************
 dnl added by me
@@ -227,6 +232,16 @@ if test -z "$ac_cv_path_CTAGS"; then
 
 ctags is not installed so you won't be able to
 generate references (--gen-references).
-Furthermore, if you run make check, then some
-tests are going to fail.])
+You can find it here http://ctags.sourceforge.net
+])
+else
+if test "$ac_ctags_flags" = "no"; then
+   AC_MSG_WARN([
+
+The ctags you have on your system cannot be used by source-highlight
+(make sure you have a ctags that support --excmd option, e.g.,
+exuberant ctags, You can find it here http://ctags.sourceforge.net).
+so you won't be able to generate references (--gen-references).
+])
+fi
 fi

@@ -1,3 +1,147 @@
+2007-06-05  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/ruby.lang: does not perform highlighting for functions
+	(since it might be confusing)
+	? and ! are not highlighted as symbols if they're part of a
+	method invocation
+
+2007-05-27  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/lineoutputgenerator.h: (class LineOutputGenerator) 
+	removed and included in OutputGenerator
+	
+	* src/lib/generatormap.h: (class GeneratorMap) removed and put 
+	everything in TextFormatter
+
+2007-05-26  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/xhtml_notfixed.outlang: added for output in xhtml with nonfixed
+	font
+
+	* src/html_notfixed.outlang: add the information about the generator
+	in a comment
+
+2007-05-23  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/docbookdoc.outlang: output with --doc for docbook
+	references in docbook output
+
+	* src/ruby.lang: handle ruby regexp correctly
+
+2007-05-20  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/html.lang: a tag must start with an alpha char, non numeric
+
+2007-05-13  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/langdefscanner.ll: check that backreferences are not
+	used inside ' and "
+
+2007-05-08  Lorenzo Bettini  <bettini@work>
+
+	* src/java.lang (preproc): highlight class names as types using
+	named groups
+
+2007-05-06  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/langdefscanner.ll: spaces are not discarded in strings
+	(bugfix)
+
+	* src/lib/messages.cc (exitError): added version for ParseStruct
+	and ParserInfo that print also file name and line num
+
+	* src/lib/regexpstatebuilder.cpp (build): correctly print the line
+	of the bad expression
+
+2007-04-30  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/regexpengine.cpp: deal with alternatives in RegExpState
+	and with named grouped subexpressions
+
+	* src/lib/regexpstate.h (struct RegExpState): contain a linked list
+	of possible alternatives (this is required to handle backreferences).
+	Field hasMarkedAlternatives, meaning that the state has a regular
+	expression made up of many marked expressions (this was the situation
+	till version 2.7)
+	Field allAlternativesCanMatch, meaning that the regular expression
+	is made up of all marked subexpressions where each subexpression
+	represents a language element
+
+2007-04-25  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/regexpstatebuilder.cpp (add_exp): for each marked 
+	subexpression add the same formatter
+
+2007-04-24  Lorenzo Bettini  <bettini@work>
+
+	* src/lib/languageinfer.cpp (infer): also try the env specification
+
+	* src/cmdline.ggo: moved to src directory (makes no sense in lib)
+
+2007-04-23  Lorenzo Bettini  <bettini@work>
+
+	* src/lib/regexpstate.h (struct RegExpFormatter): moved in lib dir
+
+	* src/lib/regexpenginedebug.h (class RegExpEngineDebug): 
+	moved in lib dir
+
+	* src/lib/regexpengine.h (class RegExpEngine): moved in lib dir
+
+2007-04-20  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/langelem.h (class LangElem): abstract method toStringOriginal
+	to print the original representation i.e., without preprocessing
+
+	* src/lib/regexpstatebuilder.cpp: does not perform regexp preprocessing
+	anymore
+
+	* src/lib/langdefscanner.ll: regexp preprocessing was moved in
+	flush_buffer_preproc
+
+	* src/lib/regexpreprocessor.cpp: moved regexp for preprocess outside
+	the method (optimization: created only once)
+
+2007-04-10  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/perl.lang: highlight regular expressions correctly (better,
+	but probably not perfectly)
+
+2007-04-01  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/langdefparser.yy: correctly release scanner memory
+
+	* src/lib/outlangdefparser.yy: correctly release scanner memory
+	
+	* src/lib/stylecssparser.yy: correctly release scanner memory
+
+	* src/lib/styleparser.yy: correctly release scanner memory
+
+2007-03-30    <bettini@gentoo>
+
+	* tests/Makefile.am: use sed -iext with explicit extension otherwise
+	we might experience problems with non gnu sed
+
+	* src/lib/Makefile.am: exclude test_readtags in case ctags
+	is missing or not the one we can use
+
+	* doc/Makefile.am (DISTCLEANFILES): source-highlight.1 is not in
+	distclean
+
+2007-03-27    <bettini@work>
+
+	* configure.ac: give priority to exuberant-ctags if found
+	and check that the ctags program support --excmd
+
+	* tests/Makefile.am: remove use of non-standard -r sed command
+	line argument
+
+2007-03-25  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/postscript.lang: handle ( ) strings
+
+	* src/lang.map: fixed association with log.lang (instead of
+	syslog.lang)
+
 2007-03-23    <bettini@work>
 
 	* src/lib/styles.h: removed, no longer needed

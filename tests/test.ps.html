@@ -1,0 +1,43 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">%!</font></i>
+<i><font color="#9A1900">% a test for highlighting postscript files</font></i>
+
+<i><font color="#9A1900">% proc dotest =&gt; .</font></i>
+<font color="#009900">/dotest</font>
+  <font color="#990000">{</font>
+    <b><font color="#0000FF">dup</font></b>
+    <b><font color="#0000FF">mark</font></b>
+    <b><font color="#0000FF">exch</font></b>
+    <b><font color="#0000FF">stopped</font></b> <b><font color="#0000FF">not</font></b> <i><font color="#9A1900">% False if error, true if no error.</font></i>
+    <font color="#990000">{</font> <font color="#FF0000">(Allowed access: )</font> <b><font color="#0000FF">print</font></b> <b><font color="#0000FF">cleartomark</font></b> <font color="#990000">==</font> <font color="#990000">}</font>
+    <b><font color="#0000FF">if</font></b>
+    <b><font color="#0000FF">clear</font></b>
+  <font color="#990000">}</font>
+<b><font color="#0000FF">def</font></b>
+
+<font color="#009900">0</font> <font color="#009900">0</font> <b><font color="#0000FF">moveto</font></b> <i><font color="#9A1900">% So the show commands don't bomb because of nocurrentpoint.</font></i>
+
+<font color="#990000">{</font> <font color="#990000">[</font><font color="#009900">1</font> <font color="#009900">2</font><font color="#990000">]</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">aload</font></b> <font color="#990000">}</font>                                     <font color="#009900">dotest</font>
+<font color="#990000">{</font> <font color="#FF0000">(string)</font> <b><font color="#0000FF">executeonly</font></b> <font color="#FF0000">(seek)</font> <b><font color="#0000FF">anchorsearch</font></b> <font color="#990000">}</font>                    <font color="#009900">dotest</font>
+<font color="#990000">{</font> <font color="#FF0000">(string)</font> <font color="#FF0000">(seek)</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">anchorsearch</font></b> <font color="#990000">}</font>                    <font color="#009900">dotest</font>
+
+<font color="#FF0000">(This is % a string)</font>
+<font color="#990000">{</font> <font color="#990000">[</font><font color="#009900">1</font> <font color="#009900">2</font><font color="#990000">]</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">aload</font></b> <font color="#990000">}</font>
+<font color="#FF0000">(This is a string with </font><font color="#CC33CC">\(</font><font color="#FF0000"> some escapes </font><font color="#CC33CC">\(</font><font color="#FF0000"> )</font>
+<font color="#990000">{</font> <font color="#990000">[</font><font color="#009900">1</font> <font color="#009900">2</font><font color="#990000">]</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">aload</font></b> <font color="#990000">}</font>
+<font color="#FF0000">(Strings may contain newlines </font>
+<font color="#FF0000">and such.)</font>
+<font color="#990000">{</font> <font color="#990000">[</font><font color="#009900">1</font> <font color="#009900">2</font><font color="#990000">]</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">aload</font></b> <font color="#990000">}</font>
+<font color="#FF0000">(Strings may contain special characters *!&amp;}^% and</font>
+<font color="#FF0000">balanced parentheses ( ) (and so on).)</font>
+<font color="#990000">{</font> <font color="#990000">[</font><font color="#009900">1</font> <font color="#009900">2</font><font color="#990000">]</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">aload</font></b> <font color="#990000">}</font>
+<font color="#FF0000">(The following is an empty string.)</font>
+<font color="#990000">{</font> <font color="#990000">[</font><font color="#009900">1</font> <font color="#009900">2</font><font color="#990000">]</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">aload</font></b> <font color="#990000">}</font>
+<font color="#FF0000">()</font>
+<font color="#990000">{</font> <font color="#990000">[</font><font color="#009900">1</font> <font color="#009900">2</font><font color="#990000">]</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">aload</font></b> <font color="#990000">}</font>
+<font color="#FF0000">(It has 0 (zero) length.)</font>
+<font color="#990000">{</font> <font color="#990000">[</font><font color="#009900">1</font> <font color="#009900">2</font><font color="#990000">]</font> <b><font color="#0000FF">executeonly</font></b> <b><font color="#0000FF">aload</font></b> <font color="#990000">}</font>
+</tt></pre>

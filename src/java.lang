@@ -6,6 +6,8 @@ include "number.lang"
 
 include "c_string.lang"
 
+(keyword,normal,type) = `(\<(?:class|interface))([[:blank:]]+)([$[:alnum:]]+)`
+
 keyword = "abstract|assert|break|case|catch|class|const",
           "continue|default|do|else|extends|false|final",
           "finally|for|goto|if|implements|instanceof|interface"

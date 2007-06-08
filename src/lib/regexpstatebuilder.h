@@ -1,10 +1,10 @@
 //
-// C++ Interface: %{MODULE}
+// C++ Interface: RegExpStateBuilder
 //
-// Description:
+// Description: Builds the RegExpStates starting from all the language elements.
+// 
 //
-//
-// Author: %{AUTHOR} <%{EMAIL}>, (C) %{YEAR}
+// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2007
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -48,6 +48,7 @@ class RegExpStateBuilder
     void (StringListLangElem *elem, RegExpStatePointer state);
     void (DelimitedLangElem *elem, RegExpStatePointer state);
     void (StateStartLangElem *elem, RegExpStatePointer state);
+    void (NamedSubExpsLangElem *elem, RegExpStatePointer state);
     void (LangElem *elem, RegExpStatePointer state);
     void (LangElems *elems, RegExpStatePointer state);
     endbranches

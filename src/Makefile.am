@@ -1,4 +1,4 @@
-# Copyright (C) 1999, 2000, Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
 #
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without
@@ -8,10 +8,24 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-bin_PROGRAMS = source-highlight
+SUFFIXES = .ggo
+
+if NO_GENGETOPT
+.ggo.c:
+	touch $@
+else
+
+check-regexp_cmd.c: $(srcdir)/check-regexp_cmd.ggo
+	$(GENGETOPT) --input $(srcdir)/check-regexp_cmd.ggo --unamed-opts -F check-regexp_cmd
+
+.ggo.c:
+	$(GENGETOPT) --input $< --unamed-opts --no-handle-help --no-handle-version
+endif
+
+
+bin_PROGRAMS = source-highlight check-regexp
 bin_SCRIPTS = java2html cpp2html src-hilite-lesspipe.sh
-noinst_LTLIBRARIES = libsh.la
-libsh_la_LIBADD = $(BOOST_REGEX_LIB) $(LDADD) lib/libcommon.la 
+
 EXTRA_PROGRAMS = source-highlight-cgi 
 
 SRCHILITE = $(top_builddir)/src/source-highlight$(EXEEXT)
@@ -24,8 +38,10 @@ AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl
 
 LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
 
-source_highlight_LDADD = libsh.la 
-source_highlight_cgi_LDADD = libsh.la 
+source_highlight_LDADD = $(BOOST_REGEX_LIB) $(LDADD) lib/libcommon.la
+source_highlight_cgi_LDADD = $(source_highlight_LDADD)
+
+check_regexp_LDADD = $(BOOST_REGEX_LIB) $(top_builddir)/gl/libgnu.la
 
 SUBDIRS = \
 	lib \
@@ -35,12 +51,11 @@ DIST_SUBDIRS = \
 	lib \
 	includes
 
-libsh_la_SOURCES = source-highlight.cc regexpengine.cpp regexpstate.cpp regexpenginedebug.cpp
-
 # for most rules, we use one file per line. `diffs' are more clear this way
-source_highlight_SOURCES = startapp.cc 
+source_highlight_SOURCES = cmdline.c startapp.cc source-highlight.cc 
+check_regexp_SOURCES = check-regexp_cmd.c check-regexp.cpp
 
-source_highlight_cgi_SOURCES = startapp-cgi.cc envmapper.c
+source_highlight_cgi_SOURCES = cmdline.c startapp-cgi.cc envmapper.c
 
 # files that we don't want automake/autoconf to touch ever.
 # just stick them in the distribution as-is
@@ -81,10 +96,12 @@ xhtml_common.outlang \
 xhtmlcss.outlang \
 xhtmldoc.outlang \
 xhtml.outlang \
+xhtml_notfixed.outlang \
 xhtmltable.outlang \
 texinfo.outlang \
 javadoc.outlang \
-docbook.outlang
+docbook.outlang \
+docbookdoc.outlang
 
 STYLEFILES = texinfo.style esc.style
 
@@ -111,4 +128,4 @@ tags:
 
 .PHONY: tags
 
-noinst_HEADERS = regexpengine.h regexpstate.h asserttest.h regexpenginedebug.h
+noinst_HEADERS = asserttest.h cmdline.h cmdlineargs.h cmdline.ggo check-regexp_cmd.h check-regexp_cmd.ggo          

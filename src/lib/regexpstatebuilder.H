@@ -1,10 +1,10 @@
 //
-// C++ Interface: %{MODULE}
+// C++ Interface: RegExpStateBuilder
 //
-// Description:
+// Description: Builds the RegExpStates starting from all the language elements.
+// 
 //
-//
-// Author: %{AUTHOR} <%{EMAIL}>, (C) %{YEAR}
+// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2007
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -34,6 +34,7 @@ build a RegExpState starting from language definitions
 class DelimitedLangElem; // file: delimitedlangelem.h
 class LangElem; // file: langelem.h
 class LangElems; // file: langelems.h
+class NamedSubExpsLangElem; // file: namedsubexpslangelem.h
 class RegExpStatePointer; // file: regexpstatebuilder.h
 class StateLangElem; // file: statelangelem.h
 class StateStartLangElem; // file: statestartlangelem.h
@@ -66,8 +67,10 @@ virtual void build(DelimitedLangElem * elem, RegExpStatePointer state);
 #line 50 "regexpstatebuilder.h"
 virtual void build(StateStartLangElem * elem, RegExpStatePointer state);
 #line 51 "regexpstatebuilder.h"
-virtual void build(LangElem * elem, RegExpStatePointer state);
+virtual void build(NamedSubExpsLangElem * elem, RegExpStatePointer state);
 #line 52 "regexpstatebuilder.h"
+virtual void build(LangElem * elem, RegExpStatePointer state);
+#line 53 "regexpstatebuilder.h"
 virtual void build(LangElems * elems, RegExpStatePointer state);
 public:
 void _forward_build(DelimitedLangElem * elem, RegExpStatePointer state)
@@ -83,6 +86,11 @@ void _forward_build(LangElem * elem, RegExpStatePointer state)
 void _forward_build(LangElems * elems, RegExpStatePointer state)
 {
   build(elems, state);
+};
+
+void _forward_build(NamedSubExpsLangElem * elem, RegExpStatePointer state)
+{
+  build(elem, state);
 };
 
 void _forward_build(StateLangElem * elem, RegExpStatePointer state)
@@ -103,7 +111,7 @@ void _forward_build(StringListLangElem * elem, RegExpStatePointer state)
 protected:
 virtual void build_DB(LangElem * elem, RegExpStatePointer state);
 virtual void build_DB(LangElems * elems, RegExpStatePointer state);
-#line 52 "regexpstatebuilder.h"
+#line 53 "regexpstatebuilder.h"
 // doublecpp: end, DO NOT MODIFY
 
 

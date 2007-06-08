@@ -3,14 +3,6 @@ state date start '[[:digit:]]{2,4}-?[[:digit:]]{2}-?[[:digit:]]{2}' begin
   name = '([[:word:]]|[[:punct:]])+'
 end
   
-state symbol start '^(?:[\t]+|[[:space:]]+)\*[[:space:]]+' begin
-  state file start '[^:]+\:' begin
-    normal start '.'
-  end
-end
+(normal,symbol,normal,file)= `(^[[:blank:]]+)(\*)([[:blank:]]+)((?:[^:]+\:)?)` 
+(normal,file)= `(^[[:blank:]]+)((?:[^:]+\:)?)` 
 
-state normal start '^(?:[\t]+|[[:space:]]+)' begin
-  state file start '[^:]+\:' begin
-    normal start '.'
-  end
-end

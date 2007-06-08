@@ -1,12 +1,34 @@
 source-highlight -- History of visible changes.
 
-Copyright (C) 1999-2006 Lorenzo Bettini
+Copyright (C) 1999-2007 Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite
 
 See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
+
+Version 2.7
+
+   * fixed language association for log files.
+   * use standard sed arguments
+   * check that the ctags program supports the options used by source-highlight
+     and disable ctags tests if it does not
+   * removed some memory leaks from scanners and parsers
+   * fixed regular expression highlighting strings in perl 
+     (thanks to Elias Pipping)
+   * regexp language element
+   * infer script languages also checking for the env specification
+   * improved error reporting for lang definition files
+   * ` ` syntax for regular expressions that permits backreferences
+     and conditionals
+   * explicit naming for subexpressions syntax
+   * added a program, check-regexp, for checking regular expressions 
+     on the command line
+   * fix html tag definitions
+   * fix ruby regexp definition
+   * --doc option and references for docbook output
+   * xhtml output with non fixed font
 
 Version 2.6
 

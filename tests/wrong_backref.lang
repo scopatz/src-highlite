@@ -1,0 +1,2 @@
+keyword = "my(regular)ex.pre$$ion{*}\\1" # ok since escaped
+keyword = "my(regular)ex.pre$$ion{*}\1" # error!

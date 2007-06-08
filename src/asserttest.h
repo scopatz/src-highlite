@@ -15,8 +15,9 @@
 #include <iostream>
 #include <stdlib.h>
 
+template <typename T>
 int
-assertEquals(const std::string &expected, const std::string &actual)
+assertEquals(T expected, T actual)
 {
     if (expected != actual) {
         std::cerr << "assertEquals failed" << std::endl;
@@ -30,7 +31,7 @@ assertEquals(const std::string &expected, const std::string &actual)
 }
 
 int
-assertEquals(bool expected, bool actual)
+assertEquals(const std::string &expected, const std::string &actual)
 {
     if (expected != actual) {
         std::cerr << "assertEquals failed" << std::endl;

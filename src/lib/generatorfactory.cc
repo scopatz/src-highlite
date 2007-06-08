@@ -25,117 +25,105 @@
 #include "textgenerator.h"
 #include "textstyles.h"
 #include "textstylebuilder.h"
-#include "refgeneratormap.h"
+#include "textformatter.h"
 
-// global
-#include "maingeneratormap.h"
-
-GeneratorFactory::GeneratorFactory(TextStylesPtr tstyles,
-                                   PreFormatter *pf,
-                                   bool gen_ref,
-    const string &_ctags_file, RefPosition position,
-    bool optimizations) :
-    textStyles(tstyles), preformatter(pf),
-  generate_references(gen_ref),
-  ctags_file(_ctags_file), refposition(position),
-  noOptimizations(optimizations)
-{
-  generatormap = createGeneratorMap();
-  generatormap->setNoOptimizations(noOptimizations);
+GeneratorFactory::GeneratorFactory(TextStylesPtr tstyles, PreFormatter *pf,
+        bool gen_ref, const string &_ctags_file, RefPosition position,
+        bool optimizations) :
+    textStyles(tstyles), preformatter(pf), generate_references(gen_ref),
+            ctags_file(_ctags_file), refposition(position),
+            noOptimizations(optimizations) {
+    textformatter = createTextFormatter();
+    textformatter->setNoOptimizations(noOptimizations);
 }
 
-GeneratorFactory::~ GeneratorFactory()
-{
-  if (generatormap)
-    delete generatormap;
+GeneratorFactory::~GeneratorFactory() {
+    if (textformatter)
+        delete textformatter;
 }
 
-GeneratorMap *
-GeneratorFactory::createGeneratorMap()
-{
-  if (generate_references)
-    return new RefGeneratorMap(preformatter, ctags_file,
-      textStyles->refstyle, refposition);
-
-  return new GeneratorMap(preformatter);
+TextFormatter *GeneratorFactory::createTextFormatter() {
+    if (generate_references)
+        return new TextFormatter(preformatter, ctags_file,
+                textStyles->refstyle, refposition);
+    else
+        return new TextFormatter(preformatter);
 }
 
-string GeneratorFactory::preprocessColor(const string &color)
-{
-  if ( color[0] == '"' && color[color.size()-1] == '"')
-    return color.substr(1, color.size()-2);
-  else
-    return textStyles->colorMap->getColor (color);
+string GeneratorFactory::preprocessColor(const string &color) {
+    if (color[0] == '"' && color[color.size()-1] == '"')
+        return color.substr(1, color.size()-2);
+    else
+        return textStyles->colorMap->getColor(color);
 }
 
 bool GeneratorFactory::createGenerator(const string &key, const string &color,
-    const string &bgcolor, StyleConstantsPtr styleconstants)
-{
-  if (generatormap->hasGenerator(key))
-    return false;
-  
-  if (! textStyles->onestyle.empty()) {
-    generatormap->addGenerator (key, new TextGenerator(textStyles->onestyle.subst_style(key)));
-    return true;
-  }
+        const string &bgcolor, StyleConstantsPtr styleconstants) {
+    if (textformatter->hasGenerator(key))
+        return false;
 
-  TextStyleBuilder textStyleBuilder(textStyles->starting_template, textStyles->style_separator);
-
-  textStyleBuilder.start();
-
-  if (styleconstants.get()) {
-    for (StyleConstantsIterator it = styleconstants->begin(); it != styleconstants->end(); ++it) {
-      switch( *it ){
-        case ISBOLD:
-          textStyleBuilder.add(textStyles->bold);
-          break;
-        case ISITALIC:
-          textStyleBuilder.add(textStyles->italics);
-          break;
-        case ISUNDERLINE:
-          textStyleBuilder.add(textStyles->underline);
-          break;
-        case ISFIXED:
-          textStyleBuilder.add(textStyles->fixed);
-          break;
-        case ISNOTFIXED:
-          textStyleBuilder.add(textStyles->notfixed);
-          break;
-        case ISNOREF:
-          generatormap->addNoReference(key);
-          break;
-      }
+    if (! textStyles->onestyle.empty()) {
+        textformatter->addGenerator(key, new TextGenerator(textStyles->onestyle.subst_style(key)));
+        return true;
     }
-  }
 
-  if ( color.size () ) {
-    textStyleBuilder.add(textStyles->color.subst_style(preprocessColor(color)));
-  }
+    TextStyleBuilder textStyleBuilder(textStyles->starting_template,
+            textStyles->style_separator);
 
-  if ( bgcolor.size () ) {
-    textStyleBuilder.add(textStyles->bg_color.subst_style(preprocessColor(bgcolor)));
-  }
+    textStyleBuilder.start();
 
-  TextStyle style = textStyleBuilder.end();
+    if (styleconstants.get()) {
+        for (StyleConstantsIterator it = styleconstants->begin(); it != styleconstants->end(); ++it) {
+            switch (*it) {
+            case ISBOLD:
+                textStyleBuilder.add(textStyles->bold);
+                break;
+            case ISITALIC:
+                textStyleBuilder.add(textStyles->italics);
+                break;
+            case ISUNDERLINE:
+                textStyleBuilder.add(textStyles->underline);
+                break;
+            case ISFIXED:
+                textStyleBuilder.add(textStyles->fixed);
+                break;
+            case ISNOTFIXED:
+                textStyleBuilder.add(textStyles->notfixed);
+                break;
+            case ISNOREF:
+                textformatter->addNoReference(key);
+                break;
+            }
+        }
+    }
 
-  generatormap->addGenerator(key, new TextGenerator(style));
-  return true;
+    if (color.size()) {
+        textStyleBuilder.add(textStyles->color.subst_style(preprocessColor(color)));
+    }
+
+    if (bgcolor.size()) {
+        textStyleBuilder.add(textStyles->bg_color.subst_style(preprocessColor(bgcolor)));
+    }
+
+    TextStyle style = textStyleBuilder.end();
+
+    textformatter->addGenerator(key, new TextGenerator(style));
+    return true;
 }
 
-void GeneratorFactory::addDefaultGenerator()
-{
-  TextGenerator *defaultGenerator = generatormap->hasGenerator(NORMAL);
-  
-  if (!defaultGenerator) {
-  
-    if (textStyles->onestyle.empty())
-      defaultGenerator = new TextGenerator();
-    else
-      defaultGenerator = new TextGenerator(textStyles->onestyle.subst_style(NORMAL));
-    
-    generatormap->addGenerator (NORMAL, defaultGenerator);
-  }
-  
-  generatormap->setDefaultGenerator(defaultGenerator);
+void GeneratorFactory::addDefaultGenerator() {
+    TextGenerator *defaultGenerator = textformatter->hasGenerator(NORMAL);
+
+    if (!defaultGenerator) {
+
+        if (textStyles->onestyle.empty())
+            defaultGenerator = new TextGenerator();
+        else
+            defaultGenerator = new TextGenerator(textStyles->onestyle.subst_style(NORMAL));
+
+        textformatter->addGenerator(NORMAL, defaultGenerator);
+    }
+
+    textformatter->setDefaultGenerator(defaultGenerator);
 }
 

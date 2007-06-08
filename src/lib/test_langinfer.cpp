@@ -43,6 +43,10 @@ main()
 
   testInfer("#!/bin/sh\n# -*- tcl, as specified in Emacs -*-", "tcl");
 
+  // try with the env specification
+  testInfer("#! /usr/bin/env python", "python");
+  testInfer("#! /bin/env perl", "perl");
+  
   // just a small check for tolower
   string s = "Lisp";
   Utils::toLower(s);

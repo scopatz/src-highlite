@@ -59,6 +59,7 @@ class LangElems : protected list<LangElem *>
     void subst(LangElem *el);
     
     const std::string toString() const;
+    const std::string toStringOriginal() const;
 // doublecpp: dispatch methods, DO NOT MODIFY
 public:
 virtual void dispatch_build(RegExpStateBuilder *, RegExpStatePointer state);

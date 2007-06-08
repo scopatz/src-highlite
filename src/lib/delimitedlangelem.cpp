@@ -38,4 +38,11 @@ DelimitedLangElem::toString() const
   return res;
 }
 
+const std::string
+DelimitedLangElem::toStringOriginal() const
+{
+  string res = StateStartLangElem::toString() + " " + start->toStringOriginal() + (end ? " " + end->toStringOriginal() : "");
+  return res;
+}
+
 

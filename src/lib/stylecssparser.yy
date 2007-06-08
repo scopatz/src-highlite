@@ -23,8 +23,6 @@
 #include <iostream>
 #include <string>
 
-#include "my_sstream.h"
-
 #include "generatorfactory.h"
 #include "colors.h"
 #include "keys.h"
@@ -51,6 +49,7 @@ static string bodyBgColor;
 
 extern int stylecsssc_lex() ;
 extern FILE *stylecsssc_in ;
+extern int stylecsssc_lex_destroy  (void);
 
 /// the global pointer to style constant for a specific element
 static StyleConstantsPtr currentStyleConstants;
@@ -79,11 +78,11 @@ static string currentBGColor;
 stylefile : { /* allow empty files */ }
     | statements
     ;
-    
+
 statements : statements statement
     | statement
     ;
-    
+
 statement : option
     ;
 
@@ -109,11 +108,11 @@ option : keylist
                 // check whether it's the body specification
                 if (Utils::tolower(key) == "body") {
                   updateBgColor(currentBGColor);
-                  
+
                   // notice that for text style specification for the body, the background
                   // is assumed for the entire document and not for the normal text
                   // following the semantics of css
-                  
+
                   // avoid adding an empty style definition for normal
                   if (currentColor != "" || currentStyleConstants->size()) {
                     if (!generatorFactory->createGenerator(NORMAL, currentColor, "", currentStyleConstants)) {
@@ -205,22 +204,24 @@ void parseCssStyles(const string &path, const string &name, GeneratorFactory *ge
   printMessage_noln( "Parsing ", cerr ) ;
   printMessage_noln (current_file, cerr);
   printMessage( " file ...", cerr ) ;
-  
+
   bodyBgColor = "";
-  
+
   yyparse() ;
-  
+
   bodyBgColor_ = bodyBgColor;
-  
+
   printMessage( "Parsing done!", cerr ) ;
   fclose(stylecsssc_in);
+
+  // release scanner memory
+  stylecsssc_lex_destroy();
 }
 
 void
 yyerror( char *s )
 {
   parseStyleError(s);
-  exit(EXIT_FAILURE);
 }
 
 void updateBgColor(const std::string &c)

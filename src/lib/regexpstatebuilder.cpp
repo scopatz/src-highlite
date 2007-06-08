@@ -1,10 +1,10 @@
 //
-// C++ Implementation: %{MODULE}
+// C++ Implementation: regexpstatebuilder.cpp
 //
-// Description:
+// Description: Builds the regexp automaton
 //
 //
-// Author: %{AUTHOR} <%{EMAIL}>, (C) %{YEAR}
+// Author: Lorenzo Bettini, 2007, http://www.lorenzobettini.it
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -17,6 +17,7 @@
 #include "statelangelem.h"
 #include "stringlistlangelem.h"
 #include "delimitedlangelem.h"
+#include "namedsubexpslangelem.h"
 #include "regexpstate.h"
 #include "stringdef.h"
 #include "tostringcollection.h"
@@ -27,17 +28,22 @@
 using namespace std;
 
 static const string buildex(const string &s);
-static const string buildex_pre(const string &s);
 
-void add_exp(RegExpStatePtr state, const string &orig, const string &exp, ParserInfo *parserInfo, RegExpFormatterPtr f)
+void add_exp(RegExpStatePtr state, const string &exp, ParserInfo *parserInfo, RegExpFormatterPtr f)
 {
-  try {
-    state->add_exp(exp, parserInfo, f);
-  } catch (boost::bad_expression &e) {
-    exitError("wrong original expression: " + orig);
-  }
-}
+    unsigned int numOfSubexpressions = RegexPreProcessor::num_of_subexpressions(exp);
 
+    if (numOfSubexpressions) {
+        // for marked subexpressions we must not use buildex, otherwise we might change
+        // the subexpressions indexes (e.g., for backreferences)
+        state->add_alternative(exp, parserInfo, f);
+    } else {
+        state->add_exp(buildex(exp), parserInfo, f);
+        
+        // record that we (manually) added an explicit marked subexpression
+        state->setHasMarkedAlternatives();
+    }
+}
 
 /**
  * Definitely associate the regular expression to this state
@@ -62,6 +68,22 @@ RegExpStateBuilder::RegExpStateBuilder()
 
 RegExpStateBuilder::~RegExpStateBuilder()
 {
+}
+
+void setFormatterExitLevel(StateStartLangElem *elem, RegExpFormatterPtr formatter) {
+    bool exit_all = elem->exitAll();
+    bool exit = elem->doExit();
+
+    /*
+    only act on the exit state (if any exist statement is defined)
+    */
+    if (exit_all) {
+      formatter->exit_state_level = 1;
+      formatter->exit_all = true;
+    }
+
+    if (exit)
+      formatter->exit_state_level = 1;
 }
 
 RegExpStatePtr
@@ -93,11 +115,11 @@ RegExpStateBuilder::build(LangElems *elems, RegExpStatePointer state)
     // try to find out where the problem is...
     RegExpStatePtr temp_state(new RegExpState());
     for (LangElems::const_iterator it = elems->begin(); it != elems->end(); ++it) {
-      build(*it, temp_state);
+      build_DB(*it, temp_state);
       try {
         temp_state->freeze();
       } catch (boost::bad_expression &e) {
-        exitError("problem in this expression: " + (*it)->toString());
+        exitError("problem in this expression: " + (*it)->toStringOriginal(), *it);
       }
     }
   } else {
@@ -111,6 +133,17 @@ RegExpStateBuilder::build(LangElem *elem, RegExpStatePointer state)
 }
 
 /**
+ * Build a non-marking group (i.e., (? ... ) starting from s
+ * @param s
+ * @return
+ */
+const string non_marking_group(const string &s)
+{
+  return "(?:" + s + ")";
+}
+
+
+/**
  * Build a subexpression starting from s
  * @param s
  * @return
@@ -118,16 +151,6 @@ RegExpStateBuilder::build(LangElem *elem, RegExpStatePointer state)
 const string buildex(const string &s)
 {
   return "(" + s + ")";
-}
-
-/**
- * Build a subexpression starting from s, after preprocessing s
- * @param s
- * @return
- */
-const string buildex_pre(const string &s)
-{
-  return buildex(RegexPreProcessor::preprocess(s));
 }
 
 /**
@@ -185,14 +208,56 @@ RegExpStateBuilder::build(StringListLangElem *elem, RegExpStatePointer state)
 
   if (!elem->isCaseSensitive())
     stringdef = RegexPreProcessor::make_nonsensitive(stringdef);
-  string exp_string = buildex_pre(stringdef);
+  string exp_string = non_marking_group(stringdef);
   if (isToIsolate)
     exp_string = buildex_isolated(exp_string);
 
   RegExpFormatterPtr formatter(new RegExpFormatter(name));
 
-  add_exp(state, exp_string, buildex_pre(exp_string), elem, formatter);
+  add_exp(state, exp_string, elem, formatter);
   build(static_cast<StateStartLangElem *>(elem), state);
+}
+
+/**
+ * Case of a list of language elements, each representing a 
+ * marked subexpression
+ * @param elem
+ * @param state
+ */
+void
+RegExpStateBuilder::build(NamedSubExpsLangElem *elem, RegExpStatePointer state)
+{
+    const ElementNames *elems = elem->getElementNames();
+    const StringDef *regexp = elem->getRegexpDef();
+    format_vector formatters;
+    const string &regexp_string = regexp->toString();
+    
+    // first check that the number of marked subexpressions is the same of
+    // the specified element names
+    subexpressions_info sexps = RegexPreProcessor::num_of_marked_subexpressions(regexp_string);
+    
+    if (sexps.errors.size()) {
+        exitError(sexps.errors, elem);
+    }
+    
+    if (sexps.marked != elems->size()) {
+        exitError("number of marked subexpressions does not match number of elements", elem);
+    }
+    
+    // for each named group build a formatter, that corresponds to that element
+    for (ElementNames::const_iterator it = elems->begin(); it != elems->end(); ++it) {
+        RegExpFormatterPtr formatter = RegExpFormatterPtr(new RegExpFormatter(*it));
+        // each formatter will share the same exit level, since it represents the
+        // same matched regexp
+        setFormatterExitLevel(elem, formatter);
+        formatters.push_back(formatter);
+    }
+    
+    // now add all the formatters for this element
+    state->add_exp(regexp_string, elem, formatters);
+    
+    // record that all the subexpressions can match
+    state->setAllAlternativesCanMatch();
 }
 
 /**
@@ -242,10 +307,10 @@ RegExpStateBuilder::build(DelimitedLangElem *elem, RegExpStatePointer state)
     "<(?:[^<>])*>"
     */
     if (!escape) {
-      exp_string = start_string + "([^" +
+      exp_string = start_string + non_marking_group("[^" +
           start_string +
           (end_string != start_string ? end_string : "") +
-          "])*" + end_string;
+          "]") + "*" + end_string;
     } else {
       /*
       in case of a specified escape character it will use it for the
@@ -255,12 +320,12 @@ RegExpStateBuilder::build(DelimitedLangElem *elem, RegExpStatePointer state)
 
       <(?:[^\\<\\>]|\\.)*>
       */
-      exp_string = start_string + "([^" +
+      exp_string = start_string + non_marking_group("[^" +
           escape_string +
           start_string +
           (end_string != start_string ? escape_string + end_string : "") +
-          "]|"+ escape_string + "." +
-          ")*" + end_string;
+          "]|"+ escape_string + ".") +
+          "*" + end_string;
     }
   } else {
     /*
@@ -300,7 +365,7 @@ RegExpStateBuilder::build(DelimitedLangElem *elem, RegExpStatePointer state)
          1 + (elem->doExit() ? 1 : 0),
          elem->exitAll()));
     if (end)
-      add_exp(inner, end_string, buildex_pre(end_string), elem, exit);
+      add_exp(inner, end_string, elem, exit);
     else
       inner->add_exp(buildex("\\z"), elem, exit);
 
@@ -313,7 +378,7 @@ RegExpStateBuilder::build(DelimitedLangElem *elem, RegExpStatePointer state)
     (\*\])|(\\.)
     */
     if (escape) {
-      add_exp(inner, escape_string, buildex_pre(escape_string + "."),
+      add_exp(inner, escape_string + ".",
               elem,
               RegExpFormatterPtr(new RegExpFormatter(name)));
     }
@@ -339,16 +404,17 @@ RegExpStateBuilder::build(DelimitedLangElem *elem, RegExpStatePointer state)
     if (elem->isNested()) {
       RegExpFormatterPtr nested(new RegExpFormatter(name, inner));
       nested_formatters.push_back(nested);
-      add_exp(inner, start_string, buildex_pre(start_string), elem, nested);
+      add_exp(inner, start_string, elem, nested);
     }
   }
 
   if (inner) {
-    freeze_state(inner);
+    if (!freeze_state(inner))
+        foundBug("bug in expression parsing", __FILE__, __LINE__);;
   }
 
   RegExpFormatterPtr formatter(new RegExpFormatter(name, inner));
-  add_exp(state, exp_string, buildex_pre(exp_string), elem, formatter);
+  add_exp(state, exp_string, elem, formatter);
   build(static_cast<StateStartLangElem *>(elem), state);
 }
 
@@ -363,19 +429,7 @@ RegExpStateBuilder::build(StateStartLangElem *elem, RegExpStatePointer state)
 {
   RegExpFormatterPtr formatter = state->getLastFormatter();
 
-  bool exit_all = elem->exitAll();
-  bool exit = elem->doExit();
-
-  /*
-  only act on the exit state (if any exist statement is defined)
-  */
-  if (exit_all) {
-    formatter->exit_state_level = 1;
-    formatter->exit_all = true;
-  }
-
-  if (exit)
-    formatter->exit_state_level = 1;
+  setFormatterExitLevel(elem, formatter);
 }
 
 /**

@@ -24,7 +24,7 @@ struct ParserInfo {
   std::string filename; // including path
   unsigned int line;
 
-  ParserInfo() {}
+  ParserInfo() : line(0) {}
   ParserInfo(const std::string &n) : filename(n) {}
 
   void setParserInfo(const std::string &name, unsigned int l)

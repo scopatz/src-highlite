@@ -13,6 +13,7 @@ valgrind_summary.log
 *.dvi
 *.pdf
 *.out.tex
+*.out.docbook
 *.out.texinfo
 *.out.debug
 *.out.show
@@ -35,3 +36,4 @@ myscript*
 *.css_doc.java.html
 *.nf_css.java.html
 syslog.style.html
+tags

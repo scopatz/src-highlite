@@ -23,7 +23,6 @@
 #include "langmap.h"
 #include "textstyles.h"
 
-class TextFormatter;
 class PreFormatter;
 class DocGenerator;
 class GeneratorFactory;
@@ -33,7 +32,6 @@ class StartApp
  protected:
   char *inputFileName, *outputFileName; /* what we're reading  */
   DocGenerator *docgenerator;
-  TextFormatter *formatter;
   PreFormatter *preformatter;
   LangMapPtr langmap;
   LangMapPtr outlangmap;

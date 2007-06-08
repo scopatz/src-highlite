@@ -31,6 +31,10 @@ keyword = "abs|add|aload|anchorsearch|and|arc|arcn|arct|arcto|array|ashow|astore
 
 variable = $ID
 
+environment string delim "(" ")" multiline nested begin
+  specialchar = '\\.'
+end
+
 comment start "%"
 
 include "number.lang"

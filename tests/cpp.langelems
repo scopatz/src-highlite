@@ -2,6 +2,7 @@ cbracket
 comment
 function
 keyword
+named subexps
 number
 preproc
 specialchar

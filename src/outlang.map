@@ -17,3 +17,4 @@ latexcolor-doc = latexcolordoc.outlang
 texinfo = texinfo.outlang
 javadoc = javadoc.outlang
 docbook = docbook.outlang
+docbook-doc = docbookdoc.outlang

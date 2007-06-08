@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 1999, 2000, Lorenzo Bettini <http://www.lorenzobettini.it>
+** Copyright (C) 1999-2007, Lorenzo Bettini <http://www.lorenzobettini.it>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -27,6 +27,8 @@
 #include <stdlib.h>
 
 #include "messages.h"
+#include "parserinfo.h"
+#include "parsestruct.h"
 
 static Messages *_messager = 0 ;
 
@@ -65,9 +67,16 @@ void printError( const std::string &s, ostream &stream ) {
   stream << s << endl;
 }
 
+void printError( const std::string &s, const ParserInfo *pinfo, ostream &stream ) {
+  printError(pinfo->filename, pinfo->line, s, stream);
+}
+
 void printError(const std::string &filename, unsigned int line, const std::string &error, ostream & stream)
 {
-  stream << filename << ":" << line << ": " << error << endl;
+  stream << filename << ":";
+  if (line)
+      stream << line << ": ";
+  stream << error << endl;
 }
 
 void setMessager( Messages *m ) {
@@ -86,9 +95,29 @@ void exitError(const std::string &error)
   exit(EXIT_FAILURE);
 }
 
+void exitError(const std::string &error, const ParserInfo *pinfo)
+{
+  exitError(pinfo->filename, pinfo->line, error);
+}
+
+void exitError(const std::string &error, const ParseStruct *pinfo)
+{
+  exitError((pinfo->path.size() ? pinfo->path + "/" : "") + pinfo->file_name, pinfo->line, error);
+}
+
+void exitError(const std::string &filename, unsigned int line, const std::string &error)
+{
+  cerr << PACKAGE << ": ";
+  printError(filename, line, error);
+  exit(EXIT_FAILURE);
+}
+
 void foundBug(const std::string &error, const std::string &file, int line)
 {
   cerr << PACKAGE << ": " << error << ", " << file << ":" << line << endl;
+  cerr << PACKAGE << ": " << "it looks like you found a bug of this program" << endl;
+  cerr << PACKAGE << ": " << "could you please send this output and the input file" << endl;
+  cerr << PACKAGE << ": " << "to the author of this program?" << endl;
   exit(EXIT_FAILURE);
 }
 

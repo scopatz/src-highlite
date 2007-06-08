@@ -27,7 +27,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "textstyles.h"
-#include "refgeneratormap.h"
+#include "refposition.h"
 
 typedef enum { ISBOLD=1, ISITALIC, ISUNDERLINE, ISFIXED, ISNOTFIXED, ISNOREF } StyleConstant;
 typedef std::list<StyleConstant> StyleConstants;
@@ -38,6 +38,7 @@ using std::string;
 
 class TextGenerator;
 class PreFormatter;
+class TextFormatter;
 
 class GeneratorFactory
 {
@@ -52,8 +53,10 @@ class GeneratorFactory
   RefPosition refposition;
   /// whether to turn off optimizations for generating output (default false)
   bool noOptimizations;
+  /// the main text formatter
+  TextFormatter *textformatter;
 
-  GeneratorMap *createGeneratorMap();
+  TextFormatter *createTextFormatter();
 
  public:
   GeneratorFactory(TextStylesPtr tstyles, PreFormatter *pf,
@@ -90,6 +93,8 @@ class GeneratorFactory
    * @return
      */
   string preprocessColor(const string &color);
+  
+  TextFormatter *getTextFormatter() { return textformatter; }
 };
 
 #endif // GENERATORFACTORY_H

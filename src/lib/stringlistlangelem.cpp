@@ -30,7 +30,13 @@ StringListLangElem::~StringListLangElem()
 const std::string
 StringListLangElem::toString() const
 {
-  string res = StateStartLangElem::toString() + " " + toStringCollection<StringDefs>(alternatives);;
+  string res = StateStartLangElem::toString() + " " + toStringCollection<StringDefs>(alternatives);
   return res;
 }
 
+const std::string
+StringListLangElem::toStringOriginal() const
+{
+  string res = StateStartLangElem::toString() + " " + toStringOriginalCollection<StringDefs>(alternatives);
+  return res;
+}

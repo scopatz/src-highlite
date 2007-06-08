@@ -7,134 +7,125 @@
 \begin{document}
 \maketitle
 \noindent
-\mbox{}\texttt{\textcolor{Black}{01:}} \textit{\textcolor{Brown}{/*}} \\
-\mbox{}\texttt{\textcolor{Black}{02:}} \textit{\textcolor{Brown}{**\ Copyright\ (C)\ 1999,\ 2000,\ 2001\ Lorenzo\ Bettini}} \\
+\mbox{}\texttt{\textcolor{Black}{01:}} \textit{\textcolor{Brown}{/**}} \\
+\mbox{}\texttt{\textcolor{Black}{02:}} \textit{\textcolor{Brown}{**\ Copyright\ (C)\ 1999-2007\ Lorenzo\ Bettini}} \\
 \mbox{}\texttt{\textcolor{Black}{03:}} \textit{\textcolor{Brown}{**\ \ }} \\
-\mbox{}\texttt{\textcolor{Black}{04:}} \textit{\textcolor{Brown}{**\ This\ program\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or\ modify}} \\
-\mbox{}\texttt{\textcolor{Black}{05:}} \textit{\textcolor{Brown}{**\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}} \\
-\mbox{}\texttt{\textcolor{Black}{06:}} \textit{\textcolor{Brown}{**\ the\ Free\ Software\ Foundation;\ either\ version\ 2\ of\ the\ License,\ or}} \\
-\mbox{}\texttt{\textcolor{Black}{07:}} \textit{\textcolor{Brown}{**\ (at\ your\ option)\ any\ later\ version.}} \\
+\mbox{}\texttt{\textcolor{Black}{04:}} \textit{\textcolor{Brown}{\ \ }}\underline{\texttt{\textcolor{Blue}{http://www.lorenzobettini.it}}} \\
+\mbox{}\texttt{\textcolor{Black}{05:}} \textit{\textcolor{Brown}{\ \ }} \\
+\mbox{}\texttt{\textcolor{Black}{06:}} \textit{\textcolor{Brown}{\ \ r2\ =\ r2\ XOR\ (1$<$$<$10);}} \\
+\mbox{}\texttt{\textcolor{Black}{07:}} \textit{\textcolor{Brown}{\ \ cout\ $<$$<$\ "{}hello\ world"{}\ $<$$<$\ endl;}} \\
 \mbox{}\texttt{\textcolor{Black}{08:}} \textit{\textcolor{Brown}{**\ \ }} \\
-\mbox{}\texttt{\textcolor{Black}{09:}} \textit{\textcolor{Brown}{**\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}} \\
-\mbox{}\texttt{\textcolor{Black}{10:}} \textit{\textcolor{Brown}{**\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}} \\
-\mbox{}\texttt{\textcolor{Black}{11:}} \textit{\textcolor{Brown}{**\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}} \\
-\mbox{}\texttt{\textcolor{Black}{12:}} \textit{\textcolor{Brown}{**\ GNU\ General\ Public\ License\ for\ more\ details.}} \\
-\mbox{}\texttt{\textcolor{Black}{13:}} \textit{\textcolor{Brown}{**\ \ }} \\
-\mbox{}\texttt{\textcolor{Black}{14:}} \textit{\textcolor{Brown}{**\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}} \\
-\mbox{}\texttt{\textcolor{Black}{15:}} \textit{\textcolor{Brown}{**\ along\ with\ this\ program;\ if\ not,\ write\ to\ the\ Free\ Software}} \\
-\mbox{}\texttt{\textcolor{Black}{16:}} \textit{\textcolor{Brown}{**\ Foundation,\ Inc.,\ 59\ Temple\ Place\ -\ Suite\ 330,\ Boston,\ MA\ 02111-1307,\ USA.}} \\
-\mbox{}\texttt{\textcolor{Black}{17:}} \textit{\textcolor{Brown}{**\ \ }} \\
-\mbox{}\texttt{\textcolor{Black}{18:}} \textit{\textcolor{Brown}{*/}} \\
+\mbox{}\texttt{\textcolor{Black}{09:}} \textit{\textcolor{Brown}{*/}} \\
+\mbox{}\texttt{\textcolor{Black}{10:}}  \\
+\mbox{}\texttt{\textcolor{Black}{11:}} \textit{\textcolor{Brown}{//\ this\ file\ also\ contains\ the\ definition\ of\ mysum\ as\ a\ \#define}} \\
+\mbox{}\texttt{\textcolor{Black}{12:}}  \\
+\mbox{}\texttt{\textcolor{Black}{13:}} \textit{\textcolor{Brown}{//\ textgenerator.h\ :\ Text\ Generator\ class\ \&\&}} \\
+\mbox{}\texttt{\textcolor{Black}{14:}}  \\
+\mbox{}\texttt{\textcolor{Black}{15:}} \textbf{\textcolor{RoyalBlue}{\#ifndef}}\ $\_$TEXTGEN$\_$H \\
+\mbox{}{\hfill $\_$TEXTGEN$\_$H $\rightarrow$ test.h:16, page~\pageref{test.h:16}} \\
+\mbox{}\texttt{\textcolor{Black}{16:}} \textbf{\textcolor{RoyalBlue}{\#define}}\ \label{test.h:16}$\_$TEXTGEN$\_$H \\
+\mbox{}\texttt{\textcolor{Black}{17:}}  \\
+\mbox{}\texttt{\textcolor{Black}{18:}} \textbf{\textcolor{RoyalBlue}{\#define}}\ \label{test.h:18}foo\textcolor{BrickRed}{(}x\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{(}x\ \textcolor{BrickRed}{+}\ \textcolor{Purple}{1}\textcolor{BrickRed}{)} \\
 \mbox{}\texttt{\textcolor{Black}{19:}}  \\
-\mbox{}\texttt{\textcolor{Black}{20:}} \textit{\textcolor{Brown}{//\ this\ file\ also\ contains\ the\ definition\ of\ mysum\ as\ a\ \#define}} \\
+\mbox{}\texttt{\textcolor{Black}{20:}} \textbf{\textcolor{RoyalBlue}{\#define}}\ \label{test.h:20}mysum\ myfunbody\  \\
 \mbox{}\texttt{\textcolor{Black}{21:}}  \\
-\mbox{}\texttt{\textcolor{Black}{22:}} \textit{\textcolor{Brown}{//\ textgenerator.h\ :\ Text\ Generator\ class\ \&\&}} \\
+\mbox{}\texttt{\textcolor{Black}{22:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{$<$iostream.h$>$}}\ \textit{\textcolor{Brown}{//\ for\ cerr}} \\
 \mbox{}\texttt{\textcolor{Black}{23:}}  \\
-\mbox{}\texttt{\textcolor{Black}{24:}} \textbf{\textcolor{RoyalBlue}{\#ifndef}}\ $\_$TEXTGEN$\_$H \\
-\mbox{}{\hfill $\_$TEXTGEN$\_$H $\rightarrow$ test.h:25, page~\pageref{test.h:25}} \\
-\mbox{}\texttt{\textcolor{Black}{25:}} \textbf{\textcolor{RoyalBlue}{\#define}}\ \label{test.h:25}$\_$TEXTGEN$\_$H \\
-\mbox{}\texttt{\textcolor{Black}{26:}}  \\
-\mbox{}\texttt{\textcolor{Black}{27:}} \textbf{\textcolor{RoyalBlue}{\#define}}\ \label{test.h:27}foo\textcolor{BrickRed}{(}x\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{(}x\ \textcolor{BrickRed}{+}\ \textcolor{Purple}{1}\textcolor{BrickRed}{)} \\
-\mbox{}\texttt{\textcolor{Black}{28:}}  \\
-\mbox{}\texttt{\textcolor{Black}{29:}} \textbf{\textcolor{RoyalBlue}{\#define}}\ \label{test.h:29}mysum\ myfunbody\  \\
-\mbox{}\texttt{\textcolor{Black}{30:}}  \\
-\mbox{}\texttt{\textcolor{Black}{31:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{$<$iostream.h$>$}}\ \textit{\textcolor{Brown}{//\ for\ cerr}} \\
-\mbox{}\texttt{\textcolor{Black}{32:}}  \\
-\mbox{}\texttt{\textcolor{Black}{33:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{"{}genfun.h"{}}}\ \textit{\textcolor{Brown}{/*\ for\ generating\ functions\ */}} \\
-\mbox{}\texttt{\textcolor{Black}{34:}}  \\
-\mbox{}\texttt{\textcolor{Black}{35:}} \textbf{\textcolor{Blue}{class}}\ \label{test.h:35}TextGenerator\ \textcolor{Red}{\{} \\
-\mbox{}\texttt{\textcolor{Black}{36:}} \ \ \textbf{\textcolor{Blue}{public}}\ \textcolor{BrickRed}{:} \\
-\mbox{}\texttt{\textcolor{Black}{37:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:37}generate\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{(*}sout\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{$<$$<$}\ s\ \textcolor{BrickRed}{;}\ \textcolor{Red}{\}} \\
-\mbox{}\texttt{\textcolor{Black}{38:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:38}generate\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ start\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ end\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}}\  \\
-\mbox{}\texttt{\textcolor{Black}{39:}} \ \ \ \ \ \ \textcolor{Red}{\{} \\
-\mbox{}\texttt{\textcolor{Black}{40:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\ \textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ start\ \textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{$<$=}\ end\ \textcolor{BrickRed}{;}\ \textcolor{BrickRed}{++}i\ \textcolor{BrickRed}{)} \\
-\mbox{}\texttt{\textcolor{Black}{41:}} \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(*}sout\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{$<$$<$}\ s\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{;} \\
-\mbox{}\texttt{\textcolor{Black}{42:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ a\textcolor{BrickRed}{$<$}p\textcolor{BrickRed}{-$>$}b\ \textcolor{BrickRed}{?}\ a\ \textcolor{BrickRed}{:}\ \textcolor{Purple}{3}\textcolor{BrickRed}{;} \\
-\mbox{}\texttt{\textcolor{Black}{43:}} \ \ \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\texttt{\textcolor{Black}{44:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:44}generateln\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}} \\
-\mbox{}\texttt{\textcolor{Black}{45:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\{}\  \\
-\mbox{}\texttt{\textcolor{Black}{46:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill generate $\rightarrow$ test.h:37, page~\pageref{test.h:37}} \\
-\mbox{}{\hfill generate $\rightarrow$ test.h:38, page~\pageref{test.h:38}} \\
-\mbox{}\texttt{\textcolor{Black}{47:}} \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(*}sout\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{$<$$<$}\ endl\ \textcolor{BrickRed}{;}\  \\
-\mbox{}\texttt{\textcolor{Black}{48:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\texttt{\textcolor{Black}{49:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:49}generateEntire\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}} \\
-\mbox{}\texttt{\textcolor{Black}{50:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\{} \\
-\mbox{}\texttt{\textcolor{Black}{51:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{startTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:55, page~\pageref{test.h:55}} \\
-\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:79, page~\pageref{test.h:79}} \\
-\mbox{}\texttt{\textcolor{Black}{52:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}s\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill generate $\rightarrow$ test.h:37, page~\pageref{test.h:37}} \\
-\mbox{}{\hfill generate $\rightarrow$ test.h:38, page~\pageref{test.h:38}} \\
-\mbox{}\texttt{\textcolor{Black}{53:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{endTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:56, page~\pageref{test.h:56}} \\
-\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:85, page~\pageref{test.h:85}} \\
-\mbox{}\texttt{\textcolor{Black}{54:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\texttt{\textcolor{Black}{55:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:55}startTextGeneration\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{Red}{\{\}} \\
-\mbox{}\texttt{\textcolor{Black}{56:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:56}endTextGeneration\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{Red}{\{\}} \\
-\mbox{}\texttt{\textcolor{Black}{57:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:57}beginText\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}} \\
-\mbox{}\texttt{\textcolor{Black}{58:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\{} \\
-\mbox{}\texttt{\textcolor{Black}{59:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{startTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:55, page~\pageref{test.h:55}} \\
-\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:79, page~\pageref{test.h:79}} \\
-\mbox{}\texttt{\textcolor{Black}{60:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)} \\
-\mbox{}\texttt{\textcolor{Black}{61:}} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill generate $\rightarrow$ test.h:37, page~\pageref{test.h:37}} \\
-\mbox{}{\hfill generate $\rightarrow$ test.h:38, page~\pageref{test.h:38}} \\
-\mbox{}\texttt{\textcolor{Black}{62:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\texttt{\textcolor{Black}{63:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:63}endText\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}} \\
-\mbox{}\texttt{\textcolor{Black}{64:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\{} \\
-\mbox{}\texttt{\textcolor{Black}{65:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)} \\
-\mbox{}\texttt{\textcolor{Black}{66:}} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill generate $\rightarrow$ test.h:37, page~\pageref{test.h:37}} \\
-\mbox{}{\hfill generate $\rightarrow$ test.h:38, page~\pageref{test.h:38}} \\
-\mbox{}\texttt{\textcolor{Black}{67:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{endTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:56, page~\pageref{test.h:56}} \\
-\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:85, page~\pageref{test.h:85}} \\
-\mbox{}\texttt{\textcolor{Black}{68:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\texttt{\textcolor{Black}{69:}} \textcolor{Red}{\}}\ \textcolor{BrickRed}{;} \\
-\mbox{}\texttt{\textcolor{Black}{70:}}  \\
-\mbox{}\texttt{\textcolor{Black}{71:}} \textit{\textcolor{Brown}{//\ Decorator}} \\
-\mbox{}\texttt{\textcolor{Black}{72:}} \textbf{\textcolor{Blue}{class}}\ \label{test.h:72}TextDecorator\ \textcolor{BrickRed}{:}\ \textbf{\textcolor{Blue}{public}}\ TextGenerator\ \textcolor{Red}{\{} \\
-\mbox{}{\hfill TextGenerator $\rightarrow$ test.h:35, page~\pageref{test.h:35}} \\
-\mbox{}\texttt{\textcolor{Black}{73:}} \ \ \textbf{\textcolor{Blue}{protected}}\ \textcolor{BrickRed}{:} \\
-\mbox{}\texttt{\textcolor{Black}{74:}} \ \ \ \ TextGenerator\ \textcolor{BrickRed}{*}\label{test.h:74}decorated\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill TextGenerator $\rightarrow$ test.h:35, page~\pageref{test.h:35}} \\
-\mbox{}\texttt{\textcolor{Black}{75:}} \ \  \\
-\mbox{}\texttt{\textcolor{Black}{76:}} \ \ \textbf{\textcolor{Blue}{public}}\ \textcolor{BrickRed}{:} \\
-\mbox{}\texttt{\textcolor{Black}{77:}} \ \ \ \ \label{test.h:77}TextDecorator\textcolor{BrickRed}{(}\ TextGenerator\ \textcolor{BrickRed}{*}t\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{:}\ \textbf{\textcolor{Black}{decorated}}\textcolor{BrickRed}{(}\ t\ \textcolor{BrickRed}{)}\ \textcolor{Red}{\{\}} \\
-\mbox{}{\hfill TextGenerator $\rightarrow$ test.h:35, page~\pageref{test.h:35}} \\
-\mbox{}{\hfill decorated $\rightarrow$ test.h:74, page~\pageref{test.h:74}} \\
-\mbox{}\texttt{\textcolor{Black}{78:}}  \\
-\mbox{}\texttt{\textcolor{Black}{79:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:79}startTextGeneration\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\  \\
-\mbox{}\texttt{\textcolor{Black}{80:}} \ \ \ \ \textcolor{Red}{\{}\  \\
-\mbox{}\texttt{\textcolor{Black}{81:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{startDecorate}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
-\mbox{}\texttt{\textcolor{Black}{82:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\ decorated\ \textcolor{BrickRed}{)} \\
-\mbox{}{\hfill decorated $\rightarrow$ test.h:74, page~\pageref{test.h:74}} \\
-\mbox{}\texttt{\textcolor{Black}{83:}} \ \ \ \ \ \ \ \ \ \ \ \ decorated\textcolor{BrickRed}{-$>$}\textbf{\textcolor{Black}{startTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill decorated $\rightarrow$ test.h:74, page~\pageref{test.h:74}} \\
-\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:55, page~\pageref{test.h:55}} \\
-\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:79, page~\pageref{test.h:79}} \\
-\mbox{}\texttt{\textcolor{Black}{84:}} \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\texttt{\textcolor{Black}{85:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:85}endTextGeneration\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\  \\
-\mbox{}\texttt{\textcolor{Black}{86:}} \ \ \ \ \textcolor{Red}{\{}\  \\
-\mbox{}\texttt{\textcolor{Black}{87:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\ decorated\ \textcolor{BrickRed}{)} \\
-\mbox{}{\hfill decorated $\rightarrow$ test.h:74, page~\pageref{test.h:74}} \\
-\mbox{}\texttt{\textcolor{Black}{88:}} \ \ \ \ \ \ \ \ \ \ \ \ decorated\textcolor{BrickRed}{-$>$}\textbf{\textcolor{Black}{endTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
-\mbox{}{\hfill decorated $\rightarrow$ test.h:74, page~\pageref{test.h:74}} \\
-\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:56, page~\pageref{test.h:56}} \\
-\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:85, page~\pageref{test.h:85}} \\
-\mbox{}\texttt{\textcolor{Black}{89:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{endDecorate}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
-\mbox{}\texttt{\textcolor{Black}{90:}} \ \ \ \ \ \ \ \ mysum\textcolor{BrickRed}{;} \\
-\mbox{}{\hfill mysum $\rightarrow$ test.h:29, page~\pageref{test.h:29}} \\
-\mbox{}\texttt{\textcolor{Black}{91:}} \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\texttt{\textcolor{Black}{92:}}  \\
-\mbox{}\texttt{\textcolor{Black}{93:}} \ \ \ \ \textit{\textcolor{Brown}{//\ pure\ virtual\ functions}} \\
-\mbox{}\texttt{\textcolor{Black}{94:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{startDecorate}}\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{;} \\
-\mbox{}\texttt{\textcolor{Black}{95:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{endDecorate}}\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{;} \\
-\mbox{}\texttt{\textcolor{Black}{96:}} \textcolor{Red}{\}}\ \textcolor{BrickRed}{;} \\
-\mbox{}\texttt{\textcolor{Black}{97:}}  \\
-\mbox{}\texttt{\textcolor{Black}{98:}} \textbf{\textcolor{RoyalBlue}{\#endif}}\ \textit{\textcolor{Brown}{//\ $\_$TEXTGEN$\_$H}} \\
+\mbox{}\texttt{\textcolor{Black}{24:}} \textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{"{}genfun.h"{}}}\ \textit{\textcolor{Brown}{/*\ for\ generating\ functions\ */}} \\
+\mbox{}\texttt{\textcolor{Black}{25:}}  \\
+\mbox{}\texttt{\textcolor{Black}{26:}} \textbf{\textcolor{Blue}{class}}\ \label{test.h:26}TextGenerator\ \textcolor{Red}{\{} \\
+\mbox{}\texttt{\textcolor{Black}{27:}} \ \ \textbf{\textcolor{Blue}{public}}\ \textcolor{BrickRed}{:} \\
+\mbox{}\texttt{\textcolor{Black}{28:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:28}generate\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{(*}sout\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{$<$$<$}\ s\ \textcolor{BrickRed}{;}\ \textcolor{Red}{\}} \\
+\mbox{}\texttt{\textcolor{Black}{29:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:29}generate\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ start\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ end\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}}\  \\
+\mbox{}\texttt{\textcolor{Black}{30:}} \ \ \ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\texttt{\textcolor{Black}{31:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\ \textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ start\ \textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{$<$=}\ end\ \textcolor{BrickRed}{;}\ \textcolor{BrickRed}{++}i\ \textcolor{BrickRed}{)} \\
+\mbox{}\texttt{\textcolor{Black}{32:}} \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(*}sout\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{$<$$<$}\ s\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{;} \\
+\mbox{}\texttt{\textcolor{Black}{33:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ a\textcolor{BrickRed}{$<$}p\textcolor{BrickRed}{-$>$}b\ \textcolor{BrickRed}{?}\ a\ \textcolor{BrickRed}{:}\ \textcolor{Purple}{3}\textcolor{BrickRed}{;} \\
+\mbox{}\texttt{\textcolor{Black}{34:}} \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\texttt{\textcolor{Black}{35:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:35}generateln\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}} \\
+\mbox{}\texttt{\textcolor{Black}{36:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\{}\  \\
+\mbox{}\texttt{\textcolor{Black}{37:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill generate $\rightarrow$ test.h:28, page~\pageref{test.h:28}} \\
+\mbox{}{\hfill generate $\rightarrow$ test.h:29, page~\pageref{test.h:29}} \\
+\mbox{}\texttt{\textcolor{Black}{38:}} \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(*}sout\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{$<$$<$}\ endl\ \textcolor{BrickRed}{;}\  \\
+\mbox{}\texttt{\textcolor{Black}{39:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\texttt{\textcolor{Black}{40:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:40}generateEntire\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}} \\
+\mbox{}\texttt{\textcolor{Black}{41:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\texttt{\textcolor{Black}{42:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{startTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:46, page~\pageref{test.h:46}} \\
+\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:70, page~\pageref{test.h:70}} \\
+\mbox{}\texttt{\textcolor{Black}{43:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}s\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill generate $\rightarrow$ test.h:28, page~\pageref{test.h:28}} \\
+\mbox{}{\hfill generate $\rightarrow$ test.h:29, page~\pageref{test.h:29}} \\
+\mbox{}\texttt{\textcolor{Black}{44:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{endTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:47, page~\pageref{test.h:47}} \\
+\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:76, page~\pageref{test.h:76}} \\
+\mbox{}\texttt{\textcolor{Black}{45:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\texttt{\textcolor{Black}{46:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:46}startTextGeneration\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{Red}{\{\}} \\
+\mbox{}\texttt{\textcolor{Black}{47:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:47}endTextGeneration\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{Red}{\{\}} \\
+\mbox{}\texttt{\textcolor{Black}{48:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:48}beginText\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}} \\
+\mbox{}\texttt{\textcolor{Black}{49:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\texttt{\textcolor{Black}{50:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{startTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:46, page~\pageref{test.h:46}} \\
+\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:70, page~\pageref{test.h:70}} \\
+\mbox{}\texttt{\textcolor{Black}{51:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)} \\
+\mbox{}\texttt{\textcolor{Black}{52:}} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill generate $\rightarrow$ test.h:28, page~\pageref{test.h:28}} \\
+\mbox{}{\hfill generate $\rightarrow$ test.h:29, page~\pageref{test.h:29}} \\
+\mbox{}\texttt{\textcolor{Black}{53:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\texttt{\textcolor{Black}{54:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:54}endText\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}s\ \textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{const}} \\
+\mbox{}\texttt{\textcolor{Black}{55:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\texttt{\textcolor{Black}{56:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)} \\
+\mbox{}\texttt{\textcolor{Black}{57:}} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}\ s\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill generate $\rightarrow$ test.h:28, page~\pageref{test.h:28}} \\
+\mbox{}{\hfill generate $\rightarrow$ test.h:29, page~\pageref{test.h:29}} \\
+\mbox{}\texttt{\textcolor{Black}{58:}} \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{endTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:47, page~\pageref{test.h:47}} \\
+\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:76, page~\pageref{test.h:76}} \\
+\mbox{}\texttt{\textcolor{Black}{59:}} \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\texttt{\textcolor{Black}{60:}} \textcolor{Red}{\}}\ \textcolor{BrickRed}{;} \\
+\mbox{}\texttt{\textcolor{Black}{61:}}  \\
+\mbox{}\texttt{\textcolor{Black}{62:}} \textit{\textcolor{Brown}{//\ Decorator}} \\
+\mbox{}\texttt{\textcolor{Black}{63:}} \textbf{\textcolor{Blue}{class}}\ \label{test.h:63}TextDecorator\ \textcolor{BrickRed}{:}\ \textbf{\textcolor{Blue}{public}}\ TextGenerator\ \textcolor{Red}{\{} \\
+\mbox{}{\hfill TextGenerator $\rightarrow$ test.h:26, page~\pageref{test.h:26}} \\
+\mbox{}\texttt{\textcolor{Black}{64:}} \ \ \textbf{\textcolor{Blue}{protected}}\ \textcolor{BrickRed}{:} \\
+\mbox{}\texttt{\textcolor{Black}{65:}} \ \ \ \ TextGenerator\ \textcolor{BrickRed}{*}\label{test.h:65}decorated\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill TextGenerator $\rightarrow$ test.h:26, page~\pageref{test.h:26}} \\
+\mbox{}\texttt{\textcolor{Black}{66:}} \ \  \\
+\mbox{}\texttt{\textcolor{Black}{67:}} \ \ \textbf{\textcolor{Blue}{public}}\ \textcolor{BrickRed}{:} \\
+\mbox{}\texttt{\textcolor{Black}{68:}} \ \ \ \ \label{test.h:68}TextDecorator\textcolor{BrickRed}{(}\ TextGenerator\ \textcolor{BrickRed}{*}t\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{:}\ \textbf{\textcolor{Black}{decorated}}\textcolor{BrickRed}{(}\ t\ \textcolor{BrickRed}{)}\ \textcolor{Red}{\{\}} \\
+\mbox{}{\hfill TextGenerator $\rightarrow$ test.h:26, page~\pageref{test.h:26}} \\
+\mbox{}{\hfill decorated $\rightarrow$ test.h:65, page~\pageref{test.h:65}} \\
+\mbox{}\texttt{\textcolor{Black}{69:}}  \\
+\mbox{}\texttt{\textcolor{Black}{70:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:70}startTextGeneration\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\  \\
+\mbox{}\texttt{\textcolor{Black}{71:}} \ \ \ \ \textcolor{Red}{\{}\  \\
+\mbox{}\texttt{\textcolor{Black}{72:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{startDecorate}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
+\mbox{}\texttt{\textcolor{Black}{73:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\ decorated\ \textcolor{BrickRed}{)} \\
+\mbox{}{\hfill decorated $\rightarrow$ test.h:65, page~\pageref{test.h:65}} \\
+\mbox{}\texttt{\textcolor{Black}{74:}} \ \ \ \ \ \ \ \ \ \ \ \ decorated\textcolor{BrickRed}{-$>$}\textbf{\textcolor{Black}{startTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill decorated $\rightarrow$ test.h:65, page~\pageref{test.h:65}} \\
+\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:46, page~\pageref{test.h:46}} \\
+\mbox{}{\hfill startTextGeneration $\rightarrow$ test.h:70, page~\pageref{test.h:70}} \\
+\mbox{}\texttt{\textcolor{Black}{75:}} \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\texttt{\textcolor{Black}{76:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \label{test.h:76}endTextGeneration\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\  \\
+\mbox{}\texttt{\textcolor{Black}{77:}} \ \ \ \ \textcolor{Red}{\{}\  \\
+\mbox{}\texttt{\textcolor{Black}{78:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}\ decorated\ \textcolor{BrickRed}{)} \\
+\mbox{}{\hfill decorated $\rightarrow$ test.h:65, page~\pageref{test.h:65}} \\
+\mbox{}\texttt{\textcolor{Black}{79:}} \ \ \ \ \ \ \ \ \ \ \ \ decorated\textcolor{BrickRed}{-$>$}\textbf{\textcolor{Black}{endTextGeneration}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
+\mbox{}{\hfill decorated $\rightarrow$ test.h:65, page~\pageref{test.h:65}} \\
+\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:47, page~\pageref{test.h:47}} \\
+\mbox{}{\hfill endTextGeneration $\rightarrow$ test.h:76, page~\pageref{test.h:76}} \\
+\mbox{}\texttt{\textcolor{Black}{80:}} \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{endDecorate}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{;} \\
+\mbox{}\texttt{\textcolor{Black}{81:}} \ \ \ \ \ \ \ \ mysum\textcolor{BrickRed}{;} \\
+\mbox{}{\hfill mysum $\rightarrow$ test.h:20, page~\pageref{test.h:20}} \\
+\mbox{}\texttt{\textcolor{Black}{82:}} \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\texttt{\textcolor{Black}{83:}}  \\
+\mbox{}\texttt{\textcolor{Black}{84:}} \ \ \ \ \textit{\textcolor{Brown}{//\ pure\ virtual\ functions}} \\
+\mbox{}\texttt{\textcolor{Black}{85:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{startDecorate}}\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{;} \\
+\mbox{}\texttt{\textcolor{Black}{86:}} \ \ \ \ \textbf{\textcolor{Blue}{virtual}}\ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{endDecorate}}\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{;} \\
+\mbox{}\texttt{\textcolor{Black}{87:}} \textcolor{Red}{\}}\ \textcolor{BrickRed}{;} \\
+\mbox{}\texttt{\textcolor{Black}{88:}}  \\
+\mbox{}\texttt{\textcolor{Black}{89:}} \textbf{\textcolor{RoyalBlue}{\#endif}}\ \textit{\textcolor{Brown}{//\ $\_$TEXTGEN$\_$H}} \\
 
 
 \end{document}

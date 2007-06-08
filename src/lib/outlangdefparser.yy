@@ -1,6 +1,6 @@
 %{
 /*
- * Copyright (C) 1999-2005 Lorenzo Bettini <http://www.lorenzobettini.it>
+ * Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,8 +23,6 @@
 #include <string.h>
 #include <iostream>
 #include <string>
-
-#include "my_sstream.h"
 
 #include "messages.h"
 #include "parsestruct.h"
@@ -235,22 +233,13 @@ translation : REGEXDEF REGEXDEF
 
 %%
 
+extern int outlangdef_lex_destroy (void);
+
 void
 yyerror( const char *s )
 {
-  ostringstream str ;
-  str << outlang_parsestruct->file_name << ":" << outlang_parsestruct->line << ": " << s; // << ", in option declaration";
-  printError( str.str(), cerr ) ;
-  exit(EXIT_FAILURE);
+  exitError(s, outlang_parsestruct);
 }
-
-/*
-void
-yyerror( const string &s )
-{
-  yyerror(s.c_str());
-}
-*/
 
 TextStylesPtr
 parse_outlang_def()
@@ -262,6 +251,10 @@ parse_outlang_def()
   outlangdef_parse();
   delete outlang_parsestruct;
   outlang_parsestruct = 0;
+
+  // release scanner memory
+  outlangdef_lex_destroy ();
+
   return textstyles;
 }
 
@@ -276,6 +269,10 @@ parse_outlang_def(const char *path, const char *name)
   outlangdef_parse();
   delete outlang_parsestruct;
   outlang_parsestruct = 0;
+
+  // release scanner memory
+  outlangdef_lex_destroy ();
+
   return textstyles;
 }
 
@@ -292,6 +289,10 @@ parse_outlang_def_file(const char *path, const char *name)
   outlangdef_parse();
   delete outlang_parsestruct;
   outlang_parsestruct = 0;
+
+  // release scanner memory
+  outlangdef_lex_destroy ();
+
   return textstyles;
 }
 

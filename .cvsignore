@@ -27,3 +27,6 @@ install-sh
 missing
 ylwrap
 libtool
+config.guess
+config.sub
+ltmain.sh

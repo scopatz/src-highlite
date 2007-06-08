@@ -1,0 +1,13 @@
+This should highlight some Hello World strings,
+like
+Hello World!! end of line
+or
+Hello world a comment and then end of line
+or
+Ciao Mondo?
+But not this one:
+hello World!
+and this highlight is not highlighted
+'cos we're still inside the state that's not closed by an "end of line"
+while this highlight will be
+let's see.

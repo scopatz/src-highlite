@@ -1,6 +1,6 @@
 %{
 /*
- * Copyright (C) 1999-2005 Lorenzo Bettini <http://www.lorenzobettini.it>
+ * Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,8 +24,6 @@
 #include <iostream>
 #include <string>
 
-#include "my_sstream.h"
-
 #include "messages.h"
 #include "stringdef.h"
 #include "statelangelem.h"
@@ -36,6 +34,7 @@
 #include "langdefparserfun.h"
 #include "langdefscanner.h"
 #include "vardefinitions.h"
+#include "namedsubexpslangelem.h"
 
 using std::cerr;
 using std::string;
@@ -64,6 +63,11 @@ struct Key : public ParserInfo
   ~Key() { delete key; }
 };
 
+// this is a trick since ElementNames is a typedef and cannot
+// be used in the union below
+struct ElementNamesList : ElementNames {
+};
+
 %}
 
 %union {
@@ -76,12 +80,15 @@ struct Key : public ParserInfo
   class StateLangElem *statelangelem;
   class StateStartLangElem *statestartlangelem;
   class LangElems *langelems;
+  class NamedSubExpsLangElem *namedsubexpslangelem;
   struct Key *key;
+  class ElementNamesList *keys;
   int flag ;
 };
 
 %token <tok> BEGIN_T END_T ENVIRONMENT_T STATE_T MULTILINE_T DELIM_T START_T ESCAPE_T NESTED_T EXIT_ALL EXIT_T VARDEF_T REDEF_T SUBST_T NONSENSITIVE_T
-%token <string> KEY STRINGDEF VARUSE
+%token <string> KEY STRINGDEF REGEXPNOPREPROC VARUSE
+%token <stringdef> REGEXPDEF
 
 %type <stringdef> stringdef escapedef
 %type <stringdefs> stringdefs
@@ -91,16 +98,18 @@ struct Key : public ParserInfo
 %type <booloption> multiline startnewenv nested nonsensitive
 %type <tok> exitall redefsubst
 %type <key> key;
+%type <keys> keys;
 
 %%
 
-allelements : 
-        { 
-          /* no definitions */
-          /* synthetize a normal elem that catches everything */ 
-          current_lang_elems = new LangElems; 
+allelements :
+        {
+          /* no definitions (i.e., empty a .lang file with no definition) */
+          /* such as, default.lang */
+          /* synthetize a normal elem that catches everything */
+          current_lang_elems = new LangElems;
           StringDefs *defs = new StringDefs;
-          defs->push_back (new StringDef("(.*)"));
+          defs->push_back (new StringDef("(?:.*)"));
           current_lang_elems->add(new StringListLangElem("normal", defs, false));
         }
         | elemdefs { current_lang_elems = $1; }
@@ -155,6 +164,11 @@ complexelem : key DELIM_T stringdef stringdef escapedef multiline nested
               $$->setParserInfo($1);
               delete $1;
             }
+          | '(' keys ')' '=' REGEXPNOPREPROC {
+          		$$ = new NamedSubExpsLangElem($2, new StringDef(*$5));
+                        $$->setParserInfo(parsestruct->file_name, @1.first_line);
+          		delete $5;
+            } 
         ;
 
 key: KEY {
@@ -162,6 +176,20 @@ key: KEY {
     $$->key = $1;
     $$->setParserInfo(parsestruct->file_name, @1.first_line);
   }
+;
+
+keys: keys ',' KEY 
+    {
+        $$ = $1;
+        $$->push_back(*$3);
+        delete $3;
+    }
+    | KEY
+    {
+    	$$ = new ElementNamesList;
+    	$$->push_back(*$1);
+        delete $1;
+    }
 ;
 
 escapedef : ESCAPE_T stringdef { $$ = $2; }
@@ -200,7 +228,14 @@ stringdefs : stringdefs ',' stringdef { $$ = $1; $$->push_back($3); }
                 $$->push_back($1); }
            ;
 
-stringdef : STRINGDEF {
+stringdef : REGEXPDEF {
+              $$ = $1;
+            }
+          | STRINGDEF {
+              $$ = new StringDef(*$1);
+              delete $1;
+            }
+          | REGEXPNOPREPROC {
               $$ = new StringDef(*$1);
               delete $1;
             }
@@ -220,13 +255,12 @@ stringdef : STRINGDEF {
 
 %%
 
+extern int langdef_lex_destroy (void);
+
 void
 yyerror( const char *s )
 {
-  ostringstream str ;
-  str << parsestruct->file_name << ":" << parsestruct->line << ": " << s; // << ", in option declaration";
-  printError( str.str(), cerr ) ;
-  exit(EXIT_FAILURE);
+  exitError(s, parsestruct);
 }
 
 void
@@ -245,6 +279,10 @@ parse_lang_def()
   delete vardefinitions;
   parsestruct = 0;
   vardefinitions = 0;
+
+  // release scanner memory
+  langdef_lex_destroy ();
+
   return current_lang_elems;
 }
 
@@ -259,6 +297,10 @@ parse_lang_def(const char *path, const char *name)
   delete vardefinitions;
   parsestruct = 0;
   vardefinitions = 0;
+
+  // release scanner memory
+  langdef_lex_destroy ();
+
   return current_lang_elems;
 }
 

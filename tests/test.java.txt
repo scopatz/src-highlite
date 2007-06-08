@@ -29,7 +29,7 @@
 [33m29:[m [36m * [m[32m@author[m[36m Lorenzo Bettini[m
 [33m30:[m [36m * [m[32m@version[m[36m 2.0[m
 [33m31:[m [36m */[m
-[33m32:[m [01;34mpublic[m [01;34mclass[m Hello [31m{[m
+[33m32:[m [01;34mpublic[m [01;34mclass[m [32mHello[m [31m{[m
 [33m33:[m     [32mint[m foo [31m=[m [35m1998[m [31m;[m
 [33m34:[m     [32mint[m hex_foo [31m=[m [35m0xCAFEBABE[m[31m;[m
 [33m35:[m     [32mboolean[m b [31m=[m [01;34mfalse[m[31m;[m

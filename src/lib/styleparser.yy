@@ -23,8 +23,6 @@
 #include <iostream>
 #include <string>
 
-#include "my_sstream.h"
-
 #include "generatorfactory.h"
 #include "colors.h"
 #include "keys.h"
@@ -42,6 +40,7 @@ int line = 1 ;
 
 extern int stylesc_lex() ;
 extern FILE *stylesc_in ;
+extern int stylesc_lex_destroy  (void);
 
 static string bodyBgColor;
 
@@ -74,15 +73,15 @@ static GeneratorFactory *generatorFactory;
 stylefile : { /* allow empty files */ }
     | statements
     ;
-    
+
 statements : statements statement
     | statement
     ;
-    
+
 statement : option
     | bodybgcolor
     ;
-    
+
 option : keylist color bgcolor
              {
                  printSequence( $1 ) ;
@@ -164,7 +163,7 @@ parseStyles(const string &path, const string &name, GeneratorFactory *genFactory
            string &bodyBgColor_)
 {
   generatorFactory = genFactory;
-  
+
   // opens the file for yylex
   stylesc_in = open_data_file_stream(path, name);
 
@@ -173,29 +172,33 @@ parseStyles(const string &path, const string &name, GeneratorFactory *genFactory
   printMessage_noln( "Parsing ", cerr ) ;
   printMessage_noln (current_file, cerr);
   printMessage( " file ...", cerr ) ;
-  
+
   bodyBgColor = "";
-  
+
   yyparse() ;
-  
+
   bodyBgColor_ = bodyBgColor;
-  
+
   printMessage( "Parsing done!", cerr ) ;
   fclose(stylesc_in);
+
+  // free scanner memory
+  stylesc_lex_destroy();
 }
 
 void
 yyerror( char *s )
 {
   parseStyleError(s);
-  exit(EXIT_FAILURE);
 }
 
-void parseStyleError(const std::string &error)
+void parseStyleError(const std::string &error, bool exit)
 {
-  ostringstream str ;
-  str << current_file << ":" << line << ": " << error;
-  printError( str.str(), cerr ) ;
+	if (exit)
+  		exitError(current_file, line, error);
+  	else {
+  		printError(current_file, line, error);
+  	}
 }
 
 void updateBgColor(const std::string *c)
@@ -204,7 +207,7 @@ void updateBgColor(const std::string *c)
     yyerror("bgcolor already defined");
   else
     bodyBgColor = *c;
-  
+
   // we don't need it anymore
   delete c;
 }

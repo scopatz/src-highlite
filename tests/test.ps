@@ -1,0 +1,38 @@
+%!
+% a test for highlighting postscript files
+
+% proc dotest => .
+/dotest
+  {
+    dup
+    mark
+    exch
+    stopped not % False if error, true if no error.
+    { (Allowed access: ) print cleartomark == }
+    if
+    clear
+  }
+def
+
+0 0 moveto % So the show commands don't bomb because of nocurrentpoint.
+
+{ [1 2] executeonly aload }                                     dotest
+{ (string) executeonly (seek) anchorsearch }                    dotest
+{ (string) (seek) executeonly anchorsearch }                    dotest
+
+(This is % a string)
+{ [1 2] executeonly aload }
+(This is a string with \( some escapes \( )
+{ [1 2] executeonly aload }
+(Strings may contain newlines 
+and such.)
+{ [1 2] executeonly aload }
+(Strings may contain special characters *!&}^% and
+balanced parentheses ( ) (and so on).)
+{ [1 2] executeonly aload }
+(The following is an empty string.)
+{ [1 2] executeonly aload }
+()
+{ [1 2] executeonly aload }
+(It has 0 (zero) length.)
+{ [1 2] executeonly aload }

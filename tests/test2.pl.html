@@ -2,67 +2,75 @@
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><i><font color="#9A1900">#! /bin/perl</font></i>
+<pre><tt><i><font color="#9A1900">#! /usr/bin/env perl</font></i>
 
-<b><font color="#0000FF">package</font></b> MIME<font color="#990000">::</font>Lite<font color="#990000">::</font>HTML<font color="#990000">;</font>
-
-<i><font color="#9A1900"># source-highlight associates .pl to Prolog, but this is a perl file</font></i>
-<i><font color="#9A1900"># this tests --infer-lang command line option, that overrides the</font></i>
-<i><font color="#9A1900"># standard language specification</font></i>
-
-<b><font color="#0000FF">use</font></b> LWP<font color="#990000">::</font>UserAgent<font color="#990000">;</font>
-<b><font color="#0000FF">use</font></b> HTML<font color="#990000">::</font>LinkExtor<font color="#990000">;</font>
-<b><font color="#0000FF">use</font></b> URI<font color="#990000">::</font>URL<font color="#990000">;</font>
-<b><font color="#0000FF">use</font></b> MIME<font color="#990000">::</font>Lite<font color="#990000">;</font>
 <b><font color="#0000FF">use</font></b> strict<font color="#990000">;</font>
-<b><font color="#0000FF">use</font></b> vars <b><font color="#0000FF">qw</font></b><font color="#990000">(</font><font color="#009900">$VERSION</font> <font color="#009900">@ISA</font> <font color="#009900">@EXPORT</font> <font color="#009900">@EXPORT_OK</font><font color="#990000">);</font>
+<b><font color="#0000FF">use</font></b> warnings<font color="#990000">;</font>
 
-<b><font color="#0000FF">require</font></b> Exporter<font color="#990000">;</font>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$port</font> <font color="#990000">=</font> <font color="#009900">$ARGV</font><font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
 
-<font color="#009900">@ISA</font> <font color="#990000">=</font> <b><font color="#0000FF">qw</font></b><font color="#990000">(</font>Exporter<font color="#990000">);</font>
-<font color="#009900">@EXPORT</font> <font color="#990000">=</font> <b><font color="#0000FF">qw</font></b><font color="#990000">();</font>
+<i><font color="#9A1900"># prepare freqently used regexes</font></i>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$trailing_comment</font>      <font color="#990000">=</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">#;\s*\#.*#</font><font color="#990000">;</font>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$leading_comment</font>       <font color="#990000">=</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">|(?:^\|\n)\s*#.*|</font><font color="#990000">;</font>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$leading_comment</font>       <font color="#990000">=</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">&lt;(?:^\|\n)\s*#.*&gt;</font><font color="#990000">;</font>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$leading_comment</font>       <font color="#990000">=</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">[(?:^\|\n)\]\s*#.*]</font><font color="#990000">;</font>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$connecting_backslash</font>  <font color="#990000">=</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">@\s*\\\n\s*@</font><font color="#990000">;</font>
 
-<b><font color="#0000FF">my</font></b> <font color="#009900">$LOGINDETAILS</font><font color="#990000">;</font>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$quick_check</font> <font color="#990000">=</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">{:</font><font color="#009900">$port</font><font color="#FF6600">}</font><b><font color="#0000FF">i</font></b><font color="#990000">;</font>
 
-<i><font color="#9A1900">#------------------------------------------------------------------------------</font></i>
-<i><font color="#9A1900"># redefine get_basic_credentials</font></i>
-<i><font color="#9A1900">#------------------------------------------------------------------------------</font></i>
-<font color="#FF0000">{</font>
-    <b><font color="#0000FF">package</font></b> RequestAgent<font color="#990000">;</font>
-    <b><font color="#0000FF">use</font></b> vars <b><font color="#0000FF">qw</font></b><font color="#990000">(</font><font color="#009900">@ISA</font><font color="#990000">);</font>
-    <font color="#009900">@ISA</font> <font color="#990000">=</font> <b><font color="#0000FF">qw</font></b><font color="#990000">(</font>LWP<font color="#990000">::</font>UserAgent<font color="#990000">);</font>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$dependency</font>  <font color="#990000">=</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">{depends_(?=[brl])(?:build|run|lib)(?:-(?:append|delete))?</font>
+<font color="#FF6600">                  .*</font>
+<font color="#FF6600">                  (?=[plb])(?:port|(?:path|lib|bin):[^:]+):(?i:</font><font color="#009900">${port}</font><font color="#FF6600">|</font><font color="#009900">$port</font><font color="#FF6600">)(\{\})(?:\s|$)}</font><b><font color="#0000FF">x</font></b><font color="#990000">;</font>
 
-    <b><font color="#0000FF">sub</font></b> new
-    <font color="#FF0000">{</font> 
-	<b><font color="#0000FF">my</font></b> <font color="#009900">$self</font> <font color="#990000">=</font> LWP<font color="#990000">::</font>UserAgent<font color="#990000">::</font><b><font color="#000000">new</font></b><font color="#990000">(</font><font color="#009900">@_</font><font color="#990000">);</font>
-	<font color="#009900">$self</font><font color="#990000">;</font>
+<b><font color="#0000FF">my</font></b> <font color="#009900">$dependency</font>  <font color="#990000">=</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">{</font>
+<font color="#FF6600">                      (?=[plb])(?:port|(?:path|lib|bin):[^:]+)</font><i><font color="#9A1900">  # kind</font></i>
+<font color="#FF6600">                      :</font><i><font color="#9A1900">                                         # separator</font></i>
+<font color="#FF6600">                      (?i:</font><font color="#009900">${port}</font><font color="#FF6600">)(?:\s|$)</font><i><font color="#9A1900">                      # name</font></i>
+<font color="#FF6600">                    }</font><b><font color="#0000FF">x</font></b><font color="#990000">;</font> 
+
+<font color="#009900">$/</font> <font color="#990000">=</font> <font color="#FF0000">".\n"</font><font color="#990000">;</font>
+
+<b><font color="#0000FF">while</font></b> <font color="#990000">(</font><b><font color="#0000FF">defined</font></b><font color="#990000">(</font><b><font color="#0000FF">my</font></b> <font color="#009900">$portfile</font> <font color="#990000">=</font> <font color="#FF0000">&lt;*/*/Portfile&gt;</font><font color="#990000">))</font> <font color="#FF0000">{</font> 
+  <font color="#009900">@ARGV</font> <font color="#990000">=</font> <font color="#009900">$portfile</font><font color="#990000">;</font>
+
+  <b><font color="#0000FF">while</font></b> <font color="#990000">(</font><font color="#FF0000">&lt;&gt;</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+    <i><font color="#9A1900"># make a quick and dirty check if the port has a remote chance of</font></i>
+    <i><font color="#9A1900"># depending on $port</font></i>
+    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#009900">$_</font> <font color="#990000">=~</font> <b><font color="#0000FF">m</font></b><font color="#FF6600">\</font><font color="#009900">$quick_check</font><font color="#FF6600">|foo(.*)\</font><b><font color="#0000FF">i</font></b><font color="#990000">)</font> <font color="#FF0000">{</font>
+
+      <font color="#FF6600">s#$connecting_backslash|a\#b#\# #g</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
+      <font color="#FF6600">s#$connecting_backslash|a\#b#\# #</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
+      <font color="#FF6600">s#$connecting_backslash|a\###</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
+      <font color="#FF6600">s/$leading_comment|a\/b/a\/b/g</font><font color="#990000">;</font>            <i><font color="#9A1900"># remove leading comments</font></i>
+      <font color="#FF6600">s{$trailing_comment|\}}{\}}g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <font color="#FF6600">s($trailing_comment|\))(\))g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <font color="#FF6600">s&lt;$trailing_comment|\&gt;&gt;&lt;\&gt;&gt;g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <font color="#FF6600">s[$trailing_comment|\]][a\]b]g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <font color="#FF6600">s|$trailing_comment\||a\|b|g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <font color="#FF6600">s@$trailing_comment|(a\@b)@(bar\@)@g</font><font color="#990000">;</font>          <i><font color="#9A1900"># just for test</font></i>
+      <font color="#FF6600">s_$connectingbackslash|a\_b_\_ _g</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
+      <font color="#FF6600">s\$trailing_comment|(a\\b)\(bar\\)\g</font><font color="#990000">;</font>          <i><font color="#9A1900"># just for test</font></i>
+
+    <font color="#FF6600">s-[a\-z]{3}-fu-</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s^\^foo^fu^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s$foo(\w{3})\$$fu\$1$</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s!foo(\w{3})\!!fu\$1!</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s?foo(\w{3})\??fu\$1?</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s*foo(\w{3})\**fu\$1*</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+
+    <i><font color="#9A1900"># let's some more exotic syntaxes ;-)</font></i>
+    <font color="#FF6600">s?foo(\w{3})\?\$?!fu\!1!</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s$foo(\w{3})\$$^fu\^\$1^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s$foo(\w{3})\$$ ^fu\^\$1^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s$foo(\w{3})\$$ ^fu\^\$1^g</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s#foo(\w{3})\## ^fu\^\$1^g</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <font color="#FF6600">s$foo(\w{3})\$$ #fu\#\$1#g</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+
+      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#009900">$_</font> <font color="#990000">=~</font> <b><font color="#0000FF">m</font></b><font color="#FF6600">{</font><font color="#009900">$dependency</font><font color="#FF6600">}</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+        <font color="#009900">$portfile</font> <font color="#990000">=~</font> <font color="#FF6600">s{/Portfile$}{}</font><font color="#990000">;</font>   <i><font color="#9A1900"># remove trailing '/Portfile'</font></i>
+        <b><font color="#0000FF">print</font></b> <font color="#FF0000">"$portfile\n"</font><font color="#990000">;</font>
+      <font color="#FF0000">}</font>
     <font color="#FF0000">}</font>
-
-    <b><font color="#0000FF">sub</font></b> get_basic_credentials
-	<font color="#FF0000">{</font>	
-	  <b><font color="#0000FF">my</font></b><font color="#990000">(</font><font color="#009900">$self</font><font color="#990000">,</font> <font color="#009900">$realm</font><font color="#990000">,</font> <font color="#009900">$uri</font><font color="#990000">)</font> <font color="#990000">=</font> <font color="#009900">@_</font><font color="#990000">;</font>
-	  <i><font color="#9A1900"># Use parameter of MIME-Lite-HTML, key LoginDetails</font></i>
-	  <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">defined</font></b> <font color="#009900">$LOGINDETAILS</font><font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">split</font></b><font color="#990000">(</font><font color="#FF0000">':'</font><font color="#990000">,</font> <font color="#009900">$LOGINDETAILS</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">);</font> <font color="#FF0000">}</font> 
-	  <i><font color="#9A1900"># Ask user on STDIN</font></i>
-	  <b><font color="#0000FF">elsif</font></b> <font color="#990000">(-</font>t<font color="#990000">)</font> 
-	    <font color="#FF0000">{</font>
-		<b><font color="#0000FF">my</font></b> <font color="#009900">$netloc</font> <font color="#990000">=</font> <font color="#009900">$uri</font><font color="#990000">-&gt;</font>host_port<font color="#990000">;</font>
-		<b><font color="#0000FF">print</font></b> <font color="#FF0000">"Enter username for $realm at $netloc: "</font><font color="#990000">;</font>
-		<b><font color="#0000FF">my</font></b> <font color="#009900">$user</font> <font color="#990000">=</font> <font color="#FF0000">&lt;STDIN&gt;</font><font color="#990000">;</font>
-		<b><font color="#0000FF">chomp</font></b><font color="#990000">(</font><font color="#009900">$user</font><font color="#990000">);</font>
-		<i><font color="#9A1900"># 403 if no user given</font></i>
-		<b><font color="#0000FF">return</font></b> <font color="#990000">(</font><b><font color="#0000FF">undef</font></b><font color="#990000">,</font> <b><font color="#0000FF">undef</font></b><font color="#990000">)</font> <b><font color="#0000FF">unless</font></b> <b><font color="#0000FF">length</font></b> <font color="#009900">$user</font><font color="#990000">;</font>
-		<b><font color="#0000FF">print</font></b> <font color="#FF0000">"Password: "</font><font color="#990000">;</font>
-		<b><font color="#0000FF">system</font></b><font color="#990000">(</font><font color="#FF0000">"stty -echo"</font><font color="#990000">);</font>
-		<b><font color="#0000FF">my</font></b> <font color="#009900">$password</font> <font color="#990000">=</font> <font color="#FF0000">&lt;STDIN&gt;</font><font color="#990000">;</font>
-		<b><font color="#0000FF">system</font></b><font color="#990000">(</font><font color="#FF0000">"stty echo"</font><font color="#990000">);</font>
-		<b><font color="#0000FF">print</font></b> <font color="#FF0000">"\n"</font><font color="#990000">;</font>  <i><font color="#9A1900"># because we disabled echo</font></i>
-		<b><font color="#0000FF">chomp</font></b><font color="#990000">(</font><font color="#009900">$password</font><font color="#990000">);</font>
-		<b><font color="#0000FF">return</font></b> <font color="#990000">(</font><font color="#009900">$user</font><font color="#990000">,</font> <font color="#009900">$password</font><font color="#990000">);</font>
-	    <font color="#FF0000">}</font>
-	  <i><font color="#9A1900"># Damm we got 403 with CGI (use param LoginDetails)  ...</font></i>
-	  <b><font color="#0000FF">else</font></b> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#990000">(</font><b><font color="#0000FF">undef</font></b><font color="#990000">,</font> <b><font color="#0000FF">undef</font></b><font color="#990000">)</font> <font color="#FF0000">}</font>
-	<font color="#FF0000">}</font>
   <font color="#FF0000">}</font>
-
+<font color="#FF0000">}</font>
 </tt></pre>

@@ -19,6 +19,7 @@ PROGEXE = $(top_builddir)/src/$(PACKAGE)$(EXEEXT)
 # so that the version does not interfere with the diffing
 PROGNAME = $(PROGEXE) --gen-version $(DATADIROPTION)
 PROGNAME_CSSSTYLE = $(PROGEXE) --gen-version $(DATADIROPTION) $(STD_CSS_STYLE)
+PROGNAME_DOCBOOK = $(PROGEXE) --gen-version $(DATADIROPTION) -f docbook --doc --title="listing in docbook" --tab=8
 
 CHECKLANG = $(top_builddir)/src/$(PACKAGE)$(EXEEXT) --check-lang
 
@@ -41,6 +42,8 @@ JAVA2XHTMLCSS = $(JAVA2XHTML) --css ../doc/mono.css --no-doc
 JAVA2XHTMLCSSDOC = $(JAVA2XHTML) --css ../doc/mono.css
 
 JAVA2HTMLNOTFIXED = $(PROGNAME) -s java --outlang-def=$(srcdir)/../src/html_notfixed.outlang $(STD_STYLE) --doc --lang-def=$(srcdir)/../src/java.lang
+
+JAVA2XHTMLNOTFIXED = $(PROGNAME) -s java --outlang-def=$(srcdir)/../src/xhtml_notfixed.outlang $(STD_STYLE) --doc --lang-def=$(srcdir)/../src/java.lang
 
 JAVA2ESC = $(PROGNAME) -s java -f esc --style-file=$(top_srcdir)/src/esc.style --doc --lang-def=$(srcdir)/../src/java.lang
 
@@ -113,15 +116,19 @@ INFERIMPLICIT = $(PROGNAME)
 
 SIMPLE = $(PROGEXE) --gen-version --outlang-def=$(srcdir)/simple.outlang --lang-def=$(srcdir)/simple.lang $(STD_STYLE)
 
+# for testing named groups
+NAMEDGROUPS = $(PROGEXE) --gen-version --lang-def=$(srcdir)/namedgroups.lang $(STD_STYLE) $(DATADIROPTION)
+NAMEDGROUPS_STATE = $(PROGEXE) --gen-version --lang-def=$(srcdir)/namedgroups_state.lang $(STD_STYLE) $(DATADIROPTION)
+
 DEBUGLANG = $(PROGNAME) -s java $(STD_STYLE_HTML) --debug-lang=dump
 
-WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang
-WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err
+WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang wrong_syntax.lang wrong_namedgroups.lang wrong_namedgroups_subexps.lang wrong_namedgroups_subexps2.lang wrong_backref.lang wrong_backref2.lang
+WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err wrong_syntax.err wrong_namedgroups.err wrong_namedgroups_subexps.err wrong_namedgroups_subexps2.err wrong_backref.err wrong_backref2.err
 WRONGSTYLES = wrong_dircolor.style
 WRONGSTYLESOUT = wrong_dircolor.err
 # missing_langmap2.err
 
-OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_ref_post.tex test_ref.texinfo
+OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_ref_post.tex test_ref.texinfo test_ref.docbook
 
 EXTRA_DIST = test.java test.java.html test.java.doc.html \
 test.js test.js.html test.h test.h.html \
@@ -134,7 +141,7 @@ test_perl_lines.html \
 test.php3 test.php3.html test_php3_lines.html \
 test.py test.py.html test_python_lines.html \
 test_comments.py test_comments.py.html test_py_comments_lines.html \
-test_xhtml.html test_xhtml_doc.html \
+test_xhtml.html test_xhtml_notfixed.html test_xhtml_doc.html \
 test_xhtml_css.html test_xhtml_css_doc.html \
 test_css.html test_css_nodoc.html test_notfixed.html \
 test.chlog test.chlog.html test.chlog_css.html \
@@ -184,16 +191,24 @@ test.sql test.sql.html \
 test.bib test.bib.html \
 test.makefile test.makefile.html \
 test.css test.css.html \
+test.ps test.ps.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
 valgrind_tests.sh.in valgrind_suppressions.sh.in \
 valgrind_test.sh.in suppressions.supp \
-erasedir.sed erasedir2.sed \
-c_comment.show \
-cpp.langelems
+erasedir.sed erasedir2.sed erasedir3.sed \
+namedgroups.lang namedgroups_state.lang \
+test.ngroups test.ngroups.html \
+test_state.ngroups test_state.ngroups.html \
+c_comment.show namedgroups_state.show \
+cpp.langelems \
+test.h.docbook
 
 %.show: $(top_srcdir)/src/%.lang
+	$(PROGEXE) --show-regex=$< > $@
+
+%.show: $(srcdir)/%.lang
 	$(PROGEXE) --show-regex=$< > $@
 
 %.langelems: $(top_srcdir)/src/%.lang
@@ -247,6 +262,9 @@ debug.java.html: debug.java
 
 %.java.texinfo: %.java
 	$(JAVA2TEXINFO) --line-number -i $< -o $@
+
+%.h.docbook: %.h
+	$(PROGNAME_DOCBOOK) --line-number -i $< -o $@
 
 %.pl.html: %.pl
 	$(PROLOG2HTML) $<
@@ -326,6 +344,9 @@ debug.java.html: debug.java
 %.style.html: $(srcdir)/%.style
 	$(STYLE2HTML) -i $< -o $@
 
+%.ps.html: $(srcdir)/%.ps
+	$(PROGNAME) -i $< -o $@
+
 %.htm: %.java
 	$(JAVA2HTML) -i $< --title="Java formatted in html" > $@
 	echo "" >> $@
@@ -336,8 +357,15 @@ debug.java.html: debug.java
 %.simple.html: %.simple
 	$(SIMPLE) -i $< -o $@
 
+%_state.ngroups.html: %_state.ngroups
+	$(NAMEDGROUPS_STATE) -i $< -o $@
+
+%.ngroups.html: %.ngroups
+	$(NAMEDGROUPS) -i $< -o $@
+
 %.err: %.lang
-	$(CHECKLANG) $< 2> $@ || true
+	$(CHECKLANG) ./$< 2> $@ || true;
+	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
 %.err: %.outlang
 	$(CHECKOUTLANG) $< 2> $@ || true
@@ -350,13 +378,11 @@ PROG_NOOUTLANGDEF=$(PROGEXE) --lang-def=$(srcdir)/simple.lang $(STD_STYLE)
 
 missing_langmap.err: test.simple
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap.err || true;
-	sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap.err
-#missing_langmap2.err: test.simple
-#	$(PROG_NOOUTLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap2.err || true;
-#	sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap2.err
+	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_langmap.err && rm -f *testtmp
+
 missing_extension.err: test.simple
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple 2> missing_extension.err || true;
-	sed -r -i -f $(srcdir)/erasedir2.sed missing_extension.err
+	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_extension.err && rm -f *testtmp
 
 CPP2HTML_WHEADERS = $(CPP2HTML) --header=$(srcdir)/header.html --footer=$(srcdir)/footer.html
 
@@ -365,6 +391,8 @@ CPP2HTML_WREFS = $(CPP2HTML) --title="Contains references to tags" --gen-referen
 CPP2LATEX_WREFS = $(CPP2TEX) --title="Contains references to tags" --gen-references=postline --line-number --ctags=""
 
 CPP2LATEX_WREFSPOST = $(CPP2TEX) --title="Contains references to tags" --gen-references=postdoc --line-number --ctags=""
+
+CPP2DOCBOOK_WREFS = $(PROGNAME_DOCBOOK) --gen-references=postline --line-number --ctags=""
 
 CTAGS_CMD=$(CTAGS) --excmd=number --tag-relative=yes 
 
@@ -380,15 +408,19 @@ test_ref.html: test.h
 test_ref.tex: test_ref.tags 
 	$(CPP2LATEX_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.tex
 
+test_ref.docbook: test_ref.tags 
+	$(CPP2DOCBOOK_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.docbook
+
 test_ref_post.tex: test_ref.tags 
 	$(CPP2LATEX_WREFSPOST) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref_post.tex
 
 test_ref.texinfo: test_ref.tags 
 	$(CPP2TEXINFO_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.texinfo
 
+# -r 's/\"([^[:blank:]]*)\/([[:alnum:]\._]*\#[[:alnum:]\._]+)\"/\"\2\"/g' -i
 test_refs.h.html: test_refs.h test_refs.cpp
 	$(CPP2HTML_WREFS) --ctags-file=my_test_ref.tags --line-number $(srcdir)/test_refs.h $(srcdir)/test_refs.cpp 
-	sed -r 's/\"([^[:blank:]]*)\/([[:alnum:]\._]*\#[[:alnum:]\._]+)\"/\"\2\"/g' -i test_refs.h.html test_refs.cpp.html # eliminate leading paths
+	sed -itesttmp -f $(srcdir)/erasedir3.sed test_refs.h.html test_refs.cpp.html  && rm -f *testtmp # eliminate leading paths
 
 test_refs.cpp.html: test_refs.h.html
 
@@ -409,6 +441,9 @@ test_xhtml_css_doc.html: test.java
 
 test_notfixed.html: test.java
 	$(JAVA2HTMLNOTFIXED) < $(srcdir)/test.java > $@
+
+test_xhtml_notfixed.html: test.java
+	$(JAVA2XHTMLNOTFIXED) < $(srcdir)/test.java > $@
 
 test_css.html: test.java
 	$(JAVA2HTMLCSS) < test.java > $@
@@ -473,7 +508,10 @@ check_debug \
 check_ref \
 check_show \
 check_makefile \
-check_css
+check_css \
+check_ps \
+check_docbook \
+check_namedgroups
 
 remove_css_html_files:
 	rm -f *.css.java.html *.nf_css.java.html
@@ -512,13 +550,15 @@ check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.
 	diff $(srcdir)/test_notfixed.html test.nf_css.java.html
 	diff $(srcdir)/test.java.doc.html test.css_doc.java.html
 
-check_java2xhtml: remove_css_xhtml_files test_xhtml.html test_xhtml_doc.html test_xhtml_css.html test_xhtml_css_doc.html test.css_xhtml.java.html
+check_java2xhtml: remove_css_xhtml_files test_xhtml.html test_xhtml_notfixed.html test_xhtml_doc.html test_xhtml_css.html test_xhtml_css_doc.html test.css_xhtml.java.html
 	$(JAVA2XHTML) < $(srcdir)/test.java > test_xhtml.out.html
+	$(JAVA2XHTMLNOTFIXED) < $(srcdir)/test.java > test_xhtml_notfixed.out.html
 	$(JAVA2XHTMLDOC) < $(srcdir)/test.java > test_xhtml_doc.out.html
 	$(JAVA2XHTMLCSS) < $(srcdir)/test.java > test_xhtml_css.out.html
 	$(JAVA2XHTMLCSSDOC) < $(srcdir)/test.java > test_xhtml_css_doc.out.html
 	@echo expect no output from diff
 	diff $(srcdir)/test_xhtml.html test_xhtml.out.html
+	diff $(srcdir)/test_xhtml_notfixed.html test_xhtml_notfixed.out.html
 	diff $(srcdir)/test_xhtml_doc.html test_xhtml_doc.out.html
 	diff $(srcdir)/test_xhtml_css.html test_xhtml_css.out.html
 	diff $(srcdir)/test_xhtml_css_doc.html test_xhtml_css_doc.out.html
@@ -696,6 +736,11 @@ check_latex: test.tex.html test.java.tex.html
 	diff $(srcdir)/test.tex.html test.tex.out.html
 	diff $(srcdir)/test.java.tex.html test.java.tex.out.html
 
+check_docbook: test.h.docbook
+	$(PROGNAME_DOCBOOK) -i $(srcdir)/test.h --line-number > test.h.out.docbook
+	@echo expect no output from diff
+	diff $(srcdir)/test.h.docbook test.h.out.docbook
+
 check_sql: test.sql.html
 	$(PROGNAME) -i $(srcdir)/test.sql > test.sql.out.html
 	@echo expect no output from diff
@@ -716,6 +761,11 @@ check_css: test.css.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.css.html test.css.out.html
 
+check_ps: test.ps.html
+	$(PROGNAME) -i $(srcdir)/test.ps > test.ps.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.ps.html test.ps.out.html
+
 check_lang: log.lang.html cpp.lang.html default.style.html
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o log.lang.out.html
 	$(LANG2HTML) -i $(top_srcdir)/src/cpp.lang -o cpp.lang.out.html
@@ -730,29 +780,48 @@ check_simple: test.simple.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.simple.html test.simple.out.html
 
+check_namedgroups: test.ngroups.html test_state.ngroups.html
+	$(NAMEDGROUPS) -i $(srcdir)/test.ngroups -o test.ngroups.out.html
+	$(NAMEDGROUPS_STATE) -i $(srcdir)/test_state.ngroups -o test_state.ngroups.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.ngroups.html test.ngroups.out.html
+	diff $(srcdir)/test_state.ngroups.html test_state.ngroups.out.html
+
 %.err_out: %.lang
 	$(CHECKLANG) ./$< 2> $@ || true; 
-	sed -r -i -f $(srcdir)/erasedir.sed $@ 
+	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
 %.err_out: %.outlang
 	$(CHECKOUTLANG) ./$< 2> $@ || true; 
-	sed -r -i -f $(srcdir)/erasedir.sed $@ 
+	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
 %.err_out: %.style
 	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=$(srcdir)/$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true;
-	sed -r -i -f $(srcdir)/erasedir.sed $@ 
+	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
-check_wrong: 
+check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
 	rm -f *.err_out
 	$(MAKE) wrong_exp.err_out
+	$(MAKE) wrong_syntax.err_out
 	$(MAKE) wrong_var.err_out
 	$(MAKE) wrong_trans.err_out
 	$(MAKE) wrong_dircolor.err_out
+	$(MAKE) wrong_namedgroups.err_out
+	$(MAKE) wrong_namedgroups_subexps.err_out
+	$(MAKE) wrong_namedgroups_subexps2.err_out
+	$(MAKE) wrong_backref.err_out
+	$(MAKE) wrong_backref2.err_out
 	@echo expect no output from diff
 	diff $(srcdir)/wrong_exp.err wrong_exp.err_out
+	diff $(srcdir)/wrong_syntax.err wrong_syntax.err_out
 	diff $(srcdir)/wrong_var.err wrong_var.err_out
 	diff $(srcdir)/wrong_trans.err wrong_trans.err_out
 	diff $(srcdir)/wrong_dircolor.err wrong_dircolor.err_out
+	diff $(srcdir)/wrong_namedgroups.err wrong_namedgroups.err_out
+	diff $(srcdir)/wrong_namedgroups_subexps.err wrong_namedgroups_subexps.err_out
+	diff $(srcdir)/wrong_namedgroups_subexps2.err wrong_namedgroups_subexps2.err_out
+	diff $(srcdir)/wrong_backref.err wrong_backref.err_out
+	diff $(srcdir)/wrong_backref2.err wrong_backref2.err_out
 
 #$(PROG_NOOUTLANGDEF) -i $(srcdir)/test.simple -o test.err_out --data-dir=/tmp 2> missing_langmap2.err_out || true
 #sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap2.err_out
@@ -763,10 +832,11 @@ check_missing: missing_extension.err missing_langmap.err
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap.err_out || true
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple 2> missing_extension.err_out || true
 	@echo expect no output from diff
-	sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap.err_out
-	sed -r -i -f $(srcdir)/erasedir2.sed missing_extension.err_out
+	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_langmap.err_out
+	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_extension.err_out
 	diff $(srcdir)/missing_langmap.err missing_langmap.err_out
 	diff $(srcdir)/missing_extension.err missing_extension.err_out
+	rm -f *testtmp
 
 check_failsafe: test.unknown.html
 	$(FAILSAFE) -i $(srcdir)/test.unknown -o test.unknown.out.html
@@ -780,23 +850,31 @@ check_debug: debug.debug debug.java.html
 	diff $(srcdir)/debug.debug debug.out.debug
 	diff $(srcdir)/debug.java.html debug.java.out.html
 
+# disable reference tests
+if NO_CTAGS
+check_ref:
+	@echo warning: tests with references are disable
+	@echo because we could not find a usable ctags program
+else
+# sed -i -r 's/([.\/[:alnum:]]+)\/(test\.h\:[[:alnum:]\._]+)/\2/g' test_ref.out.html # eliminate leading paths
 check_ref: $(OUTPUTWREFS)
 	$(CPP2HTML_WREFS) --ctags-file=my_test_ref.tags -i $(srcdir)/test.h -o test_ref.out.html
-	sed -i -e 's/test\_ref\.out\.html/test\_ref\.html/g' test_ref.out.html
-	sed -i -r 's/([.\/[:alnum:]]+)\/(test\.h\:[[:alnum:]\._]+)/\2/g' test_ref.out.html # eliminate leading paths
-	rm -f test_refs_tmp.*
+	sed -itesttmp -e 's/test\_ref\.out\.html/test\_ref\.html/g' test_ref.out.html
+	sed -itesttmp -f $(srcdir)/erasedir3.sed test_ref.out.html # eliminate leading paths
+	rm -f test_refs_tmp.* *testtmp
 	cp -f $(srcdir)/test_refs.h test_refs_tmp.h
 	cp -f $(srcdir)/test_refs.cpp test_refs_tmp.cpp
 	$(CTAGS_CMD) -o test_refs_tmp.tags test_refs_tmp.h test_refs_tmp.cpp
 	$(CPP2HTML_WREFS) --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp --verbose
-	sed -i -e 's/\_tmp\.h/\.h/g' test_refs_tmp.h.html test_refs_tmp.cpp.html
-	sed -i -e 's/\_tmp\.cpp/\.cpp/g' test_refs_tmp.h.html test_refs_tmp.cpp.html
+	sed -itesttmp -e 's/\_tmp\.h/\.h/g' test_refs_tmp.h.html test_refs_tmp.cpp.html
+	sed -itesttmp -e 's/\_tmp\.cpp/\.cpp/g' test_refs_tmp.h.html test_refs_tmp.cpp.html
 	$(CPP2LATEX_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.out.tex
-	sed -i -r 's/([.\/[:alnum:]]+)\/(test\.h\:[[:alnum:]\._]+)/\2/g' test_ref.out.tex # eliminate leading paths
+	sed -itesttmp -r 's/([.\/[:alnum:]]+)\/(test\.h\:[[:alnum:]\._]+)/\2/g' test_ref.out.tex # eliminate leading paths
 	$(CPP2LATEX_WREFSPOST) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref_post.out.tex
-	sed -i -r 's/([.\/[:alnum:]]+)\/(test\.h\:[[:alnum:]\._]+)/\2/g' test_ref_post.out.tex # eliminate leading paths
+	sed -itesttmp -f $(srcdir)/erasedir3.sed test_ref_post.out.tex # eliminate leading paths
 	$(CPP2TEXINFO_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.out.texinfo
-	sed -i -r 's/([.\/[:alnum:]]+)\/(test\.h\:[[:alnum:]\._]+)/\2/g' test_ref.out.texinfo # eliminate leading paths
+	sed -itesttmp -f $(srcdir)/erasedir3.sed test_ref.out.texinfo # eliminate leading paths
+	$(CPP2DOCBOOK_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.out.docbook
 	@echo expect no output from diff
 	diff $(srcdir)/test_ref.html test_ref.out.html
 	diff $(srcdir)/test_refs.h.html test_refs_tmp.h.html
@@ -804,12 +882,16 @@ check_ref: $(OUTPUTWREFS)
 	diff $(srcdir)/test_ref.tex test_ref.out.tex
 	diff $(srcdir)/test_ref.texinfo test_ref.out.texinfo
 	diff $(srcdir)/test_ref_post.tex test_ref_post.out.tex
-	rm -f test_refs_tmp.*
+	diff $(srcdir)/test_ref.docbook test_ref.out.docbook
+	rm -f test_refs_tmp.* *testtmp
+endif
 
-check_show: $(srcdir)/c_comment.show
+check_show: $(srcdir)/c_comment.show $(srcdir)/namedgroups_state.show
 	$(PROGEXE) --show-regex=$(top_srcdir)/src/c_comment.lang > c_comment.out.show
+	$(PROGEXE) --show-regex=$(srcdir)/namedgroups_state.lang > namedgroups_state.out.show
 	@echo expect no output from diff
 	diff $(srcdir)/c_comment.show c_comment.out.show
+	diff $(srcdir)/namedgroups_state.show namedgroups_state.out.show
 
 check_langelems: $(srcdir)/cpp.langelems
 	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$(top_srcdir)/src/cpp.lang > cpp.out.langelems
@@ -835,6 +917,7 @@ check-valgrind:
 	$(VALGRINDTEST) $(PROGNAME_CSSSTYLE) -i $(srcdir)/test.java -o test.css.java.html
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline -i $(srcdir)/test.h -o test_ref.out.html
 	$(VALGRINDTEST) $(FAILSAFE) -i $(srcdir)/test.unknown -s cpp -o test.unknown_out
+	$(VALGRINDTEST) $(NAMEDGROUPS) -i $(srcdir)/test.ngroups -o test.ngroups.out.html
 	$(VALGRINDTEST) $(FAILSAFE) -i $(srcdir)/test.unknown -o test.unknown_out
 	cp -f $(srcdir)/test_refs.h test_refs_tmp.h
 	cp -f $(srcdir)/test_refs.cpp test_refs_tmp.cpp
@@ -842,9 +925,9 @@ check-valgrind:
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp
 	rm -f test_refs_tmp.*
 
-CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html
+CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html 
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html
 
-DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html
+DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html test_ref.docbook

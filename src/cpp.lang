@@ -13,6 +13,9 @@ include "number.lang"
 
 include "c_string.lang"
 
+(keyword,normal,type) = 
+  `(\<(?:class|struct|typename))([[:blank:]]+)([[:alnum:]]+)`
+
 keyword = "__asm|__cdecl|__declspec|__export|__far16",
   "__fastcall|__fortran|__import",
   "__pascal|__rtti|__stdcall|_asm|_cdecl",

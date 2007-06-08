@@ -1,0 +1,14 @@
+vardef TODO = '(TODO|FIXME)([:]?)'
+
+environment comment delim "/**" "*/" multiline nested begin
+  type = '@[[:alpha:]]+'
+  todo = $TODO
+end
+
+regexp = `([^[:alnum:]]).*(\1)`
+
+string delim "<" ">"
+
+string2 delim "<<" ">>" multiline
+
+(paren,normal,paren) = `(\[)(.*)(\])`

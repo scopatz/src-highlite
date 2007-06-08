@@ -5,13 +5,14 @@ comment start "#"
 preproc = "include"
 
 string delim "\"" "\"" escape "\\" multiline
-string delim "'" "'" escape "\\" multiline
+regexp delim "'" "'" escape "\\" multiline
+regexp delim "`" "`" escape "\\" multiline
 
 keyword = "state|environment|begin|end|delim|escape|start",
           "multiline|nested|vardef|exitall|exit",
           "redef|subst|nonsensitive"
 
-symbol = "=|+|,"
+symbol = "=|+|,|(|)"
 
 vardef ID = '[[:word:]]+'
 

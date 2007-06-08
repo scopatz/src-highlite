@@ -13,12 +13,9 @@ ftp://ftp.gnu.org/gnu/src-highlite/ or from one of its mirrors (see
 http://www.gnu.org/prep/ftp.html).
 
 This project's CVS repository can be checked out through anonymous
-(pserver) CVS with the following instruction set. When prompted for a
-password for anoncvs, simply press the Enter key.
+(pserver) CVS with the following instruction:
 
-cvs -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/src-highlite login
-
-cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/src-highlite co src-highlite
+cvs -z3 -d:pserver:anonymous@@cvs.savannah.gnu.org:/sources/src-highlite co src-highlite
 
 Further instructions can be found at the address:
 http://savannah.gnu.org/projects/src-highlite.
@@ -149,24 +146,3 @@ My home page is http://www.lorenzobettini.it
 source-highlight is free software. See the file COPYING for copying
 conditions. Anyway I won't get offended if you send me a postcard :-)
 
-------------------------------------------------------------------------
-
-Return to GNU's home page </home.html>.
-
-Please send FSF & GNU inquiries & questions to /gnu@gnu.org
-<mailto:gnu@gnu.org>/. There are also other ways to contact
-<http://www.gnu.org/home.html#ContactInfo> the FSF.
-
-Please send comments on these web pages to /webmasters@gnu.org
-<mailto:webmasters@gnu.org>/, send other questions to /gnu@gnu.org
-<mailto:gnu@gnu.org>/.
-
-Copyright (C) 2001 Free Software Foundation, Inc., 59 Temple Place -
-Suite 330, Boston, MA 02111, USA
-
-Verbatim copying and distribution of this entire article is permitted in
-any medium, provided this notice is preserved.
-
-Updated:9 Jan 2001 mhw
-
-------------------------------------------------------------------------

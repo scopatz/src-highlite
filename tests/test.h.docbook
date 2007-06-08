@@ -1,0 +1,96 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook//EN">
+<article>
+<articleinfo>
+<title>prova</title>
+</articleinfo>
+<programlisting>01: <emphasis>/**</emphasis>
+02: <emphasis>** Copyright (C) 1999-2007 Lorenzo Bettini</emphasis>
+03: <emphasis>**  </emphasis>
+04: <emphasis>  </emphasis>http://www.lorenzobettini.it
+05: <emphasis>  </emphasis>
+06: <emphasis>  r2 = r2 XOR (1&lt;&lt;10);</emphasis>
+07: <emphasis>  cout &lt;&lt; "hello world" &lt;&lt; endl;</emphasis>
+08: <emphasis>**  </emphasis>
+09: <emphasis>*/</emphasis>
+10: 
+11: <emphasis>// this file also contains the definition of mysum as a #define</emphasis>
+12: 
+13: <emphasis>// textgenerator.h : Text Generator class &amp;&amp;</emphasis>
+14: 
+15: <emphasis role="strong">#ifndef</emphasis> _TEXTGEN_H
+16: <emphasis role="strong">#define</emphasis> _TEXTGEN_H
+17: 
+18: <emphasis role="strong">#define</emphasis> <emphasis role="strong">foo</emphasis>(x) (x + 1)
+19: 
+20: <emphasis role="strong">#define</emphasis> mysum myfunbody 
+21: 
+22: <emphasis role="strong">#include</emphasis> &lt;iostream.h&gt; <emphasis>// for cerr</emphasis>
+23: 
+24: <emphasis role="strong">#include</emphasis> "genfun.h" <emphasis>/* for generating functions */</emphasis>
+25: 
+26: <emphasis role="strong">class</emphasis> TextGenerator {
+27:   <emphasis role="strong">public</emphasis> :
+28:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">generate</emphasis>( <emphasis role="strong">const</emphasis> char *s ) <emphasis role="strong">const</emphasis> { (*sout) &lt;&lt; s ; }
+29:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">generate</emphasis>( <emphasis role="strong">const</emphasis> char *s, int start, int end ) <emphasis role="strong">const</emphasis> 
+30:       {
+31:         <emphasis role="strong">for</emphasis> ( int i = start ; i &lt;= end ; ++i )
+32:           (*sout) &lt;&lt; s[i] ;
+33:         <emphasis role="strong">return</emphasis> a&lt;p-&gt;b ? a : 3;
+34:       }
+35:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">generateln</emphasis>( <emphasis role="strong">const</emphasis> char *s ) <emphasis role="strong">const</emphasis>
+36:         { 
+37:             <emphasis role="strong">generate</emphasis>( s ) ;
+38:             (*sout) &lt;&lt; endl ; 
+39:         }
+40:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">generateEntire</emphasis>( <emphasis role="strong">const</emphasis> char *s ) <emphasis role="strong">const</emphasis>
+41:         {
+42:             <emphasis role="strong">startTextGeneration</emphasis>() ;
+43:             <emphasis role="strong">generate</emphasis>(s) ;
+44:             <emphasis role="strong">endTextGeneration</emphasis>() ;
+45:         }
+46:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">startTextGeneration</emphasis>() <emphasis role="strong">const</emphasis> {}
+47:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">endTextGeneration</emphasis>() <emphasis role="strong">const</emphasis> {}
+48:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">beginText</emphasis>( <emphasis role="strong">const</emphasis> char *s ) <emphasis role="strong">const</emphasis>
+49:         {
+50:             <emphasis role="strong">startTextGeneration</emphasis>() ;
+51:             <emphasis role="strong">if</emphasis> ( s )
+52:                 <emphasis role="strong">generate</emphasis>( s ) ;
+53:         }
+54:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">endText</emphasis>( <emphasis role="strong">const</emphasis> char *s ) <emphasis role="strong">const</emphasis>
+55:         {
+56:             <emphasis role="strong">if</emphasis> ( s )
+57:                 <emphasis role="strong">generate</emphasis>( s ) ;
+58:             <emphasis role="strong">endTextGeneration</emphasis>() ;
+59:         }
+60: } ;
+61: 
+62: <emphasis>// Decorator</emphasis>
+63: <emphasis role="strong">class</emphasis> TextDecorator : <emphasis role="strong">public</emphasis> TextGenerator {
+64:   <emphasis role="strong">protected</emphasis> :
+65:     TextGenerator *decorated ;
+66:   
+67:   <emphasis role="strong">public</emphasis> :
+68:     <emphasis role="strong">TextDecorator</emphasis>( TextGenerator *t ) : <emphasis role="strong">decorated</emphasis>( t ) {}
+69: 
+70:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">startTextGeneration</emphasis>() <emphasis role="strong">const</emphasis> 
+71:     { 
+72:         <emphasis role="strong">startDecorate</emphasis>() ;
+73:         <emphasis role="strong">if</emphasis> ( decorated )
+74:             decorated-&gt;<emphasis role="strong">startTextGeneration</emphasis>() ;
+75:     }
+76:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">endTextGeneration</emphasis>() <emphasis role="strong">const</emphasis> 
+77:     { 
+78:         <emphasis role="strong">if</emphasis> ( decorated )
+79:             decorated-&gt;<emphasis role="strong">endTextGeneration</emphasis>() ;
+80:         <emphasis role="strong">endDecorate</emphasis>() ;
+81:         mysum;
+82:     }
+83: 
+84:     <emphasis>// pure virtual functions</emphasis>
+85:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">startDecorate</emphasis>() <emphasis role="strong">const</emphasis> = 0 ;
+86:     <emphasis role="strong">virtual</emphasis> void <emphasis role="strong">endDecorate</emphasis>() <emphasis role="strong">const</emphasis> = 0 ;
+87: } ;
+88: 
+89: <emphasis role="strong">#endif</emphasis> <emphasis>// _TEXTGEN_H</emphasis>
+</programlisting>
+</article>

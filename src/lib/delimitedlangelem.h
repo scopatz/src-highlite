@@ -42,6 +42,8 @@ public:
     
     virtual const std::string toString() const;
     
+    virtual const std::string toStringOriginal() const;
+    
     void set_escape(StringDef *e) { escape = e; }
     
     StringDef *getStart() const { return start; }

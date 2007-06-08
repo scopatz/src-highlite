@@ -38,3 +38,11 @@ StateLangElem::toString() const
   return res;
 }
 
+const std::string
+StateLangElem::toStringOriginal() const
+{
+  string res = statestartlangelem->toString();
+  if (langelems)
+    res += "\n" + langelems->toStringOriginal();
+  return res;
+}

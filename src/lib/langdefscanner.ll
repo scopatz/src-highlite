@@ -1,6 +1,6 @@
 %{
 /*
- * Copyright (C) 1999-2005, Lorenzo Bettini, http://www.lorenzobettini.it
+ * Copyright (C) 1999-2007, Lorenzo Bettini, http://www.lorenzobettini.it
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,9 @@
 #include "langdefparser.h"
 #include "langdefscanner.h"
 #include "fileutil.h"
+#include "regexpreprocessor.h"
+#include "stringdef.h"
+#include "messages.h"
 
 #include <stack>
 
@@ -40,6 +43,7 @@ static std::ostringstream buff;
 static void buffer(const char *s);
 static void buffer_escape(const char *c);
 static const std::string *flush_buffer();
+static StringDef *flush_buffer_preproc();
 static void open_include_file(const char *file);
 static void close_include_file();
 
@@ -69,11 +73,11 @@ IDE [a-zA-Z_]([a-zA-Z0-9_])*
 
 STRING \"[^\n"]+\"
 
-%s COMMENT_STATE STRING_STATE REGEXP_STATE INCLUDE_STATE
+%s COMMENT_STATE STRING_STATE REGEXP_STATE REGEXP_NOPREPROC_STATE INCLUDE_STATE
 
 %%
 
-[ \t] {}
+<INITIAL,COMMENT_STATE,INCLUDE_STATE>[ \t] {}
 
 \r {}
 
@@ -130,20 +134,37 @@ STRING \"[^\n"]+\"
 <INITIAL>"=" { return '=' ; }
 <INITIAL>"," { return ',' ; }
 <INITIAL>"+" { return '+' ; }
+<INITIAL>"(" { updateTokenInfo(); return '(' ; }
+<INITIAL>")" { return ')' ; }
 
 <INITIAL>\" { BEGIN(STRING_STATE) ; }
 <STRING_STATE>("*"|"."|"?"|"+"|"("|")"|"{"|"}"|"["|"]"|"^"|"$") {  buffer_escape( yytext ) ; }
 <STRING_STATE>\\\| {  buffer( yytext ) ; }
 <STRING_STATE>\\\\ {  buffer( yytext ) ; }
+<STRING_STATE>\\[[:digit:]] {  
+	printError(parsestruct->file_name, parsestruct->line, "backreferences are not allowed") ;
+	exitError(parsestruct->file_name, parsestruct->line, "use backreferences only inside ` `") ; 
+	}
 <STRING_STATE>"\\\"" {  buffer( yytext ) ; }
 <STRING_STATE>\" { BEGIN(INITIAL) ; langdef_lval.string = flush_buffer() ; DEB2("STRINGDEF",langdef_lval.string); return STRINGDEF; }
 <STRING_STATE>[^\n] {  buffer( yytext ) ; }
 
 <INITIAL>\' { BEGIN(REGEXP_STATE) ; }
 <REGEXP_STATE>\\\\ {  buffer( yytext ) ; }
+<REGEXP_STATE>\\[[:digit:]] {  
+	printError(parsestruct->file_name, parsestruct->line, "backreferences are not allowed") ;
+	exitError(parsestruct->file_name, parsestruct->line, "use backreferences only inside ` `") ; 
+	}
 <REGEXP_STATE>"\\'" {  buffer( "'" ) ; }
-<REGEXP_STATE>\' { BEGIN(INITIAL) ; langdef_lval.string = flush_buffer() ; DEB2("STRINGDEF",langdef_lval.string); return STRINGDEF; }
+<REGEXP_STATE>\' { BEGIN(INITIAL) ; langdef_lval.stringdef = flush_buffer_preproc() ; DEB2("REGEXPDEF",langdef_lval.string); return REGEXPDEF; }
 <REGEXP_STATE>[^\n] {  buffer( yytext ) ; }
+
+<INITIAL>` { BEGIN(REGEXP_NOPREPROC_STATE) ; }
+<REGEXP_NOPREPROC_STATE>\\\\ {  buffer( yytext ) ; }
+<REGEXP_NOPREPROC_STATE>"\\`" {  buffer( "'" ) ; }
+<REGEXP_NOPREPROC_STATE>` { BEGIN(INITIAL) ; langdef_lval.string = flush_buffer() ; DEB2("REGEXPNOPREPROCDEF",langdef_lval.string); return REGEXPNOPREPROC; }
+<REGEXP_NOPREPROC_STATE>[^\n] {  buffer( yytext ) ; }
+
 
 <INITIAL>{nl} { DEB("NEWLINE"); ++(parsestruct->line) ; }
 
@@ -166,6 +187,13 @@ const std::string *flush_buffer()
   const std::string *ret = new std::string(buff.str());
   buff.str("");
   return ret;
+}
+
+StringDef *flush_buffer_preproc()
+{
+  StringDef *sd = new StringDef(RegexPreProcessor::preprocess(buff.str()), buff.str());
+  buff.str("");
+  return sd;
 }
 
 void _open_file_to_scan(const string &path, const string &name)

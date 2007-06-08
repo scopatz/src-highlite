@@ -1,10 +1,10 @@
 //
-// C++ Interface: %{MODULE}
+// C++ Interface: StringDef
 //
-// Description: 
+// Description: a string definition that is used by all the language elements.
 //
 //
-// Author: %{AUTHOR} <%{EMAIL}>, (C) %{YEAR}
+// Author: Lorenzo Bettini, 1999-2007 <http://www.lorenzobettini.it>
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -16,34 +16,55 @@
 #include <list>
 
 /**
-represent a string for a language element
+ represent a string for a language element
 
-@author Lorenzo Bettini
-*/
-class StringDef
-{
-  private:
+ @author Lorenzo Bettini
+ */
+class StringDef {
+private:
+    /// the actual content
     std::string stringdef;
-    
-  public:
-    StringDef(const char *s);
-    StringDef(const std::string &s);
+    /// the original representation (without any preprocessing)
+    std::string orig;
 
-    ~StringDef();
-    
-    const std::string toString() const { return stringdef; }
-    static StringDef *concat(const StringDef *s1, const StringDef *s2)
-    { return new StringDef(s1->stringdef + s2->stringdef); }
+public:
+    /**
+     * constructs a StringDef and store also the original representation
+     * @param s the actual content
+     * @param o the original representation
+     */
+    StringDef(const std::string &s, const std::string &o) :
+        stringdef(s), orig(o) {
+    }
+
+    StringDef(const std::string &s) :
+        stringdef(s) {
+    }
+
+    const std::string toString() const {
+        return stringdef;
+    }
+
+    /**
+     * return the original representation (this is useful for printing errors)
+     * @return the original representation
+     */
+    const std::string toStringOriginal() const {
+        return orig;
+    }
+
+    static StringDef *concat(const StringDef *s1, const StringDef *s2) {
+        return new StringDef(s1->stringdef + s2->stringdef);
+    }
 };
 
 typedef std::list<StringDef *> StringDefsBase;
 
-class StringDefs : public StringDefsBase
-{
-  public:
+class StringDefs : public StringDefsBase {
+public:
     ~StringDefs() {
-      for (StringDefsBase::iterator it = begin(); it != end(); ++it)
-        delete *it;
+        for (StringDefsBase::iterator it = begin(); it != end(); ++it)
+            delete *it;
     }
 };
 

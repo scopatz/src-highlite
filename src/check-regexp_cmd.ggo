@@ -1,0 +1,12 @@
+# Copyright (C) 1999-2007  Lorenzo Bettini, http://www.lorenzobettini.it
+
+# This file is used by gengetopt to generate a command line args parser
+# GNU gengetopt can be found at
+# http://www.gnu.org/software/gengetopt
+
+package "check-regexp (GNU Source-highlight)"
+
+purpose "Tries to match the regular expression passed as the first argument
+against the strings passed as remaining arguments"
+
+usage "check-regexp 'regular expression' 'string1' 'string2' ..."

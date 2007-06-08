@@ -53,3 +53,4 @@ test_langinfer
 mytags
 copyright.c
 reportbugs.c
+test_regexpreprocessor

@@ -1,0 +1,14 @@
+include "docbook.outlang"
+
+doctemplate
+"<!DOCTYPE article PUBLIC \"-//OASIS//DTD DocBook//EN\">
+<article>
+<articleinfo>
+<title>prova</title>
+</articleinfo>
+<programlisting>"
+"</programlisting>
+</article>
+"
+end
+

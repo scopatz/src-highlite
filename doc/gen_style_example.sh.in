@@ -8,5 +8,5 @@ SOURCEHIGHLIGHT=@top_builddir@/src/source-highlight
 for arg in $*
 do
     echo "<h2>$arg</h2>";
-    $SOURCEHIGHLIGHT --input=@srcdir@/Hello.java --style-css=@srcdir@/$arg --data-dir=@top_srcdir@/src --outlang-def=xhtmltable.outlang;
+    $SOURCEHIGHLIGHT --tab=8 --input=@srcdir@/Hello.java --style-css=@srcdir@/$arg --data-dir=@top_srcdir@/src --outlang-def=xhtmltable.outlang;
 done

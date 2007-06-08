@@ -43,7 +43,6 @@ extern int line ;
 #define DEB2(s,s2)
 #endif
 
-
 %}
 
 %option prefix="stylecsssc_"
@@ -205,16 +204,6 @@ STRING \"[^\"\n]*\"
 <CSS_PROPERTIES>. {
   /* discard other properties */
   DEB2("CSS PROPERTIES discarding", yytext);
-}
-
-<<EOF>> {
-  DEB("reached EOF of the style file");
-
-  DEB("freeing scanner memory");
-  /* For non-reentrant C scanner only. */
-  yy_delete_buffer(YY_CURRENT_BUFFER);
-
-  yyterminate();
 }
 
 <INITIAL>.  { return yytext[0] ; }

@@ -39,9 +39,7 @@ ip = $ip
 
 string = "root","failure"
 
-state normal = '(port|pid)[[:blank:]]' begin
-  port = '[[:digit:]]+' exit
-end
+(normal,port) = `((?:port|pid)[[:blank:]])([[:digit:]]+)`
 
 state normal start '[[:blank:]](?=(IN|OUT)=)' begin
   state normal = '(IN|OUT|PROTO)=(?=[^[:blank:]]+)' begin

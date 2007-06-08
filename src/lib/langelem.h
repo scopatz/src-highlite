@@ -33,12 +33,19 @@ class LangElem : public ParserInfo
     bool subst; // whether this substitutes an existing language element
 
 public:
-  LangElem(const std::string &n);
+  LangElem(const std::string &n) : name(n), redef(false), subst(false) {}
 
-  virtual ~LangElem();
+  virtual ~LangElem() {}
 
   const std::string getName() const { return name; }
-  virtual const std::string toString() const;
+  virtual const std::string toString() const { return name; }
+
+  /**
+   * return the original string representation of this element;
+   * this must be defined by subclasses
+   */
+  virtual const std::string toStringOriginal() const = 0;
+  
   bool isRedef() const { return redef; }
   void setRedef() { redef = true; }
   bool isSubst() const { return subst; }
