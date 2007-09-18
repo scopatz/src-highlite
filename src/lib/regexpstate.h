@@ -107,12 +107,44 @@ struct RegExpState
    * case of hasMarkedAlternatives: in that case only one can match
    */
   bool allAlternativesCanMatch;
+  
+  /**
+   * Whether the regular expression of this state contains marked subexpressions,
+   * e.g.,
+   * 
+   * (foo) and (bar)
+   */
+  bool hasSubExpressions;
+  
+  /**
+   * Whether the regular expression of this state contains references that must
+   * be substituted at run-time, e.g.,
+   * 
+   * foo @{1} bar
+   */
+  bool hasReferences;
 
   RegExpState() : 
-      id(global_id++), formatters(1), alternative(RegExpStatePtr()),
+      id(global_id++), formatters(1),
       nextAddMustCreateAnAlternative(false),
       hasMarkedAlternatives(false),
-      allAlternativesCanMatch(false) {}
+      allAlternativesCanMatch(false),
+      hasSubExpressions(false),
+      hasReferences(false) {}
+  
+  /**
+   * Copy constructor; copy all members
+   * 
+   * @param state
+   */
+  RegExpState(const RegExpState &state) : 
+        id(state.id), reg_exp(state.reg_exp),
+        formatters(state.formatters), alternative(state.alternative),
+        nextAddMustCreateAnAlternative(state.nextAddMustCreateAnAlternative),
+        hasMarkedAlternatives(state.hasMarkedAlternatives),
+        allAlternativesCanMatch(state.allAlternativesCanMatch),
+        hasSubExpressions(state.hasSubExpressions),
+        hasReferences(state.hasReferences) {}
 
   const std::string &get_elem(int index = -1);
   
@@ -132,7 +164,8 @@ struct RegExpState
   /**
    * Adds the formatters for the given regular expression (and the file info
    * of the original language definition file).  Each formatter of the passed
-   * vector is related to the corresponding marked subexpression of the passed expression.
+   * vector is related to the corresponding marked subexpression of the passed 
+   * expression.
    * 
    * The expression is only buffered (i.e., the regular expression is not built
    * untile freeze is called)
@@ -159,6 +192,16 @@ struct RegExpState
    * Sets that we added a subexpression where all alternatives can match
    */
   void setAllAlternativesCanMatch();
+  
+  /**
+   * Sets that we added a regular expression with marked subexpressions
+   */
+  void setHasSubExpressions();
+
+  /**
+   * Sets that the regexp has references
+   */
+  void setHasReferences();
 
   /**
    * Adds the formatter for a (marked) subexpression

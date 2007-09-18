@@ -246,13 +246,13 @@ http://www.gnu.org/software/src-highlite -->
     <b><font color="#0000FF">my</font></b> <font color="#009900">$class</font> <font color="#990000">=</font> <b><font color="#0000FF">shift</font></b><font color="#990000">;</font>
     <b><font color="#0000FF">my</font></b> <font color="#009900">$self</font> <font color="#990000">=</font> <font color="#FF0000">{}</font><font color="#990000">;</font>
     <b><font color="#0000FF">bless</font></b> <font color="#009900">$self</font><font color="#990000">,</font> <font color="#009900">$class</font><font color="#990000">;</font>
-    <font color="#009900">$content</font> <font color="#990000">=~</font> <font color="#FF6600">s/^.*content:.*?\"//i</font><font color="#990000">;</font>
+    <font color="#009900">$content</font> <font color="#990000">=~</font> <b><font color="#0000FF">s</font></b><font color="#FF6600">/^.*content:.*?\"//</font><b><font color="#0000FF">i</font></b><font color="#990000">;</font>
   <font color="#FF0000">}</font>
 
 
-<font color="#009900">$theline</font> <font color="#990000">=~</font> <font color="#FF6600">s/(&lt;=|=&gt;|=|\-|\+|\*|\/|\*\*|;|:|\\|\'|\"|,|\.|\(|\)|\[|\]|\{|\}|&lt;|&gt;)/\&lt;span class\=\"op\"\&gt;$1\&lt;\/span&gt;/g</font><font color="#990000">;</font>
+<font color="#009900">$theline</font> <font color="#990000">=~</font> <b><font color="#0000FF">s</font></b><font color="#FF6600">/(&lt;=|=&gt;|=|\-|\+|\*|\/|\*\*|;|:|\\|\'|\"|,|\.|\(|\)|\[|\]|\{|\}|&lt;|&gt;)/\&lt;span class\=\"op\"\&gt;$1\&lt;\/span&gt;/</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>
 
-<font color="#009900">$theline</font> <font color="#990000">=~</font> <font color="#FF6600">s/(&lt;=|=&gt;|=|\-|\+|\*|\/|\*\*|;|:|\\|\'|\"|,|\.|\(|\)|\[|\]|\{|\}|&lt;|&gt;)/g</font><font color="#990000">;</font>
+<font color="#009900">$theline</font> <font color="#990000">=~</font> <b><font color="#0000FF">s</font></b><font color="#FF6600">/(&lt;=|=&gt;|=|\-|\+|\*|\/|\*\*|;|:|\\|\'|\"|,|\.|\(|\)|\[|\]|\{|\}|&lt;|&gt;)/</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>
 
 <b><font color="#0000FF">if</font></b><font color="#990000">(</font><font color="#009900">$#ARGV</font><font color="#990000">==</font><font color="#993399">2</font><font color="#990000">)</font><font color="#FF0000">{}</font>
 
@@ -261,7 +261,7 @@ http://www.gnu.org/software/src-highlite -->
 <b><font color="#0000FF">if</font></b><font color="#990000">(</font><font color="#009900">$someString</font> <font color="#990000">=~</font>  <font color="#FF0000">/anything/g</font>   <font color="#990000">)</font><font color="#FF0000">{}</font>
 <b><font color="#0000FF">if</font></b><font color="#990000">(</font>                <font color="#FF0000">/anything/</font>    <font color="#990000">)</font><font color="#FF0000">{}</font>
 
-<b><font color="#0000FF">if</font></b><font color="#990000">(</font><font color="#009900">$somestring</font> <font color="#990000">=~</font>  <font color="#FF6600">s/something/something else/gi</font> <font color="#990000">)</font><font color="#FF0000">{}</font>
+<b><font color="#0000FF">if</font></b><font color="#990000">(</font><font color="#009900">$somestring</font> <font color="#990000">=~</font>  <b><font color="#0000FF">s</font></b><font color="#FF6600">/something/something else/</font><b><font color="#0000FF">gi</font></b> <font color="#990000">)</font><font color="#FF0000">{}</font>
 <font color="#009900">$somestring</font> <font color="#990000">=~</font>   <font color="#FF0000">/something/something else/</font>   <font color="#990000">;</font>
 <font color="#009900">$somestring</font> <font color="#990000">=~</font> <b><font color="#0000FF">qr</font></b><font color="#FF6600">/something/</font>something <b><font color="#0000FF">else</font></b><font color="#990000">/</font>   <font color="#990000">;</font>
 </tt></pre>

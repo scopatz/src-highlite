@@ -1,0 +1,7 @@
+# reference to third subexpression which is not present
+state string delim 
+        `\[(1?)(2?)\[` `]]` + @{1} + `a` + @{3} nested begin
+  keyword = "inside"
+end
+
+type = "symbol"

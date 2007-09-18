@@ -1,3 +1,48 @@
+2007-09-16  Lorenzo Bettini  <bettini@lorelap>
+
+	* doc/Makefile.am: removed non standard % make rules
+
+	* src/lib/Makefile.am (.h.H): removed non standard % make rules
+
+2007-09-14  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/sql.lang: fixed spell of some keywords
+
+2007-09-09  Lorenzo Bettini  <bettini@lorelap>
+
+	* COPYING: switched to version 3 of GPL
+
+	* src/cmdline.ggo: --line-number can take also the padding char
+	(default is '0'), by Roger Nilsson
+
+	* src/javascript.lang: regular expression highlighting (by Ed Kelly)
+
+	* src/perl.lang: improved regexp and string highlighting
+
+2007-08-01  Lorenzo Bettini  <bettini@lorelap>
+
+	* tests/Makefile.am: removed non standard %. rules
+
+2007-07-30  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lua.lang: updated with --[(=*)[[ comments and back reference
+
+	* src/logtalk.lang: Applied changes provided by Paulo Moura
+
+2007-07-19  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/regexpreprocessor.cpp (num_of_backreferences): count the
+	number of backreferences and the highest backreference number
+
+2007-07-17  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/lib/regexpstatebuilder.cpp (build): check whether to isolate
+	the string (only isolate the double quoted strings), bug fixed
+
+	* src/slang.lang: by John E. Davis
+
+	* src/perl.lang: removed stray char in getpriority keyword
+
 2007-06-05  Lorenzo Bettini  <bettini@lorelap>
 
 	* src/ruby.lang: does not perform highlighting for functions

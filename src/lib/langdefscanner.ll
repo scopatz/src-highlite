@@ -4,7 +4,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
+ * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -130,6 +130,11 @@ STRING \"[^\n"]+\"
 }
 
 <INITIAL>"$"{IDE} { DEB2("VAR",yytext); langdef_lval.string = new std::string(&yytext[1]) ; return VARUSE ; }
+<INITIAL>"@{"[[:digit:]]"}" { 
+	DEB2("BACKREFVAR",yytext);
+	langdef_lval.string = new std::string(yytext); 
+	return BACKREFVAR ; 
+}
 <INITIAL>{IDE} { DEB2("KEY",yytext); langdef_lval.string = new std::string(yytext) ; updateTokenInfo(); return KEY ; }
 <INITIAL>"=" { return '=' ; }
 <INITIAL>"," { return ',' ; }
@@ -138,7 +143,7 @@ STRING \"[^\n"]+\"
 <INITIAL>")" { return ')' ; }
 
 <INITIAL>\" { BEGIN(STRING_STATE) ; }
-<STRING_STATE>("*"|"."|"?"|"+"|"("|")"|"{"|"}"|"["|"]"|"^"|"$") {  buffer_escape( yytext ) ; }
+<STRING_STATE>("*"|"."|"?"|"+"|"("|")"|"{"|"}"|"["|"]"|"^"|"$"|"@") {  buffer_escape( yytext ) ; }
 <STRING_STATE>\\\| {  buffer( yytext ) ; }
 <STRING_STATE>\\\\ {  buffer( yytext ) ; }
 <STRING_STATE>\\[[:digit:]] {  
@@ -150,6 +155,7 @@ STRING \"[^\n"]+\"
 <STRING_STATE>[^\n] {  buffer( yytext ) ; }
 
 <INITIAL>\' { BEGIN(REGEXP_STATE) ; }
+<REGEXP_STATE>"@" {  buffer_escape( yytext ) ; }
 <REGEXP_STATE>\\\\ {  buffer( yytext ) ; }
 <REGEXP_STATE>\\[[:digit:]] {  
 	printError(parsestruct->file_name, parsestruct->line, "backreferences are not allowed") ;
@@ -160,6 +166,7 @@ STRING \"[^\n"]+\"
 <REGEXP_STATE>[^\n] {  buffer( yytext ) ; }
 
 <INITIAL>` { BEGIN(REGEXP_NOPREPROC_STATE) ; }
+<REGEXP_NOPREPROC_STATE>"@" {  buffer_escape( yytext ) ; }
 <REGEXP_NOPREPROC_STATE>\\\\ {  buffer( yytext ) ; }
 <REGEXP_NOPREPROC_STATE>"\\`" {  buffer( "'" ) ; }
 <REGEXP_NOPREPROC_STATE>` { BEGIN(INITIAL) ; langdef_lval.string = flush_buffer() ; DEB2("REGEXPNOPREPROCDEF",langdef_lval.string); return REGEXPNOPREPROC; }

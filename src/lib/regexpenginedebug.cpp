@@ -25,6 +25,10 @@ RegExpEngineDebug::~RegExpEngineDebug()
 {
 }
 
+/**
+ * Actually prints the state to stdout.
+ * @param state
+ */
 void printRegExpState(RegExpStatePtr state)
 {
   cout << state->reg_exp;
@@ -38,9 +42,18 @@ void printRegExpState(RegExpStatePtr state)
 void RegExpEngineDebug::enterState(RegExpStatePtr state, int index)
 {
   cout << "entering: ";
+  const string &before = state->formatters[index]->getNextState()->reg_exp.str();
   printRegExpState(state->formatters[index]->getNextState());
   cout << endl;
   RegExpEngine::enterState(state, index);
+  const string &after_entering = currentstate->reg_exp.str();
+  
+  // they could be different due to a substitution to a dynamic backreference
+  if (before != after_entering) {
+      cout << "current state: ";
+      printRegExpState(currentstate);
+      cout << endl;
+  }
   //step();
 }
 

@@ -8,16 +8,16 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-SUFFIXES = .text
+SUFFIXES = .text .H .h
 
 .text.c:
 	$(TXTC) -c $<
 
 if NO_DOUBLECPP
-$(srcdir)/%.H: $(srcdir)/%.h
+.h.H:
 	touch $@
 else
-$(srcdir)/%.H: $(srcdir)/%.h
+.h.H:
 	$(DOUBLECPP) --output-source-ext cc --invade-target --input-header-ext h --output-header-ext H --output-source-suff=_dbtab --verbose --assume-virtual -i $<
 	touch $@
 endif
@@ -42,7 +42,7 @@ libcommon_la_SOURCES = copyright.text reportbugs.text messages.cc \
 	regexpstateprinter.cpp langelemsprinter.cpp langelemsprinter.H langelemsprinter_dbtab.cc \
 	languageinfer.cpp stopwatch.cpp utils.cpp utils.h \
 	regexpengine.cpp regexpstate.cpp regexpenginedebug.cpp \
-	namedsubexpslangelem.cpp
+	namedsubexpslangelem.cpp stringdef.cpp
 
 libcommon_la_LIBADD = $(BOOST_REGEX_LIB)
 
@@ -69,8 +69,10 @@ langelemsprinter.H langelemsprinter_dbtab.cc
 langdefscanner.cc: $(srcdir)/langdefscanner.ll
 	$(LEX) $(LFLAGS) -o $@ $(srcdir)/langdefscanner.ll
 
-langdefparser.cc langdefparser.h: $(srcdir)/langdefparser.yy
+langdefparser.cc: $(srcdir)/langdefparser.yy
 	$(YACC) -p langdef_ -o $@ $(srcdir)/langdefparser.yy --defines=$*.h
+
+langdefparser.h: langdefparser.cc
 
 outlangdefscanner.cc: $(srcdir)/outlangdefscanner.ll
 	$(LEX) $(LFLAGS) -o $@ $(srcdir)/outlangdefscanner.ll
@@ -125,7 +127,11 @@ test_langinfer_SOURCES = test_langinfer.cpp
 test_langinfer_LDADD = libcommon.la
 
 test_regexpreprocessor_SOURCES = test_regexpreprocessor_main.cpp
-test_regexpreprocessor_LDADD = libcommon.la
+test_regexpreprocessor_LDADD = $(BOOST_REGEX_LIB) stringdef.$(OBJEXT) \
+regexpreprocessor.$(OBJEXT) 
+
+check_test_regexpreprocessor: test_regexpreprocessor$(EXEEXT)
+	./test_regexpreprocessor$(EXEEXT)
 
 mytags: $(srcdir)/test_readtags_main.cpp
 	$(CTAGS) --excmd=n --fields=+n -o mytags $(srcdir)/test_readtags_main.cpp $(srcdir)/readtags.h

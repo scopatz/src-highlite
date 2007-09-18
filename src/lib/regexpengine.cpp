@@ -11,6 +11,8 @@
 //
 #include "regexpengine.h"
 
+#include "regexpreprocessor.h"
+
 RegExpEngine::~RegExpEngine() {
 }
 
@@ -143,6 +145,12 @@ void RegExpEngine::process_file(const char *file) {
             }
 
             if (matched) {
+                // see if what matched has subexpressions, if so, put it into the
+                // stack of environments for references
+                if (alternative->hasSubExpressions) {
+                    reference_env.push(what);
+                }
+                
                 if (alternative->hasMarkedAlternatives) {
                     // we must inspect all the sub_matches
                     // to find the subexpression that matched
@@ -242,7 +250,27 @@ void RegExpEngine::process_file(const char *file) {
 
 void RegExpEngine::enterState(RegExpStatePtr state, int index) {
     states_stack.push(currentstate);
-    currentstate = state->formatters[index]->getNextState();
+    RegExpStatePtr next_state = state->formatters[index]->getNextState();
+    
+    if (next_state->hasReferences) {
+        // we must make a copy of the state, since we must change its regexp
+        // after performing the substitution
+        
+        if (!reference_env.size()) {
+            foundBug("reference environment empty", __FILE__, __LINE__);
+        }
+
+        next_state = RegExpStatePtr(new RegExpState(*next_state));
+        
+        // perform the reference replacement
+        next_state->reg_exp.assign(RegexPreProcessor::replace_references(
+                next_state->reg_exp.str(), 
+                reference_env.top()));
+        
+        currentstate = next_state;
+    } else {
+        currentstate = next_state;
+    }
 }
 
 void RegExpEngine::exitState(int level) {
@@ -252,11 +280,21 @@ void RegExpEngine::exitState(int level) {
 
     currentstate = states_stack.top();
     states_stack.pop();
+    
+    if (currentstate->hasReferences) {
+        if (!reference_env.size()) {
+            foundBug("reference environment empty", __FILE__, __LINE__);
+        }
+
+        // we must restore also the reference env
+        reference_env.pop();
+    }
 }
 
 void RegExpEngine::exitAll() {
     currentstate = initial_state;
     states_stack = stack_of_states();
+    reference_env = stack_of_matches();
 }
 
 void RegExpEngine::format(int index, RegExpStatePtr state, const std::string &s) {

@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite">
+<title>S-LANG test</title>
+</head>
+<body bgcolor="white">
+<pre><tt><i><font color="#9A1900">#!/usr/bin/env slsh</font></i>
+
+<b><font color="#000080">require</font></b> <font color="#990000">(</font><font color="#FF0000">"curl"</font><font color="#990000">);</font>
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">variable</font></b> My_Language <font color="#990000">=</font> <font color="#FF0000">"English"</font><font color="#990000">;</font>
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">variable</font></b> Supported_Translations <font color="#990000">=</font> 
+  <font color="#990000">[</font><font color="#FF0000">"zh_en"</font><font color="#990000">,</font> <font color="#FF0000">"zt_en"</font><font color="#990000">,</font> <font color="#FF0000">"en_zh"</font><font color="#990000">,</font> <font color="#FF0000">"en_zt"</font><font color="#990000">,</font> <font color="#FF0000">"en_nl"</font><font color="#990000">,</font> <font color="#FF0000">"en_fr"</font><font color="#990000">,</font> <font color="#FF0000">"en_de"</font><font color="#990000">,</font> <font color="#FF0000">"en_el"</font><font color="#990000">,</font>
+   <font color="#FF0000">"en_it"</font><font color="#990000">,</font> <font color="#FF0000">"en_ja"</font><font color="#990000">,</font> <font color="#FF0000">"en_ko"</font><font color="#990000">,</font> <font color="#FF0000">"en_pt"</font><font color="#990000">,</font> <font color="#FF0000">"en_ru"</font><font color="#990000">,</font> <font color="#FF0000">"en_es"</font><font color="#990000">,</font> <font color="#FF0000">"nl_en"</font><font color="#990000">,</font> <font color="#FF0000">"nl_fr"</font><font color="#990000">,</font>
+   <font color="#FF0000">"fr_en"</font><font color="#990000">,</font> <font color="#FF0000">"fr_de"</font><font color="#990000">,</font> <font color="#FF0000">"fr_el"</font><font color="#990000">,</font> <font color="#FF0000">"fr_it"</font><font color="#990000">,</font> <font color="#FF0000">"fr_pt"</font><font color="#990000">,</font> <font color="#FF0000">"fr_nl"</font><font color="#990000">,</font> <font color="#FF0000">"fr_es"</font><font color="#990000">,</font> <font color="#FF0000">"de_en"</font><font color="#990000">,</font>
+   <font color="#FF0000">"de_fr"</font><font color="#990000">,</font> <font color="#FF0000">"el_en"</font><font color="#990000">,</font> <font color="#FF0000">"el_fr"</font><font color="#990000">,</font> <font color="#FF0000">"it_en"</font><font color="#990000">,</font> <font color="#FF0000">"it_fr"</font><font color="#990000">,</font> <font color="#FF0000">"ja_en"</font><font color="#990000">,</font> <font color="#FF0000">"ko_en"</font><font color="#990000">,</font> <font color="#FF0000">"pt_en"</font><font color="#990000">,</font>
+   <font color="#FF0000">"pt_fr"</font><font color="#990000">,</font> <font color="#FF0000">"ru_en"</font><font color="#990000">,</font> <font color="#FF0000">"es_en"</font><font color="#990000">,</font> <font color="#FF0000">"es_fr"</font><font color="#990000">];</font>
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">variable</font></b> Languages <font color="#990000">=</font> Assoc_Type<font color="#990000">[</font>String_Type<font color="#990000">];</font>
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">define</font></b> <b><font color="#000000">add_language </font></b><font color="#990000">(</font>lang<font color="#990000">,</font> desc<font color="#990000">)</font>
+{
+   Languages<font color="#990000">[</font><b><font color="#000000">strlow</font></b><font color="#990000">(</font>lang<font color="#990000">)]</font> <font color="#990000">=</font> <b><font color="#000000">strlow </font></b><font color="#990000">(</font>desc<font color="#990000">);</font>
+}
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"zh"</font><font color="#990000">,</font> <font color="#FF0000">"Chinese-simple"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"zt"</font><font color="#990000">,</font> <font color="#FF0000">"Chinese-traditional"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"en"</font><font color="#990000">,</font> <font color="#FF0000">"English"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"nl"</font><font color="#990000">,</font> <font color="#FF0000">"Dutch"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"fr"</font><font color="#990000">,</font> <font color="#FF0000">"French"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"de"</font><font color="#990000">,</font> <font color="#FF0000">"German"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"el"</font><font color="#990000">,</font> <font color="#FF0000">"Greek"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"it"</font><font color="#990000">,</font> <font color="#FF0000">"Italian"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"ja"</font><font color="#990000">,</font> <font color="#FF0000">"Japanese"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"ko"</font><font color="#990000">,</font> <font color="#FF0000">"Korean"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"pt"</font><font color="#990000">,</font> <font color="#FF0000">"Portugese"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"ru"</font><font color="#990000">,</font> <font color="#FF0000">"Russian"</font><font color="#990000">);</font>
+<b><font color="#000000">add_language </font></b><font color="#990000">(</font><font color="#FF0000">"es"</font><font color="#990000">,</font> <font color="#FF0000">"Spanish"</font><font color="#990000">);</font>
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">define</font></b> <b><font color="#000000">lookup_language </font></b><font color="#990000">(</font>lang<font color="#990000">)</font>
+{
+   lang <font color="#990000">=</font> <b><font color="#000000">strlow </font></b><font color="#990000">(</font>lang<font color="#990000">);</font>
+   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#000000">assoc_key_exists </font></b><font color="#990000">(</font>Languages<font color="#990000">,</font> lang<font color="#990000">))</font>
+     <b><font color="#0000FF">return</font></b> lang<font color="#990000">;</font>
+   <b><font color="#0000FF">variable</font></b> vals <font color="#990000">=</font> <b><font color="#000000">assoc_get_values </font></b><font color="#990000">(</font>Languages<font color="#990000">);</font>
+   <b><font color="#0000FF">variable</font></b> i <font color="#990000">=</font> <b><font color="#000000">where </font></b><font color="#990000">(</font>vals <font color="#990000">==</font> lang<font color="#990000">);</font>
+   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#000000">length </font></b><font color="#990000">(</font>i<font color="#990000">)</font> <font color="#990000">==</font> <font color="#993399">0</font><font color="#990000">)</font>
+     <b><font color="#0000FF">throw</font></b> NotImplementedError<font color="#990000">,</font> <font color="#FF0000">"Language $lang is unknown or unsupported"</font>$<font color="#990000">;</font>
+
+   <b><font color="#0000FF">return</font></b> <b><font color="#000000">assoc_get_keys </font></b><font color="#990000">(</font>Languages<font color="#990000">)[</font>i<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]];</font>
+}
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">define</font></b> <b><font color="#000000">lookup_translation </font></b><font color="#990000">(</font>from<font color="#990000">,</font> to<font color="#990000">)</font>
+{
+   <b><font color="#0000FF">variable</font></b> trans <font color="#990000">=</font> <b><font color="#000000">sprintf </font></b><font color="#990000">(</font><font color="#FF0000">"%s_%s"</font><font color="#990000">,</font> <b><font color="#000000">lookup_language </font></b><font color="#990000">(</font>from<font color="#990000">),</font> <b><font color="#000000">lookup_language</font></b><font color="#990000">(</font>to<font color="#990000">));</font>
+   
+   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#000000">any </font></b><font color="#990000">(</font>Supported_Translations <font color="#990000">==</font> trans<font color="#990000">))</font>
+     <b><font color="#0000FF">return</font></b> trans<font color="#990000">;</font>
+   
+   <b><font color="#0000FF">throw</font></b> NotImplementedError<font color="#990000">,</font> <font color="#FF0000">"Translating from $from to $to is not supported"</font>$<font color="#990000">;</font>
+}
+
+   
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">define</font></b> <b><font color="#000000">make_encode_table </font></b><font color="#990000">()</font>
+{
+   <b><font color="#0000FF">variable</font></b> table <font color="#990000">=</font> <b><font color="#000000">array_map </font></b><font color="#990000">(</font>String_Type<font color="#990000">,</font> <font color="#990000">&amp;</font>sprintf<font color="#990000">,</font> <font color="#990000">(</font><font color="#FF0000">"%%%02X"</font><font color="#990000">,</font> <font color="#990000">[</font><font color="#993399">0</font><font color="#990000">:</font><font color="#993399">255</font><font color="#990000">]));</font>
+   <b><font color="#0000FF">variable</font></b> ok <font color="#990000">=</font> <font color="#990000">[[</font><font color="#FF0000">'A'</font><font color="#990000">:</font><font color="#FF0000">'Z'</font><font color="#990000">],</font> <font color="#990000">[</font><font color="#FF0000">'a'</font><font color="#990000">:</font><font color="#FF0000">'z'</font><font color="#990000">],</font> <font color="#990000">[</font><font color="#FF0000">'0'</font><font color="#990000">:</font><font color="#FF0000">'9'</font><font color="#990000">],</font> <font color="#FF0000">'.'</font><font color="#990000">,</font> <font color="#FF0000">'-'</font><font color="#990000">,</font> <font color="#FF0000">'*'</font><font color="#990000">,</font> <font color="#FF0000">'_'</font><font color="#990000">,</font> <font color="#FF0000">'/'</font><font color="#990000">,</font> <font color="#FF0000">'~'</font><font color="#990000">];</font>
+   table<font color="#990000">[</font>ok<font color="#990000">]</font> <font color="#990000">=</font> <b><font color="#000000">array_map </font></b><font color="#990000">(</font>String_Type<font color="#990000">,</font> <font color="#990000">&amp;</font>char<font color="#990000">,</font> ok<font color="#990000">);</font>
+   table<font color="#990000">[</font><font color="#FF0000">' '</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">"+"</font><font color="#990000">;</font>
+   <b><font color="#0000FF">return</font></b> table<font color="#990000">;</font>
+}
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">variable</font></b> Encode_Table <font color="#990000">=</font> <b><font color="#000000">make_encode_table </font></b><font color="#990000">();</font>
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">define</font></b> <b><font color="#000000">encode </font></b><font color="#990000">(</font>text<font color="#990000">)</font>
+{
+   <b><font color="#0000FF">variable</font></b> len <font color="#990000">=</font> <b><font color="#000000">strlen </font></b><font color="#990000">(</font>text<font color="#990000">);</font>
+   <b><font color="#0000FF">variable</font></b> new_text <font color="#990000">=</font> String_Type<font color="#990000">[</font>len<font color="#990000">];</font>
+   <b><font color="#0000FF">variable</font></b> i<font color="#990000">;</font>
+   <b><font color="#0000FF">_for</font></b> <b><font color="#000000">i </font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">,</font> len<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">1</font><font color="#990000">)</font>
+     new_text<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font>  Encode_Table<font color="#990000">[</font>text<font color="#990000">[</font>i<font color="#990000">]];</font>
+   <b><font color="#0000FF">return</font></b> <b><font color="#000000">strjoin </font></b><font color="#990000">(</font>new_text<font color="#990000">,</font> <font color="#FF0000">""</font><font color="#990000">);</font>
+}
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">define</font></b> <b><font color="#000000">parse_output </font></b><font color="#990000">(</font>str<font color="#990000">)</font>
+{
+   <font color="#990000">(</font>str<font color="#990000">,)</font> <font color="#990000">=</font> <b><font color="#000000">strreplace </font></b><font color="#990000">(</font>str<font color="#990000">,</font> <font color="#FF0000">"\n"</font><font color="#990000">,</font> <font color="#FF0000">"\x01"</font><font color="#990000">,</font> <b><font color="#000000">strbytelen </font></b><font color="#990000">(</font>str<font color="#990000">));</font>
+   <i><font color="#9A1900">% Look for TEXT in</font></i>
+   <i><font color="#9A1900">% &lt;td bgcolor=white class=s&gt;&lt;div style=padding:10px;&gt;TEXT&lt;/div&gt;</font></i>
+   <b><font color="#0000FF">variable</font></b> start_re <font color="#990000">=</font> <font color="#FF0000">"&lt;td bgcolor=white class=s&gt;&lt;div style=padding:10px;&gt;"</font><font color="#990000">;</font>
+   <b><font color="#0000FF">variable</font></b> end_re <font color="#990000">=</font> <font color="#FF0000">"&lt;/div&gt;"</font><font color="#990000">;</font>
+   <b><font color="#0000FF">variable</font></b> re <font color="#990000">=</font> <b><font color="#000000">strcat </font></b><font color="#990000">(</font>start_re<font color="#990000">,</font> <font color="#FF0000">"\([^&lt;]+\)"</font>R<font color="#990000">,</font> end_re<font color="#990000">);</font>
+   
+   <b><font color="#0000FF">variable</font></b> n <font color="#990000">=</font> <b><font color="#000000">string_match </font></b><font color="#990000">(</font>str<font color="#990000">,</font> re<font color="#990000">,</font> <font color="#993399">1</font><font color="#990000">);</font>
+   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>n <font color="#990000">==</font> <font color="#993399">0</font><font color="#990000">)</font>
+     <b><font color="#0000FF">return</font></b> <font color="#FF0000">""</font><font color="#990000">;</font>
+   <b><font color="#0000FF">variable</font></b> pos<font color="#990000">,</font> match_len<font color="#990000">;</font>
+   <font color="#990000">(</font>pos<font color="#990000">,</font> match_len<font color="#990000">)</font> <font color="#990000">=</font> <b><font color="#000000">string_match_nth </font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">);</font>
+   str <font color="#990000">=</font> <b><font color="#000000">substrbytes </font></b><font color="#990000">(</font>str<font color="#990000">,</font> pos<font color="#990000">+</font><font color="#993399">1</font><font color="#990000">,</font> match_len<font color="#990000">);</font>
+   <font color="#990000">(</font>str<font color="#990000">,)</font> <font color="#990000">=</font> <b><font color="#000000">strreplace </font></b><font color="#990000">(</font>str<font color="#990000">,</font> <font color="#FF0000">"\x01"</font><font color="#990000">,</font> <font color="#FF0000">"\n"</font><font color="#990000">,</font> <b><font color="#000000">strbytelen </font></b><font color="#990000">(</font>str<font color="#990000">));</font>
+   <b><font color="#0000FF">return</font></b> str<font color="#990000">;</font>
+}
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">define</font></b> <b><font color="#000000">write_callback </font></b><font color="#990000">(</font>vp<font color="#990000">,</font> data<font color="#990000">)</font>
+{
+   @vp <font color="#990000">=</font> <b><font color="#000000">strcat </font></b><font color="#990000">(</font>@vp<font color="#990000">,</font> data<font color="#990000">);</font>
+   <b><font color="#0000FF">return</font></b> <font color="#993399">0</font><font color="#990000">;</font>
+}
+
+<b><font color="#0000FF">define</font></b> <b><font color="#000000">babelfish </font></b><font color="#990000">(</font>from<font color="#990000">,</font> to<font color="#990000">,</font> text<font color="#990000">)</font>
+{
+   <b><font color="#0000FF">variable</font></b> c <font color="#990000">=</font> <b><font color="#000000">curl_new </font></b><font color="#990000">(</font><font color="#FF0000">"http://babelfish.altavista.com/babelfish/tr?il=en"</font><font color="#990000">);</font>
+   <b><font color="#0000FF">variable</font></b> postdata <font color="#990000">=</font> 
+     <b><font color="#000000">strcat </font></b><font color="#990000">(</font><font color="#FF0000">"doit=done&amp;urltext="</font><font color="#990000">,</font> text<font color="#990000">,</font> 
+	     <font color="#FF0000">"&amp;lp="</font><font color="#990000">,</font> <b><font color="#000000">lookup_translation </font></b><font color="#990000">(</font>from<font color="#990000">,</font> to<font color="#990000">),</font>
+	     <font color="#FF0000">"&amp;Submit=Translate"</font><font color="#990000">,</font> <font color="#FF0000">"&amp;enc=utf8"</font><font color="#990000">);</font>
+
+   <b><font color="#000000">curl_setopt </font></b><font color="#990000">(</font>c<font color="#990000">,</font> CURLOPT_POSTFIELDS<font color="#990000">,</font> postdata<font color="#990000">);</font>
+   <b><font color="#000000">curl_setopt </font></b><font color="#990000">(</font>c<font color="#990000">,</font> CURLOPT_FOLLOWLOCATION<font color="#990000">);</font>
+   <b><font color="#000000">curl_setopt </font></b><font color="#990000">(</font>c<font color="#990000">,</font> CURLOPT_HTTPHEADER<font color="#990000">,</font> 
+		<font color="#990000">[</font><font color="#FF0000">"User-Agent: S-Lang cURL Module"</font><font color="#990000">,</font>
+		 <font color="#FF0000">"Content-Type: application/x-www-form-urlencoded"</font><font color="#990000">,</font>
+		 <font color="#FF0000">"Accept-Charset: ISO-8859-1,utf-8"</font>
+		 <font color="#990000">]);</font>
+   text <font color="#990000">=</font> <font color="#FF0000">""</font><font color="#990000">;</font>
+   <b><font color="#000000">curl_setopt </font></b><font color="#990000">(</font>c<font color="#990000">,</font> CURLOPT_WRITEFUNCTION<font color="#990000">,</font> <font color="#990000">&amp;</font>write_callback<font color="#990000">,</font> <font color="#990000">&amp;</font>text<font color="#990000">);</font>
+   <b><font color="#000000">curl_perform </font></b><font color="#990000">(</font>c<font color="#990000">);</font>
+   text <font color="#990000">=</font> <b><font color="#000000">parse_output </font></b><font color="#990000">(</font>text<font color="#990000">);</font>
+   <b><font color="#0000FF">return</font></b> text<font color="#990000">;</font>
+}
+
+<b><font color="#0000FF">private</font></b> <b><font color="#0000FF">define</font></b> <b><font color="#000000">usage </font></b><font color="#990000">()</font>
+{
+   <font color="#990000">()</font> <font color="#990000">=</font> <b><font color="#000000">fprintf </font></b><font color="#990000">(</font>stderr<font color="#990000">,</font> <font color="#FF0000">"Usage: %s [--to lang-out] lang-in [phrase|-]\n"</font><font color="#990000">,</font> __argv<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]);</font>
+   <b><font color="#000000">exit </font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">);</font>
+}
+
+<b><font color="#0000FF">define</font></b> <b><font color="#000000">slsh_main </font></b><font color="#990000">()</font>
+{
+   <b><font color="#0000FF">variable</font></b> lang_out <font color="#990000">=</font> My_Language<font color="#990000">,</font> lang_in <font color="#990000">=</font> <b><font color="#0000FF">NULL</font></b><font color="#990000">;</font>
+   <b><font color="#0000FF">variable</font></b> i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+   <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>i <font color="#990000">&lt;</font> __argc<font color="#990000">)</font>
+     {
+	<b><font color="#0000FF">variable</font></b> arg <font color="#990000">=</font> __argv<font color="#990000">[</font>i<font color="#990000">];</font>
+	i<font color="#990000">++;</font>
+	<b><font color="#0000FF">if</font></b> <font color="#990000">(</font>arg <font color="#990000">==</font> <font color="#FF0000">"--to"</font><font color="#990000">)</font>
+	  {
+	     <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>i <font color="#990000">==</font> __argc<font color="#990000">)</font>
+	       <b><font color="#000000">usage </font></b><font color="#990000">();</font>
+	     lang_out <font color="#990000">=</font> __argv<font color="#990000">[</font>i<font color="#990000">];</font>
+	     i<font color="#990000">++;</font>
+	     <b><font color="#0000FF">continue</font></b><font color="#990000">;</font>
+	  }
+	lang_in <font color="#990000">=</font> arg<font color="#990000">;</font>
+	<b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+     }
+   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>lang_in <font color="#990000">==</font> <b><font color="#0000FF">NULL</font></b><font color="#990000">)</font>
+     <b><font color="#000000">usage </font></b><font color="#990000">();</font>
+
+   <b><font color="#0000FF">variable</font></b> text <font color="#990000">=</font> <font color="#FF0000">"-"</font><font color="#990000">;</font>
+   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>i <font color="#990000">==</font> __argc<font color="#990000">)</font>
+     {
+	<b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#000000">isatty </font></b><font color="#990000">(</font>stdin<font color="#990000">))</font>
+	  <b><font color="#000000">usage </font></b><font color="#990000">();</font>
+     }
+   <b><font color="#0000FF">else</font></b> text <font color="#990000">=</font> <b><font color="#000000">strjoin </font></b><font color="#990000">(</font>__argv<font color="#990000">[[</font>i<font color="#990000">:]],</font> <font color="#FF0000">" "</font><font color="#990000">);</font>
+   
+   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>text <font color="#990000">==</font> <font color="#FF0000">"-"</font><font color="#990000">)</font>
+     {
+	text <font color="#990000">=</font> <font color="#FF0000">""</font><font color="#990000">;</font>
+	<b><font color="#0000FF">variable</font></b> line<font color="#990000">;</font>
+	<b><font color="#0000FF">while</font></b> <font color="#990000">(-</font><font color="#993399">1</font> <font color="#990000">!=</font> <b><font color="#000000">fgets </font></b><font color="#990000">(&amp;</font>line<font color="#990000">,</font> stdin<font color="#990000">))</font>
+	  text <font color="#990000">=</font> <b><font color="#000000">strcat </font></b><font color="#990000">(</font>text<font color="#990000">,</font> <b><font color="#000000">encode </font></b><font color="#990000">(</font>line<font color="#990000">));</font>
+     }
+   <b><font color="#000000">message </font></b><font color="#990000">(</font><b><font color="#000000">babelfish </font></b><font color="#990000">(</font>lang_in<font color="#990000">,</font> lang_out<font color="#990000">,</font> text<font color="#990000">));</font>
+}
+
+</tt></pre>
+</body>
+</html>

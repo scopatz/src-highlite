@@ -1,3 +1,4 @@
+# contributed by Paulo Moura
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
@@ -22,6 +23,7 @@ keyword =	'\<(after|before)(?=\()',
 			'\<a(bolish|ssert(a|z))(?=\()',
 			'\<(ca(ll|tch)|throw)(?=\()',
 			'\<((bag|set)of|f(ind|or)all)(?=\()',
+			'\<threaded(_(call|once|ignore|exit|peek|wait|notify))?(?=\()',
 			'\<unify_with_occurs_check(?=\()',
 			'\<(functor|arg|copy_term)(?=\()',
 			'\<(rem|mod|abs|sign)(?=\()',
@@ -56,7 +58,7 @@ variable =	'\<[A-Z_][A-Za-z0-9_]*'
 cbracket =	"{|}"
 
 preproc =	'^[[:blank:]]*:-[[:blank:]](ca(lls|tegory)|p(ublic|r(ot(ocol|ected)|ivate))|e(ncoding|xports)|in(fo|itialization)|alias|d(ynamic|iscontiguous)|meta_predicate|m(etapredicate|od(e|ule)|ultifile)|o(bject|p)|use(s|_module))(?=\()',
-			'^[[:blank:]]*:-[[:blank:]](end_(category|object|protocol)|dynamic)\.'
+			'^[[:blank:]]*:-[[:blank:]](end_(category|object|protocol)|dynamic|synchronized|threaded)\.'
 
 preproc =	'\<(extends|i(nstantiates|mp(lements|orts))|specializes)(?=\()'
 
@@ -64,7 +66,7 @@ normal =	'\<[a-z][A-Za-z0-9_]*'
 
 number =	'0\'[A-Za-z0-9]|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|[0-9]+(\.[0-9]+)?([eE]([-+])?[0-9]+)?'
 
-symbol =	"::", "^^",
+symbol =	"::", "^^", ":",
 			">>", "<<", "/\\", "\\/", "\\",
 			"=:=", "=\\=", "<", "=<", ">", ">=",
 			"=..",

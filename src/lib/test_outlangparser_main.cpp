@@ -32,8 +32,8 @@ main()
   cout << "Style template:\n" << textstyles->starting_template << endl;
   cout << "Style separator: " << textstyles->style_separator << endl;
 
-  cout << "Bold: " << textstyles->bold.toString() << endl;
-  cout << "text formatted in bold: " << textstyles->bold.output("TEXT") << endl;
+  cout << "Bold style: " << textstyles->bold.toString() << endl;
+  cout << "text formatted in bold style: " << textstyles->bold.output("TEXT") << endl;
   cout << "Italics: " << textstyles->italics.toString() << endl;
   cout << "Underline: " << textstyles->underline.toString() << endl;
   cout << "Color: " << textstyles->color.toString() << endl;

@@ -3,7 +3,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
+ * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -82,8 +82,10 @@ int main(int argc, char * argv[]) {
         flags = boost::match_default;
 
         cout << "\nsearching      : " << tomatch << endl;
-        cout << "for the regexp : " << regex << endl;
+        cout << "for the regexp   : " << regex << endl;
 
+        cout << "num of subexps   : " << regex.mark_count() << endl;
+        
         int num_of_matches = 0;
 
         while (boost::regex_search(start, end, what, regex, flags)) {

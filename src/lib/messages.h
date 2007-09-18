@@ -76,7 +76,7 @@ void exitError(const std::string &error);
 void exitError(const std::string &error, const ParserInfo *pinfo);
 void exitError(const std::string &error, const ParseStruct *pinfo);
 void exitError(const std::string &filename, unsigned int line, const std::string &error);
-void foundBug(const std::string &error, const std::string &file, int line);
+void foundBug(const std::string &error, const std::string &file = "", int line = -1);
 bool shouldPrint();
 
 void setMessager( Messages *m ) ;

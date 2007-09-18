@@ -13,7 +13,7 @@ end
 comment start "//"
 
 # comments with documentation tags
-environment comment delim "/**" "*/" multiline nested begin
+environment comment delim "/**" "*/" multiline begin
   include "url.lang"
   include "html.lang"
   type = '@[[:alpha:]]+'
@@ -21,7 +21,7 @@ environment comment delim "/**" "*/" multiline nested begin
 end
 
 # standard comments
-environment comment delim "/*" "*/" multiline nested begin
+environment comment delim "/*" "*/" multiline begin
   include "url.lang"
   todo = $TODO
 end

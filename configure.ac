@@ -13,7 +13,7 @@ AC_INIT(autogen.sh)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(source-highlight,2.7)
+AM_INIT_AUTOMAKE(source-highlight,2.8)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)

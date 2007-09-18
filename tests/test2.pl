@@ -3,6 +3,21 @@
 use strict;
 use warnings;
 
+"I'm happy because of $x!"
+qq~I'm happy because of $x!~
+qq{I'm happy because of $x!}
+qq|I'm happy because of $x!|
+qq#I'm happy because of $x!#
+qq!I'm happy because of $x\!!
+
+'The variable is called $var.'
+q~The variable is called $var.~
+q|The variable is called $var.|
+q{The variable is called $var.}
+q[The variable is called $var.]
+q#The variable is called $var.#
+q!The variable is called $var.! 
+
 my $port = $ARGV[0];
 
 # prepare freqently used regexes

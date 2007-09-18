@@ -1,0 +1,9 @@
+state string delim 
+        `\[(1?)(2?)\[` `]]` + @{1} + `a` + @{2} nested begin
+  keyword = "inside"
+  regexp delim `(\$|\||%)` @{1}
+end
+
+string delim `(\!|\||#)` @{1}
+
+type = "symbol"

@@ -1,22 +1,34 @@
 preproc = "import"
 
 # these might be unreadable but I don't know how else to do that...
-regexp = 's\{(\\\}|[^}])*\}\{(\\\}|[^}])*\}[ixsmogce]*'
-regexp = 's\((\\\)|[^)])*\)\((\\\)|[^)])*\)[ixsmogce]*'
-regexp = 's\[(\\\]|[^\]])*\]\[(\\\]|[^\]])*\][ixsmogce]*'
-regexp = 's<.*><.*>[ixsmogce]*'
+(keyword,regexp,keyword) = 
+        `(s)(\{(?:\\\}|[^}])*\}\{(?:\\\}|[^}])*\})([ixsmogce]*)`
+(keyword,regexp,keyword) = 
+        `(s)(\((?:\\\)|[^)])*\)\((?:\\\)|[^)])*\))([ixsmogce]*)`
+(keyword,regexp,keyword) = 
+        `(s)(\[(?:\\\]|[^\]])*\]\[(?:\\\]|[^\]])*\])([ixsmogce]*)`
+(keyword,regexp,keyword) = `(s)(<.*><.*>)([ixsmogce]*)`
+
+(keyword,string) = `(q(?:q?))(\{(?:\\\}|[^}])*\})`
+(keyword,string) = `(q(?:q?))(\((?:\\\)|[^)])*\))`
+(keyword,string) = `(q(?:q?))(\[(?:\\\]|[^\]])*\])`
+(keyword,string) = `(q(?:q?))(<.*>)`
+
+(keyword,string,string) = `(q(?:q?))([^[:alnum:][:blank:]])(.*\2)`
 
 # the last (lookahead) expression is used to deal with # used
 # as a delimiter.
 # otherwise, with a line such as
 # s#foo\###;      # my comment
 # the # of the comment would be match as the closing delimiter
-regexp = `s([^[:alnum:][:blank:]]).*\1.*\1[ixsmogce]*(?=[[:blank:]]*(\)|;))`
+(keyword,regexp,regexp,keyword) = 
+    `(s)([^[:alnum:][:blank:]])(.*\2.*\2)([ixsmogce]*(?=[[:blank:]]*(?:\)|;)))`
 
 # this is to deal with cases where the delimiters for the first and the
 # second part are not the same (and spaces are allowed between the first
 # closing and the second opening)
-regexp = `s([^[:alnum:][:blank:]]).*\1[[:blank:]]*([^[:alnum:][:blank:]]).*\2[ixsmogce]*(?=[[:blank:]]*(\)|;))`
+(keyword,regexp,regexp,regexp,regexp,keyword) = 
+    `(s)([^[:alnum:][:blank:]])(.*\2[[:blank:]]*)([^[:alnum:][:blank:]])(.*\4)([ixsmogce]*(?=[[:blank:]]*(?:\)|;)))`
 
 include "script_comment.lang"
 
@@ -107,7 +119,7 @@ string delim "'" "'"  escape "\\"
 string delim "<" ">"
 string = '[[:word:]]*/[^\n]*/[[:word:]]*'
 
-keyword = "chomp|chop|chr|crypt|hex|i|index|lc|lcfirst|length|oct|ord|pack|q|qq|reverse|rindex|sprintf|substr|tr|uc|ucfirst|m|s|g|qw|abs|atan2|cos|exp|hex|int|log|oct|rand|sin|sqrt|srand|my|local|our|delete|each|exists|keys|values|pack|read|syscall|sysread|syswrite|unpack|vec|undef|unless|return|length|grep|sort|caller|continue|dump|eval|exit|goto|last|next|redo|sub|wantarray|pop|push|shift|splice|unshift|split|switch|join|defined|foreach|last|chop|chomp|bless|dbmclose|dbmopen|ref|tie|tied|untie|while|next|map|eq|die|cmp|lc|uc|and|do|if|else|elsif|for|use|require|package|import|chdir|chmod|chown|chroot|fcntl|glob|ioctl|link|lstat|mkdir|open|opendir|readlink|rename|rmdir|stat|symlink|umask|unlink|utime|binmode|close|closedir|dbmclose|dbmopen|die|eof|fileno|flock|format|getc|print|printf|read|readdir|rewinddir|seek|seekdir|select|syscall|sysread|sysseek|syswrite|tell|telldir|truncate|warn|write|alarm|exec|fork|getpgrp|getppid|get­priority|kill|pipe|qx|setpgrp|setpriority|sleep|system|times|x|wait|waitpid"
+keyword = "chomp|chop|chr|crypt|hex|i|index|lc|lcfirst|length|oct|ord|pack|q|qq|reverse|rindex|sprintf|substr|tr|uc|ucfirst|m|s|g|qw|abs|atan2|cos|exp|hex|int|log|oct|rand|sin|sqrt|srand|my|local|our|delete|each|exists|keys|values|pack|read|syscall|sysread|syswrite|unpack|vec|undef|unless|return|length|grep|sort|caller|continue|dump|eval|exit|goto|last|next|redo|sub|wantarray|pop|push|shift|splice|unshift|split|switch|join|defined|foreach|last|chop|chomp|bless|dbmclose|dbmopen|ref|tie|tied|untie|while|next|map|eq|die|cmp|lc|uc|and|do|if|else|elsif|for|use|require|package|import|chdir|chmod|chown|chroot|fcntl|glob|ioctl|link|lstat|mkdir|open|opendir|readlink|rename|rmdir|stat|symlink|umask|unlink|utime|binmode|close|closedir|dbmclose|dbmopen|die|eof|fileno|flock|format|getc|print|printf|read|readdir|rewinddir|seek|seekdir|select|syscall|sysread|sysseek|syswrite|tell|telldir|truncate|warn|write|alarm|exec|fork|getpgrp|getppid|getpriority|kill|pipe|qx|setpgrp|setpriority|sleep|system|times|x|wait|waitpid"
 
 comment delim '^\=(?:head1|head2|item)' '\=cut' multiline
 

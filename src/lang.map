@@ -79,3 +79,6 @@ am = makefile.lang
 in = makefile.lang
 css = css.lang
 m4 = m4.lang
+sl = slang.lang
+slsh = slang.lang
+slang = slang.lang

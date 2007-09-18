@@ -3,7 +3,7 @@
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
+** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
 **
 ** This program is distributed in the hope that it will be useful,
@@ -114,7 +114,10 @@ void exitError(const std::string &filename, unsigned int line, const std::string
 
 void foundBug(const std::string &error, const std::string &file, int line)
 {
-  cerr << PACKAGE << ": " << error << ", " << file << ":" << line << endl;
+  cerr << PACKAGE << ": " << error;
+  if (file.size())
+      cerr << ", " << file << ":" << line;
+  cerr << endl;
   cerr << PACKAGE << ": " << "it looks like you found a bug of this program" << endl;
   cerr << PACKAGE << ": " << "could you please send this output and the input file" << endl;
   cerr << PACKAGE << ": " << "to the author of this program?" << endl;

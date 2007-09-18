@@ -35,6 +35,13 @@ private:
     TextFormatter *formatter;
     typedef std::stack<RegExpStatePtr> stack_of_states;
     stack_of_states states_stack;
+    
+    typedef std::stack<boost::smatch> stack_of_matches;
+    /**
+     * Each element provides the replacement values for back references in regular
+     * expressions of the shape @{digit}
+     */
+    stack_of_matches reference_env;
 
 protected:
     virtual void enterState(RegExpStatePtr state, int index);

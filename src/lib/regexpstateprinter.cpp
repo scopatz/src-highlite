@@ -36,7 +36,8 @@ void RegExpStatePrinter::printRegExpState(RegExpStatePtr state)
   cout << " STATE " << state->id << endl;
   do_indent;
   cout << " regexp " << state->reg_exp <<
-      (state->has_alternative() ? " (has alternatives)" : "") << endl;
+      (state->has_alternative() ? " (has alternatives)" : "") <<
+      (state->hasReferences ? " (has references)" : "") << endl;
 
   inc_indent;
 

@@ -79,7 +79,7 @@ void OutputGenerator::reset() {
 void OutputGenerator::generate_line_info() {
     ostringstream sout;
 
-    sout << std::setw(line_num_digit)<< std::setfill('0')<< line_num << ":";
+    sout << std::setw(line_num_digit) << std::setfill(line_num_padding) << line_num << ":";
 
     string line_str = line_num_generator->generateEntire(sout.str().c_str());
 

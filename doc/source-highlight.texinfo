@@ -217,6 +217,7 @@ files):
 
 @item
 @cindex SourceHighlightIDE
+@cindex KDE
 SourceHighlightIDE is a small IDE (for KDE) I wrote for developing
 and debugging new language definitions for source-highlight:
 
@@ -224,6 +225,7 @@ and debugging new language definitions for source-highlight:
 
 @item 
 @cindex Ksrc2highlight
+@cindex KDE
 Martin Gebert implemented a KDE interface to source-highlight programs
 (and he did a wonderful job!), and it is called @emph{Ksrc2highlight};
 if you want to test it: 
@@ -259,10 +261,20 @@ from source code to HTML.
 @uref{http://code.google.com/p/code2blog}
 
 @item
+@cindex Apache
 Andy Buckley wrote a wrapper around source-highlight, which can be used
 as an Apache filter to highlight source code in Web pages on the fly.
 
 @uref{http://www.insectnation.org/projects/filter-src-highlight}
+
+@item
+@cindex RapidWeaver
+Roger Nilsson wrote a frontend for source-highlight that is used in a
+popular webdesign app for OSX called RapidWeaver. The frontend is called
+High-Light and allows users to easily add syntax-colored code inside
+RapidWeaver.
+
+@uref{http://nilrogsplace.se/webdesign/rapidweaver/plugins/high-light/index_en.html}
 
 @end itemize
 
@@ -1208,6 +1220,11 @@ option.
 Force the inference mechanism for detecting the input language.  This is
 detailed in @ref{How the input language is discovered}.
 
+@item --line-number
+Line numbers will be generated in the output, using the (optional)
+specified padding character@footnote{Padding character can be specified
+since version 2.8.} (the default padding character is @code{0}).
+
 @item --line-number-ref
 As @code{--line-number}, this option numbers all the output lines, and,
 additionally, generates an anchor for each line.  The anchor consists of
@@ -1355,6 +1372,7 @@ with multiple lines (see @ref{Delimited definitions} and
 * Order of definitions::        
 * Delimited definitions::       
 * Variable definitions::        
+* Dynamic Backreferences::      
 * File inclusion::              Include the contents of another file
 * State/Environment Definitions::  
 * Explicit subexpressions with names::  
@@ -1442,13 +1460,15 @@ allowed.
 
 @cindex marked subexpressions
 @cindex backreference
+@cindex backtick
 This syntax@footnote{Since version 2.7.} (notice the difference, this
-one uses @code{`} while the previous one uses @code{'}) for specifying a
-regular expression was introduced to overcome the limitations of the
-other two syntaxes.  With this syntax, the marked subexpressions are
-not transformed, and so you can use regular expressions mechanisms that
-rely on marked subexpressions, such as @emph{backreferences} and
-@emph{conditionals} (see @ref{Notes on regular expressions}).
+one uses the @emph{backtick} @code{`} while the previous one uses
+@code{'}) for specifying a regular expression was introduced to overcome
+the limitations of the other two syntaxes.  With this syntax, the marked
+subexpressions are not transformed, and so you can use regular
+expressions mechanisms that rely on marked subexpressions, such as
+@emph{backreferences} and @emph{conditionals} (see @ref{Notes on regular
+expressions}).
 
 This syntax is also crucial for highlighting specific program parts of
 some programming languages, such as, e.g., Perl regular expressions
@@ -1641,16 +1661,22 @@ string delim "\"" "\"" escape "\\" multiline
 @end example
 
 The option @code{nested} instructs to count possible multiple
-occurrences of delimited characters and to match relative
-multiple occurrences.  For instance, C-like multiline comments
-are specified as follows:
+occurrences of delimited characters and to match relative multiple
+occurrences (using a stack).  For instance, if we wanted to highlight
+C-like multiline comments in a nested way@footnote{As Ed Kelly correctly
+pointed out, C-style comments are NOT nested; it's a big shame I've been
+using C++ and Java for years and have always thought they were nested
+:-)... Thus, in previous versions of source-highlight distributions,
+C-style comments were (uncorrectly) defined as nested.  Thank you Ed,
+for your feedback!}, we could use the following definition:
 
 @example
 comment delim "/*" "*/" multiline nested 
 @end example
 
-If @code{nested} was not used the following nested comment
-would have not been highlighted correctly:
+If @code{nested} was not used, then the closing @code{*/} of the
+following nested comment would conclude the comment (and the second
+@code{*/} would not be highlighted as a comment):
 
 @example
 /*
@@ -1660,14 +1686,16 @@ would have not been highlighted correctly:
 
 As said above, definitions are cumulative, and they are also cumulative
 even when using different syntactic forms.  Thus, for instance, the
-complete definition for C++-style comments are the following:
+complete definition for C++-style comments are the following (actually,
+the definition of C-style comment is more involved, see the file
+@file{c_comment.lang}):
 
 @example
 comment start "//"
-comment delim "/*" "*/" multiline nested 
+comment delim "/*" "*/" multiline
 @end example
 
-@node Variable definitions, File inclusion, Delimited definitions, Language Definitions
+@node Variable definitions, Dynamic Backreferences, Delimited definitions, Language Definitions
 @section Variable definitions
 @cindex variables
 
@@ -1695,7 +1723,72 @@ vardef basic_time = '[[:digit:]]@{2@}:[[:digit:]]@{2@}:[[:digit:]]@{2@}'
 vardef time = '\<' + $basic_time + '\>'
 @end example
 
-@node File inclusion, State/Environment Definitions, Variable definitions, Language Definitions
+@node Dynamic Backreferences, File inclusion, Variable definitions, Language Definitions
+@section Dynamic Backreferences
+@cindex dynamic backreference
+
+With @emph{dynamic backreferences} you can refer to a string matched by
+the regular expression of the first element of a @code{delim}
+specification@footnote{Since version 2.8}.  I called these
+backreferences dynamic in order to distinguish them by the
+backreferences of regular expression syntax, @ref{Ways of specifying
+regular expressions}.  This is crucial in cases when the rigth delimiter
+depends on a subexpression matched by the left delimiter; for instance,
+Lua comments can be of the shape @code{--[[ comment ]]} or @code{--[=[
+comment ]=]}, but not @code{--[=[ comment ]]} neither @code{--[[ comment
+]=]} (furthermore, they can be nested)@footnote{I'm grateful to Jurgen
+Hotzel for rasing this issue about Lua comments; this led me to
+introduce dynamic backreferences.}.  Thus, the regular expression of
+the right element depends on the one of the left element.
+
+A dynamic backreference is similar to a variable (@ref{Variable definitions}),
+but there's no declaration, and have the shape of
+
+@example
+@@@{number@}
+@end example
+
+@noindent
+where @code{number} is the number of the marked subexpression in the
+left delimiter (source-highlight will actually check that such a marked
+subexpression exists in the left delimiter).
+
+For instance, this is the definition of Lua comments (see also
+@file{lua.lang}):
+
+@example
+environment comment delim `--\[(=*)\[` "]" + @@@{1@} + "]" 
+            multiline nested begin
+  include "url.lang"
+  ...
+end
+@end example
+
+@noindent
+Notice how the left delimiter can match an optional @code{=}, as a
+marked subexpression, and the right delimiter refers to that with @@@{1@}.
+
+Source-highlight will take care of escaping possible special characters
+during dynamic backreference substitutions.  For instance, suppose that
+you must substitute @code{|} for @@@{1@}, because we matched @code{|}
+with the subexpression @code{[^[:alnum:]]} in a delim element like the
+following one:
+
+@example
+comment delim `([^[:alnum:]])` @@@{1@} 
+@end example
+
+@noindent
+Since @code{|} is a special character in regular expression syntax
+source-highlight will actually replace @code{@@@{1@}} with @code{\|}.
+
+IMPORTANT: the right delimiter can only refer to subexpressions of its
+left delimiter; thus, in case of nested delim element definitions (e.g.,
+in states or environment, @ref{State/Environment Definitions}), the left
+delimiter acts as a binder and hides possible subexpressions defined in
+outer delim elements.
+
+@node File inclusion, State/Environment Definitions, Dynamic Backreferences, Language Definitions
 @section File inclusion
 @cindex file inclusion
 
@@ -2326,14 +2419,18 @@ has the following format:
 <.lang filename>:<line number>: <matched subexpression>
 formatting: <source file string to be formatted>
 entering: <next state's regular expression>
+current state: <next state's regular expression>
 exiting: 
 exitingall: 
 @end example
 
 The lines starting with @code{entering}, @code{exiting} and
 @code{exitingall} are related to entering a new state/environment and
-exiting one and all states/environments.  The first line shows a link to
-the @file{.lang} definition file and the line number, i.e., and the
+exiting one and all states/environments (@code{current state}, if shown,
+comes after @code{entering} and prints the same state's regular
+expression but after the substitution of dynamic backreferences,
+@ref{Dynamic Backreferences}).  The first line shows a link to the
+@file{.lang} definition file and the line number, i.e., and the
 sub-expression that matched and the line starting with @code{formatting}
 shows the source file string that matched with that expression.  If a
 line starting with @code{formatting} is not preceded by a line with the

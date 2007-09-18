@@ -3,7 +3,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
+ * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -73,6 +73,7 @@ ostream* sout;
 #endif // BUILD_AS_CGI
 
 unsigned int line_num_digit = 0; // num of digits to represent line number
+char line_num_padding = '0';     // character to use for padding the line number
 
 gengetopt_args_info args_info; // command line structure
 
@@ -564,11 +565,14 @@ int StartApp::processFile(const string &inputFileName,
 
     OutputGenerator *outputgenerator = 0;
 
-    if (generate_line_num)
+    if (generate_line_num) {
+        // Read the padding character to use for line numbers
+        line_num_padding = args_info.line_number_arg[0];
         outputgenerator =new OutputGenerator(*sout, generator_factory->getTextFormatter()->getGenerator("linenum"),
                 &(textstyles->refstyle.anchor), generate_ref,
                 (args_info.line_number_ref_given ? args_info.line_number_ref_arg : ""),
                 textstyles->line_prefix);
+    }
     else
         outputgenerator = new OutputGenerator(*sout, textstyles->line_prefix);
 

@@ -116,14 +116,18 @@ INFERIMPLICIT = $(PROGNAME)
 
 SIMPLE = $(PROGEXE) --gen-version --outlang-def=$(srcdir)/simple.outlang --lang-def=$(srcdir)/simple.lang $(STD_STYLE)
 
+TESTISOLATE = $(PROGNAME) --lang-def=$(srcdir)/test_isolate.lang
+
+TESTBACKREF = $(PROGNAME) --lang-def=$(srcdir)/test_backref.lang
+
 # for testing named groups
 NAMEDGROUPS = $(PROGEXE) --gen-version --lang-def=$(srcdir)/namedgroups.lang $(STD_STYLE) $(DATADIROPTION)
 NAMEDGROUPS_STATE = $(PROGEXE) --gen-version --lang-def=$(srcdir)/namedgroups_state.lang $(STD_STYLE) $(DATADIROPTION)
 
 DEBUGLANG = $(PROGNAME) -s java $(STD_STYLE_HTML) --debug-lang=dump
 
-WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang wrong_syntax.lang wrong_namedgroups.lang wrong_namedgroups_subexps.lang wrong_namedgroups_subexps2.lang wrong_backref.lang wrong_backref2.lang
-WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err wrong_syntax.err wrong_namedgroups.err wrong_namedgroups_subexps.err wrong_namedgroups_subexps2.err wrong_backref.err wrong_backref2.err
+WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang wrong_syntax.lang wrong_namedgroups.lang wrong_namedgroups_subexps.lang wrong_namedgroups_subexps2.lang wrong_backref.lang wrong_backref2.lang wrong_dyn_backref.lang wrong_dyn_backref2.lang
+WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err wrong_syntax.err wrong_namedgroups.err wrong_namedgroups_subexps.err wrong_namedgroups_subexps2.err wrong_backref.err wrong_backref2.err wrong_dyn_backref.err wrong_dyn_backref2.err
 WRONGSTYLES = wrong_dircolor.style
 WRONGSTYLESOUT = wrong_dircolor.err
 # missing_langmap2.err
@@ -174,6 +178,11 @@ $(OUTPUTWREFS) \
 test_refs.h test_refs.cpp \
 changelog.css \
 simple.lang simple.outlang \
+test_isolate.lang \
+test.isolate test.isolate.html \
+test_backref.lang \
+test.backref test.backref.html \
+test2.backref test2.backref.html \
 log.lang.html cpp.lang.html \
 default.style.html \
 lang.map \
@@ -203,174 +212,189 @@ test.ngroups test.ngroups.html \
 test_state.ngroups test_state.ngroups.html \
 c_comment.show namedgroups_state.show \
 cpp.langelems \
-test.h.docbook
+test.h.docbook \
+test.sl test.sl.html
 
-%.show: $(top_srcdir)/src/%.lang
+SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .java .java.html .java.doc.html .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show
+
+c_comment.show: $(top_srcdir)/src/c_comment.lang
+	$(PROGEXE) --show-regex=$(top_srcdir)/src/c_comment.lang > $@
+
+.lang.show:
 	$(PROGEXE) --show-regex=$< > $@
 
-%.show: $(srcdir)/%.lang
-	$(PROGEXE) --show-regex=$< > $@
+cpp.langelems: $(top_srcdir)/src/cpp.lang
+	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$(top_srcdir)/src/cpp.lang > $@
 
-%.langelems: $(top_srcdir)/src/%.lang
-	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$< > $@
-
-%.cc.html: %.cc
+.cc.cc.html:
 	$(CPP2HTML) -i $< -o $@
 
-%.cs.html: %.cs
+.cs.cs.html:
 	$(CSHARP2HTML) -i $< -o $@
 
-%.h.html: %.h
+.h.h.html:
 	$(CPP2HTML) -i $< -o $@
 
-%.java.html: %.java
+.java.java.html:
 	$(JAVA2HTML) -i $< -o $@
 
-%.java.doc.html: %.java
+.java.java.doc.html:
 	$(JAVA2HTMLDOC) -i $< -o $@
 
 # these are files processed using a css as the style file
-%.css.java.html: %.java
+.java.css.java.html:
 	$(PROGNAME_CSSSTYLE) -i $< -o $@
 
 # these are files processed using a css as the style file
-%.css_xhtml.java.html: %.java
+.java.css_xhtml.java.html:
 	$(PROGNAME_CSSSTYLE) -i $< -o $@ -f xhtml
 
 # these are files processed using a css as the style file
-%.css_doc.java.html: %.java
+.java.css_doc.java.html:
 	$(PROGNAME_CSSSTYLE) -i $< -o $@ --title="This is the title"
 
 # these are files processed using a css as the style file and a non fixed html
-%.nf_css.java.html: %.java
+.java.nf_css.java.html:
 	$(PROGNAME_CSSSTYLE) -i $< -o $@ --outlang-def=$(srcdir)/../src/html_notfixed.outlang
 
 debug.java.html: debug.java
 	$(DEBUGLANG) -i $(srcdir)/debug.java -o debug.java.html > /dev/null
 
-%.debug: %.java
+.java.debug:
 	$(DEBUGLANG) -i $< -o debug.java.html > $@
 
-%.js.html: %.js
+.js.js.html:
 	$(JS2HTML) $< 
 
-%.java.txt: %.java
+.java.java.txt:
 	$(JAVA2ESC) --line-number $< 
 
-%.java.tex: %.java
-	$(JAVA2TEX) --line-number -i $< -o $@
+.java.java.tex:
+	$(JAVA2TEX) --line-number=" " -i $< -o $@
 
-%.java.texinfo: %.java
+.java.java.texinfo:
 	$(JAVA2TEXINFO) --line-number -i $< -o $@
 
-%.h.docbook: %.h
+.h.h.docbook:
 	$(PROGNAME_DOCBOOK) --line-number -i $< -o $@
 
-%.pl.html: %.pl
+.pl.pl.html:
 	$(PROLOG2HTML) $<
 
-%.pm.html: %.pm
+.pm.pm.html:
 	$(PERL2HTML) $<
 
-%.php3.html: %.php3
+.php3.php3.html:
 	$(PHP32HTML) $<
 
-%.py.html: %.py
+.py.py.html:
 	$(PYTHON2HTML) $<
 
-%.chlog.html: %.chlog
+.chlog.chlog.htm:
 	$(CHANGELOG2HTML) $<
 
-%.chlog_css.html: %.chlog
+.chlog.chlog_css.html:
 	$(CHANGELOG2HTMLCSS) -i $< > $@
 
-%.l.html: %.l
+.l.l.html:
 	$(FLEX2HTML) $<
 
-%.y.html: %.y
+.y.y.html:
 	$(BISON2HTML) $<
 
-%.rb.html: %.rb
+.rb.rb.html:
 	$(RUBY2HTML) $<
 
-%.lua.html: %.lua
+.lua.lua.html:
 	$(LUA2HTML) $<
 
-%.ml.html: %.ml
+.ml.ml.html:
 	$(CAML2HTML) $<
 
-%.sml.html: %.sml
+.sml.sml.html:
 	$(SML2HTML) $<
 
-%.log.html: %.log
+.log.log.html:
 	$(LOG2HTML) $<
 
-%.tex.html: %.tex
+.tex.tex.html:
 	$(LATEX2HTML) $<
 
-%.lgt.html: %.lgt
+.lgt.lgt.html:
 	$(LOGTALK2HTML) $<
 
-%.diff.html: %.diff
+.diff.diff.html:
 	$(DIFF2HTML) $<
 
-%.pas.html: %.pas
+.pas.pas.html:
 	$(PROGNAME) $<
 
-%.htm.html: %.htm
+.htm.htm.html:
 	$(PROGNAME) $< --title="html output formatted in html"
 
-%.xml.html: %.xml
+.xml.xml.html:
 	$(PROGNAME) $< --title="xml formatted in html"
 
-%.sh.html: %.sh
+.sh.sh.html:
 	$(PROGNAME) $< 
 
-%.url.html: %.url
+.url.url.html:
 	$(URL2HTML) $< 
 
-%.txt.html: %.txt
+.txt.txt.html:
 	$(TXT2HTML) $< 
 
-%.unknown.html: %.unknown
+.unknown.unknown.html:
 	$(FAILSAFE) $< 
 
-%.lang.html: $(top_srcdir)/src/%.lang
-	$(LANG2HTML) -i $< -o $@
+log.lang.html: $(top_srcdir)/src/log.lang
+	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o $@
 
-%.style.html: $(top_srcdir)/src/%.style
+cpp.lang.html: $(top_srcdir)/src/cpp.lang
+	$(LANG2HTML) -i $(top_srcdir)/src/cpp.lang -o $@
+
+default.style.html: $(top_srcdir)/src/default.style
+	$(STYLE2HTML) -i $(top_srcdir)/src/default.style -o $@
+
+.style.style.html:
 	$(STYLE2HTML) -i $< -o $@
 
-%.style.html: $(srcdir)/%.style
-	$(STYLE2HTML) -i $< -o $@
-
-%.ps.html: $(srcdir)/%.ps
+.ps.ps.html:
 	$(PROGNAME) -i $< -o $@
 
-%.htm: %.java
+.java.htm:
 	$(JAVA2HTML) -i $< --title="Java formatted in html" > $@
 	echo "" >> $@
 	echo "<!-- this is an" >> $@
 	echo "     added HTML comment" >> $@
 	echo "     at the end of the file -->" >> $@
 
-%.simple.html: %.simple
+.sl.sl.html:
+	$(PROGNAME) -i $< -o $@ --title="S-LANG test"
+
+.simple.simple.html:
 	$(SIMPLE) -i $< -o $@
 
-%_state.ngroups.html: %_state.ngroups
+.isolate.isolate.html:
+	$(TESTISOLATE) -i $< -o $@
+
+.backref.backref.html:
+	$(TESTBACKREF) -i $< -o $@
+
+_state.ngroups_state.ngroups.html:
 	$(NAMEDGROUPS_STATE) -i $< -o $@
 
-%.ngroups.html: %.ngroups
+.ngroups.ngroups.html:
 	$(NAMEDGROUPS) -i $< -o $@
 
-%.err: %.lang
+.lang.err:
 	$(CHECKLANG) ./$< 2> $@ || true;
 	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
-%.err: %.outlang
+.outlang.err:
 	$(CHECKOUTLANG) $< 2> $@ || true
 
-%.err: %.style
+.style.err:
 	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true
 
 PROG_NOLANGDEF=$(PROGEXE) --outlang-def=$(srcdir)/simple.outlang $(STD_STYLE) --data-dir=$(srcdir)/
@@ -498,6 +522,8 @@ check_url \
 check_latex \
 check_diff \
 check_simple \
+check_isolate \
+check_backref \
 check_lang \
 check_txt \
 check_sql \
@@ -511,7 +537,8 @@ check_makefile \
 check_css \
 check_ps \
 check_docbook \
-check_namedgroups
+check_namedgroups \
+check_slang
 
 remove_css_html_files:
 	rm -f *.css.java.html *.nf_css.java.html
@@ -532,7 +559,7 @@ check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.
 	$(JAVA2HTML) -i $(srcdir)/test_comments.java -o test_comments.java.out.html
 	$(JAVA2HTML) -n --line-number-ref -i $(srcdir)/test.java -o test_java_lines.out.html
 	$(JAVA2ESC) -n -i $(srcdir)/test.java -o test.java.out.txt
-	$(JAVA2TEX) -n -i $(srcdir)/test.java -o test.java.out.tex
+	$(JAVA2TEX) --line-number=" " -i $(srcdir)/test.java -o test.java.out.tex
 	$(JAVA2TEXINFO) -n -i $(srcdir)/test.java -o test.java.out.texinfo
 	@echo expect no output from diff
 	diff $(srcdir)/test.java.html test.java.out.html
@@ -706,6 +733,11 @@ check_sh: test.sh.html test2.sh.html
 	diff $(srcdir)/test.sh.html test.sh.out.html
 	diff $(srcdir)/test2.sh.html test2.sh.out.html
 
+check_slang: test.sl.html
+	$(PROGNAME) -i $(srcdir)/test.sl -o test.sl.out.html --title="S-LANG test"
+	@echo expect no output from diff
+	diff $(srcdir)/test.sl.html test.sl.out.html
+
 check_url: test.url.html
 	$(URL2HTML) -i $(srcdir)/test.url > test.url.out.html
 	@echo expect no output from diff
@@ -780,6 +812,18 @@ check_simple: test.simple.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.simple.html test.simple.out.html
 
+check_isolate: test.isolate.html
+	$(TESTISOLATE) -i $(srcdir)/test.isolate -o test.isolate.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.isolate.html test.isolate.out.html
+
+check_backref: test.backref.html test2.backref.html
+	$(TESTBACKREF) -i $(srcdir)/test.backref -o test.backref.out.html
+	$(TESTBACKREF) -i $(srcdir)/test2.backref -o test2.backref.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.backref.html test.backref.out.html
+	diff $(srcdir)/test2.backref.html test2.backref.out.html
+
 check_namedgroups: test.ngroups.html test_state.ngroups.html
 	$(NAMEDGROUPS) -i $(srcdir)/test.ngroups -o test.ngroups.out.html
 	$(NAMEDGROUPS_STATE) -i $(srcdir)/test_state.ngroups -o test_state.ngroups.out.html
@@ -787,15 +831,15 @@ check_namedgroups: test.ngroups.html test_state.ngroups.html
 	diff $(srcdir)/test.ngroups.html test.ngroups.out.html
 	diff $(srcdir)/test_state.ngroups.html test_state.ngroups.out.html
 
-%.err_out: %.lang
+.lang.err_out:
 	$(CHECKLANG) ./$< 2> $@ || true; 
 	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
-%.err_out: %.outlang
+.outlang.err_out:
 	$(CHECKOUTLANG) ./$< 2> $@ || true; 
 	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
-%.err_out: %.style
+.style.err_out:
 	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=$(srcdir)/$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true;
 	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
@@ -811,6 +855,8 @@ check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
 	$(MAKE) wrong_namedgroups_subexps2.err_out
 	$(MAKE) wrong_backref.err_out
 	$(MAKE) wrong_backref2.err_out
+	$(MAKE) wrong_dyn_backref.err_out
+	$(MAKE) wrong_dyn_backref2.err_out
 	@echo expect no output from diff
 	diff $(srcdir)/wrong_exp.err wrong_exp.err_out
 	diff $(srcdir)/wrong_syntax.err wrong_syntax.err_out
@@ -822,6 +868,8 @@ check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
 	diff $(srcdir)/wrong_namedgroups_subexps2.err wrong_namedgroups_subexps2.err_out
 	diff $(srcdir)/wrong_backref.err wrong_backref.err_out
 	diff $(srcdir)/wrong_backref2.err wrong_backref2.err_out
+	diff $(srcdir)/wrong_dyn_backref.err wrong_dyn_backref.err_out
+	diff $(srcdir)/wrong_dyn_backref2.err wrong_dyn_backref2.err_out
 
 #$(PROG_NOOUTLANGDEF) -i $(srcdir)/test.simple -o test.err_out --data-dir=/tmp 2> missing_langmap2.err_out || true
 #sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap2.err_out
@@ -886,14 +934,14 @@ check_ref: $(OUTPUTWREFS)
 	rm -f test_refs_tmp.* *testtmp
 endif
 
-check_show: $(srcdir)/c_comment.show $(srcdir)/namedgroups_state.show
+check_show: namedgroups_state.show
 	$(PROGEXE) --show-regex=$(top_srcdir)/src/c_comment.lang > c_comment.out.show
 	$(PROGEXE) --show-regex=$(srcdir)/namedgroups_state.lang > namedgroups_state.out.show
 	@echo expect no output from diff
 	diff $(srcdir)/c_comment.show c_comment.out.show
 	diff $(srcdir)/namedgroups_state.show namedgroups_state.out.show
 
-check_langelems: $(srcdir)/cpp.langelems
+check_langelems: cpp.langelems
 	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$(top_srcdir)/src/cpp.lang > cpp.out.langelems
 	@echo expect no output from diff
 	diff $(srcdir)/cpp.langelems cpp.out.langelems
@@ -914,6 +962,8 @@ check-valgrind:
 	$(VALGRINDTEST) $(PROGEXE) --help
 	$(VALGRINDTEST) $(PROGEXE) --version
 	$(VALGRINDTEST) $(JAVA2HTML) -i $(srcdir)/test.java -o test.java.out.html
+# lua uses @{1} so we want to test it
+	$(VALGRINDTEST) $(LUA2HTML) -i $(srcdir)/test.lua -o test.lua.out.html
 	$(VALGRINDTEST) $(PROGNAME_CSSSTYLE) -i $(srcdir)/test.java -o test.css.java.html
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline -i $(srcdir)/test.h -o test_ref.out.html
 	$(VALGRINDTEST) $(FAILSAFE) -i $(srcdir)/test.unknown -s cpp -o test.unknown_out
@@ -928,6 +978,6 @@ check-valgrind:
 CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html
 
 DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html test_ref.docbook

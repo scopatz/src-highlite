@@ -161,6 +161,22 @@ void RegExpState::setAllAlternativesCanMatch() {
     }
 }
 
+void RegExpState::setHasSubExpressions() {
+    if (alternative.get()) {
+        alternative->setHasSubExpressions();
+    } else {
+        hasSubExpressions = true;
+    }
+}
+
+void RegExpState::setHasReferences() {
+    if (alternative.get()) {
+        alternative->setHasReferences();
+    } else {
+        hasReferences = true;
+    }
+}
+
 void RegExpState::add_subexp_formatter(RegExpFormatterPtr f) {
     if (alternative.get()) {
         alternative->add_subexp_formatter(f);

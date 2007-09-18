@@ -44,4 +44,14 @@ assertEquals(const std::string &expected, const std::string &actual)
     return EXIT_SUCCESS;
 }
 
+int
+assertTrue(bool actual) {
+    if (!actual) {
+        std::cerr << "assertion failed!" << std::endl;
+        return EXIT_FAILURE;
+    }
+    
+    return EXIT_SUCCESS;
+}
+
 #endif /*_ASSERTTEST_H_*/

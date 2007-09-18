@@ -54,3 +54,4 @@ mytags
 copyright.c
 reportbugs.c
 test_regexpreprocessor
+*.loT

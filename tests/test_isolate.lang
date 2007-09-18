@@ -1,0 +1,10 @@
+# this is just to test if strings in regular expressions
+# are isolated (or not isolated) correctly
+
+keyword = "class"
+keyword = "first|second"
+type = 'for'
+preproc = 'wise|gain'
+string = `red`
+regexp = `exp|hi` nonsensitive
+

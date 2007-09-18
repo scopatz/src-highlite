@@ -1,4 +1,4 @@
-# Copyright (C) 1999, 2000, 2001, 2002  Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2007  Lorenzo Bettini <http://www.lorenzobettini.it>
 #  
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without 
@@ -30,6 +30,8 @@ OUTPUT_HERE = --output-dir=$(top_builddir)/doc
 
 info_TEXINFOS = source-highlight.texinfo
 
+SUFFIXES = .txt .txt.texinfo .txt.texinfo.texinfo .lang .lang.texinfo .diff .diff.texinfo .css .css.texinfo .show.texinfo
+
 source-highlight.texinfo: $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
 
 lang-list.texinfo: $(top_srcdir)/src/lang.map
@@ -44,47 +46,88 @@ test.java.texinfo: $(top_srcdir)/tests/test.java
 debug.java.texinfo: $(top_srcdir)/tests/debug.java
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/debug.java --style-file=$(top_srcdir)/src/texinfo.style -n > $@
 
-%.lang.texinfo: $(top_srcdir)/src/%.lang
+cpp.langelems.texinfo: $(top_srcdir)/src/cpp.lang
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ --show-lang-elements=$(top_srcdir)/src/cpp.lang > $@
+
+log.langelems.texinfo: $(top_srcdir)/src/log.lang
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ --show-lang-elements=$(top_srcdir)/src/log.lang > $@
+
+.txt.txt.texinfo:
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
-%.langelems.texinfo: $(top_srcdir)/src/%.lang
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ --show-lang-elements=$< > $@
-
-%.txt.texinfo: $(srcdir)/%.txt
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
-
-%.txt.texinfo.texinfo: $(srcdir)/%.txt.texinfo
+.txt.texinfo.txt.texinfo.texinfo: 
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@ --lang-def=nohilite.lang
 
-%.outlang.texinfo: $(top_srcdir)/src/%.outlang
+html_common.outlang.texinfo: $(top_srcdir)/src/html_common.outlang
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/src/html_common.outlang --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+javadoc.outlang.texinfo: $(top_srcdir)/src/javadoc.outlang
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/src/javadoc.outlang --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+LANG2TEXINFO = $(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+langdef.lang.texinfo: $(top_srcdir)/src/langdef.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/langdef.lang
+
+style.lang.texinfo: $(top_srcdir)/src/style.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/style.lang
+
+cpp.lang.texinfo: $(top_srcdir)/src/cpp.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/cpp.lang
+
+csharp.lang.texinfo: $(top_srcdir)/src/csharp.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/csharp.lang
+
+c_comment.lang.texinfo: $(top_srcdir)/src/c_comment.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/c_comment.lang
+
+c_string.lang.texinfo: $(top_srcdir)/src/c_string.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/c_string.lang
+
+symbols.lang.texinfo: $(top_srcdir)/src/symbols.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/symbols.lang
+
+function.lang.texinfo: $(top_srcdir)/src/function.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/function.lang
+
+diff.lang.texinfo: $(top_srcdir)/src/diff.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/diff.lang
+
+extreme_comment.lang.texinfo: $(top_srcdir)/src/extreme_comment.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/extreme_comment.lang
+
+extreme_comment2.lang.texinfo: $(top_srcdir)/src/extreme_comment2.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/extreme_comment2.lang
+
+extreme_comment3.lang.texinfo: $(top_srcdir)/src/extreme_comment3.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/extreme_comment3.lang
+
+extreme_comment4.lang.texinfo: $(top_srcdir)/src/extreme_comment4.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/extreme_comment4.lang
+
+.lang.lang.texinfo:
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
-%.lang.texinfo: $(top_srcdir)/tests/%.lang
+default.style.texinfo: $(top_srcdir)/src/default.style
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/src/default.style --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+texinfo.style.texinfo: $(top_srcdir)/src/texinfo.style
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/src/texinfo.style --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+syslog.style.texinfo: $(top_srcdir)/tests/syslog.style
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/syslog.style --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
+.diff.diff.texinfo:
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
-%.lang.texinfo: $(srcdir)/%.lang
+.css.css.texinfo:
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
-%.lang.texinfo: $(top_srcdir)/src/%.lang
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
+default.css.texinfo: $(top_srcdir)/src/default.css
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/src/default.css --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
-%.style.texinfo: $(top_srcdir)/src/%.style
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
-
-%.style.texinfo: $(top_srcdir)/tests/%.style
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
-
-%.diff.texinfo: %.diff
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
-
-%.css.texinfo: %.css
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
-
-%.css.texinfo: $(top_srcdir)/src/%.css
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
-
-%.cpp.texinfo: $(top_srcdir)/tests/%.cpp
-	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
+test_extreme_comment.cpp.texinfo: $(top_srcdir)/tests/test_extreme_comment.cpp
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test_extreme_comment.cpp --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
 test_extreme_comment_wrong.texinfo: $(top_srcdir)/tests/test_extreme_comment.cpp
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test_extreme_comment.cpp --style-file=$(top_srcdir)/src/texinfo.style -o $@ --lang-def=extreme_comment.lang
@@ -101,7 +144,7 @@ test_extreme_comment_2.texinfo: $(top_srcdir)/tests/test_extreme_comment2.cpp
 test_extreme_comment_3.texinfo: $(top_srcdir)/tests/test_extreme_comment3.cpp
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test_extreme_comment3.cpp --style-file=$(top_srcdir)/src/texinfo.style -o $@ --lang-def=extreme_comment3.lang
 
-%.show.texinfo: %.lang
+.lang.show.texinfo:
 	$(SRCHILITEEXE) --show-regex=$< > $@
 	sed -itesttmp -e 's/@/@@/g' $@ && rm -f *testtmp
 

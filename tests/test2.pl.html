@@ -7,6 +7,21 @@ http://www.gnu.org/software/src-highlite -->
 <b><font color="#0000FF">use</font></b> strict<font color="#990000">;</font>
 <b><font color="#0000FF">use</font></b> warnings<font color="#990000">;</font>
 
+<font color="#FF0000">"I'm happy because of $x!"</font>
+<b><font color="#0000FF">qq</font></b><font color="#FF0000">~I'm happy because of $x!~</font>
+<b><font color="#0000FF">qq</font></b><font color="#FF0000">{I'm happy because of $x!}</font>
+<b><font color="#0000FF">qq</font></b><font color="#FF0000">|I'm happy because of $x!|</font>
+<b><font color="#0000FF">qq</font></b><font color="#FF0000">#I'm happy because of $x!#</font>
+<b><font color="#0000FF">qq</font></b><font color="#FF0000">!I'm happy because of $x\!!</font>
+
+<font color="#FF0000">'The variable is called $var.'</font>
+<b><font color="#0000FF">q</font></b><font color="#FF0000">~The variable is called $var.~</font>
+<b><font color="#0000FF">q</font></b><font color="#FF0000">|The variable is called $var.|</font>
+<b><font color="#0000FF">q</font></b><font color="#FF0000">{The variable is called $var.}</font>
+<b><font color="#0000FF">q</font></b><font color="#FF0000">[The variable is called $var.]</font>
+<b><font color="#0000FF">q</font></b><font color="#FF0000">#The variable is called $var.#</font>
+<b><font color="#0000FF">q</font></b><font color="#FF0000">!The variable is called $var.!</font> 
+
 <b><font color="#0000FF">my</font></b> <font color="#009900">$port</font> <font color="#990000">=</font> <font color="#009900">$ARGV</font><font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
 
 <i><font color="#9A1900"># prepare freqently used regexes</font></i>
@@ -38,36 +53,36 @@ http://www.gnu.org/software/src-highlite -->
     <i><font color="#9A1900"># depending on $port</font></i>
     <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#009900">$_</font> <font color="#990000">=~</font> <b><font color="#0000FF">m</font></b><font color="#FF6600">\</font><font color="#009900">$quick_check</font><font color="#FF6600">|foo(.*)\</font><b><font color="#0000FF">i</font></b><font color="#990000">)</font> <font color="#FF0000">{</font>
 
-      <font color="#FF6600">s#$connecting_backslash|a\#b#\# #g</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
-      <font color="#FF6600">s#$connecting_backslash|a\#b#\# #</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
-      <font color="#FF6600">s#$connecting_backslash|a\###</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
-      <font color="#FF6600">s/$leading_comment|a\/b/a\/b/g</font><font color="#990000">;</font>            <i><font color="#9A1900"># remove leading comments</font></i>
-      <font color="#FF6600">s{$trailing_comment|\}}{\}}g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
-      <font color="#FF6600">s($trailing_comment|\))(\))g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
-      <font color="#FF6600">s&lt;$trailing_comment|\&gt;&gt;&lt;\&gt;&gt;g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
-      <font color="#FF6600">s[$trailing_comment|\]][a\]b]g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
-      <font color="#FF6600">s|$trailing_comment\||a\|b|g</font><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
-      <font color="#FF6600">s@$trailing_comment|(a\@b)@(bar\@)@g</font><font color="#990000">;</font>          <i><font color="#9A1900"># just for test</font></i>
-      <font color="#FF6600">s_$connectingbackslash|a\_b_\_ _g</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
-      <font color="#FF6600">s\$trailing_comment|(a\\b)\(bar\\)\g</font><font color="#990000">;</font>          <i><font color="#9A1900"># just for test</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">#$connecting_backslash|a\#b#\# #</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">#$connecting_backslash|a\#b#\# #</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">#$connecting_backslash|a\###</font><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">/$leading_comment|a\/b/a\/b/</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>            <i><font color="#9A1900"># remove leading comments</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">{$trailing_comment|\}}{\}}</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">($trailing_comment|\))(\))</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">&lt;$trailing_comment|\&gt;&gt;&lt;\&gt;&gt;</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">[$trailing_comment|\]][a\]b]</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">|$trailing_comment\||a\|b|</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>          <i><font color="#9A1900"># remove trailing comments</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">@$trailing_comment|(a\@b)@(bar\@)@</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>          <i><font color="#9A1900"># just for test</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">_$connectingbackslash|a\_b_\_ _</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>      <i><font color="#9A1900"># merge backslash-connected lines</font></i>
+      <b><font color="#0000FF">s</font></b><font color="#FF6600">\$trailing_comment|(a\\b)\(bar\\)\</font><b><font color="#0000FF">g</font></b><font color="#990000">;</font>          <i><font color="#9A1900"># just for test</font></i>
 
-    <font color="#FF6600">s-[a\-z]{3}-fu-</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s^\^foo^fu^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s$foo(\w{3})\$$fu\$1$</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s!foo(\w{3})\!!fu\$1!</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s?foo(\w{3})\??fu\$1?</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s*foo(\w{3})\**fu\$1*</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">-[a\-z]{3}-fu-</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">^\^foo^fu^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">$foo(\w{3})\$$fu\$1$</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">!foo(\w{3})\!!fu\$1!</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">?foo(\w{3})\??fu\$1?</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">*foo(\w{3})\**fu\$1*</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
 
     <i><font color="#9A1900"># let's some more exotic syntaxes ;-)</font></i>
-    <font color="#FF6600">s?foo(\w{3})\?\$?!fu\!1!</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s$foo(\w{3})\$$^fu\^\$1^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s$foo(\w{3})\$$ ^fu\^\$1^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s$foo(\w{3})\$$ ^fu\^\$1^g</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s#foo(\w{3})\## ^fu\^\$1^g</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
-    <font color="#FF6600">s$foo(\w{3})\$$ #fu\#\$1#g</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">?foo(\w{3})\?\$?!fu\!1!</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">$foo(\w{3})\$$^fu\^\$1^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">$foo(\w{3})\$$ ^fu\^\$1^</font> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">$foo(\w{3})\$$ ^fu\^\$1^</font><b><font color="#0000FF">g</font></b> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">#foo(\w{3})\## ^fu\^\$1^</font><b><font color="#0000FF">g</font></b> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
+    <b><font color="#0000FF">s</font></b><font color="#FF6600">$foo(\w{3})\$$ #fu\#\$1#</font><b><font color="#0000FF">g</font></b> <font color="#990000">;</font>   <i><font color="#9A1900"># just for test</font></i>
 
       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#009900">$_</font> <font color="#990000">=~</font> <b><font color="#0000FF">m</font></b><font color="#FF6600">{</font><font color="#009900">$dependency</font><font color="#FF6600">}</font><font color="#990000">)</font> <font color="#FF0000">{</font>
-        <font color="#009900">$portfile</font> <font color="#990000">=~</font> <font color="#FF6600">s{/Portfile$}{}</font><font color="#990000">;</font>   <i><font color="#9A1900"># remove trailing '/Portfile'</font></i>
+        <font color="#009900">$portfile</font> <font color="#990000">=~</font> <b><font color="#0000FF">s</font></b><font color="#FF6600">{/Portfile$}{}</font><font color="#990000">;</font>   <i><font color="#9A1900"># remove trailing '/Portfile'</font></i>
         <b><font color="#0000FF">print</font></b> <font color="#FF0000">"$portfile\n"</font><font color="#990000">;</font>
       <font color="#FF0000">}</font>
     <font color="#FF0000">}</font>

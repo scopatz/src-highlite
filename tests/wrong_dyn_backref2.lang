@@ -1,0 +1,7 @@
+state string delim 
+        `\[(1?)(2?)\[` `]]` + @{1} + `a` + @{2} nested begin
+  keyword = "inside"
+end
+
+# reference to a subexpression which is not present in this scope
+type delim "foo" "symbol" + @{1}

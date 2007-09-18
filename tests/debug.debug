@@ -1,6 +1,6 @@
 c_comment.lang:24: (/\*)
 formatting: "/*" as comment
-entering: (\*/)|(/\*)|((?:(?:<?)[[:word:]\./\-_]+@[[:word:]\./\-_]+(?:>?)))|((?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?)))|((?:(?:TODO|FIXME)(?:[:]?)))
+entering: (\*/)|((?:(?:<?)[[:word:]\./\-_]+\@[[:word:]\./\-_]+(?:>?)))|((?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?)))|((?:(?:TODO|FIXME)(?:[:]?)))
 formatting: "" as comment
 formatting: "  This is to demonstrate --debug-lang" as comment
 formatting: "  " as comment
@@ -9,19 +9,19 @@ formatting: "http://www.lorenzobettini.it" as url
 formatting: "" as comment
 c_comment.lang:24: (\*/)
 formatting: "*/" as comment
-exiting 1 level(s): (\<(?:import|package)\>)|(///)|(//)|(/\*\*)|(/\*)|((?:\<[+-]?(?:(?:0x[[:xdigit:]]+)|(?:(?:[[:digit:]]*\.)?[[:digit:]]+(?:[eE][+-]?[[:digit:]]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\>))|(\")|(')
+exiting 1 level(s): ((?:\<(?:import)\>|\<(?:package)\>))|(///)|(//)|(/\*\*)|(/\*)|((?:\<[+-]?(?:(?:0x[[:xdigit:]]+)|(?:(?:[[:digit:]]*\.)?[[:digit:]]+(?:[eE][+-]?[[:digit:]]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\>))|(\")|(')
   (\<(?:class|interface))([[:blank:]]+)([$[:alnum:]]+)
-  (\<(?:abstract|assert|break|case|catch|class|const|continue|default|do|else|extends|false|final|finally|for|goto|if|implements|instanceof|interface)\>)|(\<(?:native|new|null|private|protected|public|return|static|strictfp|super|switch|synchronized|throw|throws|true|this|transient|try|volatile|while)\>)|(\<(?:int|byte|boolean|char|long|float|double|short|void)\>)|((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))|((?:\{|\}))|((?:(?:[[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()))
+  ((?:\<(?:abstract|assert|break|case|catch|class|const)\>|\<(?:continue|default|do|else|extends|false|final)\>|\<(?:finally|for|goto|if|implements|instanceof|interface)\>))|((?:\<(?:native|new|null|private|protected|public|return)\>|\<(?:static|strictfp|super|switch|synchronized|throw)\>|\<(?:throws|true|this|transient|try|volatile|while)\>))|((?:\<(?:int|byte|boolean|char|long|float|double|short|void)\>))|((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))|((?:\{|\}))|((?:(?:[[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()))
 formatting: "" as normal
 formatting: "" as normal
-java.lang:1: (\<(?:import|package)\>)
+java.lang:1: ((?:\<(?:import)\>|\<(?:package)\>))
 formatting: "package" as preproc
 formatting: " hello" as normal
 symbols.lang:1: ((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))
 formatting: ";" as symbol
 formatting: "" as normal
 formatting: "" as normal
-java.lang:14: (\<(?:native|new|null|private|protected|public|return|static|strictfp|super|switch|synchronized|throw|throws|true|this|transient|try|volatile|while)\>)
+java.lang:14: ((?:\<(?:native|new|null|private|protected|public|return)\>|\<(?:static|strictfp|super|switch|synchronized|throw)\>|\<(?:throws|true|this|transient|try|volatile|while)\>))
 formatting: "public" as keyword
 formatting: " " as normal
 java.lang:9: (\<(?:class|interface))([[:blank:]]+)([$[:alnum:]]+)
@@ -41,12 +41,12 @@ entering: (\z)
 formatting: " just some greetings ;-)  /*" as comment
 c_comment.lang:13: (\z)
 formatting: "" as comment
-exiting 1 level(s): (\<(?:import|package)\>)|(///)|(//)|(/\*\*)|(/\*)|((?:\<[+-]?(?:(?:0x[[:xdigit:]]+)|(?:(?:[[:digit:]]*\.)?[[:digit:]]+(?:[eE][+-]?[[:digit:]]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\>))|(\")|(')
+exiting 1 level(s): ((?:\<(?:import)\>|\<(?:package)\>))|(///)|(//)|(/\*\*)|(/\*)|((?:\<[+-]?(?:(?:0x[[:xdigit:]]+)|(?:(?:[[:digit:]]*\.)?[[:digit:]]+(?:[eE][+-]?[[:digit:]]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\>))|(\")|(')
   (\<(?:class|interface))([[:blank:]]+)([$[:alnum:]]+)
-  (\<(?:abstract|assert|break|case|catch|class|const|continue|default|do|else|extends|false|final|finally|for|goto|if|implements|instanceof|interface)\>)|(\<(?:native|new|null|private|protected|public|return|static|strictfp|super|switch|synchronized|throw|throws|true|this|transient|try|volatile|while)\>)|(\<(?:int|byte|boolean|char|long|float|double|short|void)\>)|((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))|((?:\{|\}))|((?:(?:[[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()))
+  ((?:\<(?:abstract|assert|break|case|catch|class|const)\>|\<(?:continue|default|do|else|extends|false|final)\>|\<(?:finally|for|goto|if|implements|instanceof|interface)\>))|((?:\<(?:native|new|null|private|protected|public|return)\>|\<(?:static|strictfp|super|switch|synchronized|throw)\>|\<(?:throws|true|this|transient|try|volatile|while)\>))|((?:\<(?:int|byte|boolean|char|long|float|double|short|void)\>))|((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))|((?:\{|\}))|((?:(?:[[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()))
 formatting: "" as normal
 formatting: "    " as normal
-java.lang:18: (\<(?:int|byte|boolean|char|long|float|double|short|void)\>)
+java.lang:18: ((?:\<(?:int|byte|boolean|char|long|float|double|short|void)\>))
 formatting: "int" as type
 formatting: " i " as normal
 symbols.lang:1: ((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))
@@ -73,9 +73,9 @@ entering: (\")|((?:\\.))
 formatting: "Hello World!" as string
 c_string.lang:3: (\")
 formatting: """ as string
-exiting 1 level(s): (\<(?:import|package)\>)|(///)|(//)|(/\*\*)|(/\*)|((?:\<[+-]?(?:(?:0x[[:xdigit:]]+)|(?:(?:[[:digit:]]*\.)?[[:digit:]]+(?:[eE][+-]?[[:digit:]]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\>))|(\")|(')
+exiting 1 level(s): ((?:\<(?:import)\>|\<(?:package)\>))|(///)|(//)|(/\*\*)|(/\*)|((?:\<[+-]?(?:(?:0x[[:xdigit:]]+)|(?:(?:[[:digit:]]*\.)?[[:digit:]]+(?:[eE][+-]?[[:digit:]]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\>))|(\")|(')
   (\<(?:class|interface))([[:blank:]]+)([$[:alnum:]]+)
-  (\<(?:abstract|assert|break|case|catch|class|const|continue|default|do|else|extends|false|final|finally|for|goto|if|implements|instanceof|interface)\>)|(\<(?:native|new|null|private|protected|public|return|static|strictfp|super|switch|synchronized|throw|throws|true|this|transient|try|volatile|while)\>)|(\<(?:int|byte|boolean|char|long|float|double|short|void)\>)|((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))|((?:\{|\}))|((?:(?:[[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()))
+  ((?:\<(?:abstract|assert|break|case|catch|class|const)\>|\<(?:continue|default|do|else|extends|false|final)\>|\<(?:finally|for|goto|if|implements|instanceof|interface)\>))|((?:\<(?:native|new|null|private|protected|public|return)\>|\<(?:static|strictfp|super|switch|synchronized|throw)\>|\<(?:throws|true|this|transient|try|volatile|while)\>))|((?:\<(?:int|byte|boolean|char|long|float|double|short|void)\>))|((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))|((?:\{|\}))|((?:(?:[[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()))
 symbols.lang:1: ((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))
 formatting: ")" as symbol
 symbols.lang:1: ((?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|))

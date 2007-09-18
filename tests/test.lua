@@ -1,3 +1,4 @@
+--[=[ first --[[ second ]=] still second ]] first ]=] outside
 
 --[[ long comment
 	XXXXXXXXXXXXX [[ long comment

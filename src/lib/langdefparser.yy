@@ -4,7 +4,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
+ * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -87,10 +87,10 @@ struct ElementNamesList : ElementNames {
 };
 
 %token <tok> BEGIN_T END_T ENVIRONMENT_T STATE_T MULTILINE_T DELIM_T START_T ESCAPE_T NESTED_T EXIT_ALL EXIT_T VARDEF_T REDEF_T SUBST_T NONSENSITIVE_T
-%token <string> KEY STRINGDEF REGEXPNOPREPROC VARUSE
+%token <string> KEY STRINGDEF REGEXPNOPREPROC VARUSE BACKREFVAR
 %token <stringdef> REGEXPDEF
 
-%type <stringdef> stringdef escapedef
+%type <stringdef> stringdef escapedef stringdefwreferences
 %type <stringdefs> stringdefs
 %type <langelem> elemdef
 %type <langelems> elemdefs
@@ -148,7 +148,7 @@ elemdef : redefsubst complexelem exitall
           }
         ;
 
-complexelem : key DELIM_T stringdef stringdef escapedef multiline nested
+complexelem : key DELIM_T stringdef stringdefwreferences escapedef multiline nested
                 {
                   $$ = new DelimitedLangElem(*($1->key), $3, $4, $5, $6, $7);
                   $$->setParserInfo($1);
@@ -228,11 +228,41 @@ stringdefs : stringdefs ',' stringdef { $$ = $1; $$->push_back($3); }
                 $$->push_back($1); }
            ;
 
+stringdefwreferences : REGEXPDEF {
+              $$ = $1;
+            }
+          | STRINGDEF {
+              $$ = new StringDef(*$1, true);
+              delete $1;
+            }
+          | REGEXPNOPREPROC {
+              $$ = new StringDef(*$1);
+              delete $1;
+            }
+          | VARUSE {
+              if (! vardefinitions->contains(*$1)) {
+                yyerror("undefined variable " + *$1);
+              }
+              $$ = new StringDef(vardefinitions->getVar(*$1));
+              delete $1;
+            }
+          | BACKREFVAR {
+              $$ = new StringDef(*$1);
+              $$->setBackRef(true);
+              delete $1;
+            }
+          | stringdefwreferences '+' stringdefwreferences {
+              $$ = StringDef::concat($1, $3);
+              delete $1;
+              delete $3;
+            }
+          ;
+
 stringdef : REGEXPDEF {
               $$ = $1;
             }
           | STRINGDEF {
-              $$ = new StringDef(*$1);
+              $$ = new StringDef(*$1, true);
               delete $1;
             }
           | REGEXPNOPREPROC {

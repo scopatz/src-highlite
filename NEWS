@@ -8,6 +8,19 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 2.8
+
+   * lang definition for slang (by John E. Davis)
+   * correctly handle words in ' and ` regular expression strings
+   * the right delimiter of a delim element can refer to marked subexpressions
+     in the left delimiter
+   * fixed the definition of C-style comments which are not nested
+   * improved perl syntax highlighting
+   * javascript regular expression highlighting
+   * padding character for line numbers can be specified (thanks to
+     Roger Nilsson)
+   * removed non standard % make rules
+
 Version 2.7
 
    * fixed language association for log files.
@@ -168,7 +181,7 @@ Version 1.9
      it is implied (e.g., when css is given) (as suggested by Keith Lea
      and Grant McLean)
    * deal with \r correctly
-   * added scanner for language LUA (thanks to Marc Côté)
+   * added scanner for language LUA (thanks to Marc Cote')
    * added scanner for CAML and SML (with the help of Jean-Baptiste Rouquier
      and James Riely)
    * fixed a bug in C++ scanner concerning tabs after # (reported by
@@ -304,7 +317,7 @@ Version 1.1
 
    * Included some standard headers; otherwise gcc 2.96 didn't compile
      (thanks to Arto Viitanen).
-   * fixed bug (seg.fault) with foreign character, such as ü (thanks to
+   * fixed bug (seg.fault) with foreign character (thanks to
      Martin Gebert).
    * --output-dir added to specify the output directory.
    * --enable-input-chroot configure option to hardcode the path to prepend

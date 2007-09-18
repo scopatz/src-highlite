@@ -22,6 +22,9 @@ check-regexp_cmd.c: $(srcdir)/check-regexp_cmd.ggo
 	$(GENGETOPT) --input $< --unamed-opts --no-handle-help --no-handle-version
 endif
 
+# in order to make it work with parallel make we need to make
+# these deps explicit
+cmdline.h: cmdline.c
 
 bin_PROGRAMS = source-highlight check-regexp
 bin_SCRIPTS = java2html cpp2html src-hilite-lesspipe.sh
@@ -77,7 +80,7 @@ diff.lang c_string.lang langdef.lang outlang.lang style.lang \
 extreme_comment.lang extreme_comment2.lang extreme_comment3.lang \
 postscript.lang csharp.lang xml.lang sh.lang script_comment.lang \
 tcl.lang sql.lang bib.lang makefile.lang css.lang m4.lang \
-default.lang nohilite.lang
+default.lang nohilite.lang slang.lang
 
 OUTLANGFILES = \
 css_common.outlang \

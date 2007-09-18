@@ -1,0 +1,5 @@
+Hi, this class will be highlighted as keyword
+Also first and second, but not firstsecond
+and in insideforfoo for will be highlighted as type
+in otherwise we expect wise to be highlighted again (and also gain)
+Inred the color is highlighted!

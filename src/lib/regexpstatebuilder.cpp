@@ -37,6 +37,9 @@ void add_exp(RegExpStatePtr state, const string &exp, ParserInfo *parserInfo, Re
         // for marked subexpressions we must not use buildex, otherwise we might change
         // the subexpressions indexes (e.g., for backreferences)
         state->add_alternative(exp, parserInfo, f);
+
+        // record that we (manually) added an expression with subexpressions
+        state->setHasSubExpressions();
     } else {
         state->add_exp(buildex(exp), parserInfo, f);
         
@@ -102,9 +105,16 @@ RegExpStateBuilder::build(LangElems *elems)
 void
 RegExpStateBuilder::build(LangElems *elems, RegExpStatePointer state)
 {
-  if (elems)
-    for (LangElems::const_iterator it = elems->begin(); it != elems->end(); ++it)
-      build_DB(*it, state);
+  if (elems) {
+    for (LangElems::const_iterator it = elems->begin(); 
+        it != elems->end(); ++it) {
+        try {
+            build_DB(*it, state);
+        } catch (boost::bad_expression &e) {
+            exitError("problem in this expression: " + (*it)->toStringOriginal(), *it);
+        }
+    }
+  }
 
   bool problems = !freeze_state(state);
 
@@ -166,8 +176,12 @@ const string buildex_isolated(const string &s)
 
 /**
  * An expression is isolated basically if it is an alphanumerical
- * string
- * TODO check whether this is actually correct in principle
+ * string.
+ * 
+ * Notice that this should be called only on strings specified in double quotes,
+ * since other expressions are intended as regular expressions and should not
+ * be isolated.  This is checked in the code that calls this function.
+ * 
  * @param s
  * @return
  */
@@ -198,23 +212,39 @@ RegExpStateBuilder::build(StringListLangElem *elem, RegExpStatePointer state)
   const string &name = elem->getName();
 
   StringDefs *alternatives = elem->getAlternatives();
-  string stringdef = toStringCollection<StringDefs>(alternatives, '|');
+  string stringdef;
+  
+  for (StringDefs::const_iterator it = alternatives->begin(); it != alternatives->end();) {
+      const string &rep = (*it)->toString();
+      
+      // check whether the regular expression string must be made non case sensitive
+      const string &nonsensitive_processed = 
+          (elem->isCaseSensitive() ? rep : 
+              RegexPreProcessor::make_nonsensitive(rep));
 
-  //printMessage("building " + name + " " + stringdef);
-
-  // check this at this point, since, stringdef might be modified
-  // e.g., if it must be case insensitive
-  bool isToIsolate = is_to_isolate(stringdef);
-
-  if (!elem->isCaseSensitive())
-    stringdef = RegexPreProcessor::make_nonsensitive(stringdef);
-  string exp_string = non_marking_group(stringdef);
-  if (isToIsolate)
-    exp_string = buildex_isolated(exp_string);
+      // this must be checked on the original string (not the one already made
+      // non sensistive); however, we will use the already made nonsensitive
+      if ((*it)->isDoubleQuoted() && is_to_isolate(rep)) {
+          // we must make a non-marking group since the string can contain
+          // alternative symbols. For instance,
+          // \<(?:class|for|else)\>
+          // correctly detects 'for' only in isolation, while
+          // (?:\<class|for|else\>)
+          // will not
+          stringdef += 
+              buildex_isolated(non_marking_group(nonsensitive_processed));
+      } else {
+          stringdef += nonsensitive_processed;
+      }
+      
+      if (++it != alternatives->end())
+          stringdef += '|'; // the alternatives separator
+  }
 
   RegExpFormatterPtr formatter(new RegExpFormatter(name));
 
-  add_exp(state, exp_string, elem, formatter);
+  // the final regexp is enclosed in (?: ) i.e., non marking group
+  add_exp(state, non_marking_group(stringdef), elem, formatter);
   build(static_cast<StateStartLangElem *>(elem), state);
 }
 
@@ -288,12 +318,40 @@ RegExpStateBuilder::build(DelimitedLangElem *elem, RegExpStatePointer state)
   string escape_string;
   if (escape)
     escape_string = escape->toString();
+  
+  bool end_string_has_references = false;
+  
+  // check possible back reference markers and their correctness
+  if (end && end->isBackRef() && end_string.size()) {
+      backreference_info ref_info = 
+          RegexPreProcessor::num_of_references(end_string);
+      subexpressions_info info = 
+          RegexPreProcessor::num_of_marked_subexpressions(start_string, true, true);
+      
+      // possible errors, e.g., unbalanced parenthesis
+      if (info.errors.size()) {
+          exitError(info.errors, elem);
+      }
+      
+      // check that there are enough subexpressions as requested by the maximal
+      // back reference number
+      int max = ref_info.second;
+      if (max > info.marked) {
+          ostringstream error;
+          error << max << " subexpressions requested, but only " <<
+              info.marked << " found ";
+          exitError(error.str(), elem);
+      }
+      
+      end_string_has_references = true;
+  }
 
   //printMessage("building " + name + " " + start_string + " " + end_string);
 
   if (! elem->getStateLangElem() &&
         ! elem->isMultiline() && escaped_string_size(start_string) == 1 &&
-        escaped_string_size(end_string) == 1) {
+        escaped_string_size(end_string) == 1 &&
+        ! end_string_has_references) {
     /*
     in case the expression is not the start element of a
     State/Environment and it must not spawn multiple lines, and the
@@ -337,6 +395,10 @@ RegExpStateBuilder::build(DelimitedLangElem *elem, RegExpStatePointer state)
     inner = RegExpStatePtr(new RegExpState); // for internal elements
     nested_states.push_back(inner);
 
+    // record where the inner state has reference to replace at run-time
+    if (end_string_has_references)
+        inner->setHasReferences();
+    
     /*
     Since this is a delimited element, everything inside this element,
     that does not match anything else, must be formatted in the same
@@ -409,8 +471,7 @@ RegExpStateBuilder::build(DelimitedLangElem *elem, RegExpStatePointer state)
   }
 
   if (inner) {
-    if (!freeze_state(inner))
-        foundBug("bug in expression parsing", __FILE__, __LINE__);;
+    inner->freeze();
   }
 
   RegExpFormatterPtr formatter(new RegExpFormatter(name, inner));

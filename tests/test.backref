@@ -1,0 +1,5 @@
+[12[ foo ]]a symbol inside ]]1a2
+[[ foo ]]a symbol inside ]]1a2
+[1[ foo ]]a [1[ symbol inside ]]1a2 ]]1a2
+[2[ foo ]]a [1[ symbol inside ]]1a2 ]]a2
+symbol
