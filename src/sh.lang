@@ -31,7 +31,7 @@ variable = '\$([^[:blank:]]{1})'
 
 # notice that - is not a symbol since it can be used in command line parameters
 symbol = "~","!","%","^","*","(",")","+","=","[",
-        "]","\\",":",";",",",".","/","?","&","<",">","\|",'(##){2}',"%%"
+        "]","\\",":",";",",",".","/","?","&","<",">","\|",'(##){2}(?!#)',"%%"
 
 include "script_comment.lang"
 

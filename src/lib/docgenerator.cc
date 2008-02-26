@@ -23,29 +23,15 @@
 
 #include "docgenerator.h"
 
-#include "globalostream.h"
-
 using std::endl;
 
 void
-DocGenerator::generate(const string &s)
-{
-  *sout << s ;
-}
-
-void
-DocGenerator::generateln(const string &s)
-{
-  *sout << s << endl;
-}
-
-void
-DocGenerator::generate_start_doc()
+DocGenerator::generate_start_doc(std::ostream *sout)
 {
     bool docTitle = (title.size () > 0);
     bool inputFileName = (input_file_name.size () > 0);
 
-    generate(
+    *sout <<
         docTemplate.output_begin(
             ( docTitle ? title :
                   ( inputFileName ? input_file_name : "source file" ) ),
@@ -55,14 +41,13 @@ DocGenerator::generate_start_doc()
             doc_header,
             doc_footer,
             doc_background
-        )
-    );
+        );
 }
 
 void
-DocGenerator::generate_end_doc()
+DocGenerator::generate_end_doc(std::ostream *sout)
 {
-    generate(
+    *sout <<
         docTemplate.output_end(
             "",
             css_url,
@@ -70,6 +55,5 @@ DocGenerator::generate_end_doc()
             doc_header,
             doc_footer,
             doc_background
-        )
-    );
+        );
 }

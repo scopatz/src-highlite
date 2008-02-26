@@ -31,7 +31,7 @@
 @t{29:} @r{@i{ * }}@b{@@author}@r{@i{ Lorenzo Bettini}}
 @t{30:} @r{@i{ * }}@b{@@version}@r{@i{ 2.0}}
 @t{31:} @r{@i{ */}}
-@t{32:} @b{public} @b{class} @b{Hello} @{
+@t{32:} @b{public} @b{class} Hello @{
 @t{33:}     @b{int} foo = 1998 ;
 @t{34:}     @b{int} hex_foo = 0xCAFEBABE;
 @t{35:}     @b{boolean} b = @b{false};

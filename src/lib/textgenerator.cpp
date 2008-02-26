@@ -15,6 +15,11 @@ TextGenerator::TextGenerator()
 {
 }
 
+TextGenerator::TextGenerator(const TextGenerator &t) :
+    textstyle(t.textstyle)
+{
+}
+
 TextGenerator::TextGenerator(const TextStyle &style) : textstyle(style)
 {
 }

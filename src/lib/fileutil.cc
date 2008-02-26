@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000, 2001  Lorenzo Bettini <http://www.lorenzobettini.it>
+ * Copyright (C) 2000-2008  Lorenzo Bettini <http://www.lorenzobettini.it>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 #include "fileutil.h"
 #include "messages.h" // for verbosity
@@ -258,7 +259,7 @@ istream *open_data_file_istream(const string &path, const string &input_file_nam
   }
 
   if (!in)
-    exitError("cannot find language map file anywhere");
+    exitError("cannot find " + input_file_name + " file anywhere");
 
   return in;
 }

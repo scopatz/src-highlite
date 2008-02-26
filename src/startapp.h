@@ -22,6 +22,7 @@
 
 #include "langmap.h"
 #include "textstyles.h"
+#include "outputbuffer.h"
 
 class PreFormatter;
 class DocGenerator;
@@ -35,8 +36,10 @@ class StartApp
   PreFormatter *preformatter;
   LangMapPtr langmap;
   LangMapPtr outlangmap;
+  LangMapPtr styledefaults;
   TextStylesPtr textstyles;
   GeneratorFactory *generator_factory;
+  OutputBuffer outputbuffer;
 
   int entire_doc; // we want a real html doc
   short verbose;
@@ -65,6 +68,12 @@ class StartApp
    * @return the inferred language or an empty string upon failure
    */
   std::string inferLang(const std::string &inputFileName);
+  
+  /**
+   * Use the style.defaults file for setting the defaults for styles
+   * not specified in the style file.
+   */
+  void setStylesFromDefaults();
 
  public:
   StartApp();

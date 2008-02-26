@@ -1,13 +1,11 @@
+include "html_ref.outlang"
+
 extension "html"
 
 bold "<b>$text</b>"
 italics "<i>$text</i>"
 underline "<u>$text</u>"
 color "<font color=\"$style\">$text</font>"
-anchor "<a name=\"$linenum\">$text</a>"
-postline_reference "<a href=\"$outfile#$linenum\">$text -> $infile:$linenum</a>"
-postdoc_reference "<a href=\"$outfile#$linenum\">$text -> $infile:$linenum</a>"
-reference "<a href=\"$outfile#$linenum\">$text</a>"
 
 colormap
 "green" "#33CC00"

@@ -1,4 +1,4 @@
-#! @SHELL@
+#! @BASH_SHELL@
 # --------------------------------------------------------------------- #
 #
 #  Script to run some examples through VALGRIND.
@@ -6,6 +6,8 @@
 #  Michael Hagemann <michael.hagemann@unibas.ch>
 #
 #  modified by Lorenzo Bettini <http://www.lorenzobettini.it>
+#
+#  this requires bash extensions
 #
 # --------------------------------------------------------------------- #
 
@@ -48,8 +50,10 @@ vgrind () {
     tmp_err=
 
     if [[ $1 == *.sh ]]; then
+	# echo "$1 ${VGRIND} >${TMP_LOG} 2>&1 ..."
         eval $1 ${VGRIND} >${TMP_LOG} 2>&1;
     else
+        # echo "${VGRIND} $* >${TMP_LOG} 2>&1 ..."
         eval ${VGRIND} $* >${TMP_LOG} 2>&1
     fi;
 

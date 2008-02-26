@@ -1,0 +1,51 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">/*</font></i>
+<i><font color="#9A1900"> * test for haxe</font></i>
+<i><font color="#9A1900"> */</font></i>
+<b><font color="#000080">import</font></b> Math<font color="#990000">;</font>
+<b><font color="#0000FF">class</font></b> <font color="#009900">ShuffleBag</font><font color="#FF0000">{</font>
+    <b><font color="#0000FF">var</font></b> data<font color="#990000">:</font>Array<font color="#990000">&lt;</font><font color="#009900">Int</font><font color="#990000">&gt;;</font>
+    <b><font color="#0000FF">var</font></b> cursor<font color="#990000">:</font><font color="#009900">Int</font><font color="#990000">;</font>
+    <i><font color="#9A1900">//c'tor</font></i>
+    <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">function</font></b> <b><font color="#0000FF">new</font></b><font color="#990000">()</font><font color="#FF0000">{</font>
+        data<font color="#990000">=[];</font>
+        cursor<font color="#990000">=-</font><font color="#993399">1</font><font color="#990000">;</font>
+
+        <i><font color="#9A1900">//pointless preprocessor tests :)</font></i>
+<b><font color="#000080">        #if neko</font></b> <i><font color="#9A1900">//nya :3</font></i>
+            <b><font color="#000000">trace</font></b><font color="#990000">(</font><font color="#FF0000">"neko"</font><font color="#990000">);</font>
+<b><font color="#000080">        #else flash9</font></b><i><font color="#9A1900">//no space</font></i>
+            <b><font color="#000000">trace</font></b><font color="#990000">(</font><font color="#FF0000">"flash9"</font><font color="#990000">);</font>
+<b><font color="#000080">        #end</font></b> <i><font color="#9A1900">//foo</font></i>
+        
+<b><font color="#000080">        #if flash8</font></b>
+            <b><font color="#000000">trace</font></b><font color="#990000">(</font><font color="#FF0000">"flash8"</font><font color="#990000">);</font>
+<b><font color="#000080">        #end</font></b><i><font color="#9A1900">//no space</font></i>
+    <font color="#FF0000">}</font>
+    <i><font color="#9A1900">//add one or several item(s)</font></i>
+    <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">function</font></b> <b><font color="#000000">add</font></b><font color="#990000">(</font>item<font color="#990000">:</font><font color="#009900">Int</font><font color="#990000">,?</font>quantity<font color="#990000">:</font><font color="#009900">Int</font><font color="#990000">)</font><font color="#FF0000">{</font>
+        <b><font color="#0000FF">if</font></b><font color="#990000">(</font>quantity<font color="#990000">==</font><b><font color="#0000FF">null</font></b><font color="#990000">)</font><font color="#FF0000">{</font>
+            data<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font>item<font color="#990000">);</font>
+        <font color="#FF0000">}</font><b><font color="#0000FF">else</font></b><font color="#FF0000">{</font>
+            <b><font color="#0000FF">for</font></b><font color="#990000">(</font>i <b><font color="#0000FF">in</font></b> <font color="#993399">0</font><font color="#990000">...</font>quantity<font color="#990000">)</font>
+                data<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font>item<font color="#990000">);</font>
+        <font color="#FF0000">}</font>
+        cursor<font color="#990000">=</font>data<font color="#990000">.</font>length<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+    <i><font color="#9A1900">//returns the next item in the bag</font></i>
+    <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">function</font></b> <b><font color="#000000">next</font></b><font color="#990000">()</font><font color="#FF0000">{</font>
+        <b><font color="#0000FF">if</font></b><font color="#990000">(</font>cursor<font color="#990000">&lt;</font><font color="#993399">1</font><font color="#990000">)</font><font color="#FF0000">{</font>
+            cursor<font color="#990000">=</font>data<font color="#990000">.</font>length<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font>
+            <b><font color="#0000FF">return</font></b> data<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+        <font color="#FF0000">}</font>
+        <b><font color="#0000FF">var</font></b> grab<font color="#990000">:</font><font color="#009900">Int</font><font color="#990000">=</font>Math<font color="#990000">.</font><b><font color="#000000">floor</font></b><font color="#990000">(</font>Math<font color="#990000">.</font><b><font color="#000000">random</font></b><font color="#990000">()*(</font>cursor<font color="#990000">+</font><font color="#993399">1</font><font color="#990000">));</font>
+        <b><font color="#0000FF">var</font></b> temp<font color="#990000">:</font><font color="#009900">Int</font><font color="#990000">=</font>data<font color="#990000">[</font>grab<font color="#990000">];</font>
+        data<font color="#990000">[</font>grab<font color="#990000">]=</font>data<font color="#990000">[</font>cursor<font color="#990000">];</font>
+        data<font color="#990000">[</font>cursor<font color="#990000">]=</font>temp<font color="#990000">;</font>
+        cursor<font color="#990000">--;</font>
+        <b><font color="#0000FF">return</font></b> temp<font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+<font color="#FF0000">}</font></tt></pre>

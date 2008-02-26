@@ -12,7 +12,7 @@
 
 #include "langelem.h"
 
-#include "regexpstatebuilder.H"
+#include "regexpstatebuilder.hpp"
 
 void
 RegExpStateBuilder::build_DB(LangElem * elem, RegExpStatePointer state)

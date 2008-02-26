@@ -40,8 +40,15 @@ class OutputGenerator
     bool generate_ref;
     TextStyle *anchor;
     std::string anchor_line_prefix;
+    /// the current line number
     unsigned int line_num;
     TextGenerator *line_num_generator;
+    
+    /// num of digits to represent line number
+    unsigned int line_num_digit;
+    /// character to use for padding the line number
+    char line_num_padding;
+
 
   public:
     OutputGenerator(std::ostream &os, const std::string &pref);
@@ -82,6 +89,10 @@ class OutputGenerator
      * Resets the generator (i.e., resets line number)
      */
     void reset();
+    
+    void setLineNumDigit(unsigned int l) { line_num_digit = l; }
+    
+    void setLineNumPadding(char l) { line_num_padding = l; }
 
   protected:
     /**

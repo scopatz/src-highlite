@@ -57,23 +57,14 @@
 
 #include "languageinfer.h"
 
-// for globals
-#include "linenumdigit.h"
-#include "globalostream.h"
+// for command line arguments
 #include "cmdlineargs.h"
-#include "mainoutputbuffer.h"
 
 using namespace std;
-
-// global output stream
-ostream* sout;
 
 #ifdef BUILD_AS_CGI
 #include "envmapper.h"
 #endif // BUILD_AS_CGI
-
-unsigned int line_num_digit = 0; // num of digits to represent line number
-char line_num_padding = '0';     // character to use for padding the line number
 
 gengetopt_args_info args_info; // command line structure
 
@@ -93,7 +84,8 @@ static void progressInfo(const string &message) {
 
 StartApp::StartApp() :
     docgenerator(0), preformatter(0), langmap(new LangMap),
-            outlangmap(new LangMap), generator_factory(0), entire_doc(0),
+            outlangmap(new LangMap), styledefaults(new LangMap), 
+            generator_factory(0), entire_doc(0),
             verbose(0), cssUrl(0), use_css(0), is_cgi(0), gen_version(true),
             generate_line_num(false), generate_ref(false) {
 }
@@ -150,7 +142,6 @@ int StartApp::start(int argc, char * argv[]) {
 
     /* initialization of global symbols */
     inputFileName = outputFileName = 0;
-    sout = 0;
     docTitle = 0;
     docHeader = 0;
     docFooter = 0;
@@ -268,6 +259,10 @@ int StartApp::start(int argc, char * argv[]) {
     if (! args_info.outlang_def_given)
         outlangmap = LangMapPtr(new LangMap(data_dir, outlang_map));
 
+    string defaults_map = args_info.style_defaults_arg;
+    assert(defaults_map.size());
+    styledefaults = LangMapPtr(new LangMap(data_dir, defaults_map));
+
     if (args_info.lang_list_given) {
         cout << "Supported languages (file extensions)\nand associated language definition files\n\n";
         langmap->print();
@@ -280,9 +275,8 @@ int StartApp::start(int argc, char * argv[]) {
         return (EXIT_SUCCESS);
     }
 
-    outputbuffer = new OutputBuffer;
     // when debugging, always flush the output
-    outputbuffer->setAlwaysFlush(args_info.debug_langdef_given);
+    outputbuffer.setAlwaysFlush(args_info.debug_langdef_given);
 
     string title;
     string doc_header;
@@ -376,7 +370,7 @@ int StartApp::start(int argc, char * argv[]) {
 
     string background_color;
 
-    generator_factory =new GeneratorFactory(textstyles, preformatter,
+    generator_factory =new GeneratorFactory(textstyles, preformatter, &outputbuffer,
             args_info.gen_references_given,
             args_info.ctags_file_arg,
             refposition, args_info.debug_langdef_given);
@@ -387,8 +381,10 @@ int StartApp::start(int argc, char * argv[]) {
     } else {
         parseStyles(data_dir, style_file, generator_factory, background_color);
     }
-
+    
     generator_factory->addDefaultGenerator();
+
+    setStylesFromDefaults();
 
     if (background_color != "")
         background_color = generator_factory->preprocessColor(background_color);
@@ -440,10 +436,14 @@ int StartApp::start(int argc, char * argv[]) {
         }
     }
 
-    delete outputbuffer;
-    outputbuffer = 0;
-
     return (result);
+}
+
+void StartApp::setStylesFromDefaults() {
+    for (LangMap::const_iterator it = styledefaults->begin(); it != styledefaults->end(); ++it) {
+        if (generator_factory->createMissingGenerator(it->first, it->second))
+            printMessage("style for " + it->first + " defaults to style for " + it->second);
+    }
 }
 
 void StartApp::print_copyright() {
@@ -526,6 +526,12 @@ int StartApp::processFile(const string &inputFileName,
     FILE *in = 0;
     bool deleteOStream = false;
     bool langSpecFound = false;
+    ostream* sout = 0;
+    
+    /// num of digits to represent line number
+    unsigned int line_num_digit;
+    /// character to use for padding the line number
+    char line_num_padding;
 
     if (outputFileName.size()) {
         sout = new ofstream(outputFileName.c_str());
@@ -572,6 +578,8 @@ int StartApp::processFile(const string &inputFileName,
                 &(textstyles->refstyle.anchor), generate_ref,
                 (args_info.line_number_ref_given ? args_info.line_number_ref_arg : ""),
                 textstyles->line_prefix);
+        outputgenerator->setLineNumDigit(line_num_digit);
+        outputgenerator->setLineNumPadding(line_num_padding);
     }
     else
         outputgenerator = new OutputGenerator(*sout, textstyles->line_prefix);
@@ -579,7 +587,7 @@ int StartApp::processFile(const string &inputFileName,
     // when debugging, always flush the output
     outputgenerator->setAlwaysFlush(args_info.debug_langdef_given);
 
-    outputbuffer->setOutputGenerator(outputgenerator);
+    outputbuffer.setOutputGenerator(outputgenerator);
 
     docgenerator->set_gen_version(gen_version);
 
@@ -644,7 +652,7 @@ int StartApp::processFile(const string &inputFileName,
     }
 
     if (langSpecFound) {
-        docgenerator->generate_start_doc();
+        docgenerator->generate_start_doc(sout);
 
         const string &i_file_name = get_input_file_name(inputFileName);
         const char *input_file_name = (i_file_name.size() ? i_file_name.c_str() : 0);
@@ -653,9 +661,9 @@ int StartApp::processFile(const string &inputFileName,
         process_file(input_file_name, generator_factory->getTextFormatter(),
                 data_dir, langfile, &fileinfo, verbose);
 
-        outputbuffer->flush();
+        outputbuffer.flush();
 
-        docgenerator->generate_end_doc();
+        docgenerator->generate_end_doc(sout);
 
         printMessage("done !", cerr);
     } else {

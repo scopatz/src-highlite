@@ -1,4 +1,4 @@
-#! @SHELL@
+#! @BASH_SHELL@
 # --------------------------------------------------------------------- #
 #
 #  Script to run some examples through VALGRIND.

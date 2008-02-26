@@ -29,7 +29,7 @@ formatting: "class" as keyword
 java.lang:9: (\<(?:class|interface))([[:blank:]]+)([$[:alnum:]]+)
 formatting: " " as normal
 java.lang:9: (\<(?:class|interface))([[:blank:]]+)([$[:alnum:]]+)
-formatting: "Hello" as type
+formatting: "Hello" as classname
 formatting: " " as normal
 java.lang:22: ((?:\{|\}))
 formatting: "{" as cbracket

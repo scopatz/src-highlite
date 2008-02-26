@@ -8,17 +8,17 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-SUFFIXES = .text .H .h
+SUFFIXES = .text .hpp .h
 
 .text.c:
 	$(TXTC) -c $<
 
 if NO_DOUBLECPP
-.h.H:
+.h.hpp:
 	touch $@
 else
-.h.H:
-	$(DOUBLECPP) --output-source-ext cc --invade-target --input-header-ext h --output-header-ext H --output-source-suff=_dbtab --verbose --assume-virtual -i $<
+.h.hpp:
+	$(DOUBLECPP) --output-source-ext cc --invade-target --input-header-ext h --output-header-ext hpp --output-source-suff=_dbtab --verbose --assume-virtual -i $<
 	touch $@
 endif
 
@@ -33,13 +33,13 @@ libcommon_la_SOURCES = copyright.text reportbugs.text messages.cc \
 	stylescanner.ll langdefparser.yy langdefscanner.ll outlangdefparser.yy \
 	stylecssparser.yy stylecssscanner.ll outlangdefscanner.ll srcuntabifier.cpp \
 	textformatter.cpp outputbuffer.cpp outputgenerator.cpp \
-	mainoutputbuffer.cpp statelangelem.cpp \
-	langelems.cpp regexpreprocessor.cpp regexpstatebuilder.H regexpstatebuilder_dbtab.cc \
+	statelangelem.cpp \
+	langelems.cpp regexpreprocessor.cpp regexpstatebuilder.hpp regexpstatebuilder_dbtab.cc \
 	regexpstatebuilder.cpp langdefloader.cpp langmap.cpp statestartlangelem.cpp \
 	stringlistlangelem.cpp delimitedlangelem.cpp vardefinitions.cpp \
 	textstyle.cpp textgenerator.cpp textstylebuilder.cpp doctemplate.cpp substfun.cpp \
 	readtags.c fileinfo.cpp preformatter.cpp \
-	regexpstateprinter.cpp langelemsprinter.cpp langelemsprinter.H langelemsprinter_dbtab.cc \
+	regexpstateprinter.cpp langelemsprinter.cpp langelemsprinter.hpp langelemsprinter_dbtab.cc \
 	languageinfer.cpp stopwatch.cpp utils.cpp utils.h \
 	regexpengine.cpp regexpstate.cpp regexpenginedebug.cpp \
 	namedsubexpslangelem.cpp stringdef.cpp
@@ -52,7 +52,6 @@ EXTRA_DIST = colors.h generatorfactory.h \
              keys.h styleparser.h stylecssparser.h \
              tokens.h messages.h fileutil.h \
              chartranslator.h my_sstream.h \
-             linenumdigit.h globalostream.h \
              docgenerator.h \
              copyright.h reportbugs.h \
              srcuntabifier.h colormap.h \
@@ -63,8 +62,8 @@ BUILT_SOURCES = styleparser.cc styleparser.h \
 stylecssparser.cc stylecssparser.h \
 stylescanner.cc stylecssscanner.cc \
 langdefparser.cc langdefparser.h langdefscanner.cc \
-regexpstatebuilder.H regexpstatebuilder_dbtab.cc \
-langelemsprinter.H langelemsprinter_dbtab.cc
+regexpstatebuilder.hpp regexpstatebuilder_dbtab.cc \
+langelemsprinter.hpp langelemsprinter_dbtab.cc
 
 langdefscanner.cc: $(srcdir)/langdefscanner.ll
 	$(LEX) $(LFLAGS) -o $@ $(srcdir)/langdefscanner.ll
@@ -147,7 +146,7 @@ langdefparser.cc langdefparser.h langdefscanner.cc \
 outlangdefparser.cc outlangdefparser.h outlangdefscanner.cc
 
 noinst_HEADERS = parsestyles.h textformatter.h outputbuffer.h \
-	outputgenerator.h mainoutputbuffer.h stringdef.h langelem.h \
+	outputgenerator.h stringdef.h langelem.h \
 	statelangelem.h langelems.h langdefparserfun.h outlangdefparserfun.h \
 	tostringcollection.h regexpreprocessor.h regexpstatebuilder.h langdefloader.h \
 	langdefscanner.h outlangdefscanner.h parsestruct.h langmap.h statestartlangelem.h \

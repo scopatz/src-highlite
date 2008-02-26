@@ -224,7 +224,7 @@ void open_include_file(const char *name)
     path = get_file_path(parsestruct->file_name);
 
   parsestructstack.push(parsestruct);
-  parsestruct = new ParseStruct(parsestruct->path, file_name);
+  parsestruct = new ParseStruct(path, file_name);
   _open_file_to_scan(path.c_str(), file_name.c_str());
 }
 

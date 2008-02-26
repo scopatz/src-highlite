@@ -14,10 +14,10 @@
 #include "fileutil.h"
 #include "langdefparserfun.h"
 #include "langelems.h"
-#include "regexpstatebuilder.H"
+#include "regexpstatebuilder.hpp"
 #include "messages.h"
 #include "regexpstateprinter.h"
-#include "langelemsprinter.H"
+#include "langelemsprinter.hpp"
 
 #include <map>
 

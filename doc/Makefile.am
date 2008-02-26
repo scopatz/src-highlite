@@ -30,7 +30,7 @@ OUTPUT_HERE = --output-dir=$(top_builddir)/doc
 
 info_TEXINFOS = source-highlight.texinfo
 
-SUFFIXES = .txt .txt.texinfo .txt.texinfo.texinfo .lang .lang.texinfo .diff .diff.texinfo .css .css.texinfo .show.texinfo
+SUFFIXES = .txt .txt.texinfo .txt.texinfo.texinfo .lang .lang.texinfo .diff .diff.texinfo .css .css.texinfo .show.texinfo .defaults .defaults.texinfo
 
 source-highlight.texinfo: $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
 
@@ -55,6 +55,9 @@ log.langelems.texinfo: $(top_srcdir)/src/log.lang
 .txt.txt.texinfo:
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
+style.defaults.texinfo: $(top_srcdir)/src/style.defaults
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/src/style.defaults --style-file=$(top_srcdir)/src/texinfo.style -o $@ --lang-def=nohilite.lang
+
 .txt.texinfo.txt.texinfo.texinfo: 
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@ --lang-def=nohilite.lang
 
@@ -74,6 +77,9 @@ style.lang.texinfo: $(top_srcdir)/src/style.lang
 
 cpp.lang.texinfo: $(top_srcdir)/src/cpp.lang
 	$(LANG2TEXINFO) -i $(top_srcdir)/src/cpp.lang
+
+c.lang.texinfo: $(top_srcdir)/src/c.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/c.lang
 
 csharp.lang.texinfo: $(top_srcdir)/src/csharp.lang
 	$(LANG2TEXINFO) -i $(top_srcdir)/src/csharp.lang
@@ -183,7 +189,7 @@ AM_MAKEINFOHTMLFLAGS=--no-split
 # these are distributed since they might depend on other programs
 DISTRIBUTEDINFOS = help-output.texinfo test_ref.h.texinfo 
 
-GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo
+GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo c.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo style.defaults.texinfo
 
 CSS_FILES = Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
             xhtml.css \

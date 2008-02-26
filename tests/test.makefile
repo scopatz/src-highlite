@@ -1,3 +1,7 @@
+# a comment
+## another comment
+###### another comment
+
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
         list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
         unique=`for i in $$list; do \
@@ -6,6 +10,8 @@ ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
           $(AWK) '    { files[$$0] = 1; } \
                END { for (i in files) print i; }'`; \
         mkid -fID $$unique
+
+a##b
 
 foo.o foo.z: foo.c
 

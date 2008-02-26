@@ -1,15 +1,17 @@
 state preproc delim "<?xml" "?>" multiline begin
-  string delim "\"" "\"" escape "\\" multiline
+	include "key_string.lang"
+end
+
+state preproc delim "<!DOCTYPE" ">" multiline begin
+	include "key_string.lang"
 end
 
 comment delim "<!--" "-->" multiline nested
 
-keyword = '<(/)?[[:word:]:-]+(/)?>'
+keyword = '<(/)?[[:alpha:]]([[:word:]:.-]*)(/)?>'
 
-state keyword delim '<(/)?[[:word:]:-]+' '(/)?>' multiline begin
-  type = '[^="[:blank:]>]+'
-  symbol = "="
-  string delim "\"" "\"" escape "\\" multiline
+state keyword delim '<(/)?[[:alpha:]]([[:word:]:.-]*)' '(/)?>' multiline begin
+	include "key_string.lang"
 end
 
 preproc = '&([[:alnum:]]+);'

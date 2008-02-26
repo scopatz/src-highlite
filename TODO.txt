@@ -6,12 +6,6 @@ of having different files.
 
 test for always flush (together with line number), and command line option
 
-in style file:
-keyword2 like keyword
-i.e., default a specific element to another one
-if, then, the style is specified, this will override the default one
-(possibly in another style file)
-
 use <ol> lists and css for changing colors of lines,
 see http://shiflett.org/code/highlight.php
 
@@ -38,12 +32,29 @@ element will be generated with class normal but this is not really correct...
 
 GROUPS
 
-regexpstatebuilder.H (isn't it a problem for windows?)
-yes it might generate problems, try to rename it.
-
 also string def as StringDef
 
 Is there an element class that is not a StateStartLangElem?
 
 If allow for newlines (i.e., read the whole file) then also
 split lines when formatting (for instance, for line numbers)
+
+add a language element classname to avoid generate types as
+keywords in some outputs (e.g., latex or texinfo) if black and white.
+and allow also _ in classnames
+
+
+check empty alternative in string def: "foo||" which would lead
+to a non-terminating program
+
+USE GENGETOPT DETAILS
+
+recognize kde rc files
+.ldif files
+
+REFERENCES
+----------
+for output such as xhtml, since the style file definitions are not used
+the noref is not used, and references are generated also for tags inside
+comments.  Deprecate noref and use a keyword in the .lang file to avoid
+generate references inside an environment/state?

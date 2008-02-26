@@ -20,6 +20,7 @@ private:
 
 public:
     TextGenerator();
+    TextGenerator(const TextGenerator &t);
     TextGenerator(const TextStyle &style);
     TextGenerator(const std::string &repr);
 

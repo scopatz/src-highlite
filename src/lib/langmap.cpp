@@ -19,7 +19,8 @@
 
 using namespace std;
 
-boost::regex assoc_exp("[[:blank:]]*([^[:blank:]]+)[[:blank:]]*=[[:blank:]]*([^[:blank:]\\r]+)[[:blank:]\\r]*|([[:space:]]+)");
+/// the regular expression for the map file syntax
+boost::regex assoc_exp("[[:blank:]]*([^[:blank:]]+)[[:blank:]]*=[[:blank:]]*([^[:blank:]\\r]+)[[:blank:]\\r]*|([[:space:]]+)|([[:space:]]*#.*)");
 
 LangMap::LangMap(const string &path, const string &filename)
 {

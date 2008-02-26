@@ -13,7 +13,7 @@ AC_INIT(autogen.sh)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(source-highlight,2.8)
+AM_INIT_AUTOMAKE(source-highlight,2.9)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)
@@ -137,6 +137,7 @@ dnl *******************
 dnl added by me
 dnl *******************
 
+AC_PATH_PROGS(BASH_SHELL, bash sh)
 
 dnl set some flags if it's bison
 AC_SUBST(YFLAGS)dnl

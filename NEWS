@@ -8,6 +8,24 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 2.9
+
+   * language definition for C (not C++) files
+   * language definition for properties files
+   * language definition for KDE desktop and ini files
+   * language definition for lsm files (Linux Software Map)
+   * language definition for rpm spec files
+   * language definition for Haxe files (thanks to Jos Hirth)
+   * style.defaults for associating a style for an element (whose style is
+     not specified) to the style of another element
+   * highlight some KDE programming files (e.g., .rc, .kcfg, etc.)
+   * correctly highlight for less when filenames contain paths
+   * fixed a bug in file inclusion of langdef files
+   * fixed compilation problems for fileutil.cc (thanks to Adrian Reber)
+   * xml elements are correctly recognized when containing .
+     (thanks to Toby White)
+   * references for xhtml output files
+
 Version 2.8
 
    * lang definition for slang (by John E. Davis)

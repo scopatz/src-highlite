@@ -1,0 +1,6 @@
+# a test lang file for testing a customized .defaults file
+
+keyword = "keyword"
+key2 = "key2"
+key3 = "key3"
+key4 = "key4"

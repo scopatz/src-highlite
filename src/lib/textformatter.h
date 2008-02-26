@@ -23,6 +23,7 @@
 class TextGenerator;
 class PreFormatter;
 class FileInfo;
+class OutputBuffer;
 
 /**
  * Formats the elements of a source file, using a map of generators; 
@@ -49,6 +50,8 @@ protected:
     bool noOptimizations;
 
     bool generateReferences;
+    
+    OutputBuffer *outputbuffer;
 
     // for references
 
@@ -84,9 +87,9 @@ protected:
     void generateNL(const std::string &s);
 
 public:
-    TextFormatter(PreFormatter *);
+    TextFormatter(PreFormatter *, OutputBuffer *b);
 
-    TextFormatter(PreFormatter *pf, const std::string &_ctags_file_name,
+    TextFormatter(PreFormatter *pf, OutputBuffer *b, const std::string &_ctags_file_name,
             const TextStyles::RefTextStyle &r, RefPosition pos);
 
     ~TextFormatter();

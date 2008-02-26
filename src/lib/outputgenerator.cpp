@@ -12,7 +12,6 @@
 #include "outputgenerator.h"
 
 #include <iomanip>
-#include "linenumdigit.h"
 #include "my_sstream.h"
 #include "textgenerator.h"
 #include "textstyle.h"

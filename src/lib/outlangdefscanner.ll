@@ -209,7 +209,7 @@ void open_include_file(const char *name)
     path = get_file_path(outlang_parsestruct->file_name);
 
   parsestructstack.push(outlang_parsestruct);
-  outlang_parsestruct = new ParseStruct(outlang_parsestruct->path, file_name);
+  outlang_parsestruct = new ParseStruct(path, file_name);
   open_outlang_file_to_scan(path.c_str(), file_name.c_str());
 }
 

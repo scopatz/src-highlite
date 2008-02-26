@@ -45,6 +45,7 @@ const char *gengetopt_args_info_help[] = {
   "  -F, --footer=filename         file to insert as footer",
   "      --style-file=filename     specify the file containing format options  \n                                  (default=`default.style')",
   "      --style-css-file=filename specify the file containing format options (in \n                                  css syntax)",
+  "      --style-defaults=filename specify the file containing defaults for format \n                                  options  (default=`style.defaults')",
   "      --outlang-def=filename    output language definition file",
   "      --outlang-map=filename    output language map file  \n                                  (default=`outlang.map')",
   "      --data-dir=path           directory where language definition files and \n                                  language maps are searched for.  If not \n                                  specified these files are searched for in the \n                                  current directory and in the data dir \n                                  installation directory",
@@ -108,6 +109,7 @@ void clear_given (struct gengetopt_args_info *args_info)
   args_info->footer_given = 0 ;
   args_info->style_file_given = 0 ;
   args_info->style_css_file_given = 0 ;
+  args_info->style_defaults_given = 0 ;
   args_info->outlang_def_given = 0 ;
   args_info->outlang_map_given = 0 ;
   args_info->data_dir_given = 0 ;
@@ -157,6 +159,8 @@ void clear_args (struct gengetopt_args_info *args_info)
   args_info->style_file_orig = NULL;
   args_info->style_css_file_arg = NULL;
   args_info->style_css_file_orig = NULL;
+  args_info->style_defaults_arg = gengetopt_strdup ("style.defaults");
+  args_info->style_defaults_orig = NULL;
   args_info->outlang_def_arg = NULL;
   args_info->outlang_def_orig = NULL;
   args_info->outlang_map_arg = gengetopt_strdup ("outlang.map");
@@ -213,28 +217,29 @@ void init_args_info(struct gengetopt_args_info *args_info)
   args_info->footer_help = gengetopt_args_info_help[14] ;
   args_info->style_file_help = gengetopt_args_info_help[15] ;
   args_info->style_css_file_help = gengetopt_args_info_help[16] ;
-  args_info->outlang_def_help = gengetopt_args_info_help[17] ;
-  args_info->outlang_map_help = gengetopt_args_info_help[18] ;
-  args_info->data_dir_help = gengetopt_args_info_help[19] ;
-  args_info->output_dir_help = gengetopt_args_info_help[20] ;
-  args_info->lang_def_help = gengetopt_args_info_help[21] ;
-  args_info->lang_map_help = gengetopt_args_info_help[22] ;
-  args_info->show_lang_elements_help = gengetopt_args_info_help[23] ;
-  args_info->infer_lang_help = gengetopt_args_info_help[24] ;
-  args_info->line_number_help = gengetopt_args_info_help[26] ;
-  args_info->line_number_ref_help = gengetopt_args_info_help[27] ;
-  args_info->gen_references_help = gengetopt_args_info_help[28] ;
-  args_info->ctags_file_help = gengetopt_args_info_help[29] ;
-  args_info->ctags_help = gengetopt_args_info_help[30] ;
-  args_info->verbose_help = gengetopt_args_info_help[32] ;
-  args_info->quiet_help = gengetopt_args_info_help[33] ;
-  args_info->statistics_help = gengetopt_args_info_help[34] ;
-  args_info->gen_version_help = gengetopt_args_info_help[35] ;
-  args_info->check_lang_help = gengetopt_args_info_help[36] ;
-  args_info->check_outlang_help = gengetopt_args_info_help[37] ;
-  args_info->failsafe_help = gengetopt_args_info_help[38] ;
-  args_info->debug_langdef_help = gengetopt_args_info_help[39] ;
-  args_info->show_regex_help = gengetopt_args_info_help[40] ;
+  args_info->style_defaults_help = gengetopt_args_info_help[17] ;
+  args_info->outlang_def_help = gengetopt_args_info_help[18] ;
+  args_info->outlang_map_help = gengetopt_args_info_help[19] ;
+  args_info->data_dir_help = gengetopt_args_info_help[20] ;
+  args_info->output_dir_help = gengetopt_args_info_help[21] ;
+  args_info->lang_def_help = gengetopt_args_info_help[22] ;
+  args_info->lang_map_help = gengetopt_args_info_help[23] ;
+  args_info->show_lang_elements_help = gengetopt_args_info_help[24] ;
+  args_info->infer_lang_help = gengetopt_args_info_help[25] ;
+  args_info->line_number_help = gengetopt_args_info_help[27] ;
+  args_info->line_number_ref_help = gengetopt_args_info_help[28] ;
+  args_info->gen_references_help = gengetopt_args_info_help[29] ;
+  args_info->ctags_file_help = gengetopt_args_info_help[30] ;
+  args_info->ctags_help = gengetopt_args_info_help[31] ;
+  args_info->verbose_help = gengetopt_args_info_help[33] ;
+  args_info->quiet_help = gengetopt_args_info_help[34] ;
+  args_info->statistics_help = gengetopt_args_info_help[35] ;
+  args_info->gen_version_help = gengetopt_args_info_help[36] ;
+  args_info->check_lang_help = gengetopt_args_info_help[37] ;
+  args_info->check_outlang_help = gengetopt_args_info_help[38] ;
+  args_info->failsafe_help = gengetopt_args_info_help[39] ;
+  args_info->debug_langdef_help = gengetopt_args_info_help[40] ;
+  args_info->show_regex_help = gengetopt_args_info_help[41] ;
   
 }
 
@@ -399,6 +404,16 @@ cmdline_parser_release (struct gengetopt_args_info *args_info)
     {
       free (args_info->style_css_file_orig); /* free previous argument */
       args_info->style_css_file_orig = 0;
+    }
+  if (args_info->style_defaults_arg)
+    {
+      free (args_info->style_defaults_arg); /* free previous argument */
+      args_info->style_defaults_arg = 0;
+    }
+  if (args_info->style_defaults_orig)
+    {
+      free (args_info->style_defaults_orig); /* free previous argument */
+      args_info->style_defaults_orig = 0;
     }
   if (args_info->outlang_def_arg)
     {
@@ -677,6 +692,13 @@ cmdline_parser_file_save(const char *filename, struct gengetopt_args_info *args_
       fprintf(outfile, "%s=\"%s\"\n", "style-css-file", args_info->style_css_file_orig);
     } else {
       fprintf(outfile, "%s\n", "style-css-file");
+    }
+  }
+  if (args_info->style_defaults_given) {
+    if (args_info->style_defaults_orig) {
+      fprintf(outfile, "%s=\"%s\"\n", "style-defaults", args_info->style_defaults_orig);
+    } else {
+      fprintf(outfile, "%s\n", "style-defaults");
     }
   }
   if (args_info->outlang_def_given) {
@@ -976,6 +998,7 @@ cmdline_parser_internal (int argc, char * const *argv, struct gengetopt_args_inf
         { "footer",	1, NULL, 'F' },
         { "style-file",	1, NULL, 0 },
         { "style-css-file",	1, NULL, 0 },
+        { "style-defaults",	1, NULL, 0 },
         { "outlang-def",	1, NULL, 0 },
         { "outlang-map",	1, NULL, 0 },
         { "data-dir",	1, NULL, 0 },
@@ -1362,6 +1385,25 @@ cmdline_parser_internal (int argc, char * const *argv, struct gengetopt_args_inf
             if (args_info->style_css_file_orig)
               free (args_info->style_css_file_orig); /* free previous string */
             args_info->style_css_file_orig = gengetopt_strdup (optarg);
+          }
+          /* specify the file containing defaults for format options.  */
+          else if (strcmp (long_options[option_index].name, "style-defaults") == 0)
+          {
+            if (local_args_info.style_defaults_given || (check_ambiguity && args_info->style_defaults_given))
+              {
+                fprintf (stderr, "%s: `--style-defaults' option given more than once%s\n", argv[0], (additional_error ? additional_error : ""));
+                goto failure;
+              }
+            if (args_info->style_defaults_given && ! override)
+              continue;
+            local_args_info.style_defaults_given = 1;
+            args_info->style_defaults_given = 1;
+            if (args_info->style_defaults_arg)
+              free (args_info->style_defaults_arg); /* free previous string */
+            args_info->style_defaults_arg = gengetopt_strdup (optarg);
+            if (args_info->style_defaults_orig)
+              free (args_info->style_defaults_orig); /* free previous string */
+            args_info->style_defaults_orig = gengetopt_strdup (optarg);
           }
           /* output language definition file.  */
           else if (strcmp (long_options[option_index].name, "outlang-def") == 0)

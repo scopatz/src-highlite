@@ -63,3 +63,4 @@ shjs_css_transform.sh
 style_examples.html
 gen_style_example.sh
 tags
+*.defaults.texinfo

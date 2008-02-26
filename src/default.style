@@ -13,6 +13,9 @@ function black b; // for function calls and declarations
 cbracket red; // for block brackets (e.g. {, })
 todo bg:cyan b;	// for TODO and FIXME
 
+// for OOP
+classname darkgreen ; // for class names, e.g., in Java and C++
+
 // line numbers
 linenum black f;
 

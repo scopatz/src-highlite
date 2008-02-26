@@ -12,7 +12,7 @@ keyword = "and|or|xor|__FILE__|exception|php_user_filter|__LINE__|array|as|break
 
 include "c_comment.lang"
 
-type = '(?:\$[#]?|@|%)[[:word:]]+'
+variable = '(?:\$[#]?|@|%)[[:word:]]+'
 
 symbol = "<?php"
 
@@ -22,4 +22,4 @@ cbracket = "{|}"
 
 include "function.lang"
 
-variable = '[[:upper:]][[:word:]]*|_'
+

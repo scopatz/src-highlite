@@ -1,3 +1,39 @@
+2008-01-31  Lorenzo Bettini  <bettini@laptop>
+
+	* src/lib/globalostream.h: removed global stream
+
+	* src/lib/linenumdigit.h: removed global vars
+
+	* src/lib/mainoutputbuffer.h: removed global outputbuffer 
+
+2008-01-27  Lorenzo Bettini  <bettini@laptop>
+
+	* src/html_ref.outlang: common definition of html anchors and refs
+
+2008-01-18  Lorenzo Bettini  <bettini@laptop>
+
+	* src/xml.lang: added . for xml element names (thanks to Toby White)
+
+2008-01-01  Lorenzo Bettini  <bettini@laptop>
+
+	* src/php.lang: removed wrong variable specification (copied from
+	prolog.lang)
+
+2007-12-30  Lorenzo Bettini  <bettini@laptop>
+
+	* src/lib/langdefscanner.ll: (open_include_file) insert the right
+	path in the ParseStruct (otherwise search for file to include
+	does not work after the first inclusion)
+
+	* src/lib/outlangdefscanner.ll: (open_include_file) idem
+
+2007-11-08  Lorenzo Bettini  <bettini@lorelap>
+
+	* src/c.lang: language definition for C (not C++)
+
+	* src/lib/Makefile.am: doublecpp generated header files have
+	extension .hpp instead of .H
+
 2007-09-16  Lorenzo Bettini  <bettini@lorelap>
 
 	* doc/Makefile.am: removed non standard % make rules

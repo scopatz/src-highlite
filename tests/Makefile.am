@@ -11,6 +11,7 @@
 STD_STYLE = --style-file $(top_srcdir)/src/default.style
 STD_CSS_STYLE = --style-css-file $(top_srcdir)/src/default.css
 STD_STYLE_HTML = -f html $(STD_STYLE)
+STD_STYLE_DEFAULTS = --style-defaults $(top_srcdir)/src/style.defaults
 DATADIROPTION = --data-dir $(top_srcdir)/src/
 
 PROGEXE = $(top_builddir)/src/$(PACKAGE)$(EXEEXT)
@@ -67,6 +68,8 @@ JAVA2HTMLCSSNODOC = $(PROGNAME) -s java -f html --css ../doc/mono.css --no-doc -
 
 CPP2HTML = $(PROGNAME) -s cpp $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/cpp.lang
 
+C2HTML = $(PROGNAME) -s c $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/c.lang
+
 CSHARP2HTML = $(PROGNAME) -s csharp $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/csharp.lang
 
 PROLOG2HTML = $(PROGNAME) -s prolog $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/prolog.lang
@@ -105,6 +108,16 @@ LANG2HTML = $(PROGNAME) -s langdef $(STD_STYLE_HTML)
 
 STYLE2HTML = $(PROGNAME) -s style $(STD_STYLE_HTML)
 
+PROPERTIES2HTML = $(PROGNAME) $(STD_STYLE_HTML)
+
+DESKTOP2HTML = $(PROGNAME) $(STD_STYLE_HTML)
+
+LSM2HTML = $(PROGNAME) $(STD_STYLE_HTML)
+
+HAXE2HTML = $(PROGNAME) $(STD_STYLE_HTML)
+
+SPEC2HTML = $(PROGNAME) $(STD_STYLE_HTML)
+
 TXT2HTML = $(PROGNAME) -s style $(STD_STYLE_HTML) --lang-def=default.lang
 
 FAILSAFE = $(PROGNAME) --failsafe
@@ -114,7 +127,13 @@ INFER = $(PROGNAME) --infer-lang
 # language inference is performed implicitly if everything else failed
 INFERIMPLICIT = $(PROGNAME)
 
-SIMPLE = $(PROGEXE) --gen-version --outlang-def=$(srcdir)/simple.outlang --lang-def=$(srcdir)/simple.lang $(STD_STYLE)
+SIMPLE = $(PROGEXE) --gen-version --outlang-def=$(srcdir)/simple.outlang --lang-def=$(srcdir)/simple.lang $(STD_STYLE) --style-defaults=$(srcdir)/../src/style.defaults
+
+# test with a defaults file
+TESTWDEFAULTS = $(PROGNAME) --lang-def=$(srcdir)/lang4defaults.lang $(STD_STYLE) --style-defaults=$(srcdir)/test.defaults
+
+# test without a defaults file
+TESTWODEFAULTS = $(PROGNAME) --lang-def=$(srcdir)/lang4defaults.lang $(STD_STYLE)
 
 TESTISOLATE = $(PROGNAME) --lang-def=$(srcdir)/test_isolate.lang
 
@@ -132,10 +151,10 @@ WRONGSTYLES = wrong_dircolor.style
 WRONGSTYLESOUT = wrong_dircolor.err
 # missing_langmap2.err
 
-OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_ref_post.tex test_ref.texinfo test_ref.docbook
+OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_ref_post.tex test_ref.texinfo test_ref.docbook test_ref.xhtml
 
 EXTRA_DIST = test.java test.java.html test.java.doc.html \
-test.js test.js.html test.h test.h.html \
+test.js test.js.html test.h test.h.html test.c test.c.html \
 test_comments.cc test_comments.cc.html test_comments.java \
 test_comments.java.html test_template.cc test_template.cc.html \
 test.pl test.pl.html header.html footer.html test_header.html \
@@ -183,7 +202,7 @@ test.isolate test.isolate.html \
 test_backref.lang \
 test.backref test.backref.html \
 test2.backref test2.backref.html \
-log.lang.html cpp.lang.html \
+log.lang.html c.lang.html \
 default.style.html \
 lang.map \
 debug.debug debug.java debug.java.html \
@@ -213,9 +232,16 @@ test_state.ngroups test_state.ngroups.html \
 c_comment.show namedgroups_state.show \
 cpp.langelems \
 test.h.docbook \
-test.sl test.sl.html
+test.sl test.sl.html \
+lang4defaults.lang test.defaults test.wdefault test.wodefault \
+test.wdefault.html test.wodefault.html \
+test.properties test.properties.html \
+test.desktop test.desktop.html \
+test.lsm test.lsm.html \
+test.hx test.hx.html \
+test.spec.html
 
-SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .java .java.html .java.doc.html .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show
+SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .c .c.html .java .java.html .java.doc.html .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show .wdefault .wodefault .wdefault.html .wodefault.html .properties .properties.html .desktop .desktop.html .lsm .lsm.html .hx .hx.html
 
 c_comment.show: $(top_srcdir)/src/c_comment.lang
 	$(PROGEXE) --show-regex=$(top_srcdir)/src/c_comment.lang > $@
@@ -228,6 +254,9 @@ cpp.langelems: $(top_srcdir)/src/cpp.lang
 
 .cc.cc.html:
 	$(CPP2HTML) -i $< -o $@
+
+.c.c.html:
+	$(C2HTML) -i $< -o $@
 
 .cs.cs.html:
 	$(CSHARP2HTML) -i $< -o $@
@@ -350,14 +379,29 @@ debug.java.html: debug.java
 log.lang.html: $(top_srcdir)/src/log.lang
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o $@
 
-cpp.lang.html: $(top_srcdir)/src/cpp.lang
-	$(LANG2HTML) -i $(top_srcdir)/src/cpp.lang -o $@
+c.lang.html: $(top_srcdir)/src/c.lang
+	$(LANG2HTML) -i $(top_srcdir)/src/c.lang -o $@
 
 default.style.html: $(top_srcdir)/src/default.style
 	$(STYLE2HTML) -i $(top_srcdir)/src/default.style -o $@
 
 .style.style.html:
 	$(STYLE2HTML) -i $< -o $@
+
+.properties.properties.html:
+	$(PROPERTIES2HTML) -i $< -o $@
+
+.desktop.desktop.html:
+	$(DESKTOP2HTML) -i $< -o $@
+
+.lsm.lsm.html:
+	$(DESKTOP2HTML) -i $< -o $@
+
+.hx.hx.html:
+	$(HAXE2HTML) -i $< -o $@
+
+test.spec.html: $(top_srcdir)/source-highlight.spec
+	$(PROGNAME) -i $(top_srcdir)/source-highlight.spec -o $@
 
 .ps.ps.html:
 	$(PROGNAME) -i $< -o $@
@@ -374,6 +418,12 @@ default.style.html: $(top_srcdir)/src/default.style
 
 .simple.simple.html:
 	$(SIMPLE) -i $< -o $@
+
+.wdefault.wdefault.html:
+	$(TESTWDEFAULTS) -i $< -o $@
+
+.wodefault.wodefault.html:
+	$(TESTWODEFAULTS) -i $< -o $@
 
 .isolate.isolate.html:
 	$(TESTISOLATE) -i $< -o $@
@@ -397,8 +447,8 @@ _state.ngroups_state.ngroups.html:
 .style.err:
 	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true
 
-PROG_NOLANGDEF=$(PROGEXE) --outlang-def=$(srcdir)/simple.outlang $(STD_STYLE) --data-dir=$(srcdir)/
-PROG_NOOUTLANGDEF=$(PROGEXE) --lang-def=$(srcdir)/simple.lang $(STD_STYLE)
+PROG_NOLANGDEF=$(PROGEXE) --outlang-def=$(srcdir)/simple.outlang $(STD_STYLE) --data-dir=$(srcdir)/ $(STD_STYLE_DEFAULTS)
+PROG_NOOUTLANGDEF=$(PROGEXE) --lang-def=$(srcdir)/simple.lang $(STD_STYLE) $(STD_STYLE_DEFAULTS)
 
 missing_langmap.err: test.simple
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap.err || true;
@@ -418,6 +468,8 @@ CPP2LATEX_WREFSPOST = $(CPP2TEX) --title="Contains references to tags" --gen-ref
 
 CPP2DOCBOOK_WREFS = $(PROGNAME_DOCBOOK) --gen-references=postline --line-number --ctags=""
 
+CPP2XHTML_WREFS = $(PROGNAME) -s cpp -f xhtml --css ../src/default.css --gen-references=inline --line-number-ref --ctags="" --title="XHTML with refs"
+
 CTAGS_CMD=$(CTAGS) --excmd=number --tag-relative=yes 
 
 test_header.html: test.h
@@ -434,6 +486,9 @@ test_ref.tex: test_ref.tags
 
 test_ref.docbook: test_ref.tags 
 	$(CPP2DOCBOOK_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.docbook
+
+test_ref.xhtml: test_ref.tags 
+	$(CPP2XHTML_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.xhtml
 
 test_ref_post.tex: test_ref.tags 
 	$(CPP2LATEX_WREFSPOST) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref_post.tex
@@ -538,7 +593,13 @@ check_css \
 check_ps \
 check_docbook \
 check_namedgroups \
-check_slang
+check_slang \
+check_defaults \
+check_properties \
+check_desktop \
+check_lsm \
+check_spec \
+check_haxe
 
 remove_css_html_files:
 	rm -f *.css.java.html *.nf_css.java.html
@@ -591,18 +652,20 @@ check_java2xhtml: remove_css_xhtml_files test_xhtml.html test_xhtml_notfixed.htm
 	diff $(srcdir)/test_xhtml_css_doc.html test_xhtml_css_doc.out.html
 	diff $(srcdir)/test_xhtml.html test.css_xhtml.java.html
 
-check_cpp2html: test.h.html test_comments.cc.html test_template.cc.html test_header.html test_cpp_lines.html
+check_cpp2html: test.h.html test_comments.cc.html test_template.cc.html test_header.html test_cpp_lines.html test.c.html
 	$(CPP2HTML) -i $(srcdir)/test.h > test.h.out.html
 	$(CPP2HTML) -i $(srcdir)/test_comments.cc > test_comments.cc.out.html
 	$(CPP2HTML) -i $(srcdir)/test_template.cc > test_template.cc.out.html
 	$(CPP2HTML_WHEADERS) -i $(srcdir)/test.h -o test_header.out.html
 	$(CPP2HTML) -n -i $(srcdir)/test.h -o test_cpp_lines.out.html
+	$(C2HTML) -i $(srcdir)/test.c -o test.c.out.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.h.html test.h.out.html
 	diff $(srcdir)/test_comments.cc.html test_comments.cc.out.html
 	diff $(srcdir)/test_template.cc.html test_template.cc.out.html
 	diff $(srcdir)/test_header.html test_header.out.html
 	diff $(srcdir)/test_cpp_lines.html test_cpp_lines.out.html
+	diff $(srcdir)/test.c.html test.c.out.html
 
 check_csharp2html: test.cs.html 
 	$(CSHARP2HTML) -i $(srcdir)/test.cs > test.cs.out.html
@@ -743,6 +806,31 @@ check_url: test.url.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.url.html test.url.out.html
 
+check_properties: test.properties.html
+	$(PROPERTIES2HTML) -i $(srcdir)/test.properties > test.properties.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.properties.html test.properties.out.html
+
+check_desktop: test.desktop.html
+	$(DESKTOP2HTML) -i $(srcdir)/test.desktop > test.desktop.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.desktop.html test.desktop.out.html
+
+check_lsm: test.lsm.html
+	$(LSM2HTML) -i $(srcdir)/test.lsm > test.lsm.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.lsm.html test.lsm.out.html
+
+check_haxe: test.hx.html
+	$(HAXE2HTML) -i $(srcdir)/test.hx > test.hx.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.hx.html test.hx.out.html
+
+check_spec: test.spec.html
+	$(SPEC2HTML) -i $(top_srcdir)/source-highlight.spec > test.spec.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.spec.html test.spec.out.html
+
 check_txt: test.txt.html
 	$(TXT2HTML) -i $(srcdir)/test.txt > test.txt.out.html
 	@echo expect no output from diff
@@ -798,13 +886,13 @@ check_ps: test.ps.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.ps.html test.ps.out.html
 
-check_lang: log.lang.html cpp.lang.html default.style.html
+check_lang: log.lang.html c.lang.html default.style.html
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o log.lang.out.html
-	$(LANG2HTML) -i $(top_srcdir)/src/cpp.lang -o cpp.lang.out.html
+	$(LANG2HTML) -i $(top_srcdir)/src/c.lang -o c.lang.out.html
 	$(STYLE2HTML) -i $(top_srcdir)/src/default.style -o default.style.out.html
 	@echo expect no output from diff
 	diff $(srcdir)/log.lang.html log.lang.out.html
-	diff $(srcdir)/cpp.lang.html cpp.lang.out.html
+	diff $(srcdir)/c.lang.html c.lang.out.html
 	diff $(srcdir)/default.style.html default.style.out.html
 
 check_simple: test.simple.html
@@ -898,10 +986,17 @@ check_debug: debug.debug debug.java.html
 	diff $(srcdir)/debug.debug debug.out.debug
 	diff $(srcdir)/debug.java.html debug.java.out.html
 
+check_defaults: lang4defaults.lang test.defaults test.wdefault.html test.wodefault.html
+	$(TESTWDEFAULTS) -i $(srcdir)/test.wdefault -o test.wdefault.out.html
+	$(TESTWODEFAULTS) -i $(srcdir)/test.wodefault -o test.wodefault.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.wdefault.html test.wdefault.out.html
+	diff $(srcdir)/test.wodefault.html test.wodefault.out.html
+
 # disable reference tests
 if NO_CTAGS
 check_ref:
-	@echo warning: tests with references are disable
+	@echo warning: tests with references are disabled
 	@echo because we could not find a usable ctags program
 else
 # sed -i -r 's/([.\/[:alnum:]]+)\/(test\.h\:[[:alnum:]\._]+)/\2/g' test_ref.out.html # eliminate leading paths
@@ -923,6 +1018,9 @@ check_ref: $(OUTPUTWREFS)
 	$(CPP2TEXINFO_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.out.texinfo
 	sed -itesttmp -f $(srcdir)/erasedir3.sed test_ref.out.texinfo # eliminate leading paths
 	$(CPP2DOCBOOK_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.out.docbook
+	$(CPP2XHTML_WREFS) --ctags-file=test_ref.tags -i $(srcdir)/test.h -o test_ref.out.xhtml
+	sed -itesttmp -e 's/test\_ref\.out\.xhtml/test\_ref\.xhtml/g' test_ref.out.xhtml
+	sed -itesttmp -f $(srcdir)/erasedir3.sed test_ref.out.xhtml # eliminate leading paths
 	@echo expect no output from diff
 	diff $(srcdir)/test_ref.html test_ref.out.html
 	diff $(srcdir)/test_refs.h.html test_refs_tmp.h.html
@@ -931,6 +1029,7 @@ check_ref: $(OUTPUTWREFS)
 	diff $(srcdir)/test_ref.texinfo test_ref.out.texinfo
 	diff $(srcdir)/test_ref_post.tex test_ref_post.out.tex
 	diff $(srcdir)/test_ref.docbook test_ref.out.docbook
+	diff $(srcdir)/test_ref.xhtml test_ref.out.xhtml
 	rm -f test_refs_tmp.* *testtmp
 endif
 
@@ -953,7 +1052,7 @@ source_highlightdoc_DATA = test.php3.html test.pl.html test.pm.html \
 test.py.html test.rb.html test.js.html test.lua.html test.ml.html \
 test.sml.html test.log.html access.log.html auth.log.html error.log.html syslog.log.html test.htm.html test.java.tex.html \
 syslog.style.html \
-log.lang.html cpp.lang.html default.style.html
+log.lang.html c.lang.html default.style.html
 
 VALGRINDTESTS = $(top_builddir)/tests/valgrind_tests.sh
 VALGRINDTEST = $(top_builddir)/tests/valgrind_test.sh
@@ -975,9 +1074,9 @@ check-valgrind:
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp
 	rm -f test_refs_tmp.*
 
-CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook
+CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html
 
-DISTCLEANFILES=test_ref.html test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html test_ref.docbook
+DISTCLEANFILES=test_ref.html test_ref.xhtml test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html test_ref.docbook

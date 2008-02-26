@@ -25,10 +25,16 @@
 #define DOCGENERATOR_H
 
 #include <string>
+#include <iostream>
+
 #include "doctemplate.h"
 
 using std::string;
 
+/**
+ * Given a DocTemplate it generates the start of the document and the end, using
+ * variables such as title, file_name, header, etc.
+ */
 class DocGenerator
 {
  protected:
@@ -55,12 +61,23 @@ class DocGenerator
   DocGenerator() {}
   ~DocGenerator() {}
 
-  void generate_start_doc();
-  void generate_end_doc();
+  /**
+   * Generates the start of the document into the passed ostream
+   * 
+   * @param sout the stream for generating the output
+   */
+  void generate_start_doc(std::ostream *sout);
 
-  void generate(const string &);
-  void generateln(const string &);
+  /**
+   * Generates the end of the document into the passed ostream
+   * 
+   * @param sout the stream for generating the output
+   */
+  void generate_end_doc(std::ostream *sout);
 
+  /**
+   * Sets the version of the generator (i.e., of source-highlight)
+   */
   void set_gen_version(bool b) { gen_source_highlight_version = b; }
 };
 

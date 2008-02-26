@@ -2,7 +2,7 @@
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><i><font color="#9A1900"># definitions for C/C++</font></i>
+<pre><tt><i><font color="#9A1900"># definitions for C</font></i>
 <b><font color="#000080">include</font></b> <font color="#FF0000">"c_comment.lang"</font>
 
 <b><font color="#0000FF">state</font></b> <font color="#009900">preproc</font> <b><font color="#0000FF">start</font></b> <font color="#FF6600">'^[[:blank:]]*#(?:[[:blank:]]*include)'</font> <b><font color="#0000FF">begin</font></b>
@@ -17,21 +17,18 @@ http://www.gnu.org/software/src-highlite -->
 
 <b><font color="#000080">include</font></b> <font color="#FF0000">"c_string.lang"</font>
 
-<font color="#990000">(</font><font color="#009900">keyword</font><font color="#990000">,</font><font color="#009900">normal</font><font color="#990000">,</font><font color="#009900">type</font><font color="#990000">)</font> <font color="#990000">=</font> 
-  <font color="#FF6600">`(\&lt;(?:class|struct|typename))([[:blank:]]+)([[:alnum:]]+)`</font>
-
 <font color="#009900">keyword</font> <font color="#990000">=</font> <font color="#FF0000">"__asm|__cdecl|__declspec|__export|__far16"</font><font color="#990000">,</font>
   <font color="#FF0000">"__fastcall|__fortran|__import"</font><font color="#990000">,</font>
   <font color="#FF0000">"__pascal|__rtti|__stdcall|_asm|_cdecl"</font><font color="#990000">,</font>
   <font color="#FF0000">"__except|_export|_far16|_fastcall"</font><font color="#990000">,</font>
   <font color="#FF0000">"__finally|_fortran|_import|_pascal|_stdcall|__thread|__try|asm|auto"</font><font color="#990000">,</font>
-  <font color="#FF0000">"break|case|catch|cdecl|class|const|const_cast|continue|default|delete"</font><font color="#990000">,</font>
-  <font color="#FF0000">"do|dynamic_cast|else|enum|explicit|extern|false|for|friend|goto"</font><font color="#990000">,</font>
-  <font color="#FF0000">"if|inline|mutable|namespace|new|operator|pascal|private|protected"</font><font color="#990000">,</font>
-  <font color="#FF0000">"public|register|reinterpret_cast|return|sizeof|static|static_cast"</font><font color="#990000">,</font>
-  <font color="#FF0000">"struct|switch|template|this|throw|true"</font><font color="#990000">,</font>
-  <font color="#FF0000">"try|typedef|typeid|typename|union"</font><font color="#990000">,</font>
-  <font color="#FF0000">"using|virtual|volatile|while"</font>
+  <font color="#FF0000">"break|case|catch|cdecl|const|continue|default"</font><font color="#990000">,</font>
+  <font color="#FF0000">"do|else|enum|extern|for|goto"</font><font color="#990000">,</font>
+  <font color="#FF0000">"if|pascal"</font><font color="#990000">,</font>
+  <font color="#FF0000">"register|return|sizeof|static"</font><font color="#990000">,</font>
+  <font color="#FF0000">"struct|switch"</font><font color="#990000">,</font>
+  <font color="#FF0000">"typedef|union"</font><font color="#990000">,</font>
+  <font color="#FF0000">"volatile|while"</font>
 
 <font color="#009900">type</font> <font color="#990000">=</font> <font color="#FF0000">"bool|char|double|float|int|long"</font><font color="#990000">,</font>
   <font color="#FF0000">"short|signed|unsigned|void|wchar_t"</font>

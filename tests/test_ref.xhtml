@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="GENERATOR" content="GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite" />
+<title>XHTML with refs</title>
+<link rel="stylesheet" href="../src/default.css" type="text/css" />
+</head>
+<body>
+<pre><tt><a name="line1"><span class="linenum">01:</span></a> <span class="comment">/**</span>
+<a name="line2"><span class="linenum">02:</span></a> <span class="comment">** Copyright (C) 1999-2007 Lorenzo Bettini</span>
+<a name="line3"><span class="linenum">03:</span></a> <span class="comment">**  </span>
+<a name="line4"><span class="linenum">04:</span></a> <span class="comment">  </span><span class="url">http://www.lorenzobettini.it</span>
+<a name="line5"><span class="linenum">05:</span></a> <span class="comment">  </span>
+<a name="line6"><span class="linenum">06:</span></a> <span class="comment">  r2 = r2 XOR (1&lt;&lt;10);</span>
+<a name="line7"><span class="linenum">07:</span></a> <span class="comment">  cout &lt;&lt; "hello world" &lt;&lt; endl;</span>
+<a name="line8"><span class="linenum">08:</span></a> <span class="comment">**  </span>
+<a name="line9"><span class="linenum">09:</span></a> <span class="comment">*/</span>
+<a name="line10"><span class="linenum">10:</span></a> 
+<a name="line11"><span class="linenum">11:</span></a> <span class="comment">// this file also contains the definition of </span><a href="test_ref.xhtml#20">mysum</a><span class="comment"> as a #define</span>
+<a name="line12"><span class="linenum">12:</span></a> 
+<a name="line13"><span class="linenum">13:</span></a> <span class="comment">// textgenerator.h : Text Generator class &amp;&amp;</span>
+<a name="line14"><span class="linenum">14:</span></a> 
+<a name="line15"><span class="linenum">15:</span></a> <span class="preproc">#ifndef</span><span class="normal"> </span><a href="test_ref.xhtml#16">_TEXTGEN_H</a>
+<a name="line16"><span class="linenum">16:</span></a> <span class="preproc">#define</span><span class="normal"> </span><a name="16">_TEXTGEN_H</a>
+<a name="line17"><span class="linenum">17:</span></a> 
+<a name="line18"><span class="linenum">18:</span></a> <span class="preproc">#define</span><span class="normal"> </span><a name="18">foo</a><span class="symbol">(</span><span class="normal">x</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">x </span><span class="symbol">+</span><span class="normal"> </span><span class="number">1</span><span class="symbol">)</span>
+<a name="line19"><span class="linenum">19:</span></a> 
+<a name="line20"><span class="linenum">20:</span></a> <span class="preproc">#define</span><span class="normal"> </span><a name="20">mysum</a><span class="normal"> myfunbody </span>
+<a name="line21"><span class="linenum">21:</span></a> 
+<a name="line22"><span class="linenum">22:</span></a> <span class="preproc">#include</span><span class="normal"> </span><span class="string">&lt;iostream.h&gt;</span><span class="normal"> </span><span class="comment">// for cerr</span>
+<a name="line23"><span class="linenum">23:</span></a> 
+<a name="line24"><span class="linenum">24:</span></a> <span class="preproc">#include</span><span class="normal"> </span><span class="string">"genfun.h"</span><span class="normal"> </span><span class="comment">/* for generating functions */</span>
+<a name="line25"><span class="linenum">25:</span></a> 
+<a name="line26"><span class="linenum">26:</span></a> <span class="keyword">class</span><span class="normal"> </span><a name="26">TextGenerator</a><span class="normal"> </span><span class="cbracket">{</span>
+<a name="line27"><span class="linenum">27:</span></a> <span class="normal">  </span><span class="keyword">public</span><span class="normal"> </span><span class="symbol">:</span>
+<a name="line28"><span class="linenum">28:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="28">generate</a><span class="symbol">(</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">s </span><span class="symbol">)</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="cbracket">{</span><span class="normal"> </span><span class="symbol">(*</span><span class="normal">sout</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&lt;&lt;</span><span class="normal"> s </span><span class="symbol">;</span><span class="normal"> </span><span class="cbracket">}</span>
+<a name="line29"><span class="linenum">29:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="29">generate</a><span class="symbol">(</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">s</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> start</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> end </span><span class="symbol">)</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span>
+<a name="line30"><span class="linenum">30:</span></a> <span class="normal">      </span><span class="cbracket">{</span>
+<a name="line31"><span class="linenum">31:</span></a> <span class="normal">        </span><span class="keyword">for</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"> </span><span class="type">int</span><span class="normal"> i </span><span class="symbol">=</span><span class="normal"> start </span><span class="symbol">;</span><span class="normal"> i </span><span class="symbol">&lt;=</span><span class="normal"> end </span><span class="symbol">;</span><span class="normal"> </span><span class="symbol">++</span><span class="normal">i </span><span class="symbol">)</span>
+<a name="line32"><span class="linenum">32:</span></a> <span class="normal">          </span><span class="symbol">(*</span><span class="normal">sout</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&lt;&lt;</span><span class="normal"> s</span><span class="symbol">[</span><span class="normal">i</span><span class="symbol">]</span><span class="normal"> </span><span class="symbol">;</span>
+<a name="line33"><span class="linenum">33:</span></a> <span class="normal">        </span><span class="keyword">return</span><span class="normal"> a</span><span class="symbol">&lt;</span><span class="normal">p</span><span class="symbol">-&gt;</span><span class="normal">b </span><span class="symbol">?</span><span class="normal"> a </span><span class="symbol">:</span><span class="normal"> </span><span class="number">3</span><span class="symbol">;</span>
+<a name="line34"><span class="linenum">34:</span></a> <span class="normal">      </span><span class="cbracket">}</span>
+<a name="line35"><span class="linenum">35:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="35">generateln</a><span class="symbol">(</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">s </span><span class="symbol">)</span><span class="normal"> </span><span class="keyword">const</span>
+<a name="line36"><span class="linenum">36:</span></a> <span class="normal">        </span><span class="cbracket">{</span><span class="normal"> </span>
+<a name="line37"><span class="linenum">37:</span></a> <span class="normal">            </span><span class="function">generate</span><span class="symbol">(</span><span class="normal"> s </span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#28">generate -> test.h:28</a>
+<a href="test_ref.xhtml#29">generate -> test.h:29</a>
+<a name="line38"><span class="linenum">38:</span></a> <span class="normal">            </span><span class="symbol">(*</span><span class="normal">sout</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&lt;&lt;</span><span class="normal"> endl </span><span class="symbol">;</span><span class="normal"> </span>
+<a name="line39"><span class="linenum">39:</span></a> <span class="normal">        </span><span class="cbracket">}</span>
+<a name="line40"><span class="linenum">40:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="40">generateEntire</a><span class="symbol">(</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">s </span><span class="symbol">)</span><span class="normal"> </span><span class="keyword">const</span>
+<a name="line41"><span class="linenum">41:</span></a> <span class="normal">        </span><span class="cbracket">{</span>
+<a name="line42"><span class="linenum">42:</span></a> <span class="normal">            </span><span class="function">startTextGeneration</span><span class="symbol">()</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#46">startTextGeneration -> test.h:46</a>
+<a href="test_ref.xhtml#70">startTextGeneration -> test.h:70</a>
+<a name="line43"><span class="linenum">43:</span></a> <span class="normal">            </span><span class="function">generate</span><span class="symbol">(</span><span class="normal">s</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#28">generate -> test.h:28</a>
+<a href="test_ref.xhtml#29">generate -> test.h:29</a>
+<a name="line44"><span class="linenum">44:</span></a> <span class="normal">            </span><span class="function">endTextGeneration</span><span class="symbol">()</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#47">endTextGeneration -> test.h:47</a>
+<a href="test_ref.xhtml#76">endTextGeneration -> test.h:76</a>
+<a name="line45"><span class="linenum">45:</span></a> <span class="normal">        </span><span class="cbracket">}</span>
+<a name="line46"><span class="linenum">46:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="46">startTextGeneration</a><span class="symbol">()</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="cbracket">{}</span>
+<a name="line47"><span class="linenum">47:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="47">endTextGeneration</a><span class="symbol">()</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="cbracket">{}</span>
+<a name="line48"><span class="linenum">48:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="48">beginText</a><span class="symbol">(</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">s </span><span class="symbol">)</span><span class="normal"> </span><span class="keyword">const</span>
+<a name="line49"><span class="linenum">49:</span></a> <span class="normal">        </span><span class="cbracket">{</span>
+<a name="line50"><span class="linenum">50:</span></a> <span class="normal">            </span><span class="function">startTextGeneration</span><span class="symbol">()</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#46">startTextGeneration -> test.h:46</a>
+<a href="test_ref.xhtml#70">startTextGeneration -> test.h:70</a>
+<a name="line51"><span class="linenum">51:</span></a> <span class="normal">            </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"> s </span><span class="symbol">)</span>
+<a name="line52"><span class="linenum">52:</span></a> <span class="normal">                </span><span class="function">generate</span><span class="symbol">(</span><span class="normal"> s </span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#28">generate -> test.h:28</a>
+<a href="test_ref.xhtml#29">generate -> test.h:29</a>
+<a name="line53"><span class="linenum">53:</span></a> <span class="normal">        </span><span class="cbracket">}</span>
+<a name="line54"><span class="linenum">54:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="54">endText</a><span class="symbol">(</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">s </span><span class="symbol">)</span><span class="normal"> </span><span class="keyword">const</span>
+<a name="line55"><span class="linenum">55:</span></a> <span class="normal">        </span><span class="cbracket">{</span>
+<a name="line56"><span class="linenum">56:</span></a> <span class="normal">            </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"> s </span><span class="symbol">)</span>
+<a name="line57"><span class="linenum">57:</span></a> <span class="normal">                </span><span class="function">generate</span><span class="symbol">(</span><span class="normal"> s </span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#28">generate -> test.h:28</a>
+<a href="test_ref.xhtml#29">generate -> test.h:29</a>
+<a name="line58"><span class="linenum">58:</span></a> <span class="normal">            </span><span class="function">endTextGeneration</span><span class="symbol">()</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#47">endTextGeneration -> test.h:47</a>
+<a href="test_ref.xhtml#76">endTextGeneration -> test.h:76</a>
+<a name="line59"><span class="linenum">59:</span></a> <span class="normal">        </span><span class="cbracket">}</span>
+<a name="line60"><span class="linenum">60:</span></a> <span class="cbracket">}</span><span class="normal"> </span><span class="symbol">;</span>
+<a name="line61"><span class="linenum">61:</span></a> 
+<a name="line62"><span class="linenum">62:</span></a> <span class="comment">// Decorator</span>
+<a name="line63"><span class="linenum">63:</span></a> <span class="keyword">class</span><span class="normal"> </span><a name="63">TextDecorator</a><span class="normal"> </span><span class="symbol">:</span><span class="normal"> </span><span class="keyword">public</span><span class="normal"> </span><a href="test_ref.xhtml#26">TextGenerator</a><span class="normal"> </span><span class="cbracket">{</span>
+<a name="line64"><span class="linenum">64:</span></a> <span class="normal">  </span><span class="keyword">protected</span><span class="normal"> </span><span class="symbol">:</span>
+<a name="line65"><span class="linenum">65:</span></a> <span class="normal">    </span><a href="test_ref.xhtml#26">TextGenerator</a><span class="normal"> </span><span class="symbol">*</span><a name="65">decorated</a><span class="normal"> </span><span class="symbol">;</span>
+<a name="line66"><span class="linenum">66:</span></a> <span class="normal">  </span>
+<a name="line67"><span class="linenum">67:</span></a> <span class="normal">  </span><span class="keyword">public</span><span class="normal"> </span><span class="symbol">:</span>
+<a name="line68"><span class="linenum">68:</span></a> <span class="normal">    </span><a name="68">TextDecorator</a><span class="symbol">(</span><span class="normal"> </span><a href="test_ref.xhtml#26">TextGenerator</a><span class="normal"> </span><span class="symbol">*</span><span class="normal">t </span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">:</span><span class="normal"> </span><a href="test_ref.xhtml#65">decorated</a><span class="symbol">(</span><span class="normal"> t </span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{}</span>
+<a name="line69"><span class="linenum">69:</span></a> 
+<a name="line70"><span class="linenum">70:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="70">startTextGeneration</a><span class="symbol">()</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span>
+<a name="line71"><span class="linenum">71:</span></a> <span class="normal">    </span><span class="cbracket">{</span><span class="normal"> </span>
+<a name="line72"><span class="linenum">72:</span></a> <span class="normal">        </span><span class="function">startDecorate</span><span class="symbol">()</span><span class="normal"> </span><span class="symbol">;</span>
+<a name="line73"><span class="linenum">73:</span></a> <span class="normal">        </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"> </span><a href="test_ref.xhtml#65">decorated</a><span class="normal"> </span><span class="symbol">)</span>
+<a name="line74"><span class="linenum">74:</span></a> <span class="normal">           </span><a href="test_ref.xhtml#65">decorated</a><span class="symbol">-&gt;</span><span class="function">startTextGeneration</span><span class="symbol">()</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#46">startTextGeneration -> test.h:46</a>
+<a href="test_ref.xhtml#70">startTextGeneration -> test.h:70</a>
+<a name="line75"><span class="linenum">75:</span></a> <span class="normal">    </span><span class="cbracket">}</span>
+<a name="line76"><span class="linenum">76:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><a name="76">endTextGeneration</a><span class="symbol">()</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span>
+<a name="line77"><span class="linenum">77:</span></a> <span class="normal">    </span><span class="cbracket">{</span><span class="normal"> </span>
+<a name="line78"><span class="linenum">78:</span></a> <span class="normal">        </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"> </span><a href="test_ref.xhtml#65">decorated</a><span class="normal"> </span><span class="symbol">)</span>
+<a name="line79"><span class="linenum">79:</span></a> <span class="normal">           </span><a href="test_ref.xhtml#65">decorated</a><span class="symbol">-&gt;</span><span class="function">endTextGeneration</span><span class="symbol">()</span><span class="normal"> </span><span class="symbol">;</span>
+<a href="test_ref.xhtml#47">endTextGeneration -> test.h:47</a>
+<a href="test_ref.xhtml#76">endTextGeneration -> test.h:76</a>
+<a name="line80"><span class="linenum">80:</span></a> <span class="normal">        </span><span class="function">endDecorate</span><span class="symbol">()</span><span class="normal"> </span><span class="symbol">;</span>
+<a name="line81"><span class="linenum">81:</span></a> <span class="normal">   </span><a href="test_ref.xhtml#20">mysum</a><span class="symbol">;</span>
+<a name="line82"><span class="linenum">82:</span></a> <span class="normal">    </span><span class="cbracket">}</span>
+<a name="line83"><span class="linenum">83:</span></a> 
+<a name="line84"><span class="linenum">84:</span></a> <span class="normal">    </span><span class="comment">// pure virtual functions</span>
+<a name="line85"><span class="linenum">85:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">startDecorate</span><span class="symbol">()</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="number">0</span><span class="normal"> </span><span class="symbol">;</span>
+<a name="line86"><span class="linenum">86:</span></a> <span class="normal">    </span><span class="keyword">virtual</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">endDecorate</span><span class="symbol">()</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="number">0</span><span class="normal"> </span><span class="symbol">;</span>
+<a name="line87"><span class="linenum">87:</span></a> <span class="cbracket">}</span><span class="normal"> </span><span class="symbol">;</span>
+<a name="line88"><span class="linenum">88:</span></a> 
+<a name="line89"><span class="linenum">89:</span></a> <span class="preproc">#endif</span><span class="normal"> </span><span class="comment">// </span><a href="test_ref.xhtml#16">_TEXTGEN_H</a>
+</tt></pre>
+</body>
+</html>

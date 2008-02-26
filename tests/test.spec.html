@@ -1,0 +1,57 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">#</font></i>
+<i><font color="#9A1900"># spec file for package GNU Source Highlight (Version 1.x)</font></i>
+<i><font color="#9A1900"># </font></i>
+<i><font color="#9A1900"># Author: Christian W. Zuckschwerdt &lt;zany@triq.net&gt;, Jan 2003</font></i>
+<i><font color="#9A1900">#</font></i>
+
+<b><font color="#0000FF">Summary:</font></b>   syntax highlighting for source documents
+<b><font color="#0000FF">Name:</font></b>      source-highlight
+<b><font color="#0000FF">Version:</font></b>   <font color="#993399">2.9</font>
+<b><font color="#0000FF">Release:</font></b>   <font color="#993399">2.9</font>
+<b><font color="#0000FF">License:</font></b>   GPL
+<b><font color="#0000FF">Group:</font></b>     Utilities/Console
+<b><font color="#0000FF">Source:</font></b>    <u><font color="#0000FF">ftp://ftp.gnu.org/gnu/source-highlight/</font></u><b><font color="#000080">%{name}</font></b>-<b><font color="#000080">%{version}</font></b>.tar.gz
+<b><font color="#0000FF">URL:</font></b>       <u><font color="#0000FF">http://www.gnu.org/software/src-highlite/</font></u>
+<b><font color="#0000FF">BuildRoot:</font></b> <b><font color="#000080">%{_tmppath}</font></b>/<b><font color="#000080">%{name}</font></b>-<b><font color="#000080">%{version}</font></b>-root
+
+<b><font color="#000080">%description</font></b>  
+This program, given a source file, produces a document
+with syntax highlighting.  Both source languages and output formats
+can be specified with a simple syntax and added dynamically.  At the
+moment this package can handle many programming languages, such as,
+e.g., Java, C/C++, Prolog, Perl, Php3, Python, Flex, ChangeLog, etc.
+as source languages, and some output formats such, as, e.g., HTML,
+XHTML, LaTeX, etc.
+
+<b><font color="#000080">%prep</font></b>
+<b><font color="#000080">%setup</font></b> -q
+
+<b><font color="#000080">%build</font></b>
+./configure <font color="#009900">$MYARCH_FLAGS</font> \
+	--prefix=<b><font color="#000080">%{_prefix}</font></b> \
+	--mandir=<b><font color="#000080">%{_mandir}</font></b> \
+	--datadir=<b><font color="#000080">%{_datadir}</font></b>
+
+make
+
+<b><font color="#000080">%install</font></b>
+rm -rf <font color="#009900">$RPM_BUILD_ROOT</font>
+
+make DESTDIR=<font color="#009900">$RPM_BUILD_ROOT</font> install
+
+<b><font color="#000080">%clean</font></b>
+rm -rf <font color="#009900">$RPM_BUILD_ROOT</font>
+
+<b><font color="#000080">%files</font></b>
+<b><font color="#000080">%defattr</font></b>(<font color="#993399">644</font>, root, root, <font color="#993399">755</font>)
+<b><font color="#000080">%doc</font></b> README COPYING ChangeLog TODO.txt AUTHORS THANKS
+<b><font color="#000080">%doc</font></b> doc/*.html doc/*.css
+<b><font color="#000080">%attr</font></b>(<font color="#993399">755</font>,root,root) <b><font color="#000080">%{_prefix}</font></b>/bin/*
+<b><font color="#000080">%{_datadir}</font></b>/<b><font color="#000080">%{name}</font></b>/*
+<b><font color="#000080">%{_mandir}</font></b>/man?/*
+
+</tt></pre>

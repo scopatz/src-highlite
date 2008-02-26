@@ -30,3 +30,5 @@ libtool
 config.guess
 config.sub
 ltmain.sh
+config.status.lineno
+configure.lineno

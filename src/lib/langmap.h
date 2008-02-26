@@ -17,10 +17,15 @@
 #include <boost/shared_ptr.hpp>
 
 /**
-map a file extension to a language definition
-
-@author Lorenzo Bettini
-*/
+ * A map stored in a file with the format
+ * key = elem
+ * 
+ * Comment line start with a #
+ * 
+ * This is used for lang.map, outlang.map and style.defaults
+ * 
+ * @author Lorenzo Bettini
+ */
 class LangMap
 {
   typedef std::map<std::string, std::string> Map;
@@ -32,6 +37,10 @@ public:
   LangMap(const std::string &path, const std::string &filename);
 
   ~LangMap();
+  
+  typedef Map::const_iterator const_iterator;
+  const_iterator begin() { return langmap.begin(); }
+  const_iterator end() { return langmap.end(); }
 
   void print();
   const std::string &get_file(const std::string &lang) {

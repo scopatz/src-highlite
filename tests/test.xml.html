@@ -9,7 +9,8 @@ http://www.gnu.org/software/src-highlite">
 <title>xml formatted in html</title>
 </head>
 <body bgcolor="white">
-<pre><tt><b><font color="#000080">&lt;?xml</font></b> version=<font color="#FF0000">"1.0"</font> encoding=<font color="#FF0000">"UTF-8"</font><b><font color="#000080">?&gt;</font></b>
+<pre><tt><b><font color="#000080">&lt;!DOCTYPE</font></b> <font color="#009900">kpartgui</font> <font color="#009900">SYSTEM</font> <font color="#FF0000">"kpartgui.dtd"</font><b><font color="#000080">&gt;</font></b>
+<b><font color="#000080">&lt;?xml</font></b> <font color="#009900">version</font><font color="#990000">=</font><font color="#FF0000">"1.0"</font> <font color="#009900">encoding</font><font color="#990000">=</font><font color="#FF0000">"UTF-8"</font><b><font color="#000080">?&gt;</font></b>
 
 <b><font color="#0000FF">&lt;xs:schema</font></b> <font color="#009900">targetNamespace</font><font color="#990000">=</font><font color="#FF0000">"http://www.cedar.ac.uk/hepml/hepdata/0.1/"</font>
            <font color="#009900">xmlns</font><font color="#990000">=</font><font color="#FF0000">"http://www.cedar.ac.uk/hepml/hepdata/0.1/"</font>
@@ -32,6 +33,10 @@ http://www.gnu.org/software/src-highlite">
 
 <b><font color="#0000FF">&lt;tomcat-user_lore&gt;</font></b>
  foo
-<b><font color="#0000FF">&lt;/tomcat-user_lore&gt;</font></b></tt></pre>
+<b><font color="#0000FF">&lt;/tomcat-user_lore&gt;</font></b>
+
+<b><font color="#0000FF">&lt;tomcat-user_lore.bettini</font></b> <font color="#009900">name</font><font color="#990000">=</font><font color="#FF0000">"lorenzo"</font><b><font color="#0000FF">&gt;</font></b>
+ bar
+<b><font color="#0000FF">&lt;/tomcat-user_lore.bettini&gt;</font></b></tt></pre>
 </body>
 </html>

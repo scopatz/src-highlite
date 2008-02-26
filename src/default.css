@@ -1,7 +1,7 @@
 body {  background-color: white;  }
 
 .keyword { color: blue; font-weight: bold; }
-.type { color: darkgreen; }
+.type, .classname { color: darkgreen; }
 .string { color: red; font-family: monospace; }
 .regexp { color: orange; }
 .specialchar { color: pink; font-family: monospace; }

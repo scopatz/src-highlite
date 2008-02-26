@@ -20,8 +20,9 @@ option "title"          T  "give a title to the output document.  Implies --doc"
 option "tab"            t  "specify tab length." int default="8"   no
 option "header"         H  "file to insert as header" string typestr="filename" no
 option "footer"         F  "file to insert as footer" string typestr="filename" no
-option "style-file"      -  "specify the file containing format options" string typestr="filename" default="default.style" no
+option "style-file"      -  "specify the file containing format options" string typestr="filename" default="default.style" optional
 option "style-css-file"      -  "specify the file containing format options (in css syntax)" string typestr="filename" optional
+option "style-defaults" - "specify the file containing defaults for format options" string typestr="filename" default="style.defaults" optional
 option "outlang-def" - "output language definition file" string typestr="filename" no
 option "outlang-map" - "output language map file" string typestr="filename" default="outlang.map" no
 option "data-dir" - "directory where language definition files and language maps are searched for.  If not specified these files are searched for in the current directory and in the data dir installation directory" string typestr="path" no

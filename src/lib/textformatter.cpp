@@ -13,7 +13,7 @@
 #include "textformatter.h"
 #include "textgenerator.h"
 #include "preformatter.h"
-#include "mainoutputbuffer.h"
+#include "outputbuffer.h"
 #include "messages.h"
 #include "fileutil.h"
 #include "fileinfo.h"
@@ -33,15 +33,16 @@ static SubstitutionMapping ref_substitutionmapping;
 #define SPACE 2
 #define NOT_SPACE 1
 
-TextFormatter::TextFormatter(PreFormatter *pf) :
+TextFormatter::TextFormatter(PreFormatter *pf, OutputBuffer *b) :
     default_generator(0), preformatter(pf), noOptimizations(false),
-            generateReferences(false), ctags_file(0) {
+            generateReferences(false), outputbuffer(b), ctags_file(0)
+{
 }
 
-TextFormatter::TextFormatter(PreFormatter *pf, const string &_ctags_file_name,
+TextFormatter::TextFormatter(PreFormatter *pf, OutputBuffer *b, const string &_ctags_file_name,
         const TextStyles::RefTextStyle &r, RefPosition pos) :
     default_generator(0), preformatter(pf), noOptimizations(false),
-            generateReferences(true), ctags_file_name(_ctags_file_name),
+            generateReferences(true), outputbuffer(b), ctags_file_name(_ctags_file_name),
             refstyle(r), refposition(pos) {
     ctags_file = tagsOpen(ctags_file_name.c_str(), &info);
     if (ctags_file == 0) {

@@ -69,6 +69,9 @@ struct gengetopt_args_info
   char * style_css_file_arg;	/**< @brief specify the file containing format options (in css syntax).  */
   char * style_css_file_orig;	/**< @brief specify the file containing format options (in css syntax) original value given at command line.  */
   const char *style_css_file_help; /**< @brief specify the file containing format options (in css syntax) help description.  */
+  char * style_defaults_arg;	/**< @brief specify the file containing defaults for format options (default='style.defaults').  */
+  char * style_defaults_orig;	/**< @brief specify the file containing defaults for format options original value given at command line.  */
+  const char *style_defaults_help; /**< @brief specify the file containing defaults for format options help description.  */
   char * outlang_def_arg;	/**< @brief output language definition file.  */
   char * outlang_def_orig;	/**< @brief output language definition file original value given at command line.  */
   const char *outlang_def_help; /**< @brief output language definition file help description.  */
@@ -142,6 +145,7 @@ struct gengetopt_args_info
   int footer_given ;	/**< @brief Whether footer was given.  */
   int style_file_given ;	/**< @brief Whether style-file was given.  */
   int style_css_file_given ;	/**< @brief Whether style-css-file was given.  */
+  int style_defaults_given ;	/**< @brief Whether style-defaults was given.  */
   int outlang_def_given ;	/**< @brief Whether outlang-def was given.  */
   int outlang_map_given ;	/**< @brief Whether outlang-map was given.  */
   int data_dir_given ;	/**< @brief Whether data-dir was given.  */

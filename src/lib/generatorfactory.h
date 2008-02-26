@@ -39,6 +39,7 @@ using std::string;
 class TextGenerator;
 class PreFormatter;
 class TextFormatter;
+class OutputBuffer;
 
 class GeneratorFactory
 {
@@ -55,11 +56,12 @@ class GeneratorFactory
   bool noOptimizations;
   /// the main text formatter
   TextFormatter *textformatter;
+  OutputBuffer *outputbuffer;
 
   TextFormatter *createTextFormatter();
 
  public:
-  GeneratorFactory(TextStylesPtr tstyles, PreFormatter *pf,
+  GeneratorFactory(TextStylesPtr tstyles, PreFormatter *pf, OutputBuffer *b,
                    bool gen_references,
                    const string &ctags_file, RefPosition position,
                    bool optimizations);
@@ -78,6 +80,15 @@ class GeneratorFactory
    */
   bool createGenerator(const string &key, const string &color,
     const string &bgcolor, StyleConstantsPtr styleconstants);
+  
+  /**
+   * Creates a generator for key1, if not already present, that has the same
+   * style as the generator for key2
+   * 
+   * @return false if the generator for key1 is already present, or there's
+   * no generator for key2
+   */
+  bool createMissingGenerator(const string &key1, const string &key2);
   
   /**
    * Adds the generator for the normal style if not already present.

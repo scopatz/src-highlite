@@ -4,7 +4,7 @@
 
 #include "langelem.h"
 
-#include "langelemsprinter.H"
+#include "langelemsprinter.hpp"
 
 void
 LangElemsPrinter::collect_DB(const LangElem * elem)

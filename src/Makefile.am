@@ -71,7 +71,7 @@ envmapper.h \
 $(source_highlightdata_DATA)
 
 LANGFILES = \
-bison.lang      cpp.lang       javascript.lang  perl.lang    ruby.lang \
+bison.lang      c.lang cpp.lang       javascript.lang  perl.lang    ruby.lang \
 c_comment.lang  flex.lang      log.lang         php.lang     sml.lang \
 caml.lang       function.lang  lua.lang         prolog.lang  symbols.lang \
 changelog.lang  java.lang      number.lang      python.lang  url.lang \
@@ -80,12 +80,14 @@ diff.lang c_string.lang langdef.lang outlang.lang style.lang \
 extreme_comment.lang extreme_comment2.lang extreme_comment3.lang \
 postscript.lang csharp.lang xml.lang sh.lang script_comment.lang \
 tcl.lang sql.lang bib.lang makefile.lang css.lang m4.lang \
-default.lang nohilite.lang slang.lang
+default.lang nohilite.lang slang.lang key_string.lang properties.lang \
+desktop.lang lsm.lang spec.lang haxe.lang
 
 OUTLANGFILES = \
 css_common.outlang \
 esc.outlang \
 html_common.outlang \
+html_ref.outlang \
 html_notfixed.outlang \
 htmlcss.outlang \
 htmldoc.outlang \
@@ -113,7 +115,8 @@ $(LANGFILES) $(OUTLANGFILES) \
 $(STYLEFILES) \
 default.style style2.style style3.style \
 lang.map outlang.map \
-default.css
+default.css \
+style.defaults
 
 # files that are built before distribution gets built
 #MAINTAINERCLEANFILES = $(BUILT_SOURCES)

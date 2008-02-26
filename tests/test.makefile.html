@@ -2,7 +2,11 @@
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><font color="#990000">ID:</font> <font color="#009900">$(HEADERS)</font> <font color="#009900">$(SOURCES)</font> <font color="#009900">$(LISP)</font> <font color="#009900">$(TAGS_FILES)</font>
+<pre><tt><i><font color="#9A1900"># a comment</font></i>
+<i><font color="#9A1900">## another comment</font></i>
+<i><font color="#9A1900">###### another comment</font></i>
+
+<font color="#990000">ID:</font> <font color="#009900">$(HEADERS)</font> <font color="#009900">$(SOURCES)</font> <font color="#009900">$(LISP)</font> <font color="#009900">$(TAGS_FILES)</font>
         <font color="#009900">list</font><font color="#990000">=</font><font color="#FF0000">'$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'</font><font color="#990000">;</font> <font color="#990000">\</font>
         <font color="#009900">unique</font><font color="#990000">=</font>`<b><font color="#0000FF">for</font></b> i <b><font color="#0000FF">in</font></b> <font color="#009900">$$</font>list<font color="#990000">;</font> <b><font color="#0000FF">do</font></b> <font color="#990000">\</font>
             <b><font color="#0000FF">if</font></b> <b><font color="#0000FF">test</font></b> -f <font color="#FF0000">"$$i"</font><font color="#990000">;</font> <b><font color="#0000FF">then</font></b> echo <font color="#009900">$$</font>i<font color="#990000">;</font> <b><font color="#0000FF">else</font></b> echo <font color="#009900">$(srcdir)</font><font color="#990000">/</font><font color="#009900">$$</font>i<font color="#990000">;</font> <b><font color="#0000FF">fi</font></b><font color="#990000">;</font> <font color="#990000">\</font>
@@ -10,6 +14,8 @@ http://www.gnu.org/software/src-highlite -->
           <font color="#009900">$(AWK)</font> <font color="#FF0000">'    { files[$$0] = 1; } \</font>
 <font color="#FF0000">               END { for (i in files) print i; }'</font>`<font color="#990000">;</font> <font color="#990000">\</font>
         mkid -fID <font color="#009900">$$</font>unique
+
+a<i><font color="#9A1900">##b</font></i>
 
 <font color="#990000">foo.o foo.z:</font> foo.c
 

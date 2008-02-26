@@ -27,12 +27,12 @@
 #include "textstylebuilder.h"
 #include "textformatter.h"
 
-GeneratorFactory::GeneratorFactory(TextStylesPtr tstyles, PreFormatter *pf,
+GeneratorFactory::GeneratorFactory(TextStylesPtr tstyles, PreFormatter *pf, OutputBuffer *b,
         bool gen_ref, const string &_ctags_file, RefPosition position,
         bool optimizations) :
     textStyles(tstyles), preformatter(pf), generate_references(gen_ref),
             ctags_file(_ctags_file), refposition(position),
-            noOptimizations(optimizations) {
+            noOptimizations(optimizations), outputbuffer(b) {
     textformatter = createTextFormatter();
     textformatter->setNoOptimizations(noOptimizations);
 }
@@ -44,10 +44,10 @@ GeneratorFactory::~GeneratorFactory() {
 
 TextFormatter *GeneratorFactory::createTextFormatter() {
     if (generate_references)
-        return new TextFormatter(preformatter, ctags_file,
+        return new TextFormatter(preformatter, outputbuffer, ctags_file,
                 textStyles->refstyle, refposition);
     else
-        return new TextFormatter(preformatter);
+        return new TextFormatter(preformatter, outputbuffer);
 }
 
 string GeneratorFactory::preprocessColor(const string &color) {
@@ -108,6 +108,24 @@ bool GeneratorFactory::createGenerator(const string &key, const string &color,
     TextStyle style = textStyleBuilder.end();
 
     textformatter->addGenerator(key, new TextGenerator(style));
+    return true;
+}
+
+bool GeneratorFactory::createMissingGenerator(const string &key1, const string &key2) {
+    TextGenerator *g1 = textformatter->hasGenerator(key1);
+    TextGenerator *g2 = textformatter->hasGenerator(key2);
+    
+    // the generator for key1 is not missing
+    if (g1)
+        return false;
+    
+    // the generator for key2 is missing
+    if (!g2)
+        return false;
+    
+    // the generator for key1 will have the same style as the generator for key2
+    textformatter->addGenerator(key1, new TextGenerator(*g2));
+    
     return true;
 }
 

@@ -347,13 +347,19 @@ You can download it from GNU's ftp site:
 @uref{ftp://ftp.gnu.org/gnu/src-highlite} or from one of its mirrors (see
 @uref{http://www.gnu.org/prep/ftp.html}).
 
-I do not distribute Windows binaries anymore; since, they can be easily
-built by using Cygnus C/C++ compiler, available at
+I do not distribute Windows binaries anymore; since, they can be built
+by using Cygnus C/C++ compiler, available at
 @uref{http://www.cygwin.com}.  However, if you don't feel like
-downloading such compiler, you can request such binaries directly to me,
-by e-mail (find my e-mail at my home page) and I can send them to you.
-An MS-Windows port of Source-highlight is available from
-@uref{http://gnuwin32.sourceforge.net}.
+downloading such compiler or you experience problems with the Boost
+Regex library (see also @ref{Tips on installing Boost Regex library};
+please also keep in mind that if you don't have these libraries
+installed, and your C/C++ compiler distribution does not provide a
+prebuilt package, it might take some time, even hours, to build the
+Boost libraries from sources), you can request such binaries directly to
+me, by e-mail (find my e-mail at my home page) and I'll be happy to send
+them to you.  An MS-Windows port of Source-highlight is available from
+@uref{http://gnuwin32.sourceforge.net}; however, I don't maintain those
+binaries personally, and they might be out of date.
 
 Archives are digitally signed by me (Lorenzo Bettini) with GNU gpg
 (@uref{http://www.gnupg.org}). My GPG public key can be found at my home
@@ -818,6 +824,7 @@ execution, you can use the command line option @code{--verbose}.
 @menu
 * Output format style::         
 * Output format style using CSS::  
+* Default Styles::              
 * Language map::                
 * Language definition files::   
 * Output Language map::         
@@ -982,7 +989,7 @@ specific output format.  Thus, direct color schemes might not be
 portable in different output formats; for instance, @code{"#00FF00"} is
 valid in HTML but not in @LaTeX{}.
 
-@node Output format style using CSS, Language map, Output format style, Configuration files
+@node Output format style using CSS, Default Styles, Output format style, Configuration files
 @section Output format style using CSS
 
 @cindex CSS
@@ -1032,7 +1039,40 @@ as standard CSS files for HTML documents, or as style files to pass to
 @file{style_examples.html} which shows many output examples, each one
 with a different CSS style.
 
-@node Language map, Language definition files, Output format style using CSS, Configuration files
+@node Default Styles, Language map, Output format style using CSS, Configuration files
+@section Default Styles
+
+This file@footnote{Since version 2.9.} (the default file is
+@file{style.defaults}) lists the default style for a language element
+whose output style is not specified in the style file; in particular the
+following line (comment lines start with @code{#}):
+
+@example
+elem1 = elem2
+@end example
+
+@noindent
+tells that, if the style for an element, say elem1, is not specified in
+the style file, then elem1 will have the same style of elem2.
+
+@cindex style.defaults
+For instance, this is the @file{style.defaults} that comes with
+Source-highlight:
+
+@include style.defaults.texinfo
+
+@noindent
+In this case the style for the element @code{preproc} will default to
+the style of the element @code{keyword}.
+
+This file is useful when you want to create your own style file and you
+don't want to specify styles for all the elements that will have the
+same output style in your style (e.g., the default style formats
+@code{preproc} elements differently from keywords, but if in your style
+you don't specify a style for it, a @code{preproc} element will still be
+formatted as a @code{keyword}).
+
+@node Language map, Language definition files, Default Styles, Configuration files
 @section Language map
 @cindex language map
 
@@ -1041,12 +1081,12 @@ language definition file.  You can also use such file extension to
 specify the @code{--src-lang} option (see @ref{Simple Usage}).
 Source-highlight comes with such a file, called @file{lang.map}.
 
-Of course, you can override the settings of this file by
-writing your own language map file and specify such file
-with the command line option @code{--lang-map}).
-Moreover, as explained above, if a file @file{lang.map}
-is present in the current directory, such version will be used.
-The format of such file is quite simple:
+Of course, you can override the settings of this file by writing your
+own language map file and specify such file with the command line option
+@code{--lang-map}).  Moreover, as explained above, if a file
+@file{lang.map} is present in the current directory, such version will
+be used.  The format of such file is quite simple (comment lines start
+with @code{#}):
 
 @example
 extension = language definition file
@@ -1205,6 +1245,11 @@ Specify the file that source-highlight will use to produce (i.e.,
 format) the output (e.g., colors and other styles for each  language
 element).  The formats of these files are detailed in @ref{Output format
 style} and in @ref{Output format style using CSS}, respectively.
+
+@item --style-defaults
+Specify the file that contains the default styles for elements
+whose styles are not found in the style file (see @ref{Default Styles} for
+further details).
 
 @item --output-dir
 You can pass to source-highlight more than one input file (see
@@ -2615,10 +2660,10 @@ use more complex features to highlight more complex language syntaxes.
 @node Highlighting C/C++ and C#, Highlighting Diff files, Tutorials on Language Definitions, Tutorials on Language Definitions
 @subsection Highlighting C/C++ and C#
 
-This is the language definition for C/C++, included in the file
-@file{cpp.lang}:
+This is the language definition for C, included in the file
+@file{c.lang}:
 
-@include cpp.lang.texinfo
+@include c.lang.texinfo
 
 @noindent
 Notice that this makes use of lots of @code{include}s since these parts
@@ -2637,7 +2682,7 @@ generation tools (such as Doxygen or Javadoc), i.e., those that start
 with @code{/**} or @code{///}) we also highlight the complete HTML
 syntax (defined in the file @file{html.lang} not shown here).
 
-Going back to @file{cpp.lang} we see that for preprocessor directives
+Going back to @file{c.lang} we see that for preprocessor directives
 @code{#include} we use a state definition since in this case the file
 included with the @code{<file>} syntax must be formatted as strings (and
 only in this context the @code{<>} must be considered as strings,
@@ -2661,11 +2706,6 @@ inside a string we want to highlight in a different way the special
 characters (such as, e.g., @code{\n}, @code{\t}, etc.)  and in general
 escaped characters, matched by the regular expression `@code{\\.}'.
 
-Notice then, that we use subexpressions with names (see @ref{Explicit
-subexpressions with names}) for highlighting the class or struct as a
-type (when preceded by @code{class}, @code{struct} or @code{typename},
-highlighted as a keyword).
-
 The included file @file{symbols.lang} defines all the symbols (shared
 also by other languages):
 
@@ -2685,6 +2725,22 @@ that shows an example of forward lookahead assert for the opening
 parenthesis (see @ref{Notes on regular expressions}).  As noted in
 @ref{File inclusion}, it is crucial that this file is included after the
 keyword definition.
+
+Since, at least syntactically, C++ is an extension of C, the language
+definition for C++, included in the file @file{cpp.lang}, relies on
+@file{c.lang}@footnote{Before version 2.9, there was only
+@file{cpp.lang} which was used both for C and C++; however, this way, if
+you had a C program where you were using a C++ keyword as a variable
+name---which of course is correct in C---that variable was actually
+highlighted as a keyword and this was not correct.}:
+
+@include cpp.lang.texinfo
+
+In particular, it extends the set of keywords.  Moreover, notice that we
+use subexpressions with names (see @ref{Explicit subexpressions with
+names}) for highlighting the class (or struct) name (when preceded by
+@code{class}, @code{struct} or @code{typename}, highlighted as a
+keyword).
 
 Now that we wrote the language definition for C/C++, writing the one
 for C# is straightforward, since we only need to add the keyword
