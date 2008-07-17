@@ -1,0 +1,36 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#0000FF">dnl</font></b><i><font color="#9A1900"> </font></i><font color="#009900">@synopsis</font><i><font color="#9A1900"> AC_CTAGS_FLAGS</font></i>
+<b><font color="#0000FF">dnl</font></b>
+<b><font color="#0000FF">dnl</font></b><i><font color="#9A1900"> check whether it's the correct version of ctags</font></i>
+
+AC_DEFUN([AC_CTAGS_FLAGS],
+[AC_CACHE_CHECK(whether ${CTAGS} accept --excmd, ac_ctags_flags,
+[echo 'void f(){}' &gt; conftest.c
+if test -z <font color="#FF0000">"`${CTAGS} --excmd=n -f conftags conftest.c 2&gt;&amp;1`"</font>; then
+  ac_ctags_flags=yes
+else
+  ac_ctags_flags=no
+fi
+rm -f conftest*
+rm -f conftags*
+])])
+
+AC_DEFUN([adl_NORMALIZE_PATH],
+[case <font color="#FF0000">":[$]$1:"</font> in
+<i><font color="#9A1900"># change empty paths to '.'</font></i>
+  ::) <font color="#009900">$1</font>='.' ;;
+<i><font color="#9A1900"># strip trailing slashes</font></i>
+  :*[[\\/]]:) <font color="#009900">$1</font>=`echo <font color="#FF0000">"[$]$1"</font> | sed 's,[[\\/]]*[$],,'` ;;
+  :*:) ;;
+esac
+<i><font color="#9A1900"># squeze repeated slashes</font></i>
+case ifelse(<font color="#009900">$2</font>,,<font color="#FF0000">"[$]$1"</font>,<font color="#009900">$2</font>) in
+<i><font color="#9A1900"># if the path contains any backslashes, turn slashes into backslashes</font></i>
+ *\\*) <font color="#009900">$1</font>=`echo <font color="#FF0000">"[$]$1"</font> | sed 's,\(.\)[[\\/]][[\\/]]*,\1\\\\,g'` ;;
+<i><font color="#9A1900"># if the path contains slashes, also turn backslashes into slashes</font></i>
+ *) <font color="#009900">$1</font>=`echo <font color="#FF0000">"[$]$1"</font> | sed 's,\(.\)[[\\/]][[\\/]]*,\1/,g'` ;;
+esac])
+</tt></pre>

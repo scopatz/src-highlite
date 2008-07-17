@@ -1,8 +1,9 @@
 cbracket
+classname
 comment
 function
 keyword
-named subexps
+normal
 number
 preproc
 specialchar

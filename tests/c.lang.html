@@ -5,6 +5,9 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><i><font color="#9A1900"># definitions for C</font></i>
 <b><font color="#000080">include</font></b> <font color="#FF0000">"c_comment.lang"</font>
 
+<font color="#990000">(</font><font color="#009900">keyword</font><font color="#990000">,</font><font color="#009900">normal</font><font color="#990000">,</font><font color="#009900">classname</font><font color="#990000">)</font> <font color="#990000">=</font> 
+  <font color="#FF6600">`(\&lt;struct)([[:blank:]]+)([[:alnum:]_]+)`</font>
+
 <b><font color="#0000FF">state</font></b> <font color="#009900">preproc</font> <b><font color="#0000FF">start</font></b> <font color="#FF6600">'^[[:blank:]]*#(?:[[:blank:]]*include)'</font> <b><font color="#0000FF">begin</font></b>
         <font color="#009900">string</font> <b><font color="#0000FF">delim</font></b> <font color="#FF0000">"&lt;"</font> <font color="#FF0000">"&gt;"</font> 
         <font color="#009900">string</font> <b><font color="#0000FF">delim</font></b> <font color="#FF0000">"\""</font> <font color="#FF0000">"\""</font> <b><font color="#0000FF">escape</font></b> <font color="#FF0000">"\\"</font>

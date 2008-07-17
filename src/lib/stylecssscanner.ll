@@ -21,12 +21,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "generatorfactory.h"
 #include "stylekey.h"
 
+#include "textstyleformatterfactory.h"
 #include "stylecssparser.h"
 #include "my_sstream.h"
-#include "messages.h"
 #include "parsestyles.h"
 
 static std::ostringstream buff;

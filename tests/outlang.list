@@ -1,0 +1,12 @@
+docbook = docbook.outlang
+esc = esc.outlang
+html = html.outlang
+html-css = htmlcss.outlang
+htmltable = htmltable.outlang
+javadoc = javadoc.outlang
+latex = latex.outlang
+latexcolor = latexcolor.outlang
+texinfo = texinfo.outlang
+xhtml = xhtml.outlang
+xhtml-css = xhtmlcss.outlang
+xhtmltable = xhtmltable.outlang

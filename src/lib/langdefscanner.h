@@ -17,8 +17,20 @@
 
 extern int langdef_lex() ;
 extern FILE *langdef_in;
-extern ParseStruct *parsestruct;
+extern ParseStructPtr parsestruct;
 
 void open_file_to_scan(const std::string &path, const std::string &file);
+
+/**
+ * Releases resources allocated by the scanner
+ */
+void clear_langdefscanner();
+
+/**
+ * Closes the input file.  This is required only in case of errors during
+ * parsing (otherwise the file is closed automatically when the scanner
+ * reaches the end of file).
+ */
+void close_langdefinputfile();
 
 #endif // LANGDEFSCANNER_H

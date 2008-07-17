@@ -16,44 +16,40 @@
 
 const boost::regex tabexp("[\\t]");
 
-const string
-Untabifier::doPreformat(const string &s)
-{
-  boost::sregex_iterator m1(s.begin(), s.end(), tabexp);
-  boost::sregex_iterator m2;
+const string Untabifier::doPreformat(const string &s) {
+    boost::sregex_iterator m1(s.begin(), s.end(), tabexp);
+    boost::sregex_iterator m2;
 
-  if (m1 == m2)
-  {
-    if (s[0] == '\n')
-      n_ = 0; // reset char counter
-    else
-      n_ += s.size();
+    if (m1 == m2) {
+        if (s[0] == '\n')
+            n_ = 0; // reset char counter
+        else
+            n_ += s.size();
 
-    return s;
-  }
-
-  ostringstream buffer;
-  string prefix;
-  string suffix;
-
-  for (boost::sregex_iterator it = m1; it != m2; ++it)
-  {
-    prefix = it->prefix();
-    suffix = it->suffix();
-    if (prefix.size()) {
-      buffer << prefix;
-      n_ += prefix.size ();
+        return s;
     }
 
-    int nSpaces = nSpacesPerTab_ - n_ % nSpacesPerTab_;
-    buffer << string(nSpaces, ' ');
-    n_ += nSpaces;
-  }
+    ostringstream buffer;
+    string prefix;
+    string suffix;
 
-  if (suffix.size()) {
-    buffer << suffix;
-    n_ += suffix.size();
-  }
+    for (boost::sregex_iterator it = m1; it != m2; ++it) {
+        prefix = it->prefix();
+        suffix = it->suffix();
+        if (prefix.size()) {
+            buffer << prefix;
+            n_ += prefix.size();
+        }
 
-  return buffer.str();
+        int nSpaces = nSpacesPerTab_ - n_ % nSpacesPerTab_;
+        buffer << string(nSpaces, ' ');
+        n_ += nSpaces;
+    }
+
+    if (suffix.size()) {
+        buffer << suffix;
+        n_ += suffix.size();
+    }
+
+    return buffer.str();
 }

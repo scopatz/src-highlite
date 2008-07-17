@@ -15,5 +15,12 @@ $header<pre><tt>"
 "
 end
 
+nodoctemplate
+"<!-- Generator: $additional -->
+$header<pre><tt>"
+"</tt></pre>$footer
+"
+end
+
 onestyle "<span class=\"$style\">$text</span>"
 

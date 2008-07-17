@@ -1,6 +1,6 @@
 # c_comment.lang
 
-vardef TODO = '(TODO|FIXME)([:]?)'
+vardef TODO = '(TODO|FIXME|BUG)([:]?)'
 
 # comments with documentation tags
 environment comment start "///" begin

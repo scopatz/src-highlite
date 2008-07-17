@@ -1,0 +1,8 @@
+doc => parseFile("output.xml", iostat=i)
+if (i/=0) then
+  print*, "Could not open XML file"
+  ! call goAndDoSomethingElseInstead()
+  print*, "A string with \"" escaped chars"
+endif
+c = 1
+double precision x

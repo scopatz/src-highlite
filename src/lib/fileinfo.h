@@ -15,20 +15,18 @@
 #include <parserinfo.h>
 
 /**
-Information about the file we are processing
+ Information about the file we are processing
 
-@author Lorenzo Bettini
-*/
-struct FileInfo : public ParserInfo
-{
-  std::string input_file_name; // with no path
-  std::string output_file_name;
-  std::string output_file_extension;
+ @author Lorenzo Bettini
+ */
+struct FileInfo : public ParserInfo {
+    std::string input_file_name; // with no path
+    std::string output_file_name;
+    std::string output_file_extension;
 
-  FileInfo(const std::string &input, const std::string &output);
+    FileInfo(const std::string &input, const std::string &output);
 
-  ~FileInfo();
-
+    ~FileInfo();
 };
 
 #endif

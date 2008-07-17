@@ -14,6 +14,7 @@
 #define PARSESTRUCT_H
 
 #include <string>
+#include <boost/shared_ptr.hpp>
 
 struct ParseStruct
 {
@@ -25,5 +26,7 @@ struct ParseStruct
   ParseStruct(const std::string &pa, const std::string &name) : 
       path(pa), file_name(name), line(1), pos(0) {}
 };
+
+typedef boost::shared_ptr<ParseStruct> ParseStructPtr;
 
 #endif // PARSESTRUCT_H

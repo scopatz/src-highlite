@@ -1,0 +1,35 @@
+.TH CHECK-REGEXP "1" "June 2008" "check-regexp 2.9" "User Commands"
+.SH NAME
+check-regexp \-  test regular expressions from the command line
+.SH SYNOPSIS
+.B check-regexp
+\fI'regular expression' 'string1' 'string2' \fR...
+.SH DESCRIPTION
+check\-regexp (GNU Source\-highlight)
+.PP
+You simply pass as the first command line argument the regular expression and
+then the strings you want to try to match.
+.br
+It is crucial, in order to avoid shell substitutions, to enclose both the
+expression and the strings in single quotes.
+.sp
+The program then prints some information about the possibly successful
+matching.
+.br
+In the output the what[0] part represents the whole match, and the what[i]
+part represents the i-th marked subexpression that matched.
+.sp
+The program also prints possible prefix and suffix.
+.SH OPTIONS
+This program follows the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help and exit
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version and exit
+.SH AUTHOR
+check-regexp was written by Lorenzo Bettini <www.lorenzobettini.it>.
+This man page was written by Cesare Tirabassi <norsetto@ubuntu.com>.

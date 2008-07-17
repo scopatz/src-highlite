@@ -1,1 +1,2 @@
-source-highlight: empty file extension in output language file simple.outlang
+source-highlight: missing file extension in simple.outlang
+source-highlight: this is needed when the output file is not specified

@@ -22,6 +22,7 @@
 #include "outlangdefparser.h"
 #include "outlangdefscanner.h"
 #include "fileutil.h"
+#include "ioexception.h"
 
 #include <stack>
 #include <stdlib.h>
@@ -48,9 +49,9 @@ static const std::string *flush_buffer();
 static void open_include_file(const char *file);
 static void close_include_file();
 
-ParseStruct *outlang_parsestruct = 0;
+ParseStructPtr outlang_parsestruct;
 
-typedef std::stack<ParseStruct *> ParseStructStack;
+typedef std::stack<ParseStructPtr> ParseStructStack;
 static ParseStructStack parsestructstack;
 
 %}
@@ -81,6 +82,7 @@ STRING \"[^\n"]+\"
 <COMMENT_STATE>[^\n] {}
 <COMMENT_STATE>\n { ++(outlang_parsestruct->line);  POP(); }
 
+<INITIAL>"nodoctemplate" { return NODOC_TEMPLATE_T ; }
 <INITIAL>"doctemplate" { return DOC_TEMPLATE_T ; }
 <INITIAL>"styletemplate" { return STYLE_TEMPLATE_T ; }
 <INITIAL>"styleseparator" { return STYLE_SEPARATOR_T ; }
@@ -101,6 +103,7 @@ STRING \"[^\n"]+\"
 <INITIAL>"postdoc_reference" { return POSTDOC_REFERENCE_T ; }
 <INITIAL>"reference" { return REFERENCE_T ; }
 <INITIAL>"lineprefix" { return LINE_PREFIX_T; }
+<INITIAL>"linenum" { return LINENUM_T; }
 <INITIAL>"translations" { BEGIN(TRANSLATION_STATE); return TRANSLATIONS_T ; }
 <INITIAL>"begin" { return BEGIN_T ; }
 <INITIAL,TRANSLATION_STATE>"end" { BEGIN(INITIAL); return END_T ; }
@@ -110,7 +113,12 @@ STRING \"[^\n"]+\"
   char *file_name = &yytext[1];
   file_name[strlen(file_name)-1] = '\0';
 
-  open_include_file(file_name);
+  try {
+    open_include_file(file_name);
+  } catch (IOException &e) {
+    outlangdef_lval.string = new std::string(e.filename);
+    return WRONG_INCLUDE_FILE;
+  }
 
   yypush_buffer_state(yy_create_buffer( outlangdef_in, YY_BUF_SIZE));
 
@@ -119,6 +127,7 @@ STRING \"[^\n"]+\"
 
 <<EOF>> {
   fclose(outlangdef_in);
+  outlangdef_in = 0;
   yypop_buffer_state();
 
   if ( !YY_CURRENT_BUFFER )
@@ -209,13 +218,26 @@ void open_include_file(const char *name)
     path = get_file_path(outlang_parsestruct->file_name);
 
   parsestructstack.push(outlang_parsestruct);
-  outlang_parsestruct = new ParseStruct(path, file_name);
+  outlang_parsestruct = ParseStructPtr(new ParseStruct(path, file_name));
   open_outlang_file_to_scan(path.c_str(), file_name.c_str());
 }
 
 void close_include_file()
 {
-  delete outlang_parsestruct;
   outlang_parsestruct = parsestructstack.top();
   parsestructstack.pop();
+}
+
+void clear_outlangdefscanner() {
+	//delete stringTable;
+	outlangdef_lex_destroy();
+}
+
+void close_outlangdefinputfile() {
+	// also close possible open files due to inclusions
+	do {
+	  if (outlangdef_in)
+	  	fclose(outlangdef_in);
+  	  yypop_buffer_state();
+    } while ( YY_CURRENT_BUFFER );
 }

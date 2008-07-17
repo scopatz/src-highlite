@@ -24,7 +24,7 @@
 StringDef *StringDef::concat(const StringDef *s1, const StringDef *s2) {
     StringDef *ret = new StringDef(s1->stringdef + s2->stringdef);
 
-    ret->setBackRef(s1->isBackRef() || s2->isBackRef());
+    ret->setBackRef(s1->hasBackRef() || s2->hasBackRef());
     
     return ret;
 }

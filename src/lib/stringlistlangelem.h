@@ -22,8 +22,8 @@ a language element made of a list of strings
 @author Lorenzo Bettini
 */
 // doublecpp: forward declarations, DO NOT MODIFY
-class RegExpStateBuilder; // file: regexpstatebuilder.h
-class RegExpStatePointer; // file: regexpstatebuilder.h
+class HighlightState; // file: highlightstate.h
+class HighlightStateBuilder; // file: highlightstatebuilder.h
 // doublecpp: end, DO NOT MODIFY
 
 class StringListLangElem : public StateStartLangElem
@@ -45,7 +45,7 @@ public:
     bool isCaseSensitive() const { return !nonsensitive; }
 // doublecpp: dispatch methods, DO NOT MODIFY
 public:
-virtual void dispatch_build(RegExpStateBuilder *, RegExpStatePointer state);
+virtual void dispatch_build(HighlightStateBuilder *, HighlightState * state);
 // doublecpp: end, DO NOT MODIFY
 };
 

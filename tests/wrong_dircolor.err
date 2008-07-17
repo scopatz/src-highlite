@@ -1,2 +1,1 @@
-wrong_dircolor.style:2: use of direct colors has changed
-wrong_dircolor.style:2: use double quoted syntax: "#9999FF" instead of #9999FF
+wrong_dircolor.style:2: syntax error

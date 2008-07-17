@@ -1,17 +1,10 @@
 TODO list
 =========
 
-change the _doc, _nodoc, _css so that these definitions are part of only one file, instead
-of having different files.
-
 test for always flush (together with line number), and command line option
 
 use <ol> lists and css for changing colors of lines,
 see http://shiflett.org/code/highlight.php
-
-normal = '\\("|\')' generates a failure
-
-tests for .m4 files
 
 shjs_css_transform.sh in share
 
@@ -36,25 +29,47 @@ also string def as StringDef
 
 Is there an element class that is not a StateStartLangElem?
 
-If allow for newlines (i.e., read the whole file) then also
-split lines when formatting (for instance, for line numbers)
-
-add a language element classname to avoid generate types as
-keywords in some outputs (e.g., latex or texinfo) if black and white.
-and allow also _ in classnames
-
-
 check empty alternative in string def: "foo||" which would lead
 to a non-terminating program
 
 USE GENGETOPT DETAILS
 
-recognize kde rc files
-.ldif files
-
-REFERENCES
+LANG FILES
 ----------
-for output such as xhtml, since the style file definitions are not used
-the noref is not used, and references are generated also for tags inside
-comments.  Deprecate noref and use a keyword in the .lang file to avoid
-generate references inside an environment/state?
+recognize kde rc files
+
+TOWARDS LIBRARY
+---------------
+the regexpengine highlighting method should also return the current state/environment?
+This way the qt highlighter can detect how many lines to highlight?
+But this way, we should have all different states (already like this)
+Probably we only need the GUID (without the alternatives):
+each state represents an actual state, and we should use a different class for
+alternatives (that will be put into a list):
+
+- in case of a single line rule that is split with states, avoid to match \n or \r? In order
+to do so, we should not return immediately after matching the entering state, and
+wait to exit the state to match the whole exp
+
+- startLine endLine: use a LineNumberGenerator?
+
+- RegexPreprocessor should not contain code dealing with boost::regex?
+
+- in LineRule is it really required to put the [^...]?
+
+- use also line prefix in order to write line number in a different column
+than the source highlighted code.
+
+- outputfilename and outputfilename extension do not concern the formatter?
+the only thing that should be passed to format() should be linenumber and filename?
+  - why refentry.filename == fileinfo->filename || refentry.filename
+                    == fileinfo->input_file_name) also input_file_name (no path)?
+                    
+- line numbers and code in different columns when generating tables (probably use
+linesuffix)?
+
+- implement ctags:
+  Are the input and output file useful in ctagsformatter?  Or could we put it into
+  FormatterParams?
+
+test with source-highlight ide (debug)

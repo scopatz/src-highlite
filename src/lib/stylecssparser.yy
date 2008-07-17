@@ -23,24 +23,27 @@
 #include <iostream>
 #include <string>
 
-#include "generatorfactory.h"
+#include "textstyleformatterfactory.h"
 #include "colors.h"
 #include "keys.h"
-#include "messages.h"
 #include "parsestyles.h"
 #include "fileutil.h"
 #include "stylekey.h"
 #include "utils.h"
+#include "parserexception.h"
 
 using std::cerr;
 
+extern int line;
+
 static int yyparse() ;
 static void yyerror( char *s ) ;
+static void yyerror( const string &s ) ;
 
 // line is defined in styleparser
 
-// to generate the generator for each language element
-static GeneratorFactory *generatorFactory;
+// to generate the formatter for each language element
+static TextStyleFormatterFactory *formatterFactory;
 
 static void updateBgColor(const std::string &c);
 
@@ -58,6 +61,9 @@ static string currentColor;
 /// the global pointer to the current bg color
 static string currentBGColor;
 
+/// where we store possible errors
+static string errorBuffer;
+
 %}
 
 %union {
@@ -72,6 +78,11 @@ static string currentBGColor;
 %token <string> KEY COLOR BG_COLOR STRINGDEF BG_STRINGDEF
 
 %type <keylist> keylist
+
+%destructor {
+	if ($$)
+	  delete $$;
+} keylist KEY COLOR BG_COLOR STRINGDEF
 
 %%
 
@@ -88,19 +99,14 @@ statement : option
 
 option : keylist
              {
-               printSequence( $1 ) ;
-               printMessage_noln( ": " ) ;
+               //printSequence( $1 ) ;
+               //printMessage_noln( ": " ) ;
                currentStyleConstants = StyleConstantsPtr(new StyleConstants);
                currentColor = "";
                currentBGColor = "";
              }
          optionspecs ';'
              {
-               printMessage_noln(" color: " + currentColor + " ") ;
-               if (currentBGColor != "")
-                  printMessage_noln(" bg color: " + currentBGColor + " ") ;
-               printMessage("");
-
                KeyType key;
                KeyList *keylist = $1;
                for (KeyList::const_iterator it = keylist->begin(); it != keylist->end(); ++it) {
@@ -115,15 +121,17 @@ option : keylist
 
                   // avoid adding an empty style definition for normal
                   if (currentColor != "" || currentStyleConstants->size()) {
-                    if (!generatorFactory->createGenerator(NORMAL, currentColor, "", currentStyleConstants)) {
-                      parseStyleError(key);
-                      yyerror("already defined");
+                    if (!formatterFactory->createFormatter(NORMAL, currentColor, "", currentStyleConstants)) {
+                      errorBuffer = "already defined " NORMAL;
+                      delete keylist;
+                      YYERROR;
                     }
                   }
                 } else {
-                      if (!generatorFactory->createGenerator(key, currentColor, currentBGColor, currentStyleConstants)) {
-                      parseStyleError(key);
-                      yyerror("already defined");
+                  if (!formatterFactory->createFormatter(key, currentColor, currentBGColor, currentStyleConstants)) {
+                      errorBuffer = "already defined " + key;
+                      delete keylist;
+                      YYERROR;
                   }
                 }
                }
@@ -178,12 +186,12 @@ bgcolor : BG_COLOR
         }
       ;
 
-styleconstant : BOLD { printMessage_noln( " bold" ) ; currentStyleConstants->push_back(ISBOLD); }
-      | ITALICS { printMessage_noln( " italics" ) ; currentStyleConstants->push_back(ISITALIC); }
-      | UNDERLINE { printMessage_noln( " underline" ) ; currentStyleConstants->push_back(ISUNDERLINE); }
-      | FIXED { printMessage_noln( " fixed" ) ; currentStyleConstants->push_back(ISFIXED); }
-      | NOTFIXED { printMessage_noln( " notfixed" ) ; currentStyleConstants->push_back(ISNOTFIXED); }
-      | NOREF { printMessage_noln( " noref" ) ; currentStyleConstants->push_back(ISNOREF); }
+styleconstant : BOLD { currentStyleConstants->push_back(ISBOLD); }
+      | ITALICS { currentStyleConstants->push_back(ISITALIC); }
+      | UNDERLINE { currentStyleConstants->push_back(ISUNDERLINE); }
+      | FIXED { currentStyleConstants->push_back(ISFIXED); }
+      | NOTFIXED { currentStyleConstants->push_back(ISNOTFIXED); }
+      | NOREF { currentStyleConstants->push_back(ISNOREF); }
       ;
 
 %%
@@ -192,36 +200,46 @@ styleconstant : BOLD { printMessage_noln( " bold" ) ; currentStyleConstants->pus
 
 extern string current_file;
 
-void parseCssStyles(const string &path, const string &name, GeneratorFactory *genFactory,
+void parseCssStyles(const string &path, const string &name, TextStyleFormatterFactory *genFactory,
                    string &bodyBgColor_)
 {
-  generatorFactory = genFactory;
+  formatterFactory = genFactory;
+  errorBuffer = "";
+  int result = 1;
+  line = 1;
+
   // opens the file for yylex
   stylecsssc_in = open_data_file_stream(path, name);
 
-  current_file = (path.size() ? path + "/" : "") + name;
-
-  printMessage_noln( "Parsing ", cerr ) ;
-  printMessage_noln (current_file, cerr);
-  printMessage( " file ...", cerr ) ;
+  if (contains_path(name))
+    current_file = name;
+  else
+    current_file = (path.size() ? path + "/" : "") + name;
 
   bodyBgColor = "";
 
-  yyparse() ;
+  result = yyparse() ;
 
   bodyBgColor_ = bodyBgColor;
 
-  printMessage( "Parsing done!", cerr ) ;
   fclose(stylecsssc_in);
 
   // release scanner memory
   stylecsssc_lex_destroy();
+  
+  if (result != 0 || errorBuffer.size()) {
+  	throw ParserException(errorBuffer, current_file, line);
+  }
 }
 
 void
 yyerror( char *s )
 {
-  parseStyleError(s);
+  errorBuffer = s;
+}
+
+void yyerror(const string &s) {
+  yyerror(s.c_str());
 }
 
 void updateBgColor(const std::string &c)

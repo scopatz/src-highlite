@@ -8,3 +8,7 @@ classname = normal
 preproc = keyword
 section = function
 paren = cbracket
+attribute = type
+value = string
+predef_var = type
+predef_func = function

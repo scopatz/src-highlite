@@ -23,18 +23,20 @@
 #include <iostream>
 #include <string>
 
-#include "generatorfactory.h"
+#include "textstyleformatterfactory.h"
 #include "colors.h"
 #include "keys.h"
-#include "messages.h"
 #include "parsestyles.h"
 #include "fileutil.h"
 #include "stylekey.h"
+#include "parserexception.h"
 
 using std::cerr;
+using std::string;
 
 static int yyparse() ;
 static void yyerror( char *s ) ;
+static void yyerror( const string &s ) ;
 
 int line = 1 ;
 
@@ -46,8 +48,11 @@ static string bodyBgColor;
 
 static void updateBgColor(const std::string *);
 
-// to generate the generator for each language element
-static GeneratorFactory *generatorFactory;
+// to generate the formatter for each language element
+static TextStyleFormatterFactory *formatterFactory;
+
+/// where we store possible errors
+static string errorBuffer;
 
 %}
 
@@ -60,13 +65,18 @@ static GeneratorFactory *generatorFactory;
 } ;
 
 %token <flag> BOLD ITALICS UNDERLINE FIXED NOTFIXED NOREF
-%token <string> KEY COLOR BG_COLOR STRINGDEF BODY_BG_COLOR
-%token <tok> BG_T
+%token <string> KEY COLOR BG_COLOR STRINGDEF
+%token <tok> BG_T BODY_BG_COLOR
 
 %type <flag> value
 %type <styleconstants> stylevalues values
-%type <string> color bgcolor bodybgcolor
+%type <string> color bgcolor
 %type <keylist> keylist
+
+%destructor {
+	if ($$)
+	  delete $$;
+} keylist KEY COLOR BG_COLOR STRINGDEF color bgcolor
 
 %%
 
@@ -84,11 +94,11 @@ statement : option
 
 option : keylist color bgcolor
              {
-                 printSequence( $1 ) ;
-                 printMessage_noln( ": " ) ;
-                 printMessage_noln( ($2 ? *$2 : "") ) ;
-                 printMessage_noln( " bg: " ) ;
-                 printMessage_noln( ($3 ? *$3 : "") ) ;
+                 //printSequence( $1 ) ;
+                 //printMessage_noln( ": " ) ;
+                 //printMessage_noln( ($2 ? *$2 : "") ) ;
+                 //printMessage_noln( " bg: " ) ;
+                 //printMessage_noln( ($3 ? *$3 : "") ) ;
              }
          stylevalues ';'
              {
@@ -97,9 +107,17 @@ option : keylist color bgcolor
                StyleConstantsPtr stylevalues = StyleConstantsPtr($5);
                for (KeyList::const_iterator it = keylist->begin(); it != keylist->end(); ++it) {
                 key = *it;
-                if (!generatorFactory->createGenerator(key, ($2 ? *$2 : ""), ($3 ? *$3 : ""), stylevalues)) {
-                  parseStyleError(key);
-                  yyerror("already defined");
+                if (!formatterFactory->createFormatter(key, ($2 ? *$2 : ""), ($3 ? *$3 : ""), stylevalues)) {
+                  errorBuffer = "already defined " + *it;
+                  //yyerror(alreadydef);
+
+                  delete keylist;
+                  if ($2)
+                   delete $2;
+                  if ($3)
+                   delete $3;
+
+                  YYERROR;
                 }
                }
                delete keylist;
@@ -138,20 +156,20 @@ bodybgcolor : BODY_BG_COLOR COLOR ';' { updateBgColor($2); }
       | BODY_BG_COLOR STRINGDEF ';' { updateBgColor($2); }
       ;
 
-stylevalues : { $$ = 0 ; printMessage( " (no options) " ) ; }
-            | values { $$ = $1; printMessage(""); }
+stylevalues : { $$ = 0 ; }
+            | values { $$ = $1; }
             ;
 
 values : values ',' value { $$ = $1; $$->push_back($3) ; }
        | value { $$ = new StyleConstants; $$->push_back($1); }
        ;
 
-value : BOLD { printMessage_noln( " - bold" ) ; $$ = ISBOLD ; }
-      | ITALICS { printMessage_noln( " - italics" ) ; $$ = ISITALIC ; }
-      | UNDERLINE { printMessage_noln( " - underline" ) ; $$ = ISUNDERLINE ; }
-      | FIXED { printMessage_noln( " - fixed" ) ; $$ = ISFIXED ; }
-      | NOTFIXED { printMessage_noln( " - notfixed" ) ; $$ = ISNOTFIXED ; }
-      | NOREF { printMessage_noln( " - noref" ) ; $$ = ISNOREF ; }
+value : BOLD { $$ = ISBOLD ; }
+      | ITALICS { $$ = ISITALIC ; }
+      | UNDERLINE { $$ = ISUNDERLINE ; }
+      | FIXED { $$ = ISFIXED ; }
+      | NOTFIXED { $$ = ISNOTFIXED ; }
+      | NOREF { $$ = ISNOREF ; }
       ;
 
 %%
@@ -159,46 +177,51 @@ value : BOLD { printMessage_noln( " - bold" ) ; $$ = ISBOLD ; }
 string current_file;
 
 void
-parseStyles(const string &path, const string &name, GeneratorFactory *genFactory,
+parseStyles(const string &path, const string &name, TextStyleFormatterFactory *genFactory,
            string &bodyBgColor_)
 {
-  generatorFactory = genFactory;
+  formatterFactory = genFactory;
+  errorBuffer = "";
+  int result = 1;
+  line = 1;
 
   // opens the file for yylex
   stylesc_in = open_data_file_stream(path, name);
 
-  current_file = (path.size() ? path + "/" : "") + name;
-
-  printMessage_noln( "Parsing ", cerr ) ;
-  printMessage_noln (current_file, cerr);
-  printMessage( " file ...", cerr ) ;
+  if (contains_path(name))
+    current_file = name;
+  else
+    current_file = (path.size() ? path + "/" : "") + name;
 
   bodyBgColor = "";
 
-  yyparse() ;
+  result = yyparse() ;
 
   bodyBgColor_ = bodyBgColor;
 
-  printMessage( "Parsing done!", cerr ) ;
   fclose(stylesc_in);
 
   // free scanner memory
   stylesc_lex_destroy();
+  
+  if (result != 0 || errorBuffer.size()) {
+  	throw ParserException(errorBuffer, current_file, line);
+  }
 }
 
 void
 yyerror( char *s )
 {
-  parseStyleError(s);
+  errorBuffer = s;
 }
 
-void parseStyleError(const std::string &error, bool exit)
+void yyerror(const string &s) {
+  yyerror(s.c_str());
+}
+
+void parseStyleError(const std::string &error)
 {
-	if (exit)
-  		exitError(current_file, line, error);
-  	else {
-  		printError(current_file, line, error);
-  	}
+	yyerror(error);
 }
 
 void updateBgColor(const std::string *c)

@@ -15,21 +15,27 @@
 #include "chartranslator.h"
 #include "doctemplate.h"
 
-struct TextStyles
-{
-    TextStyle bold, italics, underline, notfixed, fixed,
-    color, bg_color, onestyle;
+struct TextStyles {
+    TextStyle bold, italics, underline, notfixed, fixed, color, bg_color,
+            onestyle, linenum;
 
-    struct RefTextStyle
-    {
-      TextStyle anchor, inline_reference, postline_reference, postdoc_reference;
+    struct RefTextStyle {
+        TextStyle anchor, inline_reference, postline_reference,
+                postdoc_reference;
     } refstyle;
     std::string starting_template, style_separator, file_extension, line_prefix;
     CharTranslatorPtr charTranslator;
     ColorMapPtr colorMap;
+    
+    /// when generating entire document
     DocTemplate docTemplate;
 
-    TextStyles() : charTranslator(new CharTranslator), colorMap(new ColorMap) {}
+    /// when not generating entire document
+    DocTemplate noDocTemplate;
+
+    TextStyles() :
+        charTranslator(new CharTranslator), colorMap(new ColorMap) {
+    }
 };
 
 typedef boost::shared_ptr<TextStyles> TextStylesPtr;

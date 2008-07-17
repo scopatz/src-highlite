@@ -18,5 +18,11 @@ $footer</body>
 "
 end
 
+nodoctemplate
+"<!-- Generator: $additional -->
+$header<pre><tt>"
+"</tt></pre>$footer
+"
+end
 
 

@@ -14,6 +14,7 @@
 
 #include <set>
 #include <string>
+#include <ostream>
 
 /**
 Prints all the language elements
@@ -32,15 +33,18 @@ public:
 
     /**
      * Prints all the elements contained in the passed LangElems
-     * to the standard output.
+     * to the specified ostream.
+     * @param elems
+     * @param os
      */
-    void print(const LangElems *elems);
+    void print(const LangElems *elems, std::ostream &os);
 
 protected:
     branches collect
     void (const StateLangElem *elem);
     void (const LangElem *elem);
     void (const LangElems *elem);
+    void (const NamedSubExpsLangElem *elem);
     endbranches
 };
 

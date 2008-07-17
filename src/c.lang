@@ -1,6 +1,9 @@
 # definitions for C
 include "c_comment.lang"
 
+(keyword,normal,classname) = 
+  `(\<struct)([[:blank:]]+)([[:alnum:]_]+)`
+
 state preproc start '^[[:blank:]]*#(?:[[:blank:]]*include)' begin
         string delim "<" ">" 
         string delim "\"" "\"" escape "\\"

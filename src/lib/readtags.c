@@ -1,5 +1,5 @@
 /*
-*   $Id: readtags.c,v 1.10 2008/02/26 18:53:31 bettini Exp $
+*   $Id: readtags.c,v 1.11 2008/07/17 18:48:09 bettini Exp $
 *
 *   Copyright (c) 1996-2003, Darren Hiebert
 *
@@ -453,6 +453,10 @@ static tagFile *initialize (const char *const filePath, tagFileInfo *const info)
 	result->fp = fopen (filePath, "r");
 	if (result->fp == NULL)
 	{
+	    /* added by Lorenzo Bettini, to avoid memory leaks */
+	    free (result->line.buffer);
+	    free (result->name.buffer);
+	    free (result->fields.list);
 	    free (result);
 	    result = NULL;
 	    info->status.error_number = errno;

@@ -1,0 +1,34 @@
+//
+// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004-2008
+//
+// Copyright: See COPYING file that comes with this distribution
+//
+
+#include <iostream>
+
+#include "highlightbuilderexception.h"
+#include "parserinfo.h"
+#include "asserttestexit.h"
+#include "my_sstream.h"
+#include "stdboosterror.h"
+
+using namespace std;
+
+
+int main() {
+    ostringstream os;
+    
+    ParserInfo parserInfo("foo");
+    parserInfo.line = 10;
+    
+    HighlightBuilderException testException("test exception", &parserInfo);
+    
+    // cout << "OUTPUT: " << testException << endl;
+    os << testException;
+    
+    string causedby = boost::regex_error(boost::regex_constants::error_bad_pattern).what();
+    
+    assertEquals("foo:10: test exception\n" + stdBoostCausedBy("foo", "10"), os.str());
+    
+    return 0;
+}

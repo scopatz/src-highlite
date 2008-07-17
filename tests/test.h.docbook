@@ -1,7 +1,7 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook//EN">
 <article>
 <articleinfo>
-<title>prova</title>
+<title>listing in docbook</title>
 </articleinfo>
 <programlisting>01: <emphasis>/**</emphasis>
 02: <emphasis>** Copyright (C) 1999-2007 Lorenzo Bettini</emphasis>
@@ -92,5 +92,5 @@
 87: } ;
 88: 
 89: <emphasis role="strong">#endif</emphasis> <emphasis>// _TEXTGEN_H</emphasis>
-</programlisting>
+90: </programlisting>
 </article>

@@ -32,3 +32,10 @@ config.sub
 ltmain.sh
 config.status.lineno
 configure.lineno
+config.sub.lnk
+install-sh.lnk
+ylwrap.lnk
+missing.lnk
+config.guess.lnk
+depcomp.lnk
+ltmain.sh.lnk

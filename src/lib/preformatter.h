@@ -19,25 +19,36 @@ class PreFormatter;
 typedef boost::shared_ptr<PreFormatter> PreFormatterPtr;
 
 /**
-preformat text to be generated
+ preformat text to be generated
 
-@author Lorenzo Bettini
-*/
-class PreFormatter
-{
-  PreFormatterPtr decorator;
+ @author Lorenzo Bettini
+ */
+class PreFormatter {
+    /// the possible nested preformatter (Decorator pattern)
+    PreFormatterPtr decorator;
 
-  public:
+public:
     PreFormatter(PreFormatterPtr f = PreFormatterPtr());
 
     virtual ~PreFormatter();
 
     void setFormatter(PreFormatterPtr f);
 
+    /**
+     * Preformats the passed string (public version)
+     * @param text the string to be preformatted
+     * @return the preformatted string
+     */
     const std::string preformat(const std::string &text);
 
-  protected:
-    // to be redefined in the derived classes: actually perform preformatting
+protected:
+    /**
+     * Preformats the passed string (protected version).  The subclasses must
+     * redefine this method to perform the preformatting.  The default implementation
+     * does not perform any preformatting.
+     * @param text the string to be preformatted
+     * @return the preformatted string
+     */
     virtual const std::string doPreformat(const std::string &text);
 
 };

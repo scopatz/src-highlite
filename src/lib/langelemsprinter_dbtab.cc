@@ -1,5 +1,7 @@
 #include "statelangelem.h"
 
+#include "namedsubexpslangelem.h"
+
 #include "langelems.h"
 
 #include "langelem.h"
@@ -28,6 +30,12 @@ void
 LangElems::dispatch_collect_const(LangElemsPrinter *LangElemsPrinter_o)
 {
   LangElemsPrinter_o->_forward_collect((const LangElems *)(this));
+}
+
+void
+NamedSubExpsLangElem::dispatch_collect_const(LangElemsPrinter *LangElemsPrinter_o)
+{
+  LangElemsPrinter_o->_forward_collect((const NamedSubExpsLangElem *)(this));
 }
 
 void

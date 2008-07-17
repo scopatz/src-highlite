@@ -1,23 +1,24 @@
 keyword = "ACCESS|ASSIGN|BACKSPACE|BLANK|BLOCK|CALL",
-      "CLOSE|COMMON|COMPLEX|CONTINUE|DATA|DIMENSION|DIRECT|DO",
-      "ELSE|END|ENTRY|EOF|EQUIVALENCE|ERR|EXIST|EXTERNAL|FILE|FMT|FORM",
+      "CLOSE|COMMON|CONTINUE|DATA|DIMENSION|DIRECT|DO",
+      "ELSE|ENDIF|ENDDO|END",
+      "ENTRY|EOF|EQUIVALENCE|ERR|EXIST|EXTERNAL|FILE|FMT|FORM",
       "FORMAT|FORMATTED|FUNCTION|GO|TO|IF|IMPLICIT|INQUIRE",
       "INTRINSIC|IOSTAT|LOGICAL|NAMED|NEXTREC|NUMBER|OPEN|OPENED",
-      "PARAMETER|PAUSE|PRECISION|PRINT|PROGRAM|READ|REC|RECL",
+      "PARAMETER|PAUSE|PRINT|PROGRAM|READ|REC|RECL",
       "RETURN|REWIND|SEQUENTIAL|STATUS|STOP|SUBROUTINE|THEN|TYPE",
       "UNFORMATTED|UNIT|WRITE|SAVE"
         nonsensitive
 
-comment start "*"
-comment start '^C'
-comment start '^c'
+comment start "!"
 
 include "number.lang"
 
-string delim "\"" "\"" escape "\\"
-string delim "'" "'"  escape "\\"
+# fortran strings have no \ escape char
+string delim "\"" "\""
+string delim "'" "'"
 
-type = "CHARACTER|DOUBLE|INTEGER|REAL" nonsensitive
+type = "CHARACTER|DOUBLE|INTEGER|REAL|PRECISION",
+       "COMPLEX" nonsensitive
 
 include "symbols.lang"
 

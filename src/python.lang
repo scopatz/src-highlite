@@ -8,8 +8,6 @@ keyword = "and|assert|break|class|continue|def|del|elif|else|except|exec",
            "finally|for|global|if|in|is|lambda|not|or|pass",
            "print|raise|return|try|while"
 
-comment delim "/*" "*/" multiline nested 
-
 comment delim '^([[:space:]]*\'{3})' '(\'{3})' multiline 
 comment delim '^([[:space:]]*\"{3})' '(\"{3})' multiline 
 
@@ -26,4 +24,3 @@ symbol = "{|}"
 
 include "function.lang"
 
-variable = '[[:upper:]][[:word:]]*|_'

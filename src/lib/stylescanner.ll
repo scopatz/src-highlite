@@ -22,10 +22,9 @@
 
 #include "stylekey.h"
 
-#include "generatorfactory.h"
+#include "textstyleformatterfactory.h"
 #include "styleparser.h"
 #include "my_sstream.h"
-#include "messages.h"
 #include "parsestyles.h"
 
 static std::ostringstream buff;
@@ -73,14 +72,6 @@ STRING \"[^\"\n]*\"
 <COMMENT_STATE>\n { ++line;  BEGIN(INITIAL); }
 
 <INITIAL>"green"|"red"|"darkred"|"blue"|"brown"|"pink"|"yellow"|"cyan"|"purple"|"orange"|"brightorange"|"darkgreen"|"brightgreen"|"black"|"teal"|"gray"|"darkblue" { stylesc_lval.string = new std::string(yytext) ; return COLOR ; }
-
-<INITIAL>\#[a-fA-F0-9]{6} {
-  const std::string wrong = yytext ;
-  parseStyleError("use of direct colors has changed", false);
-  parseStyleError("use double quoted syntax: \"" +  wrong + "\" instead of " + wrong);
-  exit(EXIT_FAILURE);
-  return COLOR ;
-}
 
 <INITIAL>"bgcolor" { return BODY_BG_COLOR ; }
 

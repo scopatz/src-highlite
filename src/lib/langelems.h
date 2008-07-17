@@ -31,8 +31,6 @@ collection of LangElem
 */
 // doublecpp: forward declarations, DO NOT MODIFY
 class LangElemsPrinter; // file: langelemsprinter.h
-class RegExpStateBuilder; // file: regexpstatebuilder.h
-class RegExpStatePointer; // file: regexpstatebuilder.h
 // doublecpp: end, DO NOT MODIFY
 
 class LangElems : protected list<LangElem *>
@@ -62,7 +60,6 @@ class LangElems : protected list<LangElem *>
     const std::string toStringOriginal() const;
 // doublecpp: dispatch methods, DO NOT MODIFY
 public:
-virtual void dispatch_build(RegExpStateBuilder *, RegExpStatePointer state);
 virtual void dispatch_collect_const(LangElemsPrinter *);
 // doublecpp: end, DO NOT MODIFY
 };

@@ -1,12 +1,26 @@
 source-highlight -- History of visible changes.
 
-Copyright (C) 1999-2007 Lorenzo Bettini
+Copyright (C) 1999-2008 Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite
 
 See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
+
+Version 2.10
+
+   * formatting is applied even when generating anchors and references
+   * noref is handled also for output languages using onestyle (e.g., xhtml)
+   * improved fortran highlighting
+   * improved python highlighting
+   * fixed title in docbook output
+   * language definition for ldap files (e.g., ldiff files)
+   * language definition for autoconf files
+   * improved m4 language definition
+   * improved logtalk language definition
+   * url.lang handles ~ in urls
+   * language definition for glsl.lang (provided by Cesare Tirabassi)
 
 Version 2.9
 
@@ -363,7 +377,7 @@ Version 1.0
 -------------------------------------------------------
 Copying information:
 
-Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004 Lorenzo Bettini
+Copyright (C) 1999-2008 Lorenzo Bettini Lorenzo Bettini
 http://www.lorenzobettini.it
 
    Permission is granted to anyone to make or distribute verbatim copies

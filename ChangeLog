@@ -1,4 +1,19 @@
+2008-06-05  Lorenzo Bettini  <bettini@laptop>
+
+	* src/m4.lang: simplified and it does not rely on sh.lang anymore
+
+2008-02-11  Lorenzo Bettini  <bettini@laptop>
+
+	* src/lib/valgrind_test.sh.in: added also in the lib dir to check
+	leaks and errors in the library
+
 2008-01-31  Lorenzo Bettini  <bettini@laptop>
+
+	* src/lib/regexpengine.h: does not have file reading functionality
+	and provides only a method for highlighting a text
+
+	* src/lib/filehighlighter.h: (class FileHighlighter) class added
+	to read a file and highlight it using RegExpEngine
 
 	* src/lib/globalostream.h: removed global stream
 

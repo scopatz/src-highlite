@@ -24,17 +24,21 @@
 #include <iostream>
 #include <string>
 
-#include "messages.h"
 #include "parsestruct.h"
 #include "outlangdefscanner.h"
 #include "outlangdefparserfun.h"
 #include "textstyles.h"
+#include "parserexception.h"
+#include "ioexception.h"
 
 using std::cerr;
 using std::string;
 
 static void yyerror( const char *s ) ;
-//static void yyerror( const string &s ) ;
+static void yyerror( const string &s ) ;
+
+/// the buffer for storing errors
+static string errorBuffer;
 
 TextStylesPtr textstyles;
 string start_doc, end_doc;
@@ -43,6 +47,9 @@ CharTranslatorPtr charTranslator;
 
 const char *reference_vars[] = {"linenum", "infilename", "infile", "outfile", 0};
 const char *anchor_vars[] = {"linenum", "infilename", "infile", 0};
+
+/// used to record that the error is due to an included file not found
+static bool includedFileNotFound = false;
 
 %}
 
@@ -53,11 +60,11 @@ const char *anchor_vars[] = {"linenum", "infilename", "infile", 0};
   int flag ;
 };
 
-%token <tok> BEGIN_T END_T DOC_TEMPLATE_T STYLE_TEMPLATE_T STYLE_SEPARATOR_T
+%token <tok> BEGIN_T END_T DOC_TEMPLATE_T NODOC_TEMPLATE_T STYLE_TEMPLATE_T STYLE_SEPARATOR_T
 %token <tok> BOLD_T ITALICS_T UNDERLINE_T COLOR_T BG_COLOR_T FIXED_T NOTFIXED_T
 %token <tok> COLORMAP_T DEFAULT_T ONESTYLE_T TRANSLATIONS_T EXTENSION_T ANCHOR_T
 %token <tok> REFERENCE_T INLINE_REFERENCE_T POSTLINE_REFERENCE_T POSTDOC_REFERENCE_T
-%token <string> KEY STRINGDEF REGEXDEF LINE_PREFIX_T
+%token <string> KEY STRINGDEF REGEXDEF LINE_PREFIX_T LINENUM_T WRONG_INCLUDE_FILE
 
 
 %%
@@ -72,6 +79,13 @@ outputlangdefs : outputlangdefs outputlangdef
 outputlangdef : DOC_TEMPLATE_T STRINGDEF STRINGDEF END_T
 {
     textstyles->docTemplate = DocTemplate(*$2, *$3);
+    delete $2;
+    delete $3;
+}
+|
+NODOC_TEMPLATE_T STRINGDEF STRINGDEF END_T
+{
+    textstyles->noDocTemplate = DocTemplate(*$2, *$3);
     delete $2;
     delete $3;
 }
@@ -154,6 +168,12 @@ outputlangdef : DOC_TEMPLATE_T STRINGDEF STRINGDEF END_T
   delete $2;
 }
 |
+  LINENUM_T STRINGDEF
+{
+  textstyles->linenum = *$2;
+  delete $2;
+}
+|
   REFERENCE_T STRINGDEF
 {
   if (textstyles->refstyle.inline_reference.empty())
@@ -192,6 +212,14 @@ outputlangdef : DOC_TEMPLATE_T STRINGDEF STRINGDEF END_T
 {
   textstyles->charTranslator = charTranslator;
 }
+| WRONG_INCLUDE_FILE {
+            // this token is used by the scanner to signal an error
+            // in opening an include file
+            includedFileNotFound = true;
+            yyerror("cannot open include file " + *$1);
+            delete $1;
+            YYERROR;
+          }
 ;
 
 colormap : COLORMAP_T colormapentries END_T
@@ -238,61 +266,62 @@ extern int outlangdef_lex_destroy (void);
 void
 yyerror( const char *s )
 {
-  exitError(s, outlang_parsestruct);
+  errorBuffer = s;
+}
+
+void
+yyerror( const string &s )
+{
+  yyerror(s.c_str());
 }
 
 TextStylesPtr
 parse_outlang_def()
 {
-  outlang_parsestruct = new ParseStruct("", "stdin");
-  textstyles = TextStylesPtr(new TextStyles);
-  colorMap = ColorMapPtr(new ColorMap);
-  charTranslator = CharTranslatorPtr(new CharTranslator);
-  outlangdef_parse();
-  delete outlang_parsestruct;
-  outlang_parsestruct = 0;
-
-  // release scanner memory
-  outlangdef_lex_destroy ();
-
-  return textstyles;
+  return parse_outlang_def("", "stdin");
 }
 
 TextStylesPtr
 parse_outlang_def(const char *path, const char *name)
 {
-  outlang_parsestruct = new ParseStruct(path, name);
+  includedFileNotFound = false;
+  outlang_parsestruct = ParseStructPtr(new ParseStruct(path, name));
   textstyles = TextStylesPtr(new TextStyles);
   colorMap = ColorMapPtr(new ColorMap);
   charTranslator = CharTranslatorPtr(new CharTranslator);
-  open_outlang_file_to_scan(path, name);
-  outlangdef_parse();
-  delete outlang_parsestruct;
-  outlang_parsestruct = 0;
+  
+  errorBuffer = "";
+  int result = 1;
+  bool fileNotFound = false;
+  
+  try {
+  	if (strcmp(name, "stdin") != 0)
+      open_outlang_file_to_scan(path, name);
+  } catch (IOException &e) {
+    errorBuffer = e.message;
+    fileNotFound = true;
+  }
 
+  if (!fileNotFound)
+     result = outlangdef_parse();
+  
+  if (result != 0 && ! fileNotFound) {
+  	  // make sure the input file is closed
+	  close_outlangdefinputfile();
+	  // close it before clearing the scanner
+  }
+  
   // release scanner memory
-  outlangdef_lex_destroy ();
+  clear_outlangdefscanner ();
+  
+  if (result != 0 || errorBuffer.size()) {
+  	if (fileNotFound || includedFileNotFound) {
+	  throw ParserException(errorBuffer);
+  	} else {
+	  ParserException e(errorBuffer, outlang_parsestruct.get());
+	  throw e;
+	}
+  }
 
   return textstyles;
 }
-
-TextStylesPtr
-parse_outlang_def_file(const char *path, const char *name)
-{
-  // the struct stores the path for further includes but...
-  outlang_parsestruct = new ParseStruct(path, name);
-  // when we open the first file the path is not used
-  textstyles = TextStylesPtr(new TextStyles);
-  colorMap = ColorMapPtr(new ColorMap);
-  charTranslator = CharTranslatorPtr(new CharTranslator);
-  open_outlang_file_to_scan("", name);
-  outlangdef_parse();
-  delete outlang_parsestruct;
-  outlang_parsestruct = 0;
-
-  // release scanner memory
-  outlangdef_lex_destroy ();
-
-  return textstyles;
-}
-

@@ -1,0 +1,41 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#000080">#version</font></b> <font color="#993399">120</font>
+<b><font color="#000080">#pragma</font></b> optimize off
+<b><font color="#000080">#pragma</font></b> debug on
+
+<b><font color="#0000FF">uniform</font></b> <font color="#009900">vec4</font>	vSkyParams<font color="#990000">;</font>
+<b><font color="#0000FF">varying</font></b> <font color="#009900">ivec4</font>	vpos<font color="#990000">,</font> lpos<font color="#990000">;</font>
+<b><font color="#0000FF">varying</font></b> <font color="#009900">bvec2</font>	wave0<font color="#990000">,</font> wave1<font color="#990000">,</font> wave2<font color="#990000">;</font>
+<b><font color="#0000FF">const</font></b>	<font color="#009900">float</font>	lambda <font color="#990000">=</font> <font color="#993399">2.0</font><font color="#990000">;</font>
+
+<font color="#009900">void</font>  <b><font color="#000000">main</font></b><font color="#990000">(</font><font color="#009900">void</font><font color="#990000">)</font>
+<font color="#FF0000">{</font>
+<i><font color="#9A1900">// Texture coordinates generation</font></i>
+<font color="#009900">vec2</font> vTexCoords <font color="#990000">=</font> <font color="#000080">gl_Vertex.xz</font><font color="#990000">*</font>vSkyParams<font color="#000080">.z</font><font color="#990000">;</font>
+
+<i><font color="#9A1900">// Scale texture coordinates to get mix of low/high frequency details</font></i>
+wave0 <font color="#990000">=</font> vTexCoords <font color="#990000">*</font> lambda <font color="#990000">+</font> vSkyParams<font color="#000080">.w</font> <font color="#990000">*</font> <font color="#009900">vec2</font><font color="#990000">(</font> <font color="#993399">0.5</font><font color="#990000">,</font> <font color="#993399">1.0</font> <font color="#990000">);</font>
+
+<i><font color="#9A1900">// Perspective corrected projection</font></i>
+<font color="#000080">gl_Position</font> <font color="#990000">=</font> <b><font color="#000080">ftransform</font></b><font color="#990000">();</font>
+vpos <font color="#990000">=</font> <font color="#000080">gl_Vertex</font><font color="#990000">;</font>
+lpos <font color="#990000">=</font> <font color="#000080">gl_LightSource</font><font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]</font><font color="#000080">.position</font><font color="#990000">;</font>
+
+<i><font color="#9A1900">// Compute normal (assumes this is a sphere)</font></i>
+<font color="#009900">vec3</font> norm <font color="#990000">=</font> <b><font color="#000080">normalize</font></b><font color="#990000">(</font>vpos<font color="#990000">)</font><font color="#000080">.xyz</font><font color="#990000">;</font>
+
+<i><font color="#9A1900">//Compute sun light</font></i>
+<font color="#009900">vec4</font> sunlight <font color="#990000">=</font> <font color="#009900">vec4</font><font color="#990000">(</font><b><font color="#000080">pow</font></b><font color="#990000">(</font> <b><font color="#000080">max</font></b><font color="#990000">(</font><font color="#993399">0.0</font><font color="#990000">,</font> <b><font color="#000080">dot</font></b><font color="#990000">(</font>light<font color="#990000">,</font>norm<font color="#990000">)),</font> <font color="#993399">1024.0</font> <font color="#990000">));</font>
+
+<i><font color="#9A1900">// Get bump layers</font></i>
+<font color="#009900">vec3</font> vBumpTexA <font color="#990000">=</font> <b><font color="#000080">texture2D</font></b><font color="#990000">(</font>BumpMap<font color="#990000">,</font> wave0<font color="#990000">)</font><font color="#000080">.xyz</font><font color="#990000">;</font>
+
+<i><font color="#9A1900">//Add an horizon haze</font></i>
+<font color="#009900">float</font> haze <font color="#990000">=</font> <b><font color="#000080">pow</font></b><font color="#990000">(</font><font color="#000080">gl_FragCoord.z</font><font color="#990000">*(</font><font color="#993399">1.0</font><font color="#990000">-</font>norm<font color="#000080">.y</font><font color="#990000">),</font> <font color="#993399">10.0</font><font color="#990000">);</font>
+skyColor <font color="#990000">=</font> <b><font color="#000080">mix</font></b><font color="#990000">(</font> grey<font color="#990000">,</font> skyColor<font color="#990000">,</font> haze <font color="#990000">);</font>
+
+<font color="#000080">gl_FragColor</font> <font color="#990000">=</font> skyColor <font color="#990000">+</font> vSkyParams<font color="#000080">.x</font><font color="#990000">*</font>sunlight<font color="#990000">;</font>
+<font color="#FF0000">}</font></tt></pre>

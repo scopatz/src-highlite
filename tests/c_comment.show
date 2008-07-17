@@ -1,212 +1,102 @@
- STATE 1
- regexp (///)|(//)|(/\*\*)|(/\*)
-  0: normal  (exit level: 0, exit_all: 0, next: none)
-  1: comment (///) (exit level: 0, exit_all: 0, next: 2)
-     STATE 2
-     regexp (\z)|((?:(?:<?)[[:word:]\./\-_]+\@[[:word:]\./\-_]+(?:>?)))|((?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?)))|(<\?xml)|(<!DOCTYPE)|(<!--)|((?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>))|(<(?:/)?[[:alpha:]](?:[[:word:]:.-]*))|((?:&(?:[[:alnum:]]+);))|((?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>))|(<(?:/)?[[:alpha:]][[:alnum:]]*)|((?:\@[[:alpha:]]+))|((?:(?:TODO|FIXME)(?:[:]?)))
-      0: comment  (exit level: 0, exit_all: 0, next: none)
-      1: comment (\z) (exit level: 1, exit_all: 0, next: none)
-      2: url ((?:(?:<?)[[:word:]\./\-_]+\@[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
-      3: url ((?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
-      4: preproc (<\?xml) (exit level: 0, exit_all: 0, next: 3)
-         STATE 3
-         regexp (\?>) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: preproc (\?>) (exit level: 1, exit_all: 0, next: none)
-         STATE 4
-         regexp ([^="[:blank:]>]+)([:blank:]*)(=?) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: type ([^="[:blank:]>]+)
-          2: normal ([:blank:]*)
-          3: symbol (=?)           (exit level: 0, exit_all: 0, next: none)
-         STATE 6
-         regexp (\")
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: string (\") (exit level: 0, exit_all: 0, next: 5)
-             STATE 5
-             regexp (\")|(\\.)
-              0: string  (exit level: 0, exit_all: 0, next: none)
-              1: string (\") (exit level: 1, exit_all: 0, next: none)
-              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
-      5: preproc (<!DOCTYPE) (exit level: 0, exit_all: 0, next: 7)
-         STATE 7
-         regexp (>) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: preproc (>) (exit level: 1, exit_all: 0, next: none)
-         STATE 8
-         regexp ([^="[:blank:]>]+)([:blank:]*)(=?) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: type ([^="[:blank:]>]+)
-          2: normal ([:blank:]*)
-          3: symbol (=?)           (exit level: 0, exit_all: 0, next: none)
-         STATE 10
-         regexp (\")
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: string (\") (exit level: 0, exit_all: 0, next: 9)
-             STATE 9
-             regexp (\")|(\\.)
-              0: string  (exit level: 0, exit_all: 0, next: none)
-              1: string (\") (exit level: 1, exit_all: 0, next: none)
-              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
-      6: comment (<!--) (exit level: 0, exit_all: 0, next: 11)
-         STATE 11
-         regexp (-->)|(<!--)
-          0: comment  (exit level: 0, exit_all: 0, next: none)
-          1: comment (-->) (exit level: 1, exit_all: 0, next: none)
-          2: comment (<!--) (exit level: 0, exit_all: 0, next: 11)
-      7: keyword ((?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
-      8: keyword (<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)) (exit level: 0, exit_all: 0, next: 12)
-         STATE 12
-         regexp ((?:/)?>) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: keyword ((?:/)?>) (exit level: 1, exit_all: 0, next: none)
-         STATE 13
-         regexp ([^="[:blank:]>]+)([:blank:]*)(=?) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: type ([^="[:blank:]>]+)
-          2: normal ([:blank:]*)
-          3: symbol (=?)           (exit level: 0, exit_all: 0, next: none)
-         STATE 15
-         regexp (\")
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: string (\") (exit level: 0, exit_all: 0, next: 14)
-             STATE 14
-             regexp (\")|(\\.)
-              0: string  (exit level: 0, exit_all: 0, next: none)
-              1: string (\") (exit level: 1, exit_all: 0, next: none)
-              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
-      9: preproc ((?:&(?:[[:alnum:]]+);)) (exit level: 0, exit_all: 0, next: none)
-      10: keyword ((?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
-      11: keyword (<(?:/)?[[:alpha:]][[:alnum:]]*) (exit level: 0, exit_all: 0, next: 16)
-         STATE 16
-         regexp ((?:/)?>) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: keyword ((?:/)?>) (exit level: 1, exit_all: 0, next: none)
-         STATE 17
-         regexp ([^="[:blank:]>]+)([:blank:]*)(=?) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: type ([^="[:blank:]>]+)
-          2: normal ([:blank:]*)
-          3: symbol (=?)           (exit level: 0, exit_all: 0, next: none)
-         STATE 19
-         regexp (\")
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: string (\") (exit level: 0, exit_all: 0, next: 18)
-             STATE 18
-             regexp (\")|(\\.)
-              0: string  (exit level: 0, exit_all: 0, next: none)
-              1: string (\") (exit level: 1, exit_all: 0, next: none)
-              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
-      12: type ((?:\@[[:alpha:]]+)) (exit level: 0, exit_all: 0, next: none)
-      13: todo ((?:(?:TODO|FIXME)(?:[:]?))) (exit level: 0, exit_all: 0, next: none)
-  2: comment (//) (exit level: 0, exit_all: 0, next: 20)
-     STATE 20
-     regexp (\z)
-      0: comment  (exit level: 0, exit_all: 0, next: none)
-      1: comment (\z) (exit level: 1, exit_all: 0, next: none)
-  3: comment (/\*\*) (exit level: 0, exit_all: 0, next: 21)
-     STATE 21
-     regexp (\*/)|((?:(?:<?)[[:word:]\./\-_]+\@[[:word:]\./\-_]+(?:>?)))|((?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?)))|(<\?xml)|(<!DOCTYPE)|(<!--)|((?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>))|(<(?:/)?[[:alpha:]](?:[[:word:]:.-]*))|((?:&(?:[[:alnum:]]+);))|((?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>))|(<(?:/)?[[:alpha:]][[:alnum:]]*)|((?:\@[[:alpha:]]+))|((?:(?:TODO|FIXME)(?:[:]?)))
-      0: comment  (exit level: 0, exit_all: 0, next: none)
-      1: comment (\*/) (exit level: 1, exit_all: 0, next: none)
-      2: url ((?:(?:<?)[[:word:]\./\-_]+\@[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
-      3: url ((?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
-      4: preproc (<\?xml) (exit level: 0, exit_all: 0, next: 22)
-         STATE 22
-         regexp (\?>) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: preproc (\?>) (exit level: 1, exit_all: 0, next: none)
-         STATE 23
-         regexp ([^="[:blank:]>]+)([:blank:]*)(=?) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: type ([^="[:blank:]>]+)
-          2: normal ([:blank:]*)
-          3: symbol (=?)           (exit level: 0, exit_all: 0, next: none)
-         STATE 25
-         regexp (\")
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: string (\") (exit level: 0, exit_all: 0, next: 24)
-             STATE 24
-             regexp (\")|(\\.)
-              0: string  (exit level: 0, exit_all: 0, next: none)
-              1: string (\") (exit level: 1, exit_all: 0, next: none)
-              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
-      5: preproc (<!DOCTYPE) (exit level: 0, exit_all: 0, next: 26)
-         STATE 26
-         regexp (>) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: preproc (>) (exit level: 1, exit_all: 0, next: none)
-         STATE 27
-         regexp ([^="[:blank:]>]+)([:blank:]*)(=?) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: type ([^="[:blank:]>]+)
-          2: normal ([:blank:]*)
-          3: symbol (=?)           (exit level: 0, exit_all: 0, next: none)
-         STATE 29
-         regexp (\")
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: string (\") (exit level: 0, exit_all: 0, next: 28)
-             STATE 28
-             regexp (\")|(\\.)
-              0: string  (exit level: 0, exit_all: 0, next: none)
-              1: string (\") (exit level: 1, exit_all: 0, next: none)
-              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
-      6: comment (<!--) (exit level: 0, exit_all: 0, next: 30)
-         STATE 30
-         regexp (-->)|(<!--)
-          0: comment  (exit level: 0, exit_all: 0, next: none)
-          1: comment (-->) (exit level: 1, exit_all: 0, next: none)
-          2: comment (<!--) (exit level: 0, exit_all: 0, next: 30)
-      7: keyword ((?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
-      8: keyword (<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)) (exit level: 0, exit_all: 0, next: 31)
-         STATE 31
-         regexp ((?:/)?>) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: keyword ((?:/)?>) (exit level: 1, exit_all: 0, next: none)
-         STATE 32
-         regexp ([^="[:blank:]>]+)([:blank:]*)(=?) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: type ([^="[:blank:]>]+)
-          2: normal ([:blank:]*)
-          3: symbol (=?)           (exit level: 0, exit_all: 0, next: none)
-         STATE 34
-         regexp (\")
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: string (\") (exit level: 0, exit_all: 0, next: 33)
-             STATE 33
-             regexp (\")|(\\.)
-              0: string  (exit level: 0, exit_all: 0, next: none)
-              1: string (\") (exit level: 1, exit_all: 0, next: none)
-              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
-      9: preproc ((?:&(?:[[:alnum:]]+);)) (exit level: 0, exit_all: 0, next: none)
-      10: keyword ((?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>)) (exit level: 0, exit_all: 0, next: none)
-      11: keyword (<(?:/)?[[:alpha:]][[:alnum:]]*) (exit level: 0, exit_all: 0, next: 35)
-         STATE 35
-         regexp ((?:/)?>) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: keyword ((?:/)?>) (exit level: 1, exit_all: 0, next: none)
-         STATE 36
-         regexp ([^="[:blank:]>]+)([:blank:]*)(=?) (has alternatives)
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: type ([^="[:blank:]>]+)
-          2: normal ([:blank:]*)
-          3: symbol (=?)           (exit level: 0, exit_all: 0, next: none)
-         STATE 38
-         regexp (\")
-          0: normal  (exit level: 0, exit_all: 0, next: none)
-          1: string (\") (exit level: 0, exit_all: 0, next: 37)
-             STATE 37
-             regexp (\")|(\\.)
-              0: string  (exit level: 0, exit_all: 0, next: none)
-              1: string (\") (exit level: 1, exit_all: 0, next: none)
-              2: string (\\.) (exit level: 0, exit_all: 0, next: none)
-      12: type ((?:\@[[:alpha:]]+)) (exit level: 0, exit_all: 0, next: none)
-      13: todo ((?:(?:TODO|FIXME)(?:[:]?))) (exit level: 0, exit_all: 0, next: none)
-  4: comment (/\*) (exit level: 0, exit_all: 0, next: 39)
-     STATE 39
-     regexp (\*/)|((?:(?:<?)[[:word:]\./\-_]+\@[[:word:]\./\-_]+(?:>?)))|((?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?)))|((?:(?:TODO|FIXME)(?:[:]?)))
-      0: comment  (exit level: 0, exit_all: 0, next: none)
-      1: comment (\*/) (exit level: 1, exit_all: 0, next: none)
-      2: url ((?:(?:<?)[[:word:]\./\-_]+\@[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
-      3: url ((?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?))) (exit level: 0, exit_all: 0, next: none)
-      4: todo ((?:(?:TODO|FIXME)(?:[:]?))) (exit level: 0, exit_all: 0, next: none)
+STATE 1 default: normal
+  rule (comment) "///" (exit level: 0, next: 2)
+    STATE 2 default: comment
+      rule (comment) "\z" (exit level: 1, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (preproc) "<\?xml" (exit level: 0, next: 3)
+        STATE 3 default: normal
+          rule (preproc) "\?>" (exit level: 1, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([:blank:]*)(=?)" (exit level: 0, next: 0)
+          rule (string) "\"" (exit level: 0, next: 4)
+            STATE 4 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+      rule (preproc) "<!DOCTYPE" (exit level: 0, next: 5)
+        STATE 5 default: normal
+          rule (preproc) ">" (exit level: 1, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([:blank:]*)(=?)" (exit level: 0, next: 0)
+          rule (string) "\"" (exit level: 0, next: 6)
+            STATE 6 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+      rule (comment) "<!--" (exit level: 0, next: 7)
+        STATE 7 default: comment
+          rule (comment) "-->" (exit level: 1, next: 0)
+          rule (comment) "<!--" (exit level: 0, next: 0, nested)
+      rule (keyword) "(?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)" (exit level: 0, next: 8)
+        STATE 8 default: normal
+          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([:blank:]*)(=?)" (exit level: 0, next: 0)
+          rule (string) "\"" (exit level: 0, next: 9)
+            STATE 9 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+      rule (preproc) "(?:&(?:[[:alnum:]]+);)" (exit level: 0, next: 0)
+      rule (keyword) "(?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:/)?[[:alpha:]][[:alnum:]]*" (exit level: 0, next: 10)
+        STATE 10 default: normal
+          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([:blank:]*)(=?)" (exit level: 0, next: 0)
+          rule (string) "\"" (exit level: 0, next: 11)
+            STATE 11 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+      rule (type) "(?:\@[[:alpha:]]+)" (exit level: 0, next: 0)
+      rule (todo) "(?:(?:TODO|FIXME|BUG)(?:[:]?))" (exit level: 0, next: 0)
+  rule (comment) "//" (exit level: 0, next: 12)
+    STATE 12 default: comment
+      rule (comment) "\z" (exit level: 1, next: 0)
+  rule (comment) "/\*\*" (exit level: 0, next: 13)
+    STATE 13 default: comment
+      rule (comment) "\*/" (exit level: 1, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (preproc) "<\?xml" (exit level: 0, next: 14)
+        STATE 14 default: normal
+          rule (preproc) "\?>" (exit level: 1, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([:blank:]*)(=?)" (exit level: 0, next: 0)
+          rule (string) "\"" (exit level: 0, next: 15)
+            STATE 15 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+      rule (preproc) "<!DOCTYPE" (exit level: 0, next: 16)
+        STATE 16 default: normal
+          rule (preproc) ">" (exit level: 1, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([:blank:]*)(=?)" (exit level: 0, next: 0)
+          rule (string) "\"" (exit level: 0, next: 17)
+            STATE 17 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+      rule (comment) "<!--" (exit level: 0, next: 18)
+        STATE 18 default: comment
+          rule (comment) "-->" (exit level: 1, next: 0)
+          rule (comment) "<!--" (exit level: 0, next: 0, nested)
+      rule (keyword) "(?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)" (exit level: 0, next: 19)
+        STATE 19 default: normal
+          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([:blank:]*)(=?)" (exit level: 0, next: 0)
+          rule (string) "\"" (exit level: 0, next: 20)
+            STATE 20 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+      rule (preproc) "(?:&(?:[[:alnum:]]+);)" (exit level: 0, next: 0)
+      rule (keyword) "(?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:/)?[[:alpha:]][[:alnum:]]*" (exit level: 0, next: 21)
+        STATE 21 default: normal
+          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([:blank:]*)(=?)" (exit level: 0, next: 0)
+          rule (string) "\"" (exit level: 0, next: 22)
+            STATE 22 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+      rule (type) "(?:\@[[:alpha:]]+)" (exit level: 0, next: 0)
+      rule (todo) "(?:(?:TODO|FIXME|BUG)(?:[:]?))" (exit level: 0, next: 0)
+  rule (comment) "/\*" (exit level: 0, next: 23)
+    STATE 23 default: comment
+      rule (comment) "\*/" (exit level: 1, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (todo) "(?:(?:TODO|FIXME|BUG)(?:[:]?))" (exit level: 0, next: 0)

@@ -14,6 +14,7 @@
 
 #include <set>
 #include <string>
+#include <ostream>
 
 /**
 Prints all the language elements
@@ -23,10 +24,11 @@ Prints all the language elements
 // doublecpp: forward declarations, DO NOT MODIFY
 class LangElem; // file: langelem.h
 class LangElems; // file: langelems.h
+class NamedSubExpsLangElem; // file: namedsubexpslangelem.h
 class StateLangElem; // file: statelangelem.h
 // doublecpp: end, DO NOT MODIFY
 
-#line 23 "langelemsprinter.h"
+#line 24 "langelemsprinter.h"
 class LangElemsPrinter
 {
     typedef std::set<std::string> SetOfElements;
@@ -39,18 +41,22 @@ public:
 
     /**
      * Prints all the elements contained in the passed LangElems
-     * to the standard output.
+     * to the specified ostream.
+     * @param elems
+     * @param os
      */
-    void print(const LangElems *elems);
+    void print(const LangElems *elems, std::ostream &os);
 
 protected:
 // doublecpp: method branches, DO NOT MODIFY
-#line 41 "langelemsprinter.h"
+#line 44 "langelemsprinter.h"
 virtual void collect(const StateLangElem * elem);
-#line 42 "langelemsprinter.h"
+#line 45 "langelemsprinter.h"
 virtual void collect(const LangElem * elem);
-#line 43 "langelemsprinter.h"
+#line 46 "langelemsprinter.h"
 virtual void collect(const LangElems * elem);
+#line 47 "langelemsprinter.h"
+virtual void collect(const NamedSubExpsLangElem * elem);
 public:
 void _forward_collect(const LangElem * elem)
 {
@@ -58,6 +64,11 @@ void _forward_collect(const LangElem * elem)
 };
 
 void _forward_collect(const LangElems * elem)
+{
+  collect(elem);
+};
+
+void _forward_collect(const NamedSubExpsLangElem * elem)
 {
   collect(elem);
 };
@@ -70,7 +81,7 @@ void _forward_collect(const StateLangElem * elem)
 protected:
 virtual void collect_DB(const LangElem * elem);
 virtual void collect_DB(const LangElems * elem);
-#line 43 "langelemsprinter.h"
+#line 47 "langelemsprinter.h"
 // doublecpp: end, DO NOT MODIFY
 
 };

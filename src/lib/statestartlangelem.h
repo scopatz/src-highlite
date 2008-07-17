@@ -22,11 +22,6 @@ A language element that may start a new state/environment
 
 @author Lorenzo Bettini
 */
-// doublecpp: forward declarations, DO NOT MODIFY
-class RegExpStateBuilder; // file: regexpstatebuilder.h
-class RegExpStatePointer; // file: regexpstatebuilder.h
-// doublecpp: end, DO NOT MODIFY
-
 class StateStartLangElem : public LangElem
 {
   private:
@@ -50,10 +45,6 @@ public:
 
     StateLangElem *getStateLangElem() const { return statelangelem; }
     void setStateLangElem(StateLangElem *s) { statelangelem = s; }
-// doublecpp: dispatch methods, DO NOT MODIFY
-public:
-virtual void dispatch_build(RegExpStateBuilder *, RegExpStatePointer state);
-// doublecpp: end, DO NOT MODIFY
 };
 
 #endif

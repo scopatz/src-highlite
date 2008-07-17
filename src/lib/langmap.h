@@ -14,7 +14,6 @@
 
 #include <string>
 #include <map>
-#include <boost/shared_ptr.hpp>
 
 /**
  * A map stored in a file with the format
@@ -26,28 +25,42 @@
  * 
  * @author Lorenzo Bettini
  */
-class LangMap
-{
-  typedef std::map<std::string, std::string> Map;
+class LangMap {
+    typedef std::map<std::string, std::string> Map;
 
-  Map langmap;
+    Map langmap;
+    
+    /// whether the corresponding file is opened
+    bool isOpen;
+    
+    const std::string path, filename;
 
 public:
-  LangMap() {}
-  LangMap(const std::string &path, const std::string &filename);
+    LangMap() : isOpen(false) {
+    }
+    LangMap(const std::string &path, const std::string &filename);
 
-  ~LangMap();
-  
-  typedef Map::const_iterator const_iterator;
-  const_iterator begin() { return langmap.begin(); }
-  const_iterator end() { return langmap.end(); }
+    ~LangMap();
 
-  void print();
-  const std::string &get_file(const std::string &lang) {
-    return langmap[lang];
-  }
+    typedef Map::const_iterator const_iterator;
+    const_iterator begin() {
+        return langmap.begin();
+    }
+    const_iterator end() {
+        return langmap.end();
+    }
+
+    void print();
+    
+    /**
+     * Open the corresponding file (if it is not already opened) and read
+     * and parse its contents.
+     */
+    void open();
+    
+    const std::string &get_file(const std::string &lang) {
+        return langmap[lang];
+    }
 };
-
-typedef boost::shared_ptr<LangMap> LangMapPtr;
 
 #endif

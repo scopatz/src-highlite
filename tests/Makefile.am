@@ -1,4 +1,4 @@
-# Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2008 Lorenzo Bettini <http://www.lorenzobettini.it>
 #  
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without 
@@ -7,6 +7,8 @@
 # This program is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+SUBDIRS = output_dir
 
 STD_STYLE = --style-file $(top_srcdir)/src/default.style
 STD_CSS_STYLE = --style-css-file $(top_srcdir)/src/default.css
@@ -21,6 +23,7 @@ PROGEXE = $(top_builddir)/src/$(PACKAGE)$(EXEEXT)
 PROGNAME = $(PROGEXE) --gen-version $(DATADIROPTION)
 PROGNAME_CSSSTYLE = $(PROGEXE) --gen-version $(DATADIROPTION) $(STD_CSS_STYLE)
 PROGNAME_DOCBOOK = $(PROGEXE) --gen-version $(DATADIROPTION) -f docbook --doc --title="listing in docbook" --tab=8
+PROGNAME_STD = $(PROGNAME) $(STD_STYLE_HTML) 
 
 CHECKLANG = $(top_builddir)/src/$(PACKAGE)$(EXEEXT) --check-lang
 
@@ -116,6 +119,8 @@ LSM2HTML = $(PROGNAME) $(STD_STYLE_HTML)
 
 HAXE2HTML = $(PROGNAME) $(STD_STYLE_HTML)
 
+FORTRAN2HTML = $(PROGNAME) $(STD_STYLE_HTML)
+
 SPEC2HTML = $(PROGNAME) $(STD_STYLE_HTML)
 
 TXT2HTML = $(PROGNAME) -s style $(STD_STYLE_HTML) --lang-def=default.lang
@@ -145,10 +150,10 @@ NAMEDGROUPS_STATE = $(PROGEXE) --gen-version --lang-def=$(srcdir)/namedgroups_st
 
 DEBUGLANG = $(PROGNAME) -s java $(STD_STYLE_HTML) --debug-lang=dump
 
-WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang wrong_syntax.lang wrong_namedgroups.lang wrong_namedgroups_subexps.lang wrong_namedgroups_subexps2.lang wrong_backref.lang wrong_backref2.lang wrong_dyn_backref.lang wrong_dyn_backref2.lang
-WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err wrong_syntax.err wrong_namedgroups.err wrong_namedgroups_subexps.err wrong_namedgroups_subexps2.err wrong_backref.err wrong_backref2.err wrong_dyn_backref.err wrong_dyn_backref2.err
-WRONGSTYLES = wrong_dircolor.style
-WRONGSTYLESOUT = wrong_dircolor.err
+WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang wrong_syntax_simple.lang wrong_syntax.lang wrong_syntax_include.lang wrong_namedgroups.lang wrong_namedgroups_subexps.lang wrong_namedgroups_subexps2.lang wrong_backref.lang wrong_backref2.lang wrong_dyn_backref.lang wrong_dyn_backref2.lang wrong_include.lang wrong_outlang_include.outlang
+WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err wrong_syntax_simple.err wrong_syntax.err wrong_syntax_include.err wrong_namedgroups.err wrong_namedgroups_subexps.err wrong_namedgroups_subexps2.err wrong_backref.err wrong_backref2.err wrong_dyn_backref.err wrong_dyn_backref2.err wrong_include.err wrong_outlang_include.err
+WRONGSTYLES = wrong_dircolor.style wrong_already_defined.style wrong_already_defined_css.css
+WRONGSTYLESOUT = wrong_dircolor.err wrong_already_defined.err wrong_already_defined_css.err
 # missing_langmap2.err
 
 OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_ref_post.tex test_ref.texinfo test_ref.docbook test_ref.xhtml
@@ -231,6 +236,7 @@ test.ngroups test.ngroups.html \
 test_state.ngroups test_state.ngroups.html \
 c_comment.show namedgroups_state.show \
 cpp.langelems \
+lang.list outlang.list \
 test.h.docbook \
 test.sl test.sl.html \
 lang4defaults.lang test.defaults test.wdefault test.wodefault \
@@ -239,9 +245,13 @@ test.properties test.properties.html \
 test.desktop test.desktop.html \
 test.lsm test.lsm.html \
 test.hx test.hx.html \
-test.spec.html
+test.fortran test.fortran.html test.fixed-fortran.html \
+test.spec.html \
+test.ldap test.ldap.html \
+test.m4 test.m4.html \
+test.glsl test.glsl.html
 
-SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .c .c.html .java .java.html .java.doc.html .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show .wdefault .wodefault .wdefault.html .wodefault.html .properties .properties.html .desktop .desktop.html .lsm .lsm.html .hx .hx.html
+SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .c .c.html .java .java.html .java.doc.html .css .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show .wdefault .wodefault .wdefault.html .wodefault.html .properties .properties.html .desktop .desktop.html .lsm .lsm.html .hx .hx.html .fortran .fortran.html .ldap .ldap.html .m4 .m4.html .glsl .glsl.html
 
 c_comment.show: $(top_srcdir)/src/c_comment.lang
 	$(PROGEXE) --show-regex=$(top_srcdir)/src/c_comment.lang > $@
@@ -251,6 +261,12 @@ c_comment.show: $(top_srcdir)/src/c_comment.lang
 
 cpp.langelems: $(top_srcdir)/src/cpp.lang
 	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$(top_srcdir)/src/cpp.lang > $@
+
+lang.list: $(top_srcdir)/src/lang.map
+	$(PROGEXE) $(DATADIROPTION) --lang-list > $@
+
+outlang.list: $(top_srcdir)/src/lang.map
+	$(PROGEXE) $(DATADIROPTION) --outlang-list > $@
 
 .cc.cc.html:
 	$(CPP2HTML) -i $< -o $@
@@ -400,6 +416,21 @@ default.style.html: $(top_srcdir)/src/default.style
 .hx.hx.html:
 	$(HAXE2HTML) -i $< -o $@
 
+.ldap.ldap.html:
+	$(PROGNAME_STD) -i $< -o $@
+
+.m4.m4.html:
+	$(PROGNAME_STD) -i $< -o $@
+
+.glsl.glsl.html:
+	$(PROGNAME_STD) -i $< -o $@
+
+.fortran.fortran.html:
+	$(FORTRAN2HTML) -i $< -o $@
+
+test.fixed-fortran.html: $(srcdir)/test.fortran
+	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -s fixed-fortran -o $@
+
 test.spec.html: $(top_srcdir)/source-highlight.spec
 	$(PROGNAME) -i $(top_srcdir)/source-highlight.spec -o $@
 
@@ -442,20 +473,26 @@ _state.ngroups_state.ngroups.html:
 	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
 .outlang.err:
-	$(CHECKOUTLANG) $< 2> $@ || true
+	$(CHECKOUTLANG) ./$< 2> $@ || true
+	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
 .style.err:
-	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true
+	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=./$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true
+	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
+
+.css.err:
+	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style-css=./$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true
+	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
 PROG_NOLANGDEF=$(PROGEXE) --outlang-def=$(srcdir)/simple.outlang $(STD_STYLE) --data-dir=$(srcdir)/ $(STD_STYLE_DEFAULTS)
-PROG_NOOUTLANGDEF=$(PROGEXE) --lang-def=$(srcdir)/simple.lang $(STD_STYLE) $(STD_STYLE_DEFAULTS)
+PROG_NOOUTLANGDEF=$(PROGEXE) --lang-def=$(srcdir)/simple.lang $(STD_STYLE) $(STD_STYLE_DEFAULTS) --quiet
 
 missing_langmap.err: test.simple
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap.err || true;
 	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_langmap.err && rm -f *testtmp
 
 missing_extension.err: test.simple
-	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple 2> missing_extension.err || true;
+	$(PROG_NOOUTLANGDEF) --outlang-def=$(srcdir)/simple.outlang $(srcdir)/test.simple 2> missing_extension.err || true;
 	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_extension.err && rm -f *testtmp
 
 CPP2HTML_WHEADERS = $(CPP2HTML) --header=$(srcdir)/header.html --footer=$(srcdir)/footer.html
@@ -580,6 +617,8 @@ check_simple \
 check_isolate \
 check_backref \
 check_lang \
+check_langelems \
+check_list \
 check_txt \
 check_sql \
 check_bib \
@@ -599,7 +638,12 @@ check_properties \
 check_desktop \
 check_lsm \
 check_spec \
-check_haxe
+check_haxe \
+check_fortran \
+check_ldap \
+check_m4 \
+check_glsl \
+check-output-dir
 
 remove_css_html_files:
 	rm -f *.css.java.html *.nf_css.java.html
@@ -826,6 +870,28 @@ check_haxe: test.hx.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.hx.html test.hx.out.html
 
+check_ldap: test.ldap.html
+	$(PROGNAME_STD) -i $(srcdir)/test.ldap > test.ldap.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.ldap.html test.ldap.out.html
+
+check_m4: test.m4.html
+	$(PROGNAME_STD) -i $(srcdir)/test.m4 > test.m4.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.m4.html test.m4.out.html
+
+check_glsl: test.glsl.html
+	$(PROGNAME_STD) -i $(srcdir)/test.glsl > test.glsl.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.glsl.html test.glsl.out.html
+
+check_fortran: test.fortran.html test.fixed-fortran.html
+	$(FORTRAN2HTML) -i $(srcdir)/test.fortran > test.fortran.out.html
+	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -s fixed-fortran > test.fixed-fortran.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.fortran.html test.fortran.out.html
+	diff $(srcdir)/test.fixed-fortran.html test.fixed-fortran.out.html
+
 check_spec: test.spec.html
 	$(SPEC2HTML) -i $(top_srcdir)/source-highlight.spec > test.spec.out.html
 	@echo expect no output from diff
@@ -931,13 +997,20 @@ check_namedgroups: test.ngroups.html test_state.ngroups.html
 	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style=$(srcdir)/$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true;
 	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
+.css.err_out:
+	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style-css=$(srcdir)/$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true;
+	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
+
 check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
 	rm -f *.err_out
 	$(MAKE) wrong_exp.err_out
 	$(MAKE) wrong_syntax.err_out
+	$(MAKE) wrong_syntax_include.err_out
 	$(MAKE) wrong_var.err_out
 	$(MAKE) wrong_trans.err_out
 	$(MAKE) wrong_dircolor.err_out
+	$(MAKE) wrong_already_defined.err_out
+	$(MAKE) wrong_already_defined_css.err_out
 	$(MAKE) wrong_namedgroups.err_out
 	$(MAKE) wrong_namedgroups_subexps.err_out
 	$(MAKE) wrong_namedgroups_subexps2.err_out
@@ -945,12 +1018,17 @@ check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
 	$(MAKE) wrong_backref2.err_out
 	$(MAKE) wrong_dyn_backref.err_out
 	$(MAKE) wrong_dyn_backref2.err_out
+	$(MAKE) wrong_include.err_out
+	$(MAKE) wrong_outlang_include.err_out
 	@echo expect no output from diff
 	diff $(srcdir)/wrong_exp.err wrong_exp.err_out
 	diff $(srcdir)/wrong_syntax.err wrong_syntax.err_out
+	diff $(srcdir)/wrong_syntax_include.err wrong_syntax_include.err_out
 	diff $(srcdir)/wrong_var.err wrong_var.err_out
 	diff $(srcdir)/wrong_trans.err wrong_trans.err_out
 	diff $(srcdir)/wrong_dircolor.err wrong_dircolor.err_out
+	diff $(srcdir)/wrong_already_defined.err wrong_already_defined.err_out
+	diff $(srcdir)/wrong_already_defined_css.err wrong_already_defined_css.err_out
 	diff $(srcdir)/wrong_namedgroups.err wrong_namedgroups.err_out
 	diff $(srcdir)/wrong_namedgroups_subexps.err wrong_namedgroups_subexps.err_out
 	diff $(srcdir)/wrong_namedgroups_subexps2.err wrong_namedgroups_subexps2.err_out
@@ -958,6 +1036,8 @@ check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
 	diff $(srcdir)/wrong_backref2.err wrong_backref2.err_out
 	diff $(srcdir)/wrong_dyn_backref.err wrong_dyn_backref.err_out
 	diff $(srcdir)/wrong_dyn_backref2.err wrong_dyn_backref2.err_out
+	diff $(srcdir)/wrong_include.err wrong_include.err_out
+	diff $(srcdir)/wrong_outlang_include.err wrong_outlang_include.err_out
 
 #$(PROG_NOOUTLANGDEF) -i $(srcdir)/test.simple -o test.err_out --data-dir=/tmp 2> missing_langmap2.err_out || true
 #sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap2.err_out
@@ -966,7 +1046,7 @@ check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
 check_missing: missing_extension.err missing_langmap.err
 	rm -f *.err_out
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap.err_out || true
-	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple 2> missing_extension.err_out || true
+	$(PROG_NOOUTLANGDEF) --outlang-def=$(srcdir)/simple.outlang $(srcdir)/test.simple 2> missing_extension.err_out || true
 	@echo expect no output from diff
 	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_langmap.err_out
 	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_extension.err_out
@@ -1045,8 +1125,24 @@ check_langelems: cpp.langelems
 	@echo expect no output from diff
 	diff $(srcdir)/cpp.langelems cpp.out.langelems
 
+check_list: lang.list outlang.list
+	$(PROGEXE) $(DATADIROPTION) --lang-list > lang.out.list
+	$(PROGEXE) $(DATADIROPTION) --outlang-list > outlang.out.list
+	@echo expect no output from diff
+	diff $(srcdir)/lang.list lang.out.list
+	diff $(srcdir)/outlang.list outlang.out.list
+
 clean_ref: 
 	rm -f $(OUTPUTWREFS)
+
+OUTPUTDIR=$(top_builddir)/tests/output_dir
+OUTPUTTODIR= --output-dir=$(OUTPUTDIR)
+
+check-output-dir:
+	rm -f $(OUTPUTDIR)/test.java.html $(OUTPUTDIR)/test.h.html
+	$(PROGEXE) $(DATADIROPTION) $(OUTPUTTODIR) $(srcdir)/test.java $(srcdir)/test.h
+	test -f $(OUTPUTDIR)/test.java.html
+	test -f $(OUTPUTDIR)/test.h.html
 
 source_highlightdoc_DATA = test.php3.html test.pl.html test.pm.html \
 test.py.html test.rb.html test.js.html test.lua.html test.ml.html \
@@ -1074,9 +1170,9 @@ check-valgrind:
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp
 	rm -f test_refs_tmp.*
 
-CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml
+CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml *.out.langelems *.out.list
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html *.fortran.html *.fixed-fortran.html *.hx.html *.m4.html
 
 DISTCLEANFILES=test_ref.html test_ref.xhtml test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html test_ref.docbook

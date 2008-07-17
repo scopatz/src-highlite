@@ -16,11 +16,11 @@
 #include <iostream>
 
 /**
-Tries to infer the language by inspecting the input file
+ Tries to infer the language by inspecting the input file
 
-	@author Lorenzo Bettini <http://www.lorenzobettini.it>
-*/
-class LanguageInfer{
+ @author Lorenzo Bettini <http://www.lorenzobettini.it>
+ */
+class LanguageInfer {
 public:
     LanguageInfer();
 

@@ -2,7 +2,7 @@
 # most of it is shared with c.lang
 
 (keyword,normal,classname) = 
-  `(\<(?:class|struct|typename))([[:blank:]]+)([[:alnum:]]+)`
+  `(\<(?:class|struct|typename))([[:blank:]]+)([[:alnum:]_]+)`
 
 keyword = "class|const_cast|delete",
   "dynamic_cast|explicit|false|friend",

@@ -26,3 +26,11 @@ def main():
       print 'File "' + filename + '" not found!'
 
 main()
+
+q.execute('''
+    select * from
+        foo,bar,baz
+    where
+        foo.blah=bar.blah
+        and baz.spam="eggs"
+    ''')

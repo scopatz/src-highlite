@@ -37,3 +37,5 @@ myscript*
 *.nf_css.java.html
 syslog.style.html
 tags
+lang.out.list
+outlang.out.list

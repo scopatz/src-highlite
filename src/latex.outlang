@@ -2,6 +2,22 @@ extension "tex"
 
 doctemplate
 "% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\documentclass{article}
+$header
+\title{$title}
+\date{}
+\begin{document}
+\maketitle
+\noindent
+"
+"
+$footer
+\end{document}
+"
+end
+
+nodoctemplate
+"% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
 $header\noindent
 "
 "

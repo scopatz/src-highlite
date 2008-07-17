@@ -1,33 +1,38 @@
-//****************************************************************************//
-//      Untabifier class:
 //
-//      Derived Pretranslator to convert tabs to spaces before HTML generation
+// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004-2008
 //
-//      Don Stauffer Revision: June 2003
-//      Lorenzo Bettini Revision: November 2004, mostly completely rewritten
-//****************************************************************************//
-#ifndef	srcUntabifier_H
-#define	srcUntabifier_H
+// Copyright: See COPYING file that comes with this distribution
+//
+
+#ifndef	SRCUNTABIFIER_H
+#define	SRCUNTABIFIER_H
 
 #include "preformatter.h"
 
 using std::string;
 
-class Untabifier : public PreFormatter
-{
- public:
+/**
+ * PerFormratter to convert tabs to spaces before generation
+ * 
+ * @author Don Stauffer Revision: June 2003
+ * Lorenzo Bettini Revision: November 2004, mostly completely rewritten
+ */
+class Untabifier : public PreFormatter {
+public:
 
-  Untabifier (int nSpacesPerTab, PreFormatterPtr f = PreFormatterPtr()) :
-    PreFormatter(f), nSpacesPerTab_ (nSpacesPerTab), n_ (0)
-    {
+    Untabifier(unsigned int nSpacesPerTab, PreFormatterPtr f = PreFormatterPtr()) :
+        PreFormatter(f), nSpacesPerTab_(nSpacesPerTab), n_(0) {
     }
 
-  virtual const string doPreformat( const std::string &text );
+    virtual const string doPreformat(const std::string &text);
+    
+private:
 
- private:
+    /// the number of spaces corresponding to a tab char
+    const int nSpacesPerTab_;
 
-  const int nSpacesPerTab_;
-  int n_;
+    /// the counter of characters
+    unsigned int n_;
 };
 
-#endif //      #ifndef srcUntabifier_H
+#endif // SRCUNTABIFIER_H

@@ -1,0 +1,5 @@
+body {  background-color: white;  }
+
+.keyword { color: blue; font-weight: bold; }
+.type, .classname { color: darkgreen; }
+.keyword { color: blue; font-weight: bold; }

@@ -13,17 +13,15 @@
 #ifndef PARSESTYLES_H
 #define PARSESTYLES_H
 
-class GeneratorFactory;
+class TextStyleFormatterFactory;
 
 /// for style files
 void parseStyles(const std::string &path, const std::string &name,
-                   GeneratorFactory *generatorFactory,
-                   std::string &bodyBgColor) ;
-void parseStyleError(const std::string &error, bool exit = true) ;
+        TextStyleFormatterFactory *formatterFactory, std::string &bodyBgColor);
+void parseStyleError(const std::string &error);
 
 /// for css style files
 void parseCssStyles(const std::string &path, const std::string &name,
-                       GeneratorFactory *generatorFactory,
-                       std::string &bodyBgColor) ;
+        TextStyleFormatterFactory *formatterFactory, std::string &bodyBgColor);
 
 #endif

@@ -26,7 +26,8 @@ endif
 # these deps explicit
 cmdline.h: cmdline.c
 
-bin_PROGRAMS = source-highlight check-regexp
+#bin_PROGRAMS = check-regexp source-highlight
+bin_PROGRAMS = check-regexp source-highlight 
 bin_SCRIPTS = java2html cpp2html src-hilite-lesspipe.sh
 
 EXTRA_PROGRAMS = source-highlight-cgi 
@@ -41,7 +42,7 @@ AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl
 
 LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
 
-source_highlight_LDADD = $(BOOST_REGEX_LIB) $(LDADD) lib/libcommon.la
+source_highlight_LDADD = $(LDADD) $(top_builddir)/src/lib/libsrchilite.la
 source_highlight_cgi_LDADD = $(source_highlight_LDADD)
 
 check_regexp_LDADD = $(BOOST_REGEX_LIB) $(top_builddir)/gl/libgnu.la
@@ -55,10 +56,11 @@ DIST_SUBDIRS = \
 	includes
 
 # for most rules, we use one file per line. `diffs' are more clear this way
-source_highlight_SOURCES = cmdline.c startapp.cc source-highlight.cc 
+#source_highlight_SOURCES = cmdline.c startapp.cc source-highlight.cc
+source_highlight_SOURCES = cmdline.c source-highlight.cc 
 check_regexp_SOURCES = check-regexp_cmd.c check-regexp.cpp
 
-source_highlight_cgi_SOURCES = cmdline.c startapp-cgi.cc envmapper.c
+source_highlight_cgi_SOURCES = cmdline.c source-highlight-cgi.cc envmapper.c
 
 # files that we don't want automake/autoconf to touch ever.
 # just stick them in the distribution as-is
@@ -66,8 +68,8 @@ EXTRA_DIST = \
 java2html.in \
 cpp2html.in \
 src-hilite-lesspipe.sh.in \
-startapp.h \
 envmapper.h \
+cmdline.ggo check-regexp_cmd.ggo \
 $(source_highlightdata_DATA)
 
 LANGFILES = \
@@ -75,13 +77,13 @@ bison.lang      c.lang cpp.lang       javascript.lang  perl.lang    ruby.lang \
 c_comment.lang  flex.lang      log.lang         php.lang     sml.lang \
 caml.lang       function.lang  lua.lang         prolog.lang  symbols.lang \
 changelog.lang  java.lang      number.lang      python.lang  url.lang \
-pascal.lang fortran.lang html.lang latex.lang logtalk.lang \
+pascal.lang fortran.lang fixed-fortran.lang html.lang latex.lang logtalk.lang \
 diff.lang c_string.lang langdef.lang outlang.lang style.lang \
 extreme_comment.lang extreme_comment2.lang extreme_comment3.lang \
 postscript.lang csharp.lang xml.lang sh.lang script_comment.lang \
 tcl.lang sql.lang bib.lang makefile.lang css.lang m4.lang \
 default.lang nohilite.lang slang.lang key_string.lang properties.lang \
-desktop.lang lsm.lang spec.lang haxe.lang
+desktop.lang lsm.lang spec.lang haxe.lang ldap.lang glsl.lang
 
 OUTLANGFILES = \
 css_common.outlang \
@@ -90,23 +92,19 @@ html_common.outlang \
 html_ref.outlang \
 html_notfixed.outlang \
 htmlcss.outlang \
-htmldoc.outlang \
 htmltable.outlang \
+htmltablelinenum.outlang \
 html.outlang \
-latexdoc.outlang \
 latex.outlang \
-latexcolordoc.outlang \
 latexcolor.outlang \
 xhtml_common.outlang \
 xhtmlcss.outlang \
-xhtmldoc.outlang \
 xhtml.outlang \
 xhtml_notfixed.outlang \
 xhtmltable.outlang \
 texinfo.outlang \
 javadoc.outlang \
-docbook.outlang \
-docbookdoc.outlang
+docbook.outlang
 
 STYLEFILES = texinfo.style esc.style
 
@@ -134,4 +132,4 @@ tags:
 
 .PHONY: tags
 
-noinst_HEADERS = asserttest.h cmdline.h cmdlineargs.h cmdline.ggo check-regexp_cmd.h check-regexp_cmd.ggo          
+noinst_HEADERS = cmdline.h check-regexp_cmd.h          

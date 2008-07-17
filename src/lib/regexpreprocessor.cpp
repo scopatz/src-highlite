@@ -48,7 +48,7 @@ const boost::regex
 const boost::regex reference_exp("(?<!\\\\)@\\{([[:digit:]])\\}");
 
 /// substitute a special char (i.e., .[{()\*+?|^$)...
-const boost::regex special_char("(\\.|\\[|\\{|\\(|\\)|\\\\|\\*|\\+|\\?|\\||\\^|\\$)");
+const boost::regex special_char("(\\.|\\[|\\]|\\{|\\}|\\(|\\)|\\\\|\\*|\\+|\\?|\\||\\^|\\$)");
 /// ...with its escaped version
 const string special_char_escape = "(?1\\\\\\1)";
 
@@ -361,6 +361,10 @@ const std::string RegexPreProcessor::replace_backreferences(
 
     return replace_backreferences(original, replace);
 }
+
+#include <iostream>
+
+using namespace std;
 
 const std::string RegexPreProcessor::replace_references(
         const std::string &original, const backreference_replacements &replace) {

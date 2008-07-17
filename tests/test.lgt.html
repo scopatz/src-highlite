@@ -3,64 +3,352 @@ by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>
-<i><font color="#9A1900">% sort code adopted from an example in the SICStus Prolog User Manual</font></i>
-<i><font color="#9A1900">% metapredicate example taken from Prolog Part 2, Modules - Committee Draft</font></i>
+<i><font color="#9A1900">% this is a single-line comment</font></i>
+
+<i><font color="#9A1900">/*</font></i>
+<i><font color="#9A1900">this is</font></i>
+<i><font color="#9A1900">a block</font></i>
+<i><font color="#9A1900">comment</font></i>
+<i><font color="#9A1900">*/</font></i>
 
 
-<b><font color="#000080">:- object</font></b>(sort(<font color="#009900">_Type</font>)).
+<b><font color="#000080">:- encoding</font></b>(some_encoding).
+<b><font color="#000080">:- op</font></b>(<font color="#009900">Precedence</font>, <font color="#009900">Associativity</font>, <font color="#009900">Operator</font>).
 
+
+<b><font color="#000080">:- object</font></b>(prototype,
+	<b><font color="#000080">implements</font></b>(protocol),
+	<b><font color="#000080">imports</font></b>(category),
+	<b><font color="#000080">extends</font></b>(parent)).
 
 <b><font color="#000080">	:- info</font></b>([
 		version <b><font color="#0000FF">is</font></b> <font color="#993399">1.0</font>,
 		author <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Paulo Moura'</font>,
-		date <b><font color="#0000FF">is</font></b> <font color="#993399">2000</font><font color="#990000">/</font><font color="#993399">7</font><font color="#990000">/</font><font color="#993399">24</font>,
-		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'List sorting parameterized by the type of the list elements.'</font>]).
+		date <b><font color="#0000FF">is</font></b> <font color="#993399">2008</font><font color="#990000">/</font><font color="#993399">5</font><font color="#990000">/</font><font color="#993399">1</font>,
+		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Sample prototype for testing syntax coloring.'</font>]).
+<b><font color="#000080">	:- threaded.</font></b>
+<b><font color="#000080">	:- synchronized.</font></b>
+<b><font color="#000080">	:- dynamic.</font></b>
+<b><font color="#000080">	:- initialization</font></b>(some_goal(<font color="#009900">X</font>, <font color="#009900">Y</font>)).
+<b><font color="#000080">	:- calls</font></b>(some_other_protocol).
+<b><font color="#000080">	:- uses</font></b>(another_object).
+
+<b><font color="#000080">	:- alias</font></b>(set, member<font color="#990000">/</font><font color="#993399">2</font>, set_member<font color="#990000">/</font><font color="#993399">2</font>).
+<b><font color="#000080">	:- alias</font></b>(words, singular<font color="#990000">//</font><font color="#993399">0</font>, peculiar<font color="#990000">//</font><font color="#993399">0</font>).
+
+<b><font color="#000080">	:- uses</font></b>(list, [append<font color="#990000">/</font><font color="#993399">3</font>, member<font color="#990000">/</font><font color="#993399">2</font>]).
+<b><font color="#000080">	:- uses</font></b>(queues, [new<font color="#990000">/</font><font color="#993399">1</font><font color="#990000">::</font>new_queue<font color="#990000">/</font><font color="#993399">1</font>]).
+
+<b><font color="#000080">	:- public</font></b>(aaa<font color="#990000">/</font><font color="#993399">2</font>).
+<b><font color="#000080">	:- meta_predicate</font></b>(aaa(<font color="#990000">::</font>, <font color="#990000">*</font>)).
+<b><font color="#000080">	:- discontiguous</font></b>(aaa<font color="#990000">/</font><font color="#993399">2</font>).
+<b><font color="#000080">	:- mode</font></b>(aaa(<font color="#990000">+</font>callable, <font color="#990000">?</font>integer), zero_or_one).
+<b><font color="#000080">	:- info</font></b>(position<font color="#990000">/</font><font color="#993399">2</font>, [
+		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Predicate brief description.'</font>,
+		arguments <b><font color="#0000FF">is</font></b> [<font color="#FF0000">'Arg1'</font><font color="#990000">-</font><font color="#FF0000">'Arg1 description'</font>, <font color="#FF0000">'Arg2'</font><font color="#990000">-</font><font color="#FF0000">'Arg2 description'</font>]]).
+
+<b><font color="#000080">	:- protected</font></b>(bbb<font color="#990000">/</font><font color="#993399">2</font>).
+<b><font color="#000080">	:- synchronized</font></b>(bbb<font color="#990000">/</font><font color="#993399">2</font>).
+<b><font color="#000080">	:- mode</font></b>(bbb(<font color="#990000">+</font>integer, <font color="#990000">-</font>float), one).
+<b><font color="#000080">	:- info</font></b>(bbb<font color="#990000">/</font><font color="#993399">2</font>, [
+		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Predicate brief description.'</font>,
+		argnames <b><font color="#0000FF">is</font></b> [<font color="#FF0000">'Arg1'</font>, <font color="#FF0000">'Arg2'</font>]]).
+
+<b><font color="#000080">	:- private</font></b>(ccc<font color="#990000">/</font><font color="#993399">2</font>).
+<b><font color="#000080">	:- dynamic</font></b>(ccc<font color="#990000">/</font><font color="#993399">2</font>).
+<b><font color="#000080">	:- mode</font></b>(ccc(<font color="#990000">@</font>atom, <font color="#990000">?</font>atom), one_or_more).
+<b><font color="#000080">	:- info</font></b>(ccc<font color="#990000">/</font><font color="#993399">2</font>, [
+		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Predicate brief description.'</font>,
+		argnames <b><font color="#0000FF">is</font></b> [<font color="#FF0000">'Arg1'</font>, <font color="#FF0000">'Arg2'</font>]]).
+
+	enumerating_entities(<font color="#009900">Object</font>, <font color="#009900">Protocol</font>, <font color="#009900">Category</font>) <font color="#990000">:-</font>
+		<b><font color="#0000FF">current_category</font></b>(<font color="#009900">Category</font>),
+		<b><font color="#0000FF">current_object</font></b>(<font color="#009900">Object</font>),
+		<b><font color="#0000FF">current_protocol</font></b>(<font color="#009900">Protocol</font>).
+
+	enumerating_properties <font color="#990000">:-</font>
+		<b><font color="#0000FF">category_property</font></b>(<font color="#009900">Category</font>, <font color="#009900">Property</font>),
+		<b><font color="#0000FF">object_property</font></b>(<font color="#009900">Object</font>, <font color="#009900">Property</font>),
+		<b><font color="#0000FF">protocol_property</font></b>(<font color="#009900">Protocol</font>, <font color="#009900">Property</font>).
+
+	creating_entities(<font color="#009900">Object</font>, <font color="#009900">Protocol</font>, <font color="#009900">Category</font>) <font color="#990000">:-</font>
+		<b><font color="#0000FF">create_category</font></b>(<font color="#009900">Category</font>, <font color="#009900">Relations</font>, <font color="#009900">Directives</font>, <font color="#009900">Clauses</font>),
+		<b><font color="#0000FF">create_object</font></b>(<font color="#009900">Object</font>, <font color="#009900">Relations</font>, <font color="#009900">Directives</font>, <font color="#009900">Clauses</font>),
+		<b><font color="#0000FF">create_protocol</font></b>(<font color="#009900">Protocol</font>, <font color="#009900">Relations</font>, <font color="#009900">Directives</font>).
+
+	abolishing_entities(<font color="#009900">Object</font>, <font color="#009900">Protocol</font>, <font color="#009900">Category</font>) <font color="#990000">:-</font>
+		<b><font color="#0000FF">abolish_category</font></b>(<font color="#009900">Category</font>),
+		<b><font color="#0000FF">abolish_object</font></b>(<font color="#009900">Object</font>),
+		<b><font color="#0000FF">abolish_protocol</font></b>(<font color="#009900">Protocol</font>).
+
+	entity_relations <font color="#990000">:-</font>
+		<b><font color="#0000FF">extends_object</font></b>(<font color="#009900">Prototype</font>, <font color="#009900">Parent</font>, <font color="#009900">Scope</font>),
+		<b><font color="#0000FF">extends_protocol</font></b>(<font color="#009900">Protocol1</font>, <font color="#009900">Protocol2</font>, <font color="#009900">Scope</font>),
+		<b><font color="#0000FF">extends_category</font></b>(<font color="#009900">Category1</font>, <font color="#009900">Category2</font>, <font color="#009900">Scope</font>),
+		<b><font color="#0000FF">implements_protocol</font></b>(<font color="#009900">Object</font>, <font color="#009900">Protocol</font>, <font color="#009900">Scope</font>),
+		<b><font color="#0000FF">imports_category</font></b>(<font color="#009900">Object</font>, <font color="#009900">Category</font>, <font color="#009900">Scope</font>),
+		<b><font color="#0000FF">instantiates_class</font></b>(<font color="#009900">Instance</font>, <font color="#009900">Class</font>, <font color="#009900">Scope</font>),
+		<b><font color="#0000FF">specializes_class</font></b>(<font color="#009900">Class</font>, <font color="#009900">Superclass</font>, <font color="#009900">Scope</font>),
+		<b><font color="#0000FF">complements_object</font></b>(<font color="#009900">Category</font>, <font color="#009900">Object</font>).
+
+	event_handling <font color="#990000">:-</font>
+		<b><font color="#0000FF">abolish_events</font></b>(<font color="#009900">Event</font>, <font color="#009900">Object</font>, <font color="#009900">Message</font>, <font color="#009900">Sender</font>, <font color="#009900">Monitor</font>),
+		<b><font color="#0000FF">current_event</font></b>(<font color="#009900">Event</font>, <font color="#009900">Object</font>, <font color="#009900">Message</font>, <font color="#009900">Sender</font>, <font color="#009900">Monitor</font>),
+		<b><font color="#0000FF">define_events</font></b>(<font color="#009900">Event</font>, <font color="#009900">Object</font>, <font color="#009900">Message</font>, <font color="#009900">Sender</font>, <font color="#009900">Monitor</font>).
+
+	multi_threading <font color="#990000">:-</font>
+		<b><font color="#0000FF">threaded</font></b>(<font color="#009900">Goals</font>),
+		<b><font color="#0000FF">threaded_call</font></b>(<font color="#009900">Goal</font>),
+		<b><font color="#0000FF">threaded_once</font></b>(<font color="#009900">Goal</font>),
+		<b><font color="#0000FF">threaded_ignore</font></b>(<font color="#009900">Goal</font>),
+		<b><font color="#0000FF">threaded_exit</font></b>(<font color="#009900">Goal</font>),
+		<b><font color="#0000FF">threaded_peek</font></b>(<font color="#009900">Goal</font>),
+		<b><font color="#0000FF">threaded_wait</font></b>(<font color="#009900">Goal</font>),
+		<b><font color="#0000FF">threaded_notify</font></b>(<font color="#009900">Notification</font>).
+
+	compiling_and_loading <font color="#990000">:-</font>
+		<b><font color="#0000FF">logtalk_compile</font></b>(<font color="#009900">File</font>, <font color="#009900">Options</font>),
+		<b><font color="#0000FF">logtalk_load</font></b>(<font color="#009900">File</font>, <font color="#009900">Options</font>),
+		<b><font color="#0000FF">logtalk_library_path</font></b>(<font color="#009900">Library</font>, <font color="#009900">Path</font>).
+
+	flags <font color="#990000">:-</font>
+		<b><font color="#0000FF">current_logtalk_flag</font></b>(<font color="#009900">Flag</font>, <font color="#009900">Value</font>),
+		<b><font color="#0000FF">set_logtalk_flag</font></b>(<font color="#009900">Flag</font>, <font color="#009900">Value</font>).
+
+	execution_context_methods <font color="#990000">:-</font>
+		<b><font color="#0000FF">parameter</font></b>(<font color="#009900">N</font>, <font color="#009900">Parameter</font>),
+		<b><font color="#0000FF">self</font></b>(<font color="#009900">Self</font>),
+		<b><font color="#0000FF">sender</font></b>(<font color="#009900">Sender</font>),
+		<b><font color="#0000FF">this</font></b>(<font color="#009900">This</font>).
+
+	reflection_methods <font color="#990000">:-</font>
+		<b><font color="#0000FF">current_predicate</font></b>(<font color="#009900">Predicate</font>),
+		<b><font color="#0000FF">predicate_property</font></b>(<font color="#009900">Predicate</font>, <font color="#009900">Property</font>).
+
+	database_methods <font color="#990000">:-</font>
+		<b><font color="#0000FF">abolish</font></b>(<font color="#009900">Functor</font><font color="#990000">/</font><font color="#009900">Arity</font>),
+		<b><font color="#0000FF">asserta</font></b>(<font color="#009900">Clause</font>),
+		<b><font color="#0000FF">assertz</font></b>(<font color="#009900">Clause</font>),
+		<b><font color="#0000FF">clause</font></b>(<font color="#009900">Head</font>, <font color="#009900">Body</font>),
+		<b><font color="#0000FF">retract</font></b>(<font color="#009900">Clause</font>),
+		<b><font color="#0000FF">retractall</font></b>(<font color="#009900">Head</font>).
+
+	meta_call_methods <font color="#990000">:-</font>
+		<b><font color="#0000FF">call</font></b>(<font color="#009900">Goal</font>).
+
+	all_solutions_methods <font color="#990000">:-</font>
+		<b><font color="#0000FF">bagof</font></b>(<font color="#009900">Term</font>, <font color="#009900">Goal</font>, <font color="#009900">List</font>),
+		<b><font color="#0000FF">findall</font></b>(<font color="#009900">Term</font>, <font color="#009900">Goal</font>, <font color="#009900">List</font>),
+		<b><font color="#0000FF">forall</font></b>(<font color="#009900">Generate</font>, <font color="#009900">Test</font>),
+		<b><font color="#0000FF">setof</font></b>(<font color="#009900">Term</font>, <font color="#009900">Goal</font>, <font color="#009900">List</font>).
+
+	event_handler_methods <font color="#990000">:-</font>
+		<b><font color="#0000FF">before</font></b>(<font color="#009900">Object</font>, <font color="#009900">Message</font>, <font color="#009900">Sender</font>),
+		<b><font color="#0000FF">after</font></b>(<font color="#009900">Object</font>, <font color="#009900">Message</font>, <font color="#009900">Sender</font>).
+
+	dcg_rules_parsing_methods <font color="#990000">:-</font>
+		<b><font color="#0000FF">phrase</font></b>(<font color="#009900">NonTerminal</font>, <font color="#009900">Input</font>, <font color="#009900">Rest</font>).
+
+	term_expansion_methods <font color="#990000">:-</font>
+		<b><font color="#0000FF">expand_term</font></b>(<font color="#009900">Term</font>, <font color="#009900">Expanded</font>),
+		<b><font color="#0000FF">term_expansion</font></b>(<font color="#009900">Term</font>, <font color="#009900">Expanded</font>),
+		<b><font color="#0000FF">goal_expansion</font></b>(<font color="#009900">Goal</font>, <font color="#009900">Expanded</font>).
+
+	message_sending <font color="#990000">:-</font>
+		<font color="#009900">Object</font><font color="#990000">::</font><font color="#009900">Message</font>,
+		<font color="#990000">::</font><font color="#009900">Message</font>,
+		<font color="#990000">^^</font><font color="#009900">Message</font>.
+
+	calling_external_code <font color="#990000">:-</font>
+		<font color="#FF0000">{</font>goal1, goal2, goal3<font color="#FF0000">}</font>.
+
+	context_switching_calls <font color="#990000">:-</font>
+		<font color="#009900">Object</font><font color="#990000">&lt;&lt;</font><font color="#009900">Goal</font>.
+
+	direct_calls_of_category_predicates <font color="#990000">:-</font>
+		<font color="#990000">:</font><font color="#009900">Goal</font>.
+
+	if_then_else <font color="#990000">:-</font>
+		(	<font color="#009900">If</font> <font color="#990000">-&gt;</font>
+			<font color="#009900">Then</font>
+		<font color="#990000">;</font>	<font color="#009900">Else</font>
+		).
+
+	numbers <font color="#990000">:-</font>
+		<font color="#009900">X</font> <b><font color="#0000FF">is</font></b> <font color="#993399">13</font>,
+		<font color="#009900">Y</font> <b><font color="#0000FF">is</font></b> <font color="#993399">13.13</font>,
+		<font color="#009900">Z</font> <b><font color="#0000FF">is</font></b> <font color="#993399">13.13e-23</font>,
+		<font color="#009900">C1</font> <b><font color="#0000FF">is</font></b> <font color="#993399">0'A</font>, <font color="#009900">C2</font> <b><font color="#0000FF">is</font></b> <font color="#993399">0''</font>, <font color="#009900">C3</font> <b><font color="#0000FF">is</font></b> <font color="#993399">0'"</font>,
+		<font color="#009900">B</font> <b><font color="#0000FF">is</font></b> <font color="#993399">0b1011101</font>,
+		<font color="#009900">O</font> <b><font color="#0000FF">is</font></b> <font color="#993399">0o1234560</font>,
+		<font color="#009900">H</font> <b><font color="#0000FF">is</font></b> <font color="#993399">0x1234567890abcDEF</font>.
+
+	functions <font color="#990000">:-</font>
+		<font color="#009900">A</font> <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">atan</font></b>(<font color="#993399">3.14</font>) <font color="#990000">+</font> <b><font color="#0000FF">sin</font></b>(<font color="#993399">0.77</font>) <font color="#990000">-</font> <b><font color="#0000FF">cos</font></b>(<font color="#993399">123.23</font>),
+		<font color="#009900">B</font> <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">sign</font></b>(<font color="#990000">-</font><font color="#993399">12</font>) <font color="#990000">*</font> <b><font color="#0000FF">abs</font></b>(<font color="#993399">35</font><font color="#990000">/</font><font color="#993399">78</font>),
+		<font color="#009900">C</font> <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">truncate</font></b>(<font color="#993399">3.14</font>) <font color="#990000">+</font> <b><font color="#0000FF">round</font></b>(<font color="#990000">-</font><font color="#993399">7.8</font>) <font color="#990000">-</font> <b><font color="#0000FF">ceiling</font></b>(<font color="#993399">111.88</font>),
+		<font color="#009900">D</font> <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">exp</font></b>(<font color="#993399">3.8</font>) <font color="#990000">-</font> <b><font color="#0000FF">log</font></b>(<font color="#993399">123.98</font>) <font color="#990000">/</font> <b><font color="#0000FF">sqrt</font></b>(<font color="#993399">33</font>) <font color="#990000">*</font> <font color="#993399">23</font> <font color="#990000">**</font> <font color="#993399">4</font>,
+		<font color="#009900">E</font> <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">rem</font></b>(<font color="#993399">3</font>, <font color="#993399">2</font>) <font color="#990000">+</font> <b><font color="#0000FF">mod</font></b>(<font color="#993399">5</font>, <font color="#993399">3</font>) <font color="#990000">*</font> <font color="#993399">2</font> <b><font color="#0000FF">rem</font></b> <font color="#993399">2</font> <font color="#990000">//</font> <font color="#993399">5</font> <b><font color="#0000FF">mod</font></b> <font color="#993399">3</font>,
+		<font color="#009900">F</font> <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">float_fractional_part</font></b>(<font color="#993399">3.14</font>) <font color="#990000">+</font> <b><font color="#0000FF">float_integer_part</font></b>(<font color="#993399">3.14</font>),
+		<font color="#009900">G</font> <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">float</font></b>(<font color="#993399">33</font>) <font color="#990000">+</font> <b><font color="#0000FF">floor</font></b>(<font color="#993399">99.99</font>).
+
+	bitwise <font color="#990000">:-</font>
+		<font color="#009900">A</font> <b><font color="#0000FF">is</font></b> <font color="#993399">16</font> <font color="#990000">&gt;&gt;</font> <font color="#993399">2</font>,
+		<font color="#009900">B</font> <b><font color="#0000FF">is</font></b> <font color="#993399">16</font> <font color="#990000">&lt;&lt;</font> <font color="#993399">2</font>,
+		<font color="#009900">C</font> <b><font color="#0000FF">is</font></b> <font color="#993399">10</font> <font color="#990000">/\</font> <font color="#993399">12</font>,
+		<font color="#009900">D</font> <b><font color="#0000FF">is</font></b> <font color="#993399">10</font> <font color="#990000">\/</font> <font color="#993399">12</font>,
+		<font color="#009900">E</font> <b><font color="#0000FF">is</font></b> <font color="#990000">\</font> <font color="#993399">10</font>.
+
+	term_unification <font color="#990000">:-</font>
+		<font color="#009900">Term1</font> <font color="#990000">=</font> <font color="#009900">Term2</font>,
+		<font color="#009900">Term1</font> <font color="#990000">\=</font> <font color="#009900">Term2</font>,
+		<b><font color="#0000FF">unify_with_occurs_check</font></b>(<font color="#009900">Term1</font>, <font color="#009900">Term2</font>).
+
+	term_testing <font color="#990000">:-</font>
+		<b><font color="#0000FF">atom</font></b>(<font color="#009900">Atom</font>),
+		<b><font color="#0000FF">atomic</font></b>(<font color="#009900">Atomic</font>),
+		<b><font color="#0000FF">integer</font></b>(<font color="#009900">Integer</font>),
+		<b><font color="#0000FF">float</font></b>(<font color="#009900">Float</font>),
+		<b><font color="#0000FF">compound</font></b>(<font color="#009900">Term</font>),
+		<b><font color="#0000FF">nonvar</font></b>(<font color="#009900">Term</font>),
+		<b><font color="#0000FF">var</font></b>(<font color="#009900">Term</font>),
+		<b><font color="#0000FF">number</font></b>(<font color="#009900">Number</font>).
+
+	term_comparison <font color="#990000">:-</font>
+		<font color="#009900">Term1</font> <font color="#990000">==</font> <font color="#009900">Term2</font>,
+		<font color="#009900">Term1</font> <font color="#990000">\==</font> <font color="#009900">Term2</font>,
+		<font color="#009900">Term1</font> <font color="#990000">@&lt;</font> <font color="#009900">Term2</font>,
+		<font color="#009900">Term1</font> <font color="#990000">@=&lt;</font> <font color="#009900">Term2</font>,
+		<font color="#009900">Term1</font> <font color="#990000">@&gt;=</font> <font color="#009900">Term2</font>,
+		<font color="#009900">Term1</font> <font color="#990000">@&gt;</font> <font color="#009900">Term2</font>.
+
+	term_creation_and_decomposition <font color="#990000">:-</font>
+		<b><font color="#0000FF">functor</font></b>(<font color="#009900">Term</font>, <font color="#009900">Functor</font>, <font color="#009900">Arity</font>),
+		<b><font color="#0000FF">arg</font></b>(<font color="#009900">N</font>, <font color="#009900">Term</font>, <font color="#009900">Arg</font>),
+		<font color="#009900">Term</font> <font color="#990000">=..</font> [<font color="#009900">Functor</font>| <font color="#009900">Args</font>],
+		<b><font color="#0000FF">copy_term</font></b>(<font color="#009900">Term</font>, <font color="#009900">Copy</font>).
+
+	arithemtic_evaluation <font color="#990000">:-</font>
+		<font color="#009900">X</font> <b><font color="#0000FF">is</font></b> <font color="#009900">Expression</font>.
+
+	arithemtic_comparison <font color="#990000">:-</font>
+		<font color="#009900">Exp1</font> <font color="#990000">=:=</font> <font color="#009900">Exp2</font>,
+		<font color="#009900">Exp1</font> <font color="#990000">=\=</font> <font color="#009900">Exp2</font>,
+		<font color="#009900">Exp1</font> <font color="#990000">&lt;</font> <font color="#009900">Exp2</font>,
+		<font color="#009900">Exp1</font> <font color="#990000">=&lt;</font> <font color="#009900">Exp2</font>,
+		<font color="#009900">Exp1</font> <font color="#990000">&gt;</font> <font color="#009900">Exp2</font>,
+		<font color="#009900">Exp1</font> <font color="#990000">&gt;=</font> <font color="#009900">Exp2</font>.
+
+	stream_selection_and_control <font color="#990000">:-</font>
+		<b><font color="#0000FF">current_input</font></b>(<font color="#009900">Stream</font>),
+		<b><font color="#0000FF">current_output</font></b>(<font color="#009900">Stream</font>),
+		<b><font color="#0000FF">set_input</font></b>(<font color="#009900">Stream</font>),
+		<b><font color="#0000FF">set_output</font></b>(<font color="#009900">Stream</font>),
+		<b><font color="#0000FF">open</font></b>(<font color="#009900">Source</font>, <font color="#009900">Mode</font>, <font color="#009900">Stream</font>, <font color="#009900">Options</font>),
+		<b><font color="#0000FF">close</font></b>(<font color="#009900">Stream</font>),
+		<b><font color="#0000FF">flush_output</font></b>(<font color="#009900">Stream</font>),
+		<b><font color="#0000FF">stream_property</font></b>(<font color="#009900">Stream</font>, <font color="#009900">Property</font>),
+		<b><font color="#0000FF">at_end_of_stream</font></b>(<font color="#009900">Stream</font>),
+		<b><font color="#0000FF">set_stream_position</font></b>(<font color="#009900">Stream</font>, <font color="#009900">Position</font>),
+		<b><font color="#0000FF">flush_output</font></b>,
+		<b><font color="#0000FF">at_end_of_stream</font></b>.
+
+	character_input_output <font color="#990000">:-</font>
+		<b><font color="#0000FF">get_char</font></b>(<font color="#009900">Char</font>),
+		<b><font color="#0000FF">get_code</font></b>(<font color="#009900">Code</font>),
+		<b><font color="#0000FF">peek_char</font></b>(<font color="#009900">Char</font>),
+		<b><font color="#0000FF">peek_code</font></b>(<font color="#009900">Code</font>),
+		<b><font color="#0000FF">put_char</font></b>(<font color="#009900">Char</font>),
+		<b><font color="#0000FF">put_code</font></b>(<font color="#009900">Code</font>),
+		<b><font color="#0000FF">nl</font></b>(<font color="#009900">Stream</font>),
+		<b><font color="#0000FF">nl</font></b>.
+
+	byte_input_output <font color="#990000">:-</font>
+		<b><font color="#0000FF">get_byte</font></b>(<font color="#009900">Byte</font>),
+		<b><font color="#0000FF">peek_byte</font></b>(<font color="#009900">Byte</font>),
+		<b><font color="#0000FF">put_byte</font></b>(<font color="#009900">Byte</font>).
+
+	term_input_output <font color="#990000">:-</font>
+		<b><font color="#0000FF">read</font></b>(<font color="#009900">Term</font>),
+		<b><font color="#0000FF">read_term</font></b>(<font color="#009900">Term</font>),
+		<b><font color="#0000FF">write</font></b>(<font color="#009900">Term</font>),
+		<b><font color="#0000FF">write</font></b>(<font color="#009900">Term</font>),
+		<b><font color="#0000FF">write_canonical</font></b>(<font color="#009900">Term</font>),
+		<b><font color="#0000FF">write_term</font></b>(<font color="#009900">Stream</font>, <font color="#009900">Term</font>, <font color="#009900">Options</font>),
+		<b><font color="#0000FF">current_op</font></b>(<font color="#009900">Precedence</font>, <font color="#009900">Associativity</font>, <font color="#009900">Operator</font>),
+		<b><font color="#0000FF">op</font></b>(<font color="#009900">Precedence</font>, <font color="#009900">Associativity</font>, <font color="#009900">Operator</font>),
+		<b><font color="#0000FF">current_char_conversion</font></b>(<font color="#009900">InChar</font>, <font color="#009900">OutChar</font>),
+		<b><font color="#0000FF">char_conversion</font></b>(<font color="#009900">InChar</font>, <font color="#009900">OutChar</font>).
+
+	logic_and_control <font color="#990000">:-</font>
+		<font color="#990000">\+</font> <font color="#009900">Goal</font>,
+		<b><font color="#0000FF">once</font></b>(<font color="#009900">Goal</font>),
+		<b><font color="#0000FF">repeat</font></b>,
+		<font color="#990000">!</font>.
+
+	atomic_term_processing <font color="#990000">:-</font>
+		<b><font color="#0000FF">atom_length</font></b>(<font color="#009900">Atom</font>, <font color="#009900">Length</font>),
+		<b><font color="#0000FF">atom_chars</font></b>(<font color="#009900">Atom</font>, <font color="#009900">Chars</font>),
+		<b><font color="#0000FF">atom_codes</font></b>(<font color="#009900">Atom</font>, <font color="#009900">Codes</font>),
+		<b><font color="#0000FF">atom_concat</font></b>(<font color="#009900">Atom1</font>, <font color="#009900">Atom2</font>, <font color="#009900">Atom</font>),
+		<b><font color="#0000FF">sub_atom</font></b>(<font color="#009900">Atom</font>, <font color="#009900">Before</font>, <font color="#009900">Length</font>, <font color="#009900">After</font>, <font color="#009900">SubAtom</font>),
+		<b><font color="#0000FF">char_code</font></b>(<font color="#009900">Char</font>, <font color="#009900">Code</font>),
+		<b><font color="#0000FF">number_chars</font></b>(<font color="#009900">Number</font>, <font color="#009900">Chars</font>),
+		<b><font color="#0000FF">number_codes</font></b>(<font color="#009900">Number</font>, <font color="#009900">Codes</font>).
+
+	implementation_defined_hooks <font color="#990000">:-</font>
+		<b><font color="#0000FF">current_prolog_flag</font></b>(<font color="#009900">Flag</font>, <font color="#009900">Value</font>),
+		<b><font color="#0000FF">set_prolog_flag</font></b>(<font color="#009900">Flag</font>, <font color="#009900">Value</font>),
+		<b><font color="#0000FF">halt</font></b>(<font color="#009900">ExitCode</font>),
+		<b><font color="#0000FF">halt</font></b>.
+
+	<b><font color="#0000FF">number</font></b>(<font color="#009900">C</font>) <font color="#990000">--&gt;</font> <font color="#FF0000">"+"</font>, <b><font color="#0000FF">number</font></b>(<font color="#009900">C</font>).
+	<b><font color="#0000FF">number</font></b>(<font color="#009900">C</font>) <font color="#990000">--&gt;</font> <font color="#FF0000">"-"</font>, <b><font color="#0000FF">number</font></b>(<font color="#009900">X</font>), <font color="#FF0000">{</font><font color="#009900">C</font> <b><font color="#0000FF">is</font></b> <font color="#990000">-</font><font color="#009900">X</font><font color="#FF0000">}</font>.
+	<b><font color="#0000FF">number</font></b>(<font color="#009900">X</font>) <font color="#990000">--&gt;</font> [<font color="#009900">C</font>], <font color="#FF0000">{</font><font color="#993399">0'0</font> <font color="#990000">=&lt;</font> <font color="#009900">C</font>, <font color="#009900">C</font> <font color="#990000">=&lt;</font> <font color="#993399">0'9</font>, <font color="#009900">X</font> <b><font color="#0000FF">is</font></b> <font color="#009900">C</font> <font color="#990000">-</font> <font color="#993399">0'0</font><font color="#FF0000">}</font>.
+
+	escape_sequences <font color="#990000">:-</font>
+		<b><font color="#0000FF">write</font></b>(<font color="#FF0000">'Quoted atom with a quote ('') inside.'</font>),
+		<b><font color="#0000FF">write</font></b>(<font color="#FF0000">'Quoted atom with control escape sequences: </font><font color="#CC33CC">\a</font><font color="#FF0000"> </font><font color="#CC33CC">\b</font><font color="#FF0000"> </font><font color="#CC33CC">\r</font><font color="#FF0000"> </font><font color="#CC33CC">\f</font><font color="#FF0000"> </font><font color="#CC33CC">\t</font><font color="#FF0000"> </font><font color="#CC33CC">\n</font><font color="#FF0000"> </font><font color="#CC33CC">\v</font><font color="#FF0000">'</font>),
+		<b><font color="#0000FF">write</font></b>(<font color="#FF0000">'Quoted atom with an octal escape sequence: </font><font color="#CC33CC">\123\</font><font color="#FF0000">.'</font>),
+		<b><font color="#0000FF">write</font></b>(<font color="#FF0000">'Quoted atom with an hexa-decimal escape sequence: </font><font color="#CC33CC">\x123f\</font><font color="#FF0000">.'</font>).
+
+<b><font color="#000080">:- end_object.</font></b>
 
 
-<b><font color="#000080">	:- uses</font></b>(list).
-<b><font color="#000080">	:- uses</font></b>(tracer).
 
-<b><font color="#000080">	:- calls</font></b>(comparingp).
-
-
-<b><font color="#000080">	:- public</font></b>(sort<font color="#990000">/</font><font color="#993399">2</font>).
-
-<b><font color="#000080">	:- mode</font></b>(sort(<font color="#990000">+</font>list, <font color="#990000">-</font>list), one).
-
-<b><font color="#000080">	:- info</font></b>(sort<font color="#990000">/</font><font color="#993399">2</font>, [
-		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Sorts a list in ascending order.'</font>,
-		argnames <b><font color="#0000FF">is</font></b> [<font color="#FF0000">'List'</font>, <font color="#FF0000">'Sorted'</font>]]).
-
-
-<b><font color="#000080">	:- private</font></b>(partition<font color="#990000">/</font><font color="#993399">4</font>).
-
-<b><font color="#000080">	:- mode</font></b>(partition(<font color="#990000">+</font>list, <font color="#990000">+</font>nonvar, <font color="#990000">-</font>list, <font color="#990000">-</font>list), one).
-
-<b><font color="#000080">	:- info</font></b>(partition<font color="#990000">/</font><font color="#993399">4</font>, [
-		comment <b><font color="#0000FF">is</font></b> <font color="#FF0000">'Partition a list in two lists containing the elements smaller and larger than a pivot.'</font>,
-		argnames <b><font color="#0000FF">is</font></b> [<font color="#FF0000">'List'</font>, <font color="#FF0000">'Pivot'</font>, <font color="#FF0000">'Small'</font>, <font color="#FF0000">'Large'</font>]]).
-
-
-	sort([], []).
-
-	sort([<font color="#009900">Head</font>| <font color="#009900">Tail</font>], <font color="#009900">Sorted</font>) <font color="#990000">:-</font>
-		tracer<font color="#990000">::</font>(
-			trace(partition(<font color="#009900">Tail</font>, <font color="#009900">Head</font>, <font color="#009900">Small</font>, <font color="#009900">Large</font>)),
-			trace(sort(<font color="#009900">Small</font>, <font color="#009900">Sorted1</font>)),
-			trace(sort(<font color="#009900">Large</font>, <font color="#009900">Sorted2</font>))),
-		list<font color="#990000">::</font>append(<font color="#009900">Sorted1</font>, [<font color="#009900">Head</font>| <font color="#009900">Sorted2</font>], <font color="#009900">Sorted</font>).
-
-
-	partition([], <font color="#009900">_</font>, [], []).
-
-	partition([<font color="#009900">Head</font>| <font color="#009900">Tail</font>], <font color="#009900">Pivot</font>, <font color="#009900">Small</font>, <font color="#009900">Large</font>) <font color="#990000">:-</font>
-		<b><font color="#0000FF">parameter</font></b>(<font color="#993399">1</font>, <font color="#009900">Type</font>),
-		(	<font color="#009900">Type</font><font color="#990000">::</font>(<font color="#009900">Head</font> <font color="#990000">&lt;</font> <font color="#009900">Pivot</font>) <font color="#990000">-&gt;</font>
-			<font color="#009900">Small</font> <font color="#990000">=</font> [<font color="#009900">Head</font>| <font color="#009900">Small1</font>], <font color="#009900">Large</font> <font color="#990000">=</font> <font color="#009900">Large1</font>
-		<font color="#990000">;</font>	<font color="#009900">Small</font> <font color="#990000">=</font> <font color="#009900">Small1</font>, <font color="#009900">Large</font> <font color="#990000">=</font> [<font color="#009900">Head</font>| <font color="#009900">Large1</font>]
-		),
-		partition(<font color="#009900">Tail</font>, <font color="#009900">Pivot</font>, <font color="#009900">Small1</font>, <font color="#009900">Large1</font>).
+<b><font color="#000080">:- object</font></b>(class,
+	<b><font color="#000080">implements</font></b>(protected<font color="#990000">::</font>protocol),
+	<b><font color="#000080">imports</font></b>(private<font color="#990000">::</font>category),
+	<b><font color="#000080">instantiates</font></b>(metaclass),
+	<b><font color="#000080">specializes</font></b>(superclass)).
 
 
 <b><font color="#000080">:- end_object.</font></b>
+
+
+
+<b><font color="#000080">:- object</font></b>(parametric(<font color="#009900">Parameter</font>, <font color="#FF0000">"String"</font>, <font color="#993399">33.78</font>),
+	<b><font color="#000080">implements</font></b>(protocol),
+	<b><font color="#000080">imports</font></b>(category),
+	<b><font color="#000080">extends</font></b>(parent(<font color="#009900">Parameter</font>))).
+
+
+<b><font color="#000080">:- end_object.</font></b>
+
+
+
+<b><font color="#000080">:- category</font></b>(category,
+	<b><font color="#000080">implements</font></b>(protocol),
+	<b><font color="#000080">extends</font></b>(other_category)).
+
+
+<b><font color="#000080">:- end_category.</font></b>
+
+
+
+<b><font color="#000080">:- protocol</font></b>(extended,
+	<b><font color="#000080">extends</font></b>(minimal)).
+
+
+<b><font color="#000080">:- end_protocol.</font></b>
 </tt></pre>

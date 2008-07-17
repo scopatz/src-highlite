@@ -113,11 +113,12 @@ field names, etc.) by relying on the program @emph{ctags},
 
 @menu
 * Supported languages::         
+* Notes on some languages::     
 * Using source-highlight as a simple formatter::  
 * Related Software and Links::  
 @end menu
 
-@node Supported languages, Using source-highlight as a simple formatter, Introduction, Introduction
+@node Supported languages, Notes on some languages, Introduction, Introduction
 @section Supported languages
 
 The complete list of languages (indeed, file extensions) natively
@@ -137,22 +138,75 @@ of Source-highlight (@value{VERSION}), as reported by
 @end example
 
 @noindent
-The meaning of the suffixes @code{-doc}, @code{-css} and @code{-css-doc}
-is explained in @ref{Output Language map}.
+The meaning of the suffix @code{-css} is explained in @ref{Output
+Language map}@footnote{Up to version 2.9, there were also the suffixes
+@code{-doc} and @code{-css-doc}, but this mechanism was quite confusing
+and complex; hopefully, this new one should be better.}.
 
 Please, keep in mind, that I haven't tested personally all these
 language definitions: I actually checked that the definition files are
-syntactically correct (with the command line option @code{--check-lang},
-@ref{Invoking source-highlight}), but I'm not sure their definition
-actually respects that language syntax (e.g., I've put up together some
-language definitions by searching for information in the Internet, but
-I've never programmed in that language).  So, if you find that a
-language definition is not precise, please let me know.  Moreover, if
-you have a program example in a language that's not included in the
-@file{tests} directory, please send it to me so that I can include it in
-the test suite.
+syntactically correct (with the command line option @code{--check-lang}
+and @code{--check-outlang}, @ref{Invoking source-highlight}), but I'm
+not sure their definition actually respects that language syntax (e.g.,
+I've put up together some language definitions by searching for
+information in the Internet, but I've never programmed in that
+language).  So, if you find that a language definition is not precise,
+please let me know.  Moreover, if you have a program example in a
+language that's not included in the @file{tests} directory, please send
+it to me so that I can include it in the test suite.
 
-@node Using source-highlight as a simple formatter, Related Software and Links, Supported languages, Introduction
+@node Notes on some languages, Using source-highlight as a simple formatter, Supported languages, Introduction
+@section Notes on some languages
+
+In this section I'd like to go into details on the highlighting of some
+specific programming languages.  These notes might be useful when the
+highlighted language has some ``dialects'' that might require some
+further specification at the command line (e.g., to select a specific
+dialect).
+
+@menu
+* Fortran::                     
+* Perl::                        
+@end menu
+
+@node Fortran, Perl, Notes on some languages, Notes on some languages
+@subsection Fortran
+
+@cindex Fortran
+As Toby White explained to me, Fortran comes into different ``flavors'':
+a fixed-format, where some characters have a different semantics
+depending on their column position in the source file, and a free-format
+where this is not true.  For instance, in the former, @code{*} and
+@code{c} start a command line, but only if they are specified in the
+first column (while this is not true in the free-format).
+
+By default, the free-format is assumed for fortran files; if you want to
+use the fixed-format, you need to specify @code{fortran-fixed} at
+the @code{--src-lang} command line option.
+
+@node Perl,  , Fortran, Notes on some languages
+@subsection Perl
+
+@cindex Perl
+Perl syntax forms, especially its regular expression specifications, are
+quite a nightmare ;-)  I tried to specify as much as possible in the
+@file{perl.lang} but some particular regular expressions might not be
+highlighted correctly.  Actually, I never programmed in Perl, so, if you
+see that some parts of your Perl programs are not highlighted correctly,
+please do not hesitate to contact me, so that I can improve Perl
+highlighting.
+
+@cindex @code{--infer-lang}
+Moreover, although the standard extension for Perl files is @code{.pl},
+since the Prolog language definition was implemented in source-highlight
+before Perl, this extension is assigned, by default, to Prolog files.
+However, you can use @code{--infer-lang} command line option, so that
+source-highlight can try to detect the language by inspecting the first
+lines of the input file (@ref{How the input language is discovered});
+you can also use @code{--src-lang=perl} command line specification to
+explitictly require Perl highlighting.
+
+@node Using source-highlight as a simple formatter, Related Software and Links, Notes on some languages, Introduction
 @section Using source-highlight as a simple formatter
 
 You can also use source-highlight as a simple formatter of input file,
@@ -166,7 +220,7 @@ sources the file @file{nohilite.lang}, using the command line option
 @code{--lang-def} (@ref{Invoking source-highlight}).  Since that
 language definition is empty, no highlighting will be performed;
 however, source-highlight will transform the input file in the output
-format.  Notice, in the input language associations in @ref{Supported
+format.  Note, in the input language associations in @ref{Supported
 languages}, that @file{nohilite.lang} is also associated to txt files.
 
 This, for instance, makes source-highlight useful in cases you want to
@@ -201,7 +255,7 @@ performed, but source-highlight will transform the input file in the
 output format.
 
 @cindex default.lang
-Notice, however, that if the input language cannot be established, the
+Note, however, that if the input language cannot be established, the
 @file{default.lang} will be used: an empty language definition file
 which you might want to customize.
 
@@ -322,7 +376,7 @@ option to configure.
 
 @cindex java2html
 @cindex cpp2html
-NOTICE: Originally, instead of Source-highlight, there were  two
+NOTE: Originally, instead of Source-highlight, there were  two
 separate programs, namely @emph{GNU java2html} and @emph{GNU cpp2html}.
 There are two shell scripts with the same name that will be installed
 together with Source-highlight in order to facilitate the migration
@@ -383,7 +437,7 @@ Further instructions can be found at the address:
 
 @uref{http://savannah.gnu.org/projects/src-highlite}.
 
-Please notice that this way you will get the latest development sources
+Please note that this way you will get the latest development sources
 of Source-highlight, which may also be unstable.  This solution is the
 best if you intend to correct/extend this program: you should send me
 patches against the latest cvs repository sources.
@@ -393,7 +447,7 @@ through cvs, say, e.g., version X.Y.Z, you must specify the tag
 @code{rel_X_Y_Z} when you run the cvs command or the @code{cvs update}
 command.
 
-NOTICE: This convention holds since release 2.1.
+NOTE: This convention holds since release 2.1.
 
 When you compile the sources that you get through the cvs repository,
 before running the @code{configure} and @code{make} commands, you
@@ -482,7 +536,7 @@ installing Boost Regex library from sources; other users had problems in
 compiling source-highlight even if this library was already correctly
 installed (especially windows users, using cygwin).  I hope this section
 sheds some light in installing/using the Boost Regex library.  Please,
-notice that this section does not explain how to compile the Boost
+note that this section does not explain how to compile the Boost
 libraries (the documentation you'll find on @uref{http://www.boost.org}
 is well done); it explains how to tweak things if you have problems in
 compiling source-highlight even after a successful installation of Boost
@@ -889,7 +943,7 @@ color, and the background color@footnote{Since version 2.6.} by using
 the prefix @code{bg:} (for instance, in the @file{default.style} above
 the background color is specified for the @code{todo} element).
 
-Notice that the background color might not be available for all ouput
+Note that the background color might not be available for all ouput
 formats: it is available for XHTML and @LaTeX{} but not for
 HTML@footnote{Of course, if you use HTML and an external CSS file you
 will achieve the same result.}.
@@ -967,7 +1021,7 @@ darkblue
 @cindex direct color scheme
 You can also use the direct color scheme for the specific output format,
 by using double quotes, such as, e.g., @code{"#00FF00"} in
-HTML@footnote{Notice that, since version 2.2, you must use double
+HTML@footnote{Note that, since version 2.2, you must use double
 quotes.} or even string colors in double quotes@footnote{Since version
 2.6.}, such as @code{"lightblue"}.  Of course, the double quotes will be
 discarded during the generation.
@@ -977,7 +1031,7 @@ directory.  This uses direct color schemes.
 
 @include syslog.style.texinfo
 
-Notice that, if you use direct color schemes, source-highlight will
+Note that, if you use direct color schemes, source-highlight will
 perform no transformation, and will output exactly the color scheme you
 specified.  For instance, the specification @code{"brown"} is different
 from @code{brown}: the former will be output as it is, while the latter
@@ -994,7 +1048,7 @@ valid in HTML but not in @LaTeX{}.
 
 @cindex CSS
 Since version 2.6 you can specify the output format style also using
-a limited CSS syntax.  Please, notice that this has nothing to do
+a limited CSS syntax.  Please, note that this has nothing to do
 with output produced by source-highlight using the @code{--css} option.
 
 @cindex @code{--style-css-file}
@@ -1012,7 +1066,7 @@ output format style using a css file, and then re-use the same css file
 as the actual style sheet of other HTML pages (or even output files
 produced by source-highlight using the @code{--css} option).
 
-Notice that this feature is quite primordial, so only a limited subset
+Note that this feature is quite primordial, so only a limited subset
 of CSS syntax is recognized.  In particular, selectors are always
 intended as CSS class selectors, so they must start with a dot.
 @code{/* */} comments are handled.  Properties (and their values) not
@@ -1127,35 +1181,10 @@ output format name = language definition file
 
 The default language definition file is shown in @ref{Introduction}.
 
-In particular, there is a convention for the output format name
-in the output language map, according to the suffix of the name
-with a dash @code{-}:
+In particular, there is a convention for the output format name in the
+output language map: the one with @code{-css} suffix is the one used
+when @code{--css} command line option is given
 
-@table @code
-@item -doc 
-The one used when @code{--doc} command line option is given
-@item -css-doc 
-The one used when @code{--css} command line option is given
-@item -css
-The one used when @code{--css} and @code{--no-doc} command line options
- are given
-@end table
-
-If a combination of the above mentioned command line options is given
-for a specific output format, and a corresponding definition file is not
-specified in the map file, then an error is raised.
-
-For instance, if you specified the definition file for your language
-@code{mylang} and also one for dealing with @code{--doc} option, i.e., a
-definition file for @code{mylang-doc}, and you run source-highlight as
-follows:
-
-@code{source-highlight -f mylang --css mycss.css}
-
-@noindent
-You will get the following error:
-
-@code{source-highlight: output language mylang-css-doc not handled}
 
 @node Output Language definition files, Developing your own definition files, Output Language map, Configuration files
 @section Output Language definition files
@@ -1227,7 +1256,7 @@ style sheet), you can disable this by using @code{--no-doc}.
 Specify the style sheet file (e.g., a @file{.css} for HTML@footnote{As
 explained before, originally Source-highlight was thought mainly for
 generating HTML output, this is why the term @emph{css} is used for
-style sheets.}) for the output document.  Notice that source-highlight
+style sheets.}) for the output document.  Note that source-highlight
 will not use this file: it will simply use this file name when
 generating the output file, so to specify that the output file uses this
 file as the style sheet (e.g., if the generated HTML relies on this file
@@ -1275,7 +1304,7 @@ As @code{--line-number}, this option numbers all the output lines, and,
 additionally, generates an anchor for each line.  The anchor consists of
 the specified prefix (default is @code{line}) and the line number (e.g.,
 @code{line25}).  For instance, as prefix, if you deal with many files,
-you can use the file name.  Notice that some output languages might not
+you can use the file name.  Note that some output languages might not
 support this feature (e.g., @code{esc}, since it makes no sense in such
 case).  See @ref{Anchors and References} for defining how to generate an
 anchor in a specific output language.
@@ -1360,7 +1389,8 @@ option @code{--infer-lang}.  For instance, this is used in the script
 @file{src-hilite-lesspipe.sh} (@ref{Using source-highlight with less})
 when running source-highlight, in order to avoid the problem of
 formatting a Perl script as a Prolog program (since the extension
-@file{.pl} is associated to Prolog programs in the language map file).
+@file{.pl} is associated to Prolog programs in the language map file,
+@ref{Perl}).
 
 @node Language Definitions, Output Language Definitions, Invoking source-highlight, Top
 @chapter Language Definitions
@@ -1377,12 +1407,12 @@ source-highlight program.
 Instead, now, language elements are specified in a file, loaded
 dynamically, through a (hopefully) simple syntax.  Then, these
 definitions are used internally to create, on-the-fly, regular
-expressions that are used to highlight the elements.  In particular, we
-use the regular expressions provided by the Boost library (see
-@ref{Installation}).   Thus, when writing a language definition file you
-will surely have to deal with regular expressions.  Of course, we use
-the Boost regex library regular expression syntax.  We refer to Boost
-documentation for such syntax,
+expressions that are used to highlight the elements (see also @ref{How
+source-highlight works}).  In particular, we use the regular expressions
+provided by the Boost library (see @ref{Installation}).   Thus, when
+writing a language definition file you will surely have to deal with
+regular expressions.  Of course, we use the Boost regex library regular
+expression syntax.  We refer to Boost documentation for such syntax,
 @uref{http://www.boost.org/libs/regex/doc/syntax.html}, however, in
 @ref{Notes on regular expressions}, we provide some notes on regular
 expressions that might be helpful for those who never dealt with them.
@@ -1422,6 +1452,7 @@ with multiple lines (see @ref{Delimited definitions} and
 * State/Environment Definitions::  
 * Explicit subexpressions with names::  
 * Redefinitions and Substitutions::  
+* How source-highlight works::  
 * Notes on regular expressions::  
 * The program check-regexp::    
 * Listing Language Elements::   
@@ -1446,7 +1477,7 @@ cannot accomplish the required goal.
 @cindex @code{"expression"}
 @item "expression"
 
-If you use double quotes (notice, @code{"} and not @code{``} or
+If you use double quotes (note, @code{"} and not @code{``} or
 @code{''}) to specify a regular expression, then basically all the
 characters, but the alternation symbol, i.e., the pipe symbol @code{|},
 are considered literally, and thus will be automatically escaped (e.g.,
@@ -1506,7 +1537,7 @@ allowed.
 @cindex marked subexpressions
 @cindex backreference
 @cindex backtick
-This syntax@footnote{Since version 2.7.} (notice the difference, this
+This syntax@footnote{Since version 2.7.} (note the difference, this
 one uses the @emph{backtick} @code{`} while the previous one uses
 @code{'}) for specifying a regular expression was introduced to overcome
 the limitations of the other two syntaxes.  With this syntax, the marked
@@ -1523,8 +1554,9 @@ replace with can be any non alphanumerical characters@footnote{This
 issue concerning Perl regular expression syntax was raised by Elias
 Pipping, and this also pushed me to deal with this more powerful syntax
 that permits using backreferences, for instance.  Although we're still
-far from highlighting Perl syntax completely, I definitely must thank
-Elias for his precious information about this matter :-)}, for instance,
+far from highlighting Perl syntax completely (@ref{Perl}), I definitely
+must thank Elias for his precious information about this matter :-)},
+for instance,
 
 @example
 s/foo/bar/g
@@ -1565,7 +1597,7 @@ a quoted definition, alternatives can be separated with the pipe symbol
 @code{|}.  The above definition defines the language element
 @code{keyword}.  Each time an element is found in the source file, it is
 highlighted with the style for the element with the same name in the
-output format style file (notice that all elements shown in the example
+output format style file (note that all elements shown in the example
 are take from the language definition files that come with
 source-highlight and there is a style for each of such elements, see
 @ref{Configuration files}).  If such an element is not specified in the
@@ -1573,13 +1605,13 @@ output format style file, it is simply not highlighted (actually, it is
 highlighted with style @code{normal}, @ref{Configuration files}) (so pay
 attention to typos :-).
 
-From the above example you may have noticed that language element
+From the above example you may have noted that language element
 definitions are cumulative, so the second @code{keyword} definition does
 not replace the first one.   (Indeed, in some cases you may want to
 actually redefine a language element; this is possible as explained in
 @ref{Redefinitions and Substitutions}).
 
-Notice that words specified in double quotes have to match exactly in a
+Note that words specified in double quotes have to match exactly in a
 source file, and they must be isolated (not surrounded by anything but
 spaces).  Thus for instance @code{class} is matched as a keyword, but in
 @code{my_class} the substring @code{class} is not matched as keyword.
@@ -1606,9 +1638,24 @@ directive in C/C++:
 preproc = '^[[:blank:]]*#([[:blank:]]*[[:word:]]*)'
 @end example
 
-Notice that the definition @code{'class'} is different from
+Note that the definition @code{'class'} is different from
 @code{"class"}, as explained above.  Thus, for instance @code{'class'}
 matches also the sub-expression @code{class} inside @code{my_class}.
+
+Furthermore, you are not allowed to specify, in the same list, double
+quoted strings and single quoted strings: you need to split such list
+definitions.  Thus, for instance, the following definition is wrong:
+
+@example
+preproc = "#define",'^[[:blank:]]*#([[:blank:]]*[[:word:]]*)'
+@end example
+
+while the following one is correct:
+
+@example
+preproc = "#define"
+preproc = '^[[:blank:]]*#([[:blank:]]*[[:word:]]*)'
+@end example
 
 @cindex nonsensitive
 Finally, at the end of a list of definitions, one can specify the
@@ -1691,7 +1738,7 @@ For instance, this is the definition of C-like strings:
 string delim "\"" "\"" escape "\\"
 @end example
 
-Notice that @code{\} is a special characters in definitions so it has to
+Note that @code{\} is a special characters in definitions so it has to
 be escaped.  If the @code{escape} specification was omitted, the C
 string @code{"write \"hello\" string"} would have been highlight
 incorrectly (it would have been highlighted as the string
@@ -1729,6 +1776,14 @@ following nested comment would conclude the comment (and the second
 */
 @end example
 
+Note that, in order for a delimited language element to be nested, its
+starting and ending elements must be different; thus, for instance, the
+following definition is not correct:
+
+@example
+string delim "\"" "\"" nested # WRONG!
+@end example
+
 As said above, definitions are cumulative, and they are also cumulative
 even when using different syntactic forms.  Thus, for instance, the
 complete definition for C++-style comments are the following (actually,
@@ -1754,7 +1809,7 @@ Once defined, a variable can be used by prepending the
 symbol @code{$} to its name.  For instance,
 
 @example
-vardef FUNCTION = '(?:[[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()'
+vardef FUNCTION = '(?:[[:alpha:]]|_)[[:word:]]*(?=[[:blank:]]*\()'
 function = $FUNCTION
 @end example
 
@@ -1810,7 +1865,7 @@ end
 @end example
 
 @noindent
-Notice how the left delimiter can match an optional @code{=}, as a
+Note how the left delimiter can match an optional @code{=}, as a
 marked subexpression, and the right delimiter refers to that with @@@{1@}.
 
 Source-highlight will take care of escaping possible special characters
@@ -1857,7 +1912,7 @@ keywords ...
 include "function.lang"
 @end example
 
-Notice that the order of inclusion is crucial since the order of
+Note that the order of inclusion is crucial since the order of
 definition is crucial.  If function definition was included before
 keyword definitions, then the sentence @code{if (exp)} would be
 highlighted as a function invocation.
@@ -1890,7 +1945,7 @@ of the definition that defines the environment.
 
 As an example, the following defines the multiline  nested C comment,
 and highlights URL and e-mail addresses only when they appear inside a
-comment (notice that this uses file inclusion):
+comment (note that this uses file inclusion):
 
 @example
 environment comment delim "/*" "*/" multiline nested begin
@@ -1898,7 +1953,7 @@ environment comment delim "/*" "*/" multiline nested begin
 end
 @end example
 
-Notice that we used @code{environment} because everything else inside a
+Note that we used @code{environment} because everything else inside a
 comment has to be formatted according to the comment style.
 
 While for programming language definitions states/environments can be
@@ -1917,7 +1972,7 @@ state date start '[[:digit:]]@{2,4@}-?[[:digit:]]@{2@}-?[[:digit:]]@{2@}' begin
 end
 @end example
 
-Notice that definitions that appear inside a state/environment have the
+Note that definitions that appear inside a state/environment have the
 same scope of the expressions that define the environment.  While this
 makes sense for @code{start} and @code{delim} definitions, it may makes
 less sense for simple definitions (i.e., those that simply lists all
@@ -1993,7 +2048,7 @@ This way, the @code{class} (or @code{interface}) will be highlighted as
 a keyword, the separating blank characters are formatted as
 @code{normal}, and the name of the class as a @code{type}.
 
-Notice that the number of element names must be equal to the number of
+Note that the number of element names must be equal to the number of
 subexpressions in the expression; furthermore, at least in the current
 version, the expression can contain only marked subexpressions (no
 character outside is allowed) and no nested subexpressions are allowed.
@@ -2046,7 +2101,13 @@ them more easily (see @file{changelog.lang}):
 (normal,file)= `(^[[:blank:]]+)((?:[^:]+\:)?)` 
 @end example
 
-@node Redefinitions and Substitutions, Notes on regular expressions, Explicit subexpressions with names, Language Definitions
+Since a language element definition using explicit subexpressions with
+names consists of more than one element, and thus of more than one
+formatting style, it cannot be used to start an environment (what would
+the default element be?); while, as seen above, they can be used to
+start a state.
+
+@node Redefinitions and Substitutions, How source-highlight works, Explicit subexpressions with names, Language Definitions
 @section Redefinitions and Substitutions
 
 These two features are useful when you want to define
@@ -2138,7 +2199,60 @@ matched first) than the redefinition of @code{if} as a keyword.
 Another example is the language definition for C# by reusing the one
 for C/C++, @ref{Highlighting C/C++ and C#}.
 
-@node Notes on regular expressions, The program check-regexp, Redefinitions and Substitutions, Language Definitions
+@node How source-highlight works, Notes on regular expressions, Redefinitions and Substitutions, Language Definitions
+@section How source-highlight works
+
+As hinted at the beginning of @ref{Language Definitions},
+source-highlight uses the definitions in the language definition file to
+internally create, on-the-fly, regular expressions that are used to
+highlight the tokens of an input file.  Here we provide some internal
+details that are crucial to understand how to write language definition
+files correctly@footnote{The strategy used by source-highlight for
+matching regular expressions is slightly changed since version 2.10.}.
+
+First of all, each element definition, an highlighting rule is created
+by source-highlight (even if they correspond to the same language
+element); thus, each language definition file will correspond to a list
+of highlighting rules.  For each line of the input file,
+source-highlight will try to match all these rules against the whole
+line (more formally, against the part of the line that has not been
+highlighted yet).  It will not stop as soon as an highlighting rule
+matched, since there might be another rule that matches ``better''.
+
+The strategy used by source-highlight is to select the first rule that
+matches the longest part of the text with the smallest prefix (i.e., the
+initial part of the line that contains no language element).  (Thus, as
+already noted in the previous sections, the order of language
+definitions is crucial.)  Then, it will continue to search for another
+matching rule for the remaining part of the line.
+
+Let us explain this strategy a little bit further with an example.  We
+go back to the @code{if (exp)} case: we want the @code{if} to be
+highlightedas a keyword and not as a function call.
+This actually happens not only because the keyword language element is
+defined first, but also because the regular expression for function
+elements is defined correctly:
+
+@example
+'(?:[[:alpha:]]|_)[[:word:]]*(?=[[:blank:]]*\()'
+@end example
+
+@cindex lookahead asserts
+Indeed, it is crucial to use the lookahead assert (@ref{Notes on regular
+expressions}) including also the possible space before the parenthesis;
+on the contrary
+
+@example
+'(?:[[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()'
+@end example
+
+@noindent
+would have not worked, since the space before the parenthesis would be
+part of the matched input, and thus, ``if '' (note the space) would be
+matched as function since the length of the matched input is longer
+than ``if''.
+
+@node Notes on regular expressions, The program check-regexp, How source-highlight works, Language Definitions
 @section Notes on regular expressions
 @cindex regular expressions
 
@@ -2203,14 +2317,16 @@ For instance, in the definition of a function (@file{function.lang}) we
 use the following regular expression:
 
 @example
-([[:alpha:]]|_)[[:word:]]*[[:blank:]]*(?=\()
+([[:alpha:]]|_)[[:word:]]*(?=[[:blank:]]*\()
 @end example
 
 @noindent
 Thus after the name of a function we test, with the regular expression
 @code{(?=\()} whether an open parenthesis @code{(} can be matched.  If
-it can be matched, however, we leave that part in the input (so that the
-parenthesis will not be formatted the same way of a function name).
+it can be matched, however, we leave that part in the input, so that the
+parenthesis will not be formatted the same way of a function name (see
+also @ref{How source-highlight works} to understand better this language
+element definition).
 
 Please, be careful when using such regular expression forms: since part
 of the input is not actually removed you may end up always scanning the
@@ -2429,7 +2545,7 @@ state cbracket delim "@{" "@}" multiline nested begin
 end
 @end example
 
-Notice that, since we used @code{nested} we can be sure
+Note that, since we used @code{nested} we can be sure
 that the C++ language definitions are not considered
 anymore when we matched the last closing @code{@}}.
 
@@ -2461,12 +2577,11 @@ When using this command line option the additional information produced
 has the following format:
 
 @example
-<.lang filename>:<line number>: <matched subexpression>
+<.lang filename>:<line number>
+expression: <matched subexpression>
 formatting: <source file string to be formatted>
-entering: <next state's regular expression>
-current state: <next state's regular expression>
-exiting: 
-exitingall: 
+entering: <next state's id>
+exiting state, level: <number of states> 
 @end example
 
 The lines starting with @code{entering}, @code{exiting} and
@@ -2491,45 +2606,49 @@ Now you can debug the @file{java.lang} file by using the
 @code{--debug-lang} command line option.  And the output is as follows:
 
 @example
-c_comment.lang:15: (/\*)
-formatting: "/*" as comment
-entering: (\*/)|(/\*)|...
-formatting: "" as comment
-formatting: "  This is to demonstrate --debug-lang" as comment
-formatting: "  " as comment
-url.lang:2: ((?:(?:[[:word:]]+://(?:[[:word:]]+[\./\-_]?)+)))
-formatting: "http://www.lorenzobettini.it" as url
-formatting: "" as comment
-c_comment.lang:15: (\*/)
-formatting: "*/" as comment
-exiting 1 level(s): (\<(?:import|package)\>)|(//)|...
-formatting: "" as normal
-formatting: "" as normal
-java.lang:1: (\<(?:import|package)\>)
-formatting: "package" as preproc
-formatting: " hello" as normal
-symbols.lang:1: ((?:~|!|%|\^|\*|\(|\)...
-formatting: ";" as symbol
+c_comment.lang:24
+expression: "/\*"
+formatting "/*" as comment
+entering state: 23
+formatting "  This is to demonstrate --debug-lang" as default
+formatting "  " as default
+url.lang:3
+expression: "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_]+(?:>?))"
+formatting "http://www.lorenzobettini.it" as url
+c_comment.lang:24
+expression: "\*/"
+formatting "*/" as comment
+exiting state, level: 1
+java.lang:1
+expression: "\<(?:import|package)\>"
+formatting "package" as preproc
+formatting " hello" as default
+symbols.lang:1
+expression: "(?:~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|/|\?|&|<|>|\|)"
+formatting ";" as symbol
 ... omissis ...
-c_comment.lang:2: (//)
-formatting: "//" as comment
-entering: (\z)
-formatting: " just some greetings ;-)  /*" as comment
-c_comment.lang:2: (\z)
-formatting: "" as comment
-exiting 1 level(s): (\<(?:import|package)\>)|(//)|...
+c_comment.lang:13
+expression: "//"
+formatting "//" as comment
+entering state: 12
+formatting " just some greetings ;-)  /*" as default
+c_comment.lang:13
+expression: "\z"
+formatting "" as comment
+exiting state, level: 1
+... omissis ...
 @end example
 
 This should provide enough information to understand how the regular
 expressions are used and how the states/environments are entered and
-exited.  Please notice that the sub-expressions that are shown may
+exited.  Please note that the sub-expressions that are shown may
 differ from the original ones specified in the @file{.lang} file.  This
 is due to the preprocessing that is performed by Source-highlight.
 Moreover, some sub-expressions are not defined at all in the
 @file{.lang} file: for instance, this is the case for line wide
 definitions, i.e., those that are defined with the keyword @code{start},
 @ref{Line wide definitions}.  The last lines above, showing
-@code{entering: (\z)}, mean that we wait to reach the end of a line.
+@code{expression: "\z"}, means that we matched the end of a line.
 
 Another useful feature in debugging is the option @code{--show-regex}
 that shows, on the standard output, the regular expression automaton
@@ -2548,43 +2667,51 @@ source-highlight --show-regex=comment-show.lang
 @end example
 
 @noindent
-you will get, on the standard output, the following output:
+you will get, on the standard output, the following output@footnote{Up
+to version 2.9 the output of @code{--show-regex} was a little bit more
+complex to read; hopefully this output is better.}:
 
 @smallexample
 @include comment-show.show.texinfo
 @end smallexample
 
 @noindent
-This shows the states of the regular expression automaton that
-source-highlight creates and will use to format an input source.
+This shows the states and highlight rules of the regular expression
+automaton that source-highlight creates and will use to format an input
+source.
 
-Each state is associated a unique number in order to identify them.
-Then for each state it shows the regular expression for that state
-(typically consisting of some alternatives) and the regular expressions
-associated to each element (each alternative of the state).  The first
-element (the one numbered with 0) of each state is always the default
-style for that state, i.e., the style applied if no regular expression
-is matched (in fact it does not have an associated regular expression).
-For instance, in the initial state the default style is normal.  Then,
-we can see that if we match a @code{/**} (it is shown as a string with
+Each state is associated a unique number in order to identify it;
+moreover, the default element of the state is shown (i.e., if none of
+the state's rule match, then that part is highlighted with the default
+element style). For instance, in the initial state the default style is
+normal.  Then for each state it shows the rules for that state.  
+For each rule you can see the corresponding element of the rule, 
+the regular expression for the rule and some other information, that we
+explain in the following.
+
+We can see that if we match a @code{/**} (it is shown as a string with
 escaped special characters, @code{/\*\*}) we enter a new state, in this
 case the state 2 (@code{next: 2}).  This corresponds to the delimited
-element defining a new environment.  The fact that it is actually an
-environment and not a state@footnote{Please notice that this concept of
-state is different from the concept of ``state'' of an automaton.} can
-be seen by the fact that the default style is the same of the
-environment itself.  If we match a @code{*/}, i.e., the end of the
-delimited element, we exit one level (@code{exit level: 1}) meaning that
-we go back to state 1.  Since the delimited element is defined as
-nested, we can notice that in the state 2 we have that if we match
-@code{/**} we simply enter a new instance of state 2 itself.
+element defining a new environment (@ref{State/Environment
+Definitions}).  The fact that it is actually an environment and not a
+state@footnote{Please note that this concept of state is different
+from the concept of ``state'' of an automaton.} can be seen by the fact
+that the default element is the same of the environment itself.  If we
+match a @code{*/}, i.e., the end of the delimited element, we exit one
+level (@code{exit level: 1}) meaning that we go back to state 1.  Then
+we have the state for @code{cbracket}, which is not an environment, in
+fact its default state is normal.  The second rule of this state,
+@code{\\.} represents the @code{escape} string of the state definition.
+Since the delimited element is defined as nested, we have a third rule
+@code{@{} which has the @code{nested} information; thus, if we match it,
+we simply enter a new instance of state 3 itself.
 
 The @code{string} and @code{string2} show the difference implied by the
 @code{multiline} option: since source-highlight handles a line of input
 separately, the first delimited definition can be handled with a single
 regular expression while the multiline version cannot.
 
-Notice that the states/environments are indented so that it's
+Note that the states/environments are indented so that it's
 easier to understand the outer and the inner states.
 
 Let us now consider a variation of the previous example:
@@ -2597,31 +2724,14 @@ and let us see the output of @code{--show-regex}
 @include comment-show2.show.texinfo
 @end smallexample
 
-Notice that the main state was split into 4 states (that are still at
-the main level), each of one, but the last one, shows @code{(has
-alternatives)}.  Since we used the @code{`} regular expression (see
-@ref{Ways of specifying regular expressions}), then, the marked
-subexpressions are not translated, and to make backreferences work
-correctly we need to separate such regular expression from the other
-ones (otherwise the backreference would refer to a wrong
-subexpression@footnote{An alternative could have been to adjust
-backreferences by increasing the number; however, backreferences are
-limited to a number of 9 and we would have soon run out of numbers.}).
+Since in the rule @code{regexp} we used the @code{`} regular expression
+(see @ref{Ways of specifying regular expressions}), then, the marked
+subexpressions are not translated in order to make backreferences work
+correctly.
 
-Source-highlight will try to match all alternatives and will then use
-the first one with the smallest prefix (i.e., not matched part) and that
-matched the longest part.
-
-Notice that the split of the state takes place only before and after the
-points where expressions specified with @code{`} are encountered (e.g.,
-the @code{string} and @code{string2} are not split into two
-alternatives).
-
-Finally, notice how the isolated state with subexpressions with names
-(see @ref{Explicit subexpressions with names}) is shown.  In fact,
-although that expressions is made up of different elements, the
-expression is matched as a whole; thus the next state and exit level are
-shown only once.
+The last rule uses explicit subexpressions with names (see @ref{Explicit
+subexpressions with names}); although that expression is made up of
+different elements, the expression is matched as a whole.
 
 @node Tutorials on Language Definitions,  , Debugging, Language Definitions
 @section Tutorials on Language Definitions
@@ -2647,7 +2757,7 @@ even simpler:
 
 @include style.lang.texinfo
 
-Notice that this definition is pretty simple since the language
+Note that this definition is pretty simple since the language
 definition syntax is simple.  In the next examples we will see how to
 use more complex features to highlight more complex language syntaxes.
 
@@ -2666,7 +2776,7 @@ This is the language definition for C, included in the file
 @include c.lang.texinfo
 
 @noindent
-Notice that this makes use of lots of @code{include}s since these parts
+Note that this makes use of lots of @code{include}s since these parts
 are reused in other language definitions (e.g., Java has lots of parts
 that are in common with C/C++ so we wrote these parts in separate
 files).  In particular the comments definitions:
@@ -2736,7 +2846,7 @@ highlighted as a keyword and this was not correct.}:
 
 @include cpp.lang.texinfo
 
-In particular, it extends the set of keywords.  Moreover, notice that we
+In particular, it extends the set of keywords.  Moreover, note that we
 use subexpressions with names (see @ref{Explicit subexpressions with
 names}) for highlighting the class (or struct) name (when preceded by
 @code{class}, @code{struct} or @code{typename}, highlighted as a
@@ -2775,7 +2885,7 @@ information without any addition context lines:
 @include example-n.diff.texinfo
 
 Summarizing, we would like to be able to handle all these three
-different syntaxes; notice that the first format and the second format
+different syntaxes; note that the first format and the second format
 have something conflicting: the first one uses the @code{---} to
 indicate the new version of a file while the second format uses it to
 indicate the old version of a file.  Since we want to highlight
@@ -2794,7 +2904,7 @@ This is the language definition for diff files:
 Since we can safely assume that when we process a diff file it contains
 only information created with the same diff command line switch, we
 define three different states that correspond to the three diff output
-formats.  Notice that these states are entered with a simple definition;
+formats.  Note that these states are entered with a simple definition;
 as noted in @ref{State/Environment Definitions}, this means that no
 automatic exit means are provided, and since no explicit exit condition
 is specified, this means that once one of this state is entered it will
@@ -2814,7 +2924,7 @@ elements of the specific diff file format.
 For the files created with the option @code{-c|--context} we define two
 inner environments, one for the new file part and one for the old file
 part (these are delimited by a @code{---} or @code{***} and line number
-information).  Notice that these are environments, so anything that is
+information).  Note that these are environments, so anything that is
 not matched by any expression is formatted according to the style of the
 element that defines the environment.  Thus, we provide an expression
 for text that must be formatted as normal.  For diff files this
@@ -2896,7 +3006,7 @@ This time the right block of code is correctly formatted as a comment:
 
 @include test_extreme_comment_2.texinfo
 
-Notice that it is crucial to exit the environment even when we match an
+Note that it is crucial to exit the environment even when we match an
 @code{#else} (not only an @code{#endif}, since, this way, we can match
 again another @code{#ifdef 0}; consider, for instance, the following
 code:
@@ -3057,7 +3167,7 @@ the property @code{background-color} of the @code{body} selector in a
 CSS).  The background color for the entire document is explained in
 @ref{Document template}.
 
-Notice that the background color might not be available for all ouput
+Note that the background color might not be available for all ouput
 formats.   For instance, for HTML we only have:
 
 @example
@@ -3091,7 +3201,7 @@ default "default color representation"
 end
 @end example
 
-The @code{default} row (notice the absence of @code{"}) defines the
+The @code{default} row (note the absence of @code{"}) defines the
 color to be used in case a color constant is used during formatting, but
 it is not defined in the output format.
 
@@ -3183,7 +3293,7 @@ reference "<a href=\"$outfile#$linenum\">$text</a>"
 @end example
 
 @noindent
-Notice, that in this case we use the @code{$outfile} since we actually
+Note, that in this case we use the @code{$outfile} since we actually
 generate a link to another (or possibly the same) output file.
 
 On the contrary, for @LaTeX{}, since we do not generate a ``clickable''
@@ -3203,7 +3313,7 @@ In particular, we use @code{$infilename} for generating the
 ``disturb'' @LaTeX{} (while we use the complete file path in the textual
 information of the reference).
 
-This will generate a right aligned reference.  Notice that it is assumed
+This will generate a right aligned reference.  Note that it is assumed
 that when generating references in @LaTeX{} one uses
 @code{--gen-references=postline} or @code{--gen-references=postdoc} and
 not @code{--gen-references=inline} (@ref{Generating References}), since
@@ -3220,7 +3330,7 @@ reference "@@flushright
 @end example
 
 @noindent
-Notice that using both @code{$infilename} (and not @code{$infile} for
+Note that using both @code{$infilename} (and not @code{$infile} for
 the same reasons) and @code{$linenum} also in the definition of
 @code{anchor} somehow ensures that there are no duplicate anchors; this
 is done for @LaTeX{} and Texinfo but not for HTML because it is assumed
@@ -3314,7 +3424,7 @@ color "$style"
 @end example
 
 @noindent
-Notice that, since more than one style can be mixed into the style
+Note that, since more than one style can be mixed into the style
 template, @code{bold}, @code{underline}, ... explicitly use the variable
 @code{$style}.
 
@@ -3396,7 +3506,7 @@ end
 @end example
 
 @noindent
-Notice that, since a new character must be translated in @LaTeX{} with
+Note that, since a new character must be translated in @LaTeX{} with
 @code{\\}, we have to escape two @code{\} (i.e., @code{\\\\}) and then
 we want to actually insert a new line in the output file @code{\n}.
 
@@ -3421,9 +3531,9 @@ end
 @node Document template, Generating HTML output, String translation, Output Language Definitions
 @section Document template
 
-You can define the document template, i.e., the beginning and the end of
-an output file, with
+You can define the beginning and the end of an output file, with
 
+@cindex doctemplate
 @example
 doctemplate
 "...beginning..."
@@ -3431,10 +3541,24 @@ doctemplate
 end
 @end example
 
+@cindex nodoctemplate
+@example
+nodoctemplate
+"...beginning..."
+"...end..."
+end
+@end example
+
+The first one is used when the @code{--doc} command line option is
+specified, while the second one is used in the other case@footnote{Up
+to version 2.9, there was only @code{doctemplate} and for @code{--doc}
+there was a separate @code{.outlang} file; I think the present solution
+is better and reduces the number of files.}.
+
 For instance, for HTML we have
 
 @example
-doctemplate
+nodoctemplate
 "<!-- Generator: $additional -->
 $header<pre><tt>"
 "</tt></pre>$footer
@@ -3443,10 +3567,11 @@ end
 @end example
 
 @noindent
-Notice that in the end part there is an explicit new line.
+Note that in the end part there is an explicit new line.
 
-In the definition of the @code{doctemplate} the following variables can
-be used and will be replaced during the output generation:
+In the definition of the @code{doctemplate} and @code{nodoctemplate} the
+following variables can be used and will be replaced during the output
+generation:
 
 @table @code
 @item $title
@@ -3472,7 +3597,7 @@ style using CSS}).
 @end table
 
 For instance, for an HTML document with css, (file
-@file{cssdoc.outlang}) we have:
+@file{htmlcss.outlang}) we have:
 
 @example
 doctemplate
@@ -3496,7 +3621,7 @@ end
 @end example
 
 For an HTML document with header and footer, (file
-@file{htmldoc.outlang}) we have (notice the use of @code{$docbgcolor}):
+@file{html.outlang}) we have (note the use of @code{$docbgcolor}):
 
 @example
 doctemplate
@@ -3537,7 +3662,7 @@ end
 
 As a complete example we show the file @file{html_common.outlang} which
 contains the common definitions for the various HTML output formats
-(@file{html.outlang}, @file{htmldoc.outlang}, etc.):
+(@file{html.outlang}, @file{htmltable.outlang}, etc.):
 
 @include html_common.outlang.texinfo
 
@@ -3551,9 +3676,9 @@ file@footnote{Although I haven't tested it, I think this will work also
 for Doxygen comments.}.  Apart from being formatted nicely in the
 generated HTML documentation, this also releases the programmer from
 escaping specific characters in the code snippet (i.e., @code{&},
-@code{<} and @code{>}).  Notice also that it also avoids the
-sequence @code{*/} to be interpreted as the closing of the 
-(javadoc) comment.  For instance, if you write this code:
+@code{<} and @code{>}).  Note also that it also avoids the sequence
+@code{*/} to be interpreted as the closing of the (javadoc) comment.
+For instance, if you write this code:
 
 @example
 /**
@@ -3639,7 +3764,7 @@ Once the tag file is generated, Source-highlight relies on the library
 @file{readtags} provided by the @code{ctags} distribution, and included
 in the Source-highlight sources.
 
-Notice that if a program element is formatted according to a style that
+Note that if a program element is formatted according to a style that
 has the option @code{noref} (see @ref{Output format style}) then this
 element is not considered a tag, and no reference is generated.  This is
 the case, for instance, for a @code{comment} element: each string that
@@ -3675,7 +3800,7 @@ source-highlight -f texinfo -i test.h -o test_ref.h.texinfo -n \
      --gen-references=postline
 @end example
 
-and here's the result (notice how the comment line containing the string
+and here's the result (note how the comment line containing the string
 @code{mysum} does not contain references, since it is a @code{comment}
 element, and this element has the option @code{noref} in the
 @file{texinfo.style}, see @ref{Output format style}.  The same holds for

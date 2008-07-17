@@ -1,6 +1,6 @@
 # Linux Software Map language definition
 
-keyword = 'Begin[[:digit:]]*',"End"
+keyword = 'Begin[[:digit:]]*|End'
 
 type = '^[[:word:]-]+:'
 

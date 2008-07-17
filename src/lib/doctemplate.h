@@ -13,21 +13,24 @@
 
 #include <string>
 
-class DocTemplate
-{
+class DocTemplate {
     std::string begin_repr, end_repr;
 public:
-	DocTemplate(const std::string &begin = "", const std::string &end = "");
+    DocTemplate(const std::string &begin = "", const std::string &end = "");
 
     std::string output_begin(const std::string &title, const std::string &cs,
-        const std::string &add, const std::string &header, const std::string &footer,
-        const std::string &background);
+            const std::string &add, const std::string &header,
+            const std::string &footer, const std::string &background);
     std::string output_end(const std::string &title, const std::string &cs,
-        const std::string &add, const std::string &header, const std::string &footer,
-        const std::string &background);
+            const std::string &add, const std::string &header,
+            const std::string &footer, const std::string &background);
 
-    const std::string &toStringBegin() const { return begin_repr; }
-    const std::string &toStringEnd() const { return end_repr; }
+    const std::string &toStringBegin() const {
+        return begin_repr;
+    }
+    const std::string &toStringEnd() const {
+        return end_repr;
+    }
 };
 
 #endif /*_DOCTEMPLATE_H_*/

@@ -1,21 +1,6 @@
- STATE 1
- regexp (Hello|Ciao)([[:blank:]]*)([mM]ondo|[wW]orld)([[:punct:]]*) (has alternatives)
-  0: normal  (exit level: 0, exit_all: 0, next: none)
-  1: keyword (Hello|Ciao)
-  2: normal ([[:blank:]]*)
-  3: type ([mM]ondo|[wW]orld)
-  4: symbol ([[:punct:]]*)   (exit level: 0, exit_all: 0, next: 2)
-     STATE 2
-     regexp ((?:\<(?:comment)\>)) (has alternatives)
-      0: normal  (exit level: 0, exit_all: 0, next: none)
-      1: comment ((?:\<(?:comment)\>)) (exit level: 0, exit_all: 0, next: none)
-     STATE 3
-     regexp (end)( )(of line)
-      0: normal  (exit level: 0, exit_all: 0, next: none)
-      1: keyword (end)
-      2: normal ( )
-      3: type (of line)       (exit level: 1, exit_all: 0, next: none)
- STATE 4
- regexp ((?:\<(?:highlight)\>))
-  0: normal  (exit level: 0, exit_all: 0, next: none)
-  1: comment ((?:\<(?:highlight)\>)) (exit level: 0, exit_all: 0, next: none)
+STATE 1 default: normal
+  rule (keyword normal type symbol) "(Hello|Ciao)([[:blank:]]*)([mM]ondo|[wW]orld)([[:punct:]]*)" (exit level: 0, next: 2)
+    STATE 2 default: normal
+      rule (comment) "\<(?:comment)\>" (exit level: 0, next: 0)
+      rule (keyword normal type) "(end)( )(of line)" (exit level: 1, next: 0)
+  rule (comment) "\<(?:highlight)\>" (exit level: 0, next: 0)

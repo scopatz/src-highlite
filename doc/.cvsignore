@@ -64,3 +64,6 @@ style_examples.html
 gen_style_example.sh
 tags
 *.defaults.texinfo
+texinfo.tex.lnk
+mdate-sh.lnk
+source-highlight.cc.html

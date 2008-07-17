@@ -24,7 +24,8 @@
 #include "fileutil.h"
 #include "regexpreprocessor.h"
 #include "stringdef.h"
-#include "messages.h"
+#include "stringtable.h"
+#include "ioexception.h"
 
 #include <stack>
 
@@ -40,6 +41,8 @@
 
 static std::ostringstream buff;
 
+static StringTable *stringTable = 0;
+
 static void buffer(const char *s);
 static void buffer_escape(const char *c);
 static const std::string *flush_buffer();
@@ -47,9 +50,9 @@ static StringDef *flush_buffer_preproc();
 static void open_include_file(const char *file);
 static void close_include_file();
 
-ParseStruct *parsestruct = 0;
+ParseStructPtr parsestruct;
 
-typedef std::stack<ParseStruct *> ParseStructStack;
+typedef std::stack<ParseStructPtr> ParseStructStack;
 static ParseStructStack parsestructstack;
 
 void
@@ -108,7 +111,12 @@ STRING \"[^\n"]+\"
   char *file_name = &yytext[1];
   file_name[strlen(file_name)-1] = '\0';
 
-  open_include_file(file_name);
+  try {
+    open_include_file(file_name);
+  } catch (IOException &e) {
+    langdef_lval.string = stringTable->newString(e.filename);
+    return WRONG_INCLUDE_FILE;
+  }
 
   yypush_buffer_state(yy_create_buffer( langdef_in, YY_BUF_SIZE));
 
@@ -119,6 +127,7 @@ STRING \"[^\n"]+\"
   DEB("END OF FILE");
   
   fclose(langdef_in);
+  langdef_in = 0;
   yypop_buffer_state();
 
   if ( !YY_CURRENT_BUFFER )
@@ -129,13 +138,13 @@ STRING \"[^\n"]+\"
     close_include_file();
 }
 
-<INITIAL>"$"{IDE} { DEB2("VAR",yytext); langdef_lval.string = new std::string(&yytext[1]) ; return VARUSE ; }
+<INITIAL>"$"{IDE} { DEB2("VAR",yytext); langdef_lval.string = stringTable->newString(&yytext[1]) ; return VARUSE ; }
 <INITIAL>"@{"[[:digit:]]"}" { 
 	DEB2("BACKREFVAR",yytext);
-	langdef_lval.string = new std::string(yytext); 
+	langdef_lval.string = stringTable->newString(yytext); 
 	return BACKREFVAR ; 
 }
-<INITIAL>{IDE} { DEB2("KEY",yytext); langdef_lval.string = new std::string(yytext) ; updateTokenInfo(); return KEY ; }
+<INITIAL>{IDE} { DEB2("KEY",yytext); langdef_lval.string = stringTable->newString(yytext) ; updateTokenInfo(); return KEY ; }
 <INITIAL>"=" { return '=' ; }
 <INITIAL>"," { return ',' ; }
 <INITIAL>"+" { return '+' ; }
@@ -147,8 +156,7 @@ STRING \"[^\n"]+\"
 <STRING_STATE>\\\| {  buffer( yytext ) ; }
 <STRING_STATE>\\\\ {  buffer( yytext ) ; }
 <STRING_STATE>\\[[:digit:]] {  
-	printError(parsestruct->file_name, parsestruct->line, "backreferences are not allowed") ;
-	exitError(parsestruct->file_name, parsestruct->line, "use backreferences only inside ` `") ; 
+	return WRONG_BACKREFERENCE ; 
 	}
 <STRING_STATE>"\\\"" {  buffer( yytext ) ; }
 <STRING_STATE>\" { BEGIN(INITIAL) ; langdef_lval.string = flush_buffer() ; DEB2("STRINGDEF",langdef_lval.string); return STRINGDEF; }
@@ -158,8 +166,7 @@ STRING \"[^\n"]+\"
 <REGEXP_STATE>"@" {  buffer_escape( yytext ) ; }
 <REGEXP_STATE>\\\\ {  buffer( yytext ) ; }
 <REGEXP_STATE>\\[[:digit:]] {  
-	printError(parsestruct->file_name, parsestruct->line, "backreferences are not allowed") ;
-	exitError(parsestruct->file_name, parsestruct->line, "use backreferences only inside ` `") ; 
+	return WRONG_BACKREFERENCE ; 
 	}
 <REGEXP_STATE>"\\'" {  buffer( "'" ) ; }
 <REGEXP_STATE>\' { BEGIN(INITIAL) ; langdef_lval.stringdef = flush_buffer_preproc() ; DEB2("REGEXPDEF",langdef_lval.string); return REGEXPDEF; }
@@ -191,7 +198,7 @@ void buffer_escape(const char *s)
 
 const std::string *flush_buffer()
 {
-  const std::string *ret = new std::string(buff.str());
+  const std::string *ret = stringTable->newString(buff.str());
   buff.str("");
   return ret;
 }
@@ -211,6 +218,7 @@ void _open_file_to_scan(const string &path, const string &name)
 void open_file_to_scan(const string &path, const string &name)
 {
   _open_file_to_scan(path, name);
+  stringTable = new StringTable;
   langdef_restart(langdef_in);
 }
 
@@ -224,13 +232,26 @@ void open_include_file(const char *name)
     path = get_file_path(parsestruct->file_name);
 
   parsestructstack.push(parsestruct);
-  parsestruct = new ParseStruct(path, file_name);
+  parsestruct = ParseStructPtr(new ParseStruct(path, file_name));
   _open_file_to_scan(path.c_str(), file_name.c_str());
 }
 
 void close_include_file()
 {
-  delete parsestruct;
   parsestruct = parsestructstack.top();
   parsestructstack.pop();
+}
+
+void clear_langdefscanner() {
+	delete stringTable;
+	langdef_lex_destroy();
+}
+
+void close_langdefinputfile() {
+	// also close possible open files due to inclusions
+	do {
+	  if (langdef_in)
+	  	fclose(langdef_in);
+  	  yypop_buffer_state();
+    } while ( YY_CURRENT_BUFFER );
 }

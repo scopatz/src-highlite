@@ -30,8 +30,8 @@ private:
     std::string orig;
     /// @brief whether the string was specified with double quotes
     bool doubleQuotedString;
-    /// @brief whether this is only a back reference to a matched subexpression
-    bool isbackref;
+    /// @brief whether this is contains a back reference to a matched subexpression
+    bool hasBackRef_;
 
 public:
     /**
@@ -40,7 +40,7 @@ public:
      * @param o the original representation
      */
     StringDef(const std::string &s, const std::string &o) :
-        stringdef(s), orig(o), doubleQuotedString(false), isbackref(false) {
+        stringdef(s), orig(o), doubleQuotedString(false), hasBackRef_(false) {
     }
 
     /**
@@ -50,7 +50,7 @@ public:
      * @param doubleQuotes
      */
     StringDef(const std::string &s, bool doubleQuotes = false) :
-        stringdef(s), doubleQuotedString(doubleQuotes), isbackref(false) {
+        stringdef(s), doubleQuotedString(doubleQuotes), hasBackRef_(false) {
     }
 
     const std::string toString() const;
@@ -72,22 +72,22 @@ public:
     }
 
     /**
-     * @return whether this is only a back reference
+     * @return whether this has a back reference
      */
-    int isBackRef() const {
-        return isbackref;
+    bool hasBackRef() const {
+        return hasBackRef_;
     }
     
     /**
      * @param b
      */
     void setBackRef(bool b) {
-        isbackref = b;
+        hasBackRef_ = b;
     }
     
     /**
      * Given two StringDef produces a new StringDef (keeping properties such as
-     * isbackref)
+     * hasBackRef)
      * @param s1
      * @param s2
      * @return the new StringDef

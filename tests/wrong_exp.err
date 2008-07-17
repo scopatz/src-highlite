@@ -1,3 +1,2 @@
-bad expression: ((?:\<(?:ok)\>))|((?:(?:notclosed))
-bad expression: ((?:\<(?:ok)\>))|((?:(?:notclosed))
 wrong_exp.lang:2: problem in this expression: keyword (notclosed
+wrong_exp.lang:2: Caused by: Unmatched ( or \(

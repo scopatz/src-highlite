@@ -13,6 +13,10 @@ function black b; // for function calls and declarations
 cbracket red; // for block brackets (e.g. {, })
 todo bg:cyan b;	// for TODO and FIXME
 
+//Predefined variables and functions (for instance glsl)
+predef_var darkblue ;
+predef_func darkblue b ;
+
 // for OOP
 classname darkgreen ; // for class names, e.g., in Java and C++
 

@@ -24,7 +24,6 @@
 #include <iostream>
 #include <string>
 
-#include "messages.h"
 #include "stringdef.h"
 #include "statelangelem.h"
 #include "statestartlangelem.h"
@@ -35,6 +34,8 @@
 #include "langdefscanner.h"
 #include "vardefinitions.h"
 #include "namedsubexpslangelem.h"
+#include "parserexception.h"
+#include "ioexception.h"
 
 using std::cerr;
 using std::string;
@@ -42,8 +43,16 @@ using std::string;
 static void yyerror( const char *s ) ;
 static void yyerror( const string &s ) ;
 
+/// the buffer for storing errors
+static string errorBuffer;
+
+/// this is where the parsed elements are store
 LangElems *current_lang_elems = 0;
+
 VarDefinitions *vardefinitions = 0;
+
+/// used to record that the error is due to an included file not found
+static bool includedFileNotFound = false;
 
 #define UPDATE_REDEF(el, r) if (r == 1) { el->setRedef(); } else if (r == 2) { el->setSubst(); }
 #define ADD_ELEMENT(elems, elem) \
@@ -60,7 +69,10 @@ struct Key : public ParserInfo
 {
   const string *key;
 
-  ~Key() { delete key; }
+  ~Key() { 
+  	/* the string belongs to the string table so it is
+  	   deallocated automatically by clearing the scanner */ 
+  }
 };
 
 // this is a trick since ElementNames is a typedef and cannot
@@ -86,8 +98,8 @@ struct ElementNamesList : ElementNames {
   int flag ;
 };
 
-%token <tok> BEGIN_T END_T ENVIRONMENT_T STATE_T MULTILINE_T DELIM_T START_T ESCAPE_T NESTED_T EXIT_ALL EXIT_T VARDEF_T REDEF_T SUBST_T NONSENSITIVE_T
-%token <string> KEY STRINGDEF REGEXPNOPREPROC VARUSE BACKREFVAR
+%token <tok> BEGIN_T END_T ENVIRONMENT_T STATE_T MULTILINE_T DELIM_T START_T ESCAPE_T NESTED_T EXIT_ALL EXIT_T VARDEF_T REDEF_T SUBST_T NONSENSITIVE_T WRONG_BACKREFERENCE
+%token <string> KEY STRINGDEF REGEXPNOPREPROC VARUSE BACKREFVAR WRONG_INCLUDE_FILE
 %token <stringdef> REGEXPDEF
 
 %type <stringdef> stringdef escapedef stringdefwreferences
@@ -100,6 +112,11 @@ struct ElementNamesList : ElementNames {
 %type <key> key;
 %type <keys> keys;
 
+%destructor {
+	//std::cout << "freeing discarded symbol" << std::endl;
+	delete $$;
+} stringdef stringdefs elemdef elemdefs key keys
+
 %%
 
 allelements :
@@ -109,7 +126,7 @@ allelements :
           /* synthetize a normal elem that catches everything */
           current_lang_elems = new LangElems;
           StringDefs *defs = new StringDefs;
-          defs->push_back (new StringDef("(?:.*)"));
+          defs->push_back (new StringDef("(?:.+)"));
           current_lang_elems->add(new StringListLangElem("normal", defs, false));
         }
         | elemdefs { current_lang_elems = $1; }
@@ -144,7 +161,15 @@ elemdef : redefsubst complexelem exitall
         | VARDEF_T KEY '=' stringdefs {
             vardefinitions->add(*$2, $4);
             $$ = 0;
-            delete $2;
+          }
+        | WRONG_INCLUDE_FILE {
+            // this token is used by the scanner to signal an error
+            // in opening an include file
+            includedFileNotFound = true;
+            yyerror("cannot open include file " + *$1);
+            YYERROR;
+            
+            $$ = 0;
           }
         ;
 
@@ -167,7 +192,6 @@ complexelem : key DELIM_T stringdef stringdefwreferences escapedef multiline nes
           | '(' keys ')' '=' REGEXPNOPREPROC {
           		$$ = new NamedSubExpsLangElem($2, new StringDef(*$5));
                         $$->setParserInfo(parsestruct->file_name, @1.first_line);
-          		delete $5;
             } 
         ;
 
@@ -182,13 +206,11 @@ keys: keys ',' KEY
     {
         $$ = $1;
         $$->push_back(*$3);
-        delete $3;
     }
     | KEY
     {
     	$$ = new ElementNamesList;
     	$$->push_back(*$1);
-        delete $1;
     }
 ;
 
@@ -233,29 +255,34 @@ stringdefwreferences : REGEXPDEF {
             }
           | STRINGDEF {
               $$ = new StringDef(*$1, true);
-              delete $1;
             }
           | REGEXPNOPREPROC {
               $$ = new StringDef(*$1);
-              delete $1;
             }
           | VARUSE {
               if (! vardefinitions->contains(*$1)) {
                 yyerror("undefined variable " + *$1);
+                YYERROR;
               }
               $$ = new StringDef(vardefinitions->getVar(*$1));
-              delete $1;
             }
           | BACKREFVAR {
               $$ = new StringDef(*$1);
               $$->setBackRef(true);
-              delete $1;
             }
           | stringdefwreferences '+' stringdefwreferences {
               $$ = StringDef::concat($1, $3);
               delete $1;
               delete $3;
             }
+          | WRONG_BACKREFERENCE {
+            // this token is used by the scanner to signal an error
+            // in scanning a string with backreference
+            yyerror("backreferences are allowed only inside ` `");
+            YYERROR;
+            
+            $$ = 0;
+          }
           ;
 
 stringdef : REGEXPDEF {
@@ -263,24 +290,30 @@ stringdef : REGEXPDEF {
             }
           | STRINGDEF {
               $$ = new StringDef(*$1, true);
-              delete $1;
             }
           | REGEXPNOPREPROC {
               $$ = new StringDef(*$1);
-              delete $1;
             }
           | VARUSE {
               if (! vardefinitions->contains(*$1)) {
                 yyerror("undefined variable " + *$1);
+                YYERROR;
               }
               $$ = new StringDef(vardefinitions->getVar(*$1));
-              delete $1;
             }
           | stringdef '+' stringdef {
               $$ = StringDef::concat($1, $3);
               delete $1;
               delete $3;
             }
+          | WRONG_BACKREFERENCE {
+            // this token is used by the scanner to signal an error
+            // in scanning a string with backreference
+            yyerror("backreferences are allowed only inside ` `");
+            YYERROR;
+            
+            $$ = 0;
+          }
           ;
 
 %%
@@ -290,7 +323,7 @@ extern int langdef_lex_destroy (void);
 void
 yyerror( const char *s )
 {
-  exitError(s, parsestruct);
+  errorBuffer = s;
 }
 
 void
@@ -302,34 +335,55 @@ yyerror( const string &s )
 LangElems *
 parse_lang_def()
 {
-  vardefinitions = new VarDefinitions;
-  parsestruct = new ParseStruct("", "stdin");
-  langdef_parse();
-  delete parsestruct;
-  delete vardefinitions;
-  parsestruct = 0;
-  vardefinitions = 0;
-
-  // release scanner memory
-  langdef_lex_destroy ();
-
-  return current_lang_elems;
+  return parse_lang_def("", "stdin");
 }
 
 LangElems *
 parse_lang_def(const char *path, const char *name)
 {
+  current_lang_elems = 0;
+  includedFileNotFound = false;
   vardefinitions = new VarDefinitions;
-  parsestruct = new ParseStruct(path, name);
-  open_file_to_scan(path, name);
-  langdef_parse();
-  delete parsestruct;
+  parsestruct = ParseStructPtr(new ParseStruct(path, name));
+  
+  errorBuffer = "";
+  int result = 1;
+  bool fileNotFound = false;
+  
+  try {
+  	if (strcmp(name, "stdin") != 0)
+      open_file_to_scan(path, name);
+  } catch (IOException &e) {
+    errorBuffer = e.message;
+    fileNotFound = true;
+  }
+
+  if (!fileNotFound)
+     result = langdef_parse();
+
   delete vardefinitions;
-  parsestruct = 0;
+  
   vardefinitions = 0;
 
+  if (result != 0 && ! fileNotFound) {
+  	  // make sure the input file is closed
+	  close_langdefinputfile();
+	  // close it before clearing the scanner
+  }
+  
   // release scanner memory
-  langdef_lex_destroy ();
+  clear_langdefscanner ();
+
+  if (result != 0 || errorBuffer.size()) {
+  	if (fileNotFound || includedFileNotFound) {
+	  if (current_lang_elems) delete current_lang_elems;
+	  throw ParserException(errorBuffer);
+  	} else {
+	  ParserException e(errorBuffer, parsestruct.get());
+	  if (current_lang_elems) delete current_lang_elems;
+	  throw e;
+	}
+  }
 
   return current_lang_elems;
 }

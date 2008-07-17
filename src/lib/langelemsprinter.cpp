@@ -14,49 +14,50 @@
 
 #include "statelangelem.h"
 #include "langelems.h"
+#include "namedsubexpslangelem.h"
 
-#include <iostream>
+#include <ostream>
+#include <algorithm>
+#include <iterator>
 
 using namespace std;
 
-LangElemsPrinter::LangElemsPrinter()
-{
+LangElemsPrinter::LangElemsPrinter() {
 }
 
-
-LangElemsPrinter::~LangElemsPrinter()
-{
+LangElemsPrinter::~LangElemsPrinter() {
 }
 
-void LangElemsPrinter::print(const LangElems *elems)
-{
+void LangElemsPrinter::print(const LangElems *elems, ostream &os) {
     if (!elems)
         return;
-    
+
     collect_DB(elems);
 
-    for (SetOfElements::const_iterator it = setOfElements.begin();
-         it != setOfElements.end(); ++it)
-        cout << *it << endl;
+    copy(setOfElements.begin(), setOfElements.end(), ostream_iterator<
+            SetOfElements::value_type>(os, "\n"));
 }
 
-void LangElemsPrinter::collect(const LangElems *elems)
-{
+void LangElemsPrinter::collect(const LangElems *elems) {
     if (elems)
         for (LangElems::const_iterator it = elems->begin(); it != elems->end(); ++it)
             collect_DB(*it);
 }
 
-void LangElemsPrinter::collect(const StateLangElem *elem)
-{
+void LangElemsPrinter::collect(const StateLangElem *elem) {
     setOfElements.insert(elem->getName());
 
     const LangElems *elems = elem->getElems();
     if (elems)
-        collect_DB (elems);
+        collect_DB(elems);
 }
 
-void LangElemsPrinter::collect(const LangElem *elem)
-{
+void LangElemsPrinter::collect(const LangElem *elem) {
     setOfElements.insert(elem->getName());
+}
+
+void LangElemsPrinter::collect(const NamedSubExpsLangElem *elem) {
+    const ElementNames *names = elem->getElementNames();
+    
+    setOfElements.insert(names->begin(), names->end());
 }

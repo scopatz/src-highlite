@@ -26,9 +26,9 @@ pattern Composite
 @author Lorenzo Bettini
 */
 // doublecpp: forward declarations, DO NOT MODIFY
+class HighlightState; // file: highlightstate.h
+class HighlightStateBuilder; // file: highlightstatebuilder.h
 class LangElemsPrinter; // file: langelemsprinter.h
-class RegExpStateBuilder; // file: regexpstatebuilder.h
-class RegExpStatePointer; // file: regexpstatebuilder.h
 // doublecpp: end, DO NOT MODIFY
 
 class StateLangElem : public LangElem
@@ -55,7 +55,7 @@ public:
     LangElems *getElems() const { return langelems; }
 // doublecpp: dispatch methods, DO NOT MODIFY
 public:
-virtual void dispatch_build(RegExpStateBuilder *, RegExpStatePointer state);
+virtual void dispatch_build(HighlightStateBuilder *, HighlightState * state);
 virtual void dispatch_collect_const(LangElemsPrinter *);
 // doublecpp: end, DO NOT MODIFY
 };

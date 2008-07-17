@@ -27,3 +27,5 @@ cpp2html.h.html
 src-hilite-lesspipe.sh
 libsh.a
 check-regexp
+source-highlight.exe
+check-regexp.exe

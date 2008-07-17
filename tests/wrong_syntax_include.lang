@@ -1,0 +1,7 @@
+# the problem is not in this file but in the included one
+
+symbol = "ok"
+
+include "wrong_syntax.lang"
+
+type = "ok"

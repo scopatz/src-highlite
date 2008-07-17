@@ -22,16 +22,14 @@
 #define TEXT_VAR_TEXT "$text" // the text of the text variable
 #define STYLE_VAR "\\" STYLE_VAR_TEXT // the name of the style variable as regexp
 #define TEXT_VAR "\\" TEXT_VAR_TEXT // the name of the text variable as regexp
-
 typedef std::map<std::string, std::string> SubstitutionMapping;
 
-class TextStyle
-{
+class TextStyle {
 private:
-  typedef std::vector<std::string> StringVector;
-  typedef std::vector<int> IndexVector;
-  typedef std::map<std::string, IndexVector> SubstitutionIndexes;
-  boost::regex var_exp; // the regular expression to find variable occurrences
+    typedef std::vector<std::string> StringVector;
+    typedef std::vector<int> IndexVector;
+    typedef std::map<std::string, IndexVector> SubstitutionIndexes;
+    boost::regex var_exp; // the regular expression to find variable occurrences
 
     std::string repr;
     StringVector parts; // contains all the string parts of this TextStyle.
@@ -43,6 +41,12 @@ private:
     void build_vectors();
 
 public:
+    /**
+     * @param s the representation
+     * @param vars an array of string representing the variables in this TextStyle
+     * (e.g., {"linenum", "infilename", "infile", "outfile", 0}), the last element must
+     * be 0
+     */
     TextStyle(const std::string &s = "", const char **vars = 0);
     ~TextStyle();
 
@@ -59,7 +63,9 @@ public:
      */
     std::string subst_style(const std::string &style = "");
 
-    const std::string &toString() const { return repr; }
+    const std::string &toString() const {
+        return repr;
+    }
 
     /**
      * substitutes $text with the string representation of inner

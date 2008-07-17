@@ -1,2 +1,1 @@
-wrong_backref.lang:2: backreferences are not allowed
-wrong_backref.lang:2: use backreferences only inside ` `
+wrong_backref.lang:2: backreferences are allowed only inside ` `

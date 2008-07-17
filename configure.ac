@@ -9,11 +9,11 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(autogen.sh)
+AC_INIT(source-highlight,2.10)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(source-highlight,2.9)
+AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)
@@ -176,8 +176,15 @@ AC_DEFINE_DIR([ABSOLUTEDATADIR], [datadir/source-highlight],
 
 AM_MAINTAINER_MODE
 
-AC_OUTPUT(
-[Makefile
+AC_CONFIG_FILES(
+[
+tests/valgrind_tests.sh
+tests/valgrind_suppressions.sh
+tests/valgrind_test.sh
+src/lib/tests/valgrind_test.sh
+doc/shjs_css_transform.sh
+doc/gen_style_example.sh
+Makefile
 txtc.sh
 gl/Makefile
 src/Makefile
@@ -185,21 +192,21 @@ src/java2html
 src/cpp2html
 src/src-hilite-lesspipe.sh
 doc/Makefile
-doc/shjs_css_transform.sh
-doc/gen_style_example.sh
 src/includes/Makefile
 src/lib/Makefile
+src/lib/tests/Makefile
 tests/Makefile
-tests/valgrind_tests.sh
-tests/valgrind_test.sh
-tests/valgrind_suppressions.sh
+tests/output_dir/Makefile
 source-highlight.spec],
 [chmod +x tests/valgrind_tests.sh
  chmod +x tests/valgrind_suppressions.sh
  chmod +x tests/valgrind_test.sh
+ chmod +x src/lib/tests/valgrind_test.sh
  chmod +x doc/shjs_css_transform.sh
  chmod +x doc/gen_style_example.sh]
 )
+
+AC_OUTPUT
 
 if test "$ax_cv_boost_regex" = "yes"; then
   if test -z "$BOOST_REGEX_LIB"; then

@@ -29,10 +29,11 @@ FLEX2HTML = $(SRCHILITEPROG) -s flex -f html $(STD_STYLE)
 OUTPUT_HERE = --output-dir=$(top_builddir)/doc
 
 info_TEXINFOS = source-highlight.texinfo
+source_highlight_TEXINFOS = $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
 
 SUFFIXES = .txt .txt.texinfo .txt.texinfo.texinfo .lang .lang.texinfo .diff .diff.texinfo .css .css.texinfo .show.texinfo .defaults .defaults.texinfo
 
-source-highlight.texinfo: $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
+#source-highlight.texinfo: $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
 
 lang-list.texinfo: $(top_srcdir)/src/lang.map
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ --lang-list | sed -e 's/@/@@/' > $@
@@ -151,8 +152,9 @@ test_extreme_comment_3.texinfo: $(top_srcdir)/tests/test_extreme_comment3.cpp
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test_extreme_comment3.cpp --style-file=$(top_srcdir)/src/texinfo.style -o $@ --lang-def=extreme_comment3.lang
 
 .lang.show.texinfo:
-	$(SRCHILITEEXE) --show-regex=$< > $@
-	sed -itesttmp -e 's/@/@@/g' $@ && rm -f *testtmp
+	$(SRCHILITEEXE) --show-regex=$< | $(SRCHILITEPROG) -f texinfo --style-file=$(top_srcdir)/src/texinfo.style --lang-def=nohilite.lang > $@
+#	$(SRCHILITEEXE) --show-regex=$< > $@
+#	sed -itesttmp -e 's/@/@@/g' $@ && rm -f *testtmp
 
 # the following rules have to do only with maintainance of the package
 if MAINTAINER_MODE
@@ -178,7 +180,7 @@ source-highlight.1: $(top_srcdir)/src/cmdline.ggo $(top_builddir)/config.h
 	touch $@
 else
 source-highlight.1: $(top_srcdir)/src/cmdline.ggo $(top_builddir)/config.h
-	$(HELP2MAN) $(SRCHILITEEXE) > $@
+	$(HELP2MAN) -n "convert source code to syntax highlighted document" $(SRCHILITEEXE) > $@
 endif
 
 # end of maintainer mode
@@ -191,7 +193,8 @@ DISTRIBUTEDINFOS = help-output.texinfo test_ref.h.texinfo
 
 GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo c.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo style.defaults.texinfo
 
-CSS_FILES = Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
+CSS_FILES = default.css \
+Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
             xhtml.css \
 sh_acid.css           sh_golden.css           sh_night.css \
 sh_berries-dark.css   sh_greenlcd.css         sh_pablo.css \
@@ -214,7 +217,7 @@ EXTRA_DIST = colors.html source-highlight.html \
              test_refs.h test_refs.cpp \
              gpl.texinfo flex_scanner.ll \
              example-u.diff example-c.diff example-n.diff \
-             source-highlight.1 index.html \
+             source-highlight.1 check-regexp.1 index.html \
 	     comment-show.lang comment-show2.lang \
 	     SimpleClass.java SimpleClass-doc.html UsageExample.java \
 	     txt2texinfo.txt \
@@ -227,7 +230,8 @@ source_highlightdoc_DATA = colors.html source-highlight.html \
     Hello.java.html Hello_h_f.html Hello_lines.html Hello_xhtml.html \
     Hello_xhtml2.html Hello_notfixed.html \
     $(CSS_FILES) \
-    startapp.cc.html cmdline.h.html test_refs.h.html test_refs.cpp.html \
+    source-highlight.cc.html \
+    cmdline.h.html test_refs.h.html test_refs.cpp.html \
     flex_scanner.ll.html \
     header.html footer.html \
     langdef.lang.html \
@@ -237,15 +241,15 @@ source_highlightdoc_DATA = colors.html source-highlight.html \
     style_examples.html
 
 # man page
-man_MANS = source-highlight.1
+man_MANS = source-highlight.1 check-regexp.1
 
 # note that $(srcdir) actually points to doc dir
 
 langdef.lang.html: $(top_srcdir)/src/langdef.lang
 	$(SRCHILITEPROG) $(STD_STYLE) -i $(top_srcdir)/src/langdef.lang -o langdef.lang.html
 
-startapp.cc.html: $(top_srcdir)/src/startapp.cc
-	$(CPP2HTML) --doc $(OUTPUT_HERE) $(top_srcdir)/src/startapp.cc
+source-highlight.cc.html: $(top_srcdir)/src/source-highlight.cc
+	$(CPP2HTML) --doc $(OUTPUT_HERE) $(top_srcdir)/src/source-highlight.cc
 
 #ChangeLog.html: $(top_srcdir)/ChangeLog
 #	$(CHANGELOG2HTML) --doc $(OUTPUT_HERE) $(top_srcdir)/ChangeLog
@@ -329,7 +333,7 @@ Hello_notfixed.html: $(srcdir)/Hello.java
 
 style_examples.html: $(srcdir)/Hello.java
 	cat $(srcdir)/style_examples_header.html > style_examples.html
-	./gen_style_example.sh $(top_srcdir)/src/default.css >> style_examples.html
+#./gen_style_example.sh default.css >> style_examples.html
 	for style in $(CSS_FILES); do \
 	  ./gen_style_example.sh $$style >> style_examples.html ; \
 	done ; \
@@ -349,7 +353,7 @@ check:
 	$(BUILD_HELLO_HTMLNOTFIXED)
 
 HTML_GENERATED_FILES = Hello1.html Hello2.html Hello3.html Hello4.html \
-Hello5.html Hello.java.html Hello_h_f.html startapp.cc.html \
+Hello5.html Hello.java.html Hello_h_f.html source-highlight.cc.html \
 cmdline.h.html Hello_lines.html Hello_xhtml.html Hello_xhtml2.html \
 flex_scanner.ll.html test_refs.h.html test_refs.cpp.html SimpleClass.html \
 UsageExample.html Hello_notfixed.html \

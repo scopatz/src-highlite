@@ -1,8 +1,12 @@
 vardef TODO = '(TODO|FIXME)([:]?)'
 
-environment comment delim "/**" "*/" multiline nested begin
+environment comment delim "/**" "*/" multiline begin
   type = '@[[:alpha:]]+'
   todo = $TODO
+end
+
+state cbracket delim "{" "}" escape "\\" multiline nested begin
+  keyword = "if|then|else|endif"
 end
 
 string delim "<" ">"
