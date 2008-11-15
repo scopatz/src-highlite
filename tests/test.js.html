@@ -2,7 +2,10 @@
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt>
+<pre><tt><i><font color="#9A1900">/* single line comment */</font></i>
+
+<font color="#FF6600">/myregex/gi</font>
+
 <i><font color="#9A1900">/*</font></i>
 <i><font color="#9A1900">* Sarissa XML library v 0.9 beta 4</font></i>
 <i><font color="#9A1900">* Author: Manos Batsis, mailto: </font></i><u><font color="#0000FF">mbatsis@netsmart.gr</font></u>
@@ -150,7 +153,7 @@ http://www.gnu.org/software/src-highlite -->
 	<i><font color="#9A1900">// causing an error and I dont want to use user agent stuff for that...</font></i>
 	<b><font color="#0000FF">try</font></b><font color="#FF0000">{</font>
 		XMLDocument<font color="#990000">.</font><b><font color="#0000FF">prototype</font></b><font color="#990000">.</font>async <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
-	<font color="#FF0000">}</font><b><font color="#0000FF">catch</font></b><font color="#990000">(</font>e<font color="#990000">)</font><font color="#FF0000">{</font><font color="#FF6600">/*trap*/</font><font color="#FF0000">}</font>
+	<font color="#FF0000">}</font><b><font color="#0000FF">catch</font></b><font color="#990000">(</font>e<font color="#990000">)</font><font color="#FF0000">{</font><i><font color="#9A1900">/*trap*/</font></i><font color="#FF0000">}</font>
 	<i><font color="#9A1900">// Keeps a handle to the original load() method</font></i>
 	XMLDocument<font color="#990000">.</font><b><font color="#0000FF">prototype</font></b><font color="#990000">.</font>_sarissa_load <font color="#990000">=</font> XMLDocument<font color="#990000">.</font><b><font color="#0000FF">prototype</font></b><font color="#990000">.</font>load<font color="#990000">;</font>
 	<i><font color="#9A1900">/** Extends the load method to provide synchronous loading</font></i>

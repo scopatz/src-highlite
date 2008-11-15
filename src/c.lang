@@ -37,3 +37,5 @@ include "symbols.lang"
 cbracket = "{|}"
 
 include "function.lang"
+
+include "clike_vardeclaration.lang"

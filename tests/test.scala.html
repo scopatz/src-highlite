@@ -1,0 +1,39 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">// Example Scala file for source-highlight.</font></i>
+
+<b><font color="#0000FF">case</font></b> <b><font color="#0000FF">class</font></b> <font color="#008080">Point</font><font color="#990000">(</font>x<b><font color="#0000FF">:</font></b> <font color="#009900">Double</font><font color="#990000">,</font> y<b><font color="#0000FF">:</font></b> <font color="#009900">Double</font><font color="#990000">)</font>  
+
+<b><font color="#0000FF">abstract</font></b> <b><font color="#0000FF">case</font></b> <b><font color="#0000FF">class</font></b> <font color="#008080">Shape</font> <font color="#FF0000">{</font> <b><font color="#0000FF">def</font></b> <b><font color="#000000">draw</font></b><font color="#990000">()</font><b><font color="#0000FF">:</font></b> Unit <b><font color="#0000FF">=</font></b> <b><font color="#000000">println</font></b><font color="#990000">(</font><b><font color="#0000FF">this</font></b><font color="#990000">)</font> <font color="#FF0000">}</font>  
+<b><font color="#0000FF">case</font></b> <b><font color="#0000FF">class</font></b> <font color="#008080">Circle</font><font color="#990000">(</font>center<b><font color="#0000FF">:</font></b> Point<font color="#990000">,</font> radius<b><font color="#0000FF">:</font></b> <font color="#009900">Double</font><font color="#990000">)</font> <b><font color="#0000FF">extends</font></b> Shape  
+<b><font color="#0000FF">case</font></b> <b><font color="#0000FF">class</font></b> <font color="#008080">Rectangle</font><font color="#990000">(</font>lowerLeft<b><font color="#0000FF">:</font></b> Point<font color="#990000">,</font> height<b><font color="#0000FF">:</font></b> <font color="#009900">Double</font><font color="#990000">,</font> width<b><font color="#0000FF">:</font></b> <font color="#009900">Double</font><font color="#990000">)</font> <b><font color="#0000FF">extends</font></b> Shape
+
+<b><font color="#000080">import</font></b> scala<font color="#990000">.</font>actors<font color="#990000">.</font><b><font color="#0000FF">_</font></b>  
+<b><font color="#000080">import</font></b> scala<font color="#990000">.</font>actors<font color="#990000">.</font>Actor<font color="#990000">.</font><b><font color="#0000FF">_</font></b>  
+
+<b><font color="#0000FF">object</font></b> ShapeDrawer <b><font color="#0000FF">extends</font></b> Actor <font color="#FF0000">{</font>  
+    <b><font color="#0000FF">def</font></b> <b><font color="#000000">act</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>  
+        loop <font color="#FF0000">{</font>   
+            receive <font color="#FF0000">{</font>  
+                <b><font color="#0000FF">case</font></b> s<b><font color="#0000FF">:</font></b> Shape <b><font color="#0000FF">=&gt;</font></b> <b><font color="#000000">s.draw</font></b><font color="#990000">()</font>  
+                <b><font color="#0000FF">case</font></b> <font color="#FF0000">"exit"</font>   <b><font color="#0000FF">=&gt;</font></b> <font color="#FF0000">{</font> <b><font color="#000000">println</font></b><font color="#990000">(</font><font color="#FF0000">"exiting..."</font><font color="#990000">);</font> exit <font color="#FF0000">}</font>  
+                <b><font color="#0000FF">case</font></b> x<b><font color="#0000FF">:</font></b> Any   <b><font color="#0000FF">=&gt;</font></b> <b><font color="#000000">println</font></b><font color="#990000">(</font><font color="#FF0000">"Error: Unknown message! "</font> <font color="#990000">+</font> x<font color="#990000">)</font>
+            <font color="#FF0000">}</font>
+        <font color="#FF0000">}</font>
+    <font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#000000">ShapeDrawer.start</font></b><font color="#990000">()</font> 
+ShapeDrawer <font color="#990000">!</font> <b><font color="#000000">Circle(Point</font></b><font color="#990000">(</font><font color="#993399">0.0</font><font color="#990000">,</font><font color="#993399">0.0</font><font color="#990000">),</font> <font color="#993399">1.0</font><font color="#990000">)</font>     
+ShapeDrawer <font color="#990000">!</font> <b><font color="#000000">Rectangle(Point</font></b><font color="#990000">(</font><font color="#993399">0.0</font><font color="#990000">,</font><font color="#993399">0.0</font><font color="#990000">),</font> <font color="#993399">2</font><font color="#990000">,</font> <font color="#993399">5</font><font color="#990000">)</font> 
+ShapeDrawer <font color="#990000">!</font> <font color="#993399">3.14159</font>  
+ShapeDrawer <font color="#990000">!</font> <font color="#FF0000">"exit"</font>   
+
+<i><font color="#9A1900">// Output:</font></i>
+<i><font color="#9A1900">// =&gt; Circle(Point(0.0,0.0),1.0)</font></i>
+<i><font color="#9A1900">// =&gt; Rectangle(Point(0.0,0.0),2.0,5.0)</font></i>
+<i><font color="#9A1900">// =&gt; Error: Unknown message! 3.14159</font></i>
+<i><font color="#9A1900">// =&gt; exiting...</font></i>
+</tt></pre>

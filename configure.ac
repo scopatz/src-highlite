@@ -9,7 +9,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(source-highlight,2.10)
+AC_INIT(source-highlight,2.11)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
@@ -17,9 +17,11 @@ AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)
+AC_SUBST(bash_completiondir)
 
 source_highlightdatadir=$datadir/source-highlight
 source_highlightdocdir=$datadir/doc/source-highlight
+bash_completiondir=$sysconfdir/bash_completion.d
 
 dnl Checks for C compiler.
 AC_PROG_CC
@@ -65,6 +67,7 @@ dnl check for ios_base
 AC_CXX_HAVE_IOS_BASE
 
 dnl check for Boost regular expression library
+AX_BOOST_BASE([1.33.1])
 AX_BOOST_REGEX
 AC_CHECK_HEADERS([boost/shared_ptr.hpp])
 
@@ -74,6 +77,26 @@ AC_SUBST(CHROOT_INPUT_DIR)
 AC_ARG_ENABLE( input-chroot,   [  --enable-input-chroot=DIR     change the root input dir], if test $enableval = yes || test $enableval = no; then echo "configure: error: you must specify a path for --enable-input-chroot" 1>&2; exit 1; else CHROOT_INPUT_DIR=$enableval; fi, CHROOT_INPUT_DIR= )
 
 AC_DEFINE_UNQUOTED(CHROOT_INPUT_DIR, "$CHROOT_INPUT_DIR")
+
+dnl AC_ARG_ENABLE( bash-completion-dir,   
+dnl [  --bash-completion-dir=DIR     specify directory for bash completion files
+dnl                          @<:@default=/etc/bash_completion.d@:>@], if test $enableval = yes || test $enableval = no; then echo "configure: error: you must specify a path for --bash-completion-dir" 1>&2; exit 1; else BASH_COMPLETION_DIR=$enableval; fi, BASH_COMPLETION_DIR="/etc/bash_completion.d/" )
+
+AC_ARG_WITH([bash-completion],
+	AS_HELP_STRING([--with-bash-completion@<:@=DIR@:>@], [install bash_completion conf file (default is yes) - it is possible to specify bash_completion's config file directory (default is SYSCONFDIR/bash_completion.d)]),
+	[
+    if test "$withval" = "no"; then
+	BASH_COMPLETION_DIR=""
+    elif test "$withval" = "yes"; then
+        BASH_COMPLETION_DIR=$sysconfdir/bash_completion.d
+    else
+	BASH_COMPLETION_DIR="$withval"
+    fi
+    ],
+    [BASH_COMPLETION_DIR=$sysconfdir/bash_completion.d])
+
+
+AC_SUBST(BASH_COMPLETION_DIR)
 
 dnl for txtc (Text-to-C compiler)
 LF_PROG_TXTC
@@ -128,7 +151,7 @@ dnl this is for generating references
 AC_PATH_PROGS(CTAGS, ctags exuberant-ctags)
 if test -n "$ac_cv_path_CTAGS"; then
 AC_CTAGS_FLAGS
-AM_CONDITIONAL(NO_CTAGS, test "$ac_ctags_flags" = "no" )
+AM_CONDITIONAL(NO_CTAGS, test "$ac_cv_ctags_flags" = "no" )
 else
 AM_CONDITIONAL(NO_CTAGS, test -z "$ac_cv_path_CTAGS" )
 fi
@@ -173,6 +196,9 @@ AC_DEFINE_UNQUOTED([RELATIVEDATADIR], ["$source_highlight_lang_dir"],
 AC_DEFINE_DIR([ABSOLUTEDATADIR], [datadir/source-highlight],
                    [Define to the source-highlight
                    data directory absolute to installation path.])
+
+bash_completiondir="${BASH_COMPLETION_DIR}"
+AM_CONDITIONAL(USE_BASH_COMPLETION, test "${BASH_COMPLETION_DIR}" != "")
 
 AM_MAINTAINER_MODE
 
@@ -243,7 +269,7 @@ generate references (--gen-references).
 You can find it here http://ctags.sourceforge.net
 ])
 else
-if test "$ac_ctags_flags" = "no"; then
+if test "$ac_cv_ctags_flags" = "no"; then
    AC_MSG_WARN([
 
 The ctags you have on your system cannot be used by source-highlight
@@ -253,3 +279,12 @@ so you won't be able to generate references (--gen-references).
 ])
 fi
 fi
+
+dnl echo "Good: you're using bash_completion! dir: `echo ${BASH_COMPLETION_DIR}`"
+if test "${BASH_COMPLETION_DIR}" != ""; then
+   echo "Good: you're using bash_completion! dir: $BASH_COMPLETION_DIR"
+else
+   echo "you're not using bash_completion (I'm not installing its config file)."
+   BASH_COMPLETION_DIR=""
+fi
+echo ""

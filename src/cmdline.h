@@ -33,6 +33,7 @@ extern "C" {
 struct gengetopt_args_info
 {
   const char *help_help; /**< @brief Print help and exit help description.  */
+  const char *detailed_help_help; /**< @brief Print help, including all details and hidden options, and exit help description.  */
   const char *version_help; /**< @brief Print version and exit help description.  */
   char * input_arg;	/**< @brief input file. default std input.  */
   char * input_orig;	/**< @brief input file. default std input original value given at command line.  */
@@ -102,6 +103,17 @@ struct gengetopt_args_info
   char * line_number_ref_arg;	/**< @brief number all output lines and generate an anchor, made of the specified prefix + the line number (default='line').  */
   char * line_number_ref_orig;	/**< @brief number all output lines and generate an anchor, made of the specified prefix + the line number original value given at command line.  */
   const char *line_number_ref_help; /**< @brief number all output lines and generate an anchor, made of the specified prefix + the line number help description.  */
+  char ** line_range_arg;	/**< @brief generate only the lines in the specified range(s).  */
+  char ** line_range_orig;	/**< @brief generate only the lines in the specified range(s) original value given at command line.  */
+  unsigned int line_range_min; /**< @brief generate only the lines in the specified range(s)'s minimum occurreces */
+  unsigned int line_range_max; /**< @brief generate only the lines in the specified range(s)'s maximum occurreces */
+  const char *line_range_help; /**< @brief generate only the lines in the specified range(s) help description.  */
+  char * range_separator_arg;	/**< @brief the optional separator to be printed among ranges (e.g., \"...\").  */
+  char * range_separator_orig;	/**< @brief the optional separator to be printed among ranges (e.g., \"...\") original value given at command line.  */
+  const char *range_separator_help; /**< @brief the optional separator to be printed among ranges (e.g., \"...\") help description.  */
+  int range_context_arg;	/**< @brief number of (context) lines generated even if not in range.  */
+  char * range_context_orig;	/**< @brief number of (context) lines generated even if not in range original value given at command line.  */
+  const char *range_context_help; /**< @brief number of (context) lines generated even if not in range help description.  */
   char * gen_references_arg;	/**< @brief generate references (default='inline').  */
   char * gen_references_orig;	/**< @brief generate references original value given at command line.  */
   const char *gen_references_help; /**< @brief generate references help description.  */
@@ -131,6 +143,7 @@ struct gengetopt_args_info
   const char *show_regex_help; /**< @brief show the regular expression automaton corresponding to a language definition file help description.  */
   
   unsigned int help_given ;	/**< @brief Whether help was given.  */
+  unsigned int detailed_help_given ;	/**< @brief Whether detailed-help was given.  */
   unsigned int version_given ;	/**< @brief Whether version was given.  */
   unsigned int input_given ;	/**< @brief Whether input was given.  */
   unsigned int output_given ;	/**< @brief Whether output was given.  */
@@ -158,6 +171,9 @@ struct gengetopt_args_info
   unsigned int infer_lang_given ;	/**< @brief Whether infer-lang was given.  */
   unsigned int line_number_given ;	/**< @brief Whether line-number was given.  */
   unsigned int line_number_ref_given ;	/**< @brief Whether line-number-ref was given.  */
+  unsigned int line_range_given ;	/**< @brief Whether line-range was given.  */
+  unsigned int range_separator_given ;	/**< @brief Whether range-separator was given.  */
+  unsigned int range_context_given ;	/**< @brief Whether range-context was given.  */
   unsigned int gen_references_given ;	/**< @brief Whether gen-references was given.  */
   unsigned int ctags_file_given ;	/**< @brief Whether ctags-file was given.  */
   unsigned int ctags_given ;	/**< @brief Whether ctags was given.  */
@@ -191,6 +207,8 @@ extern const char *gengetopt_args_info_purpose;
 extern const char *gengetopt_args_info_usage;
 /** @brief all the lines making the help output */
 extern const char *gengetopt_args_info_help[];
+/** @brief all the lines making the detailed help output (including hidden options and details) */
+extern const char *gengetopt_args_info_detailed_help[];
 
 /**
  * The command line parser
@@ -252,6 +270,10 @@ int cmdline_parser_file_save(const char *filename,
  * Print the help
  */
 void cmdline_parser_print_help(void);
+/**
+ * Print the detailed help (including hidden options and details)
+ */
+void cmdline_parser_print_detailed_help(void);
 /**
  * Print the version
  */

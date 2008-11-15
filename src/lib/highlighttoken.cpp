@@ -9,13 +9,14 @@
 using namespace std;
 
 HighlightToken::HighlightToken(const HighlightRule *_rule) :
-    matchedSize(0), rule(_rule) {
+    prefixOnlySpaces(false), matchedSize(0), rule(_rule) {
 }
 
 HighlightToken::HighlightToken(const std::string &elem,
         const std::string &_matched, const std::string &_prefix,
         const HighlightRule *_rule) :
-    prefix(_prefix), matchedSize(_matched.size()), rule(_rule) {
+    prefix(_prefix), prefixOnlySpaces(false), matchedSize(_matched.size()),
+            rule(_rule) {
     addMatched(elem, _matched);
 }
 

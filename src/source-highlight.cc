@@ -41,6 +41,7 @@
 #include "debuglistener.h"
 #include "ctagsmanager.h"
 #include "stopwatch.h"
+#include "lineranges.h"
 
 using namespace std;
 
@@ -49,7 +50,9 @@ using namespace std;
  * INFERFIRST = inference has priority (e.g., if --infer-lang is specified),
  * INFERATLAST = try inference as the last chance
  */
-enum InferPolicy {NOINFERENCE = 0, INFERFIRST, INFERATLAST};
+enum InferPolicy {
+    NOINFERENCE = 0, INFERFIRST, INFERATLAST
+};
 
 static void print_copyright();
 static void print_reportbugs();
@@ -102,12 +105,39 @@ int main(int argc, char * argv[]) {
         return EXIT_SUCCESS;
     }
 
-    if (args_info.help_given) {
+    if (args_info.help_given || args_info.detailed_help_given) {
         cout << "GNU ";
-        cmdline_parser_print_help();
+        if (args_info.detailed_help_given) {
+            cmdline_parser_print_detailed_help();
+        } else {
+            cmdline_parser_print_help();
+        }
         print_reportbugs();
         cmdline_parser_free(&args_info);
         return EXIT_SUCCESS;
+    }
+
+    // set possible line ranges
+    boost::shared_ptr<LineRanges> lineRanges;
+    if (args_info.line_range_given) {
+        lineRanges = boost::shared_ptr<LineRanges>(new LineRanges);
+        for (unsigned int i = 0; i < args_info.line_range_given; ++i) {
+            if (lineRanges->addRange(args_info.line_range_arg[i]) != NO_ERROR) {
+                string invalid_range = args_info.line_range_arg[i];
+                cmdline_parser_free(&args_info);
+                exitError("invalid line range: " + invalid_range);
+            }
+        }
+    }
+
+    if (args_info.range_context_given) {
+        if (!args_info.line_range_given) {
+            cmdline_parser_free(&args_info);
+            exitError(
+                    "option --range-context makes sense only when a range is specified");
+        }
+
+        lineRanges->setContextLines(args_info.range_context_arg);
     }
 
     // if a stopwatch is created, when it is deleted (automatically
@@ -133,23 +163,23 @@ int main(int argc, char * argv[]) {
     set_file_util_verbose(verbose);
 
     if (args_info.input_given)
-    inputFile = args_info.input_arg;
+        inputFile = args_info.input_arg;
 
     if (args_info.output_given)
-    outputFile = args_info.output_arg;
+        outputFile = args_info.output_arg;
 
     // for cgi force output to standard output
     if (is_cgi)
-    outputFile = "STDOUT";
+        outputFile = "STDOUT";
 
     if (args_info.src_lang_given)
-    srcLang = args_info.src_lang_arg;
+        srcLang = args_info.src_lang_arg;
 
     if (args_info.lang_def_given)
-    langFile = args_info.lang_def_arg;
+        langFile = args_info.lang_def_arg;
 
     if (args_info.outlang_def_given)
-    outLangFile = args_info.outlang_def_arg;
+        outLangFile = args_info.outlang_def_arg;
 
     // the default for output format is html
     outputFormat = args_info.out_format_arg;
@@ -177,9 +207,9 @@ int main(int argc, char * argv[]) {
     // this is defined in fileutil.cc
     string prefix_dir = get_file_path(argv[0]);
     if (prefix_dir.size())
-    start_path = get_file_path(argv[0]) + RELATIVEDATADIR;
+        start_path = get_file_path(argv[0]) + RELATIVEDATADIR;
     else
-    start_path = ABSOLUTEDATADIR;
+        start_path = ABSOLUTEDATADIR;
 
     try {
         // initialize map files
@@ -203,23 +233,24 @@ int main(int argc, char * argv[]) {
 
         string cssUrl;
         if (args_info.css_given)
-        cssUrl = args_info.css_arg;
+            cssUrl = args_info.css_arg;
 
         string docTitle;
         if (args_info.title_given)
-        docTitle = args_info.title_arg;
+            docTitle = args_info.title_arg;
 
         if (args_info.check_lang_given || args_info.check_outlang_given
-                || args_info.show_regex_given || args_info.show_lang_elements_given ||
-                args_info.lang_list_given || args_info.outlang_list_given) {
+                || args_info.show_regex_given
+                || args_info.show_lang_elements_given
+                || args_info.lang_list_given || args_info.outlang_list_given) {
             // FIXME just a bogus outlang file specification not to search in outlang.map
             outLangFile = "html.outlang";
         }
 
         // initialize the main source highlight object
-        SourceHighlight sourcehighlight(getLangFileName(NOINFERENCE, outputFile,
-                        outLangFile, outputFormat + (cssUrl.size() ? +"-css" : ""),
-                        outlangmap));
+        SourceHighlight sourcehighlight(getLangFileName(NOINFERENCE,
+                outputFile, outLangFile, outputFormat
+                        + (cssUrl.size() ? +"-css" : ""), outlangmap));
 
         // and sets all its properties according to the command line args
         sourcehighlight.setDataDir(dataDir);
@@ -253,39 +284,41 @@ int main(int argc, char * argv[]) {
 
         // just print the lang elems if show-lang-elements is specified
         if (args_info.show_lang_elements_given) {
-            sourcehighlight.printLangElems(args_info.show_lang_elements_arg, cout);
+            sourcehighlight.printLangElems(args_info.show_lang_elements_arg,
+                    cout);
             return (EXIT_SUCCESS);
         }
 
         sourcehighlight.setGenerateEntireDoc((!args_info.no_doc_given)
-                &&(args_info.doc_given || (docTitle.size()) || cssUrl.size()));
+                && (args_info.doc_given || (docTitle.size()) || cssUrl.size()));
         sourcehighlight.setStyleDefaultFile(args_info.style_defaults_arg);
         sourcehighlight.setStyleFile(args_info.style_file_arg);
         if (args_info.style_css_file_given)
-        sourcehighlight.setStyleCssFile(args_info.style_css_file_arg);
+            sourcehighlight.setStyleCssFile(args_info.style_css_file_arg);
         sourcehighlight.setGenerateVersion(args_info.gen_version_flag != 0);
         sourcehighlight.setCss(cssUrl);
         sourcehighlight.setTitle(docTitle);
         sourcehighlight.setOutputDir(outputDir);
+        sourcehighlight.setLineRanges(lineRanges.get());
 
         if (args_info.debug_langdef_given) {
             debugListener = boost::shared_ptr<DebugListener>(new DebugListener);
             const string debugType = args_info.debug_langdef_arg;
             if (debugType == "interactive")
-            debugListener->setInteractive(true);
+                debugListener->setInteractive(true);
             sourcehighlight.setHighlightEventListener(debugListener.get());
             // during debugging disable optimizations
             sourcehighlight.setOptimize(false);
         }
 
         if (args_info.header_given)
-        sourcehighlight.setHeaderFileName(args_info.header_arg);
+            sourcehighlight.setHeaderFileName(args_info.header_arg);
 
         if (args_info.footer_given)
-        sourcehighlight.setFooterFileName(args_info.footer_arg);
+            sourcehighlight.setFooterFileName(args_info.footer_arg);
 
         bool generateLineNumbers = args_info.line_number_given
-        || args_info.line_number_ref_given;
+                || args_info.line_number_ref_given;
         sourcehighlight.setGenerateLineNumbers(generateLineNumbers);
 
         if (args_info.line_number_given) {
@@ -295,7 +328,8 @@ int main(int argc, char * argv[]) {
 
         if (args_info.line_number_ref_given) {
             sourcehighlight.setGenerateLineNumberRefs(true);
-            sourcehighlight.setLineNumberAnchorPrefix(args_info.line_number_ref_arg);
+            sourcehighlight.setLineNumberAnchorPrefix(
+                    args_info.line_number_ref_arg);
         }
 
         if (generateLineNumbers) {
@@ -306,16 +340,17 @@ int main(int argc, char * argv[]) {
         }
 
         // whether to give precedence to language inference
-        InferPolicy inferPolicy = (args_info.infer_lang_given ? INFERFIRST : INFERATLAST);
+        InferPolicy inferPolicy = (args_info.infer_lang_given ? INFERFIRST
+                : INFERATLAST);
 
         RefPosition refposition;
         string gen_references_arg = args_info.gen_references_arg;
         if (gen_references_arg == "inline")
-        refposition = INLINE;
+            refposition = INLINE;
         else if (gen_references_arg == "postline")
-        refposition = POSTLINE;
+            refposition = POSTLINE;
         else if (gen_references_arg == "postdoc")
-        refposition = POSTDOC;
+            refposition = POSTDOC;
 
         boost::shared_ptr<CTagsManager> ctagsManager;
         if (args_info.gen_references_given) {
@@ -336,12 +371,20 @@ int main(int argc, char * argv[]) {
             }
 
             // the ctags command must be executed if --ctags is specified with an empty string
-            ctagsManager =
-            boost::shared_ptr<CTagsManager>(
-                    new CTagsManager(
-                            ctags_file,
-                            ctags, ctags != "", refposition));
+            ctagsManager
+                    = boost::shared_ptr<CTagsManager>(
+                            new CTagsManager(ctags_file, ctags, ctags != "", refposition));
             sourcehighlight.setCTagsManager(ctagsManager.get());
+        }
+
+        if (args_info.range_separator_given) {
+            if (!args_info.line_range_given) {
+                cmdline_parser_free(&args_info);
+                exitError(
+                        "option --range-separator makes sense only when a range is specified");
+            }
+
+            sourcehighlight.setRangeSeparator(args_info.range_separator_arg);
         }
 
         // OK, let's highlight!
@@ -353,17 +396,18 @@ int main(int argc, char * argv[]) {
             // in case multiple input files were specified (without --input)
             for (unsigned int i = 0; i < (args_info.inputs_num); ++i) {
                 PROGRESSINFO(string("Processing ")+ args_info.inputs[i] + " ... ");
-                sourcehighlight.highlight(args_info.inputs[i], "", getLangFileName(inferPolicy, args_info.inputs[i], langFile,
-                                srcLang, langmap));
+                sourcehighlight.highlight(args_info.inputs[i], "",
+                        getLangFileName(inferPolicy, args_info.inputs[i],
+                                langFile, srcLang, langmap));
                 PROGRESSINFO("created " + sourcehighlight.createOutputFileName(args_info.inputs[i]) + "\n");
             }
         } else {
             if (is_cgi)
-            print_cgi_header();
+                print_cgi_header();
 
             // in case only one input file was specified with --input
-            sourcehighlight.highlight(inputFile, outputFile, getLangFileName(inferPolicy, inputFile, langFile,
-                            srcLang, langmap));
+            sourcehighlight.highlight(inputFile, outputFile, getLangFileName(
+                    inferPolicy, inputFile, langFile, srcLang, langmap));
         }
     } catch (const HighlightBuilderException &e) {
         cerr << e << endl;
@@ -384,8 +428,7 @@ void print_copyright() {
     int i;
 
     for (i = 1; i <= copyright_text_length; ++i)
-        cout << copyright_text[i] << endl;
-    ;
+        cout << copyright_text[i] << endl;;
 }
 
 void print_reportbugs() {

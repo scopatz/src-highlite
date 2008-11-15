@@ -154,6 +154,7 @@ WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang wrong_syntax_simp
 WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err wrong_syntax_simple.err wrong_syntax.err wrong_syntax_include.err wrong_namedgroups.err wrong_namedgroups_subexps.err wrong_namedgroups_subexps2.err wrong_backref.err wrong_backref2.err wrong_dyn_backref.err wrong_dyn_backref2.err wrong_include.err wrong_outlang_include.err
 WRONGSTYLES = wrong_dircolor.style wrong_already_defined.style wrong_already_defined_css.css
 WRONGSTYLESOUT = wrong_dircolor.err wrong_already_defined.err wrong_already_defined_css.err
+WRONGCMDLINEPARAMS = wrong_line_range.err
 # missing_langmap2.err
 
 OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_ref_post.tex test_ref.texinfo test_ref.docbook test_ref.xhtml
@@ -228,6 +229,7 @@ test.ps test.ps.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
+$(WRONGCMDLINEPARAMS) \
 valgrind_tests.sh.in valgrind_suppressions.sh.in \
 valgrind_test.sh.in suppressions.supp \
 erasedir.sed erasedir2.sed erasedir3.sed \
@@ -249,9 +251,38 @@ test.fortran test.fortran.html test.fixed-fortran.html \
 test.spec.html \
 test.ldap test.ldap.html \
 test.m4 test.m4.html \
-test.glsl test.glsl.html
+test.glsl test.glsl.html \
+test_xorg.conf test_xorg.conf.html \
+test.scala test.scala.html \
+test_string_stop.java test_string_stop.java.html \
+test_java_stop.java test_java_stop.java.html \
+test_string_stop.lang \
+test_vardecl.java test_vardecl.java.html \
+test_vardecl.cc test_vardecl.cc.html \
+test_newlines.lang test_nonewlines.lang \
+test_linerange1.html test_linerange2.html \
+test_linerange_sep.html
 
-SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .c .c.html .java .java.html .java.doc.html .css .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show .wdefault .wodefault .wdefault.html .wodefault.html .properties .properties.html .desktop .desktop.html .lsm .lsm.html .hx .hx.html .fortran .fortran.html .ldap .ldap.html .m4 .m4.html .glsl .glsl.html
+SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .c .c.html .java .java.html .java.doc.html .css .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show .wdefault .wodefault .wdefault.html .wodefault.html .properties .properties.html .desktop .desktop.html .lsm .lsm.html .hx .hx.html .fortran .fortran.html .ldap .ldap.html .m4 .m4.html .glsl .glsl.html .conf .conf.html .scala .scala.html
+
+test_string_stop.java.html: $(srcdir)/test_string_stop.java
+	$(PROGNAME) --lang-def=$(srcdir)/test_string_stop.lang -i $< -o test_string_stop.java.html
+
+test_string_nostop.java.html: $(srcdir)/test_string_stop.java
+	$(PROGNAME) --lang-def=$(srcdir)/test_string_nostop.lang -i $< -o test_string_nostop.java.html
+
+LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
+LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
+LINERANGESEPEXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3 --range-separator="<...>"
+
+test_linerange1.html: $(srcdir)/test.java
+	$(LINERANGE1EXE) < $(srcdir)/test.java > $@
+
+test_linerange2.html: $(srcdir)/test.java
+	$(LINERANGE2EXE) < $(srcdir)/test.java > $@
+
+test_linerange_sep.html: $(srcdir)/test.java
+	$(LINERANGESEPEXE) < $(srcdir)/test.java > $@
 
 c_comment.show: $(top_srcdir)/src/c_comment.lang
 	$(PROGEXE) --show-regex=$(top_srcdir)/src/c_comment.lang > $@
@@ -425,6 +456,12 @@ default.style.html: $(top_srcdir)/src/default.style
 .glsl.glsl.html:
 	$(PROGNAME_STD) -i $< -o $@
 
+.conf.conf.html:
+	$(PROGNAME_STD) -i $< -o $@ -s xorg
+
+.scala.scala.html:
+	$(PROGNAME_STD) -i $< -o $@ -s scala
+
 .fortran.fortran.html:
 	$(FORTRAN2HTML) -i $< -o $@
 
@@ -467,6 +504,11 @@ _state.ngroups_state.ngroups.html:
 
 .ngroups.ngroups.html:
 	$(NAMEDGROUPS) -i $< -o $@
+
+WRONGLINERANGEEXE=$(PROGEXE) --line-range="a-b"  --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null
+
+wrong_line_range.err:
+	$(WRONGLINERANGEEXE) 2> wrong_line_range.err || true
 
 .lang.err:
 	$(CHECKLANG) ./$< 2> $@ || true;
@@ -603,7 +645,8 @@ test_python_lines.html: test.py
 test_py_comments_lines.html: test_comments.py
 	$(PYTHON2HTML) --line-number -i test_comments.py -o $@
 
-check: check_java2html check_java2xhtml check_cpp2html check_csharp2html \
+check: check_java2html check_javascript \
+check_java2xhtml check_cpp2html check_csharp2html \
 check_prolog2html check_logtalk2html \
 check_perl2html \
 check_php32html check_python2html check_changelog check_flex check_bison \
@@ -643,7 +686,14 @@ check_fortran \
 check_ldap \
 check_m4 \
 check_glsl \
-check-output-dir
+check_xorg \
+check_scala \
+check-output-dir \
+check_stop \
+check_vardecl \
+check_newlines \
+check_wrong_lineranges \
+check_lineranges
 
 remove_css_html_files:
 	rm -f *.css.java.html *.nf_css.java.html
@@ -654,10 +704,9 @@ remove_css_xhtml_files:
 remove_css_doc_files:
 	rm -f *.css_doc.java.html
 
-check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.java.doc.html test.js.html test.java.txt test.java.tex test.java.texinfo test_notfixed.html test_css.html test_css_nodoc.html test_comments.java.html test_java_lines.html test.css.java.html test.nf_css.java.html test.css_doc.java.html
+check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.java.doc.html test.java.txt test.java.tex test.java.texinfo test_notfixed.html test_css.html test_css_nodoc.html test_comments.java.html test_java_lines.html test.css.java.html test.nf_css.java.html test.css_doc.java.html
 	$(JAVA2HTML) -i $(srcdir)/test.java -o test.java.out.html
 	$(JAVA2HTMLDOC) -i $(srcdir)/test.java -o test.java.doc.out.html
-	$(JS2HTML) < $(srcdir)/test.js > test.js.out.html
 	$(JAVA2HTMLNOTFIXED) < $(srcdir)/test.java > test_notfixed.out.html
 	$(JAVA2HTMLCSS) < $(srcdir)/test.java > test_css.out.html
 	$(JAVA2HTMLCSSNODOC) < $(srcdir)/test.java > test_css_nodoc.out.html
@@ -669,7 +718,6 @@ check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.
 	@echo expect no output from diff
 	diff $(srcdir)/test.java.html test.java.out.html
 	diff $(srcdir)/test.java.doc.html test.java.doc.out.html
-	diff $(srcdir)/test.js.html test.js.out.html
 	diff $(srcdir)/test_notfixed.html test_notfixed.out.html
 	diff $(srcdir)/test_css.html test_css.out.html
 	diff $(srcdir)/test_css_nodoc.html test_css_nodoc.out.html
@@ -681,6 +729,11 @@ check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.
 	diff $(srcdir)/test.java.html test.css.java.html
 	diff $(srcdir)/test_notfixed.html test.nf_css.java.html
 	diff $(srcdir)/test.java.doc.html test.css_doc.java.html
+
+check_javascript: test.js.html
+	$(JS2HTML) < $(srcdir)/test.js > test.js.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.js.html test.js.out.html
 
 check_java2xhtml: remove_css_xhtml_files test_xhtml.html test_xhtml_notfixed.html test_xhtml_doc.html test_xhtml_css.html test_xhtml_css_doc.html test.css_xhtml.java.html
 	$(JAVA2XHTML) < $(srcdir)/test.java > test_xhtml.out.html
@@ -885,6 +938,16 @@ check_glsl: test.glsl.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.glsl.html test.glsl.out.html
 
+check_xorg: test_xorg.conf.html
+	$(PROGNAME_STD) -i $(srcdir)/test_xorg.conf -s xorg  > test_xorg.conf.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test_xorg.conf.html test_xorg.conf.out.html
+
+check_scala: test.scala.html
+	$(PROGNAME_STD) -i $(srcdir)/test.scala -s scala  > test.scala.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.scala.html test.scala.out.html
+
 check_fortran: test.fortran.html test.fixed-fortran.html
 	$(FORTRAN2HTML) -i $(srcdir)/test.fortran > test.fortran.out.html
 	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -s fixed-fortran > test.fixed-fortran.out.html
@@ -1039,6 +1102,21 @@ check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
 	diff $(srcdir)/wrong_include.err wrong_include.err_out
 	diff $(srcdir)/wrong_outlang_include.err wrong_outlang_include.err_out
 
+check_wrong_lineranges:
+	rm -f *.err_out
+	$(WRONGLINERANGEEXE) 2> wrong_line_range.err_out || true
+	@echo expect no output from diff
+	diff $(srcdir)/wrong_line_range.err wrong_line_range.err_out
+
+check_lineranges: test_linerange1.html test_linerange2.html test_linerange_sep.html
+	$(LINERANGE1EXE) < $(srcdir)/test.java > test_linerange1.out.html
+	$(LINERANGE2EXE) < $(srcdir)/test.java > test_linerange2.out.html
+	$(LINERANGESEPEXE) < $(srcdir)/test.java > test_linerange_sep.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test_linerange1.html test_linerange1.out.html
+	diff $(srcdir)/test_linerange2.html test_linerange2.out.html
+	diff $(srcdir)/test_linerange_sep.html test_linerange_sep.out.html
+
 #$(PROG_NOOUTLANGDEF) -i $(srcdir)/test.simple -o test.err_out --data-dir=/tmp 2> missing_langmap2.err_out || true
 #sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap2.err_out
 #diff $(srcdir)/missing_langmap2.err missing_langmap2.err_out
@@ -1132,6 +1210,27 @@ check_list: lang.list outlang.list
 	diff $(srcdir)/lang.list lang.out.list
 	diff $(srcdir)/outlang.list outlang.out.list
 
+check_stop: test_string_stop.java.html test_java_stop.java.html
+	$(PROGNAME) --lang-def=$(srcdir)/test_string_stop.lang -i $(srcdir)/test_string_stop.java -o test_string_stop.java.out.html
+	$(JAVA2HTML) -i $(srcdir)/test_java_stop.java -o test_java_stop.java.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test_string_stop.java.html test_string_stop.java.out.html
+	diff $(srcdir)/test_java_stop.java.html test_java_stop.java.out.html
+
+check_vardecl: test_vardecl.java.html test_vardecl.cc.html
+	$(JAVA2HTML) -i $(srcdir)/test_vardecl.java -o test_vardecl.java.out.html
+	$(CPP2HTML) -i $(srcdir)/test_vardecl.cc -o test_vardecl.cc.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test_vardecl.java.html test_vardecl.java.out.html
+	diff $(srcdir)/test_vardecl.cc.html test_vardecl.cc.out.html
+
+check_newlines: 
+	$(PROGEXE) --show-regex=$(srcdir)/test_newlines.lang > test_newlines.out
+	$(PROGEXE) --show-regex=$(srcdir)/test_nonewlines.lang > test_nonewlines.out
+	@echo expect no output from diff
+	diff test_newlines.out test_nonewlines.out
+
+
 clean_ref: 
 	rm -f $(OUTPUTWREFS)
 
@@ -1148,7 +1247,8 @@ source_highlightdoc_DATA = test.php3.html test.pl.html test.pm.html \
 test.py.html test.rb.html test.js.html test.lua.html test.ml.html \
 test.sml.html test.log.html access.log.html auth.log.html error.log.html syslog.log.html test.htm.html test.java.tex.html \
 syslog.style.html \
-log.lang.html c.lang.html default.style.html
+log.lang.html c.lang.html default.style.html \
+test_linerange_sep.html
 
 VALGRINDTESTS = $(top_builddir)/tests/valgrind_tests.sh
 VALGRINDTEST = $(top_builddir)/tests/valgrind_test.sh
@@ -1170,9 +1270,9 @@ check-valgrind:
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp
 	rm -f test_refs_tmp.*
 
-CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml *.out.langelems *.out.list
+CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml *.out.langelems *.out.list test_newlines.out test_nonewlines.out
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html *.fortran.html *.fixed-fortran.html *.hx.html *.m4.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html *.fortran.html *.fixed-fortran.html *.hx.html *.m4.html *.scala.html
 
 DISTCLEANFILES=test_ref.html test_ref.xhtml test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html test_ref.docbook

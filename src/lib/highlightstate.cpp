@@ -55,6 +55,12 @@ bool HighlightState::findBestMatch(std::string::const_iterator start,
                 }
                 bestToken.copyFrom(tempToken);
                 bestMatchingRule = currentRule;
+
+                // if we matched something with no prefix (or only spaces)...
+                if (tempToken.prefixOnlySpaces) {
+                    // ...don't try any other rule
+                    break;
+                }
             }
         }
     }

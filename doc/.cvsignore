@@ -67,3 +67,6 @@ tags
 texinfo.tex.lnk
 mdate-sh.lnk
 source-highlight.cc.html
+test_vardecl.cc.texinfo
+test_lineranges1.java.texinfo
+test_lineranges2.java.texinfo

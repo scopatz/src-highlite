@@ -1,6 +1,7 @@
 // tests for RegexHighlightRules
 
 #include <iostream>
+#include <boost/regex.hpp>
 
 #include "asserttestexit.h"
 #include "regexrulefactory.h"
@@ -25,12 +26,11 @@ static void check_compound_regex(HighlightRule *rule,
         const MatchedElements &expectedElemList, const string &prefix,
         const string &suffix);
 
-static void
-        check_state(const HighlightState *state,
-                const MatchingParameters &params, const string &s,
-                bool shouldMatch, const string &match, const string &prefix,
-                const string &suffix, const string &expectedMatchingRule = "",
-                const string &expectedElem = "");
+static void check_state(const HighlightState *state,
+        const MatchingParameters &params, const string &s, bool shouldMatch,
+        const string &match, const string &prefix, const string &suffix,
+        const string &expectedMatchingRule = "", const string &expectedElem =
+                "");
 
 void check_regex(HighlightRule *rule, const MatchingParameters &params,
         const string &s, bool shouldMatch, const string &match,
@@ -116,6 +116,15 @@ int main() {
     MatchingParameters params;
 
     cout << "*** test_regexrules" << endl;
+
+    // first of all check the only spaces regular expression
+    boost::regex onlySpaces("[[:blank:]]*");
+
+    assertTrue(boost::regex_match(" \t \t ", onlySpaces));
+    assertTrue(boost::regex_match("", onlySpaces));
+    assertFalse(boost::regex_match(" a\t \t ", onlySpaces));
+    assertFalse(boost::regex_match(" a ", onlySpaces));
+    assertFalse(boost::regex_match("foo", onlySpaces));
 
     RegexRuleFactory factory;
 
@@ -273,13 +282,15 @@ int main() {
 
     assertEquals("normal", classState.getDefaultElement());
 
-    classState.addRule(HighlightRulePtr(factory.createSimpleRule("as", "as|at")));
+    classState.addRule(
+            HighlightRulePtr(factory.createSimpleRule("as", "as|at")));
 
     check_state(&classState, params, "this class foo", true, "as", "this cl",
             "s foo", "", "as");
 
-    classState.addRule(HighlightRulePtr(factory.createSimpleRule("keyword",
-            "class")));
+    HighlightRulePtr keywordRule = HighlightRulePtr(factory.createSimpleRule(
+            "keyword", "class"));
+    classState.addRule(keywordRule);
 
     // now we should find a better match "class"
     check_state(&classState, params, "this class foo", true, "class", "this ",
@@ -292,11 +303,16 @@ int main() {
     check_state(&classState, params, "this class foo", true, "class foo",
             "this ", "", "class[[:blank:]]+[[:word:]]+", "complex");
 
+    // we don't match "class foo" but only "class" since its prefix
+    // contains only spaces
+    check_state(&classState, params, "\t \t class foo", true, "class",
+            "\t \t ", " foo", "class", "keyword");
+
     classState.addRule(HighlightRulePtr(factory.createSimpleRule("foo", "bar"))); // (1)
     classState.addRule(HighlightRulePtr(factory.createSimpleRule("foo",
             "[[:word:]]+(?=[[:blank:]]*\\()"))); // (2)
 
-    // although also the second rule matches "bar", however the first one already matched 
+    // although also the second rule matches "bar", however the first one already matched
     check_state(&classState, params, "this bar ( foo", true, "bar", "this ",
             " ( foo", "bar");
     // in this case the second rule matches only
@@ -320,9 +336,8 @@ int main() {
     assertTrue(nextState->getRuleList()[2]->getNextState().get() == 0);
 
     // single line automatically transformed in multi line (since nested)
-    HighlightRulePtr singleNestedToMultiRule =
-            HighlightRulePtr(factory.createLineRule("foo", "<", ">", "\\\\",
-                    true));
+    HighlightRulePtr singleNestedToMultiRule = HighlightRulePtr(
+            factory.createLineRule("foo", "<", ">", "\\\\", true));
 
     cout << "single nested line rule (transformed): ";
     coutPrinter.printHighlightRule(singleNestedToMultiRule.get());
@@ -336,8 +351,8 @@ int main() {
 
     // single line automatically transformed in multi line (since
     // one delimiter has more than one char)
-    HighlightRulePtr singleToMultiRule =
-            HighlightRulePtr(factory.createLineRule("foo", "<<", ">>", "\\\\"));
+    HighlightRulePtr singleToMultiRule = HighlightRulePtr(
+            factory.createLineRule("foo", "<<", ">>", "\\\\"));
 
     cout << "single line rule (transformed): ";
     coutPrinter.printHighlightRule(singleToMultiRule.get());
@@ -348,7 +363,8 @@ int main() {
     assertEquals(1, nextState->getRuleList()[0]->getExitLevel());
 
     // check state copy
-    HighlightStatePtr stateCopy = HighlightStatePtr(new HighlightState(*nextState));
+    HighlightStatePtr stateCopy = HighlightStatePtr(
+            new HighlightState(*nextState));
     assertEquals(stateCopy->getId(), nextState->getId());
     rule = HighlightRulePtr(factory.createSimpleRule("foo", "foo"));
     // change the second rule of the state
@@ -400,8 +416,8 @@ int main() {
     nameList.push_back("keyword");
     nameList.push_back("normal");
     nameList.push_back("type");
-    HighlightRulePtr compoundRule =
-            HighlightRulePtr(factory.createCompoundRule(nameList,
+    HighlightRulePtr compoundRule = HighlightRulePtr(
+            factory.createCompoundRule(nameList,
                     "(class)([[:blank:]]+)([[:word:]]+)"));
 
     cout << "compound rule: ";
@@ -468,7 +484,8 @@ int main() {
     assertEquals("@{3} @{1} @{2}", origRep2->toString());
 
     // that the second rule was not changed
-    assertEquals("no @{1} replacement", stateWithRepl->getRuleList()[1]->toString());
+    assertEquals("no @{1} replacement",
+            stateWithRepl->getRuleList()[1]->toString());
 
     // that the other two were changed
     assertEquals("second first ", stateWithRepl->getRuleList()[0]->toString());

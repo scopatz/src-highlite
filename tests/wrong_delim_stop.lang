@@ -1,0 +1,4 @@
+string delim "(" ")"
+
+# stop cannot be used with nested or multiline elems
+string delim "<" ">" nested stop

@@ -1,0 +1,18 @@
+keyword = "if|class"
+
+type = 'int'
+
+comment delim "/*" "*/"
+
+# thus this won't catch "/* */ /" as a regexp,
+# since comment elem definition comes first
+regexp = '/.*/.*/'
+
+# this won't match if ( ) as a function,
+# since keyword elem definition comes first
+function = '([[:alpha:]]|_)[[:word:]]*[[:blank:]]*\(*[[:blank:]]*\)'
+
+# the following order is conceptually wrong,
+# since "//" won't be highlighted as a comment, but as two symbols
+symbol = "/"
+comment start "//"

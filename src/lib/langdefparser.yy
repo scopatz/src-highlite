@@ -98,7 +98,9 @@ struct ElementNamesList : ElementNames {
   int flag ;
 };
 
-%token <tok> BEGIN_T END_T ENVIRONMENT_T STATE_T MULTILINE_T DELIM_T START_T ESCAPE_T NESTED_T EXIT_ALL EXIT_T VARDEF_T REDEF_T SUBST_T NONSENSITIVE_T WRONG_BACKREFERENCE
+%token <tok> BEGIN_T END_T ENVIRONMENT_T STATE_T MULTILINE_T DELIM_T START_T 
+%token <tok> ESCAPE_T NESTED_T EXIT_ALL EXIT_T VARDEF_T REDEF_T SUBST_T NONSENSITIVE_T 
+%token <tok> WRONG_BACKREFERENCE
 %token <string> KEY STRINGDEF REGEXPNOPREPROC VARUSE BACKREFVAR WRONG_INCLUDE_FILE
 %token <stringdef> REGEXPDEF
 
@@ -156,6 +158,7 @@ elemdef : redefsubst complexelem exitall
             StateLangElem *statelangelem = new StateLangElem($3->getName(), $3, $5, !$2);
             $$ = statelangelem;
             $3->setStateLangElem(statelangelem);
+            
             UPDATE_REDEF($$, $1);
           }
         | VARDEF_T KEY '=' stringdefs {
@@ -177,6 +180,7 @@ complexelem : key DELIM_T stringdef stringdefwreferences escapedef multiline nes
                 {
                   $$ = new DelimitedLangElem(*($1->key), $3, $4, $5, $6, $7);
                   $$->setParserInfo($1);
+                  
                   delete $1;
                 }
           | key START_T stringdef {
@@ -187,6 +191,7 @@ complexelem : key DELIM_T stringdef stringdefwreferences escapedef multiline nes
           | key '=' stringdefs nonsensitive {
               $$ = new StringListLangElem(*($1->key), $3, $4);
               $$->setParserInfo($1);
+              
               delete $1;
             }
           | '(' keys ')' '=' REGEXPNOPREPROC {

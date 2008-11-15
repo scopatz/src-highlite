@@ -1,3 +1,6 @@
+/* single line comment */
+
+/myregex/gi
 
 /*
 * Sarissa XML library v 0.9 beta 4

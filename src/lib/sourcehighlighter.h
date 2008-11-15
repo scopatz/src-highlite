@@ -26,8 +26,8 @@ typedef std::stack<HighlightStatePtr> HighlightStateStack;
  * The main class performing the highlighting.  It relies on a HighlightState
  * (and its HighlightRule objects)
  */
-class SourceHighlighter :
-    public EventGenerator<HighlightEventListener, HighlightEvent> {
+class SourceHighlighter: public EventGenerator<HighlightEventListener,
+        HighlightEvent> {
     /// the main (and initial) highlight state
     HighlightStatePtr mainHighlightState;
 
@@ -41,10 +41,17 @@ class SourceHighlighter :
     const FormatterManager *formatterManager;
 
     /**
-     * Whether to optmize output (e.g., adiacent text parts belonging
+     * Whether to optimize output (e.g., adjacent text parts belonging
      * to the same element will be buffered and generated as a single text part)
      */
     bool optimize;
+
+    /**
+     * Whether formatting is currently suspended.  Note that matching for
+     * regular expressions is not suspended: only the actual output of formatted
+     * code is suspended.
+     */
+    bool suspended;
 
     /**
      * Additional parameters for the formatters
@@ -130,6 +137,14 @@ public:
 
     void setFormatterParams(FormatterParams *p) {
         formatterParams = p;
+    }
+
+    bool isSuspended() const {
+        return suspended;
+    }
+
+    void setSuspended(bool b = true) {
+        suspended = b;
     }
 };
 

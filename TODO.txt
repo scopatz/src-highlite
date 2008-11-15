@@ -32,8 +32,6 @@ Is there an element class that is not a StateStartLangElem?
 check empty alternative in string def: "foo||" which would lead
 to a non-terminating program
 
-USE GENGETOPT DETAILS
-
 LANG FILES
 ----------
 recognize kde rc files
@@ -68,7 +66,7 @@ the only thing that should be passed to format() should be linenumber and filena
 - line numbers and code in different columns when generating tables (probably use
 linesuffix)?
 
-- implement ctags:
+- ctags:
   Are the input and output file useful in ctagsformatter?  Or could we put it into
   FormatterParams?
 

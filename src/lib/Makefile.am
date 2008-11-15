@@ -24,7 +24,8 @@ else
 	touch $@
 endif
 
-AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl
+AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl $(BOOST_CPPFLAGS)
+AM_LDFLAGS = $(BOOST_LDFLAGS)
 
 LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
 
@@ -61,7 +62,7 @@ noinst_HEADERS = parsestyles.h \
 	textstyleformattercollection.h \
 	ioexception.h parserexception.h stringtable.h \
 	verbose.h eventgenerator.h highlightevent.h highlighteventlistener.h \
-	debuglistener.h ctagsmanager.h bufferedoutput.h
+	debuglistener.h ctagsmanager.h bufferedoutput.h lineranges.h
 
 liblangelem_la_SOURCES = langelem.cpp statelangelem.cpp \
 	langelems.cpp statestartlangelem.cpp stringlistlangelem.cpp \
@@ -72,7 +73,7 @@ librules_la_SOURCES = highlightrule.cpp highlighttoken.cpp \
 	highlightstate.cpp highlightrulefactory.cpp highlightstateprinter.cpp
 
 libhighlighter_la_SOURCES = sourcehighlighter.cpp sourcefilehighlighter.cpp \
-	linenumgenerator.cpp
+	linenumgenerator.cpp lineranges.cpp
 libhighlighter_la_LIBADD = $(BOOST_REGEX_LIB) ./libformatter.la ./libcommon.la
 
 libformatter_la_SOURCES = formatter.cpp formattermanager.cpp

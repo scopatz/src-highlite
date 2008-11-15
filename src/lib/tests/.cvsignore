@@ -8,6 +8,11 @@ test_formatter_manager
 test_highlighter
 test_exception
 test_highlightbuilder
+test_highlightbuilder.exe
+test_regexrules.exe
+test_highlighter.exe
+test_exception.exe
+test_formatter_manager.exe
 test_buffered_output
 test_textstyleformatter
 test_wordtokenizer
@@ -39,3 +44,5 @@ test_textstyle
 test_filenotfound
 test_style_errors
 *.exe
+*.stackdump
+test_lineranges

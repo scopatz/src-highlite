@@ -1,0 +1,15 @@
+# test_newlines.lang
+# test that newlines in expressions are simply discarded
+
+keyword = "foo
+|
+lang"
+
+(keyword,normal,classname) = 
+  `(\<struct)
+([[:blank:]]+)
+([[:alnum:]_]+)`
+
+preproc = '^[[:blank:]]*
+#([[:blank:]]*
+[[:word:]]*)'

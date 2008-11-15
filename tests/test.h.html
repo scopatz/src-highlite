@@ -27,7 +27,7 @@ http://www.gnu.org/software/src-highlite -->
 
 <b><font color="#000080">#include</font></b> <font color="#FF0000">"genfun.h"</font> <i><font color="#9A1900">/* for generating functions */</font></i>
 
-<b><font color="#0000FF">class</font></b> <font color="#009900">TextGenerator</font> <font color="#FF0000">{</font>
+<b><font color="#0000FF">class</font></b> <font color="#008080">TextGenerator</font> <font color="#FF0000">{</font>
   <b><font color="#0000FF">public</font></b> <font color="#990000">:</font>
     <b><font color="#0000FF">virtual</font></b> <font color="#009900">void</font> <b><font color="#000000">generate</font></b><font color="#990000">(</font> <b><font color="#0000FF">const</font></b> <font color="#009900">char</font> <font color="#990000">*</font>s <font color="#990000">)</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font> <font color="#990000">(*</font>sout<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> s <font color="#990000">;</font> <font color="#FF0000">}</font>
     <b><font color="#0000FF">virtual</font></b> <font color="#009900">void</font> <b><font color="#000000">generate</font></b><font color="#990000">(</font> <b><font color="#0000FF">const</font></b> <font color="#009900">char</font> <font color="#990000">*</font>s<font color="#990000">,</font> <font color="#009900">int</font> start<font color="#990000">,</font> <font color="#009900">int</font> end <font color="#990000">)</font> <b><font color="#0000FF">const</font></b> 
@@ -64,12 +64,12 @@ http://www.gnu.org/software/src-highlite -->
 <font color="#FF0000">}</font> <font color="#990000">;</font>
 
 <i><font color="#9A1900">// Decorator</font></i>
-<b><font color="#0000FF">class</font></b> <font color="#009900">TextDecorator</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> TextGenerator <font color="#FF0000">{</font>
+<b><font color="#0000FF">class</font></b> <font color="#008080">TextDecorator</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> TextGenerator <font color="#FF0000">{</font>
   <b><font color="#0000FF">protected</font></b> <font color="#990000">:</font>
-    TextGenerator <font color="#990000">*</font>decorated <font color="#990000">;</font>
+    <font color="#008080">TextGenerator</font> <font color="#990000">*</font>decorated <font color="#990000">;</font>
   
   <b><font color="#0000FF">public</font></b> <font color="#990000">:</font>
-    <b><font color="#000000">TextDecorator</font></b><font color="#990000">(</font> TextGenerator <font color="#990000">*</font>t <font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">decorated</font></b><font color="#990000">(</font> t <font color="#990000">)</font> <font color="#FF0000">{}</font>
+    <b><font color="#000000">TextDecorator</font></b><font color="#990000">(</font> <font color="#008080">TextGenerator</font> <font color="#990000">*</font>t <font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">decorated</font></b><font color="#990000">(</font> t <font color="#990000">)</font> <font color="#FF0000">{}</font>
 
     <b><font color="#0000FF">virtual</font></b> <font color="#009900">void</font> <b><font color="#000000">startTextGeneration</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> 
     <font color="#FF0000">{</font> 

@@ -24,11 +24,12 @@ class CharTranslator;
 class HighlightEventListener;
 class CTagsManager;
 class CTagsFormatter;
+class LineRanges;
 
 /**
  * The main class performing highlighting of a file
  */
-class SourceHighlight : public Verbose {
+class SourceHighlight: public Verbose {
     /// the output language file name
     std::string outputLang;
 
@@ -49,6 +50,9 @@ class SourceHighlight : public Verbose {
 
     /// the prefix for all the output lines
     std::string linePrefix;
+
+    /// the separator for ranges
+    std::string rangeSeparator;
 
     /// the title for the output document (defaults to the source file name)
     std::string title;
@@ -84,7 +88,7 @@ class SourceHighlight : public Verbose {
     LineNumGenerator *lineNumGenerator;
 
     /**
-     * the generator of the start and end of the output document 
+     * the generator of the start and end of the output document
      */
     DocGenerator *docGenerator;
 
@@ -104,6 +108,9 @@ class SourceHighlight : public Verbose {
 
     /// the CTagsFormatter for formatting references and anchors
     CTagsFormatter *ctagsFormatter;
+
+    /// the possible LineRanges (to check which lines should be printed)
+    LineRanges *lineRanges;
 
     /**
      * Whether to optmize output (e.g., adiacent text parts belonging
@@ -173,8 +180,10 @@ public:
      * @param inputLang the language definition file
      * @param inputFileName the input file name
      */
-    void highlight(std::istream &input, std::ostream &output,
-            const std::string &inputLang, const std::string &inputFileName = "");
+    void
+            highlight(std::istream &input, std::ostream &output,
+                    const std::string &inputLang,
+                    const std::string &inputFileName = "");
 
     /**
      * Only check the validity of the language definition file.
@@ -216,11 +225,11 @@ public:
 
     /**
      * Given the input file name creates an output file name.
-     * 
+     *
      * @return the output file name
      */
     const std::string createOutputFileName(const std::string &inputFile);
-    
+
     void setDataDir(const std::string &_datadir) {
         dataDir = _datadir;
     }
@@ -297,12 +306,24 @@ public:
         highlightEventListener = l;
     }
 
+    void setRangeSeparator(const std::string &sep) {
+        rangeSeparator = sep;
+    }
+
     DocGenerator *getDocGenerator() const {
         return docGenerator;
     }
 
     DocGenerator *getNoDocGenerator() const {
         return noDocGenerator;
+    }
+
+    LineRanges *getLineRanges() const {
+        return lineRanges;
+    }
+
+    void setLineRanges(LineRanges *lr) {
+        lineRanges = lr;
     }
 
     void setCTagsManager(CTagsManager *m) {

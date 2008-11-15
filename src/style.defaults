@@ -5,6 +5,7 @@
 # then it will have the same style as elem2
 
 classname = normal
+usertype = normal
 preproc = keyword
 section = function
 paren = cbracket

@@ -35,7 +35,7 @@ using std::cerr;
 using std::string;
 
 static int yyparse() ;
-static void yyerror( char *s ) ;
+static void yyerror( const char *s ) ;
 static void yyerror( const string &s ) ;
 
 int line = 1 ;
@@ -210,7 +210,7 @@ parseStyles(const string &path, const string &name, TextStyleFormatterFactory *g
 }
 
 void
-yyerror( char *s )
+yyerror( const char *s )
 {
   errorBuffer = s;
 }

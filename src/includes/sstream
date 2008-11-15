@@ -4,7 +4,7 @@ Copyright (C) 2000 Free Software Foundation
 This file is part of the GNU IO Library.  This library is free
 software; you can redistribute it and/or modify it under the
 terms of the GNU General Public License as published by the
-Free Software Foundation; either version 2, or (at your option)
+Free Software Foundation; either version 3, or (at your option)
 any later version.
 
 This library is distributed in the hope that it will be useful,
@@ -25,8 +25,8 @@ the executable file might be covered by the GNU General Public License. */
 /* Written by Magnus Fromreide (magfr@lysator.liu.se). */
 
 /* Mofified by Lorenzo Bettini <http://www.lorenzobettini.it>
-   check whether namespaces are implemented including stl_config.h 
-   and using the macros __STL_BEGIN_NAMESPACE and __STL_END_NAMESPACE 
+   check whether namespaces are implemented including stl_config.h
+   and using the macros __STL_BEGIN_NAMESPACE and __STL_END_NAMESPACE
 */
 
 #ifndef __SSTREAM__
@@ -52,7 +52,7 @@ __STL_BEGIN_NAMESPACE
       streambuf(which), buf(), mode(static_cast<ios::open_mode>(which)),
       rpos(0), bufsize(1)
     { }
-	
+
     explicit stringbuf(const std::string &s, int which=ios::in|ios::out) :
       streambuf(which), buf(s), mode(static_cast<ios::open_mode>(which)),
       bufsize(1)
@@ -67,7 +67,7 @@ __STL_BEGIN_NAMESPACE
 	}
       rpos = (mode & ios::ate ? s.size() : 0);
     }
-	
+
     std::string str() const
     {
       const_cast<stringbuf*>(this)->sync();  // Sigh, really ugly hack
@@ -113,7 +113,7 @@ __STL_BEGIN_NAMESPACE
       clear();
       dynamic_cast<stringbuf*>(_strbuf)->str(s);
     }
-	
+
     stringbuf* rdbuf()
     {
       return &__my_sb;
@@ -124,48 +124,48 @@ __STL_BEGIN_NAMESPACE
     {
       init (&__my_sb);
     }
-	
+
     stringstreambase(const std::string& s, int which) :
       __my_sb(s, which)
     {
       init (&__my_sb);
     }
   };
-    
+
   class istringstream : public stringstreambase, public istream {
   public:
     istringstream(int which=ios::in) :
       stringstreambase(which)
     { }
-	
+
     istringstream(const std::string& s, int which=ios::in) :
       stringstreambase(s, which)
     { }
   };
-    
+
   class ostringstream : public stringstreambase, public ostream {
   public:
     ostringstream(int which=ios::out) :
       stringstreambase(which)
     { }
-	
+
     ostringstream(const std::string& s, int which=ios::out) :
       stringstreambase(s, which)
     { }
   };
-    
+
   class stringstream : public stringstreambase, public iostream {
   public:
     stringstream(int which=ios::in|ios::out) :
       stringstreambase(which)
     { }
-    
+
     stringstream(const std::string &s, int which=ios::in|ios::out) :
       stringstreambase(s, which)
     { }
   };
 
-__STL_END_NAMESPACE 
+__STL_END_NAMESPACE
 
 inline int std::stringbuf::sync()
 {
@@ -198,7 +198,7 @@ inline int std::stringbuf::overflow(int ch)
   if(ch != EOF)
     {
       std::string::size_type oldSize = buf.size();
-      
+
       buf.replace(rpos, std::string::npos, ch);
       if(buf.size() - oldSize != 1)
 	return EOF;
@@ -218,7 +218,7 @@ inline int std::stringbuf::underflow()
     {
       return EOF;
     }
-  
+
   std::string::size_type n = egptr() - eback();
   std::string::size_type s;
 

@@ -22,9 +22,12 @@ int main() {
     FormatterLog log;
     RegexRuleFactory factory;
 
-    FormatterPtr normalFormatter = FormatterPtr(new LogFormatter(log, "normal"));
-    FormatterPtr keywordFormatter = FormatterPtr(new LogFormatter(log, "keyword"));
-    FormatterPtr commentFormatter = FormatterPtr(new LogFormatter(log, "comment"));
+    FormatterPtr normalFormatter =
+            FormatterPtr(new LogFormatter(log, "normal"));
+    FormatterPtr keywordFormatter = FormatterPtr(
+            new LogFormatter(log, "keyword"));
+    FormatterPtr commentFormatter = FormatterPtr(
+            new LogFormatter(log, "comment"));
 
     FormatterManager formatterManager(normalFormatter);
 
@@ -38,7 +41,7 @@ int main() {
 
     showLog(log);
 
-    assertEquals((size_t)1, log.size());
+    assertEquals((size_t) 1, log.size());
     assertEquals("normal", log[0].first);
     assertEquals("this is normal", log[0].second);
 
@@ -86,9 +89,8 @@ int main() {
 
     log.clear();
 
-    HighlightRulePtr multiLineCommentRule =
-            HighlightRulePtr(factory.createMultiLineRule("comment", "/\\*",
-                    "\\*/", "", false));
+    HighlightRulePtr multiLineCommentRule = HighlightRulePtr(
+            factory.createMultiLineRule("comment", "/\\*", "\\*/", "", false));
     HighlightStatePtr multiLineCommentState =
             multiLineCommentRule->getNextState();
 
@@ -133,9 +135,8 @@ int main() {
 
     log.clear();
 
-    HighlightRulePtr multiLineNestedCommentRule =
-            HighlightRulePtr(factory.createMultiLineRule("comment", "<<", ">>",
-                    "", true));
+    HighlightRulePtr multiLineNestedCommentRule = HighlightRulePtr(
+            factory.createMultiLineRule("comment", "<<", ">>", "", true));
     HighlightStatePtr multiLineNestedCommentState =
             multiLineNestedCommentRule->getNextState();
 
@@ -144,7 +145,8 @@ int main() {
     multiLineNestedCommentState->setDefaultElement("comment");
     highlightState->addRule(multiLineNestedCommentRule);
 
-    sourceHighlighter.highlightParagraph("this << is << a << nested >> comment >> >> foo");
+    sourceHighlighter.highlightParagraph(
+            "this << is << a << nested >> comment >> >> foo");
 
     showLog(log);
 
@@ -171,7 +173,8 @@ int main() {
     exitAllRule->setExitLevel(-1);
     multiLineNestedCommentState->addRule(exitAllRule);
 
-    sourceHighlighter.highlightParagraph("this << is << a << ! exit >> comment >> >> foo");
+    sourceHighlighter.highlightParagraph(
+            "this << is << a << ! exit >> comment >> >> foo");
 
     showLog(log);
 
@@ -191,7 +194,8 @@ int main() {
     log.clear();
 
     sourceHighlighter.setOptimize();
-    sourceHighlighter.highlightParagraph("this << is << a << ! exit >> comment >> >> foo");
+    sourceHighlighter.highlightParagraph(
+            "this << is << a << ! exit >> comment >> >> foo");
 
     showLog(log);
 
@@ -209,7 +213,7 @@ int main() {
 
     check_log_entry(log[0], "normal", "this ");
     check_log_entry(log[1], "comment", "<< is << a << !");
-    
+
     sourceHighlighter.setOptimize(false);
 
     // check for final current state
@@ -222,19 +226,21 @@ int main() {
     check_log_entry(log[0], "normal", "this ");
     check_log_entry(log[1], "comment", "<<");
 
-    assertEquals("comment", sourceHighlighter.getCurrentState()->getDefaultElement());
+    assertEquals("comment",
+            sourceHighlighter.getCurrentState()->getDefaultElement());
 
     log.clear();
-    
+
     // bring it back to the initial state
     sourceHighlighter.highlightParagraph("!");
-    
+
     showLog(log);
-    
+
     check_log_entry(log[0], "comment", "!");
-    
-    assertEquals("normal", sourceHighlighter.getCurrentState()->getDefaultElement());
-    
+
+    assertEquals("normal",
+            sourceHighlighter.getCurrentState()->getDefaultElement());
+
     // test for rule with \z
     log.clear();
 
@@ -255,7 +261,17 @@ int main() {
     //check_log_entry(log[i++], "comment", ""); // match the end of line
     check_log_entry(log[i++], "normal", "while this is ");
     check_log_entry(log[i++], "keyword", "class");
-    
+
+    // test for suspended
+    log.clear();
+
+    sourceHighlighter.setSuspended(true);
+    assertEquals((size_t)0, log.size());
+    sourceHighlighter.highlightParagraph("foo");
+    sourceHighlighter.setSuspended(false);
+    sourceHighlighter.highlightParagraph("bar");
+    check_log_entry(log[0], "normal", "bar");
+
     cout << "test_highlighter: SUCCESS" << endl;
 
     return 0;

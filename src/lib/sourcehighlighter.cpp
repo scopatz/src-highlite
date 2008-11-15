@@ -31,7 +31,8 @@ static HighlightEvent defaultHighlightEvent(defaultHighlightToken,
 
 SourceHighlighter::SourceHighlighter(HighlightStatePtr mainState) :
     mainHighlightState(mainState), currentHighlightState(mainState),
-            formatterManager(0), optimize(false), formatterParams(0) {
+            formatterManager(0), optimize(false), suspended(false),
+            formatterParams(0) {
 }
 
 SourceHighlighter::~SourceHighlighter() {
@@ -118,7 +119,8 @@ HighlightStatePtr SourceHighlighter::getNextState(const HighlightToken &token) {
             nextState = nextState->getOriginalState();
         }
 
-        HighlightStatePtr copyState = HighlightStatePtr(new HighlightState(*nextState));
+        HighlightStatePtr copyState = HighlightStatePtr(
+                new HighlightState(*nextState));
         copyState->setOriginalState(nextState);
         copyState->replaceReferences(token.matchedSubExps);
         return copyState;
@@ -154,6 +156,9 @@ void SourceHighlighter::exitAll() {
 }
 
 void SourceHighlighter::format(const std::string &elem, const std::string &s) {
+    if (suspended)
+        return;
+
     if (!s.size())
         return;
 
@@ -183,8 +188,8 @@ void SourceHighlighter::flush() {
     if (formatterManager) {
 
         // flush the buffer for the current element
-        formatterManager->getFormatter(currentElement)->format(currentElementBuffer.str(),
-                formatterParams);
+        formatterManager->getFormatter(currentElement)->format(
+                currentElementBuffer.str(), formatterParams);
 
         // reset current element information
         currentElement = "";

@@ -4,4 +4,4 @@ include "script_comment.lang"
 
 comment start "!"
 
-(type,normal,symbol) = `([^="]+)([:blank:]*)(=)`
+(type,normal,symbol) = `([^="]+)([[:blank:]]*)(=)`

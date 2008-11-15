@@ -1,7 +1,5 @@
 preproc = "require"
 
-include "script_comment.lang"
-
 include "number.lang"
 
 string delim "\"" "\"" escape "\\"
@@ -23,6 +21,8 @@ include "symbols.lang"
 
 # for variable interpolation, #{ is not a comment
 (symbol,cbracket) = `(#)(\{)`
+
+include "script_comment.lang"
 
 cbracket = "{|}"
 

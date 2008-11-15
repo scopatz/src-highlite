@@ -37,12 +37,14 @@ using namespace std;
 
 SourceHighlight::SourceHighlight(const std::string &_outputLang) :
     outputLang(_outputLang), styleFile("default.style"), formatterManager(0),
-            preFormatter(0), langDefManager(new LangDefManager(new RegexRuleFactory)), lineNumGenerator(0),
-            docGenerator(0), noDocGenerator(0), highlightEventListener(0),
-            ctagsManager(0), ctagsFormatter(0), optimize(true),
-            generateLineNumbers(false), generateLineNumberRefs(false),
-            lineNumberPad('0'), generateEntireDoc(false),
-            generateVersion(true), canUseStdOut(true), tabSpaces(0) {
+            preFormatter(0), langDefManager(
+                    new LangDefManager(new RegexRuleFactory)),
+            lineNumGenerator(0), docGenerator(0), noDocGenerator(0),
+            highlightEventListener(0), ctagsManager(0), ctagsFormatter(0),
+            lineRanges(0), optimize(true), generateLineNumbers(false),
+            generateLineNumberRefs(false), lineNumberPad('0'),
+            generateEntireDoc(false), generateVersion(true),
+            canUseStdOut(true), tabSpaces(0) {
 }
 
 SourceHighlight::~SourceHighlight() {
@@ -80,7 +82,8 @@ void SourceHighlight::initialize() {
 
     if (tabSpaces) {
         preFormatter = new Untabifier(tabSpaces);
-        preFormatter->setFormatter(PreFormatterPtr(new PreFormatter(textStyles->charTranslator)));
+        preFormatter->setFormatter(PreFormatterPtr(
+                new PreFormatter(textStyles->charTranslator)));
     } else {
         preFormatter = new PreFormatter(textStyles->charTranslator);
     }
@@ -88,8 +91,8 @@ void SourceHighlight::initialize() {
     linePrefix = textStyles->line_prefix;
 
     if (ctagsManager) {
-        ctagsFormatter
-                = ctagsManager->createCTagsFormatter(textStyles->refstyle);
+        ctagsFormatter = ctagsManager->createCTagsFormatter(
+                textStyles->refstyle);
         ctagsFormatter->setPreFormatter(preFormatter);
     }
 
@@ -97,7 +100,8 @@ void SourceHighlight::initialize() {
             ctagsFormatter, formatterManager);
 
     if (styleCssFile.size())
-        parseCssStyles(dataDir, styleCssFile, &formatterFactory, backgroundColor);
+        parseCssStyles(dataDir, styleCssFile, &formatterFactory,
+                backgroundColor);
     else
         parseStyles(dataDir, styleFile, &formatterFactory, backgroundColor);
 
@@ -119,16 +123,18 @@ void SourceHighlight::initialize() {
 
     // initialize the line number generator
     TextStyleFormatter *lineNumFormatter =
-            dynamic_cast<TextStyleFormatter *>(formatterManager->getFormatter("linenum").get());
-    lineNumGenerator = new LineNumGenerator(lineNumFormatter->toString(), 5, lineNumberPad);
+            dynamic_cast<TextStyleFormatter *> (formatterManager->getFormatter(
+                    "linenum").get());
+    lineNumGenerator
+            = new LineNumGenerator(lineNumFormatter->toString(), 5, lineNumberPad);
     lineNumGenerator->setAnchorPrefix(lineNumberAnchorPrefix);
     if (generateLineNumberRefs)
         lineNumGenerator->setAnchorStyle(textStyles->refstyle.anchor);
 
-    docGenerator = new DocGenerator(textStyles->docTemplate.toStringBegin(),
-            textStyles->docTemplate.toStringEnd());
-    noDocGenerator = new DocGenerator(textStyles->noDocTemplate.toStringBegin(),
-            textStyles->noDocTemplate.toStringEnd());
+    docGenerator
+            = new DocGenerator(textStyles->docTemplate.toStringBegin(), textStyles->docTemplate.toStringEnd());
+    noDocGenerator
+            = new DocGenerator(textStyles->noDocTemplate.toStringBegin(), textStyles->noDocTemplate.toStringEnd());
 
     docGenerator->set_gen_version(generateVersion);
     noDocGenerator->set_gen_version(generateVersion);
@@ -212,8 +218,8 @@ void SourceHighlight::highlight(const std::string &input,
             // in this case we need the extension defined in the outlang
             if (!outputFileExtension.size()) {
                 // we can't continue
-                ParserException e("missing file extension in " + outputLang, 
-                PACKAGE);
+                ParserException e("missing file extension in " + outputLang,
+                        PACKAGE);
                 e.additional
                         = "this is needed when the output file is not specified";
                 throw e;
@@ -253,7 +259,7 @@ void SourceHighlight::highlight(const std::string &input,
 }
 
 const string SourceHighlight::createOutputFileName(const std::string &inputFile) {
-    return:: createOutputFileName(inputFile, outputFileDir, outputFileExtension);
+    return ::createOutputFileName(inputFile, outputFileDir, outputFileExtension);
 }
 
 void SourceHighlight::highlight(std::istream &input, std::ostream &output,
@@ -276,6 +282,8 @@ void SourceHighlight::highlight(std::istream &input, std::ostream &output,
     SourceFileHighlighter fileHighlighter(inputFileName, &highlighter,
             &bufferedOutput);
 
+    fileHighlighter.setLineRanges(lineRanges);
+
     if (generateLineNumbers)
         fileHighlighter.setLineNumGenerator(lineNumGenerator);
 
@@ -283,6 +291,16 @@ void SourceHighlight::highlight(std::istream &input, std::ostream &output,
     fileHighlighter.setLinePrefix(linePrefix);
 
     fileHighlighter.setPreformatter(preFormatter);
+
+    // set the range separator only after the preformatter!
+    // since the separator itself might have to be preformatted
+    if (rangeSeparator.size()) {
+        fileHighlighter.setRangeSeparator(rangeSeparator);
+    }
+
+    // the formatter for possible context lines
+    fileHighlighter.setContextFormatter(formatterManager->getFormatter(
+            "context").get());
 
     DocGenerator *documentGenerator = (generateEntireDoc ? docGenerator
             : noDocGenerator);
@@ -326,7 +344,8 @@ void SourceHighlight::printHighlightState(const std::string &langFile,
         std::ostream &os) {
     HighlightStatePrinter printer(os);
 
-    printer.printHighlightState(langDefManager->buildHighlightState(dataDir, langFile).get());
+    printer.printHighlightState(langDefManager->buildHighlightState(dataDir,
+            langFile).get());
 }
 
 void SourceHighlight::printLangElems(const std::string &langFile,

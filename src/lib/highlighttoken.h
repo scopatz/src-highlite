@@ -16,12 +16,12 @@ class HighlightRule;
 
 /**
  * The matched element information by a rule. Each element of the collection is:
- * first = the element name, second = the actual program string 
+ * first = the element name, second = the actual program string
  */
 typedef std::list<std::pair<std::string, std::string> > MatchedElements;
 
 /**
- * The matched subexpressions (if the original rule had subexpressions) 
+ * The matched subexpressions (if the original rule had subexpressions)
  */
 typedef std::vector<std::string> MatchedSubExps;
 
@@ -32,6 +32,9 @@ struct HighlightToken {
     /// the possible prefix (part before the matched string)
     std::string prefix;
 
+    /// true if the prefix is empty or contains only spaces
+    bool prefixOnlySpaces;
+
     /// the possible suffix (part after the matched string)
     std::string suffix;
 
@@ -41,7 +44,7 @@ struct HighlightToken {
     /** the size of the whole matched sequence (this is computed automatically
      when matched elements are set or added) */
     unsigned int matchedSize;
-    
+
     /**
      * The matched subexpressions (in case the rule had subexpressions)
      */

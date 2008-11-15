@@ -9,6 +9,9 @@
 #include "matchingparameters.h"
 #include "regexpreprocessor.h"
 
+/// the only spaces regular expression
+static boost::regex onlySpaces("[[:blank:]]*");
+
 RegexHighlightRule::RegexHighlightRule(const std::string &s) :
     regExp(s) {
 
@@ -41,6 +44,9 @@ bool RegexHighlightRule::tryToMatch(std::string::const_iterator start,
         token.prefix = match.prefix();
         token.suffix = match.suffix();
 
+        // check that the prefix is empty or contains only spaces
+        token.prefixOnlySpaces = boost::regex_match(token.prefix, onlySpaces);
+
         if (getHasSubexpressions()) {
             // record all the matched subexpressions
             for (unsigned int i = 1; i < match.size(); ++i) {
@@ -51,7 +57,7 @@ bool RegexHighlightRule::tryToMatch(std::string::const_iterator start,
         if (hasMultipleElements) {
             for (unsigned int i = 1; i < match.size(); ++i) {
                 if (match[i].matched) {
-                    token.addMatched(getElemList()[i-1], match[i]);
+                    token.addMatched(getElemList()[i - 1], match[i]);
                 }
             }
         } else {

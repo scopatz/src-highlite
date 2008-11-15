@@ -161,6 +161,7 @@ STRING \"[^\n"]+\"
 <STRING_STATE>"\\\"" {  buffer( yytext ) ; }
 <STRING_STATE>\" { BEGIN(INITIAL) ; langdef_lval.string = flush_buffer() ; DEB2("STRINGDEF",langdef_lval.string); return STRINGDEF; }
 <STRING_STATE>[^\n] {  buffer( yytext ) ; }
+<STRING_STATE>{nl} { DEB("NEWLINE"); ++(parsestruct->line) ; }
 
 <INITIAL>\' { BEGIN(REGEXP_STATE) ; }
 <REGEXP_STATE>"@" {  buffer_escape( yytext ) ; }
@@ -171,6 +172,7 @@ STRING \"[^\n"]+\"
 <REGEXP_STATE>"\\'" {  buffer( "'" ) ; }
 <REGEXP_STATE>\' { BEGIN(INITIAL) ; langdef_lval.stringdef = flush_buffer_preproc() ; DEB2("REGEXPDEF",langdef_lval.string); return REGEXPDEF; }
 <REGEXP_STATE>[^\n] {  buffer( yytext ) ; }
+<REGEXP_STATE>{nl} { DEB("NEWLINE"); ++(parsestruct->line) ; }
 
 <INITIAL>` { BEGIN(REGEXP_NOPREPROC_STATE) ; }
 <REGEXP_NOPREPROC_STATE>"@" {  buffer_escape( yytext ) ; }
@@ -178,7 +180,7 @@ STRING \"[^\n"]+\"
 <REGEXP_NOPREPROC_STATE>"\\`" {  buffer( "'" ) ; }
 <REGEXP_NOPREPROC_STATE>` { BEGIN(INITIAL) ; langdef_lval.string = flush_buffer() ; DEB2("REGEXPNOPREPROCDEF",langdef_lval.string); return REGEXPNOPREPROC; }
 <REGEXP_NOPREPROC_STATE>[^\n] {  buffer( yytext ) ; }
-
+<REGEXP_NOPREPROC_STATE>{nl} { DEB("NEWLINE"); ++(parsestruct->line) ; }
 
 <INITIAL>{nl} { DEB("NEWLINE"); ++(parsestruct->line) ; }
 

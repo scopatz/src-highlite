@@ -37,8 +37,7 @@ using std::cerr;
 extern int line;
 
 static int yyparse() ;
-static void yyerror( char *s ) ;
-static void yyerror( const string &s ) ;
+static void yyerror( const char *s ) ;
 
 // line is defined in styleparser
 
@@ -233,13 +232,9 @@ void parseCssStyles(const string &path, const string &name, TextStyleFormatterFa
 }
 
 void
-yyerror( char *s )
+yyerror( const char *s )
 {
   errorBuffer = s;
-}
-
-void yyerror(const string &s) {
-  yyerror(s.c_str());
 }
 
 void updateBgColor(const std::string &c)

@@ -145,4 +145,9 @@ void yyerror( char *s )
   fprintf( stderr, "%*s\n", tokenpos, "^" ) ;
 }
 
+void yyerror( const std::string &s )
+{  
+  yyerror(s.c_str());
+}
+
 /* vim:set ft=flex expandtab cindent tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0: */

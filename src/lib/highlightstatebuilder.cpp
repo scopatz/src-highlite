@@ -33,11 +33,11 @@ static void setExitLevel(const StateStartLangElem *elem, HighlightRule *rule,
 /**
  * A string is to matched as isolated (word boundaries) basically if it is an alphanumerical
  * string or a _.
- * 
+ *
  * Notice that this should be called only on strings specified in double quotes,
  * since other expressions are intended as regular expressions and should not
  * be isolated.  This is checked in the code that calls this function.
- * 
+ *
  * @param s
  * @return
  */
@@ -53,7 +53,8 @@ HighlightStateBuilder::~HighlightStateBuilder() {
 
 bool is_to_isolate(const string &s) {
     if (s.size()) {
-        if ((isalnum(s[0]) || s[0] == '_') && (isalnum(s[s.size()-1]) || s[s.size()-1] == '_'))
+        if ((isalnum(s[0]) || s[0] == '_') && (isalnum(s[s.size() - 1])
+                || s[s.size() - 1] == '_'))
             return true;
     }
 
@@ -69,7 +70,8 @@ void HighlightStateBuilder::build(LangElems *elems, HighlightStatePtr mainState)
             build_DB(*it, mainState.get());
         } catch (boost::regex_error &e) {
             // catch all other exceptions
-            throw HighlightBuilderException("problem in this expression: " + (*it)->toStringOriginal(), *it, e);
+            throw HighlightBuilderException("problem in this expression: "
+                    + (*it)->toStringOriginal(), *it, e);
         }
     }
 }
@@ -94,8 +96,10 @@ void HighlightStateBuilder::build(StringListLangElem *elem,
         // double quoted strings generate WordListRules, otherwise simple ListRules
 
         // we don't allow double quoted strings mixed with non double quoted
-        if (((*it)->isDoubleQuoted() && nonDoubleQuoted) || (!(*it)->isDoubleQuoted() && doubleQuoted)) {
-            throw HighlightBuilderException("cannot mix double quoted and non double quoted", elem);
+        if (((*it)->isDoubleQuoted() && nonDoubleQuoted)
+                || (!(*it)->isDoubleQuoted() && doubleQuoted)) {
+            throw HighlightBuilderException(
+                    "cannot mix double quoted and non double quoted", elem);
         }
 
         doubleQuoted = (*it)->isDoubleQuoted();
@@ -141,14 +145,15 @@ void HighlightStateBuilder::build(DelimitedLangElem *elem,
 
     if (elem->isNested() && start_string == end_string) {
         // the two delimiters must be different for nested elements
-        throw HighlightBuilderException("delimiters must be different for nested elements", elem);
+        throw HighlightBuilderException(
+                "delimiters must be different for nested elements", elem);
     }
 
     bool end_string_has_references = false;
     // check possible back reference markers and their correctness
     if (end && end->hasBackRef() && end_string.size()) {
-        backreference_info ref_info =
-                RegexPreProcessor::num_of_references(end_string);
+        backreference_info ref_info = RegexPreProcessor::num_of_references(
+                end_string);
         subexpressions_info info =
                 RegexPreProcessor::num_of_marked_subexpressions(start_string,
                         true, true);
@@ -211,7 +216,8 @@ void HighlightStateBuilder::build(DelimitedLangElem *elem,
         setExitLevel(elem, rule->getNextState()->getRuleList().front().get(), 1);
 
         // adjust the additional info of the exiting rule
-        rule->getNextState()->getRuleList().front()->setAdditionalInfo(elem->toStringParserInfo());
+        rule->getNextState()->getRuleList().front()->setAdditionalInfo(
+                elem->toStringParserInfo());
 
         // since this is a delimited element, we must set the default element for
         // the inner state to the name of the element itself
@@ -237,12 +243,13 @@ void HighlightStateBuilder::build(NamedSubExpsLangElem *elem,
     }
 
     if (sexps.marked != elems->size()) {
-        throw HighlightBuilderException("number of marked subexpressions does not match number of elements", elem);
+        throw HighlightBuilderException(
+                "number of marked subexpressions does not match number of elements",
+                elem);
     }
 
-    HighlightRulePtr rule =
-            HighlightRulePtr(highlightRuleFactory->createCompoundRule(*elems,
-                    regexp_string));
+    HighlightRulePtr rule = HighlightRulePtr(
+            highlightRuleFactory->createCompoundRule(*elems, regexp_string));
 
     rule->setAdditionalInfo(elem->toStringParserInfo());
     state->addRule(rule);
@@ -253,8 +260,10 @@ void HighlightStateBuilder::build(NamedSubExpsLangElem *elem,
 void HighlightStateBuilder::build(StateLangElem *elem, HighlightState *state) {
     StateStartLangElem *statestart = elem->getStateStart();
 
-    if (!elem->isState() && dynamic_cast<NamedSubExpsLangElem *>(statestart)) {
-        throw HighlightBuilderException("cannot use this element for environments (only for states)", statestart);
+    if (!elem->isState() && dynamic_cast<NamedSubExpsLangElem *> (statestart)) {
+        throw HighlightBuilderException(
+                "cannot use this element for environments (only for states)",
+                statestart);
     }
 
     /*

@@ -11,6 +11,7 @@
 #include "textstyleformatter.h"
 #include "chartranslator.h"
 #include "linenumgenerator.h"
+#include "lineranges.h"
 
 /*
  static void check_log_entry(const FormatterLogEntry &e,
@@ -35,6 +36,7 @@ int main() {
     FormatterPtr normalFormatter = FormatterPtr(new TextStyleFormatter("$text", &output));
     FormatterPtr keywordFormatter = FormatterPtr(new TextStyleFormatter("<K>$text</K>", &output));
     FormatterPtr commentFormatter = FormatterPtr(new TextStyleFormatter("<C>$text</C>", &output));
+    FormatterPtr contextFormatter = FormatterPtr(new TextStyleFormatter("<CC>$text</CC>", &output));
 
     FormatterManager formatterManager(normalFormatter);
 
@@ -168,6 +170,83 @@ end",
             " PREFIX <LINE>00001:</LINE> this is <C>/* a comment</C><NL>\n\
  PREFIX <LINE>00002:</LINE> <C>that spans more lines</C><NL>\n\
  PREFIX <LINE>00003:</LINE> <C>*/</C> end",
+            os.str());
+
+    // test for line ranges
+    os.str("");
+
+    LineRanges lineRanges;
+    lineRanges.addRange("2-3");
+
+    highlighter.setLineRanges(&lineRanges);
+    highlighter.highlight("this is /* a comment\nthat spans more lines\n*/ end\nend2");
+
+    cout << "HIGHLIGHTED: " << os.str() << endl;
+
+    // only line 2 and 3 must be output
+    assertEquals(
+            " PREFIX <LINE>00002:</LINE> <C>that spans more lines</C><NL>\n\
+ PREFIX <LINE>00003:</LINE> <C>*/</C> end<NL>\n",
+            os.str());
+
+    // do it again to check that lineRanges was correctly reset
+    os.str("");
+
+    highlighter.highlight("this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4");
+
+    cout << "HIGHLIGHTED: " << os.str() << endl;
+
+    // only line 2 and 3 must be output
+    assertEquals(
+            " PREFIX <LINE>00002:</LINE> <C>that spans more lines</C><NL>\n\
+ PREFIX <LINE>00003:</LINE> <C>*/</C> end<NL>\n",
+            os.str());
+
+    // do it again to check context lines
+    os.str("");
+    highlighter.setContextFormatter(contextFormatter.get());
+
+    lineRanges.setContextLines(2);
+
+    highlighter.highlight("this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4\nend5");
+
+    cout << "HIGHLIGHTED: " << os.str() << endl;
+
+    // only line 2 and 3 must be output, but line 1 and line 4 and 5 are printed as context
+    assertEquals(
+            " PREFIX <LINE>00001:</LINE> <CC>this is /* a comment</CC><NL>\n\
+ PREFIX <LINE>00002:</LINE> <C>that spans more lines</C><NL>\n\
+ PREFIX <LINE>00003:</LINE> <C>*/</C> end<NL>\n\
+ PREFIX <LINE>00004:</LINE> <CC>end2</CC><NL>\n\
+ PREFIX <LINE>00005:</LINE> <CC>end3</CC><NL>\n",
+            os.str());
+
+    // do it again to check range separators
+    os.str("");
+    highlighter.setContextFormatter(contextFormatter.get());
+    highlighter.setRangeSeparator("...");
+
+    lineRanges.addRange("7-8");
+    lineRanges.setContextLines(1);
+
+    highlighter.highlight("this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4\nend5\nend6\nend7\nend8\nend9");
+
+    cout << "HIGHLIGHTED: " << os.str() << endl;
+
+    // only line 2 and 3 must be output, but line 1 and line 4 is printed as context
+    // then lines 7 and 8
+    // and also the separator is printed
+    assertEquals(
+            " PREFIX <LINE>00001:</LINE> <CC>this is /* a comment</CC><NL>\n\
+ PREFIX <LINE>00002:</LINE> <C>that spans more lines</C><NL>\n\
+ PREFIX <LINE>00003:</LINE> <C>*/</C> end<NL>\n\
+ PREFIX <LINE>00004:</LINE> <CC>end2</CC><NL>\n\
+ PREFIX ...<NL>\n\
+ PREFIX <LINE>00006:</LINE> <CC>end4</CC><NL>\n\
+ PREFIX <LINE>00007:</LINE> end5<NL>\n\
+ PREFIX <LINE>00008:</LINE> end6<NL>\n\
+ PREFIX <LINE>00009:</LINE> <CC>end7</CC><NL>\n\
+ PREFIX ...<NL>\n",
             os.str());
 
     cout << "test_sourcefilehighlighter: SUCCESS" << endl;

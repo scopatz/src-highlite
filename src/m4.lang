@@ -1,13 +1,13 @@
 # language definition for m4 files
 
 state keyword start "dnl" begin
+  # avoid spaces in front of urls or @[[:alpha:]]+ be caputured as prefixes
+  comment = '[[:blank:]]+'
   include "url.lang"
   include "html.lang"
   type = '@[[:alpha:]]+'
-  # the following is similar to .+ but does not exclude the
-  # url, html, type defined above
-  comment = '[^[:blank:]]+'
-  comment = '[[:blank:]]+'
+  # everything else is a comment
+  comment = '.+'
 end
 
 comment start "#"

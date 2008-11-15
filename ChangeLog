@@ -1,3 +1,48 @@
+2008-10-26  bettini  <bettini@bettini-laptop>
+
+	* src/xorg.lang: language definition for XOrg conf files
+
+2008-10-11  bettini  <bettini@localhost>
+
+	* src/includes/sstream: moved to version 3 of GPL
+
+2008-09-24  bettini  <bettini@bettini-laptop>
+
+	* src/lib/sourcehighlight.h (SourceHighlight): use LineRanges
+	* src/lib/sourcehighlighter.h (SourceHighlight): output can be suspended
+	* src/source-highlight.h (SourceHighlight): --line-ranges
+
+2008-09-17  bettini  <bettini@bettini-laptop>
+
+	* src/lib/lineranges.h (LineRanges): new class for checking whether
+	a line is a range
+
+2008-09-14  bettini  <bettini@bettini-laptop>
+
+	* src/lib/stylecssparser.yy: yyerror(const char *)
+	* src/lib/styleparser.yy: yyerror(const char *)
+
+2008-09-14  Lorenzo Bettini  <bettini@laptop>
+
+	* src/properties.lang: [:blank:]* changed to [[:blank:]]*
+
+	* src/key_string.lang: [:blank:]* changed to [[:blank:]]*
+
+	* src/desktop.lang: [:blank:]* changed to [[:blank:]]*
+
+2008-09-04  bettini  <bettini@dellbettini>
+
+	* src\ruby.lang: fixed the order of definitions
+	* src\m4.lang: fixed the order of definitions
+	* src\glsl.lang: fixed the order of definitions
+	* src\lib\highlightstate.cpp (HighlightState::findBestMatch): check whether
+	the prefix is only spaces (or empty); if so, then don't test other rules
+
+2008-09-02  bettini  <bettini@laptop>
+
+	* src/javascript.lang: fixed regexp element (avoid catching
+	single line comments), thanks to gnombat
+
 2008-06-05  Lorenzo Bettini  <bettini@laptop>
 
 	* src/m4.lang: simplified and it does not rely on sh.lang anymore
@@ -610,7 +655,7 @@
 
         * src/cpp_scanner.ll: handle tabs in preprocessing directives
 
-2003-11-25  Marc Côté
+2003-11-25  Marc Cï¿½tï¿½
 
         * src/lua_scanner.ll: Added scanner for the language LUA
 
@@ -1155,7 +1200,7 @@
 
         * src/lib/chartranslator.cc (translate): cast the string character
         to unsigned so that also extended ASCII is handled (e.g. foreign
-        characters, such as ü).
+        characters, such as ï¿½).
 
 2001-06-19  Robert Wetzel 
 

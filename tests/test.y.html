@@ -43,10 +43,10 @@ http://www.gnu.org/software/src-highlite -->
 
 <font color="#009900">int</font> line <font color="#990000">=</font> <font color="#993399">1</font> <font color="#990000">;</font>
 
-<b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">add_tag</font></b><font color="#990000">(</font>Tags <font color="#990000">*</font>tags<font color="#990000">,</font> Tag <font color="#990000">*</font>t<font color="#990000">);</font>
+<b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">add_tag</font></b><font color="#990000">(</font><font color="#008080">Tags</font> <font color="#990000">*</font>tags<font color="#990000">,</font> <font color="#008080">Tag</font> <font color="#990000">*</font>t<font color="#990000">);</font>
 
 <b><font color="#0000FF">extern</font></b> <font color="#009900">int</font> <b><font color="#000000">opsc_lex</font></b><font color="#990000">()</font> <font color="#990000">;</font>
-<b><font color="#0000FF">extern</font></b> FILE <font color="#990000">*</font>opsc_in <font color="#990000">;</font>
+<b><font color="#0000FF">extern</font></b> <font color="#008080">FILE</font> <font color="#990000">*</font>opsc_in <font color="#990000">;</font>
 
 <b><font color="#000080">%}</font></b>
 
@@ -101,7 +101,7 @@ value <font color="#990000">:</font> <font color="#FF0000">{</font> <font color=
 <font color="#009900">char</font> <font color="#990000">*</font>current_file <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
 
 <font color="#009900">void</font>
-<b><font color="#000000">parseTags</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> string <font color="#990000">&amp;</font>path<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> string <font color="#990000">&amp;</font>name<font color="#990000">)</font>
+<b><font color="#000000">parseTags</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#008080">string</font> <font color="#990000">&amp;</font>path<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> <font color="#008080">string</font> <font color="#990000">&amp;</font>name<font color="#990000">)</font>
 <font color="#FF0000">{</font>
   <i><font color="#9A1900">// opens the file for yylex</font></i>
   opsc_in <font color="#990000">=</font> <b><font color="#000000">open_data_file_stream</font></b><font color="#990000">(</font>path<font color="#990000">,</font> name<font color="#990000">);</font>
@@ -116,17 +116,18 @@ value <font color="#990000">:</font> <font color="#FF0000">{</font> <font color=
 <font color="#009900">void</font>
 <b><font color="#000000">yyerror</font></b><font color="#990000">(</font> <font color="#009900">char</font> <font color="#990000">*</font>s <font color="#990000">)</font>
 <font color="#FF0000">{</font>
-  ostringstream str <font color="#990000">;</font>
+  <font color="#008080">ostringstream</font> str <font color="#990000">;</font>
   str <font color="#990000">&lt;&lt;</font> current_file <font color="#990000">&lt;&lt;</font> <font color="#FF0000">":"</font> <font color="#990000">&lt;&lt;</font> line <font color="#990000">&lt;&lt;</font> <font color="#FF0000">": "</font> <font color="#990000">&lt;&lt;</font> s <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", in option declaration"</font><font color="#990000">;</font>
   <b><font color="#000000">printError</font></b><font color="#990000">(</font> str<font color="#990000">.</font><b><font color="#000000">str</font></b><font color="#990000">().</font><b><font color="#000000">c_str</font></b><font color="#990000">(),</font> cerr <font color="#990000">)</font> <font color="#990000">;</font>
   <b><font color="#000000">exit</font></b><font color="#990000">(</font>EXIT_FAILURE<font color="#990000">);</font>
 <font color="#FF0000">}</font>
 
 <font color="#009900">void</font>
-<b><font color="#000000">add_tag</font></b><font color="#990000">(</font>Tags <font color="#990000">*</font>tags<font color="#990000">,</font> Tag <font color="#990000">*</font>t<font color="#990000">)</font>
+<b><font color="#000000">add_tag</font></b><font color="#990000">(</font><font color="#008080">Tags</font> <font color="#990000">*</font>tags<font color="#990000">,</font> <font color="#008080">Tag</font> <font color="#990000">*</font>t<font color="#990000">)</font>
 <font color="#FF0000">{</font>
   <b><font color="#0000FF">if</font></b> <font color="#990000">(!</font> tags<font color="#990000">-&gt;</font><b><font color="#000000">AddTag</font></b><font color="#990000">(</font>t<font color="#990000">))</font>
   <font color="#FF0000">{</font>
     <b><font color="#000000">yyerror</font></b><font color="#990000">(</font><font color="#FF0000">"already defined"</font><font color="#990000">);</font>
   <font color="#FF0000">}</font>
-<font color="#FF0000">}</font></tt></pre>
+<font color="#FF0000">}</font>
+</tt></pre>

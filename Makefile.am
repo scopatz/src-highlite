@@ -15,7 +15,8 @@ EXTRA_DIST = \
 	source-highlight.spec \
 	autogen.sh \
 	TODO.txt \
-	CREDITS gl/m4/gnulib-cache.m4
+	CREDITS gl/m4/gnulib-cache.m4 \
+	source-highlight-bash-completion
 
 source_highlightdoc_DATA = \
 	ChangeLog \
@@ -26,5 +27,11 @@ source_highlightdoc_DATA = \
 	README \
 	TODO.txt \
 	CREDITS
+
+if USE_BASH_COMPLETION
+bash_completion_DATA = source-highlight-bash-completion
+else
+bash_completion_DATA = 
+endif
 
 ACLOCAL_AMFLAGS = -I gl/m4

@@ -102,3 +102,5 @@ hx = haxe.lang
 ldap = ldap.lang
 ldif = ldap.lang
 glsl = glsl.lang
+xorg = xorg.lang
+scala = scala.lang

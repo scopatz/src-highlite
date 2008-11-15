@@ -1,7 +1,11 @@
 body {  background-color: white;  }
 
+/* the color for context lines (when specified with line ranges) */
+.context {  color: gray; }
+
 .keyword { color: blue; font-weight: bold; }
-.type, .classname { color: darkgreen; }
+.type { color: darkgreen; }
+.usertype, .classname { color: teal; }
 .string { color: red; font-family: monospace; }
 .regexp { color: orange; }
 .specialchar { color: pink; font-family: monospace; }

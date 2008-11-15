@@ -8,6 +8,22 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 2.11
+
+   * optimized the procedure for finding the best matching expression
+   * improved boost regex library search in configure script
+   * fixed regexp element in javascript lang definition
+   * highlight types used in variable/parameter declarations in C++ and Java
+   * fixed language def files for properties and desktop files
+   * newline chars can be inserted (and ignored) in regular expression
+     specifications
+   * --line-range (highlight only specified lines of an input file,
+     --range-context to specify the number of surrounding context lines,
+     --range-separator the separator line between ranges)
+   * language definition for Xorg configuration files
+   * language definition for Scala (thanks to Dean Wampler)
+   * bash completion file for source-highlight (thanks to Tiziano Muller)
+
 Version 2.10
 
    * formatting is applied even when generating anchors and references

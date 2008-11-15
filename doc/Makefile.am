@@ -44,10 +44,19 @@ outlang-list.texinfo: $(top_srcdir)/src/outlang.map
 test.java.texinfo: $(top_srcdir)/tests/test.java
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.java --style-file=$(top_srcdir)/src/texinfo.style -n > $@
 
+test_lineranges1.java.texinfo: $(top_srcdir)/tests/test.java
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.java --style-file=$(top_srcdir)/src/texinfo.style --line-range="12-18","29-34" -n > $@
+
+test_lineranges2.java.texinfo: $(top_srcdir)/tests/test.java
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.java --style-file=$(top_srcdir)/src/texinfo.style --line-range="12-18","29-34" -n --range-context=2 --range-separator="{... not in range ...}" > $@
+
+test_vardecl.cc.texinfo: $(top_srcdir)/tests/test_vardecl.cc
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test_vardecl.cc --style-file=$(srcdir)/highlight_type.style > $@
+
 debug.java.texinfo: $(top_srcdir)/tests/debug.java
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/debug.java --style-file=$(top_srcdir)/src/texinfo.style -n > $@
 
-cpp.langelems.texinfo: $(top_srcdir)/src/cpp.lang
+cpp.langelems.texinfo: $(top_srcdir)/src/cpp.lang $(top_srcdir)/src/c.lang
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ --show-lang-elements=$(top_srcdir)/src/cpp.lang > $@
 
 log.langelems.texinfo: $(top_srcdir)/src/log.lang
@@ -70,6 +79,15 @@ javadoc.outlang.texinfo: $(top_srcdir)/src/javadoc.outlang
 
 LANG2TEXINFO = $(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
+test_newlines.lang.texinfo: $(top_srcdir)/tests/test_newlines.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/tests/test_newlines.lang
+
+test_nonewlines.lang.texinfo: $(top_srcdir)/tests/test_nonewlines.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/tests/test_nonewlines.lang
+
+test_string_stop.lang.texinfo: $(top_srcdir)/tests/test_string_stop.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/tests/test_string_stop.lang
+
 langdef.lang.texinfo: $(top_srcdir)/src/langdef.lang
 	$(LANG2TEXINFO) -i $(top_srcdir)/src/langdef.lang
 
@@ -87,6 +105,9 @@ csharp.lang.texinfo: $(top_srcdir)/src/csharp.lang
 
 c_comment.lang.texinfo: $(top_srcdir)/src/c_comment.lang
 	$(LANG2TEXINFO) -i $(top_srcdir)/src/c_comment.lang
+
+clike_vardeclaration.lang.texinfo: $(top_srcdir)/src/clike_vardeclaration.lang
+	$(LANG2TEXINFO) -i $(top_srcdir)/src/clike_vardeclaration.lang
 
 c_string.lang.texinfo: $(top_srcdir)/src/c_string.lang
 	$(LANG2TEXINFO) -i $(top_srcdir)/src/c_string.lang
@@ -167,7 +188,7 @@ help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
 	touch $@
 else
 help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
-	$(GENGETOPT) --show-help -i $(top_srcdir)/src/cmdline.ggo --set-package="source-highlight" --set-version="" > $@
+	$(GENGETOPT) --show-detailed-help -i $(top_srcdir)/src/cmdline.ggo --set-package="source-highlight" --set-version="" > $@
 endif
 
 test_ref.h.texinfo: $(top_srcdir)/tests/test.h
@@ -191,7 +212,7 @@ AM_MAKEINFOHTMLFLAGS=--no-split
 # these are distributed since they might depend on other programs
 DISTRIBUTEDINFOS = help-output.texinfo test_ref.h.texinfo 
 
-GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo c.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo style.defaults.texinfo
+GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo test_lineranges1.java.texinfo test_lineranges2.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo c.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo clike_vardeclaration.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo style.defaults.texinfo test_string_stop.lang.texinfo strategy_example.lang.texinfo test_vardecl.cc.texinfo test_nonewlines.lang.texinfo test_newlines.lang.texinfo
 
 CSS_FILES = default.css \
 Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
@@ -223,7 +244,9 @@ EXTRA_DIST = colors.html source-highlight.html \
 	     txt2texinfo.txt \
              $(DISTRIBUTEDINFOS) $(CSS_FILES) \
 style_examples_footer.html style_examples_header.html \
-css_example.css
+css_example.css \
+strategy_example.lang \
+highlight_type.style
 
 source_highlightdoc_DATA = colors.html source-highlight.html \
     Hello.java Hello1.html Hello2.html Hello3.html Hello4.html Hello5.html \

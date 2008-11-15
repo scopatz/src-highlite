@@ -1,0 +1,2 @@
+wrong_delim_stop.lang:4: 'stop' cannot be used with delimited nested|multiline elements
+wrong_delim_stop.lang:4: Caused by: Invalid regular expression

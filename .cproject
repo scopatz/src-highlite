@@ -246,6 +246,8 @@
 
 
 
+
+<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 <buildTargets>
 <target name="test_regexrules" path="src/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
@@ -484,6 +486,14 @@
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_style_errors</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+<runAllBuilders>true</runAllBuilders>
+</target>
+<target name="test_lineranges" path="src/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<buildCommand>make</buildCommand>
+<buildArguments>-j3</buildArguments>
+<buildTarget>check_test_lineranges</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>

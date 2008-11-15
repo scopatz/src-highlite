@@ -9,6 +9,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl
+AM_LDFLAGS = $(BOOST_LDFLAGS)
 
 LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
 
@@ -20,7 +21,8 @@ VALGRIND_TESTS = test_regexrules test_formatter_manager test_highlighter \
 	test_sourcefilehighlighter test_textstyleformatterfactory \
 	test_langdefmanager test_sourcehighlight test_sourcehighlight_errors test_langinfer \
 	test_untabifier test_outlangparser test_outlang_errors test_events test_debuglistener \
-	test_regexpreprocessor test_filenotfound test_style_errors
+	test_regexpreprocessor test_filenotfound test_style_errors \
+	test_lineranges
 
 if !NO_CTAGS
 VALGRIND_TESTS += test_ctagscollector test_ctagsformatter test_ctagsmanager \
@@ -90,6 +92,9 @@ test_sourcefilehighlighter_SOURCES = test_sourcefilehighlighter_main.cpp
 test_sourcefilehighlighter_LDADD = $(top_builddir)/src/lib/libhighlighter.la \
 	$(top_builddir)/src/lib/libregexrules.la \
 	$(top_builddir)/src/lib/libshformatter.la
+
+test_lineranges_SOURCES = test_lineranges_main.cpp
+test_lineranges_LDADD = $(top_builddir)/src/lib/libhighlighter.la
 
 test_debuglistener_SOURCES = test_debuglistener_main.cpp
 test_debuglistener_LDADD = $(top_builddir)/src/lib/libsrchilite.la
@@ -229,6 +234,9 @@ check_test_events: test_events$(EXEEXT)
 
 check_test_debuglistener: test_debuglistener$(EXEEXT)
 	./test_debuglistener$(EXEEXT)
+
+check_test_lineranges: test_lineranges$(EXEEXT)
+	./test_lineranges$(EXEEXT)
 
 VALGRINDTEST = $(top_builddir)/src/lib/tests/valgrind_test.sh
 

@@ -64,7 +64,7 @@ http://www.gnu.org/software/src-highlite -->
 
 <b><font color="#000080">\r</font></b> <font color="#FF0000">{}</font>
 
-<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#FF0000">"/*"</font> <font color="#FF0000">{</font> BEGIN COMMENT_STATE <font color="#990000">;</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#FF0000">"/*"</font> <font color="#FF0000">{</font> <font color="#008080">BEGIN</font> COMMENT_STATE <font color="#990000">;</font>
  <b><font color="#000000">startComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font>      
 <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#FF0000">"/*"</font><font color="#990000">.*</font><font color="#FF0000">"*/"</font> <font color="#FF0000">{</font> <b><font color="#000000">generateComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font>  <font color="#FF0000">}</font>
@@ -85,18 +85,18 @@ http://www.gnu.org/software/src-highlite -->
 <i><font color="#9A1900">      treat it as a ordinary string */</font></i>
  <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;COMMENT_STATE&gt;</font></b><font color="#FF0000">"*/"</font> <font color="#FF0000">{</font> <b><font color="#000000">endComment</font></b><font color="#990000">(</font>yytext<font color="#990000">)</font> <font color="#990000">;</font>
-                      BEGIN INITIAL <font color="#990000">;</font> <i><font color="#9A1900">/* end of the comment */</font></i> <font color="#FF0000">}</font>
+                      <font color="#008080">BEGIN</font> INITIAL <font color="#990000">;</font> <i><font color="#9A1900">/* end of the comment */</font></i> <font color="#FF0000">}</font>
 
-<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#FF0000">"//"</font> <font color="#FF0000">{</font> BEGIN SINGLELINE_COMMENT <font color="#990000">;</font> <b><font color="#000000">startComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#FF0000">"//"</font> <font color="#FF0000">{</font> <font color="#008080">BEGIN</font> SINGLELINE_COMMENT <font color="#990000">;</font> <b><font color="#000000">startComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;SINGLELINE_COMMENT&gt;</font></b><b><font color="#000080">\n</font></b> <font color="#FF0000">{</font> 
-   BEGIN INITIAL <font color="#990000">;</font>
+   <font color="#008080">BEGIN</font> INITIAL <font color="#990000">;</font>
    <b><font color="#000000">yyless</font></b> <font color="#990000">(</font><font color="#993399">0</font><font color="#990000">);</font> <i><font color="#9A1900">// put the \n back</font></i>
    <b><font color="#000000">endComment</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> 
    <i><font color="#9A1900">/* if we encounter another // during a comment we simply</font></i>
 <i><font color="#9A1900">      treat it as a ordinary string */</font></i>
  <font color="#FF0000">}</font>
 
-<b><font color="#000000">&lt;INITIAL&gt;</font></b><b><font color="#000080">\"</font></b> <font color="#FF0000">{</font> BEGIN STRING_STATE <font color="#990000">;</font> <b><font color="#000000">startString</font></b><font color="#990000">(</font> yytext <font color="#990000">);</font>  <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><b><font color="#000080">\"</font></b> <font color="#FF0000">{</font> <font color="#008080">BEGIN</font> STRING_STATE <font color="#990000">;</font> <b><font color="#000000">startString</font></b><font color="#990000">(</font> yytext <font color="#990000">);</font>  <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;STRING_STATE&gt;</font></b><b><font color="#000080">\\\\</font></b> <font color="#FF0000">{</font>  <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;STRING_STATE&gt;</font></b><font color="#FF0000">"\\\""</font> <font color="#FF0000">{</font>  <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;STRING_STATE&gt;</font></b><b><font color="#000080">\n</font></b> <font color="#FF0000">{</font> 
@@ -105,12 +105,12 @@ http://www.gnu.org/software/src-highlite -->
    <b><font color="#000000">generateNewLine</font></b><font color="#990000">()</font> <font color="#990000">;</font>
    <b><font color="#000000">startString</font></b> <font color="#990000">(</font><font color="#FF0000">""</font><font color="#990000">);</font>
 <font color="#FF0000">}</font>
-<b><font color="#000000">&lt;STRING_STATE&gt;</font></b><b><font color="#000080">\"</font></b> <font color="#FF0000">{</font> BEGIN INITIAL <font color="#990000">;</font> <b><font color="#000000">endString</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;STRING_STATE&gt;</font></b><b><font color="#000080">\"</font></b> <font color="#FF0000">{</font> <font color="#008080">BEGIN</font> INITIAL <font color="#990000">;</font> <b><font color="#000000">endString</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
 
-<b><font color="#000000">&lt;INITIAL&gt;</font></b><b><font color="#000080">\'</font></b> <font color="#FF0000">{</font> BEGIN CHAR_STATE <font color="#990000">;</font> <b><font color="#000000">startString</font></b><font color="#990000">(</font> yytext <font color="#990000">);</font>  <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;INITIAL&gt;</font></b><b><font color="#000080">\'</font></b> <font color="#FF0000">{</font> <font color="#008080">BEGIN</font> CHAR_STATE <font color="#990000">;</font> <b><font color="#000000">startString</font></b><font color="#990000">(</font> yytext <font color="#990000">);</font>  <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;CHAR_STATE&gt;</font></b><b><font color="#000080">\\\\</font></b> <font color="#FF0000">{</font>  <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;CHAR_STATE&gt;</font></b><font color="#FF0000">"\\\'"</font> <font color="#FF0000">{</font>  <b><font color="#000000">generate_preproc</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
-<b><font color="#000000">&lt;CHAR_STATE&gt;</font></b><b><font color="#000080">\'</font></b> <font color="#FF0000">{</font> BEGIN INITIAL <font color="#990000">;</font> <b><font color="#000000">endString</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
+<b><font color="#000000">&lt;CHAR_STATE&gt;</font></b><b><font color="#000080">\'</font></b> <font color="#FF0000">{</font> <font color="#008080">BEGIN</font> INITIAL <font color="#990000">;</font> <b><font color="#000000">endString</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
 
 <b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#009900">{keyword}</font>  <font color="#FF0000">{</font> <b><font color="#000000">generateKeyWord</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
 <b><font color="#000000">&lt;INITIAL&gt;</font></b><font color="#009900">{basetype}</font> <font color="#FF0000">{</font> <b><font color="#000000">generateBaseType</font></b><font color="#990000">(</font> yytext <font color="#990000">)</font> <font color="#990000">;</font> <font color="#FF0000">}</font>
@@ -147,6 +147,11 @@ http://www.gnu.org/software/src-highlite -->
 <font color="#FF0000">{</font>  
   <b><font color="#000000">fprintf</font></b><font color="#990000">(</font> stderr<font color="#990000">,</font> <font color="#FF0000">"%d: %s: %s</font><font color="#CC33CC">\n</font><font color="#FF0000">%s</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">,</font> lineno<font color="#990000">,</font> s<font color="#990000">,</font> yytext<font color="#990000">,</font> linebuf <font color="#990000">)</font> <font color="#990000">;</font>
   <b><font color="#000000">fprintf</font></b><font color="#990000">(</font> stderr<font color="#990000">,</font> <font color="#FF0000">"%*s</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">,</font> tokenpos<font color="#990000">,</font> <font color="#FF0000">"^"</font> <font color="#990000">)</font> <font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#009900">void</font> <b><font color="#000000">yyerror</font></b><font color="#990000">(</font> <b><font color="#0000FF">const</font></b> std<font color="#990000">::</font><font color="#008080">string</font> <font color="#990000">&amp;</font>s <font color="#990000">)</font>
+<font color="#FF0000">{</font>  
+  <b><font color="#000000">yyerror</font></b><font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">c_str</font></b><font color="#990000">());</font>
 <font color="#FF0000">}</font>
 
 <i><font color="#9A1900">/* vim:set ft=flex expandtab cindent tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0: */</font></i>

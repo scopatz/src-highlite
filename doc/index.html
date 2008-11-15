@@ -1,14 +1,10 @@
 <!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta name="Author" content="Lorenzo Bettini"><title>GNU Source-highlight - GNU Project - Free Software
-Foundation (FSF)</title>
-
-</head>
-
+<meta name="Author" content="Lorenzo Bettini"><title>GNU Source-highlight - GNU Project - Free Software Foundation (FSF)</title></head>
 <body style="background-color: rgb(255, 255, 255);">
 <h1><a class="mozTocH1" name="mozTocId593827"></a>
-GNU Source-highlight 2.10</h1>
+GNU Source-highlight 2.11</h1>
 <p>by <a href="http://www.lorenzobettini.it">Lorenzo
 Bettini</a> </p>
 <p>This program, <i>given a source file, produces a
@@ -52,7 +48,7 @@ supported
 (in alphabetical order):<br>
 </p>
 <ul>
-<li> <i>Autoconf files</i>&nbsp; &nbsp; &nbsp;(new)</li>
+<li> <i>Autoconf files</i></li>
 <li> <i>C/C++</i></li>
 <li> <i>C#</i></li>
 <li> <i>Bib</i></li>
@@ -63,7 +59,7 @@ supported
 <li> <i>Diff</i></li>
 <li> <i>Flex</i></li>
 <li> <i>Fortran</i></li>
-<li> <i>GLSL</i>&nbsp; &nbsp; &nbsp;(new)</li>
+<li> <i>GLSL</i></li>
 <li> <i>Haxe</i></li>
 <li> <i>Html</i></li>
 <li> <i>ini files</i></li>
@@ -71,7 +67,7 @@ supported
 <li> <i>Javascript</i></li>
 <li> <i>KDE desktop files</i></li>
 <li> <i>Latex</i></li>
-<li> <i>Ldap files</i>&nbsp; &nbsp; &nbsp;(new)</li>
+<li> <i>Ldap files</i></li>
 <li> <i>Logtalk</i></li>
 <li> <i>Log files</i></li>
 <li> <i>lsm files (Linux Software Map)</i></li>
@@ -88,11 +84,13 @@ supported
 <li> <i>Python</i></li>
 <li> <i>RPM Spec files</i></li>
 <li> <i>Ruby</i></li>
+<li> <i>Scala</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>Shell</i></li>
 <li> <i>S-Lang</i></li>
 <li> <i>Sql</i></li>
 <li> <i>Tcl</i></li>
 <li> <i>XML</i></li>
+<li> <i>XOrg conf files</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 </ul>
 <p><font color="#990000">NOTICE: now the name of the
 program is </font><b><i><font color="#663366">source-highlight</font></i></b><font color="#990000">:
@@ -266,9 +264,12 @@ SimpleClass, so we process it with the option <span style="font-family: monospac
 we copy the result into the comment, as illustrated in <a href="SimpleClass.html">SimpleClass.java</a>. When we
 process this file with javadoc, we obtain that code formatted in the
 documentation html file: <a href="SimpleClass-doc.html">SimpleClass-doc.html</a>.
-&nbsp;Doesn't it look nice :-)<br>
-<br>
-Here's the output of source-highlight applied to a Prolog program
+&nbsp;Doesn't it look nice :-)<br><br>You
+can also specify several line ranges, so that you produce an output
+only with those specific lines of your input file; you can specify a
+number of lines for the sorrounding context, and the separator of
+ranges; for instance, this <a href="test_linerange_sep.html">output</a> was produced with the following command (note how the context is shown in gray, as specified in the style file):<br><blockquote>
+<pre>ssource-highlight -s java -f html <br>            --line-range="12-18","29-34" --line-number --range-context=3 --range-separator="&lt;...&gt;" <br>            -i test.java -o test_linerange_sep.html</pre></blockquote>Here's the output of source-highlight applied to a Prolog program
 (through the option `<tt>source-highlight -s prolog</tt>`: <a href="test.pl.html">test.pl.html</a>.&nbsp; This
 one is an
 highlighted Perl program (through the option `<tt>source-highlight

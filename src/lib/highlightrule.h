@@ -44,6 +44,7 @@ class HighlightRule {
 
     /// whether this rule can match subexpressions
     bool hasSubexpressions;
+
 public:
     HighlightRule();
     /**
@@ -61,7 +62,7 @@ public:
      * the pure virtual function tryToMatch below).  The passed token is assumed to be
      * reset (i.e., no existing matching information is stored in it when passing it to
      * this method).
-     * 
+     *
      * @param s the string for trying to match the rule
      * @param token where results will be inserted, if the rule matched
      * @param params additional arguments for the matching
@@ -72,7 +73,7 @@ public:
 
     /**
      * Try to match this rule against the passed string
-     * 
+     *
      * @param start the beginning of the string for trying to match the rule
      * @param end the beginning of the string for trying to match the rule
      * @param token where results will be inserted, if the rule matched

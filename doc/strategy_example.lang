@@ -1,0 +1,4 @@
+# an example for explaining the strategy of source-highlight
+type = "int"
+keyword = "null"
+symbol = "="
