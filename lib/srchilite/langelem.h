@@ -25,7 +25,8 @@ class HighlightStateBuilder; // file: highlightstatebuilder.h
 class LangElemsPrinter; // file: langelemsprinter.h
 // doublecpp: end, DO NOT MODIFY
 
-class LangElem: public ParserInfo {
+class LangElem : public ParserInfo
+{
 private:
     const std::string name;
     bool redef; // whether this redefs an existing language element
@@ -72,9 +73,8 @@ public:
 
 // doublecpp: dispatch methods, DO NOT MODIFY
 public:
-    virtual void
-            dispatch_build(HighlightStateBuilder *, HighlightState * state);
-    virtual void dispatch_collect_const(LangElemsPrinter *);
+virtual void dispatch_build(HighlightStateBuilder *, HighlightState * state);
+virtual void dispatch_collect_const(LangElemsPrinter *);
 // doublecpp: end, DO NOT MODIFY
 };
 

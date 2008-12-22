@@ -1,5 +1,19 @@
-# make sure to avoid catching single line comments by excluding *
-regexp = '/(\\.|[^*\\/])(\\.|[^\\/])*/[gim]*(?![*/])'
+# Javascript lang definition file
+
+# first check if the input matches a comment
+include "c_comment.lang"
+
+# next check if it matches a division operator, which can occur only
+# after a number, an identifier, or certain symbols
+(symbol,normal,symbol) = 
+	`(\+\+|--|\)|\])(\s*)(/=?(?![*/]))`
+(number,normal,symbol) =
+	`(0x[[:xdigit:]]+|(?:[[:digit:]]*\.)?[[:digit:]]+(?:[eE][+-]?[[:digit:]]+)?)(\s*)(/(?![*/]))`
+(normal,symbol) = 
+	`([[:alpha:]$_][[:alnum:]$_]*\s*)(/=?(?![*/]))`
+
+# finally check if it matches a regular expression 
+regexp = '/(\\.|[^*\\/])(\\.|[^\\/])*/[gim]*' 
 
 include "java.lang"
 

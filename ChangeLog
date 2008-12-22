@@ -1,3 +1,13 @@
+2008-11-22  Jason Blevins
+
+	* src/fortran.lang: improved with new keywords from Fortran 90 
+	through Fortran 2003
+
+2008-11-20  bettini  <bettini@dellbettini>
+
+	* src\lib\Makefile.am: libsrchilite renamed into libsource-highlight
+	* lib\Makefile.am: library files moved here
+
 2008-10-26  bettini  <bettini@bettini-laptop>
 
 	* src/xorg.lang: language definition for XOrg conf files

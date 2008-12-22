@@ -1,4 +1,4 @@
-# Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2008 Lorenzo Bettini <http://www.lorenzobettini.it>
 #
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without
@@ -34,27 +34,17 @@ EXTRA_PROGRAMS = source-highlight-cgi
 
 SRCHILITE = $(top_builddir)/src/source-highlight$(EXEEXT)
 
-LIBSUBDIR = $(SUBDIRS)
-
-INCLUDES = -I@top_srcdir@/src/lib
+INCLUDES = -I@top_srcdir@/lib/srchilite
 
 AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl $(BOOST_CPPFLAGS)
 AM_LDFLAGS = $(BOOST_LDFLAGS)
 
 LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
 
-source_highlight_LDADD = $(LDADD) $(top_builddir)/src/lib/libsrchilite.la
+source_highlight_LDADD = $(LDADD) $(top_builddir)/lib/srchilite/libsource-highlight.la
 source_highlight_cgi_LDADD = $(source_highlight_LDADD)
 
 check_regexp_LDADD = $(BOOST_REGEX_LIB) $(top_builddir)/gl/libgnu.la
-
-SUBDIRS = \
-	lib \
-	includes
-
-DIST_SUBDIRS = \
-	lib \
-	includes
 
 # for most rules, we use one file per line. `diffs' are more clear this way
 #source_highlight_SOURCES = cmdline.c startapp.cc source-highlight.cc
@@ -85,7 +75,7 @@ postscript.lang csharp.lang xml.lang sh.lang script_comment.lang \
 tcl.lang sql.lang bib.lang makefile.lang css.lang m4.lang \
 default.lang nohilite.lang slang.lang key_string.lang properties.lang \
 desktop.lang lsm.lang spec.lang haxe.lang ldap.lang glsl.lang xorg.lang \
-clike_vardeclaration.lang scala.lang
+clike_vardeclaration.lang scala.lang ada.lang
 
 OUTLANGFILES = \
 css_common.outlang \

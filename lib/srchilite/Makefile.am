@@ -8,17 +8,19 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-SUBDIRS = tests
-
-SUFFIXES = .text .hpp .h
+SUBDIRS = includes
 
 .text.c:
 	$(TXTC) -c $<
 
 if NO_DOUBLECPP
-.h.hpp:
-	touch $@
+
+SUFFIXES = .text
+
 else
+
+SUFFIXES = .text .hpp .h
+
 .h.hpp:
 	$(DOUBLECPP) --output-source-ext cc --invade-target --input-header-ext h --output-header-ext hpp --output-source-suff=_dbtab --verbose --assume-virtual -i $<
 	touch $@
@@ -29,12 +31,14 @@ AM_LDFLAGS = $(BOOST_LDFLAGS)
 
 LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
 
+#lib_LTLIBRARIES = libsource-highlight.la
+
 noinst_LTLIBRARIES = libcommon.la librules.la libregexrules.la \
 	libformatter.la libhighlighter.la libhighlighterbuilder.la \
 	liblangelem.la libshformatter.la liblangdef.la \
-	libsrchilite.la
+	libsource-highlight.la
 
-libcommon_la_SOURCES = copyright.text reportbugs.text \
+libcommon_la_SOURCES = copyright.c reportbugs.c \
 	fileutil.cc \
 	substfun.cpp \
 	stopwatch.cpp utils.cpp utils.h \
@@ -74,7 +78,7 @@ librules_la_SOURCES = highlightrule.cpp highlighttoken.cpp \
 
 libhighlighter_la_SOURCES = sourcehighlighter.cpp sourcefilehighlighter.cpp \
 	linenumgenerator.cpp lineranges.cpp
-libhighlighter_la_LIBADD = $(BOOST_REGEX_LIB) ./libformatter.la ./libcommon.la
+# libhighlighter_la_LIBADD = $(BOOST_REGEX_LIB) ./libformatter.la ./libcommon.la
 
 libformatter_la_SOURCES = formatter.cpp formattermanager.cpp
 
@@ -83,30 +87,35 @@ libshformatter_la_SOURCES = textstyle.cpp textstyleformatter.cpp bufferedoutput.
 	srcuntabifier.cpp textstyleformatterfactory.cpp \
 	docgenerator.cc doctemplate.cpp chartranslator.cc \
 	textstylebuilder.cpp fileinfo.cpp ctagsmanager.cpp
-libshformatter_la_LIBADD = $(BOOST_REGEX_LIB) ./libformatter.la ./libcommon.la
+# libshformatter_la_LIBADD = $(BOOST_REGEX_LIB) ./libformatter.la ./libcommon.la
 
 libregexrules_la_SOURCES = regexhighlightrule.cpp regexrulefactory.cpp \
 	regexpreprocessor.cpp
-libregexrules_la_LIBADD = $(BOOST_REGEX_LIB) ./librules.la
+# libregexrules_la_LIBADD = $(BOOST_REGEX_LIB) ./librules.la
 
 libhighlighterbuilder_la_SOURCES = highlightstatebuilder.cpp highlightstatebuilder.hpp \
 	highlightstatebuilder_dbtab.cc highlightbuilderexception.cpp langdefmanager.cpp
-libhighlighterbuilder_la_LIBADD = ./libregexrules.la ./liblangdef.la
+# libhighlighterbuilder_la_LIBADD = ./libregexrules.la ./liblangdef.la
 
-libcommon_la_LIBADD = $(BOOST_REGEX_LIB)
+# libcommon_la_LIBADD = $(BOOST_REGEX_LIB)
 
 liblangdef_la_SOURCES = langdefparser.yy langdefscanner.ll \
 	languageinfer.cpp \
 	parserexception.cpp \
 	stringtable.cpp vardefinitions.cpp
-liblangdef_la_LIBADD = ./libcommon.la ./liblangelem.la
+# liblangdef_la_LIBADD = ./libcommon.la ./liblangelem.la
 
-libsrchilite_la_SOURCES = sourcehighlight.cpp styleparser.yy \
+libsource_highlight_la_SOURCES = sourcehighlight.cpp styleparser.yy \
 	stylescanner.ll outlangdefparser.yy \
 	stylecssparser.yy stylecssscanner.ll outlangdefscanner.ll \
 	debuglistener.cpp langmap.cpp
-libsrchilite_la_LIBADD = ./libshformatter.la \
-	./libhighlighter.la ./libhighlighterbuilder.la
+libsource_highlight_la_LIBADD = libcommon.la librules.la libregexrules.la \
+	libformatter.la libhighlighter.la libhighlighterbuilder.la \
+	liblangelem.la libshformatter.la liblangdef.la \
+	@LTLIBOBJS@ $(BOOST_REGEX_LIB)
+#libsource_highlight_la_LIBADD = ./libshformatter.la \
+#	./libhighlighter.la ./libhighlighterbuilder.la @LTLIBOBJS@
+libsource_highlight_la_LDFLAGS = -version-info 1:0:0
 
 INCLUDES = -I@top_srcdir@/src
 

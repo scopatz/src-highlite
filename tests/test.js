@@ -2,6 +2,9 @@
 
 /myregex/gi
 
+// check that division operator is highlighted correctly
+document.write('<table><tr><td>25% = '+(25/100)+'</td></tr></table>'); 
+
 /*
 * Sarissa XML library v 0.9 beta 4
 * Author: Manos Batsis, mailto: mbatsis@netsmart.gr

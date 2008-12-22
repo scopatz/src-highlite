@@ -1,6 +1,8 @@
 C = cpp.lang
 H = cpp.lang
 ac = m4.lang
+ada = ada.lang
+adb = ada.lang
 am = makefile.lang
 autoconf = m4.lang
 bib = bib.lang

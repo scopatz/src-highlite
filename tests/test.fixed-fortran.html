@@ -10,4 +10,17 @@ http://www.gnu.org/software/src-highlite -->
 <b><font color="#0000FF">endif</font></b>
 <i><font color="#9A1900">c = 1</font></i>
 <font color="#009900">double</font> <font color="#009900">precision</font> x
+
+x <font color="#990000">=</font> <font color="#993399">1.234e5</font>  <i><font color="#9A1900">! single</font></i>
+x <font color="#990000">=</font> <font color="#993399">1.234d5</font>  <i><font color="#9A1900">! double</font></i>
+x <font color="#990000">=</font> <font color="#993399">1.234q5</font>  <i><font color="#9A1900">! quad</font></i>
+
+    x <font color="#990000">=</font> <font color="#993399">b'1001010'</font> <i><font color="#9A1900">! binary</font></i>
+    x <font color="#990000">=</font> <font color="#993399">o'1271530'</font> <i><font color="#9A1900">! octal</font></i>
+    x <font color="#990000">=</font> <font color="#993399">z'235A7F0'</font> <i><font color="#9A1900">! hex (no idea why it's z and not x)</font></i>
+
+<i><font color="#9A1900">! 15 significant digits and range of (1e-307, 1e307)</font></i>
+<font color="#009900">integer</font><font color="#990000">,</font> <b><font color="#0000FF">parameter</font></b> <font color="#990000">::</font> wp <font color="#990000">=</font> <b><font color="#000000">selected_real_kind</font></b><font color="#990000">(</font><font color="#993399">15</font><font color="#990000">,</font> <font color="#993399">307</font><font color="#990000">)</font>
+
+<font color="#009900">real</font><font color="#990000">(</font>wp<font color="#990000">)</font> <font color="#990000">::</font> x <font color="#990000">=</font> <font color="#993399">1.234e5_wp</font>  <i><font color="#9A1900">! working precision</font></i>
 </tt></pre>

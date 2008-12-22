@@ -104,3 +104,5 @@ ldif = ldap.lang
 glsl = glsl.lang
 xorg = xorg.lang
 scala = scala.lang
+ada = ada.lang
+adb = ada.lang

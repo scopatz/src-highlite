@@ -27,7 +27,7 @@
 
 const char *gengetopt_args_info_purpose = "Highlight the syntax of a source file (e.g. Java) into a specific format (e.g. \nHTML)";
 
-const char *gengetopt_args_info_usage = "Usage: " CMDLINE_PARSER_PACKAGE " [OPTIONS]... [FILES]...";
+const char *gengetopt_args_info_usage = "Usage: " CMDLINE_PARSER_PACKAGE "[OPTIONS]... < input_file > output_file\n       source-highlight [OPTIONS]... -i input_file -o output_file\n       source-highlight [OPTIONS]... [FILES]...";
 
 const char *gengetopt_args_info_description = "";
 

@@ -36,6 +36,8 @@ int main() {
 
     string sourceFile = string(BASEDIR) + "readtags.h";
 
+    cout << "sourceFile: " << sourceFile << endl;
+
     TextStyles textStyles;
     const char *vars[] = { "linenum", "infilename", "infile", "outfile", 0 };
 

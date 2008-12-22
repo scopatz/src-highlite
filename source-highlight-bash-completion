@@ -29,7 +29,7 @@ _source_highlight()
 	    COMPREPLY=($(compgen -A file -- "${cur}"))
 	    ;;
 	-s|--src-lang)
-	    COMPREPLY=($(compgen -W "C H ac am autoconf bib bison c caml cc changelog cls cpp cs csh csharp css \
+	    COMPREPLY=($(compgen -W "C H ac ada am autoconf bib bison c caml cc changelog cls cpp cs csh csharp css \
 		diff docbook dtx eps fixed-fortran flex fortran free-fortran glsl h haxe hh hpp htm html hx in ini java javascript js kcfg kdevelop kidl ksh l lang \
 		langdef latex ldap ldif lex lgt ll log logtalk lsm lua m4 ml mli moc outlang pas pascal patch perl php php3 php4 php5 \
 		pl pm postscript prolog properties ps py python rb rc ruby scala sh shell sig sl slang slsh sml spec sql sty style syslog tcl tcsh \

@@ -1,0 +1,88 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">--</font></i>
+<i><font color="#9A1900">--  This is a classical Hello world example written in Ada</font></i>
+<i><font color="#9A1900">--  to test source-highlight with Ada programs.</font></i>
+<i><font color="#9A1900">--</font></i>
+<i><font color="#9A1900">--  to perform a html translation type:</font></i>
+<i><font color="#9A1900">--</font></i>
+<i><font color="#9A1900">--  source-highlight -s ada -f html --input test.ada --output test.ada.html</font></i>
+<i><font color="#9A1900">--</font></i>
+<i><font color="#9A1900">--  or type source-highlight --help for the list of options</font></i>
+<i><font color="#9A1900">--</font></i>
+<i><font color="#9A1900">--</font></i>
+<i><font color="#9A1900">--  written by Reto Buerki &lt;reet@codelabs.ch&gt;</font></i>
+<i><font color="#9A1900">--</font></i>
+
+<b><font color="#000080">with</font></b> Ada<font color="#990000">.</font>Text_IO<font color="#990000">;</font>
+
+<b><font color="#0000FF">procedure</font></b> Test <b><font color="#0000FF">is</font></b>
+   Test_Int     <font color="#990000">:</font> <font color="#009900">Integer</font> <font color="#990000">:=</font> <font color="#993399">10</font><font color="#990000">;</font>
+   <i><font color="#9A1900">--  This is an example test integer</font></i>
+   Test_Float   <font color="#990000">:</font> <b><font color="#0000FF">constant</font></b> <font color="#009900">Float</font> <font color="#990000">:=</font> <font color="#993399">10.2</font><font color="#990000">;</font>
+   <i><font color="#9A1900">--  This is an example test float</font></i>
+   Test_Boolean <font color="#990000">:</font> <font color="#009900">Boolean</font> <font color="#990000">:=</font> False<font color="#990000">;</font>
+   <i><font color="#9A1900">--  This is an example test boolean</font></i>
+   Test_Char    <font color="#990000">:</font> <font color="#009900">Character</font> <font color="#990000">:=</font> <font color="#FF0000">'C'</font><font color="#990000">;</font>
+   <i><font color="#9A1900">--  This is an example test character</font></i>
+   Test_String  <font color="#990000">:</font> <font color="#009900">String</font> <font color="#990000">:=</font> <font color="#FF0000">"Some test string"</font><font color="#990000">;</font>
+   <i><font color="#9A1900">--  This is an example test string</font></i>
+
+   <b><font color="#0000FF">type</font></b> Test_Person_Type <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">tagged</font></b> <b><font color="#0000FF">record</font></b>
+      Name <font color="#990000">:</font> <font color="#009900">String</font> <font color="#990000">(</font><font color="#993399">1</font> <font color="#990000">..</font> <font color="#993399">8</font><font color="#990000">);</font>
+      <i><font color="#9A1900">--  Name</font></i>
+      Age  <font color="#990000">:</font> Positive <font color="#990000">:=</font> <font color="#993399">18</font><font color="#990000">;</font>
+      <i><font color="#9A1900">--  Age</font></i>
+   <b><font color="#0000FF">end</font></b> <b><font color="#0000FF">record</font></b><font color="#990000">;</font>
+   <i><font color="#9A1900">--  This is an example type</font></i>
+
+   <b><font color="#0000FF">type</font></b> Test_Profession_Type <b><font color="#0000FF">is</font></b> <font color="#990000">(</font>Unknown<font color="#990000">,</font> Medic<font color="#990000">,</font> Fireman<font color="#990000">,</font> Construction_Worker<font color="#990000">);</font>
+   <i><font color="#9A1900">--  Enumeration test type : All possible professions</font></i>
+
+   <b><font color="#0000FF">type</font></b> Test_Employee_Type <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">new</font></b> Test_Person_Type <b><font color="#000080">with</font></b> <b><font color="#0000FF">record</font></b>
+      Profession <font color="#990000">:</font> Test_Profession_Type <font color="#990000">:=</font> Unknown<font color="#990000">;</font>
+      <i><font color="#9A1900">--  Initial profession is not known</font></i>
+   <b><font color="#0000FF">end</font></b> <b><font color="#0000FF">record</font></b><font color="#990000">;</font>
+   <i><font color="#9A1900">--  This is an example extension of Test_Person_Type</font></i>
+
+   <b><font color="#0000FF">subtype</font></b> Test_Int_Subtype <b><font color="#0000FF">is</font></b> <font color="#009900">Integer</font> <b><font color="#0000FF">range</font></b> <font color="#993399">1</font> <font color="#990000">..</font> <font color="#993399">9</font><font color="#990000">;</font>
+   <i><font color="#9A1900">--  This is an example subtype</font></i>
+
+   <b><font color="#0000FF">task</font></b> Test_Greeter_Task <b><font color="#0000FF">is</font></b>
+      <b><font color="#0000FF">entry</font></b> Run<font color="#990000">;</font>
+      <i><font color="#9A1900">--  Entry to start example task</font></i>
+   <b><font color="#0000FF">end</font></b> Test_Greeter_Task<font color="#990000">;</font>
+   <i><font color="#9A1900">--  An example task</font></i>
+
+   <b><font color="#0000FF">task</font></b> <b><font color="#0000FF">body</font></b> Test_Greeter_Task <b><font color="#0000FF">is</font></b>
+
+      <i><font color="#9A1900">------------------</font></i>
+      <i><font color="#9A1900">-- Get_Greeting --</font></i>
+      <i><font color="#9A1900">------------------</font></i>
+
+      <b><font color="#0000FF">function</font></b> <b><font color="#000000">Get_Greeting</font></b> <font color="#990000">(</font>Num <font color="#990000">:</font> <b><font color="#0000FF">in</font></b> <font color="#009900">Integer</font><font color="#990000">)</font> <b><font color="#0000FF">return</font></b> <font color="#009900">String</font> <b><font color="#0000FF">is</font></b>
+      <b><font color="#0000FF">begin</font></b>
+         <b><font color="#0000FF">return</font></b> <font color="#009900">Integer</font>'<b><font color="#000000">Image</font></b> <font color="#990000">(</font>Num<font color="#990000">)</font> <font color="#990000">&amp;</font> <font color="#FF0000">" : Hello world from an Ada task"</font><font color="#990000">;</font>
+      <b><font color="#0000FF">end</font></b> Get_Greeting<font color="#990000">;</font>
+
+   <b><font color="#0000FF">begin</font></b>
+      <b><font color="#0000FF">accept</font></b> Run<font color="#990000">;</font>
+      <b><font color="#0000FF">for</font></b> Index <b><font color="#0000FF">in</font></b> Test_Int_Subtype'<b><font color="#0000FF">Range</font></b> <b><font color="#0000FF">loop</font></b>
+         Ada<font color="#990000">.</font>Text_IO<font color="#990000">.</font><b><font color="#000000">Put_Line</font></b> <font color="#990000">(</font><b><font color="#000000">Get_Greeting</font></b> <font color="#990000">(</font>Num <font color="#990000">=&gt;</font> Index<font color="#990000">));</font>
+      <b><font color="#0000FF">end</font></b> <b><font color="#0000FF">loop</font></b><font color="#990000">;</font>
+   <b><font color="#0000FF">end</font></b> Test_Greeter_Task<font color="#990000">;</font>
+
+   <b><font color="#000080">use</font></b> Ada<font color="#990000">.</font>Text_IO<font color="#990000">;</font>
+
+<b><font color="#0000FF">begin</font></b>
+
+   <i><font color="#9A1900">--  Just display some greeting</font></i>
+
+   <b><font color="#000000">Put_Line</font></b> <font color="#990000">(</font><font color="#FF0000">"Hello world in Ada for GNU Source-highlight"</font><font color="#990000">);</font>
+   <b><font color="#000000">Put_Line</font></b> <font color="#990000">(</font><font color="#FF0000">"written by Reto Buerki &lt;reet@codelabs.ch&gt;"</font><font color="#990000">);</font>
+   Test_Greeter_Task<font color="#990000">.</font>Run<font color="#990000">;</font>
+
+<b><font color="#0000FF">end</font></b> Test<font color="#990000">;</font>
+</tt></pre>

@@ -9,11 +9,13 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl
-AM_LDFLAGS = $(BOOST_LDFLAGS)
+AM_LDFLAGS = $(BOOST_LDFLAGS) -no-install
 
 LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
 
-INCLUDES = -I@top_srcdir@/src -I@srcdir@/..
+LIBDIR = $(top_builddir)/lib/srchilite/
+
+INCLUDES = -I@top_srcdir@/src -I@srcdir@/../srchilite
 
 VALGRIND_TESTS = test_regexrules test_formatter_manager test_highlighter \
 	test_exception test_highlightbuilder test_buffered_output \
@@ -33,120 +35,131 @@ TESTS = $(VALGRIND_TESTS) test_sourcehighlight_errors
 check_PROGRAMS = $(TESTS)
 
 test_regexrules_SOURCES = test_regexrules_main.cpp
-test_regexrules_LDADD = $(top_builddir)/src/lib/libregexrules.la
+test_regexrules_LDADD = $(LIBDIR)/libregexrules.la $(LIBDIR)/librules.la $(BOOST_REGEX_LIB)
 
 test_formatter_manager_SOURCES = test_formatter_manager_main.cpp
-test_formatter_manager_LDADD = $(top_builddir)/src/lib/libformatter.la
+test_formatter_manager_LDADD = $(LIBDIR)/libformatter.la
 
 test_highlighter_SOURCES = logformatter.cpp test_highlighter_main.cpp
-test_highlighter_LDADD = $(top_builddir)/src/lib/libhighlighter.la \
-	$(top_builddir)/src/lib/libregexrules.la
+test_highlighter_LDADD = $(LIBDIR)/libhighlighter.la \
+	$(LIBDIR)/libregexrules.la $(LIBDIR)/libformatter.la \
+	$(LIBDIR)/librules.la $(BOOST_REGEX_LIB)
 
 test_exception_SOURCES = test_exception_main.cpp
-test_exception_LDADD = $(top_builddir)/src/lib/libhighlighterbuilder.la
+test_exception_LDADD = $(LIBDIR)/libhighlighterbuilder.la $(BOOST_REGEX_LIB)
 
 test_highlightbuilder_SOURCES = logformatter.cpp test_highlightbuilder_main.cpp
-test_highlightbuilder_LDADD = $(top_builddir)/src/lib/libhighlighter.la \
-	$(top_builddir)/src/lib/libhighlighterbuilder.la \
-	$(top_builddir)/src/lib/libregexrules.la
+test_highlightbuilder_LDADD = $(LIBDIR)/libhighlighter.la \
+	$(LIBDIR)/libhighlighterbuilder.la \
+	$(LIBDIR)/libregexrules.la $(LIBDIR)/libformatter.la \
+	$(LIBDIR)/librules.la $(LIBDIR)/liblangelem.la $(BOOST_REGEX_LIB)
 
 test_buffered_output_SOURCES = test_buffered_output_main.cpp
-test_buffered_output_LDADD = $(top_builddir)/src/lib/libshformatter.la
+test_buffered_output_LDADD = $(LIBDIR)/libshformatter.la
 
 test_textstyle_SOURCES = test_textstyle_main.cpp 
-test_textstyle_LDADD = $(top_builddir)/src/lib/libshformatter.la
+test_textstyle_LDADD = $(LIBDIR)/libshformatter.la $(BOOST_REGEX_LIB)
 
 test_textstyleformatter_SOURCES = test_textstyleformatter_main.cpp
-test_textstyleformatter_LDADD = $(top_builddir)/src/lib/libshformatter.la
+test_textstyleformatter_LDADD = $(LIBDIR)/libshformatter.la \
+	$(LIBDIR)/libformatter.la \
+	$(LIBDIR)/libcommon.la $(BOOST_REGEX_LIB)
 
 test_textgenerator_SOURCES = test_textgenerator_main.cpp 
-test_textgenerator_LDADD = $(top_builddir)/src/lib/libshformatter.la
+test_textgenerator_LDADD = $(LIBDIR)/libsource-highlight.la
 
 test_wordtokenizer_SOURCES = test_wordtokenizer_main.cpp
-test_wordtokenizer_LDADD = $(top_builddir)/src/lib/libshformatter.la
+test_wordtokenizer_LDADD = $(LIBDIR)/libshformatter.la $(BOOST_REGEX_LIB)
 
 test_ctagscollector_SOURCES = test_ctagscollector_main.cpp
 test_ctagscollector_DEPENDENCIES = mytags
-test_ctagscollector_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../\""
-test_ctagscollector_LDADD = $(top_builddir)/src/lib/libshformatter.la
+test_ctagscollector_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/lib/srchilite/\""
+test_ctagscollector_LDADD = $(LIBDIR)/libshformatter.la \
+	$(LIBDIR)/libcommon.la $(BOOST_REGEX_LIB)
 
 test_ctagsformatter_SOURCES = test_ctagsformatter_main.cpp
 test_ctagsformatter_DEPENDENCIES = mytags
-test_ctagsformatter_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../\""
-test_ctagsformatter_LDADD = $(top_builddir)/src/lib/libshformatter.la 
+test_ctagsformatter_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/lib/srchilite/\""
+test_ctagsformatter_LDADD = $(LIBDIR)/libshformatter.la \
+	$(LIBDIR)/libcommon.la \
+	$(BOOST_REGEX_LIB)
 
 test_ctagsmanager_SOURCES = test_ctagsmanager_main.cpp
 test_ctagsmanager_DEPENDENCIES = mytags
-test_ctagsmanager_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../\"" -D CTAGS="\"$(CTAGS)\""
-test_ctagsmanager_LDADD = $(top_builddir)/src/lib/libshformatter.la 
+test_ctagsmanager_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/lib/srchilite/\"" -D CTAGS="\"$(CTAGS)\""
+test_ctagsmanager_LDADD = $(LIBDIR)/libshformatter.la \
+	$(LIBDIR)/libcommon.la \
+	$(BOOST_REGEX_LIB)
 
 test_formatreferences_SOURCES = logformatter.cpp test_formatreferences_main.cpp
 test_formatreferences_DEPENDENCIES = mytags
-test_formatreferences_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../\""
-test_formatreferences_LDADD = $(top_builddir)/src/lib/libshformatter.la 
+test_formatreferences_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/lib/srchilite/\""
+test_formatreferences_LDADD = $(LIBDIR)/libshformatter.la \
+	$(LIBDIR)/libformatter.la $(LIBDIR)/libcommon.la \
+	$(BOOST_REGEX_LIB)
 
 test_untabifier_SOURCES = test_untabifier_main.cpp
-test_untabifier_LDADD = $(top_builddir)/src/lib/libshformatter.la
+test_untabifier_LDADD = $(LIBDIR)/libshformatter.la $(BOOST_REGEX_LIB)
 
 test_sourcefilehighlighter_SOURCES = test_sourcefilehighlighter_main.cpp
-test_sourcefilehighlighter_LDADD = $(top_builddir)/src/lib/libhighlighter.la \
-	$(top_builddir)/src/lib/libregexrules.la \
-	$(top_builddir)/src/lib/libshformatter.la
+test_sourcefilehighlighter_LDADD = $(LIBDIR)/libsource-highlight.la
 
 test_lineranges_SOURCES = test_lineranges_main.cpp
-test_lineranges_LDADD = $(top_builddir)/src/lib/libhighlighter.la
+test_lineranges_LDADD = $(LIBDIR)/libhighlighter.la $(BOOST_REGEX_LIB)
 
 test_debuglistener_SOURCES = test_debuglistener_main.cpp
-test_debuglistener_LDADD = $(top_builddir)/src/lib/libsrchilite.la
+test_debuglistener_LDADD = $(LIBDIR)/libsource-highlight.la
 
 test_linenum_SOURCES = test_linenum_main.cpp
-test_linenum_LDADD = $(top_builddir)/src/lib/libhighlighter.la \
-	$(top_builddir)/src/lib/libshformatter.la
+test_linenum_LDADD = $(LIBDIR)/libhighlighter.la \
+	$(LIBDIR)/libshformatter.la $(BOOST_REGEX_LIB)
 
 test_textstyleformatterfactory_SOURCES = test_textstyleformatterfactory_main.cpp
-test_textstyleformatterfactory_LDADD = $(top_builddir)/src/lib/libshformatter.la
+test_textstyleformatterfactory_LDADD = $(LIBDIR)/libshformatter.la \
+	$(LIBDIR)/libformatter.la $(LIBDIR)/libcommon.la \
+	$(BOOST_REGEX_LIB)
 
 test_langdefmanager_SOURCES = test_langdefmanager_main.cpp
-test_langdefmanager_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../../\""
-test_langdefmanager_LDADD = $(top_builddir)/src/lib/libhighlighterbuilder.la \
-	$(top_builddir)/src/lib/liblangdef.la 
+test_langdefmanager_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/src/\""
+test_langdefmanager_LDADD = $(LIBDIR)/libsource-highlight.la
 
 test_sourcehighlight_SOURCES = test_sourcehighlight_main.cpp
-test_sourcehighlight_LDADD = $(top_builddir)/src/lib/libsrchilite.la
-test_sourcehighlight_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../../\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
+test_sourcehighlight_LDADD = $(LIBDIR)/libsource-highlight.la
+test_sourcehighlight_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/src/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
 
 test_sourcehighlight_errors_SOURCES = test_sourcehighlight_errors_main.cpp
-test_sourcehighlight_errors_LDADD = $(top_builddir)/src/lib/libsrchilite.la
-test_sourcehighlight_errors_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../../\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
+test_sourcehighlight_errors_LDADD = $(LIBDIR)/libsource-highlight.la
+test_sourcehighlight_errors_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/src/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
 
 test_style_errors_SOURCES = test_style_errors_main.cpp
-test_style_errors_LDADD = $(top_builddir)/src/lib/libsrchilite.la
-test_style_errors_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../../\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
+test_style_errors_LDADD = $(LIBDIR)/libsource-highlight.la
+test_style_errors_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/src/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
 
 test_outlang_errors_SOURCES = test_outlang_errors_main.cpp
-test_outlang_errors_LDADD = $(top_builddir)/src/lib/libsrchilite.la
-test_outlang_errors_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../../\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
+test_outlang_errors_LDADD = $(LIBDIR)/libsource-highlight.la
+test_outlang_errors_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/src/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
 
 test_filenotfound_SOURCES = test_filenotfound_main.cpp
-test_filenotfound_LDADD = $(top_builddir)/src/lib/libsrchilite.la
-test_filenotfound_CXXFLAGS = -D BASEDIR="\"$(srcdir)/../../\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
+test_filenotfound_LDADD = $(LIBDIR)/libsource-highlight.la
+test_filenotfound_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/src/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
 
 test_outlangparser_SOURCES = test_outlangparser_main.cpp
 test_outlangparser_DEPENDENCIES = outlangtest.outlang
 test_outlangparser_CXXFLAGS = -D BASEDIR="\"$(srcdir)/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
-test_outlangparser_LDADD = $(top_builddir)/src/lib/libsrchilite.la
+test_outlangparser_LDADD = $(LIBDIR)/libsource-highlight.la
 
 test_langinfer_SOURCES = test_langinfer_main.cpp
-test_langinfer_LDADD = $(top_builddir)/src/lib/liblangdef.la
+test_langinfer_LDADD = $(LIBDIR)/liblangdef.la $(LIBDIR)/libcommon.la \
+	$(BOOST_REGEX_LIB)
 
 test_events_SOURCES = test_events_main.cpp
 
 test_regexpreprocessor_SOURCES = test_regexpreprocessor_main.cpp
-test_regexpreprocessor_LDADD = $(top_builddir)/src/lib/libregexrules.la \
-	$(top_builddir)/src/lib/liblangelem.la
+test_regexpreprocessor_LDADD = $(LIBDIR)/libregexrules.la \
+	$(LIBDIR)/liblangelem.la $(BOOST_REGEX_LIB)
 
-mytags: $(srcdir)/../test_readtags_main.cpp
-	$(CTAGS) --excmd=n --fields=+n -o mytags $(srcdir)/../test_readtags_main.cpp $(srcdir)/../readtags.h
+mytags: $(top_srcdir)/lib/srchilite/test_readtags_main.cpp
+	$(CTAGS) --excmd=n --fields=+n -o mytags $(top_srcdir)/lib/srchilite/test_readtags_main.cpp $(top_srcdir)/lib/srchilite/readtags.h
 
 check_test_regexpreprocessor: test_regexpreprocessor$(EXEEXT)
 	./test_regexpreprocessor$(EXEEXT)
@@ -238,7 +251,7 @@ check_test_debuglistener: test_debuglistener$(EXEEXT)
 check_test_lineranges: test_lineranges$(EXEEXT)
 	./test_lineranges$(EXEEXT)
 
-VALGRINDTEST = $(top_builddir)/src/lib/tests/valgrind_test.sh
+VALGRINDTEST = $(builddir)/valgrind_test.sh
 
 check-valgrind: $(VALGRIND_TESTS)
 	for prog in $(VALGRIND_TESTS); do \

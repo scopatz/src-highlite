@@ -8,6 +8,16 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 2.11.1
+
+   * fixed an installation bug in non-root mode (thanks to Britton Kerin)
+   * fortran.lang improved with new keywords from Fortran 90 
+     through Fortran 2003 (thanks to Jason Blevins)
+   * javascript.lang improved (thanks to gnombat)
+   * Ada language definition file (thanks to Reto Buerki)
+   * lang and outlang files can also be downloaded independently from
+     the source-highlight site
+
 Version 2.11
 
    * optimized the procedure for finding the best matching expression

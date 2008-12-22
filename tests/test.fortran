@@ -6,3 +6,16 @@ if (i/=0) then
 endif
 c = 1
 double precision x
+
+x = 1.234e5  ! single
+x = 1.234d5  ! double
+x = 1.234q5  ! quad
+
+    x = b'1001010' ! binary
+    x = o'1271530' ! octal
+    x = z'235A7F0' ! hex (no idea why it's z and not x)
+
+! 15 significant digits and range of (1e-307, 1e307)
+integer, parameter :: wp = selected_real_kind(15, 307)
+
+real(wp) :: x = 1.234e5_wp  ! working precision

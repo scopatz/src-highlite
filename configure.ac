@@ -9,7 +9,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(source-highlight,2.11)
+AC_INIT(source-highlight,2.11.1)
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
@@ -204,12 +204,6 @@ AM_MAINTAINER_MODE
 
 AC_CONFIG_FILES(
 [
-tests/valgrind_tests.sh
-tests/valgrind_suppressions.sh
-tests/valgrind_test.sh
-src/lib/tests/valgrind_test.sh
-doc/shjs_css_transform.sh
-doc/gen_style_example.sh
 Makefile
 txtc.sh
 gl/Makefile
@@ -218,19 +212,21 @@ src/java2html
 src/cpp2html
 src/src-hilite-lesspipe.sh
 doc/Makefile
-src/includes/Makefile
-src/lib/Makefile
-src/lib/tests/Makefile
+lib/Makefile
+lib/srchilite/includes/Makefile
+lib/srchilite/Makefile
+lib/tests/Makefile
 tests/Makefile
 tests/output_dir/Makefile
-source-highlight.spec],
-[chmod +x tests/valgrind_tests.sh
- chmod +x tests/valgrind_suppressions.sh
- chmod +x tests/valgrind_test.sh
- chmod +x src/lib/tests/valgrind_test.sh
- chmod +x doc/shjs_css_transform.sh
- chmod +x doc/gen_style_example.sh]
-)
+source-highlight.spec])
+
+AC_CONFIG_FILES([tests/valgrind_tests.sh], [chmod +x tests/valgrind_tests.sh])
+AC_CONFIG_FILES([tests/valgrind_suppressions.sh], [chmod +x tests/valgrind_suppressions.sh])
+AC_CONFIG_FILES([tests/valgrind_test.sh], [chmod +x tests/valgrind_test.sh])
+AC_CONFIG_FILES([lib/tests/valgrind_test.sh], [chmod +x lib/tests/valgrind_test.sh])
+AC_CONFIG_FILES([doc/shjs_css_transform.sh], [chmod +x doc/shjs_css_transform.sh])
+AC_CONFIG_FILES([doc/gen_style_example.sh], [chmod +x doc/gen_style_example.sh])
+
 
 AC_OUTPUT
 

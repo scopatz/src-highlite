@@ -51,8 +51,6 @@ outlangtest.outlang
 test_readtags
 test_langinfer
 mytags
-copyright.c
-reportbugs.c
 test_regexpreprocessor
 *.loT
 test_regexrules

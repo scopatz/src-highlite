@@ -71,3 +71,11 @@ linesuffix)?
   FormatterParams?
 
 test with source-highlight ide (debug)
+
+LIBRARY
+
+- use subdir when including files
+- use namespaces
+
+- specify the different usage modes
+- check that when unnamed options are given, no -i nor -o are specified

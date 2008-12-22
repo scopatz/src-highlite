@@ -9,6 +9,8 @@
 @c %**end of header
 
 @set myhomepage @uref{http://www.lorenzobettini.it}
+@set langfilesurl @uref{http://www.gnu.org/software/src-highlite/lang_files/}
+@set outlangfilesurl @uref{http://www.gnu.org/software/src-highlite/outlang_files/}
 
 @copying
 This manual is for GNU Source-highlight 
@@ -337,6 +339,15 @@ to automatically highlight a file and show it in Firefox:
 
 @uref{http://chillorb.com/?p=122}
 
+@item
+@cindex Wiki
+@cindex Ikiwiki
+Jason Blevins made a plugin for Ikiwiki that enables syntax highlighting
+of source code fragments and whole files via source-highlight.
+
+@uref{http://jblevins.org/projects/ikiwiki/code}
+
+
 @end itemize
 
 
@@ -487,6 +498,12 @@ possibly missing files.  You should have installed recent versions of
 @cindex libtool
 @code{automake}, @code{autoconf} and @code{libtool} in order for this to
 succeed.  You will also need @code{flex} and @code{bison}.
+
+Instead of running @code{autogen.sh} another option is to run
+
+@example
+autoreconf -i
+@end example
 
 @node What you need to build source-highlight, Tips on installing Boost Regex library, Anonymous CVS Access, Installation
 @section What you need to build source-highlight
@@ -1220,6 +1237,11 @@ difference introduced in version 2.1 with respect the the previous
 version.}.  The syntax for these files is explained in @ref{Output
 Language Definitions}.
 
+These files are part of source-highlight distribution, but they can
+also be downloaded, independently, from here:
+
+@value{outlangfilesurl}
+
 @node  Developing your own definition files,  , Output Language definition files, Configuration files
 @section Developing your own definition files
 
@@ -1231,6 +1253,12 @@ Since these files require more explanations (that, however, are not
 necessary to the standard usage of source-highlight), they are carefully
 explained in separate parts: @ref{Language Definitions} and @ref{Output
 Language Definitions}.
+
+These files are part of source-highlight distribution, but they can
+also be downloaded, independently, from here:
+
+@value{langfilesurl}
+
 
 @node Invoking source-highlight, Language Definitions, Configuration files, Top
 @chapter Invoking @command{source-highlight}

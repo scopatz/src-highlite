@@ -254,6 +254,7 @@ test.m4 test.m4.html \
 test.glsl test.glsl.html \
 test_xorg.conf test_xorg.conf.html \
 test.scala test.scala.html \
+test.adb test.adb.html \
 test_string_stop.java test_string_stop.java.html \
 test_java_stop.java test_java_stop.java.html \
 test_string_stop.lang \
@@ -263,7 +264,7 @@ test_newlines.lang test_nonewlines.lang \
 test_linerange1.html test_linerange2.html \
 test_linerange_sep.html
 
-SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .c .c.html .java .java.html .java.doc.html .css .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show .wdefault .wodefault .wdefault.html .wodefault.html .properties .properties.html .desktop .desktop.html .lsm .lsm.html .hx .hx.html .fortran .fortran.html .ldap .ldap.html .m4 .m4.html .glsl .glsl.html .conf .conf.html .scala .scala.html
+SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .c .c.html .java .java.html .java.doc.html .css .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show .wdefault .wodefault .wdefault.html .wodefault.html .properties .properties.html .desktop .desktop.html .lsm .lsm.html .hx .hx.html .fortran .fortran.html .ldap .ldap.html .m4 .m4.html .glsl .glsl.html .conf .conf.html .scala .scala.html .adb .adb.html
 
 test_string_stop.java.html: $(srcdir)/test_string_stop.java
 	$(PROGNAME) --lang-def=$(srcdir)/test_string_stop.lang -i $< -o test_string_stop.java.html
@@ -461,6 +462,9 @@ default.style.html: $(top_srcdir)/src/default.style
 
 .scala.scala.html:
 	$(PROGNAME_STD) -i $< -o $@ -s scala
+
+.adb.adb.html:
+	$(PROGNAME_STD) -i $< -o $@ -s ada
 
 .fortran.fortran.html:
 	$(FORTRAN2HTML) -i $< -o $@
@@ -688,6 +692,7 @@ check_m4 \
 check_glsl \
 check_xorg \
 check_scala \
+check_ada \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -947,6 +952,11 @@ check_scala: test.scala.html
 	$(PROGNAME_STD) -i $(srcdir)/test.scala -s scala  > test.scala.out.html
 	@echo expect no output from diff
 	diff $(srcdir)/test.scala.html test.scala.out.html
+
+check_ada: test.adb.html
+	$(PROGNAME_STD) -i $(srcdir)/test.adb -s ada  > test.adb.out.html
+	@echo expect no output from diff
+	diff $(srcdir)/test.adb.html test.adb.out.html
 
 check_fortran: test.fortran.html test.fixed-fortran.html
 	$(FORTRAN2HTML) -i $(srcdir)/test.fortran > test.fortran.out.html
@@ -1273,6 +1283,6 @@ check-valgrind:
 CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml *.out.langelems *.out.list test_newlines.out test_nonewlines.out
 
 clean_html:
-	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html *.fortran.html *.fixed-fortran.html *.hx.html *.m4.html *.scala.html
+	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html *.fortran.html *.fixed-fortran.html *.hx.html *.m4.html *.scala.html *.adb.html
 
 DISTCLEANFILES=test_ref.html test_ref.xhtml test_ref.tags my_test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html test_ref.docbook

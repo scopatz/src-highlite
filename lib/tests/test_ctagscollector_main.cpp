@@ -106,6 +106,7 @@ int main() {
     // this should be a reference postline even if single
     expectReference(infos, sourceFile, "22", POSTLINE);
 
+    cout << "test_ctagscollector: SUCCESS!" << endl;
     
     return 0;
 }
