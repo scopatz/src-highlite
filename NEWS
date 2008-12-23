@@ -14,6 +14,7 @@ Version 2.11.1
    * fortran.lang improved with new keywords from Fortran 90 
      through Fortran 2003 (thanks to Jason Blevins)
    * javascript.lang improved (thanks to gnombat)
+   * added keywords to caml language definition
    * Ada language definition file (thanks to Reto Buerki)
    * lang and outlang files can also be downloaded independently from
      the source-highlight site

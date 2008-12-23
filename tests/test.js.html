@@ -9,6 +9,19 @@ http://www.gnu.org/software/src-highlite -->
 <i><font color="#9A1900">// check that division operator is highlighted correctly</font></i>
 document<font color="#990000">.</font><b><font color="#000000">write</font></b><font color="#990000">(</font><font color="#FF0000">'&lt;table&gt;&lt;tr&gt;&lt;td&gt;25% = '</font><font color="#990000">+(</font><font color="#993399">25</font><font color="#990000">/</font><font color="#993399">100</font><font color="#990000">)+</font><font color="#FF0000">'&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;'</font><font color="#990000">);</font> 
 
+<i><font color="#9A1900">/* unusual, but valid JavaScript */</font></i>
+<b><font color="#0000FF">throw</font></b> <font color="#FF6600">/foo/</font><font color="#990000">;</font>
+
+<i><font color="#9A1900">/* this is more likely to occur in practice */</font></i>
+<b><font color="#0000FF">function</font></b> <b><font color="#000000">f</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">return</font></b> <font color="#FF6600">/foo/</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<i><font color="#9A1900">/* or this */</font></i>
+<b><font color="#0000FF">function</font></b> <b><font color="#000000">g</font></b><font color="#990000">(</font>bar<font color="#990000">)</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">return</font></b> <font color="#FF6600">/foo/</font><font color="#990000">.</font><b><font color="#000000">test</font></b><font color="#990000">(</font>bar<font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
 <i><font color="#9A1900">/*</font></i>
 <i><font color="#9A1900">* Sarissa XML library v 0.9 beta 4</font></i>
 <i><font color="#9A1900">* Author: Manos Batsis, mailto: </font></i><u><font color="#0000FF">mbatsis@netsmart.gr</font></u>

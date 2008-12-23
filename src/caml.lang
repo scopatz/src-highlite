@@ -4,7 +4,7 @@ include "number.lang"
 
 string delim "\"" "\"" escape "\\"
 
-keyword = "and|as|assert|asr|begin|class|closed|constraint|do|done|downto|else|end|exception|false|for|fun|function|functor|if|in|inherit|land|lazy|let|lor|lsl|lsr|lxor|match|method|mod|module|mutable|new|of|or|parser|private|rec|sig|struct|then|to|true|try|type|val|virtual|when|while|with"
+keyword = "and|as|assert|asr|begin|class|closed|constraint|do|done|downto|else|end|exception|false|for|fun|function|functor|if|in|inherit|initializer|land|lazy|let|lor|lsl|lsr|lxor|match|method|mod|module|mutable|new|object|of|or|parser|private|rec|sig|struct|then|to|true|try|type|val|virtual|when|while|with"
 
 comment delim "(*" "*)" multiline nested 
 

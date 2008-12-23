@@ -6,7 +6,7 @@
 
 purpose "Highlight the syntax of a source file (e.g. Java) into a specific format (e.g. HTML)"
 usage 
-"[OPTIONS]... < input_file > output_file\n       source-highlight [OPTIONS]... -i input_file -o output_file\n       source-highlight [OPTIONS]... [FILES]..."
+" [OPTIONS]... < input_file > output_file\n       source-highlight [OPTIONS]... -i input_file -o output_file\n       source-highlight [OPTIONS]... [FILES]..."
 
 # Options
 option "input"          i  "input file. default std input"      string  typestr="filename"   no

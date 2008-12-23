@@ -154,7 +154,7 @@ WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang wrong_syntax_simp
 WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err wrong_syntax_simple.err wrong_syntax.err wrong_syntax_include.err wrong_namedgroups.err wrong_namedgroups_subexps.err wrong_namedgroups_subexps2.err wrong_backref.err wrong_backref2.err wrong_dyn_backref.err wrong_dyn_backref2.err wrong_include.err wrong_outlang_include.err
 WRONGSTYLES = wrong_dircolor.style wrong_already_defined.style wrong_already_defined_css.css
 WRONGSTYLESOUT = wrong_dircolor.err wrong_already_defined.err wrong_already_defined_css.err
-WRONGCMDLINEPARAMS = wrong_line_range.err
+WRONGCMDLINEPARAMS = wrong_line_range.err wrong_syntax_mode.err
 # missing_langmap2.err
 
 OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_ref_post.tex test_ref.texinfo test_ref.docbook test_ref.xhtml
@@ -514,6 +514,11 @@ WRONGLINERANGEEXE=$(PROGEXE) --line-range="a-b"  --data-dir=$(top_srcdir)/src < 
 wrong_line_range.err:
 	$(WRONGLINERANGEEXE) 2> wrong_line_range.err || true
 
+WRONGSYNTAXMODEEXE=$(PROGEXE) --data-dir=$(top_srcdir)/src -o /dev/null $(srcdir)/test.java
+
+wrong_syntax_mode.err:
+	$(WRONGSYNTAXMODEEXE) 2> wrong_syntax_mode.err || true
+
 .lang.err:
 	$(CHECKLANG) ./$< 2> $@ || true;
 	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
@@ -698,6 +703,7 @@ check_stop \
 check_vardecl \
 check_newlines \
 check_wrong_lineranges \
+check_wrong_syntaxmode \
 check_lineranges
 
 remove_css_html_files:
@@ -1117,6 +1123,12 @@ check_wrong_lineranges:
 	$(WRONGLINERANGEEXE) 2> wrong_line_range.err_out || true
 	@echo expect no output from diff
 	diff $(srcdir)/wrong_line_range.err wrong_line_range.err_out
+
+check_wrong_syntaxmode:
+	rm -f *.err_out
+	$(WRONGSYNTAXMODEEXE) 2> wrong_syntax_mode.err_out || true
+	@echo expect no output from diff
+	diff $(srcdir)/wrong_syntax_mode.err wrong_syntax_mode.err_out
 
 check_lineranges: test_linerange1.html test_linerange2.html test_linerange_sep.html
 	$(LINERANGE1EXE) < $(srcdir)/test.java > test_linerange1.out.html

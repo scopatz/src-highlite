@@ -802,6 +802,19 @@ formed using the name of the source file with a .<ext> appended, where
 contains information on how to format specific language parts
 (e.g., keywords in blue and boldface, etc.).
 
+IMPORTANT: you must choose one of the above two invocation modes: either
+you use @code{-i (--input)}, @code{-o (--output)} (possibly replacing
+them with standard input/output redirection), or you specify one or many
+files without @code{-i (--input)}; if you try to mix them you'll get an
+error:
+
+@example
+source-highlight -o main.html main.cpp
+Please, use one of the two syntaxes for invocation:
+source-highlight [OPTIONS]... -i input_file -o output_file
+source-highlight [OPTIONS]... [FILES]...
+@end example
+
 If @code{STDOUT} string is passed as @code{-o (--output)} option, then
 the output is forced to the standard output anyway.
 
@@ -2369,8 +2382,8 @@ type = "int"
 @end example
 
 It is up to you to decide which one fits best your needs.
-We use this feature to define @code{javascript} in terms
-of @code{java}:
+We could use this feature to define @code{javascript} in terms
+of @code{java}, e.g.:
 
 @example
 include "java.lang"

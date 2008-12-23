@@ -5,6 +5,19 @@
 // check that division operator is highlighted correctly
 document.write('<table><tr><td>25% = '+(25/100)+'</td></tr></table>'); 
 
+/* unusual, but valid JavaScript */
+throw /foo/;
+
+/* this is more likely to occur in practice */
+function f() {
+  return /foo/;
+}
+
+/* or this */
+function g(bar) {
+  return /foo/.test(bar);
+}
+
 /*
 * Sarissa XML library v 0.9 beta 4
 * Author: Manos Batsis, mailto: mbatsis@netsmart.gr

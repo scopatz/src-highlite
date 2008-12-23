@@ -1,3 +1,8 @@
+2008-12-23  bettini  <bettini@bettini-laptop>
+
+	* src/source-highlight.cc (main): check that if -i or -o is specified
+	then no other files are specified on the command line
+
 2008-11-22  Jason Blevins
 
 	* src/fortran.lang: improved with new keywords from Fortran 90 

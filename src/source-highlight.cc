@@ -371,9 +371,8 @@ int main(int argc, char * argv[]) {
             }
 
             // the ctags command must be executed if --ctags is specified with an empty string
-            ctagsManager
-                    = boost::shared_ptr<CTagsManager>(
-                            new CTagsManager(ctags_file, ctags, ctags != "", refposition));
+            ctagsManager = boost::shared_ptr<CTagsManager>(new CTagsManager(
+                    ctags_file, ctags, ctags != "", refposition));
             sourcehighlight.setCTagsManager(ctagsManager.get());
         }
 
@@ -388,6 +387,18 @@ int main(int argc, char * argv[]) {
         }
 
         // OK, let's highlight!
+
+        if (args_info.inputs_num && (args_info.input_given
+                || args_info.output_given)) {
+            // do not mix command line invocation modes
+            cerr << "Please, use one of the two syntaxes for invocation: "
+                    << endl;
+            cerr
+                    << "source-highlight [OPTIONS]... -i input_file -o output_file"
+                    << endl;
+            cerr << "source-highlight [OPTIONS]... [FILES]..." << endl;
+            exit(EXIT_FAILURE);
+        }
 
         // for cgi we can only process one file specified with --input
         if (args_info.inputs_num && !is_cgi) {
