@@ -12,11 +12,14 @@
 
 #include "formatter.h"
 
+namespace srchilite {
+
+/// the map for formatters
 typedef std::map<std::string, FormatterPtr> FormatterMap;
 
 /**
  * Associates to an element name the corresponding formatter.
- * This class is the owner of each stored formatter
+ * This class uses shared pointers for formatters
  */
 class FormatterManager {
     /// the map associating to each element name a formatter
@@ -26,6 +29,10 @@ class FormatterManager {
     /// formatter associated to an element name
     FormatterPtr defaultFormatter;
 public:
+    /**
+     * @param _defaultFormatter the default formatter, i.e., the one that is used when there's no
+     * formatter associated to an element name
+     */
     FormatterManager(FormatterPtr _defaultFormatter);
     ~FormatterManager();
 
@@ -62,5 +69,7 @@ public:
      */
     void addFormatter(const std::string &elem, FormatterPtr formatter);
 };
+
+}
 
 #endif /*FORMATTERMANAGER_H_*/

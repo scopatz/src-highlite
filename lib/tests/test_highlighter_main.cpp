@@ -1,33 +1,39 @@
 #include <iostream>
 
 #include "logformatter.h"
-#include "sourcehighlighter.h"
-#include "formattermanager.h"
-#include "regexrulefactory.h"
-#include "regexhighlightrule.h"
+#include "srchilite/sourcehighlighter.h"
+#include "srchilite/formattermanager.h"
+#include "srchilite/formatterparams.h"
+#include "srchilite/regexrulefactory.h"
+#include "srchilite/regexhighlightrule.h"
 #include "asserttestexit.h"
 
+using namespace std;
+using namespace srchilite;
+
 static void check_log_entry(const FormatterLogEntry &e,
-        const std::string &elem, const std::string &s);
+        const std::string &elem, const std::string &s, const int start = -1);
 
 void check_log_entry(const FormatterLogEntry &e, const std::string &elem,
-        const std::string &s) {
+        const std::string &s, const int start) {
     assertEquals(elem, e.first);
     assertEquals(s, e.second);
+    if (start != -1) {
+        assertEquals(start, e.start);
+    }
 }
-
-using namespace std;
 
 int main() {
     FormatterLog log;
     RegexRuleFactory factory;
+    FormatterParams params;
 
     FormatterPtr normalFormatter =
             FormatterPtr(new LogFormatter(log, "normal"));
-    FormatterPtr keywordFormatter = FormatterPtr(
-            new LogFormatter(log, "keyword"));
-    FormatterPtr commentFormatter = FormatterPtr(
-            new LogFormatter(log, "comment"));
+    FormatterPtr keywordFormatter = FormatterPtr(new LogFormatter(log,
+            "keyword"));
+    FormatterPtr commentFormatter = FormatterPtr(new LogFormatter(log,
+            "comment"));
 
     FormatterManager formatterManager(normalFormatter);
 
@@ -35,6 +41,7 @@ int main() {
 
     SourceHighlighter sourceHighlighter(highlightState);
     sourceHighlighter.setFormatterManager(&formatterManager);
+    sourceHighlighter.setFormatterParams(&params);
 
     // now the state has no rules, so we should see only "normal" formatting
     sourceHighlighter.highlightParagraph("this is normal");
@@ -79,11 +86,11 @@ int main() {
 
     showLog(log);
 
-    check_log_entry(log[0], "normal", "this ");
-    check_log_entry(log[1], "keyword", "class");
-    check_log_entry(log[2], "normal", " is ");
-    check_log_entry(log[3], "keyword", "public");
-    check_log_entry(log[4], "normal", " and normal");
+    check_log_entry(log[0], "normal", "this ", 0);
+    check_log_entry(log[1], "keyword", "class", 5);
+    check_log_entry(log[2], "normal", " is ", 10);
+    check_log_entry(log[3], "keyword", "public", 14);
+    check_log_entry(log[4], "normal", " and normal", 20);
 
     // test environments
 
@@ -255,22 +262,82 @@ int main() {
     showLog(log);
 
     int i = 0;
-    check_log_entry(log[i++], "normal", "before ");
-    check_log_entry(log[i++], "comment", "#");
-    check_log_entry(log[i++], "comment", " this is a comment");
+    check_log_entry(log[i++], "normal", "before ", 0);
+    check_log_entry(log[i++], "comment", "#", 7);
+    check_log_entry(log[i++], "comment", " this is a comment", 8);
     //check_log_entry(log[i++], "comment", ""); // match the end of line
-    check_log_entry(log[i++], "normal", "while this is ");
-    check_log_entry(log[i++], "keyword", "class");
+    check_log_entry(log[i++], "normal", "while this is ", 0);
+    check_log_entry(log[i++], "keyword", "class", 14);
 
     // test for suspended
     log.clear();
 
     sourceHighlighter.setSuspended(true);
-    assertEquals((size_t)0, log.size());
+    assertEquals((size_t) 0, log.size());
     sourceHighlighter.highlightParagraph("foo");
     sourceHighlighter.setSuspended(false);
     sourceHighlighter.highlightParagraph("bar");
     check_log_entry(log[0], "normal", "bar");
+
+    // test for compound rule: class <classname>
+    log.clear();
+
+    FormatterPtr typeFormatter = FormatterPtr(new LogFormatter(log, "type"));
+    formatterManager.addFormatter("type", typeFormatter);
+
+    ElemNameList nameList;
+    nameList.push_back("keyword");
+    nameList.push_back("normal");
+    nameList.push_back("type");
+    HighlightRulePtr compoundRule = HighlightRulePtr(
+            factory.createCompoundRule(nameList,
+                    "(myclass)([[:blank:]]+)([[:word:]]+)"));
+    highlightState->addRule(compoundRule);
+
+    sourceHighlighter.highlightParagraph("fo() myclass Foo {");
+
+    showLog(log);
+
+    i = 0;
+    check_log_entry(log[i++], "normal", "fo() ", 0);
+    check_log_entry(log[i++], "keyword", "myclass", 5);
+    check_log_entry(log[i++], "normal", " ", 12);
+    check_log_entry(log[i++], "type", "Foo", 13);
+    check_log_entry(log[i++], "normal", " {", 16);
+
+    // check explicit setting of current state and stack
+    log.clear();
+    sourceHighlighter.highlightParagraph("<< comment");
+    HighlightStatePtr prevCommentState = sourceHighlighter.getCurrentState();
+    HighlightStateStackPtr prevStack = sourceHighlighter.getStateStack();
+    // now the stack should contain one state
+    assertEquals((size_t)1, sourceHighlighter.getStateStack()->size());
+    showLog(log);
+    i = 0;
+    check_log_entry(log[i++], "comment", "<<");
+    check_log_entry(log[i++], "comment", " comment");
+
+    log.clear();
+    sourceHighlighter.setCurrentState(sourceHighlighter.getMainState());
+    sourceHighlighter.setStateStack(HighlightStateStackPtr(new HighlightStateStack));
+    sourceHighlighter.highlightParagraph("not in comment");
+    showLog(log);
+    i = 0;
+    check_log_entry(log[i++], "normal", "not in comment");
+
+    log.clear();
+    sourceHighlighter.setCurrentState(prevCommentState);
+    sourceHighlighter.setStateStack(prevStack);
+    sourceHighlighter.highlightParagraph("end comment >>");
+    showLog(log);
+    i = 0;
+    check_log_entry(log[i++], "comment", "end comment ");
+    check_log_entry(log[i++], "comment", ">>");
+
+    // now the stack should be empty
+    assertEquals((size_t)0, sourceHighlighter.getStateStack()->size());
+    // also our copy
+    assertEquals((size_t)0, prevStack->size());
 
     cout << "test_highlighter: SUCCESS" << endl;
 

@@ -1,13 +1,14 @@
 #include <iostream>
 
-#include "my_sstream.h"
+#include <sstream>
 #include "asserttestexit.h"
-#include "langdefparserfun.h"
-#include "outlangdefparserfun.h"
-#include "ioexception.h"
-#include "parserexception.h"
+#include "srchilite/langdefparserfun.h"
+#include "srchilite/outlangdefparserfun.h"
+#include "srchilite/ioexception.h"
+#include "srchilite/parserexception.h"
 
 using namespace std;
+using namespace srchilite;
 
 int main() {
     try {

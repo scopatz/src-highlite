@@ -13,10 +13,11 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "outlangdefparserfun.h"
+#include "srchilite/outlangdefparserfun.h"
 #include "asserttestexit.h"
 
 using namespace std;
+using namespace srchilite;
 
 int main() {
     TextStylesPtr textstyles =

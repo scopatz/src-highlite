@@ -1,12 +1,13 @@
 #include <iostream>
 
 #include "asserttestexit.h"
-#include "ctagscollector.h"
-#include "ctagsformatter.h"
-#include "formatterparams.h"
-#include "tostringcollection.h"
+#include "srchilite/ctagscollector.h"
+#include "srchilite/ctagsformatter.h"
+#include "srchilite/formatterparams.h"
+#include "srchilite/tostringcollection.h"
 
 using namespace std;
+using namespace srchilite;
 
 #ifndef BASEDIR
 #define BASEDIR ""

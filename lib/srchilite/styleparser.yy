@@ -23,16 +23,19 @@
 #include <iostream>
 #include <string>
 
-#include "textstyleformatterfactory.h"
+#include "formatterfactory.h"
 #include "colors.h"
 #include "keys.h"
 #include "parsestyles.h"
 #include "fileutil.h"
 #include "stylekey.h"
 #include "parserexception.h"
+#include "settings.h"
 
 using std::cerr;
 using std::string;
+
+using namespace srchilite;
 
 static int yyparse() ;
 static void yyerror( const char *s ) ;
@@ -49,7 +52,7 @@ static string bodyBgColor;
 static void updateBgColor(const std::string *);
 
 // to generate the formatter for each language element
-static TextStyleFormatterFactory *formatterFactory;
+static FormatterFactory *formatterFactory;
 
 /// where we store possible errors
 static string errorBuffer;
@@ -59,9 +62,9 @@ static string errorBuffer;
 %union {
   int tok ; /* command */
   const std::string * string ; /* string : id, ... */
-  StyleConstant flag ;
-  StyleConstants *styleconstants;
-  KeyList *keylist;
+  srchilite::StyleConstant flag ;
+  srchilite::StyleConstants *styleconstants;
+  srchilite::KeyList *keylist;
 } ;
 
 %token <flag> BOLD ITALICS UNDERLINE FIXED NOTFIXED NOREF
@@ -176,8 +179,16 @@ value : BOLD { $$ = ISBOLD ; }
 
 string current_file;
 
+namespace srchilite {
+
 void
-parseStyles(const string &path, const string &name, TextStyleFormatterFactory *genFactory,
+parseStyles(const string &name, FormatterFactory *genFactory,
+           string &bodyBgColor_) {
+  parseStyles(Settings::retrieveDataDir(), name, genFactory, bodyBgColor_);
+}
+
+void
+parseStyles(const string &path, const string &name, FormatterFactory *genFactory,
            string &bodyBgColor_)
 {
   formatterFactory = genFactory;
@@ -209,6 +220,8 @@ parseStyles(const string &path, const string &name, TextStyleFormatterFactory *g
   }
 }
 
+}
+
 void
 yyerror( const char *s )
 {
@@ -234,4 +247,3 @@ void updateBgColor(const std::string *c)
   // we don't need it anymore
   delete c;
 }
-

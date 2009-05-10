@@ -1,11 +1,12 @@
 #include <iostream>
 
-#include "textstyleformatter.h"
-#include "textstylebuilder.h"
-#include "doctemplate.h"
+#include "srchilite/textstyleformatter.h"
+#include "srchilite/textstylebuilder.h"
+#include "srchilite/doctemplate.h"
 #include "asserttestexit.h"
 
 using namespace std;
+using namespace srchilite;
 
 int main() {
     TextStyle bold("<b>$text</b>");
@@ -86,6 +87,6 @@ int main() {
     assertEquals(expected_end, transformed_end);
 
     cout << "test_textgenerator: SUCCESS!" << endl;
-    
+
     return 0;
 }

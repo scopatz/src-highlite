@@ -1,17 +1,17 @@
 #include <iostream>
 
-#include "sourcehighlighter.h"
-#include "sourcefilehighlighter.h"
-#include "formattermanager.h"
-#include "regexrulefactory.h"
-#include "regexhighlightrule.h"
+#include "srchilite/sourcehighlighter.h"
+#include "srchilite/sourcefilehighlighter.h"
+#include "srchilite/formattermanager.h"
+#include "srchilite/regexrulefactory.h"
+#include "srchilite/regexhighlightrule.h"
 #include "asserttestexit.h"
-#include "my_sstream.h"
-#include "bufferedoutput.h"
-#include "textstyleformatter.h"
-#include "chartranslator.h"
-#include "linenumgenerator.h"
-#include "debuglistener.h"
+#include <sstream>
+#include "srchilite/bufferedoutput.h"
+#include "srchilite/textstyleformatter.h"
+#include "srchilite/chartranslator.h"
+#include "srchilite/linenumgenerator.h"
+#include "srchilite/debuglistener.h"
 
 /*
  static void check_log_entry(const FormatterLogEntry &e,
@@ -25,6 +25,7 @@
  */
 
 using namespace std;
+using namespace srchilite;
 
 int main() {
     ostringstream os;

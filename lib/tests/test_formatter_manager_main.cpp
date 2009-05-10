@@ -1,9 +1,10 @@
 #include <iostream>
 
-#include "formattermanager.h"
+#include "srchilite/formattermanager.h"
 #include "asserttestexit.h"
 
 using namespace std;
+using namespace srchilite;
 
 class MyFormatter : public Formatter {
     virtual void format(const std::string &s, const FormatterParams *params) {

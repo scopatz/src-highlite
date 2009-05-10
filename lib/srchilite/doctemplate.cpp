@@ -11,6 +11,8 @@
 #include "doctemplate.h"
 #include "substfun.h"
 
+namespace srchilite {
+
 #define TITLE_VAR_TEXT "$title" // the text of the title variable
 #define CSS_VAR_TEXT "$css" // the text of the css variable
 #define ADDITIONAL_VAR_TEXT "$additional" // the text of the additional text variable
@@ -73,3 +75,4 @@ DocTemplate::output_end(const string &title, const string &cs, const string &add
     return ret;
 }
 
+}

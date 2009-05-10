@@ -12,6 +12,8 @@
 #include "highlighttoken.h"
 #include "tostringcollection.h"
 
+namespace srchilite {
+
 #define INDENT_INC 2
 #define inc_indent (indent += INDENT_INC)
 #define dec_indent (indent -= INDENT_INC)
@@ -77,4 +79,6 @@ void HighlightStatePrinter::printHighlightToken(const HighlightToken *token) {
 
     if (token->rule)
         stream << "rule   : " << token->rule->toString() << endl;
+}
+
 }

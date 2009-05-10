@@ -23,10 +23,12 @@
 
 #include "stylekey.h"
 
-#include "textstyleformatterfactory.h"
+#include "formatterfactory.h"
 #include "stylecssparser.h"
-#include "my_sstream.h"
+#include <sstream>
 #include "parsestyles.h"
+
+using namespace srchilite;
 
 static std::ostringstream buff;
 
@@ -143,7 +145,7 @@ STRING \"[^\"\n]*\"
   BEGIN(CSS_PROPERTIES);
   if (strcmp(yytext, "bold") == 0) {
     DEB("CSS BOLD");
-    stylecsssc_lval.flag = ISBOLD ;
+    stylecsssc_lval.flag = srchilite::ISBOLD ;
     return BOLD ;
   }
   DEB2("discarding not handled value", yytext);
@@ -156,7 +158,7 @@ STRING \"[^\"\n]*\"
   BEGIN(CSS_PROPERTIES);
   if (strcmp(yytext, "italic") == 0) {
     DEB("CSS ITALIC");
-    stylecsssc_lval.flag = ISITALIC ;
+    stylecsssc_lval.flag = srchilite::ISITALIC ;
     return ITALICS ;
   }
   DEB2("discarding not handled value", yytext);
@@ -169,7 +171,7 @@ STRING \"[^\"\n]*\"
   BEGIN(CSS_PROPERTIES);
   if (strcmp(yytext, "monospace") == 0) {
     DEB("CSS FIXED");
-    stylecsssc_lval.flag = ISFIXED ;
+    stylecsssc_lval.flag = srchilite::ISFIXED ;
     return FIXED ;
   }
   DEB2("discarding not handled value", yytext);
@@ -182,7 +184,7 @@ STRING \"[^\"\n]*\"
   BEGIN(CSS_PROPERTIES);
   if (strcmp(yytext, "underline") == 0) {
     DEB("CSS UNDERLINE");
-    stylecsssc_lval.flag = ISUNDERLINE ;
+    stylecsssc_lval.flag = srchilite::ISUNDERLINE ;
     return UNDERLINE ;
   }
   DEB2("discarding not handled value", yytext);

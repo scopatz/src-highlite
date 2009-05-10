@@ -11,6 +11,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 DebugListener::DebugListener(std::ostream &_os) :
     os(_os), interactive(false) {
 }
@@ -18,13 +20,15 @@ DebugListener::DebugListener(std::ostream &_os) :
 DebugListener::~DebugListener() {
 }
 
+//> TEXINFO
 void DebugListener::notify(const HighlightEvent &event) {
     switch (event.type) {
     case HighlightEvent::FORMAT:
         // print information about the rule
         if (event.token.rule) {
             os << event.token.rule->getAdditionalInfo() << endl;
-            os << "expression: \"" << event.token.rule->toString() << "\"" << endl;
+            os << "expression: \"" << event.token.rule->toString() << "\""
+                    << endl;
         }
 
         // now format the matched strings
@@ -36,11 +40,13 @@ void DebugListener::notify(const HighlightEvent &event) {
         step();
         break;
     case HighlightEvent::FORMATDEFAULT:
-        os << "formatting \"" << event.token.matched.front().second << "\" as default" << endl;
+        os << "formatting \"" << event.token.matched.front().second
+                << "\" as default" << endl;
         step();
         break;
     case HighlightEvent::ENTERSTATE:
-        os << "entering state: " << event.token.rule->getNextState()->getId() << endl;
+        os << "entering state: " << event.token.rule->getNextState()->getId()
+                << endl;
         break;
     case HighlightEvent::EXITSTATE:
         int level = event.token.rule->getExitLevel();
@@ -53,13 +59,16 @@ void DebugListener::notify(const HighlightEvent &event) {
         break;
     }
 }
+//> TEXINFO
 
-void DebugListener::step()
-{
-  if (!interactive)
-    return;
+void DebugListener::step() {
+    if (!interactive) {
+        return;
+    }
 
-  // this is only a quick solution to perform interaction
-  string cmd;
-  getline(cin, cmd);
+    // this is only a quick solution to perform interaction
+    string cmd;
+    getline(cin, cmd);
+}
+
 }

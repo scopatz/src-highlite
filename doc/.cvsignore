@@ -70,3 +70,12 @@ source-highlight.cc.html
 test_vardecl.cc.texinfo
 test_lineranges1.java.texinfo
 test_lineranges2.java.texinfo
+*.tmp
+test_regexrange_main.java.texinfo
+test_regexrange_methods.java.texinfo
+test_regexrange1.java.texinfo
+stamp-1
+version-lib.texi
+*.cpp.texinfo
+*.h.texinfo
+source-highlight-lib.html

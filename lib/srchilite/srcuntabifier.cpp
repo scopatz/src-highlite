@@ -11,8 +11,10 @@
 //
 
 #include "srcuntabifier.h"
-#include "my_sstream.h"
+#include <sstream>
 #include <boost/regex.hpp>
+
+namespace srchilite {
 
 const boost::regex tabexp("[\\t]");
 
@@ -29,7 +31,7 @@ const string Untabifier::doPreformat(const string &s) {
         return s;
     }
 
-    ostringstream buffer;
+    std::ostringstream buffer;
     string prefix;
     string suffix;
 
@@ -52,4 +54,6 @@ const string Untabifier::doPreformat(const string &s) {
     }
 
     return buffer.str();
+}
+
 }

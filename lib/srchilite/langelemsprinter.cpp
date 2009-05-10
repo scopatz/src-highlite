@@ -1,7 +1,7 @@
 //
 // C++ Implementation: langelemsprinter
 //
-// Description: 
+// Description:
 //
 //
 // Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2006
@@ -21,6 +21,8 @@
 #include <iterator>
 
 using namespace std;
+
+namespace srchilite {
 
 LangElemsPrinter::LangElemsPrinter() {
 }
@@ -58,6 +60,10 @@ void LangElemsPrinter::collect(const LangElem *elem) {
 
 void LangElemsPrinter::collect(const NamedSubExpsLangElem *elem) {
     const ElementNames *names = elem->getElementNames();
-    
+
     setOfElements.insert(names->begin(), names->end());
+}
+
+#include "langelemsprinter_dbtab.cc"
+
 }

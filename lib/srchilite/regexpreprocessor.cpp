@@ -11,10 +11,13 @@
 //
 #include "regexpreprocessor.h"
 #include <boost/regex.hpp>
-#include "my_sstream.h"
+#include <sstream>
 #include <ctype.h>
+#include <iostream>
 
 using namespace std;
+
+namespace srchilite {
 
 // IMPORTANT: the following regular expressions assume that the
 // regular expression they try to match is a valid regular expression
@@ -183,7 +186,7 @@ subexpressions_info RegexPreProcessor::num_of_marked_subexpressions(
                     // exit the char class name state
                     char_class_name_state = false;
                 }
-            } else if (!char_class_name_state && c == '[' && s[i-1] != '\\' 
+            } else if (!char_class_name_state && c == '[' && s[i-1] != '\\'
                 && (i+1) < len && s[i+1] == ':') {
                 char_class_name_state = true;
             } else if (c == ']' && s[i-1] != '\\') {
@@ -362,11 +365,7 @@ const std::string RegexPreProcessor::replace_backreferences(
     return replace_backreferences(original, replace);
 }
 
-#include <iostream>
-
-using namespace std;
-
-const std::string RegexPreProcessor::replace_references(
+const string RegexPreProcessor::replace_references(
         const std::string &original, const backreference_replacements &replace) {
     boost::sregex_iterator m1(original.begin(), original.end(), reference_exp);
     boost::sregex_iterator m2;
@@ -396,7 +395,7 @@ const std::string RegexPreProcessor::replace_references(
         // string, after escaping non-alphanumerical characters
         // this is necessary since this string will be used to create a regular
         // expression
-        result << boost::regex_replace(replace[backreference_num-1], 
+        result << boost::regex_replace(replace[backreference_num-1],
                 special_char, special_char_escape, boost::match_default
                 | boost::format_all);
 
@@ -408,7 +407,7 @@ const std::string RegexPreProcessor::replace_references(
     return result.str();
 }
 
-const std::string RegexPreProcessor::replace_references(
+const string RegexPreProcessor::replace_references(
         const std::string &original, const regex_match_results &results) {
     // build the replacement vector
     backreference_replacements replace(9);
@@ -422,3 +421,4 @@ const std::string RegexPreProcessor::replace_references(
     return replace_references(original, replace);
 }
 
+}

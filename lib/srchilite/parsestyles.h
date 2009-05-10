@@ -13,15 +13,42 @@
 #ifndef PARSESTYLES_H
 #define PARSESTYLES_H
 
-class TextStyleFormatterFactory;
+#include <string>
 
-/// for style files
-void parseStyles(const std::string &path, const std::string &name,
-        TextStyleFormatterFactory *formatterFactory, std::string &bodyBgColor);
-void parseStyleError(const std::string &error);
+#include "formatterfactory.h"
+
+namespace srchilite {
+
+/**
+ * Parses the specified style file, and creates the corresponding formatters,
+ * using the passed FormatterFactory.
+ *
+ * @param path the path for searching for style files
+ * @param name the style file name
+ * @param formatterFactory
+ * @param bodyBgColor the background color for the document (can be an empty string)
+ */
+extern void parseStyles(const std::string &path, const std::string &name,
+        FormatterFactory *formatterFactory, std::string &bodyBgColor);
+
+/**
+ * Parses the specified style file, and creates the corresponding formatters,
+ * using the passed FormatterFactory.  (For the default searching path, it uses
+ * the hardcoded data dir).
+ *
+ * @param name the style file name
+ * @param formatterFactory
+ * @param bodyBgColor the background color for the document (output parameter)
+ */
+extern void parseStyles(const std::string &name, FormatterFactory *formatterFactory,
+        std::string &bodyBgColor);
+
+extern void parseStyleError(const std::string &error);
 
 /// for css style files
-void parseCssStyles(const std::string &path, const std::string &name,
-        TextStyleFormatterFactory *formatterFactory, std::string &bodyBgColor);
+extern void parseCssStyles(const std::string &path, const std::string &name,
+        FormatterFactory *formatterFactory, std::string &bodyBgColor);
+
+}
 
 #endif

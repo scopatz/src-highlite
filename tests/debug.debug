@@ -1,7 +1,7 @@
 c_comment.lang:24
 expression: "/\*"
 formatting "/*" as comment
-entering state: 23
+entering state: 43
 formatting "  This is to demonstrate --debug-lang" as default
 formatting "  " as default
 url.lang:3
@@ -45,7 +45,7 @@ formatting "	" as default
 c_comment.lang:13
 expression: "//"
 formatting "//" as comment
-entering state: 12
+entering state: 22
 formatting " just some greetings ;-)  /*" as default
 c_comment.lang:13
 expression: "\z"
@@ -83,7 +83,7 @@ formatting "(" as symbol
 c_string.lang:3
 expression: "\""
 formatting """ as string
-entering state: 24
+entering state: 44
 formatting "Hello World!" as default
 c_string.lang:3
 expression: "\""

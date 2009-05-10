@@ -34,6 +34,8 @@
 using std::cerr;
 using std::string;
 
+using namespace srchilite;
+
 static void yyerror( const char *s ) ;
 static void yyerror( const string &s ) ;
 
@@ -275,6 +277,8 @@ yyerror( const string &s )
   yyerror(s.c_str());
 }
 
+namespace srchilite {
+
 TextStylesPtr
 parse_outlang_def()
 {
@@ -324,4 +328,6 @@ parse_outlang_def(const char *path, const char *name)
   }
 
   return textstyles;
+}
+
 }

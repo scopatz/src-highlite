@@ -27,29 +27,32 @@ endif
 cmdline.h: cmdline.c
 
 #bin_PROGRAMS = check-regexp source-highlight
-bin_PROGRAMS = check-regexp source-highlight 
+bin_PROGRAMS = check-regexp source-highlight source-highlight-settings
 bin_SCRIPTS = java2html cpp2html src-hilite-lesspipe.sh
 
 EXTRA_PROGRAMS = source-highlight-cgi 
 
 SRCHILITE = $(top_builddir)/src/source-highlight$(EXEEXT)
 
-INCLUDES = -I@top_srcdir@/lib/srchilite
+INCLUDES = -I@top_srcdir@/lib
 
 AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl $(BOOST_CPPFLAGS)
 AM_LDFLAGS = $(BOOST_LDFLAGS)
 
-LDADD = @LEXLIB@ $(top_builddir)/gl/libgnu.la
+LDADD = $(top_builddir)/gl/libgnu.la
 
 source_highlight_LDADD = $(LDADD) $(top_builddir)/lib/srchilite/libsource-highlight.la
 source_highlight_cgi_LDADD = $(source_highlight_LDADD)
 
 check_regexp_LDADD = $(BOOST_REGEX_LIB) $(top_builddir)/gl/libgnu.la
 
+source_highlight_settings_LDADD = $(LDADD) $(top_builddir)/lib/srchilite/libsource-highlight.la
+
 # for most rules, we use one file per line. `diffs' are more clear this way
 #source_highlight_SOURCES = cmdline.c startapp.cc source-highlight.cc
 source_highlight_SOURCES = cmdline.c source-highlight.cc 
 check_regexp_SOURCES = check-regexp_cmd.c check-regexp.cpp
+source_highlight_settings_SOURCES = source-highlight-settings.cpp
 
 source_highlight_cgi_SOURCES = cmdline.c source-highlight-cgi.cc envmapper.c
 
@@ -75,7 +78,7 @@ postscript.lang csharp.lang xml.lang sh.lang script_comment.lang \
 tcl.lang sql.lang bib.lang makefile.lang css.lang m4.lang \
 default.lang nohilite.lang slang.lang key_string.lang properties.lang \
 desktop.lang lsm.lang spec.lang haxe.lang ldap.lang glsl.lang xorg.lang \
-clike_vardeclaration.lang scala.lang ada.lang
+clike_vardeclaration.lang scala.lang ada.lang conf.lang pc.lang
 
 OUTLANGFILES = \
 css_common.outlang \

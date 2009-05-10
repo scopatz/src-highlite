@@ -15,7 +15,11 @@
 
 #include "textstyles.h"
 
+namespace srchilite {
+
 TextStylesPtr parse_outlang_def();
 TextStylesPtr parse_outlang_def(const char *path, const char *name);
+
+}
 
 #endif

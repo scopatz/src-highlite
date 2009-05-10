@@ -12,6 +12,8 @@
 #include <set>
 #include <string>
 
+namespace srchilite {
+
 /// a possible error in specifying a range
 enum RangeError {
     NO_ERROR = 0, INVALID_RANGE_NUMBER
@@ -103,5 +105,7 @@ private:
      */
     int contextLines;
 };
+
+}
 
 #endif /* LINERANGES_H_ */

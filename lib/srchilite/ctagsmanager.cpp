@@ -11,8 +11,11 @@
 #include "ioexception.h"
 #include "ctagscollector.h"
 #include "ctagsformatter.h"
+#include "verbosity.h"
 
 using namespace std;
+
+namespace srchilite {
 
 CTagsManager::CTagsManager(const std::string &_ctagsFile,
         const std::string &_ctagsCmd, bool _runCTags, RefPosition _refPosition) :
@@ -45,8 +48,10 @@ CTagsFormatter *CTagsManager::createCTagsFormatter(const TextStyles::RefTextStyl
     // the CTagsCollector will be shared by all the created CTagsFormatters
     if (!ctagsCollector)
         ctagsCollector = new CTagsCollector(ctagsFile, refPosition);
-    
+
     // the preformatter is set to 0 in the CTagsFormatter: it must be
     // set externally
     return new CTagsFormatter(0, r, ctagsCollector);
+}
+
 }

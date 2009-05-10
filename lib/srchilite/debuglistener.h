@@ -11,18 +11,25 @@
 
 #include "highlighteventlistener.h"
 
+namespace srchilite {
+
 class HighlightEvent;
 
 /**
- * Implementation of highlight events that prints debug information
+ * Implementation of highlight events that prints debug information.
+ * In interactive mode, after each event, it will wait for the user
+ * to press ENTER to go on.
  */
-class DebugListener : public HighlightEventListener {
+class DebugListener: public HighlightEventListener {
     /// where to output debug info (default stdout)
     std::ostream &os;
 
     /// whether to act in step mode (wait for the user ENTER after each step)
     bool interactive;
 public:
+    /**
+     * @param os the output stream to print debug information (default std::cout)
+     */
     DebugListener(std::ostream &_os = std::cout);
     virtual ~DebugListener();
 
@@ -33,9 +40,11 @@ public:
     }
 
     /**
-     * Waits for the user to press ENTER
+     * Waits for the user to press ENTER (in case of interactive debugging)
      */
     void step();
 };
+
+}
 
 #endif /*DEBUGLISTENER_H_*/

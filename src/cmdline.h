@@ -114,6 +114,11 @@ struct gengetopt_args_info
   int range_context_arg;	/**< @brief number of (context) lines generated even if not in range.  */
   char * range_context_orig;	/**< @brief number of (context) lines generated even if not in range original value given at command line.  */
   const char *range_context_help; /**< @brief number of (context) lines generated even if not in range help description.  */
+  char ** regex_range_arg;	/**< @brief generate only the lines within the specified regular expressions.  */
+  char ** regex_range_orig;	/**< @brief generate only the lines within the specified regular expressions original value given at command line.  */
+  unsigned int regex_range_min; /**< @brief generate only the lines within the specified regular expressions's minimum occurreces */
+  unsigned int regex_range_max; /**< @brief generate only the lines within the specified regular expressions's maximum occurreces */
+  const char *regex_range_help; /**< @brief generate only the lines within the specified regular expressions help description.  */
   char * gen_references_arg;	/**< @brief generate references (default='inline').  */
   char * gen_references_orig;	/**< @brief generate references original value given at command line.  */
   const char *gen_references_help; /**< @brief generate references help description.  */
@@ -125,6 +130,7 @@ struct gengetopt_args_info
   const char *ctags_help; /**< @brief how to run the ctags command.  If this option is not specified, ctags will be executed with the default value.  If it is specified with an empty string, ctags will not be executed at all help description.  */
   const char *verbose_help; /**< @brief verbose mode on help description.  */
   const char *quiet_help; /**< @brief print no progress information help description.  */
+  const char *binary_output_help; /**< @brief write output files in binary mode help description.  */
   const char *statistics_help; /**< @brief print some statistics (i.e., elapsed time) help description.  */
   int gen_version_flag;	/**< @brief put source-highlight version in the generated file (default=on).  */
   const char *gen_version_help; /**< @brief put source-highlight version in the generated file help description.  */
@@ -174,11 +180,13 @@ struct gengetopt_args_info
   unsigned int line_range_given ;	/**< @brief Whether line-range was given.  */
   unsigned int range_separator_given ;	/**< @brief Whether range-separator was given.  */
   unsigned int range_context_given ;	/**< @brief Whether range-context was given.  */
+  unsigned int regex_range_given ;	/**< @brief Whether regex-range was given.  */
   unsigned int gen_references_given ;	/**< @brief Whether gen-references was given.  */
   unsigned int ctags_file_given ;	/**< @brief Whether ctags-file was given.  */
   unsigned int ctags_given ;	/**< @brief Whether ctags was given.  */
   unsigned int verbose_given ;	/**< @brief Whether verbose was given.  */
   unsigned int quiet_given ;	/**< @brief Whether quiet was given.  */
+  unsigned int binary_output_given ;	/**< @brief Whether binary-output was given.  */
   unsigned int statistics_given ;	/**< @brief Whether statistics was given.  */
   unsigned int gen_version_given ;	/**< @brief Whether gen-version was given.  */
   unsigned int check_lang_given ;	/**< @brief Whether check-lang was given.  */
@@ -189,6 +197,8 @@ struct gengetopt_args_info
 
   char **inputs ; /**< @brief unamed options (options without names) */
   unsigned inputs_num ; /**< @brief unamed options number */
+  int linerange_mode_counter; /**< @brief Counter for mode linerange */
+  int regexrange_mode_counter; /**< @brief Counter for mode regexrange */
 } ;
 
 /** @brief The additional parameters to pass to parser functions */

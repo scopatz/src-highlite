@@ -8,6 +8,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 StringTable::StringTable() {
 }
 
@@ -21,4 +23,6 @@ std::string *StringTable::newString(const std::string &s) {
     string *newstring = new string(s);
     push_back(newstring);
     return newstring;
+}
+
 }

@@ -8,6 +8,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 HighlightToken::HighlightToken(const HighlightRule *_rule) :
     prefixOnlySpaces(false), matchedSize(0), rule(_rule) {
 }
@@ -36,4 +38,6 @@ void HighlightToken::clearMatched() {
     if (matchedSubExps.size()) {
         matchedSubExps.clear();
     }
+}
+
 }

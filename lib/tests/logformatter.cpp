@@ -5,8 +5,10 @@
 //
 
 #include "logformatter.h"
+#include "srchilite/formatterparams.h"
 
 using namespace std;
+using namespace srchilite;
 
 LogFormatter::LogFormatter(FormatterLog &_log, const std::string &_elem) :
     log(_log), elem(_elem) {
@@ -16,11 +18,11 @@ LogFormatter::~LogFormatter() {
 }
 
 void LogFormatter::format(const std::string &s, const FormatterParams *params) {
-    log.push_back(std::make_pair(elem, s));
+    log.push_back(FormatterLogEntry(elem, s, (params ? params->start : -2)));
 }
 
 ostream& operator<<(ostream& os, const FormatterLogEntry &entry) {
-    os << entry.first << ": \"" << entry.second << "\"";
+    os << entry.first << ": \"" << entry.second << "\"" << ", start: " << entry.start;
     return os;
 }
 

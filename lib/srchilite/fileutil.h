@@ -14,11 +14,13 @@
 using std::istream;
 using std::string;
 
+namespace srchilite {
+
 extern std::string start_path;
 
 /**
  * Reads the contents of the file into a string and returns it
- * 
+ *
  * @param fileName
  * @return the contents of the file
  * @throw IOException
@@ -29,7 +31,7 @@ string readFile(const string &fileName) throw (IOException);
 
 /**
  * Creates the output file name as outputDir + input file name + ext
- * 
+ *
  * @param inputFileName
  * @param outputDir
  * @param ext
@@ -59,10 +61,6 @@ bool contains_path(const string &);
 string strip_file_path(const string &);
 string get_input_file_name(const string &file_name);
 
-/**
- * Whether file util operations are verbose
- * @param b
- */
-void set_file_util_verbose(bool b = true);
+}
 
 #endif //_FILEUTIL_H

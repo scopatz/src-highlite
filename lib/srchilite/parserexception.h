@@ -11,12 +11,18 @@
 #include <string>
 #include <exception>
 
+namespace srchilite {
+
 class ParseStruct;
 
+/**
+ * Represents an exception during parsing, for instance,
+ * syntax errors.
+ */
 struct ParserException : public std::exception {
     /// detailed message for this exception
     std::string message;
-    
+
     /// additional explaining message
     std::string additional;
 
@@ -36,5 +42,7 @@ struct ParserException : public std::exception {
 };
 
 std::ostream& operator<<(std::ostream& os, const ParserException &entry);
+
+}
 
 #endif /*PARSEREXCEPTION_H_*/

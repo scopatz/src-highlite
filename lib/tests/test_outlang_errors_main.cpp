@@ -1,13 +1,14 @@
 #include <iostream>
 
-#include "sourcehighlight.h"
-#include "textstyleformatter.h"
-#include "my_sstream.h"
+#include "srchilite/sourcehighlight.h"
+#include "srchilite/textstyleformatter.h"
+#include <sstream>
 #include "asserttestexit.h"
-#include "outlangdefparserfun.h"
-#include "parserexception.h"
+#include "srchilite/outlangdefparserfun.h"
+#include "srchilite/parserexception.h"
 
 using namespace std;
+using namespace srchilite;
 
 /*
  static void showFormatters(const TextStyleFormatterCollection &collection);

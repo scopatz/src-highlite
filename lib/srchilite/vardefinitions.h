@@ -1,9 +1,4 @@
 //
-// C++ Interface: vardefinitions
-//
-// Description: 
-//
-//
 // Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004
 //
 // Copyright: See COPYING file that comes with this distribution
@@ -15,12 +10,12 @@
 #include <map>
 #include <string>
 
+namespace srchilite {
+
 class StringDefs;
 
 /**
 store definitions of strings and regular expressions representing language elements
-
-@author Lorenzo Bettini
 */
 class VarDefinitions : protected std::map<std::string, std::string>
 {
@@ -33,5 +28,7 @@ public:
     const std::string &getVar(const std::string &name);
     bool contains(const std::string &name);
 };
+
+}
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008  Lorenzo Bettini <http://www.lorenzobettini.it>
+ * Copyright (C) 1999-2009  Lorenzo Bettini <http://www.lorenzobettini.it>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,24 +26,31 @@
 #include <exception>
 #include <boost/shared_ptr.hpp>
 
-#include "sourcehighlight.h"
+#include "srchilite/sourcehighlight.h"
+
+#include "srchilite/copyright.h"
+#include "srchilite/reportbugs.h"
+#include "srchilite/fileutil.h"
+#include "srchilite/verbosity.h"
+#include "srchilite/langmap.h"
+#include "srchilite/languageinfer.h"
+#include "srchilite/utils.h"
+#include "srchilite/highlightbuilderexception.h"
+#include "srchilite/parserexception.h"
+#include "srchilite/debuglistener.h"
+#include "srchilite/ctagsmanager.h"
+#include "srchilite/stopwatch.h"
+#include "srchilite/lineranges.h"
+#include "srchilite/regexranges.h"
+#include "srchilite/versions.h"
+#include "srchilite/settings.h"
 
 #include "cmdline.h"
-#include "copyright.h"
-#include "reportbugs.h"
-#include "fileutil.h"
-#include "verbose.h"
-#include "langmap.h"
-#include "languageinfer.h"
-#include "utils.h"
-#include "highlightbuilderexception.h"
-#include "parserexception.h"
-#include "debuglistener.h"
-#include "ctagsmanager.h"
-#include "stopwatch.h"
-#include "lineranges.h"
+
+#include "progname.h"
 
 using namespace std;
+using namespace srchilite;
 
 /**
  * how language inference should be made: NOINFERENCE = no inference at all,
@@ -83,6 +90,7 @@ static bool failsafe = false;
 #define PROGRESSINFO(message) if (!args_info.quiet_given) cerr << message;
 
 int main(int argc, char * argv[]) {
+    set_program_name(argv[0]);
     gengetopt_args_info args_info; // command line structure
     bool is_cgi = false;
 
@@ -130,13 +138,20 @@ int main(int argc, char * argv[]) {
         }
     }
 
-    if (args_info.range_context_given) {
-        if (!args_info.line_range_given) {
-            cmdline_parser_free(&args_info);
-            exitError(
-                    "option --range-context makes sense only when a range is specified");
+    // set possible regex ranges
+    boost::shared_ptr<RegexRanges> regexRanges;
+    if (args_info.regex_range_given) {
+        regexRanges = boost::shared_ptr<RegexRanges>(new RegexRanges);
+        for (unsigned int i = 0; i < args_info.regex_range_given; ++i) {
+            if (!regexRanges->addRegexRange(args_info.regex_range_arg[i])) {
+                string invalid_range = args_info.regex_range_arg[i];
+                cmdline_parser_free(&args_info);
+                exitError("invalid regex range: " + invalid_range);
+            }
         }
+    }
 
+    if (args_info.range_context_given) {
         lineRanges->setContextLines(args_info.range_context_arg);
     }
 
@@ -160,7 +175,7 @@ int main(int argc, char * argv[]) {
     string dataDir;
     string outputDir;
 
-    set_file_util_verbose(verbose);
+    Verbosity::setVerbosity(verbose);
 
     if (args_info.input_given)
         inputFile = args_info.input_arg;
@@ -209,7 +224,9 @@ int main(int argc, char * argv[]) {
     if (prefix_dir.size())
         start_path = get_file_path(argv[0]) + RELATIVEDATADIR;
     else
-        start_path = ABSOLUTEDATADIR;
+        start_path = Settings::retrieveDataDir();
+
+    // if datadir is not specified, we rely on start_path?
 
     try {
         // initialize map files
@@ -300,6 +317,8 @@ int main(int argc, char * argv[]) {
         sourcehighlight.setTitle(docTitle);
         sourcehighlight.setOutputDir(outputDir);
         sourcehighlight.setLineRanges(lineRanges.get());
+        sourcehighlight.setRegexRanges(regexRanges.get());
+        sourcehighlight.setBinaryOutput(args_info.binary_output_given);
 
         if (args_info.debug_langdef_given) {
             debugListener = boost::shared_ptr<DebugListener>(new DebugListener);
@@ -377,12 +396,6 @@ int main(int argc, char * argv[]) {
         }
 
         if (args_info.range_separator_given) {
-            if (!args_info.line_range_given) {
-                cmdline_parser_free(&args_info);
-                exitError(
-                        "option --range-separator makes sense only when a range is specified");
-            }
-
             sourcehighlight.setRangeSeparator(args_info.range_separator_arg);
         }
 
@@ -450,7 +463,7 @@ void print_reportbugs() {
 }
 
 void print_version() {
-    cout << "GNU " << PACKAGE << " " << VERSION << endl;
+    cout << Versions::getCompleteVersion() << endl;
 }
 
 string inferLang(const string &inputFileName) {
@@ -473,15 +486,12 @@ string inferLang(const string &inputFileName) {
 }
 
 string getMappedLang(const string &s, LangMap &langmap) {
-    // make sure the lang map file is open
-    langmap.open();
-
     // OK now map it into a .lang file
-    string mapped_lang = langmap.get_file(s);
+    string mapped_lang = langmap.getMappedFileName(s);
 
     if (!mapped_lang.size()) {
         // try the lower version
-        mapped_lang = langmap.get_file(Utils::tolower(s));
+        mapped_lang = langmap.getFileName(Utils::tolower(s));
     }
 
     return mapped_lang;
@@ -508,8 +518,9 @@ string getLangFileName(InferPolicy infer, const string &inputFileName,
     if (langFile.size())
         return langFile;
 
-    // otherwise try with the inputFileName file extension
-    langFile = getMappedLang(get_file_extension(inputFileName), langMap);
+    // otherwise try with the inputFileName (its file extension
+    // and its name)
+    langFile = langMap.getMappedFileNameFromFileName(inputFileName);
     if (langFile.size())
         return langFile;
 

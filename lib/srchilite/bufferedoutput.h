@@ -11,8 +11,20 @@
 #include <string>
 #include <set>
 
+namespace srchilite {
+
+/// the contents to be put after a line or after the document
 typedef std::set<std::string> PostContents;
 
+/**
+ * The main class for writing into the output.  It wraps an ostream object
+ * and can perform buffering.  Moreover, it provides functionalities
+ * to write something after a line or after an entire document (these contents
+ * are buffered so that they can be inserted at any time, with
+ * postLineInsert and postDocInsert
+ * and will be actually inserted in the output
+ * with writePostLine and writePostDoc).
+ */
 class BufferedOutput {
     /// the stream used to output strings
     std::ostream &outputBuff;
@@ -34,9 +46,16 @@ class BufferedOutput {
     void writePostInfo(PostContents &post, const std::string &prefix = "");
 
 public:
+    /**
+     * @param os the ostream where data will be written
+     */
     BufferedOutput(std::ostream &os);
     ~BufferedOutput();
 
+    /**
+     * Whether to flush the output stream at each output operation
+     * @param a
+     */
     void setAlwaysFlush(bool a = true) {
         alwaysFlush = a;
     }
@@ -64,7 +83,7 @@ public:
      * into the contents to be output after the current line
      * @param s
      */
-    template <typename T> void postLineInsertFrom(const T &s) {
+    template<typename T> void postLineInsertFrom(const T &s) {
         for (typename T::const_iterator it = s.begin(); it != s.end(); ++it)
             postLineInsert(*it);
     }
@@ -74,7 +93,7 @@ public:
      * into the contents to be output after the entire document
      * @param s
      */
-    template <typename T> void postDocInsertFrom(const T &s) {
+    template<typename T> void postDocInsertFrom(const T &s) {
         for (typename T::const_iterator it = s.begin(); it != s.end(); ++it)
             postDocInsert(*it);
     }
@@ -92,5 +111,7 @@ public:
     void writePostDoc(const std::string &prefix = "");
 
 };
+
+}
 
 #endif /*BUFFEREDOUTPUT_H_*/

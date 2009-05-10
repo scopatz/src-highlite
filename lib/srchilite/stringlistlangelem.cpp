@@ -16,6 +16,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 StringListLangElem::StringListLangElem(const string &n, StringDefs *al, bool nons)
  : StateStartLangElem(n), alternatives(al), nonsensitive(nons)
 {
@@ -39,4 +41,6 @@ StringListLangElem::toStringOriginal() const
 {
   string res = StateStartLangElem::toString() + " " + toStringOriginalCollection<StringDefs>(alternatives);
   return res;
+}
+
 }

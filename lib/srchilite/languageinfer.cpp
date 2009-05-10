@@ -16,6 +16,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 LanguageInfer::LanguageInfer() {
 }
 
@@ -92,4 +94,6 @@ const string LanguageInfer::infer(istream &stream) {
         return what[1];
 
     return "";
+}
+
 }

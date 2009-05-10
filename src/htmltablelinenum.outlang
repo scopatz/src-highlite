@@ -20,6 +20,19 @@ doctemplate
 "
 end
 
+nodoctemplate
+"<table  BGCOLOR=\"$docbgcolor\" 
+	style=\"text-align: left; width: 100%;\" border=\"0\"
+ 	cellpadding=\"2\" cellspacing=\"2\"
+ 	NOSAVE >
+<tbody>
+<pre><tt>"
+"</tt></pre>
+</tbody>
+</table>
+"
+end
+
 # terminate each line by closing the table column and the table row
 translations
 "\n" "</td></tr>\n"

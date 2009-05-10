@@ -15,11 +15,16 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 
+namespace srchilite {
+
 class PreFormatter;
+
+/// shared pointer for PreFormatter
 typedef boost::shared_ptr<PreFormatter> PreFormatterPtr;
 
 /**
- preformat text to be generated
+ Preformats text to be generated.  This implements the
+ Decorator pattern, thus yielding a chain of preformatters
 
  @author Lorenzo Bettini
  */
@@ -28,11 +33,18 @@ class PreFormatter {
     PreFormatterPtr decorator;
 
 public:
+    /**
+     * @param f the nested decorated preformatter
+     */
     PreFormatter(PreFormatterPtr f = PreFormatterPtr());
 
     virtual ~PreFormatter();
 
-    void setFormatter(PreFormatterPtr f);
+    /**
+     * Sets the nested preformatter
+     * @param f the nested (decorated) preformatter
+     */
+    void setPreFormatter(PreFormatterPtr f);
 
     /**
      * Preformats the passed string (public version)
@@ -52,5 +64,7 @@ protected:
     virtual const std::string doPreformat(const std::string &text);
 
 };
+
+}
 
 #endif

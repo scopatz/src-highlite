@@ -55,3 +55,7 @@ test_regexpreprocessor
 *.loT
 test_regexrules
 valgrind_test.sh
+html
+copyright.c
+reportbugs.c
+doxygen.stamp

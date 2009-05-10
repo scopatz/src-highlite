@@ -1,7 +1,7 @@
 //
 // C++ Interface: langdefscanner
 //
-// Description: 
+// Description:
 //
 //
 // Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004
@@ -15,9 +15,7 @@
 
 #include "parsestruct.h"
 
-extern int langdef_lex() ;
-extern FILE *langdef_in;
-extern ParseStructPtr parsestruct;
+namespace srchilite {
 
 void open_file_to_scan(const std::string &path, const std::string &file);
 
@@ -32,5 +30,7 @@ void clear_langdefscanner();
  * reaches the end of file).
  */
 void close_langdefinputfile();
+
+}
 
 #endif // LANGDEFSCANNER_H

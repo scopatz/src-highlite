@@ -7,9 +7,11 @@
 #include "highlightbuilderexception.h"
 
 #include "parserinfo.h"
-#include "my_sstream.h"
+#include <sstream>
 
 using namespace std;
+
+namespace srchilite {
 
 HighlightBuilderException::HighlightBuilderException(
         const std::string &_message, const ParserInfo *parserinfo,
@@ -58,3 +60,4 @@ std::ostream& operator<<(std::ostream& os,
     return os;
 }
 
+}

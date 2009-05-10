@@ -7,17 +7,21 @@
 #ifndef MATCHINGPARAMETERS_H_
 #define MATCHINGPARAMETERS_H_
 
+namespace srchilite {
+
 /**
- * Structure for passing parameters to the matching algorithm
- * (e.g., "not beginning of line", etc.)
+ * Structure for passing parameters to the matching algorithm,
+ * for instance, "not beginning of line", etc.
  */
 struct MatchingParameters {
+    /// whether we are inspecting the beginning of a line
     bool beginningOfLine;
 
     MatchingParameters() :
         beginningOfLine(true) {
-
     }
 };
+
+}
 
 #endif /*MATCHINGPARAMETERS_H_*/

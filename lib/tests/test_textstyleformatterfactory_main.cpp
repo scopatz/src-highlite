@@ -1,13 +1,16 @@
 #include <iostream>
 
 #include "asserttestexit.h"
-#include "textstyleformatter.h"
-#include "bufferedoutput.h"
-#include "my_sstream.h"
-#include "srcuntabifier.h"
-#include "textstyleformatterfactory.h"
-#include "formattermanager.h"
-#include "ctagsformatter.h"
+#include "srchilite/textstyleformatter.h"
+#include "srchilite/bufferedoutput.h"
+#include <sstream>
+#include "srchilite/srcuntabifier.h"
+#include "srchilite/textstyleformatterfactory.h"
+#include "srchilite/formattermanager.h"
+#include "srchilite/ctagsformatter.h"
+
+using namespace std;
+using namespace srchilite;
 
 class MyPreFormatter : public PreFormatter {
 public:
@@ -23,8 +26,6 @@ protected:
     }
 
 };
-
-using namespace std;
 
 int main() {
     ostringstream os;
@@ -47,7 +48,7 @@ int main() {
     // this is just to test noref, it will be never used
     CTagsFormatter ctagsformatter(0, textStyles->refstyle, 0);
     ctagsformatter.setFileInfo("", "");
-    
+
     FormatterManager formatterManager(defaultFormatter);
 
     TextStyleFormatterFactory formatterFactory(textStyles, &preformatter,
@@ -76,7 +77,7 @@ int main() {
 
     // one formatter was created
     assertEquals((size_t)1, formatterFactory.getFormatterCollection().size());
-    
+
     tformatter->setBufferedOutput(&bufferedOutput);
 
     tformatter->format("test");
@@ -129,30 +130,30 @@ int main() {
     assertEquals("<b><u><c=RED>test</c></u></b>", os.str());
 
     // test for createMissingFormatter
-    
+
     // formatter for foo already exists
     assertFalse(formatterFactory.createMissingFormatter("foo", "bar"));
-    
+
     // formatter doesn't exist
     assertFalse(formatterFactory.createMissingFormatter("bar", "nonexisting"));
-    
+
     // formatter for bar is just the same as the formatter for foo
     assertTrue(formatterFactory.createMissingFormatter("bar", "foo"));
 
     // check that formatting with "bar" is the same as formatting with "foo"
     formatter = formatterManager.hasFormatter("bar");
     assertTrue(formatter.get());
-    
+
     // no other formatter was created
     assertEquals((size_t)3, formatterFactory.getFormatterCollection().size());
-    
+
     os.str("");
     formatter->format("test");
 
     cout << "formatted: " << os.str() << endl;
 
     assertEquals("<b><u>test</u></b>", os.str());
-    
+
     cout << "test_textstyleformatterfactory: SUCCESS" << endl;
 
     return 0;

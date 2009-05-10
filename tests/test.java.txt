@@ -28,7 +28,7 @@
 [33m28:[m [36m *[m
 [33m29:[m [36m * [m[32m@author[m[36m Lorenzo Bettini[m
 [33m30:[m [36m * [m[32m@version[m[36m 2.0[m
-[33m31:[m [36m */[m
+[33m31:[m [36m */[m [36m/// class[m
 [33m32:[m [01;34mpublic[m [01;34mclass[m [32mHello[m [31m{[m
 [33m33:[m     [32mint[m foo [31m=[m [35m1998[m [31m;[m
 [33m34:[m     [32mint[m hex_foo [31m=[m [35m0xCAFEBABE[m[31m;[m
@@ -36,15 +36,25 @@
 [33m36:[m     Integer i [31m=[m [01;34mnull[m [31m;[m
 [33m37:[m     [32mchar[m c [31m=[m [31m'[m[35m\'[m[31m'[m[31m,[m d [31m=[m [31m'n'[m[31m,[m e [31m=[m [31m'[m[35m\\[m[31m'[m [31m;[m
 [33m38:[m     String xml [31m=[m [31m"<tag attr=[m[35m\"[m[31mvalue[m[35m\"[m[31m>&auml;</tag>"[m[31m,[m foo2 [31m=[m [31m"[m[35m\\[m[31m"[m [31m;[m
-[33m39:[m     
-[33m40:[m     [01;34mpublic[m [01;34mstatic[m [32mvoid[m [01;30mmain[m[31m([m String args[31m[][m [31m)[m [31m{[m
-[33m41:[m         [36m// just some greetings ;-)  /*[m
-[33m42:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"Hello from java2html :-)"[m [31m)[m [31m;[m
-[33m43:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"[m[35m\t[m[31mby Lorenzo Bettini"[m [31m)[m [31m;[m
-[33m44:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"[m[35m\t[m[31mhttp://www.lorenzobettini.it"[m [31m)[m [31m;[m
-[33m45:[m         [01;34mif[m [31m([margc [31m>[m [35m0[m[31m)[m
-[33m46:[m             String param [31m=[m argc[31m[[m[35m0[m[31m];[m
-[33m47:[m         [36m//System.out.println( "bye bye... :-D" ) ; // see you soon[m
-[33m48:[m     [31m}[m
-[33m49:[m [31m}[m
-[33m50:[m 
+[33m39:[m 
+[33m40:[m     [36m/* mymethod */[m
+[33m41:[m     [01;34mpublic[m [32mvoid[m [01;30mmymethod[m[31m([m[32mint[m i[31m)[m [31m{[m
+[33m42:[m         [36m// just a foo method[m
+[33m43:[m     [31m}[m
+[33m44:[m     [36m/* mymethod */[m
+[33m45:[m    
+[33m46:[m     [36m/* main */[m
+[33m47:[m     [01;34mpublic[m [01;34mstatic[m [32mvoid[m [01;30mmain[m[31m([m String args[31m[][m [31m)[m [31m{[m
+[33m48:[m         [36m// just some greetings ;-)  /*[m
+[33m49:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"Hello from java2html :-)"[m [31m)[m [31m;[m
+[33m50:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"[m[35m\t[m[31mby Lorenzo Bettini"[m [31m)[m [31m;[m
+[33m51:[m         System[31m.[mout[31m.[m[01;30mprintln[m[31m([m [31m"[m[35m\t[m[31mhttp://www.lorenzobettini.it"[m [31m)[m [31m;[m
+[33m52:[m         [01;34mif[m [31m([margc [31m>[m [35m0[m[31m)[m
+[33m53:[m             String param [31m=[m argc[31m[[m[35m0[m[31m];[m
+[33m54:[m         [36m//System.out.println( "bye bye... :-D" ) ; // see you soon[m
+[33m55:[m     [31m}[m
+[33m56:[m     [36m/* main */[m
+[33m57:[m [31m}[m
+[33m58:[m [36m/// class[m
+[33m59:[m 
+[33m60:[m [36m// end of file test.java[m

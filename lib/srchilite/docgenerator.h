@@ -31,6 +31,8 @@
 
 using std::string;
 
+namespace srchilite {
+
 /**
  * Given a DocTemplate it generates the start of the document and the end, using
  * variables such as title, file_name, header, etc.
@@ -68,14 +70,14 @@ public:
 
     /**
      * Generates the start of the document into the passed ostream
-     * 
+     *
      * @param sout the stream for generating the output
      */
     void generate_start_doc(std::ostream *sout);
 
     /**
      * Generates the end of the document into the passed ostream
-     * 
+     *
      * @param sout the stream for generating the output
      */
     void generate_end_doc(std::ostream *sout);
@@ -98,18 +100,20 @@ public:
     void setBackgroundColor(const std::string &bg) {
         doc_background = bg;
     }
-    
+
     void setCss(const std::string &css) {
         css_url = css;
     }
-    
+
     void setHeader(const std::string &_header) {
         doc_header = _header;
     }
-    
+
     void setFooter(const std::string &_footer) {
         doc_footer = _footer;
     }
 };
+
+}
 
 #endif // DOCGENERATOR_H

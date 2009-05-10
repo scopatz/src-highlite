@@ -11,10 +11,12 @@
 //
 #include "langelems.h"
 
-#include "my_sstream.h"
+#include <sstream>
 #include "tostringcollection.h"
 
 using namespace std;
+
+namespace srchilite {
 
 LangElems::LangElems()
 {
@@ -42,7 +44,7 @@ LangElems::toStringOriginal() const
 void LangElems::add(LangElem *el)
 {
   push_back(el);
-  
+
   // store the pointer to the element just inserted in the list
   elem_map[el->getName()].push_back((++rbegin()).base());
 }
@@ -73,4 +75,6 @@ void LangElems::subst(LangElem *el)
   }
   elem_map[name].clear();
   elem_map[name].push_back(first);
+}
+
 }

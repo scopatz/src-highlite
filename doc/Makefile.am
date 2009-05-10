@@ -1,4 +1,4 @@
-# Copyright (C) 1999-2007  Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2009  Lorenzo Bettini <http://www.lorenzobettini.it>
 #  
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without 
@@ -13,6 +13,7 @@ DATADIR_OPTION = --data-dir $(top_srcdir)/src/
 
 SRCHILITEEXE = $(top_builddir)/src/$(PACKAGE)$(EXEEXT)
 SRCHILITEPROG = $(SRCHILITEEXE) $(DATADIR_OPTION)
+SRCHILITETEXINFO = $(SRCHILITEPROG) -f texinfo --output-dir=$(top_builddir)/doc/ --style-file=$(top_srcdir)/src/texinfo.style
 
 JAVA2HTML_PROG = $(SRCHILITEPROG) -s java -f html 
 
@@ -28,8 +29,9 @@ FLEX2HTML = $(SRCHILITEPROG) -s flex -f html $(STD_STYLE)
 
 OUTPUT_HERE = --output-dir=$(top_builddir)/doc
 
-info_TEXINFOS = source-highlight.texinfo
+info_TEXINFOS = source-highlight.texinfo source-highlight-lib.texinfo
 source_highlight_TEXINFOS = $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
+source_highlight_lib_TEXINFOS = $(EXAMPLEINFOS)
 
 SUFFIXES = .txt .txt.texinfo .txt.texinfo.texinfo .lang .lang.texinfo .diff .diff.texinfo .css .css.texinfo .show.texinfo .defaults .defaults.texinfo
 
@@ -49,6 +51,15 @@ test_lineranges1.java.texinfo: $(top_srcdir)/tests/test.java
 
 test_lineranges2.java.texinfo: $(top_srcdir)/tests/test.java
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.java --style-file=$(top_srcdir)/src/texinfo.style --line-range="12-18","29-34" -n --range-context=2 --range-separator="{... not in range ...}" > $@
+
+test_regexrange1.java.texinfo: $(top_srcdir)/tests/test.java
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.java --style-file=$(top_srcdir)/src/texinfo.style --regex-range="/// [[:alpha:]]+" -n > $@
+
+test_regexrange_main.java.texinfo: $(top_srcdir)/tests/test.java
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.java --style-file=$(top_srcdir)/src/texinfo.style --regex-range="/\* main \*/" -n > $@
+
+test_regexrange_methods.java.texinfo: $(top_srcdir)/tests/test.java
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.java --style-file=$(top_srcdir)/src/texinfo.style --regex-range="/\* [[:alpha:]]+ \*/" -n > $@
 
 test_vardecl.cc.texinfo: $(top_srcdir)/tests/test_vardecl.cc
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test_vardecl.cc --style-file=$(srcdir)/highlight_type.style > $@
@@ -172,6 +183,19 @@ test_extreme_comment_2.texinfo: $(top_srcdir)/tests/test_extreme_comment2.cpp
 test_extreme_comment_3.texinfo: $(top_srcdir)/tests/test_extreme_comment3.cpp
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test_extreme_comment3.cpp --style-file=$(top_srcdir)/src/texinfo.style -o $@ --lang-def=extreme_comment3.lang
 
+source-highlight-console-main.cpp.texinfo: $(top_srcdir)/lib/examples/source-highlight-console-main.cpp
+	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/source-highlight-console-main.cpp --regex-range="//> TEXINFO"
+
+debuglistener.cpp.texinfo: $(top_srcdir)/lib/srchilite/debuglistener.cpp
+	$(SRCHILITETEXINFO) $(top_srcdir)/lib/srchilite/debuglistener.cpp --regex-range="//> TEXINFO"
+
+infoformatter.h.texinfo: $(top_srcdir)/lib/examples/infoformatter.h
+	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/infoformatter.h --regex-range="//> TEXINFO"
+
+infoformatter-main.cpp.texinfo: $(top_srcdir)/lib/examples/infoformatter-main.cpp
+	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/infoformatter-main.cpp --regex-range="//> TEXINFO"
+
+
 .lang.show.texinfo:
 	$(SRCHILITEEXE) --show-regex=$< | $(SRCHILITEPROG) -f texinfo --style-file=$(top_srcdir)/src/texinfo.style --lang-def=nohilite.lang > $@
 #	$(SRCHILITEEXE) --show-regex=$< > $@
@@ -212,7 +236,9 @@ AM_MAKEINFOHTMLFLAGS=--no-split
 # these are distributed since they might depend on other programs
 DISTRIBUTEDINFOS = help-output.texinfo test_ref.h.texinfo 
 
-GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo test_lineranges1.java.texinfo test_lineranges2.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo c.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo clike_vardeclaration.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo style.defaults.texinfo test_string_stop.lang.texinfo strategy_example.lang.texinfo test_vardecl.cc.texinfo test_nonewlines.lang.texinfo test_newlines.lang.texinfo
+GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo test_lineranges1.java.texinfo test_lineranges2.java.texinfo test_regexrange1.java.texinfo test_regexrange_main.java.texinfo test_regexrange_methods.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo c.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo clike_vardeclaration.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo style.defaults.texinfo test_string_stop.lang.texinfo strategy_example.lang.texinfo test_vardecl.cc.texinfo test_nonewlines.lang.texinfo test_newlines.lang.texinfo
+
+EXAMPLEINFOS = source-highlight-console-main.cpp.texinfo infoformatter.h.texinfo infoformatter-main.cpp.texinfo debuglistener.cpp.texinfo
 
 CSS_FILES = default.css \
 Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
@@ -234,11 +260,9 @@ sh_emacs.css          sh_neon.css             sh_zellner.css
 EXTRA_DIST = colors.html source-highlight.html \
              Hello.java \
              header.html footer.html \
-             test_refs.h.html test_refs.cpp.html \
-             test_refs.h test_refs.cpp \
              gpl.texinfo flex_scanner.ll \
              example-u.diff example-c.diff example-n.diff \
-             source-highlight.1 check-regexp.1 index.html \
+             source-highlight.1 check-regexp.1 index.html examples.html \
 	     comment-show.lang comment-show2.lang \
 	     SimpleClass.java SimpleClass-doc.html UsageExample.java \
 	     txt2texinfo.txt \
@@ -254,11 +278,11 @@ source_highlightdoc_DATA = colors.html source-highlight.html \
     Hello_xhtml2.html Hello_notfixed.html \
     $(CSS_FILES) \
     source-highlight.cc.html \
-    cmdline.h.html test_refs.h.html test_refs.cpp.html \
+    cmdline.h.html \
     flex_scanner.ll.html \
     header.html footer.html \
     langdef.lang.html \
-    index.html \
+    index.html examples.html \
     SimpleClass.java SimpleClass.html SimpleClass-doc.html \
     UsageExample.java UsageExample.html \
     style_examples.html
@@ -298,28 +322,13 @@ BUILD_HELLO_XHTML = $(SRCHILITEPROG) -s java -f xhtml --doc -i $(srcdir)/Hello.j
 BUILD_HELLO_XHTML2 = $(SRCHILITEPROG) -s java -f xhtml --doc -i $(srcdir)/Hello.java -o Hello_xhtml2.html $(STD_STYLE)
 BUILD_HELLO_HTMLNOTFIXED = $(SRCHILITEPROG) -s java --outlang-def=$(srcdir)/../src/html_notfixed.outlang -i $(srcdir)/Hello.java -o Hello_notfixed.html
 
-BUILD_REFS = $(CPP2HTML_WREFS) --ctags-file=my_test_ref.tags --line-number $(srcdir)/test_refs.h $(srcdir)/test_refs.cpp 
+#BUILD_REFS = $(CPP2HTML_WREFS) --ctags-file=my_test_ref.tags --line-number $(srcdir)/test_refs.h $(srcdir)/test_refs.cpp 
 
 SimpleClass.html: $(srcdir)/SimpleClass.java
 	$(PROGNAME) --input $(srcdir)/SimpleClass.java --output SimpleClass.html --doc
 
 UsageExample.html: $(srcdir)/UsageExample.java
 	$(PROGNAME) --input $(srcdir)/UsageExample.java --output UsageExample.html --doc
-
-if NO_CTAGS
-test_refs.h.html: test_refs.h
-	touch test_refs.h.html
-
-test_refs.cpp.html: test_refs.h.html
-	touch test_refs.cpp.html
-else
-test_refs.h.html: test_refs.h
-	$(BUILD_REFS)
-	sed -itesttmp -f $(top_srcdir)/tests/erasedir3.sed test_refs.h.html test_refs.cpp.html && rm -f *testtmp # eliminate leading paths
-
-test_refs.cpp.html: test_refs.h.html
-
-endif
 
 Hello1.html: $(srcdir)/Hello.java
 	$(BUILD_HELLO1)
@@ -378,7 +387,7 @@ check:
 HTML_GENERATED_FILES = Hello1.html Hello2.html Hello3.html Hello4.html \
 Hello5.html Hello.java.html Hello_h_f.html source-highlight.cc.html \
 cmdline.h.html Hello_lines.html Hello_xhtml.html Hello_xhtml2.html \
-flex_scanner.ll.html test_refs.h.html test_refs.cpp.html SimpleClass.html \
+flex_scanner.ll.html SimpleClass.html \
 UsageExample.html Hello_notfixed.html \
 style_examples.html
 
@@ -386,6 +395,8 @@ html-clean:
 	rm -f $(HTML_GENERATED_FILES)
 
 texinfo-clean:
-	rm -f $(GENERATEDINFOS)
+	rm -f $(GENERATEDINFOS) $(EXAMPLEINFOS)
 
-DISTCLEANFILES = $(HTML_GENERATED_FILES) $(GENERATEDINFOS) tags langdef.lang.html
+DISTCLEANFILES = $(HTML_GENERATED_FILES) langdef.lang.html
+
+MAINTAINERCLEANFILES = $(GENERATEDINFOS) tags 

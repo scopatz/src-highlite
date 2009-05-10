@@ -19,7 +19,7 @@
 
 /*
  * This program is part of GNU source-highlight
- * 
+ *
  * This tests regex preprocessing
  */
 
@@ -28,10 +28,11 @@
 #include <boost/regex.hpp>
 
 #include "asserttestexit.h"
-#include "regexpreprocessor.h"
-#include "stringdef.h"
+#include "srchilite/regexpreprocessor.h"
+#include "srchilite/stringdef.h"
 
 using namespace std;
+using namespace srchilite;
 
 void testPreprocess(const string &original, const string &expected) {
     cout << "original     : "<< original << endl;
@@ -359,7 +360,7 @@ int main() {
     assertTrue(conc->hasBackRef());
 
     delete conc;
-    
+
     cout << "test_regexpreprocessor: SUCCESS!" << endl;
 
     return 0;

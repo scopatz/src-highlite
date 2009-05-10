@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999, 2000, 2001, 2002, 2003  Lorenzo Bettini, http://www.lorenzobettini.it
+ * Copyright (C) 1999-2009  Lorenzo Bettini, http://www.lorenzobettini.it
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,37 +23,60 @@
 #include <map>
 #include <string>
 #include <boost/shared_ptr.hpp>
-#include "my_sstream.h"
+#include <sstream>
 
 using std::map;
 using std::string;
 using std::ostringstream;
 
-class ColorMap : public map<string, string>
-{
- protected:
-  string default_color;
+namespace srchilite {
 
- public:
-  void setDefault(const string &d) { default_color = d; }
-  const string getColor(const string &key)
-  {
-    const_iterator it = find (key);
-    if (it == end ())
-      return default_color;
-    else
-      return it->second;
-  }
-  const string toString() const
-  {
-    ostringstream s;
-    for (const_iterator it = begin(); it != end(); ++it)
-      s << "[" << it->first << "]=" << it->second << "\n";
-    s << "default=" << default_color;
-    return s.str();
-  }
+/**
+ * Simple map for colors (maps a color constant string to the
+ * corresponding color of the output format)
+ */
+class ColorMap: public map<string, string> {
+protected:
+    /// when no color corresponds to the requested one
+    string default_color;
+
+public:
+    /**
+     * Sets the default color
+     * @param d the default color
+     */
+    void setDefault(const string &d) {
+        default_color = d;
+    }
+
+    /**
+     * @param key the color we're looking for
+     * @return the color corresponding to the specified key, or the
+     * default color if we don't have the requested key
+     */
+    const string getColor(const string &key) {
+        const_iterator it = find(key);
+        if (it == end())
+            return default_color;
+        else
+            return it->second;
+    }
+
+    /**
+     * Returns a string representation of the map.
+     */
+    const string toString() const {
+        ostringstream s;
+        for (const_iterator it = begin(); it != end(); ++it)
+            s << "[" << it->first << "]=" << it->second << "\n";
+        s << "default=" << default_color;
+        return s.str();
+    }
 };
 
+/// shared pointer for ColorMap
 typedef boost::shared_ptr<ColorMap> ColorMapPtr;
+
+}
 
 #endif // COLORMAP_H

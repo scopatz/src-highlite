@@ -16,15 +16,20 @@
 #include <string>
 #include <istream>
 
+namespace srchilite {
+
 class SourceHighlighter;
 class BufferedOutput;
 class PreFormatter;
 class LineNumGenerator;
 class LineRanges;
+class RegexRanges;
 class Formatter;
 
 /// debugging policy
-enum FileHighlighterDebug {NO_DEBUG = 0, DEBUG, DEBUG_INTERACTIVE};
+enum FileHighlighterDebug {
+    NO_DEBUG = 0, DEBUG, DEBUG_INTERACTIVE
+};
 
 /**
  * Highlights the contents of a file relying on a SourceHighlighter
@@ -51,6 +56,9 @@ class SourceFileHighlighter {
     /// if not null, it detects whether a line is in the stored ranges
     LineRanges *lineRanges;
 
+    /// if not null, it detects whether a line is in the stored ranges
+    RegexRanges *regexRanges;
+
     /// the formatter for possible context lines
     Formatter *contextFormatter;
 
@@ -67,8 +75,8 @@ public:
      * @param sourceHighlighter the highlighter to highlight paragraphs
      * @param output the output object used to write
      */
-    SourceFileHighlighter(const std::string &file, SourceHighlighter *sourceHighlighter,
-            BufferedOutput *output);
+    SourceFileHighlighter(const std::string &file,
+            SourceHighlighter *sourceHighlighter, BufferedOutput *output);
 
     void setDebugPolicy(FileHighlighterDebug p) {
         debugPolicy = p;
@@ -106,6 +114,10 @@ public:
         lineRanges = lr;
     }
 
+    void setRegexRanges(RegexRanges *rr) {
+        regexRanges = rr;
+    }
+
     /**
      * Performs the highlighting; Once the highlighting is finished, this
      * object can be re-used.
@@ -127,5 +139,7 @@ public:
     void highlight(const std::string &is);
 
 };
+
+}
 
 #endif /*SOURCEFILEHIGHLIGHTER_H_*/

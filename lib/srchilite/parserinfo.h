@@ -14,11 +14,11 @@
 
 #include <string>
 
+namespace srchilite {
+
 /**
  Stores information about the file name and the line number of a generic element created
  during parsing
-
- @author Lorenzo Bettini
  */
 struct ParserInfo {
     std::string filename; // including path
@@ -41,5 +41,7 @@ struct ParserInfo {
         line = p->line;
     }
 };
+
+}
 
 #endif

@@ -8,6 +8,8 @@
 
 #include "wordtokenizer.h"
 
+namespace srchilite {
+
 /**
  * the regular expression for detecting spaces and words
  */
@@ -31,4 +33,6 @@ void WordTokenizer::tokenize(const std::string &s,
 
         ++i;
     }
+}
+
 }

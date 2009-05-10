@@ -11,14 +11,11 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 
+#include "formatterfactory.h"
 #include "textstyles.h"
 #include "textstyleformattercollection.h"
 
-typedef enum {ISBOLD=1, ISITALIC, ISUNDERLINE, ISFIXED, ISNOTFIXED, ISNOREF}
-        StyleConstant;
-typedef std::list<StyleConstant> StyleConstants;
-typedef boost::shared_ptr<StyleConstants> StyleConstantsPtr;
-typedef StyleConstants::const_iterator StyleConstantsIterator;
+namespace srchilite {
 
 using std::string;
 
@@ -30,7 +27,7 @@ class TextStyleFormatter;
 /**
  * Generates TextStyleFormatters based on TextStyles
  */
-class TextStyleFormatterFactory {
+class TextStyleFormatterFactory : public FormatterFactory {
     /// contains all the styles for formatting
     TextStylesPtr textStyles;
 
@@ -53,13 +50,13 @@ public:
     ~TextStyleFormatterFactory();
 
     /**
-     * Creates a formatter for the specific language element (identifed by
+     * Creates a formatter for the specific language element (identified by
      * key) with the passed style parameters
-     * 
-     * @param key 
-     * @param color 
-     * @param bgcolor 
-     * @param styleconstants 
+     *
+     * @param key
+     * @param color
+     * @param bgcolor
+     * @param styleconstants
      * @return false if a formatter for the specific key is already present
      */
     bool createFormatter(const string &key, const string &color,
@@ -76,7 +73,7 @@ public:
     /**
      * Creates a formatter for key1, if not already present, that has the same
      * style as the formatter for key2
-     * 
+     *
      * @return false if the formatter for key1 is already present, or there's
      * no formatter for key2
      */
@@ -84,7 +81,7 @@ public:
 
     /**
      * Adds the formatter for the normal style if not already present.
-     * 
+     *
      * This must be called after all the formatter for the language elements were generated
      */
     void addDefaultFormatter();
@@ -93,5 +90,7 @@ public:
         return formatterCollection;
     }
 };
+
+}
 
 #endif /*TEXTSTYLEFORMATTERFACTORY_H_*/

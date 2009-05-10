@@ -11,6 +11,8 @@
 #include "textstyle.h"
 #include "formatter.h"
 
+namespace srchilite {
+
 class BufferedOutput;
 class PreFormatter;
 class CTagsFormatter;
@@ -88,5 +90,7 @@ protected:
     bool formatReferences(const std::string &s, const FormatterParams *params);
 
 };
+
+}
 
 #endif /* _TEXTSTYLEFORMATTER_H_ */

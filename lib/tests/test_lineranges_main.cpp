@@ -2,10 +2,11 @@
 #include <iterator>
 
 #include "asserttestexit.h"
-#include "lineranges.h"
-#include "my_sstream.h"
+#include "srchilite/lineranges.h"
+#include <sstream>
 
 using namespace std;
+using namespace srchilite;
 
 static std::ostream& operator<<(std::ostream& os,
         const LineRanges::RangeType &entry);

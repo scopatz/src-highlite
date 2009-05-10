@@ -28,7 +28,7 @@ import java.io.* ;
  *
  * @author Lorenzo Bettini
  * @version 2.0
- */
+ */ /// class
 public class Hello {
     int foo = 1998 ;
     int hex_foo = 0xCAFEBABE;
@@ -36,7 +36,14 @@ public class Hello {
     Integer i = null ;
     char c = '\'', d = 'n', e = '\\' ;
     String xml = "<tag attr=\"value\">&auml;</tag>", foo2 = "\\" ;
-    
+
+    /* mymethod */
+    public void mymethod(int i) {
+	// just a foo method
+    }
+    /* mymethod */
+   
+    /* main */
     public static void main( String args[] ) {
 	// just some greetings ;-)  /*
 	System.out.println( "Hello from java2html :-)" ) ;
@@ -46,4 +53,8 @@ public class Hello {
             String param = argc[0];
         //System.out.println( "bye bye... :-D" ) ; // see you soon
     }
+    /* main */
 }
+/// class
+
+// end of file test.java

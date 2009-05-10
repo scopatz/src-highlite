@@ -1,0 +1,6 @@
+infoformatter
+Makefile.in
+source-highlight-console
+Makefile
+.libs
+.deps

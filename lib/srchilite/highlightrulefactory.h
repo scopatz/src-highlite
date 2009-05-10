@@ -10,6 +10,8 @@
 #include <list>
 #include <string>
 
+namespace srchilite {
+
 typedef std::list<std::string> WordList;
 typedef std::list<std::string> ElemNameList;
 
@@ -24,7 +26,7 @@ public:
     virtual ~HighlightRuleFactory();
 
     /**
-     * Creates a generinc highlighting rule
+     * Creates a generic highlighting rule
      * @param name the element name represented by the rule
      * @param the string representation
      * @return the generated rule
@@ -44,7 +46,7 @@ public:
      */
     virtual HighlightRule *createWordListRule(const std::string &name,
             const WordList &list, bool caseSensitve = true) = 0;
-    
+
     /**
      * Creates a rule for detecting a list of specific expressions
      * @param name the element name represented by the rule
@@ -94,5 +96,7 @@ public:
             const std::string &rep) = 0;
 
 };
+
+}
 
 #endif /*HIGHLIGHTRULEFACTORY_H_*/

@@ -26,10 +26,12 @@
 #include <stdlib.h>
 
 #include "fileutil.h"
-#include "verbose.h"
+#include "verbosity.h"
 #include "ioexception.h"
 
 using namespace std;
+
+namespace srchilite {
 
 static bool verbose = false;
 
@@ -50,56 +52,56 @@ string readFile(const string &fileName) throw (IOException) {
     }
 
     string s, line;
-    while(getline(file, line)) {
+    while (getline(file, line)) {
         s += line + "\n";
     }
-    
+
     return s;
 }
 
 /*
-char * read_file(const string &fileName) {
-    char *buffer = 0;
-    long int char_count;
+ char * read_file(const string &fileName) {
+ char *buffer = 0;
+ long int char_count;
 
-    // we open it as binary otherwise we may experience problems under
-    // Windows system: when we fread, the number of char read can be
-    // less then char_count, and thus we'd get an error...
-    ifstream file(fileName.c_str(), ios_base::binary);
-    if (!file.is_open() )
-        file_error("Error operning", fileName);
-    else {
-        // let's go to the end of the file...
-        file.seekg(0, ios::end);
-        if (!file)
-            file_error("Error positioning", fileName);
+ // we open it as binary otherwise we may experience problems under
+ // Windows system: when we fread, the number of char read can be
+ // less then char_count, and thus we'd get an error...
+ ifstream file(fileName.c_str(), ios_base::binary);
+ if (!file.is_open() )
+ file_error("Error operning", fileName);
+ else {
+ // let's go to the end of the file...
+ file.seekg(0, ios::end);
+ if (!file)
+ file_error("Error positioning", fileName);
 
-        // ...to read the dimension
-        char_count = file.tellg();
-        if (!file)
-            file_error("Error reading position", fileName);
+ // ...to read the dimension
+ char_count = file.tellg();
+ if (!file)
+ file_error("Error reading position", fileName);
 
-        buffer = new char [char_count + 1];
-        if (!buffer)
-            internal_error("Memory allocation failed");
+ buffer = new char [char_count + 1];
+ if (!buffer)
+ internal_error("Memory allocation failed");
 
-        file.seekg(0, ios::beg);
-        if (!file)
-            file_error("Error positioning to start", fileName);
+ file.seekg(0, ios::beg);
+ if (!file)
+ file_error("Error positioning to start", fileName);
 
-        //copy file into memory
-        file.read(buffer, char_count);
-        buffer[char_count] = '\0';
+ //copy file into memory
+ file.read(buffer, char_count);
+ buffer[char_count] = '\0';
 
-        file.close();
-    }
+ file.close();
+ }
 
-    return buffer;
-}
-*/
+ return buffer;
+ }
+ */
 
-string createOutputFileName(const string &inputFileName, const string &outputDir,
-        const string &ext) {
+string createOutputFileName(const string &inputFileName,
+        const string &outputDir, const string &ext) {
     string input_file_name;
     char path_separator = '/';
 
@@ -166,7 +168,7 @@ FILE *open_file_stream(const string &input_file_name) {
 }
 
 istream *open_file_istream(const string &input_file_name) {
-    ifstream *in = new ifstream (input_file_name.c_str());
+    ifstream *in = new ifstream(input_file_name.c_str());
     if (!in || !(*in)) {
         if (!in)
             throw IOException("no more free memory", "");
@@ -196,6 +198,9 @@ istream *_open_data_file_istream(const string &path,
 
 istream *open_data_file_istream(const string &path,
         const string &input_file_name, const string &start) {
+    if (!input_file_name.size())
+        throw IOException("empty file name", input_file_name);
+
     istream *in = 0;
     if (input_file_name.size() && contains_path(input_file_name)) {
         in = _open_data_file_istream("", input_file_name);
@@ -308,4 +313,6 @@ string get_input_file_name(const string &file_name) {
         return "";
 
     return CHROOT_INPUT_DIR + file_name;
+}
+
 }

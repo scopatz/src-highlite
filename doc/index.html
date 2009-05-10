@@ -4,12 +4,14 @@
 <meta name="Author" content="Lorenzo Bettini"><title>GNU Source-highlight - GNU Project - Free Software Foundation (FSF)</title></head>
 <body style="background-color: rgb(255, 255, 255);">
 <h1><a class="mozTocH1" name="mozTocId593827"></a>
-GNU Source-highlight 2.11.1</h1>
+GNU Source-highlight 3.0</h1>
 <p>by <a href="http://www.lorenzobettini.it">Lorenzo
 Bettini</a> </p>
 <p>This program, <i>given a source file, produces a
 document with
-syntax highlighting</i>. </p>
+syntax highlighting</i>. It also provides a <b>C++ highlight library</b>
+<font color="red">(new)</font>
+(since version 3.0).</p>
 <p>
 Source-highlight reads source language specifications
 dynamically, thus it can be easily extended (without recompiling
@@ -48,10 +50,11 @@ supported
 (in alphabetical order):<br>
 </p>
 <ul>
-<li> <i>Ada</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>Ada</i></li>
 <li> <i>Autoconf files</i></li>
 <li> <i>C/C++</i></li>
 <li> <i>C#</i></li>
+<li> <i>Configuration files (generic)</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>Bib</i></li>
 <li> <i>Bison</i></li>
 <li> <i>Caml</i></li>
@@ -78,6 +81,7 @@ supported
 <li> <i>ML</i></li>
 <li> <i>Pascal</i></li>
 <li> <i>Perl</i></li>
+<li> <i>pkg-config files</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>PHP</i></li>
 <li> <i>Postscript</i></li>
 <li> <i>Prolog</i></li>
@@ -85,13 +89,13 @@ supported
 <li> <i>Python</i></li>
 <li> <i>RPM Spec files</i></li>
 <li> <i>Ruby</i></li>
-<li> <i>Scala</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>Scala</i></li>
 <li> <i>Shell</i></li>
 <li> <i>S-Lang</i></li>
 <li> <i>Sql</i></li>
 <li> <i>Tcl</i></li>
 <li> <i>XML</i></li>
-<li> <i>XOrg conf files</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>XOrg conf files</i></li>
 </ul>
 <p><font color="#990000">NOTICE: now the name of the
 program is </font><b><i><font color="#663366">source-highlight</font></i></b><font color="#990000">:
@@ -110,8 +114,6 @@ documentation, please read this file. </p>
 program and its main home page is at GNU site: <br>
 <a href="http://www.gnu.org/software/src-highlite">http://www.gnu.org/software/src-highlite</a>
 </p>
-For further information, please consult the <a href="source-highlight.html">manual</a>.<br>
-<br>
 <ol id="mozToc">
 <!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6--><li><a href="#mozTocId593827"> GNU Source-highlight 2.7</a>
 <ol>
@@ -146,6 +148,9 @@ manual</a> shipped with source-highlight.
 It details all the file formats used by source-highlight and
 also contains documentation on how to create your own language
 definitions.
+<p>
+If you want to use source-highlight library inside your C++
+programs, you may want to read the <a href="source-highlight.html">manual of the library</a> and the <a href="api/index.html">API documentation</a>.
 <h2><a class="mozTocH2" name="mozTocId127780"></a>
 Download</h2>
 You can download it from GNU's ftp site: <br>
@@ -231,125 +236,8 @@ provided by boost (<a href="http://www.boost.org">http://www.boost.org</a>),
 so you need to install at least the regex library from boost.&nbsp;
 Most GNU/Linux distributions provide this library already in a compiled
 form.<br>
-<h2><a class="mozTocH2" name="mozTocId120994"></a>Usage
-and examples</h2>
-source-highlight only does a lexical analysis of the source code, so
-the program source is assumed to be correct!<br>
-<br>
-Finally, there is texinfo documentation.&nbsp; It is also available
-as
-an html file, and it is also <a href="source-highlight.html">available
-on-line</a>.<br>
-<p>Here we only show some examples of generated files.<br>
-</p>
-<p>Here are some links to some of the C and C++ sources of
-source-highlight colored with source-highlight itself: </p>
-<blockquote><a href="source-highlight.cc.html">source-highlight.cc.html</a></blockquote>
-generated with the following command
-<blockquote>
-<pre>source-highlight -s cpp -f html --doc source-highlight.cc</pre>
-</blockquote>
-And obviously it works with header file as well:
-<blockquote><a href="cmdline.h.html">cmdline.h.html</a></blockquote>
-created with the command:
-<blockquote>
-<pre>source-highlight -s cpp -f html *.h --css="mono.css"</pre>
-</blockquote>
-Here are some examples of Java files processed with source-highlight
-(in most of them we have used the <a href="Hello.java" hello.java="">Hello.java</a> to make some test).
-Here's how <a href="Hello1.html">Hello1.html</a>, <a href="Hello2.html">Hello2.html</a>, <a href="Hello3.html">Hello3.html</a>,
-<a href="Hello4.html">Hello4.html</a>, <a href="Hello5.html">Hello5.html</a>,
-<a href="Hello_h_f.html">Hello_h_f.html</a>, <a href="Hello_lines.html">Hello_lines.html</a>,
-<a href="Hello_xhtml.html">Hello_xhtml.html</a>, <a href="Hello_xhtml2.html">Hello_xhtml2.html</a>, <a href="Hello_notfixed.html">Hello_notfixed.html</a>
-were created:
-<pre>source-highlight -s java -f html -i Hello.java -o Hello1.html<br>source-highlight -s java -f html --input Hello.java --output Hello2.html --doc<br>source-highlight -s java -f html -i Hello.java -o Hello3.html --title "Happy Java with java2html :-)" --tab 3<br>source-highlight -s java -f html &lt; Hello.java &gt; Hello4.html --title "and what about CSS :-)" --css "Hello.css"<br>source-highlight -s java -f html &lt; Hello.java &gt; Hello5.html --title "Wooo... this is quite dark ;-D" --css "mono-alt.css"<br>source-highlight -s java -f html --doc *.java<br>Processed Hello.java&nbsp;&nbsp; <i>(creates Hello.java.html)<br></i>source-highlight -s java -f html --doc -i Hello.java -o Hello_h_f.html --style-file="default.style" --header="header.html" --footer="footer.html"<br>source-highlight -s java -f html --line-number --doc -i Hello.java -o Hello_lines.html<br>source-highlight -s java -f xhtml --doc -i Hello.java -o Hello_xhtml.html --css xhtml.css<br>source-highlight -s java -f xhtml --doc -i Hello.java -o Hello_xhtml2.html --style-file default.style<br>source-highlight -s java --outlang-def=html_notfixed.outlang -i Hello.java -o Hello_notfixed.html --style-file default.style</pre>
-Here's another example:
-<blockquote><a href="Hello_h_f.html">Hello_h_f.html</a></blockquote>
-Created with the command (notice that this one uses both CSS file and
-headers and footers):
-<blockquote>
-<pre>source-highlight -s java -f html -i Hello.java -o Hello_h_f.html&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --css="cpp2html.css"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --header="./header.html" --footer="./footer.html"</pre>
-</blockquote>
-Source-highlight can also generate HTML code to be
-embedded (i.e., copied and pasted) inside a Javadoc comment (or another
-kind of comment framework such as Doxygen). &nbsp;This way, when
-you
-run javadoc on such a file, the resulting generated html documentation
-files will have the code snippets highlighted. &nbsp;For instance,
-consider this piece of code, <a href="UsageExample.html">UsageExample.java</a>,
-representing an example of usage of the class SimpleClass; we would
-like to embed this code (formatted) into a javadoc comment of
-SimpleClass, so we process it with the option <span style="font-family: monospace;">-f javadoc</span> and
-we copy the result into the comment, as illustrated in <a href="SimpleClass.html">SimpleClass.java</a>. When we
-process this file with javadoc, we obtain that code formatted in the
-documentation html file: <a href="SimpleClass-doc.html">SimpleClass-doc.html</a>.
-&nbsp;Doesn't it look nice :-)<br><br>You
-can also specify several line ranges, so that you produce an output
-only with those specific lines of your input file; you can specify a
-number of lines for the sorrounding context, and the separator of
-ranges; for instance, this <a href="test_linerange_sep.html">output</a> was produced with the following command (note how the context is shown in gray, as specified in the style file):<br><blockquote>
-<pre>ssource-highlight -s java -f html <br>            --line-range="12-18","29-34" --line-number --range-context=3 --range-separator="&lt;...&gt;" <br>            -i test.java -o test_linerange_sep.html</pre></blockquote>Here's the output of source-highlight applied to a Prolog program
-(through the option `<tt>source-highlight -s prolog</tt>`: <a href="test.pl.html">test.pl.html</a>.&nbsp; This
-one is an
-highlighted Perl program (through the option `<tt>source-highlight
--s
-prolog</tt>`): <a href="test.pm.html">test.pm.html</a>.&nbsp;
-Here's
-an
-highlighted PHP3 program: <a href="test.php3.html">test.php3.html</a>.
-And here's a Python program: <a href="test.py.html">test.py.html</a>.&nbsp;
-This the flex scanner for flex files <a href="flex_scanner.ll.html">flex_scanner.ll.html</a>.
-This is a Ruby
-program: <a href="test.rb.html">test.rb.html</a>.
-This is a Javascript
-program <a href="test.js.html">test.js.html</a>.&nbsp;
-This is a Lua
-test program <a href="test.lua.html">test.lua.html</a>.&nbsp;
-This is
-a Caml test program <a href="test.ml.html">test.ml.html</a>
-and this
-is an Sml test program <a href="test.sml.html">test.sml.html</a>.&nbsp;
-<br>
-<br>
-Here are some log files formatted using the color file <a href="syslog.style.html">syslog.style</a>: <br>
-<ul>
-<li><a href="test.log.html">test.log.html</a>,</li>
-<li><a href="access.log.html">access.log.html</a>,</li>
-<li><a href="auth.log.html">auth.log.html</a>,</li>
-<li><a href="error.log.html">error.log.html</a>,</li>
-<li><a href="syslog.log.html">syslog.log.html</a>.</li>
-</ul>
-<p>
-This is the language definition file for C/C++: <a href="cpp.lang.html">cpp.lang.html</a>, the one for
-the
-log files above, <a href="log.lang.html">log.lang.html</a>,
-and the language definition file for the language definition
-syntax itself: <a href="langdef.lang.html">langdef.lang.html</a>.
-</p>
-<p>
-Here's the html output of test.java.html formatted in html
-itself: <a href="test.htm.html">test.htm.html</a>.<br>
-<br>
-and here's the output of test.java.tex formatted in
-html: <a href="test.java.tex.html">test.java.tex.html</a>
-</p>
-<p>These HTML outputs contain cross references,
-<a href="test_refs.h.html">test_refs.h.html</a>,
-<a href="test_refs.cpp.html">test_refs.cpp.html</a>,
-generated with the following command:
-</p>
-<blockquote>
-<pre>source-highlight -s cpp -f html --title="Contains references to tags" <br> --gen-references=inline test_refs.h test_refs.cpp</pre>
-</blockquote>
-<h2><a class="mozTocH2" name="mozTocId323328"></a>Style
-files</h2>
-<p>Since version 2.6, source-highlight can use
-CSS style files (limited support) as style files for
-coloring and formatting the output. Here you can find the
-output using all these files shipped with source-highlight
-(these were adapted from those provided by <a href="http://shjs.sourceforge.net">SHJS</a>):</p>
-<p><a href="style_examples.html">Style examples</a>
-(huge file).</p>
+<h2><a class="mozTocH2" name="mozTocId120994"></a><a href="examples.html">Usage
+and examples</a></h2>
 <h2><a class="mozTocH2" name="mozTocId222354"></a>Related
 Software and Links</h2>
 <p>Here we list some software related to source-highlight in the

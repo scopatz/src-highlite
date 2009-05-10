@@ -1,7 +1,7 @@
 //
 // C++ Interface: langelemsprinter
 //
-// Description: 
+// Description:
 //
 //
 // Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2006
@@ -16,16 +16,18 @@
 #include <string>
 #include <ostream>
 
-/**
-Prints all the language elements
+namespace srchilite {
 
-	@author Lorenzo Bettini <http://www.lorenzobettini.it>
+/**
+ * Prints all the language elements.
+ * his class uses dynamic overloading and it must be processed by doublecpp,
+ * http://doublecpp.sf.net, in case you need to modify it.
 */
 class LangElemsPrinter
 {
     typedef std::set<std::string> SetOfElements;
     SetOfElements setOfElements;
-    
+
 public:
     LangElemsPrinter();
 
@@ -47,5 +49,7 @@ protected:
     void (const NamedSubExpsLangElem *elem);
     endbranches
 };
+
+}
 
 #endif

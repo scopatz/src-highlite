@@ -17,7 +17,7 @@ This manual is for GNU Source-highlight
 (version @value{VERSION}, @value{UPDATED}),
 which given a source file, produces a document with syntax highlighting.
 
-Copyright @copyright{} 2005-2008 Lorenzo Bettini.
+Copyright @copyright{} 2005-2008 Lorenzo Bettini, @value{myhomepage}.
 
 @quotation
 Permission is granted to copy, distribute and/or modify this document
@@ -45,7 +45,7 @@ Software Foundation raise funds for GNU development.''
 @subtitle for GNU Source-highlight Version @value{VERSION}
 @subtitle updated on @value{UPDATED-MONTH}
 
-@author by Lorenzo Bettini
+@author by Lorenzo Bettini, @value{myhomepage}
 
 @page
 @vskip 0pt plus 1filll
@@ -113,14 +113,21 @@ later in this manual (@ref{Output Language Definitions}).  Since version
 field names, etc.) by relying on the program @emph{ctags},
 @url{http://ctags.sourceforge.net} (@ref{Generating References}).
 
+@cindex library
+Since version 3.0, GNU Source-highlight also provides a C++ library
+(which is used by the main program itself), that can be used
+by C++ programmers to add highlighting functionalities to their
+programs.  @inforef{Introduction,,source-highlight-info}.
+
 @menu
 * Supported languages::         
+* The program source-highlight-settings::  
 * Notes on some languages::     
 * Using source-highlight as a simple formatter::  
 * Related Software and Links::  
 @end menu
 
-@node Supported languages, Notes on some languages, Introduction, Introduction
+@node Supported languages, The program source-highlight-settings, Introduction, Introduction
 @section Supported languages
 
 The complete list of languages (indeed, file extensions) natively
@@ -157,7 +164,26 @@ please let me know.  Moreover, if you have a program example in a
 language that's not included in the @file{tests} directory, please send
 it to me so that I can include it in the test suite.
 
-@node Notes on some languages, Using source-highlight as a simple formatter, Supported languages, Introduction
+@node The program source-highlight-settings, Notes on some languages, Supported languages, Introduction
+@section The program @code{source-highlight-settings}
+
+@cindex source-highlight-settings
+Since version 3.0, GNU Source-highlight includes also the program
+@code{source-highlight-settings}, which can be used to check whether
+source-highlight will be able find its language definition files, and
+other configuration files, and in case, to store the correct settings in
+a configuration file, in the user home directory.
+
+@cindex source-highlight.conf
+In particular, the stored configuration file will be called
+@file{source-highlight.conf} and stored in
+@file{$HOME/.source-highlight/}.
+
+@cindex @code{--data-dir}
+For the moment, this file only stores the default value for
+the @code{--data-dir} option.
+
+@node Notes on some languages, Using source-highlight as a simple formatter, The program source-highlight-settings, Introduction
 @section Notes on some languages
 
 In this section I'd like to go into details on the highlighting of some
@@ -385,15 +411,20 @@ Files will be installed in the following directories:
 @table @code
 @item Executables
         @code{prefix/bin}
-@item docs and samples
+@item docs and output examples
         @code{prefix/share/doc/source-highlight}
+@item library examples
+        @code{prefix/share/doc/source-highlight/examples}
+@item library API documentation
+        @code{prefix/share/doc/source-highlight/api}
 @item conf files           
         @code{prefix/share/source-highlight}
 @end table
 
 Default value for prefix is @code{/usr/local} 
 but you may change it with @code{--prefix}
-option to configure.
+option to configure.  For further @code{configure} options, you
+can run @code{configure --help}.
 
 @cindex bash completion
 Tiziano Muller wrote a bash completion configuration file for
@@ -404,6 +435,20 @@ completion script searches for configuration file is
 @code{/etc/bash_completion.d}.  Thus, we suggest you explicitly specify
 this directory with the configuration script command line option
 @code{--with-bash-completion}.
+
+@cindex library
+@cindex @code{--with-doxygen}
+@cindex doxygen
+If you want to build and install the API documentation of
+Source-highlight library, you need to run @code{configure} with the
+option @code{--with-doxygen}, but you need the program @emph{Doxygen},
+@url{http://www.doxygen.org}, to build the documentation.
+The documentation will be installed in the following directory:
+
+@table @code
+@item Library API documentation
+        @code{prefix/share/doc/source-highlight/api}
+@end table
 
 
 @cindex java2html
@@ -819,9 +864,10 @@ If @code{STDOUT} string is passed as @code{-o (--output)} option, then
 the output is forced to the standard output anyway.
 
 If @code{-s (--src-lang)} is not specified, the source language is
-inferred by the extension of the input file (this, of course, does not
-work with standard input redirection).  For further details, see
-@ref{How the input language is discovered}.
+inferred by the extension of the input file or from the file name itself
+(possibly using also lower case versions); this, of course, does not
+work with standard input redirection.  For further details, see @ref{How
+the input language is discovered}.
 
 If @code{-f (--out-format)} is not specified, the output will be
 produced in HTML.
@@ -908,6 +954,7 @@ format to use (if not specified explicitly with @code{--out-format} or
 keywords, comments, etc.), and source and output language definitions.
 These files will be explained in the next sections.
 
+@cindex @code{--data-dir}
 If the directory for such files is not explicitly specified with the
 command line option @code{--data-dir}, these files are searched for in
 the following order:
@@ -1301,6 +1348,20 @@ in @ref{Simple Usage}).
 
 @c Formatting copied from the Texinfo 4.0 manual.
 @table @code
+
+@item --data-dir
+@cindex @code{--data-dir}
+Source-highlight, during the execution, will need some files, such as,
+e.g., language definition files, output format definition files, etc.
+These files are installed in @code{prefix/share/source-highlight} where
+@code{prefix} is chosen at compilation time (see @xref{Installation}).
+Thus, source-highlight should be able to find all the files it needs
+independently.  However, if you want to override this setting, e.g.,
+because you have your own language definition files, or simply because
+you installed a possible source-highlight binary in a different
+directory from the one used during the compilation, you can use the
+command line option @code{--data-dir}.
+
 @item --doc
 @itemx -d
 If you want a stand alone output document (i.e., an output file that is
@@ -1411,6 +1472,27 @@ the examples in @ref{Line ranges (with context)}).  The separator string
 is preformatted automatically, so, e.g., you don't have to escape
 special output characters, such as the @{ @} in texinfo output.
 
+@cindex regex ranges
+@item --regex-range
+
+Ranges can be expressed also using regular expressions, with the command
+line option @code{--regex-range}.  In this case the beginning of the
+range will be detected by a line containing (in any point) a string
+matching the specified regular expression; the end will be detected by a
+line containing a string matching the same regular expression that
+started the range.  This feature is very useful when we want to document
+some code (e.g., in this very manual) by showing only specific parts,
+that are delimited in a ad-hoc way in the source code (e.g., with
+specific comment patterns).  You can see some usage examples
+in @xref{Regex ranges}.
+
+The specified strings (this option accepts multiple occurrences) must be
+valid regular expressions (thus you must escape special characters
+accordingly), otherwise you will get an error.
+
+Furthermore, @code{--line-range} and @code{--regex-range} cannot coexist
+in the same command line.
+
 @item --failsafe
 @cindex failsafe
 If no language specification is found, an error will be printed and the
@@ -1482,8 +1564,10 @@ will be interpreted as a Tcl script, and not as bash script.
 
 This inference mechanism is performed, by default, in case the input
 language is neither explicitly specified nor found in the language map
-file by using the input file extension (the input file may also have no
-extension at all).
+file by using the input file extension or the filename itself, possibly
+also the lowercase version (the input file may also have no extension at
+all, but, for instance, a @file{ChangeLog} input file will be
+highlighted using @file{changelog.lang}).
 
 @cindex @code{--infer-lang}
 Furthermore, this mechanism can be given priority with the command line
@@ -2129,7 +2213,8 @@ state/environment is that the state/environment starts after matching one
 of the alternatives.  And where will it end?   In this case you must
 explicitly exit the environment.   For instance, you can say that, when
 inside a state/environment, a specific language definition, when
-encountered also exits the environment (with the keyword @code{exit}).
+encountered also exits the environment, with the keyword @code{exit}
+(you can also specify the number of states to exit).
 You can even exit all the environments with @code{exitall}.   For
 instance, the following definition, highlights a non empty string
 following a web method:
@@ -4041,7 +4126,7 @@ Source-highlight (e.g., because the tags file has already been
 generated) then @code{--ctags} must be passed an empty string,
 @code{""}.  In this case or when the specified @code{ctags} command line
 generates an alternative output tag file (the default generated file is
-@file{tags}), one can specify the exact tag file with the command line
+@file{tags}), one must specify the exact tag file with the command line
 option @code{--ctags-file}.
 
 Once the tag file is generated, Source-highlight relies on the library
@@ -4070,6 +4155,7 @@ numbers are visible everywhere :-).
 * References::                  
 * Line ranges::                 
 * Line ranges (with context)::  
+* Regex ranges::                
 @end menu
 
 @node Simple example, References, Examples, Examples
@@ -4108,8 +4194,9 @@ the @code{_TEXTGEN_H} comment in the last comment line).
 @node Line ranges, Line ranges (with context), References, Examples
 @section Line ranges
 
+@cindex line ranges
 This is an example that uses @code{--line-range} command line
-option:
+option on the input file shown in @xref{Simple example}:
 
 @example
 source-highlight -f texinfo -i test.java -n \
@@ -4125,9 +4212,12 @@ the highlighting is respected: the starting of the comment is not
 printed, but the remaining parts of the comment are correctly
 highlighted as comment.
 
-@node Line ranges (with context),  , Line ranges, Examples
+@node Line ranges (with context), Regex ranges, Line ranges, Examples
 @section Line ranges (with context)
 
+@cindex line ranges
+@cindex range context
+@cindex range separator
 This is an example that uses the command line option @code{--line-range}
 together with the @code{--range-context} and @code{--range-separator}:
 
@@ -4149,6 +4239,71 @@ context lines are not highlighted.  Moreover, the range separator line
 separator string is preformatted automatically, so, e.g., you don't have
 to escape special output characters, such as the @{ @} in texinfo
 output).
+
+@node Regex ranges,  , Line ranges (with context), Examples
+@section Regex ranges
+
+@cindex regex ranges
+Ranges can be expressed also using regular expressions, with the command
+line option @code{--regex-range}.  In this case the beginning of the
+range will be detected by a line containing (in any point) a string
+matching the specified regular expression; the end will be detected by a
+line containing a string matching the same regular expression that
+started the range.  This feature is very useful when we want to document
+some code (e.g., in this very manual) by showing only specific parts,
+that are delimited in a ad-hoc way in the source code (e.g., with
+specific comment patterns).
+
+For instance, the following output was produced, starting from the
+source file shown in @xref{Simple example}, by specifying:
+
+@example
+--regex-range="/// [[:alpha:]]+"
+@end example
+
+@noindent
+Note that the lines containing @code{/// class}, which determine the
+range, are not shown in the output:
+
+@include test_regexrange1.java.texinfo
+
+Furthermore, the line numbers are consistent with the lines of the
+original file.
+
+If we want to output only what is included between @code{/* main */}, we
+specify (note that we must escape the special regular expression
+character @code{*}):
+
+@example
+--regex-range="/\* main \*/"
+@end example
+
+@noindent
+and we get:
+
+@include test_regexrange_main.java.texinfo
+
+If we want to show only the methods, which in the source file
+are delimited by comment lines containing the method's name, we can specify:
+
+@example
+--regex-range="/\* [[:alpha:]]+ \*/"
+@end example
+
+@include test_regexrange_methods.java.texinfo
+
+In this case, we might have also specified:
+
+@example
+--regex-range="/\* main \*/","/\* mymethod \*/"
+@end example
+
+@noindent
+since @code{--regex-range} accepts multiple regular expressions.
+
+IMPORTANT: the order of regular expression specification is crucial,
+since they are tested in the same order they are specified at the
+command line.
 
 @node Problems, Mailing Lists, Examples, Top
 @chapter Reporting Bugs

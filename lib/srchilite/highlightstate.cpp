@@ -9,6 +9,8 @@
 #include "tostringcollection.h"
 #include "highlighttoken.h"
 
+namespace srchilite {
+
 unsigned int HighlightState::global_id = 1;
 
 HighlightState::HighlightState(const std::string &e) :
@@ -88,4 +90,6 @@ void HighlightState::replaceReferences(const ReplacementList &rep) {
             ruleList[i]->replaceReferences(rep);
         }
     }
+}
+
 }

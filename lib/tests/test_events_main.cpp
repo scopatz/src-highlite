@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 
-#include "eventgenerator.h"
-#include "my_sstream.h"
+#include "srchilite/eventgenerator.h"
+#include <sstream>
 #include "asserttestexit.h"
 
 using namespace std;
+using namespace srchilite;
 
 ostringstream buffer;
 
@@ -33,7 +34,7 @@ int main() {
     MyListener l1("l1"), l2("l2"), l3("l3");
 
     EventGenerator<MyListener, MyEvent> eventGenerator;
-    
+
     assertFalse(eventGenerator.hasListeners());
 
     eventGenerator.addListener(&l1);
@@ -41,7 +42,7 @@ int main() {
     eventGenerator.addListener(&l3);
 
     assertTrue(eventGenerator.hasListeners());
-    
+
     eventGenerator.notify(MyEvent("foo"));
 
     cout << buffer.str() << endl;
@@ -51,7 +52,7 @@ int main() {
             buffer.str());
 
     buffer.str("");
-    
+
     eventGenerator.removeListener(&l2);
 
     eventGenerator.notify(MyEvent("bar"));

@@ -11,16 +11,32 @@
 #include <algorithm>
 #include <iostream>
 
-#include "formatter.h"
+#include "srchilite/formatter.h"
 
-typedef std::pair<std::string, std::string> FormatterLogEntry;
+using namespace srchilite;
+
+struct FormatterLogEntry {
+    /// the element name
+    const std::string first;
+
+    /// the string to format
+    const std::string second;
+
+    /// the start of the string in the paragraph
+    const int start;
+
+    FormatterLogEntry(const std::string &f, const std::string &s, const int i) :
+        first(f), second(s), start(i) {
+    }
+};
+
 typedef std::deque<FormatterLogEntry> FormatterLog;
 
 /**
  * A simple Formatter implementation that logs the strings to format into
  * a collection (each element is a pair: <element, string>
  */
-struct LogFormatter : public Formatter {
+struct LogFormatter: public Formatter {
     /// the log (shared with other formatters)
     FormatterLog &log;
 

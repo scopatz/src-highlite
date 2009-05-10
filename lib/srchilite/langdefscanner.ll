@@ -1,6 +1,6 @@
 %{
 /*
- * Copyright (C) 1999-2007, Lorenzo Bettini, http://www.lorenzobettini.it
+ * Copyright (C) 1999-2009, Lorenzo Bettini, http://www.lorenzobettini.it
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,13 +18,14 @@
  *
  */
 
-#include "my_sstream.h"
+#include <cstdlib>
+#include <sstream>
+#include "stringdef.h"
+#include "stringtable.h"
 #include "langdefparser.h"
 #include "langdefscanner.h"
 #include "fileutil.h"
 #include "regexpreprocessor.h"
-#include "stringdef.h"
-#include "stringtable.h"
 #include "ioexception.h"
 
 #include <stack>
@@ -39,20 +40,24 @@
 #define DEB2(s,s2)
 #endif
 
+//using srchilite::StringDef;
+
+//using namespace srchilite;
+
 static std::ostringstream buff;
 
-static StringTable *stringTable = 0;
+static srchilite::StringTable *stringTable = 0;
 
 static void buffer(const char *s);
 static void buffer_escape(const char *c);
 static const std::string *flush_buffer();
-static StringDef *flush_buffer_preproc();
+static srchilite::StringDef *flush_buffer_preproc();
 static void open_include_file(const char *file);
 static void close_include_file();
 
-ParseStructPtr parsestruct;
+srchilite::ParseStructPtr parsestruct;
 
-typedef std::stack<ParseStructPtr> ParseStructStack;
+typedef std::stack<srchilite::ParseStructPtr> ParseStructStack;
 static ParseStructStack parsestructstack;
 
 void
@@ -113,7 +118,7 @@ STRING \"[^\n"]+\"
 
   try {
     open_include_file(file_name);
-  } catch (IOException &e) {
+  } catch (srchilite::IOException &e) {
     langdef_lval.string = stringTable->newString(e.filename);
     return WRONG_INCLUDE_FILE;
   }
@@ -184,6 +189,8 @@ STRING \"[^\n"]+\"
 
 <INITIAL>{nl} { DEB("NEWLINE"); ++(parsestruct->line) ; }
 
+<INITIAL>[[:digit:]]+  { langdef_lval.level = atoi(yytext); return LEVEL ; }
+
 <INITIAL>.  { return yytext[0] ; }
 
 %%
@@ -205,23 +212,18 @@ const std::string *flush_buffer()
   return ret;
 }
 
-StringDef *flush_buffer_preproc()
+srchilite::StringDef *flush_buffer_preproc()
 {
-  StringDef *sd = new StringDef(RegexPreProcessor::preprocess(buff.str()), buff.str());
+  srchilite::StringDef *sd = 
+  	new srchilite::StringDef
+  		(srchilite::RegexPreProcessor::preprocess(buff.str()), buff.str());
   buff.str("");
   return sd;
 }
 
 void _open_file_to_scan(const string &path, const string &name)
 {
-  langdef_in = open_data_file_stream(path, name);
-}
-
-void open_file_to_scan(const string &path, const string &name)
-{
-  _open_file_to_scan(path, name);
-  stringTable = new StringTable;
-  langdef_restart(langdef_in);
+  langdef_in = srchilite::open_data_file_stream(path, name);
 }
 
 void open_include_file(const char *name)
@@ -229,12 +231,12 @@ void open_include_file(const char *name)
   string file_name = name;
   string path = parsestruct->path;
 
-  if (! contains_path(name) &&
-      contains_path(parsestruct->file_name))
-    path = get_file_path(parsestruct->file_name);
+  if (! srchilite::contains_path(name) &&
+      srchilite::contains_path(parsestruct->file_name))
+    path = srchilite::get_file_path(parsestruct->file_name);
 
   parsestructstack.push(parsestruct);
-  parsestruct = ParseStructPtr(new ParseStruct(path, file_name));
+  parsestruct = srchilite::ParseStructPtr(new srchilite::ParseStruct(path, file_name));
   _open_file_to_scan(path.c_str(), file_name.c_str());
 }
 
@@ -242,6 +244,15 @@ void close_include_file()
 {
   parsestruct = parsestructstack.top();
   parsestructstack.pop();
+}
+
+namespace srchilite {
+
+void open_file_to_scan(const string &path, const string &name)
+{
+  stringTable = new StringTable;
+  _open_file_to_scan(path, name);
+  langdef_restart(langdef_in);
 }
 
 void clear_langdefscanner() {
@@ -256,4 +267,6 @@ void close_langdefinputfile() {
 	  	fclose(langdef_in);
   	  yypop_buffer_state();
     } while ( YY_CURRENT_BUFFER );
+}
+
 }

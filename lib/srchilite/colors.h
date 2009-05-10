@@ -1,6 +1,8 @@
 #ifndef COLORS_H
 #define COLORS_H
 
+namespace srchilite {
+
 #define GREEN "green"
 #define RED "red"
 #define DARKRED "darkred"
@@ -28,5 +30,7 @@
 #define SYMBOL_C BLACK
 #define FUNCTION_C BLACK
 #define CBRACKET_C BLACK
+
+}
 
 #endif

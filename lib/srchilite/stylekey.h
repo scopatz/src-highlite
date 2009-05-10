@@ -19,10 +19,14 @@
 using std::list;
 using std::string;
 
+namespace srchilite {
+
 // used to store a key
 typedef string KeyType;
 
 // used to store the keys of styles
 typedef list<KeyType> KeyList;
+
+}
 
 #endif

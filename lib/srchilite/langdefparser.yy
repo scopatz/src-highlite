@@ -1,6 +1,6 @@
 %{
 /*
- * Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
+ * Copyright (C) 1999-2009 Lorenzo Bettini <http://www.lorenzobettini.it>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,12 @@
 
 using std::cerr;
 using std::string;
+
+using namespace srchilite;
+
+extern int langdef_lex() ;
+extern FILE *langdef_in;
+extern ParseStructPtr parsestruct;
 
 static void yyerror( const char *s ) ;
 static void yyerror( const string &s ) ;
@@ -86,7 +92,7 @@ struct ElementNamesList : ElementNames {
   int tok ; /* command */
   bool booloption ;
   const std::string * string ; /* string : id, ... */
-  class StringDef *stringdef;
+  class srchilite::StringDef *stringdef;
   class StringDefs *stringdefs;
   class LangElem *langelem;
   class StateLangElem *statelangelem;
@@ -96,11 +102,13 @@ struct ElementNamesList : ElementNames {
   struct Key *key;
   class ElementNamesList *keys;
   int flag ;
+  unsigned int level;
 };
 
 %token <tok> BEGIN_T END_T ENVIRONMENT_T STATE_T MULTILINE_T DELIM_T START_T 
 %token <tok> ESCAPE_T NESTED_T EXIT_ALL EXIT_T VARDEF_T REDEF_T SUBST_T NONSENSITIVE_T 
 %token <tok> WRONG_BACKREFERENCE
+%token <level> LEVEL
 %token <string> KEY STRINGDEF REGEXPNOPREPROC VARUSE BACKREFVAR WRONG_INCLUDE_FILE
 %token <stringdef> REGEXPDEF
 
@@ -110,7 +118,8 @@ struct ElementNamesList : ElementNames {
 %type <langelems> elemdefs
 %type <statestartlangelem> complexelem
 %type <booloption> multiline startnewenv nested nonsensitive
-%type <tok> exitall redefsubst
+%type <tok> exitlevel redefsubst
+%type <level> level
 %type <key> key;
 %type <keys> keys;
 
@@ -144,13 +153,13 @@ elemdefs : elemdefs elemdef {
           }
          ;
 
-elemdef : redefsubst complexelem exitall
+elemdef : redefsubst complexelem exitlevel
           {
             $$ = $2;
-            if ($3 > 1)
-              $2->set_exitall();
+            if ($3 < 0)
+              $2->setExitAll();
             if ($3 > 0)
-              $2->set_exit();
+              $2->setExit($3);
             UPDATE_REDEF($2, $1);
           }
         | redefsubst startnewenv complexelem BEGIN_T elemdefs END_T
@@ -223,9 +232,13 @@ escapedef : ESCAPE_T stringdef { $$ = $2; }
         | { $$ = 0; }
         ;
 
-exitall: EXIT_ALL { $$ = 2; }
-        | EXIT_T { $$ = 1; }
+exitlevel: EXIT_ALL { $$ = -1; }
+        | EXIT_T level { $$ = $2; }
         | { $$ = 0; }
+        ;
+
+level: LEVEL { $$ = $1; }
+        | { $$ = 1; }
         ;
 
 startnewenv : ENVIRONMENT_T { $$ = true; }
@@ -337,6 +350,8 @@ yyerror( const string &s )
   yyerror(s.c_str());
 }
 
+namespace srchilite {
+
 LangElems *
 parse_lang_def()
 {
@@ -393,3 +408,4 @@ parse_lang_def(const char *path, const char *name)
   return current_lang_elems;
 }
 
+}

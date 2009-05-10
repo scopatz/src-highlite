@@ -7,6 +7,8 @@
 #ifndef HIGHLIGHTEVENT_H_
 #define HIGHLIGHTEVENT_H_
 
+namespace srchilite {
+
 class HighlightToken;
 
 /**
@@ -15,11 +17,17 @@ class HighlightToken;
  */
 struct HighlightEvent {
     /// the type of the event
-    enum HighlightEventType {FORMAT = 0, FORMATDEFAULT, ENTERSTATE, EXITSTATE};
+    enum HighlightEventType {
+        FORMAT = 0, ///< a standard formatting event
+        FORMATDEFAULT, ///< formatting something as normal
+        ENTERSTATE, ///< entering a new formatting state
+        EXITSTATE ///< exiting a formatting state
+    };
 
     /// the token corresponding to the event
     const HighlightToken &token;
-    
+
+    /// the type of event
     HighlightEventType type;
 
     HighlightEvent(const HighlightToken &_token, HighlightEventType _type = FORMAT) :
@@ -28,5 +36,7 @@ struct HighlightEvent {
     ~HighlightEvent() {
     }
 };
+
+}
 
 #endif /*HIGHLIGHTEVENT_H_*/

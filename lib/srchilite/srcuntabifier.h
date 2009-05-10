@@ -9,13 +9,12 @@
 
 #include "preformatter.h"
 
+namespace srchilite {
+
 using std::string;
 
 /**
  * PerFormratter to convert tabs to spaces before generation
- * 
- * @author Don Stauffer Revision: June 2003
- * Lorenzo Bettini Revision: November 2004, mostly completely rewritten
  */
 class Untabifier : public PreFormatter {
 public:
@@ -25,7 +24,7 @@ public:
     }
 
     virtual const string doPreformat(const std::string &text);
-    
+
 private:
 
     /// the number of spaces corresponding to a tab char
@@ -34,5 +33,7 @@ private:
     /// the counter of characters
     unsigned int n_;
 };
+
+}
 
 #endif // SRCUNTABIFIER_H

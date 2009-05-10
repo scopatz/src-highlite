@@ -15,6 +15,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 VarDefinitions::VarDefinitions()
 {
 }
@@ -45,4 +47,6 @@ bool
 VarDefinitions::contains(const string &name)
 {
   return find(name) != end();
+}
+
 }

@@ -1,15 +1,17 @@
 #include <iostream>
 
 #include "asserttestexit.h"
-#include "ctagscollector.h"
-#include "ctagsformatter.h"
-#include "formatterparams.h"
-#include "tostringcollection.h"
-#include "ctagsmanager.h"
-#include "ioexception.h"
-#include "my_sstream.h"
+#include "srchilite/ctagscollector.h"
+#include "srchilite/ctagsformatter.h"
+#include "srchilite/formatterparams.h"
+#include "srchilite/tostringcollection.h"
+#include "srchilite/ctagsmanager.h"
+#include "srchilite/ioexception.h"
+#include "srchilite/verbosity.h"
+#include <sstream>
 
 using namespace std;
+using namespace srchilite;
 
 #ifndef BASEDIR
 #define BASEDIR ""
@@ -106,10 +108,11 @@ int main() {
         assertEquals("cannot open tag file mytags4.", o.str());
     }
 
+    Verbosity::setVerbosity(true);
+
     // try with a wrong command
     try {
         CTagsManager ctagsManager3("mytags3", "foobarcommand", true, INLINE);
-        ctagsManager3.setVerbose(true);
         ctagsManager3.runCTagsCmd();
         assertTrue(false); // must not get here
     } catch (IOException &e) {
@@ -127,7 +130,6 @@ int main() {
     cout << "trying running " << ctagsCommand << endl;
 
     CTagsManager ctagsManager2("mytags2", ctagsCommand, true, INLINE);
-    ctagsManager2.setVerbose(true);
 
     _formatter = ctagsManager2.createCTagsFormatter(textStyles.refstyle);
     _formatter->setFileInfo(sourceFile, "readtags.html");

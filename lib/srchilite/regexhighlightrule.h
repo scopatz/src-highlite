@@ -11,6 +11,8 @@
 
 #include <boost/regex.hpp>
 
+namespace srchilite {
+
 /**
  * An implementation of HighlightRule using Boost regex library
  */
@@ -35,12 +37,14 @@ public:
             const MatchingParameters &params);
 
     virtual const std::string toString() const;
-    
+
     virtual void replaceReferences(const ReplacementList &rep);
-    
+
     virtual HighlightRule *clone();
 
     void setRegExp(const std::string &s);
 };
+
+}
 
 #endif /*REGEXHIGHLIGHTRULE_H_*/

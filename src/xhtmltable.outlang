@@ -5,3 +5,7 @@ doctemplate
 "</tt></pre></td></tr></tbody></table>"
 end
 
+nodoctemplate
+"<table style=\"background-color: $docbgcolor\"><tbody><tr><td><pre><tt>"
+"</tt></pre></td></tr></tbody></table>"
+end

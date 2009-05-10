@@ -13,6 +13,8 @@
 
 #include <string>
 
+namespace srchilite {
+
 class DocTemplate {
     std::string begin_repr, end_repr;
 public:
@@ -32,5 +34,7 @@ public:
         return end_repr;
     }
 };
+
+}
 
 #endif /*_DOCTEMPLATE_H_*/

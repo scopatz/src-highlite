@@ -6,10 +6,12 @@
 
 #include "ctagscollector.h"
 #include "formatterparams.h"
-#include "my_sstream.h"
+#include <sstream>
 #include "ioexception.h"
 
 using namespace std;
+
+namespace srchilite {
 
 /**
  * internal struct to store information about references
@@ -92,3 +94,4 @@ bool CTagsCollector::collectTags(const std::string &word, CTagsInfos &infos,
     return found || found_anchor;
 }
 
+}

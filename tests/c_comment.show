@@ -4,98 +4,206 @@ STATE 1 default: normal
       rule (comment) "\z" (exit level: 1, next: 0)
       rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
       rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
-      rule (preproc) "<\?xml" (exit level: 0, next: 3)
+      rule (keyword) "(?:<(?:(?:[sS][tT][yY][lL][eE])|(?:(?:[nN][oO])?[sS][cC][rR][iI][pP][tT])|(?:[xX][mM][pP])|(?:[iI][fF][rR][aA][mM][eE])|(?:[nN][oO][eE][mM][bB][eE][dD])|(?:[nN][oO][fF][rR][aA][mM][eE][sS])))" (exit level: 0, next: 3)
         STATE 3 default: normal
-          rule (preproc) "\?>" (exit level: 1, next: 0)
-          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=?)" (exit level: 0, next: 0)
           rule (string) "\"" (exit level: 0, next: 4)
             STATE 4 default: string
               rule (string) "\"" (exit level: 1, next: 0)
               rule (string) "\\." (exit level: 0, next: 0)
-      rule (preproc) "<!DOCTYPE" (exit level: 0, next: 5)
-        STATE 5 default: normal
-          rule (preproc) ">" (exit level: 1, next: 0)
-          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=?)" (exit level: 0, next: 0)
-          rule (string) "\"" (exit level: 0, next: 6)
-            STATE 6 default: string
+          rule (string) "'" (exit level: 0, next: 5)
+            STATE 5 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+          rule (keyword) "(?:>)" (exit level: 0, next: 6)
+            STATE 6 default: normal
+              rule (keyword) "(?:</(?:(?:[sS][tT][yY][lL][eE])|(?:(?:[nN][oO])?[sS][cC][rR][iI][pP][tT])|(?:[xX][mM][pP])|(?:[iI][fF][rR][aA][mM][eE])|(?:[nN][oO][eE][mM][bB][eE][dD])|(?:[nN][oO][fF][rR][aA][mM][eE][sS]))>)" (exit level: 2, next: 0)
+              rule (normal) "(?:[^<[:blank:]]+)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:(?:[tT][iI][tT][lL][eE])|(?:[tT][eE][xX][tT][aA][rR][eE][aA]))>" (exit level: 0, next: 7)
+        STATE 7 default: normal
+          rule (keyword) "</(?:(?:[tT][iI][tT][lL][eE])|(?:[tT][eE][xX][tT][aA][rR][eE][aA]))>" (exit level: 1, next: 0)
+          rule (preproc) "(?:&(?:[[:alnum:]]+);)" (exit level: 0, next: 0)
+          rule (normal) "(?:[^<[:blank:]]+)" (exit level: 0, next: 0)
+      rule (keyword) "(?:<[pP][lL][aA][iI][nN][tT][eE][xX][tT]>)" (exit level: 0, next: 8)
+        STATE 8 default: normal
+          rule (normal) "(?:.+)" (exit level: 0, next: 0)
+      rule (preproc) "<\?xml" (exit level: 0, next: 9)
+        STATE 9 default: normal
+          rule (preproc) "\?>" (exit level: 1, next: 0)
+          rule (string) "\"" (exit level: 0, next: 10)
+            STATE 10 default: string
               rule (string) "\"" (exit level: 1, next: 0)
               rule (string) "\\." (exit level: 0, next: 0)
-      rule (comment) "<!--" (exit level: 0, next: 7)
-        STATE 7 default: comment
+          rule (string) "'" (exit level: 0, next: 11)
+            STATE 11 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+      rule (preproc) "<![[:alpha:]]+" (exit level: 0, next: 12)
+        STATE 12 default: normal
+          rule (preproc) ">" (exit level: 1, next: 0)
+          rule (string) "\"" (exit level: 0, next: 13)
+            STATE 13 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "'" (exit level: 0, next: 14)
+            STATE 14 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+      rule (comment) "<!--" (exit level: 0, next: 15)
+        STATE 15 default: comment
           rule (comment) "-->" (exit level: 1, next: 0)
           rule (comment) "<!--" (exit level: 0, next: 0, nested)
       rule (keyword) "(?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>)" (exit level: 0, next: 0)
-      rule (keyword) "<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)" (exit level: 0, next: 8)
-        STATE 8 default: normal
-          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
-          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=?)" (exit level: 0, next: 0)
-          rule (string) "\"" (exit level: 0, next: 9)
-            STATE 9 default: string
-              rule (string) "\"" (exit level: 1, next: 0)
-              rule (string) "\\." (exit level: 0, next: 0)
-      rule (preproc) "(?:&(?:[[:alnum:]]+);)" (exit level: 0, next: 0)
-      rule (keyword) "(?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>)" (exit level: 0, next: 0)
-      rule (keyword) "<(?:/)?[[:alpha:]][[:alnum:]]*" (exit level: 0, next: 10)
-        STATE 10 default: normal
-          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
-          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=?)" (exit level: 0, next: 0)
-          rule (string) "\"" (exit level: 0, next: 11)
-            STATE 11 default: string
-              rule (string) "\"" (exit level: 1, next: 0)
-              rule (string) "\\." (exit level: 0, next: 0)
-      rule (type) "(?:\@[[:alpha:]]+)" (exit level: 0, next: 0)
-      rule (todo) "(?:(?:TODO|FIXME|BUG)(?:[:]?))" (exit level: 0, next: 0)
-  rule (comment) "//" (exit level: 0, next: 12)
-    STATE 12 default: comment
-      rule (comment) "\z" (exit level: 1, next: 0)
-  rule (comment) "/\*\*" (exit level: 0, next: 13)
-    STATE 13 default: comment
-      rule (comment) "\*/" (exit level: 1, next: 0)
-      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
-      rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
-      rule (preproc) "<\?xml" (exit level: 0, next: 14)
-        STATE 14 default: normal
-          rule (preproc) "\?>" (exit level: 1, next: 0)
-          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=?)" (exit level: 0, next: 0)
-          rule (string) "\"" (exit level: 0, next: 15)
-            STATE 15 default: string
-              rule (string) "\"" (exit level: 1, next: 0)
-              rule (string) "\\." (exit level: 0, next: 0)
-      rule (preproc) "<!DOCTYPE" (exit level: 0, next: 16)
+      rule (keyword) "<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)" (exit level: 0, next: 16)
         STATE 16 default: normal
-          rule (preproc) ">" (exit level: 1, next: 0)
-          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=?)" (exit level: 0, next: 0)
+          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
           rule (string) "\"" (exit level: 0, next: 17)
             STATE 17 default: string
               rule (string) "\"" (exit level: 1, next: 0)
               rule (string) "\\." (exit level: 0, next: 0)
-      rule (comment) "<!--" (exit level: 0, next: 18)
-        STATE 18 default: comment
-          rule (comment) "-->" (exit level: 1, next: 0)
-          rule (comment) "<!--" (exit level: 0, next: 0, nested)
-      rule (keyword) "(?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>)" (exit level: 0, next: 0)
-      rule (keyword) "<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)" (exit level: 0, next: 19)
+          rule (string) "'" (exit level: 0, next: 18)
+            STATE 18 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+      rule (preproc) "(?:&(?:[[:alnum:]]+);)" (exit level: 0, next: 0)
+      rule (keyword) "(?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:/)?[[:alpha:]][[:alnum:]]*" (exit level: 0, next: 19)
         STATE 19 default: normal
           rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
-          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=?)" (exit level: 0, next: 0)
           rule (string) "\"" (exit level: 0, next: 20)
             STATE 20 default: string
               rule (string) "\"" (exit level: 1, next: 0)
               rule (string) "\\." (exit level: 0, next: 0)
-      rule (preproc) "(?:&(?:[[:alnum:]]+);)" (exit level: 0, next: 0)
-      rule (keyword) "(?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>)" (exit level: 0, next: 0)
-      rule (keyword) "<(?:/)?[[:alpha:]][[:alnum:]]*" (exit level: 0, next: 21)
-        STATE 21 default: normal
-          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
-          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=?)" (exit level: 0, next: 0)
-          rule (string) "\"" (exit level: 0, next: 22)
-            STATE 22 default: string
-              rule (string) "\"" (exit level: 1, next: 0)
+          rule (string) "'" (exit level: 0, next: 21)
+            STATE 21 default: string
+              rule (string) "'" (exit level: 1, next: 0)
               rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
       rule (type) "(?:\@[[:alpha:]]+)" (exit level: 0, next: 0)
       rule (todo) "(?:(?:TODO|FIXME|BUG)(?:[:]?))" (exit level: 0, next: 0)
-  rule (comment) "/\*" (exit level: 0, next: 23)
+  rule (comment) "//" (exit level: 0, next: 22)
+    STATE 22 default: comment
+      rule (comment) "\z" (exit level: 1, next: 0)
+  rule (comment) "/\*\*" (exit level: 0, next: 23)
     STATE 23 default: comment
+      rule (comment) "\*/" (exit level: 1, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (keyword) "(?:<(?:(?:[sS][tT][yY][lL][eE])|(?:(?:[nN][oO])?[sS][cC][rR][iI][pP][tT])|(?:[xX][mM][pP])|(?:[iI][fF][rR][aA][mM][eE])|(?:[nN][oO][eE][mM][bB][eE][dD])|(?:[nN][oO][fF][rR][aA][mM][eE][sS])))" (exit level: 0, next: 24)
+        STATE 24 default: normal
+          rule (string) "\"" (exit level: 0, next: 25)
+            STATE 25 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "'" (exit level: 0, next: 26)
+            STATE 26 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+          rule (keyword) "(?:>)" (exit level: 0, next: 27)
+            STATE 27 default: normal
+              rule (keyword) "(?:</(?:(?:[sS][tT][yY][lL][eE])|(?:(?:[nN][oO])?[sS][cC][rR][iI][pP][tT])|(?:[xX][mM][pP])|(?:[iI][fF][rR][aA][mM][eE])|(?:[nN][oO][eE][mM][bB][eE][dD])|(?:[nN][oO][fF][rR][aA][mM][eE][sS]))>)" (exit level: 2, next: 0)
+              rule (normal) "(?:[^<[:blank:]]+)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:(?:[tT][iI][tT][lL][eE])|(?:[tT][eE][xX][tT][aA][rR][eE][aA]))>" (exit level: 0, next: 28)
+        STATE 28 default: normal
+          rule (keyword) "</(?:(?:[tT][iI][tT][lL][eE])|(?:[tT][eE][xX][tT][aA][rR][eE][aA]))>" (exit level: 1, next: 0)
+          rule (preproc) "(?:&(?:[[:alnum:]]+);)" (exit level: 0, next: 0)
+          rule (normal) "(?:[^<[:blank:]]+)" (exit level: 0, next: 0)
+      rule (keyword) "(?:<[pP][lL][aA][iI][nN][tT][eE][xX][tT]>)" (exit level: 0, next: 29)
+        STATE 29 default: normal
+          rule (normal) "(?:.+)" (exit level: 0, next: 0)
+      rule (preproc) "<\?xml" (exit level: 0, next: 30)
+        STATE 30 default: normal
+          rule (preproc) "\?>" (exit level: 1, next: 0)
+          rule (string) "\"" (exit level: 0, next: 31)
+            STATE 31 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "'" (exit level: 0, next: 32)
+            STATE 32 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+      rule (preproc) "<![[:alpha:]]+" (exit level: 0, next: 33)
+        STATE 33 default: normal
+          rule (preproc) ">" (exit level: 1, next: 0)
+          rule (string) "\"" (exit level: 0, next: 34)
+            STATE 34 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "'" (exit level: 0, next: 35)
+            STATE 35 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+      rule (comment) "<!--" (exit level: 0, next: 36)
+        STATE 36 default: comment
+          rule (comment) "-->" (exit level: 1, next: 0)
+          rule (comment) "<!--" (exit level: 0, next: 0, nested)
+      rule (keyword) "(?:<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)(?:/)?>)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:/)?[[:alpha:]](?:[[:word:]:.-]*)" (exit level: 0, next: 37)
+        STATE 37 default: normal
+          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
+          rule (string) "\"" (exit level: 0, next: 38)
+            STATE 38 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "'" (exit level: 0, next: 39)
+            STATE 39 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+      rule (preproc) "(?:&(?:[[:alnum:]]+);)" (exit level: 0, next: 0)
+      rule (keyword) "(?:<(?:/)?[[:alpha:]][[:alnum:]]*(?:/)?>)" (exit level: 0, next: 0)
+      rule (keyword) "<(?:/)?[[:alpha:]][[:alnum:]]*" (exit level: 0, next: 40)
+        STATE 40 default: normal
+          rule (keyword) "(?:/)?>" (exit level: 1, next: 0)
+          rule (string) "\"" (exit level: 0, next: 41)
+            STATE 41 default: string
+              rule (string) "\"" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "'" (exit level: 0, next: 42)
+            STATE 42 default: string
+              rule (string) "'" (exit level: 1, next: 0)
+              rule (string) "\\." (exit level: 0, next: 0)
+          rule (string) "/(?:[^/])*/" (exit level: 0, next: 0)
+          rule (type normal symbol normal string) "([^="[:blank:]>]+)([[:blank:]]*)(=)([[:blank:]]*)([^="'>]+)" (exit level: 0, next: 0)
+          rule (type normal symbol) "([^="[:blank:]>]+)([[:blank:]]*)(=)" (exit level: 0, next: 0)
+          rule (type) "(?:[[:alnum:]]+)" (exit level: 0, next: 0)
+      rule (type) "(?:\@[[:alpha:]]+)" (exit level: 0, next: 0)
+      rule (todo) "(?:(?:TODO|FIXME|BUG)(?:[:]?))" (exit level: 0, next: 0)
+  rule (comment) "/\*" (exit level: 0, next: 43)
+    STATE 43 default: comment
       rule (comment) "\*/" (exit level: 1, next: 0)
       rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
       rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)

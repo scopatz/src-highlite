@@ -7,10 +7,12 @@
  */
 
 #include "lineranges.h"
-#include "my_sstream.h"
+#include <sstream>
 
 #include <boost/regex.hpp>
 #include <cstdlib>
+
+namespace srchilite {
 
 /// regular expression for a single line
 static boost::regex singleNumber("\\s*([[:digit:]]+)\\s*");
@@ -107,4 +109,6 @@ RangeResult LineRanges::isInRange(const RangeElemType e) {
     }
 
     return NOT_IN_RANGE;
+}
+
 }

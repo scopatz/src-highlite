@@ -1,0 +1,49 @@
+<!doctype HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<title>Check HTML features &amp; <br></title>
+</head>
+<body bgcolor="white">
+<body bgcolor='white'>
+<body bgcolor=white>
+<pre><tt><i><font color="#9A1900">/*</font></i>
+
+<Style foo="bar"> &amp; <br> these must not be highlighted </STYle>
+
+<NOSCRIPT foo="bar"> &amp; 
+<br> 
+these must not be highlighted </noscript>
+
+   <p foo=/bar/>
+
+is syntactically valid and equivalent to
+
+   <p foo="bar">
+
+<textarea>
+Here elements such as <b> are not highlighted
+while entities such as &amp; are highlighted
+</textarea>
+
+</body>
+</html>
+
+<!-- this is an
+     added HTML comment
+     at the end of the file -->
+
+<plaintext>
+
+From then on, everything else won't be highlighted
+
+<textarea>
+Here elements such as <b> are not highlighted
+while entities such as &amp; are highlighted
+</textarea>
+
+</body>
+</html>
+
+<!-- this is an
+     added HTML comment
+     at the end of the file -->

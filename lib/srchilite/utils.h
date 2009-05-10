@@ -1,9 +1,4 @@
 //
-// C++ Interface: utils
-//
-// Description:
-//
-//
 // Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2006
 //
 // Copyright: See COPYING file that comes with this distribution
@@ -14,10 +9,10 @@
 
 #include <string>
 
+namespace srchilite {
+
 /**
 generic utils functions (e.g., string manipulation)
-
-	@author Lorenzo Bettini <http://www.lorenzobettini.it>
 */
 class Utils{
 public:
@@ -48,5 +43,7 @@ public:
     static std::string tolower(const std::string &s);
 
 };
+
+}
 
 #endif

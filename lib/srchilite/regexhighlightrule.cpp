@@ -9,6 +9,8 @@
 #include "matchingparameters.h"
 #include "regexpreprocessor.h"
 
+namespace srchilite {
+
 /// the only spaces regular expression
 static boost::regex onlySpaces("[[:blank:]]*");
 
@@ -84,4 +86,6 @@ HighlightRule *RegexHighlightRule::clone() {
 
 void RegexHighlightRule::setRegExp(const std::string &s) {
     regExp.assign(s);
+}
+
 }

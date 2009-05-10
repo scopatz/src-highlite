@@ -12,6 +12,8 @@
 
 #include "textstyles.h"
 
+namespace srchilite {
+
 class PreFormatter;
 class CTagsCollector;
 class FormatterParams;
@@ -31,7 +33,7 @@ struct CTagsFormatterResults {
 
     /// the result for postdoc references
     postResults postDocResult;
-    
+
     /**
      * Clears all the results.
      */
@@ -71,11 +73,11 @@ public:
     CTagsFormatter(PreFormatter *pre, const TextStyles::RefTextStyle &r,
             CTagsCollector *ctagsC);
     ~CTagsFormatter();
-    
+
     void setPreFormatter(PreFormatter *pre) {
         preFormatter = pre;
     }
-    
+
     /**
      * Sets the information about input file and output file
      * @param input input file (with path)
@@ -85,7 +87,7 @@ public:
 
     /**
      * Formats an anchor or references concerning the passed word
-     * 
+     *
      * @param word
      * @param result where formatting results will be stored
      * @param params additional parameters for the formatter
@@ -94,5 +96,7 @@ public:
     bool formatCTags(const std::string &word, CTagsFormatterResults &result,
             const FormatterParams *params);
 };
+
+}
 
 #endif /*CTAGSFORMATTER_H_*/

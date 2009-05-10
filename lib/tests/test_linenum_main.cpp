@@ -1,10 +1,11 @@
 #include <iostream>
 
 #include "asserttestexit.h"
-#include "linenumgenerator.h"
-#include "textstyle.h"
+#include "srchilite/linenumgenerator.h"
+#include "srchilite/textstyle.h"
 
 using namespace std;
+using namespace srchilite;
 
 int main() {
 
@@ -42,7 +43,7 @@ int main() {
     cout << "line: " << result << endl;
 
     assertEquals("<A line10><LINE>   10:</LINE></A> ", result);
-    
+
     lineNumGen.setAnchorPrefix("__");
 
     result = lineNumGen.generateLine(10);

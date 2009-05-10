@@ -15,12 +15,12 @@
 #include <string>
 #include <list>
 
+namespace srchilite {
+
 class StringDefs;
 
 /**
- represent a string for a language element
-
- @author Lorenzo Bettini
+ represent a string for a language definition file's element
  */
 class StringDef {
 private:
@@ -53,10 +53,15 @@ public:
         stringdef(s), doubleQuotedString(doubleQuotes), hasBackRef_(false) {
     }
 
+    /**
+     * return the string representation (after preprocessing)
+     * @return the string representation
+     */
     const std::string toString() const;
 
     /**
-     * return the original representation (this is useful for printing errors)
+     * return the original representation (without any preprocessing);
+     * this is useful for printing errors
      * @return the original representation
      */
     const std::string toStringOriginal() const {
@@ -77,14 +82,14 @@ public:
     bool hasBackRef() const {
         return hasBackRef_;
     }
-    
+
     /**
      * @param b
      */
     void setBackRef(bool b) {
         hasBackRef_ = b;
     }
-    
+
     /**
      * Given two StringDef produces a new StringDef (keeping properties such as
      * hasBackRef)
@@ -93,7 +98,7 @@ public:
      * @return the new StringDef
      */
     static StringDef *concat(const StringDef *s1, const StringDef *s2);
-    
+
 };
 
 typedef std::list<StringDef *> StringDefsBase;
@@ -109,5 +114,7 @@ public:
             delete *it;
     }
 };
+
+}
 
 #endif

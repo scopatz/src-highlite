@@ -1,11 +1,12 @@
 #include <iostream>
 
-#include "langdefmanager.h"
-#include "regexrulefactory.h"
-#include "highlightstateprinter.h"
+#include "srchilite/langdefmanager.h"
+#include "srchilite/regexrulefactory.h"
+#include "srchilite/highlightstateprinter.h"
 #include "asserttestexit.h"
 
 using namespace std;
+using namespace srchilite;
 
 HighlightStatePrinter coutPrinter;
 

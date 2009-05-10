@@ -12,11 +12,15 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 
+namespace srchilite {
+
 class HighlightRule;
 class HighlightToken;
 class MatchingParameters;
 
 /**
+ * Shared pointer for HighlightRule.
+ *
  * We need to use shared pointers because if we need to substitute some variables
  * in a rule, we need to create a brand new copy of it, while we keep on using
  * the same rules that do not need substitutions.  Using shared pointers will
@@ -24,9 +28,11 @@ class MatchingParameters;
  */
 typedef boost::shared_ptr<HighlightRule> HighlightRulePtr;
 
+/// List of rules.
 typedef std::deque<HighlightRulePtr> RuleList;
 
-/// the values for replacing references (it should contain 9 possibly empty elements)
+/// the values for replacing references (it should contain 9 possibly empty elements, because
+/// 9 is usually the limit for backreferences in regular expressions)
 typedef std::vector<std::string> ReplacementList;
 
 class HighlightState;
@@ -47,7 +53,7 @@ class HighlightState {
 
     /// the name of the element for strings when no rule matches (default: "normal")
     /// for states this should always be "normal" while for environments it should
-    /// be the same element that enters the new state
+    /// be the same element that represents the new state (e.g., "comment", "string", etc.)
     std::string defaultElement;
 
     /// the list of rules of this state
@@ -69,6 +75,10 @@ public:
     HighlightState(const std::string &e = "normal");
     ~HighlightState();
 
+    /**
+     * Adss a rule to this state
+     * @param rule the rule to add at the end of the list
+     */
     void addRule(HighlightRulePtr rule);
 
     /**
@@ -155,5 +165,7 @@ public:
     }
 
 };
+
+}
 
 #endif /*HIGHLIGHTSTATE_H_*/

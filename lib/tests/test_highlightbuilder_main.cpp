@@ -6,25 +6,26 @@
 
 #include <iostream>
 
-#include "highlightstatebuilder.hpp"
+#include "srchilite/highlightstatebuilder.hpp"
 #include "asserttestexit.h"
-#include "regexrulefactory.h"
-#include "stringdef.h"
-#include "highlightstate.h"
-#include "highlightrule.h"
-#include "stringlistlangelem.h"
-#include "highlightbuilderexception.h"
-#include "my_sstream.h"
-#include "highlightstateprinter.h"
-#include "delimitedlangelem.h"
-#include "namedsubexpslangelem.h"
-#include "statelangelem.h"
+#include "srchilite/regexrulefactory.h"
+#include "srchilite/stringdef.h"
+#include "srchilite/highlightstate.h"
+#include "srchilite/highlightrule.h"
+#include "srchilite/stringlistlangelem.h"
+#include "srchilite/highlightbuilderexception.h"
+#include <sstream>
+#include "srchilite/highlightstateprinter.h"
+#include "srchilite/delimitedlangelem.h"
+#include "srchilite/namedsubexpslangelem.h"
+#include "srchilite/statelangelem.h"
 #include "logformatter.h"
-#include "sourcehighlighter.h"
-#include "formattermanager.h"
+#include "srchilite/sourcehighlighter.h"
+#include "srchilite/formattermanager.h"
 #include "stdboosterror.h"
 
 using namespace std;
+using namespace srchilite;
 
 HighlightStatePrinter coutPrinter;
 
@@ -119,7 +120,7 @@ int main() {
     nonMixed2->push_back(unquoted2);
 
     StringListLangElem okListElem2("foo", nonMixed2, false);
-    okListElem2.set_exit();
+    okListElem2.setExit();
 
     builder.build_DB(&okListElem2, mainState.get());
 
@@ -139,7 +140,7 @@ int main() {
 
     // test for delimited lang (automatically transformed)
     DelimitedLangElem delim2("delim", new StringDef("<"), new StringDef(">"), new StringDef("\\\\"), true, false);
-    delim2.set_exit();
+    delim2.setExit();
 
     builder.build_DB(&delim2, mainState.get());
 
@@ -176,7 +177,7 @@ int main() {
     names->push_back("gogo");
 
     // also test exit all
-    namedSubExpsLangElem.set_exitall();
+    namedSubExpsLangElem.setExitAll();
 
     // now it's OK since we added an element
     builder.build_DB(&namedSubExpsLangElem, mainState.get());

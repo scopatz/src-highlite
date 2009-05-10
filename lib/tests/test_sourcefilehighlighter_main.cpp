@@ -1,17 +1,18 @@
 #include <iostream>
 
-#include "sourcehighlighter.h"
-#include "sourcefilehighlighter.h"
-#include "formattermanager.h"
-#include "regexrulefactory.h"
-#include "regexhighlightrule.h"
+#include "srchilite/sourcehighlighter.h"
+#include "srchilite/sourcefilehighlighter.h"
+#include "srchilite/formattermanager.h"
+#include "srchilite/regexrulefactory.h"
+#include "srchilite/regexhighlightrule.h"
 #include "asserttestexit.h"
-#include "my_sstream.h"
-#include "bufferedoutput.h"
-#include "textstyleformatter.h"
-#include "chartranslator.h"
-#include "linenumgenerator.h"
-#include "lineranges.h"
+#include <sstream>
+#include "srchilite/bufferedoutput.h"
+#include "srchilite/textstyleformatter.h"
+#include "srchilite/chartranslator.h"
+#include "srchilite/linenumgenerator.h"
+#include "srchilite/lineranges.h"
+#include "srchilite/regexranges.h"
 
 /*
  static void check_log_entry(const FormatterLogEntry &e,
@@ -25,6 +26,7 @@
  */
 
 using namespace std;
+using namespace srchilite;
 
 int main() {
     ostringstream os;
@@ -33,10 +35,14 @@ int main() {
 
     BufferedOutput output(os);
 
-    FormatterPtr normalFormatter = FormatterPtr(new TextStyleFormatter("$text", &output));
-    FormatterPtr keywordFormatter = FormatterPtr(new TextStyleFormatter("<K>$text</K>", &output));
-    FormatterPtr commentFormatter = FormatterPtr(new TextStyleFormatter("<C>$text</C>", &output));
-    FormatterPtr contextFormatter = FormatterPtr(new TextStyleFormatter("<CC>$text</CC>", &output));
+    FormatterPtr normalFormatter = FormatterPtr(new TextStyleFormatter("$text",
+            &output));
+    FormatterPtr keywordFormatter = FormatterPtr(new TextStyleFormatter(
+            "<K>$text</K>", &output));
+    FormatterPtr commentFormatter = FormatterPtr(new TextStyleFormatter(
+            "<C>$text</C>", &output));
+    FormatterPtr contextFormatter = FormatterPtr(new TextStyleFormatter(
+            "<CC>$text</CC>", &output));
 
     FormatterManager formatterManager(normalFormatter);
 
@@ -66,7 +72,8 @@ int main() {
     highlightState->addRule(HighlightRulePtr(factory.createWordListRule(
             "keyword", keywords)));
 
-    highlighter.highlight("this is a public class and\nhere's another class\nend");
+    highlighter.highlight(
+            "this is a public class and\nhere's another class\nend");
 
     cout << "HIGHLIGHTED: " << os.str() << endl;
 
@@ -77,9 +84,8 @@ int main() {
     // test comments (environments)
     os.str("");
 
-    HighlightRulePtr multiLineCommentRule =
-            HighlightRulePtr(factory.createMultiLineRule("comment", "/\\*",
-                    "\\*/", "", false));
+    HighlightRulePtr multiLineCommentRule = HighlightRulePtr(
+            factory.createMultiLineRule("comment", "/\\*", "\\*/", "", false));
     HighlightStatePtr multiLineCommentState =
             multiLineCommentRule->getNextState();
 
@@ -90,7 +96,8 @@ int main() {
     // now we set its default element (to comment)
     multiLineCommentState->setDefaultElement("comment");
 
-    highlighter.highlight("this is /* a comment\nthat spans\nmore lines\n*/\na public class and\nhere's another class\nend");
+    highlighter.highlight(
+            "this is /* a comment\nthat spans\nmore lines\n*/\na public class and\nhere's another class\nend");
 
     cout << "HIGHLIGHTED: " << os.str() << endl;
 
@@ -109,7 +116,8 @@ end",
 
     sourceHighlighter.setOptimize(true);
 
-    highlighter.highlight("this is /* a comment\nthat spans\nmore lines\n*/ a public class end");
+    highlighter.highlight(
+            "this is /* a comment\nthat spans\nmore lines\n*/ a public class end");
 
     cout << "HIGHLIGHTED: " << os.str() << endl;
 
@@ -128,7 +136,8 @@ end",
 
     highlighter.setPreformatter(&charTranslator);
 
-    highlighter.highlight("this is /* a comment\nthat spans\nmore lines\n*/ a public class end");
+    highlighter.highlight(
+            "this is /* a comment\nthat spans\nmore lines\n*/ a public class end");
 
     cout << "HIGHLIGHTED: " << os.str() << endl;
 
@@ -179,7 +188,8 @@ end",
     lineRanges.addRange("2-3");
 
     highlighter.setLineRanges(&lineRanges);
-    highlighter.highlight("this is /* a comment\nthat spans more lines\n*/ end\nend2");
+    highlighter.highlight(
+            "this is /* a comment\nthat spans more lines\n*/ end\nend2");
 
     cout << "HIGHLIGHTED: " << os.str() << endl;
 
@@ -192,7 +202,8 @@ end",
     // do it again to check that lineRanges was correctly reset
     os.str("");
 
-    highlighter.highlight("this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4");
+    highlighter.highlight(
+            "this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4");
 
     cout << "HIGHLIGHTED: " << os.str() << endl;
 
@@ -208,7 +219,8 @@ end",
 
     lineRanges.setContextLines(2);
 
-    highlighter.highlight("this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4\nend5");
+    highlighter.highlight(
+            "this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4\nend5");
 
     cout << "HIGHLIGHTED: " << os.str() << endl;
 
@@ -229,7 +241,8 @@ end",
     lineRanges.addRange("7-8");
     lineRanges.setContextLines(1);
 
-    highlighter.highlight("this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4\nend5\nend6\nend7\nend8\nend9");
+    highlighter.highlight(
+            "this is /* a comment\nthat spans more lines\n*/ end\nend2\nend3\nend4\nend5\nend6\nend7\nend8\nend9");
 
     cout << "HIGHLIGHTED: " << os.str() << endl;
 
@@ -247,6 +260,30 @@ end",
  PREFIX <LINE>00008:</LINE> end6<NL>\n\
  PREFIX <LINE>00009:</LINE> <CC>end7</CC><NL>\n\
  PREFIX ...<NL>\n",
+            os.str());
+
+    // now test the regex ranges
+    RegexRanges regexRanges;
+
+    highlighter.setLineRanges(0);
+    highlighter.setRangeSeparator("");
+    highlighter.setRegexRanges(&regexRanges);
+
+    regexRanges.addRegexRange("/// [[:alpha:]]+");
+    regexRanges.addRegexRange("/// [[:digit:]]+");
+
+    os.str("");
+    highlighter.highlight(
+            "this is /* a comment\nthat spans more lines\n*/ /// range end\nin range\nin range2\nend4 /// range\nend5\n/// 25\nend7\nend8\nend9\n/// 28\nend10");
+    cout << "HIGHLIGHTED: " << os.str() << endl;
+
+    assertEquals(
+            " PREFIX <NL>\n\
+ PREFIX <LINE>00004:</LINE> in range<NL>\n\
+ PREFIX <LINE>00005:</LINE> in range2<NL>\n\
+ PREFIX <LINE>00009:</LINE> end7<NL>\n\
+ PREFIX <LINE>00010:</LINE> end8<NL>\n\
+ PREFIX <LINE>00011:</LINE> end9<NL>\n",
             os.str());
 
     cout << "test_sourcefilehighlighter: SUCCESS" << endl;

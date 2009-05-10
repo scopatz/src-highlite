@@ -15,10 +15,17 @@
 #include <string>
 #include <iostream>
 
-/**
- Tries to infer the language by inspecting the input file
+namespace srchilite {
 
- @author Lorenzo Bettini <http://www.lorenzobettini.it>
+/**
+ Tries to infer the language by inspecting the input file.
+
+ For instance, it looks for something like
+ <pre>
+ #!/bin/bash
+ </pre>
+ at the beginning of the file, or other expression to infer the language
+
  */
 class LanguageInfer {
 public:
@@ -40,5 +47,7 @@ public:
      */
     const std::string infer(std::istream &stream = std::cin);
 };
+
+}
 
 #endif

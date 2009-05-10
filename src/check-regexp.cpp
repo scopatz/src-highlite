@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007  Lorenzo Bettini <http://www.lorenzobettini.it>
+ * Copyright (C) 2007-2009  Lorenzo Bettini <http://www.lorenzobettini.it>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 /*
  * some examples:
- * 
+ *
 
  ./check-regexp "([^[:alnum:]]+)[^[:blank:]]*(\1)[^[:blank:]]*(\1)" "|w|\$|e|d| ^w^w^ ?a?b?"
  trying to match: |w|$|e|d| ^w^w^ ?a?b?
@@ -45,18 +45,21 @@
  what[3]: ?
  total number of matches: 3
 
- * 
+ *
  */
 
 #include <cstdlib>
 #include <boost/regex.hpp>
 #include <iostream>
 
+#include "progname.h"
+
 #include "check-regexp_cmd.h"
 
 using namespace std;
 
 int main(int argc, char * argv[]) {
+    set_program_name(argv[0]);
     gengetopt_args_info args_info; // command line structure
 
     if (cmdline_parser(argc, argv, &args_info)!= 0)
@@ -85,7 +88,7 @@ int main(int argc, char * argv[]) {
         cout << "for the regexp   : " << regex << endl;
 
         cout << "num of subexps   : " << regex.mark_count() << endl;
-        
+
         int num_of_matches = 0;
 
         while (boost::regex_search(start, end, what, regex, flags)) {

@@ -13,6 +13,8 @@
 #include <algorithm>
 #include <cctype>      // old <ctype.h>
 
+namespace srchilite {
+
 struct ToLower
 {
   char operator() (char c) const  { return std::tolower(c); }
@@ -47,4 +49,6 @@ std::string Utils::tolower(const std::string &s)
   std::string buffer = s;
   toLower(buffer);
   return buffer;
+}
+
 }

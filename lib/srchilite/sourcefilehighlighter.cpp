@@ -21,11 +21,14 @@
 #include "preformatter.h"
 #include "formatter.h"
 #include "linenumgenerator.h"
-#include "my_sstream.h"
+#include <sstream>
 #include "ioexception.h"
 #include "lineranges.h"
+#include "regexranges.h"
 
 using namespace std;
+
+namespace srchilite {
 
 typedef enum {
     FOUND_EOF = 0, FOUND_NL, FOUND_END
@@ -37,7 +40,7 @@ SourceFileHighlighter::SourceFileHighlighter(const std::string &file,
         SourceHighlighter *_sourceHighlighter, BufferedOutput *_output) :
     fileName(file), sourceHighlighter(_sourceHighlighter), output(_output),
             debugPolicy(NO_DEBUG), preformatter(0), lineNumGenerator(0),
-            lineRanges(0), contextFormatter(0) {
+            lineRanges(0), regexRanges(0), contextFormatter(0) {
 }
 
 load_line_ret load_line(std::string& s, std::istream& is) {
@@ -90,10 +93,15 @@ void SourceFileHighlighter::highlight(istream &is) {
     bool rangeSeparatorPrinted = false;
 
     sourceHighlighter->setFormatterParams(&params);
+    sourceHighlighter->setSuspended(false);
 
     // if we have a LineRanges, make sure we reset it
     if (lineRanges) {
         lineRanges->reset();
+    }
+
+    if (regexRanges) {
+        regexRanges->reset();
     }
 
     load_line_ret ret;
@@ -107,6 +115,15 @@ void SourceFileHighlighter::highlight(istream &is) {
                 sourceHighlighter->setSuspended(false);
                 rangeSeparatorPrinted = false;
             } else {
+                sourceHighlighter->setSuspended(true);
+            }
+        } else if (regexRanges) {
+            // we assume that regex range is set only if line range is not set
+            if (regexRanges->isInRange(s)) {
+                rangeResult = IN_RANGE;
+                sourceHighlighter->setSuspended(false);
+            } else {
+                rangeResult = NOT_IN_RANGE;
                 sourceHighlighter->setSuspended(true);
             }
         }
@@ -158,4 +175,6 @@ void SourceFileHighlighter::highlight(istream &is) {
 void SourceFileHighlighter::highlight(const string &s) {
     istringstream is(s);
     highlight(is);
+}
+
 }

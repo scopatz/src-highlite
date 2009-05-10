@@ -9,11 +9,15 @@
 
 #include "highlightstate.h"
 
+namespace srchilite {
+
 class LangElems;
 class HighlightRuleFactory;
 
 /**
- * Builds an HighlightState from the language definition file collected structures
+ * Builds an HighlightState from the language definition file collected structures.
+ * This class uses dynamic overloading and it must be processed by doublecpp,
+ * http://doublecpp.sf.net, in case you need to modify it.
  */
 class HighlightStateBuilder {
     /// the factory for creating rules
@@ -25,13 +29,13 @@ public:
     /**
      * Builds all the rules into the passed mainState as specified in the
      * passed LangElems
-     * 
+     *
      * @param elems the element definitions retrieved from the lang file
      * @param mainState the main state where to store all the rules
      */
     void build(LangElems *elems, HighlightStatePtr mainState);
-    
-    // the following will be processed by doublecpp
+
+    /// the following is a multi-method that needs to be processed by doublecpp
     branches build
     void (LangElem *elem, HighlightState *state);
     void (StringListLangElem *elem, HighlightState *state);
@@ -40,5 +44,7 @@ public:
     void (StateLangElem *elem, HighlightState *state);
     endbranches
 };
+
+}
 
 #endif /*HIGHLIGHTSTATEBUILDER_H_*/

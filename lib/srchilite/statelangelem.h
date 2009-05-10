@@ -1,7 +1,7 @@
 //
 // C++ Interface: %{MODULE}
 //
-// Description: 
+// Description:
 //
 //
 // Author: %{AUTHOR} <%{EMAIL}>, (C) %{YEAR}
@@ -15,11 +15,14 @@
 #include "statestartlangelem.h"
 #include "langelems.h"
 
+namespace srchilite {
+
 class StringDef;
 class StringDefs;
 class StateStartLangElem;
 
 /**
+ * @class StateLangElem
 a language element that introduces a new state
 pattern Composite
 
@@ -37,19 +40,19 @@ class StateLangElem : public LangElem
     StateStartLangElem *statestartlangelem;
     LangElems *langelems;
     bool state;
-    
+
 public:
   StateLangElem(const std::string &n, StateStartLangElem *start, LangElems *elems, bool st = false);
-  
+
     ~StateLangElem();
 
     void set_elems(LangElems *elems) { langelems = elems; }
     void set_state() { state = true; }
-    
+
     virtual const std::string toString() const;
-    
+
     virtual const std::string toStringOriginal() const;
-    
+
     StateStartLangElem *getStateStart() const { return statestartlangelem; }
     bool isState() const { return state; }
     LangElems *getElems() const { return langelems; }
@@ -59,5 +62,7 @@ virtual void dispatch_build(HighlightStateBuilder *, HighlightState * state);
 virtual void dispatch_collect_const(LangElemsPrinter *);
 // doublecpp: end, DO NOT MODIFY
 };
+
+}
 
 #endif

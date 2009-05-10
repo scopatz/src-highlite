@@ -1,7 +1,82 @@
+2009-05-10  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* doc/index.html: put examples in a separate file: examples.html
+
+2009-05-09  bettini  <bettini@bettini-desktop>
+
+	* configure.ac: removed check for flex library (which is not
+	needed anyway)
+
+2009-05-05  bettini  <bettini@bettini-laptop>
+
+	* lib/srchilite/langdefparser.yy: can specify the exit level (default 1)
+
+2009-04-21  bettini  <bettini@bettini-laptop>
+
+	* src/cmdline.ggo: added --binary-output command line arg so that
+	output files are written in binary mode
+
+2009-04-19  bettini  <bettini@bettini-laptop>
+
+	* lib/srchilite/verbose.h: removed, since now we only use Verbosity
+	* lib/srchilite/verbosity.h (Verbosity): class with static methods
+	for global verbosity
+
+2009-04-18  bettini  <bettini@bettini-laptop>
+
+	* src/source-highlight-settings.cpp (main): new program to interact
+	with the user for the settings
+	* lib/srchilite/versions.h (Versions): static public methods for retrieving
+	version numbers
+	* lib/srchilite/settings.h (Settings): class for dealing with
+	setting reading and storage
+
+2009-04-14  bettini  <bettini@bettini-laptop>
+
+	* configure.ac: use --docdir for documentation directory
+
+2009-04-13  bettini  <bettini@bettini-laptop>
+
+	* src/html.lang: deal with HTML5 stuff
+	* src/key_string.lang: deal with HTML5 stuff
+	* src/xml.lang: deal with HTML5 stuff
+
+2009-04-11  bettini  <bettini@bettini-laptop>
+
+	* lib/srchilite/regexranges.h (RegexRanges): to search for ranges delimited
+	by a regular expression
+	* src/source-highlight.cc: removed check for range-context and separator
+	which is executed by the command line parser itself
+	* src/cmdline.ggo: range-context and range-separator depend on line-range
+
+2009-01-18  bettini  <bettini@bettini-laptop>
+
+	* tests/Makefile.am: use diff --strip-trailing-cr to work also on windows
+	(in case output files are generated with \r)
+	* src/xhtmltable.outlang: added the nodoctemplate (this also fixes the
+	output of style_examples.html)
+
+2009-01-16  bettini  <bettini@bettini-laptop>
+
+	* doc/Makefile.am: generated texinfos are in maintainer-clean, not
+	dist-clean
+
 2008-12-23  bettini  <bettini@bettini-laptop>
 
 	* src/source-highlight.cc (main): check that if -i or -o is specified
 	then no other files are specified on the command line
+
+2008-12-07  bettini  <bettini@bettini-laptop>
+
+	* lib/srchilite/formatterfactory.h (FormatterFactory): Added abstract factory
+	for creating formatters.
+
+2008-10-26  bettini  <bettini@bettini-laptop>
+
+	* library code uses namespaces
+
+	* _sstream: replacement for sstream if not present (used by the configure
+	script);
 
 2008-11-22  Jason Blevins
 

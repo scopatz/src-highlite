@@ -1,29 +1,34 @@
 #include <iostream>
 
 #include "asserttestexit.h"
-#include "ctagscollector.h"
-#include "fileutil.h"
-#include "formatterparams.h"
-#include "tostringcollection.h"
+#include "srchilite/ctagscollector.h"
+#include "srchilite/fileutil.h"
+#include "srchilite/formatterparams.h"
+#include "srchilite/tostringcollection.h"
 
 using namespace std;
+using namespace srchilite;
 
-static ostream &operator <<(ostream &os, const CTagsInfo &);
 static void printCTagsInfo(const CTagsInfos &infos);
 static void expectAnchor(const CTagsInfos &infos, const string &filename,
         const string &line);
 static void expectReference(const CTagsInfos &infos, const string &filename,
         const string &line, RefPosition refpos);
 
-ostream &operator <<(ostream &os, const CTagsInfo &info) {
+namespace srchilite {
+
+static ostream &operator <<(ostream &os, const CTagsInfo &);
+
+ostream &operator <<(ostream &os, const srchilite::CTagsInfo &info) {
     os << (info.isAnchor ? "ANCHOR: " : "REF: ") << ", filename: "
             << strip_file_path(info.fileName) << ", line: " << info.lineNumber
             << ", refposition: " << info.refposition;
 
     return os;
 }
+}
 
-void printCTagsInfo(const CTagsInfos &infos) {
+void printCTagsInfo(const srchilite::CTagsInfos &infos) {
     cout << "tags infos: " << collectionToString(&infos, '\n') << endl;
 }
 
@@ -63,7 +68,7 @@ int main() {
     CTagsCollector collectorInline("mytags", INLINE);
     CTagsInfos infos;
     string sourceFile = BASEDIR;
-    
+
     sourceFile += "readtags.h";
 
     // test tags found in file readtags.h
@@ -107,6 +112,6 @@ int main() {
     expectReference(infos, sourceFile, "22", POSTLINE);
 
     cout << "test_ctagscollector: SUCCESS!" << endl;
-    
+
     return 0;
 }

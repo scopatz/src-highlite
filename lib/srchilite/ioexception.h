@@ -11,6 +11,11 @@
 #include <exception>
 #include <string>
 
+namespace srchilite {
+
+/**
+ * Exception representing an error in an input/output operation.
+ */
 struct IOException : public std::exception {
     /// detailed message for this exception
     std::string message;
@@ -26,5 +31,7 @@ struct IOException : public std::exception {
 };
 
 std::ostream& operator<<(std::ostream& os, const IOException &entry);
+
+}
 
 #endif /*IOEXCEPTION_H_*/

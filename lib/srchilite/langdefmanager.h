@@ -11,6 +11,8 @@
 
 #include "highlightstate.h"
 
+namespace srchilite {
+
 /// store already generated HighlightState specific to a given file name
 typedef std::map<std::string, HighlightStatePtr> HighlightStateCache;
 
@@ -34,7 +36,7 @@ public:
     ~LangDefManager();
 
     /**
-     * Gets the HighlightState corresponding to the
+     * Builds the HighlightState corresponding to the
      * language definition by the specified file, using the specified path.
      * @param path the path that is used for searching for the file and included files
      * @param file the name of the language definition file
@@ -56,6 +58,16 @@ public:
             const std::string &file);
 
     /**
+     * Gets the HighlightState corresponding to the
+     * language definition by the specified file, using the default path
+     * for language definition files (either stored in the user home setting
+     * configuration file or the default hardcoded one).
+     * @param file the name of the language definition file
+     * @return the HighlightState built using the language definitions
+     */
+    HighlightStatePtr getHighlightState(const std::string &file);
+
+    /**
      * Returns the language elements of the specified language definition file.
      * @param path
      * @param file
@@ -67,5 +79,7 @@ public:
         return ruleFactory;
     }
 };
+
+}
 
 #endif /*LANGDEFMANAGER_H_*/

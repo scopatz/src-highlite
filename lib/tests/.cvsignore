@@ -46,3 +46,6 @@ test_style_errors
 *.exe
 *.stackdump
 test_lineranges
+test_regexranges
+test_settings
+test_langmap

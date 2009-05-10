@@ -29,3 +29,4 @@ libsh.a
 check-regexp
 source-highlight.exe
 check-regexp.exe
+source-highlight-settings

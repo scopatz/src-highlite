@@ -15,10 +15,12 @@
 
 using namespace std;
 
+namespace srchilite {
+
 StopWatch::~StopWatch()
 {
   clock_t total = clock() - start;
   cout << "elapsed time (secs): " << double(total) / CLOCKS_PER_SEC << endl;
 }
 
-
+}

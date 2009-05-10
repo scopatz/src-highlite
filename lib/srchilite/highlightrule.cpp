@@ -6,6 +6,8 @@
 
 #include "highlightrule.h"
 
+namespace srchilite {
+
 HighlightRule::HighlightRule() :
     nextState(HighlightStatePtr()), exitLevel(0), nested(false),
             needsReferenceReplacement(false), hasSubexpressions(false) {
@@ -28,4 +30,6 @@ void HighlightRule::addElem(const std::string &name) {
 bool HighlightRule::tryToMatch(const std::string &s, HighlightToken &token,
         const MatchingParameters &params) {
     return tryToMatch(s.begin(), s.end(), token, params);
+}
+
 }

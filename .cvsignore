@@ -40,3 +40,10 @@ config.guess.lnk
 depcomp.lnk
 ltmain.sh.lnk
 configure.ac.html
+source-highlight-lib.pc
+config.lt
+source-highlight.pc
+tags
+build_cygwin
+build_msys
+source-highlight-3.0

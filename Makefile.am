@@ -8,7 +8,7 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-SUBDIRS = gl lib src doc tests
+SUBDIRS = m4 gl lib src doc tests
 
 EXTRA_DIST = \
 	source-highlight.spec.in \
@@ -16,7 +16,8 @@ EXTRA_DIST = \
 	autogen.sh \
 	TODO.txt \
 	CREDITS gl/m4/gnulib-cache.m4 \
-	source-highlight-bash-completion
+	source-highlight-bash-completion \
+        _sstream
 
 source_highlightdoc_DATA = \
 	ChangeLog \
@@ -34,4 +35,9 @@ else
 bash_completion_DATA = 
 endif
 
-ACLOCAL_AMFLAGS = -I gl/m4
+ACLOCAL_AMFLAGS = -I m4 -I gl/m4
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = source-highlight.pc
+
+DISTCHECK_CONFIGURE_FLAGS=--with-doxygen

@@ -12,6 +12,8 @@
 
 #include "highlightstate.h"
 
+namespace srchilite {
+
 class HighlightToken;
 class MatchingParameters;
 
@@ -19,7 +21,8 @@ class MatchingParameters;
 typedef std::deque<std::string> ElemList;
 
 /**
- * Base class for highlight rules
+ * Base class for highlight rules.  This abstracts from the actual
+ * implementation for matching.
  */
 class HighlightRule {
     /// the list of program elements detected by this rule
@@ -154,5 +157,7 @@ public:
         additionalInfo = info;
     }
 };
+
+}
 
 #endif /*HIGHLIGHTRULE_H_*/

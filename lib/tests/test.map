@@ -1,0 +1,8 @@
+# simple map file for testing
+
+C = cpp.lang
+c = c.lang
+changelog = changelog.lang
+makefile = makefile.lang
+Makefile = Makefile.lang
+am = makefile.lang

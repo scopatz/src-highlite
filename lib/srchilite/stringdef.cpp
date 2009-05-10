@@ -21,14 +21,18 @@
 
 #include "stringdef.h"
 
+namespace srchilite {
+
 StringDef *StringDef::concat(const StringDef *s1, const StringDef *s2) {
     StringDef *ret = new StringDef(s1->stringdef + s2->stringdef);
 
     ret->setBackRef(s1->hasBackRef() || s2->hasBackRef());
-    
+
     return ret;
 }
 
 const std::string StringDef::toString() const {
     return stringdef;
+}
+
 }

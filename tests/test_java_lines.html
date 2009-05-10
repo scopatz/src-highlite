@@ -32,7 +32,7 @@ http://www.gnu.org/software/src-highlite -->
 <a name="line28"><font color="#000000">28:</font></a> <i><font color="#9A1900"> *</font></i>
 <a name="line29"><font color="#000000">29:</font></a> <i><font color="#9A1900"> * </font></i><font color="#009900">@author</font><i><font color="#9A1900"> Lorenzo Bettini</font></i>
 <a name="line30"><font color="#000000">30:</font></a> <i><font color="#9A1900"> * </font></i><font color="#009900">@version</font><i><font color="#9A1900"> 2.0</font></i>
-<a name="line31"><font color="#000000">31:</font></a> <i><font color="#9A1900"> */</font></i>
+<a name="line31"><font color="#000000">31:</font></a> <i><font color="#9A1900"> */</font></i> <i><font color="#9A1900">/// class</font></i>
 <a name="line32"><font color="#000000">32:</font></a> <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> <font color="#008080">Hello</font> <font color="#FF0000">{</font>
 <a name="line33"><font color="#000000">33:</font></a>     <font color="#009900">int</font> foo <font color="#990000">=</font> <font color="#993399">1998</font> <font color="#990000">;</font>
 <a name="line34"><font color="#000000">34:</font></a>     <font color="#009900">int</font> hex_foo <font color="#990000">=</font> <font color="#993399">0xCAFEBABE</font><font color="#990000">;</font>
@@ -40,15 +40,25 @@ http://www.gnu.org/software/src-highlite -->
 <a name="line36"><font color="#000000">36:</font></a>     <font color="#008080">Integer</font> i <font color="#990000">=</font> <b><font color="#0000FF">null</font></b> <font color="#990000">;</font>
 <a name="line37"><font color="#000000">37:</font></a>     <font color="#009900">char</font> c <font color="#990000">=</font> <font color="#FF0000">'</font><font color="#CC33CC">\'</font><font color="#FF0000">'</font><font color="#990000">,</font> d <font color="#990000">=</font> <font color="#FF0000">'n'</font><font color="#990000">,</font> e <font color="#990000">=</font> <font color="#FF0000">'</font><font color="#CC33CC">\\</font><font color="#FF0000">'</font> <font color="#990000">;</font>
 <a name="line38"><font color="#000000">38:</font></a>     <font color="#008080">String</font> xml <font color="#990000">=</font> <font color="#FF0000">"&lt;tag attr=</font><font color="#CC33CC">\"</font><font color="#FF0000">value</font><font color="#CC33CC">\"</font><font color="#FF0000">&gt;&amp;auml;&lt;/tag&gt;"</font><font color="#990000">,</font> foo2 <font color="#990000">=</font> <font color="#FF0000">"</font><font color="#CC33CC">\\</font><font color="#FF0000">"</font> <font color="#990000">;</font>
-<a name="line39"><font color="#000000">39:</font></a>     
-<a name="line40"><font color="#000000">40:</font></a>     <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">main</font></b><font color="#990000">(</font> <font color="#008080">String</font> args<font color="#990000">[]</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
-<a name="line41"><font color="#000000">41:</font></a>         <i><font color="#9A1900">// just some greetings ;-)  /*</font></i>
-<a name="line42"><font color="#000000">42:</font></a>         System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font> <font color="#FF0000">"Hello from java2html :-)"</font> <font color="#990000">)</font> <font color="#990000">;</font>
-<a name="line43"><font color="#000000">43:</font></a>         System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font> <font color="#FF0000">"</font><font color="#CC33CC">\t</font><font color="#FF0000">by Lorenzo Bettini"</font> <font color="#990000">)</font> <font color="#990000">;</font>
-<a name="line44"><font color="#000000">44:</font></a>         System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font> <font color="#FF0000">"</font><font color="#CC33CC">\t</font><font color="#FF0000">http://www.lorenzobettini.it"</font> <font color="#990000">)</font> <font color="#990000">;</font>
-<a name="line45"><font color="#000000">45:</font></a>         <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>argc <font color="#990000">&gt;</font> <font color="#993399">0</font><font color="#990000">)</font>
-<a name="line46"><font color="#000000">46:</font></a>             <font color="#008080">String</font> param <font color="#990000">=</font> argc<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
-<a name="line47"><font color="#000000">47:</font></a>         <i><font color="#9A1900">//System.out.println( "bye bye... :-D" ) ; // see you soon</font></i>
-<a name="line48"><font color="#000000">48:</font></a>     <font color="#FF0000">}</font>
-<a name="line49"><font color="#000000">49:</font></a> <font color="#FF0000">}</font>
-<a name="line50"><font color="#000000">50:</font></a> </tt></pre>
+<a name="line39"><font color="#000000">39:</font></a> 
+<a name="line40"><font color="#000000">40:</font></a>     <i><font color="#9A1900">/* mymethod */</font></i>
+<a name="line41"><font color="#000000">41:</font></a>     <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">mymethod</font></b><font color="#990000">(</font><font color="#009900">int</font> i<font color="#990000">)</font> <font color="#FF0000">{</font>
+<a name="line42"><font color="#000000">42:</font></a>         <i><font color="#9A1900">// just a foo method</font></i>
+<a name="line43"><font color="#000000">43:</font></a>     <font color="#FF0000">}</font>
+<a name="line44"><font color="#000000">44:</font></a>     <i><font color="#9A1900">/* mymethod */</font></i>
+<a name="line45"><font color="#000000">45:</font></a>    
+<a name="line46"><font color="#000000">46:</font></a>     <i><font color="#9A1900">/* main */</font></i>
+<a name="line47"><font color="#000000">47:</font></a>     <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">main</font></b><font color="#990000">(</font> <font color="#008080">String</font> args<font color="#990000">[]</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+<a name="line48"><font color="#000000">48:</font></a>         <i><font color="#9A1900">// just some greetings ;-)  /*</font></i>
+<a name="line49"><font color="#000000">49:</font></a>         System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font> <font color="#FF0000">"Hello from java2html :-)"</font> <font color="#990000">)</font> <font color="#990000">;</font>
+<a name="line50"><font color="#000000">50:</font></a>         System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font> <font color="#FF0000">"</font><font color="#CC33CC">\t</font><font color="#FF0000">by Lorenzo Bettini"</font> <font color="#990000">)</font> <font color="#990000">;</font>
+<a name="line51"><font color="#000000">51:</font></a>         System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font> <font color="#FF0000">"</font><font color="#CC33CC">\t</font><font color="#FF0000">http://www.lorenzobettini.it"</font> <font color="#990000">)</font> <font color="#990000">;</font>
+<a name="line52"><font color="#000000">52:</font></a>         <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>argc <font color="#990000">&gt;</font> <font color="#993399">0</font><font color="#990000">)</font>
+<a name="line53"><font color="#000000">53:</font></a>             <font color="#008080">String</font> param <font color="#990000">=</font> argc<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+<a name="line54"><font color="#000000">54:</font></a>         <i><font color="#9A1900">//System.out.println( "bye bye... :-D" ) ; // see you soon</font></i>
+<a name="line55"><font color="#000000">55:</font></a>     <font color="#FF0000">}</font>
+<a name="line56"><font color="#000000">56:</font></a>     <i><font color="#9A1900">/* main */</font></i>
+<a name="line57"><font color="#000000">57:</font></a> <font color="#FF0000">}</font>
+<a name="line58"><font color="#000000">58:</font></a> <i><font color="#9A1900">/// class</font></i>
+<a name="line59"><font color="#000000">59:</font></a> 
+<a name="line60"><font color="#000000">60:</font></a> <i><font color="#9A1900">// end of file test.java</font></i></tt></pre>

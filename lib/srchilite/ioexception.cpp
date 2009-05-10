@@ -6,6 +6,8 @@
 
 #include "ioexception.h"
 
+namespace srchilite {
+
 IOException::IOException(const std::string &_message,
         const std::string &_filename) :
     message(_message + (_filename.size() ? " " + _filename : "")), filename(_filename) {
@@ -24,3 +26,4 @@ std::ostream& operator<<(std::ostream& os, const IOException &entry) {
     return os;
 }
 
+}

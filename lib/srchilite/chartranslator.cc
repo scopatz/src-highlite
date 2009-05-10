@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008  Lorenzo Bettini, http://www.lorenzobettini.it
+ * Copyright (C) 1999-2009  Lorenzo Bettini, http://www.lorenzobettini.it
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,63 +18,63 @@
  */
 
 #include "chartranslator.h"
-#include "my_sstream.h"
+#include <sstream>
 
 using namespace std;
 
-CharTranslator::CharTranslator(PreFormatterPtr f)
-  : PreFormatter(f), counter(0), reg_exp(0), bol(true)
-{
+namespace srchilite {
+
+CharTranslator::CharTranslator(PreFormatterPtr f) :
+    PreFormatter(f), counter(0), reg_exp(0), bol(true) {
 }
 
-CharTranslator::~CharTranslator()
-{
-  if (reg_exp)
-    delete reg_exp;
+CharTranslator::~CharTranslator() {
+    if (reg_exp)
+        delete reg_exp;
 }
 
-void
-CharTranslator::set_translation(const std::string &to_translate,
-                                const std::string &translate_into)
-{
-  ostringstream exp;
-  exp << (translation_exp.size() ? "|" : "") << "(" << to_translate << ")";
+void CharTranslator::set_translation(const std::string &to_translate,
+        const std::string &translate_into) {
+    // here we only buffer the translation regular expression
+    ostringstream exp;
+    exp << (translation_exp.size() ? "|" : "") << "(" << to_translate << ")";
 
-  translation_exp += exp.str();
+    translation_exp += exp.str();
 
-  ostringstream format;
-  format << "(?" << ++counter << translate_into << ")";
+    ostringstream format;
+    // the translation format corresponding to "to_translate"
+    format << "(?" << ++counter << translate_into << ")";
 
-  translation_format += format.str();
+    translation_format += format.str();
 }
 
-// s must be a NULL terminated string
-const string
-CharTranslator::doPreformat(const string &text)
-{
-  if (!translation_exp.size()) {
-    return text;
-  }
+const string CharTranslator::doPreformat(const string &text) {
+    if (!translation_exp.size()) {
+        return text;
+    }
 
-  if (! reg_exp)
-    reg_exp = new boost::regex(translation_exp);
+    // we finally build the actual regular expression
+    if (!reg_exp)
+        reg_exp = new boost::regex(translation_exp);
 
-  boost::match_flag_type flags = boost::match_default | boost::format_all;
-  if (!bol)
-      flags |= boost::match_not_bol;
-  // if we're not at the beginning of the line, then we must not match the
-  // beginning of the string as the beginning of a line
-  
-  std::ostringstream preformat_text(std::ios::out | std::ios::binary);
-  std::ostream_iterator<char, char> oi(preformat_text);
-  boost::regex_replace(oi, text.begin(), text.end(), *reg_exp,
-                       translation_format, flags);
+    boost::match_flag_type flags = boost::match_default | boost::format_all;
+    if (!bol)
+        flags |= boost::match_not_bol;
+    // if we're not at the beginning of the line, then we must not match the
+    // beginning of the string as the beginning of a line
 
-  // keep track of the fact that we begin a new line
-  if (text.find('\n') != string::npos)
-      bol = true;
-  else
-      bol = false;
-  
-  return preformat_text.str();
+    std::ostringstream preformat_text(std::ios::out | std::ios::binary);
+    std::ostream_iterator<char, char> oi(preformat_text);
+    boost::regex_replace(oi, text.begin(), text.end(), *reg_exp,
+            translation_format, flags);
+
+    // keep track of the fact that we begin a new line
+    if (text.find('\n') != string::npos)
+        bol = true;
+    else
+        bol = false;
+
+    return preformat_text.str();
+}
+
 }

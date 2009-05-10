@@ -7,9 +7,11 @@
 #include <iomanip>
 
 #include "linenumgenerator.h"
-#include "my_sstream.h"
+#include <sstream>
 
 using namespace std;
+
+namespace srchilite {
 
 /// used for line information generation
 static SubstitutionMapping substitutionmapping;
@@ -39,4 +41,6 @@ const std::string LineNumGenerator::generateLine(unsigned int line) {
     }
 
     return line_str + " ";
+}
+
 }

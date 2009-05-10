@@ -3,14 +3,16 @@
 #include <iostream>
 
 #include "asserttestexit.h"
-#include "textstyleformatter.h"
-#include "bufferedoutput.h"
-#include "my_sstream.h"
-#include "srcuntabifier.h"
-#include "ctagsformatter.h"
-#include "ctagscollector.h"
-#include "textstyles.h"
-#include "formatterparams.h"
+#include "srchilite/textstyleformatter.h"
+#include "srchilite/bufferedoutput.h"
+#include <sstream>
+#include "srchilite/srcuntabifier.h"
+#include "srchilite/ctagsformatter.h"
+#include "srchilite/ctagscollector.h"
+#include "srchilite/textstyles.h"
+#include "srchilite/formatterparams.h"
+
+using namespace srchilite;
 
 class MyPreFormatter : public PreFormatter {
 public:

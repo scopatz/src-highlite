@@ -6,29 +6,29 @@
 
 #include <iostream>
 
-#include "highlightbuilderexception.h"
-#include "parserinfo.h"
+#include "srchilite/highlightbuilderexception.h"
+#include "srchilite/parserinfo.h"
 #include "asserttestexit.h"
-#include "my_sstream.h"
+#include <sstream>
 #include "stdboosterror.h"
 
 using namespace std;
-
+using namespace srchilite;
 
 int main() {
     ostringstream os;
-    
+
     ParserInfo parserInfo("foo");
     parserInfo.line = 10;
-    
+
     HighlightBuilderException testException("test exception", &parserInfo);
-    
+
     // cout << "OUTPUT: " << testException << endl;
     os << testException;
-    
+
     string causedby = boost::regex_error(boost::regex_constants::error_bad_pattern).what();
-    
+
     assertEquals("foo:10: test exception\n" + stdBoostCausedBy("foo", "10"), os.str());
-    
+
     return 0;
 }

@@ -2,12 +2,13 @@
  * Tests for language inference, class LanguageInfer
  */
 
-#include "languageinfer.h"
-#include "my_sstream.h"
+#include "srchilite/languageinfer.h"
+#include <sstream>
 #include "asserttestexit.h"
-#include "utils.h"
+#include "srchilite/utils.h"
 
 using namespace std;
+using namespace srchilite;
 
 LanguageInfer inf;
 

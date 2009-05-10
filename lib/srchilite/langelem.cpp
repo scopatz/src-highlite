@@ -5,7 +5,9 @@
 //
 
 #include "langelem.h"
-#include "my_sstream.h"
+#include <sstream>
+
+namespace srchilite {
 
 const std::string LangElem::toStringParserInfo() const {
     std::ostringstream os;
@@ -16,4 +18,6 @@ const std::string LangElem::toStringParserInfo() const {
         os << ":" << line;
 
     return os.str();
+}
+
 }

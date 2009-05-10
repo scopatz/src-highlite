@@ -34,10 +34,17 @@ option "lang-map" - "language map file" string typestr="filename" default="lang.
 option "show-lang-elements" - "prints the language elements that are defined in the language definition file" optional string typestr="filename"
 option "infer-lang" - "force to infer source script language (overriding given language specification)" optional
 
-section "lines"
+section "Lines"
+
 option "line-number"    n  "number all output lines, using the specified padding character" string typestr="padding" default="0" no argoptional
 option "line-number-ref"    -  "number all output lines and generate an anchor, made of the specified prefix + the line number" string typestr="prefix" default="line" no argoptional
-option "line-range" - "generate only the lines in the specified range(s)" 
+
+section "Filtering output"
+
+defmode "linerange" modedesc="specifying line ranges"
+defmode "regexrange" modedesc="specifying regular expression delimited ranges"
+
+modeoption "line-range" - "generate only the lines in the specified range(s)" 
 	details="each range can be of the shape: 
 	single line (e.g., --line-range=50)
 	full range (e.g., --line-range=2-10)
@@ -45,14 +52,28 @@ option "line-range" - "generate only the lines in the specified range(s)"
 	--line-range=40- from line 40 to the end
 "
 	string multiple optional
+	mode="linerange"
 
-option "range-separator" - "the optional separator to be printed among ranges (e.g., \"...\")" 
+modeoption "range-separator" - "the optional separator to be printed among ranges (e.g., \"...\")" 
 	string optional
+	dependon="line-range"
+	mode="linerange"
 
-option "range-context" - "number of (context) lines generated even if not in range" int optional
+modeoption "range-context" - "number of (context) lines generated even if not in range" int optional
 	details="The optional --range-context specifies the number of lines that are not in
 	range that will be printed anyway (before and after the lines in range);
-	These lines will be formatted according to the \"context\" style." 
+	These lines will be formatted according to the \"context\" style.
+" 
+	dependon="line-range"
+	mode="linerange"
+
+modeoption "regex-range" - "generate only the lines within the specified regular expressions"
+	details="when a line containing the specified regular expression is found, then
+the lines after this one are actually generated, until another line, 
+containing the same regular expression is found (this last line is not generated).
+More than one regular expression can be specified."
+	string multiple optional
+	mode="regexrange"
 
 section "reference generation"
 option "gen-references"    -  "generate references" values="inline","postline","postdoc" default="inline" no
@@ -62,6 +83,9 @@ option "ctags"      -  "how to run the ctags command.  If this option is not spe
 section "testing"
 option "verbose"        v  "verbose mode on" optional
 option "quiet"          q  "print no progress information" optional
+option "binary-output" - "write output files in binary mode" optional
+	details="This is useful for testing purposes, since you may want to make
+sure that output files are always generated with a final newline character only"
 option "statistics" - "print some statistics (i.e., elapsed time)" optional
 option "gen-version" - "put source-highlight version in the generated file" flag on
 option "check-lang" - "only check the correctness of a language definition file" string typestr="filename" no

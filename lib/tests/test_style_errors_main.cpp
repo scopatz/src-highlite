@@ -1,14 +1,15 @@
 #include <iostream>
 
-#include "sourcehighlight.h"
-#include "textstyleformatter.h"
-#include "my_sstream.h"
+#include "srchilite/sourcehighlight.h"
+#include "srchilite/textstyleformatter.h"
+#include <sstream>
 #include "asserttestexit.h"
-#include "ioexception.h"
-#include "docgenerator.h"
-#include "parserexception.h"
+#include "srchilite/ioexception.h"
+#include "srchilite/docgenerator.h"
+#include "srchilite/parserexception.h"
 
 using namespace std;
+using namespace srchilite;
 
 int main() {
     istringstream input;

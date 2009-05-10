@@ -9,19 +9,55 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(source-highlight,2.11.1)
+AC_INIT(source-highlight,3.0)
+
+# this is requested for the install-data-local of doxygen documentation
+AC_PREREQ([2.62])
+
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
 
 dnl for automake
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 
+#API version (often = GENERIC_MAJOR_VERSION.GENERIC_MINOR_VERSION)
+#API_VERSION=1.0
+#AC_SUBST(API_VERSION)
+
+#shared library versioning
+LIBRARY_VERSION=1:0:0
+#               | | |
+#        +------+ | +---+
+#        |        |     |
+#      current:revision:age
+#        |        |     |
+#        |        |     +- increment if interfaces have been added
+#        |        |        set to zero if interfaces have been removed
+#        |        |        or changed
+#        |        +- increment if source code has changed
+#        |           set to zero if current is incremented
+#        +- increment if interfaces have been added, removed or changed
+
+
+AC_SUBST(LIBRARY_VERSION)
+AC_DEFINE_UNQUOTED(LIBRARY_VERSION, "$LIBRARY_VERSION")
+
 AC_SUBST(source_highlightdatadir)
 AC_SUBST(source_highlightdocdir)
+AC_SUBST(source_highlightlibdocdir)
+AC_SUBST(source_highlightlibexampledir)
 AC_SUBST(bash_completiondir)
 
 source_highlightdatadir=$datadir/source-highlight
-source_highlightdocdir=$datadir/doc/source-highlight
+source_highlightdocdir=$docdir
+source_highlightlibdocdir=$docdir/api
+source_highlightlibexampledir=$docdir/examples
 bash_completiondir=$sysconfdir/bash_completion.d
+
+dnl the namespace and header directory
+LIBRARY_NAMESPACE=srchilite
+AC_SUBST(LIBRARY_NAMESPACE)
 
 dnl Checks for C compiler.
 AC_PROG_CC
@@ -69,7 +105,8 @@ AC_CXX_HAVE_IOS_BASE
 dnl check for Boost regular expression library
 AX_BOOST_BASE([1.33.1])
 AX_BOOST_REGEX
-AC_CHECK_HEADERS([boost/shared_ptr.hpp])
+dnl AC_CHECK_HEADERS([boost/shared_ptr.hpp])
+dnl it's no use searching for shared_ptr.hpp: it's already included in boost base
 
 dnl test for ch-root feature
 AC_SUBST(CHROOT_INPUT_DIR)
@@ -108,8 +145,9 @@ dnl for lex or flex
 AM_PROG_LEX
 
 dnl Checks for libraries.
-dnl Replace `main' with a function in -lfl:
-AC_CHECK_LIB(fl, main)
+dnl Replace 'main' with a function in -lfl:
+dnl we don't need lexlibrary
+dnl AC_CHECK_LIB(fl, main)
 
 dnl check for Electric Fence library, but do not link it automatically
 AC_HAVE_LIBRARY(libefence.a, [LIBS="$LIBS"])
@@ -156,6 +194,15 @@ else
 AM_CONDITIONAL(NO_CTAGS, test -z "$ac_cv_path_CTAGS" )
 fi
 
+# Check for doxygen program.
+AC_ARG_WITH([doxygen],
+            [AS_HELP_STRING([--with-doxygen],
+              [build doxygen documentation for the api of the library])],
+            [AC_PROG_TRY_DOXYGEN],
+            [with_doxygen=check])
+
+AM_CONDITIONAL([HAVE_DOXYGEN],[test -n "$DOXYGEN"])
+
 dnl *******************
 dnl added by me
 dnl *******************
@@ -166,6 +213,7 @@ dnl set some flags if it's bison
 AC_SUBST(YFLAGS)dnl
 YFLAGS="$YFLAGS -d"
 AC_MSG_CHECKING( checking if it's bison )
+
 if test "$ac_cv_prog_YACC" = "bison -y"; then
 YFLAGS="$YFLAGS -o y.tab.c -l"
 AC_MSG_RESULT( $ac_cv_prog_YACC )
@@ -181,6 +229,7 @@ AC_PATH_PROGS(TAR, tar gtar)
 AC_PATH_PROGS(TEXI2HTML, texi2html)
 
 AH_TEMPLATE(CHROOT_INPUT_DIR)
+AH_TEMPLATE(LIBRARY_VERSION)
 
 dnl compute relative paths
 dnl adl_COMPUTE_STANDARD_RELATIVE_PATHS
@@ -202,10 +251,18 @@ AM_CONDITIONAL(USE_BASH_COMPLETION, test "${BASH_COMPLETION_DIR}" != "")
 
 AM_MAINTAINER_MODE
 
+if test "x$ac_cv_cxx_have_sstream" != "xyes"; then
+  dnl generate the replacement for sstream
+  AC_CONFIG_LINKS([sstream:_sstream])
+fi
+ 
+
 AC_CONFIG_FILES(
 [
 Makefile
 txtc.sh
+source-highlight.pc
+m4/Makefile
 gl/Makefile
 src/Makefile
 src/java2html
@@ -213,9 +270,9 @@ src/cpp2html
 src/src-hilite-lesspipe.sh
 doc/Makefile
 lib/Makefile
-lib/srchilite/includes/Makefile
 lib/srchilite/Makefile
 lib/tests/Makefile
+lib/examples/Makefile
 tests/Makefile
 tests/output_dir/Makefile
 source-highlight.spec])
@@ -249,6 +306,25 @@ ERROR! Boost::regex library not installed.
 Please install it (download at http://www.boost.org/)])
 fi
 
+echo "
+  These programs are NOT required, and
+  are useful only for source-highlight developers
+  Gengetopt.........: $GENGETOPT
+  Doublecpp.........: $DOUBLECPP
+  Valgrind..........: $VALGRIND
+"
+
+echo "
+  ($PACKAGE_NAME) version $PACKAGE_VERSION
+  Prefix.........: $prefix
+  Using Boost....: $BOOST_REGEX_LIB
+  C++ Compiler...: $CXX $CXXFLAGS $CPPFLAGS
+  Linker.........: $LD $LDFLAGS $LIBS
+  Doxygen........: ${DOXYGEN:-NONE or not enabled}
+  Help2Man.......: ${HELP2MAN:-NONE}
+  Ctags..........: ${CTAGS:-NONE}
+"
+
 if test -z "$ac_cv_path_HELP2MAN"; then
    AC_MSG_WARN([
 
@@ -276,7 +352,15 @@ so you won't be able to generate references (--gen-references).
 fi
 fi
 
-dnl echo "Good: you're using bash_completion! dir: `echo ${BASH_COMPLETION_DIR}`"
+if test -z "$DOXYGEN"; then
+  echo "-----------------------------------------"
+  echo " No Doxygen program found - continuing"
+  echo " without Doxygen documentation support."
+  echo " (it must be enabled with --with-doxygen)"
+  echo "-----------------------------------------"
+fi
+
+
 if test "${BASH_COMPLETION_DIR}" != ""; then
    echo "Good: you're using bash_completion! dir: $BASH_COMPLETION_DIR"
 else

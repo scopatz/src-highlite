@@ -10,8 +10,11 @@
 #include "langdefparserfun.h"
 #include "langelems.h"
 #include "highlightstatebuilder.hpp"
+#include "settings.h"
 
 using namespace std;
+
+namespace srchilite {
 
 LangDefManager::LangDefManager(HighlightRuleFactory *_ruleFactory) :
     ruleFactory(_ruleFactory) {
@@ -47,6 +50,7 @@ HighlightStatePtr LangDefManager::getHighlightState(const string &path,
     if (highlightState.get())
         return highlightState;
 
+    // otherwise build it
     highlightState = buildHighlightState(path, file);
 
     // store in the cache
@@ -55,7 +59,13 @@ HighlightStatePtr LangDefManager::getHighlightState(const string &path,
     return highlightState;
 }
 
+HighlightStatePtr LangDefManager::getHighlightState(const string &file) {
+    return getHighlightState(Settings::retrieveDataDir(), file);
+}
+
 LangElems *LangDefManager::getLangElems(const std::string &path,
         const std::string &file) {
     return parse_lang_def(path.c_str(), file.c_str());
+}
+
 }

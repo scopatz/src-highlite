@@ -6,10 +6,14 @@
 
 #include "formatter.h"
 
+namespace srchilite {
+
 Formatter::Formatter()
 {
 }
 
 Formatter::~Formatter()
 {
+}
+
 }

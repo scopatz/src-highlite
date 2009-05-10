@@ -22,10 +22,12 @@
 
 #include "stylekey.h"
 
-#include "textstyleformatterfactory.h"
+#include "formatterfactory.h"
 #include "styleparser.h"
-#include "my_sstream.h"
+#include <sstream>
 #include "parsestyles.h"
+
+using namespace srchilite;
 
 static std::ostringstream buff;
 

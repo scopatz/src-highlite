@@ -1,5 +1,5 @@
 //
-// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004-2008
+// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004-2009
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -12,6 +12,8 @@
 
 #include "refposition.h"
 #include "readtags.h"
+
+namespace srchilite {
 
 class FormatterParams;
 
@@ -32,6 +34,14 @@ struct CTagsInfo {
     /// whether the information concerns an anchor and not a reference
     bool isAnchor;
 
+    /**
+     * @param _fileName the filename of a tag
+     * @param _lineNumber the line number
+     * @param _refposition where the reference should be positioned
+     * (only valid if !isAnchor)
+     * @param _isAnchor whether the information concerns an anchor
+     * and not a reference
+     */
     CTagsInfo(const std::string &_fileName, const std::string &_lineNumber,
             RefPosition _refposition, bool _isAnchor) :
         fileName(_fileName), lineNumber(_lineNumber),
@@ -79,9 +89,14 @@ public:
     bool collectTags(const std::string &word, CTagsInfos &infos,
             const FormatterParams *fileInfo);
 
+    /**
+     * where references should be positioned
+     */
     void setRefPosition(RefPosition r) {
         refposition = r;
     }
 };
+
+}
 
 #endif /*CTAGSCOLLECTOR_H_*/

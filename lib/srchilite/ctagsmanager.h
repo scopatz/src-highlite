@@ -9,9 +9,10 @@
 
 #include <string>
 
-#include "verbose.h"
 #include "refposition.h"
 #include "textstyles.h"
+
+namespace srchilite {
 
 class CTagsCollector;
 class CTagsFormatter;
@@ -19,7 +20,7 @@ class CTagsFormatter;
 /**
  * Takes care of running ctags and to generate a CTagsFormmatter
  */
-class CTagsManager : public Verbose {
+class CTagsManager {
     /// the ctags file name
     std::string ctagsFile;
 
@@ -60,5 +61,7 @@ public:
      */
     CTagsFormatter *createCTagsFormatter(const TextStyles::RefTextStyle &r);
 };
+
+}
 
 #endif /*CTAGSMANAGER_H_*/

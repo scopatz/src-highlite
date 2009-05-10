@@ -13,7 +13,8 @@ background color in some .css in doc (for TODO)
 the default ctags command line option should contain the
 actual found ctags
 
-line-range
+line numbers in table in a smarter way, so that code is separated by lines
+(different columns).
 
 CODE CLEANUP
 
@@ -36,21 +37,8 @@ LANG FILES
 ----------
 recognize kde rc files
 
-TOWARDS LIBRARY
+LIBRARY
 ---------------
-the regexpengine highlighting method should also return the current state/environment?
-This way the qt highlighter can detect how many lines to highlight?
-But this way, we should have all different states (already like this)
-Probably we only need the GUID (without the alternatives):
-each state represents an actual state, and we should use a different class for
-alternatives (that will be put into a list):
-
-- in case of a single line rule that is split with states, avoid to match \n or \r? In order
-to do so, we should not return immediately after matching the entering state, and
-wait to exit the state to match the whole exp
-
-- startLine endLine: use a LineNumberGenerator?
-
 - RegexPreprocessor should not contain code dealing with boost::regex?
 
 - in LineRule is it really required to put the [^...]?
@@ -70,9 +58,17 @@ linesuffix)?
   Are the input and output file useful in ctagsformatter?  Or could we put it into
   FormatterParams?
 
-test with source-highlight ide (debug)
-
 LIBRARY
 
-- use subdir when including files
-- use namespaces
+- use namespaces (for copyright and reportbugs?)
+- class for parsers (or for langdefparserfun.h) in order to use namespaces
+- document LangElem
+
+- should library headers use <srchilite/...> ?
+- who calls createMissingFormatter?
+
+Configuration: a class with data dir, LangMap, keep all the related
+objects consistent: e.g., if we change dataDir, then change it also in 
+lang map objects. (?)
+
+move .lang, .outlang and others in another directory?

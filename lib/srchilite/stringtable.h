@@ -10,15 +10,20 @@
 #include <list>
 #include <string>
 
+namespace srchilite {
+
 /**
- * Stores dynamically allocated strings (used by the scanners)
+ * Stores dynamically allocated strings (used by the scanners), so that,
+ * later on, we can easily free all the memory for these strings.
  */
 class StringTable : public std::list<std::string *> {
 public:
     StringTable();
     ~StringTable();
-    
+
     std::string *newString(const std::string &s);
 };
+
+}
 
 #endif /*STRINGTABLE_H_*/

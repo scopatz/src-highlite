@@ -11,38 +11,43 @@
 
 #include "textstyle.h"
 
+namespace srchilite {
+
+/**
+ * Generates line numbers in the output.
+ */
 class LineNumGenerator {
-    /// num of digits to represent line number
+    /// number of digits to represent line number
     unsigned int digitNum;
 
     /// character to use for padding the line number
     char padding;
-    
+
     /// for actually formatting the line number
     TextStyle lineStyle;
-    
+
     /// for possible line anchor generation (can be null)
     TextStyle anchorStyle;
-    
+
     /// when generating an anchor for a line, use this prefix for the anchor name
     std::string anchorLinePrefix;
 
 public:
     LineNumGenerator(const TextStyle &lineStyle, unsigned int digitNum, char padding = '0');
     ~LineNumGenerator();
-    
+
     void setAnchorStyle(const TextStyle &_anchorStyle) {
         anchorStyle = _anchorStyle;
     }
-    
+
     void setAnchorPrefix(const std::string &_anchorLinePrefix) {
         anchorLinePrefix = _anchorLinePrefix;
     }
-    
+
     void setDigitNum(unsigned int _digitNum) {
         digitNum = _digitNum;
     }
-    
+
     /**
      * Generates a string representing the formatting of the passed line number
      * @param line
@@ -50,5 +55,7 @@ public:
      */
     const std::string generateLine(unsigned int line);
 };
+
+}
 
 #endif /*LINENUMGENERATOR_H_*/

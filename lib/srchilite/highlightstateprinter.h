@@ -8,12 +8,14 @@
 #ifndef HIGHLIGHTSTATEPRINTER_H_
 #define HIGHLIGHTSTATEPRINTER_H_
 
+#include <set>
+#include <iostream>
+
+namespace srchilite {
+
 class HighlightState;
 class HighlightRule;
 class HighlightToken;
-
-#include <set>
-#include <iostream>
 
 typedef std::set<int> StateIdSet;
 
@@ -37,5 +39,7 @@ public:
     void printHighlightRule(const HighlightRule *rule);
     void printHighlightToken(const HighlightToken *token);
 };
+
+}
 
 #endif /*HIGHLIGHTSTATEPRINTER_H_*/

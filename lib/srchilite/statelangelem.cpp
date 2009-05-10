@@ -15,6 +15,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 StateLangElem::StateLangElem(const string &n, StateStartLangElem *start, LangElems *elems, bool st) :
     LangElem(n), statestartlangelem(start), langelems(elems), state(st)
 {
@@ -45,4 +47,6 @@ StateLangElem::toStringOriginal() const
   if (langelems)
     res += "\n" + langelems->toStringOriginal();
   return res;
+}
+
 }

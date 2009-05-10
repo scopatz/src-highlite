@@ -11,8 +11,11 @@
 #include "formattermanager.h"
 #include "highlightevent.h"
 #include "highlighteventlistener.h"
+#include "formatterparams.h"
 
 using namespace std;
+
+namespace srchilite {
 
 /// represents highlighting as default
 static HighlightToken defaultHighlightToken;
@@ -29,8 +32,11 @@ static HighlightEvent defaultHighlightEvent(defaultHighlightToken,
         notify(defaultHighlightEvent); \
     }
 
+#define UPDATE_START_IN_FORMATTER_PARAMS(start_index) if (formatterParams) formatterParams->start = start_index;
+
 SourceHighlighter::SourceHighlighter(HighlightStatePtr mainState) :
     mainHighlightState(mainState), currentHighlightState(mainState),
+            stateStack(HighlightStateStackPtr(new HighlightStateStack)),
             formatterManager(0), optimize(false), suspended(false),
             formatterParams(0) {
 }
@@ -45,6 +51,9 @@ void SourceHighlighter::highlightParagraph(const std::string &paragraph) {
     HighlightToken token;
     MatchingParameters params;
 
+    // we're at the beginning
+    UPDATE_START_IN_FORMATTER_PARAMS(0);
+
     // note that we go on even if the string is empty, since it is crucial
     // to try to match also the end of buffer (some rules rely on that)
     while (matched) {
@@ -52,21 +61,24 @@ void SourceHighlighter::highlightParagraph(const std::string &paragraph) {
                 params);
 
         if (matched) {
-            // advance in the string, so that the part not matched
-            // can be highlighted in the next loop
-            start += (token.prefix.size() + token.matchedSize);
-
             if (token.prefix.size()) {
+                // this is the index in the paragraph of the matched part
+                UPDATE_START_IN_FORMATTER_PARAMS((std::distance(paragraph.begin(), start)));
                 // format non matched part with the current state's default element
                 format(currentHighlightState->getDefaultElement(), token.prefix);
                 GENERATE_DEFAULT_EVENT(token.prefix);
             }
 
+            // the length of the previous matched string in the matched elem list
+            int prevLen = 0;
             // now format the matched strings
             for (MatchedElements::const_iterator it = token.matched.begin(); it
                     != token.matched.end(); ++it) {
+                // this is the index in the paragraph of the matched part
+                UPDATE_START_IN_FORMATTER_PARAMS((std::distance(paragraph.begin(), start) + token.prefix.size() + prevLen));
                 format(it->first, it->second);
                 GENERATE_EVENT(token, HighlightEvent::FORMAT);
+                prevLen += it->second.size();
             }
 
             // now we're not at the beginning of line anymore, if we matched some chars
@@ -88,10 +100,16 @@ void SourceHighlighter::highlightParagraph(const std::string &paragraph) {
                 }
                 GENERATE_EVENT(token, HighlightEvent::EXITSTATE);
             }
+
+            // advance in the string, so that the part not matched
+            // can be highlighted in the next loop
+            start += (token.prefix.size() + token.matchedSize);
         } else {
             // no rule matched, so we highlight it with the current state's default element
             // provided the string is not empty (if it is empty this is really useless)
             if (start != end) {
+                // this is the index in the paragraph of the matched part
+                UPDATE_START_IN_FORMATTER_PARAMS((std::distance(paragraph.begin(), start)));
                 const string s(start, end);
                 format(currentHighlightState->getDefaultElement(), s);
                 GENERATE_DEFAULT_EVENT(s);
@@ -119,8 +137,8 @@ HighlightStatePtr SourceHighlighter::getNextState(const HighlightToken &token) {
             nextState = nextState->getOriginalState();
         }
 
-        HighlightStatePtr copyState = HighlightStatePtr(
-                new HighlightState(*nextState));
+        HighlightStatePtr copyState = HighlightStatePtr(new HighlightState(
+                *nextState));
         copyState->setOriginalState(nextState);
         copyState->replaceReferences(token.matchedSubExps);
         return copyState;
@@ -130,7 +148,7 @@ HighlightStatePtr SourceHighlighter::getNextState(const HighlightToken &token) {
 }
 
 void SourceHighlighter::enterState(HighlightStatePtr state) {
-    stateStack.push(currentHighlightState);
+    stateStack->push(currentHighlightState);
     currentHighlightState = state;
 }
 
@@ -141,18 +159,20 @@ void SourceHighlighter::enterState(HighlightStatePtr state) {
 void SourceHighlighter::exitState(int level) {
     // remove additional levels
     for (int l = 1; l < level; ++l)
-        stateStack.pop();
+        stateStack->pop();
 
-    currentHighlightState = stateStack.top();
-    stateStack.pop();
+    currentHighlightState = stateStack->top();
+    stateStack->pop();
 }
 
-/**
- * Exits all states in the stack (and thus go back to the initial main state)
- */
 void SourceHighlighter::exitAll() {
     currentHighlightState = mainHighlightState;
-    stateStack = HighlightStateStack();
+    clearStateStack();
+}
+
+void SourceHighlighter::clearStateStack() {
+    while (!stateStack->empty())
+        stateStack->pop();
 }
 
 void SourceHighlighter::format(const std::string &elem, const std::string &s) {
@@ -195,4 +215,6 @@ void SourceHighlighter::flush() {
         currentElement = "";
         currentElementBuffer.str("");
     }
+}
+
 }

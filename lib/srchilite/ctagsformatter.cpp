@@ -13,6 +13,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 /// for formatting anchors and references
 static SubstitutionMapping ref_substitutionmapping;
 
@@ -113,4 +115,6 @@ bool CTagsFormatter::formatCTags(const std::string &word,
     }
 
     return true;
+}
+
 }

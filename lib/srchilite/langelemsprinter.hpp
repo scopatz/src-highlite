@@ -1,7 +1,7 @@
 //
 // C++ Interface: langelemsprinter
 //
-// Description: 
+// Description:
 //
 //
 // Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2006
@@ -16,10 +16,12 @@
 #include <string>
 #include <ostream>
 
-/**
-Prints all the language elements
+namespace srchilite {
 
-	@author Lorenzo Bettini <http://www.lorenzobettini.it>
+/**
+ * Prints all the language elements.
+ * his class uses dynamic overloading and it must be processed by doublecpp,
+ * http://doublecpp.sf.net, in case you need to modify it.
 */
 // doublecpp: forward declarations, DO NOT MODIFY
 class LangElem; // file: langelem.h
@@ -28,12 +30,12 @@ class NamedSubExpsLangElem; // file: namedsubexpslangelem.h
 class StateLangElem; // file: statelangelem.h
 // doublecpp: end, DO NOT MODIFY
 
-#line 24 "langelemsprinter.h"
+#line 26 "langelemsprinter.h"
 class LangElemsPrinter
 {
     typedef std::set<std::string> SetOfElements;
     SetOfElements setOfElements;
-    
+
 public:
     LangElemsPrinter();
 
@@ -49,13 +51,13 @@ public:
 
 protected:
 // doublecpp: method branches, DO NOT MODIFY
-#line 44 "langelemsprinter.h"
-virtual void collect(const StateLangElem * elem);
-#line 45 "langelemsprinter.h"
-virtual void collect(const LangElem * elem);
 #line 46 "langelemsprinter.h"
-virtual void collect(const LangElems * elem);
+virtual void collect(const StateLangElem * elem);
 #line 47 "langelemsprinter.h"
+virtual void collect(const LangElem * elem);
+#line 48 "langelemsprinter.h"
+virtual void collect(const LangElems * elem);
+#line 49 "langelemsprinter.h"
 virtual void collect(const NamedSubExpsLangElem * elem);
 public:
 void _forward_collect(const LangElem * elem)
@@ -81,9 +83,11 @@ void _forward_collect(const StateLangElem * elem)
 protected:
 virtual void collect_DB(const LangElem * elem);
 virtual void collect_DB(const LangElems * elem);
-#line 47 "langelemsprinter.h"
+#line 49 "langelemsprinter.h"
 // doublecpp: end, DO NOT MODIFY
 
 };
+
+}
 
 #endif

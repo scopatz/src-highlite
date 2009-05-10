@@ -5,3 +5,7 @@ Makefile.in
 *.lo
 *.la
 getopt.h
+errno.h
+stdlib.h
+string.h
+unistd.h

@@ -4,15 +4,16 @@
 #include <boost/regex.hpp>
 
 #include "asserttestexit.h"
-#include "regexrulefactory.h"
-#include "highlightrule.h"
-#include "highlighttoken.h"
-#include "highlightstateprinter.h"
-#include "matchingparameters.h"
-#include "my_sstream.h"
-#include "tostringcollection.h"
+#include "srchilite/regexrulefactory.h"
+#include "srchilite/highlightrule.h"
+#include "srchilite/highlighttoken.h"
+#include "srchilite/highlightstateprinter.h"
+#include "srchilite/matchingparameters.h"
+#include <sstream>
+#include "srchilite/tostringcollection.h"
 
 using namespace std;
+using namespace srchilite;
 
 HighlightStatePrinter coutPrinter;
 

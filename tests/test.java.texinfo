@@ -30,7 +30,7 @@
 @t{28:} @r{@i{ *}}
 @t{29:} @r{@i{ * }}@b{@@author}@r{@i{ Lorenzo Bettini}}
 @t{30:} @r{@i{ * }}@b{@@version}@r{@i{ 2.0}}
-@t{31:} @r{@i{ */}}
+@t{31:} @r{@i{ */}} @r{@i{/// class}}
 @t{32:} @b{public} @b{class} Hello @{
 @t{33:}     @b{int} foo = 1998 ;
 @t{34:}     @b{int} hex_foo = 0xCAFEBABE;
@@ -38,16 +38,26 @@
 @t{36:}     Integer i = @b{null} ;
 @t{37:}     @b{char} c = @t{'}\'@t{'}, d = @t{'n'}, e = @t{'}\\@t{'} ;
 @t{38:}     String xml = @t{"<tag attr=}\"@t{value}\"@t{>&auml;</tag>"}, foo2 = @t{"}\\@t{"} ;
-@t{39:}     
-@t{40:}     @b{public} @b{static} @b{void} main( String args[] ) @{
-@t{41:}         @r{@i{// just some greetings ;-)  /*}}
-@t{42:}         System.out.println( @t{"Hello from java2html :-)"} ) ;
-@t{43:}         System.out.println( @t{"}\t@t{by Lorenzo Bettini"} ) ;
-@t{44:}         System.out.println( @t{"}\t@t{http://www.lorenzobettini.it"} ) ;
-@t{45:}         @b{if} (argc > 0)
-@t{46:}             String param = argc[0];
-@t{47:}         @r{@i{//System.out.println( "bye bye... :-D" ) ; // see you soon}}
-@t{48:}     @}
-@t{49:} @}
-@t{50:} 
+@t{39:} 
+@t{40:}     @r{@i{/* mymethod */}}
+@t{41:}     @b{public} @b{void} mymethod(@b{int} i) @{
+@t{42:}         @r{@i{// just a foo method}}
+@t{43:}     @}
+@t{44:}     @r{@i{/* mymethod */}}
+@t{45:}    
+@t{46:}     @r{@i{/* main */}}
+@t{47:}     @b{public} @b{static} @b{void} main( String args[] ) @{
+@t{48:}         @r{@i{// just some greetings ;-)  /*}}
+@t{49:}         System.out.println( @t{"Hello from java2html :-)"} ) ;
+@t{50:}         System.out.println( @t{"}\t@t{by Lorenzo Bettini"} ) ;
+@t{51:}         System.out.println( @t{"}\t@t{http://www.lorenzobettini.it"} ) ;
+@t{52:}         @b{if} (argc > 0)
+@t{53:}             String param = argc[0];
+@t{54:}         @r{@i{//System.out.println( "bye bye... :-D" ) ; // see you soon}}
+@t{55:}     @}
+@t{56:}     @r{@i{/* main */}}
+@t{57:} @}
+@t{58:} @r{@i{/// class}}
+@t{59:} 
+@t{60:} @r{@i{// end of file test.java}}
 @end example

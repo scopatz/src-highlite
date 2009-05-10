@@ -9,10 +9,13 @@
 
 #include <string>
 #include <stack>
+#include <sstream>
+#include <boost/shared_ptr.hpp>
 
 #include "highlightstate.h"
-#include "my_sstream.h"
 #include "eventgenerator.h"
+
+namespace srchilite {
 
 class FormatterManager;
 class HighlightToken;
@@ -21,10 +24,21 @@ class HighlightEventListener;
 class HighlightEvent;
 
 typedef std::stack<HighlightStatePtr> HighlightStateStack;
+typedef boost::shared_ptr<HighlightStateStack> HighlightStateStackPtr;
 
 /**
- * The main class performing the highlighting.  It relies on a HighlightState
- * (and its HighlightRule objects)
+ * The main class performing the highlighting of a single line.  It relies on a HighlightState
+ * (and its HighlightRule objects).
+ *
+ * It provides the method highlightParagraph() to highlight a single line.
+ *
+ * The current highlighting state can be retrieved with getCurrentState().
+ *
+ * The highlighting state is not reset after highlighting a line, thus, the
+ * same object can be used to highlight, for instance, an entire file, by
+ * calling highlightParagraph on each line.
+ *
+ * An example of use of this class is in infoformatter-main.cpp
  */
 class SourceHighlighter: public EventGenerator<HighlightEventListener,
         HighlightEvent> {
@@ -35,7 +49,7 @@ class SourceHighlighter: public EventGenerator<HighlightEventListener,
     HighlightStatePtr currentHighlightState;
 
     /// the stack for the highlight states
-    HighlightStateStack stateStack;
+    HighlightStateStackPtr stateStack;
 
     /// the formatter manager, used to format element strings
     const FormatterManager *formatterManager;
@@ -106,17 +120,41 @@ class SourceHighlighter: public EventGenerator<HighlightEventListener,
     void flush();
 
 public:
+    /**
+     * @param mainState the main and initial state for highlighting
+     */
     SourceHighlighter(HighlightStatePtr mainState);
     ~SourceHighlighter();
 
     /**
-     * Highlights a paragraph
+     * Highlights a paragraph (a line actually)
      * @param paragraph
      */
     void highlightParagraph(const std::string &paragraph);
 
     HighlightStatePtr getCurrentState() const {
         return currentHighlightState;
+    }
+
+    void setCurrentState(HighlightStatePtr state) {
+        currentHighlightState = state;
+    }
+
+    HighlightStateStackPtr getStateStack() {
+        return stateStack;
+    }
+
+    void setStateStack(HighlightStateStackPtr state) {
+        stateStack = state;
+    }
+
+    /**
+     * Clears the statck of states
+     */
+    void clearStateStack();
+
+    HighlightStatePtr getMainState() const {
+        return mainHighlightState;
     }
 
     const FormatterManager *getFormatterManager() const {
@@ -147,5 +185,7 @@ public:
         suspended = b;
     }
 };
+
+}
 
 #endif /*SOURCEHIGHLIGHTER_H_*/

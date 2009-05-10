@@ -1,0 +1,19 @@
+standard configure command:
+
+./configure CXX="ccache g++" CXXFLAGS=-g --enable-warnings --enable-maintainer-mode --prefix=$HOME/usr/local --with-doxygen
+
+from msys mingw
+
+./configure --with-boost=/c/boost_mingw/
+
+for cygwin (building for mingw)
+
+make sure to have a link to the actual boost mingw installation:
+
+ln -s /cygwin/boost_mingw
+
+run configure with
+
+CXX="ccache g++" CXXFLAGS="-mno-cygwin" CFLAGS="-mno-cygwin" --with-boost=/boost_mingw
+
+

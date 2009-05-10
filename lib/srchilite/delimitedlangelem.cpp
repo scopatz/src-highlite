@@ -15,6 +15,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 DelimitedLangElem::DelimitedLangElem(const string &n, StringDef *s, StringDef *e, StringDef *es, bool multi, bool nes)
  : StateStartLangElem(n), start(s), end(e), escape(es), multiline(multi), nested(nes)
 {
@@ -45,4 +47,4 @@ DelimitedLangElem::toStringOriginal() const
   return res;
 }
 
-
+}

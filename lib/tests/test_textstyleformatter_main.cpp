@@ -3,10 +3,13 @@
 #include <iostream>
 
 #include "asserttestexit.h"
-#include "textstyleformatter.h"
-#include "bufferedoutput.h"
-#include "my_sstream.h"
-#include "srcuntabifier.h"
+#include "srchilite/textstyleformatter.h"
+#include "srchilite/bufferedoutput.h"
+#include <sstream>
+#include "srchilite/srcuntabifier.h"
+
+using namespace std;
+using namespace srchilite;
 
 class MyPreFormatter : public PreFormatter {
 public:
@@ -22,8 +25,6 @@ protected:
     }
 
 };
-
-using namespace std;
 
 int main() {
     ostringstream os;

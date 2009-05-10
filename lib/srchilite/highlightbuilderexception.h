@@ -11,6 +11,8 @@
 #include <boost/regex/pattern_except.hpp>
 #include <string>
 
+namespace srchilite {
+
 class ParserInfo;
 
 struct HighlightBuilderException : public std::exception {
@@ -38,5 +40,7 @@ struct HighlightBuilderException : public std::exception {
 };
 
 std::ostream& operator<<(std::ostream& os, const HighlightBuilderException &entry);
+
+}
 
 #endif /*HIGHLIGHTBUILDEREXCEPTION_H_*/

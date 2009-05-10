@@ -2,7 +2,7 @@ state preproc delim "<?xml" "?>" multiline begin
 	include "key_string.lang"
 end
 
-state preproc delim "<!DOCTYPE" ">" multiline begin
+state preproc delim '<![[:alpha:]]+' ">" multiline begin
 	include "key_string.lang"
 end
 

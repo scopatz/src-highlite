@@ -1,0 +1,12 @@
+prefix=/home/bettini/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libsource-highlight
+Description: GNU Source-highlight library.
+URL: http://www.gnu.org/software/src-highlite/
+Version: 3.0
+Libs: -L${libdir} -lsource-highlight -L/usr/lib -lboost_regex-gcc43-1_35
+Cflags: -I${includedir} -I${libdir}/include -I/usr/include
+

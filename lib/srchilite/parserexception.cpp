@@ -7,7 +7,9 @@
 #include "parserexception.h"
 
 #include "parsestruct.h"
-#include "my_sstream.h"
+#include <sstream>
+
+namespace srchilite {
 
 ParserException::ParserException(const std::string &_message,
         const ParseStruct *pinfo) :
@@ -29,7 +31,7 @@ const char* ParserException::what() const throw () {
 
 std::ostream& operator<<(std::ostream& os, const ParserException &entry) {
     std::ostringstream err;
-    
+
     if (entry.filename.size())
         err << entry.filename << ":";
 
@@ -37,12 +39,13 @@ std::ostream& operator<<(std::ostream& os, const ParserException &entry) {
         err << entry.line << ": ";
     else if (entry.filename.size())
         err << " ";
-    
+
     os << err.str() << entry.message;
-    
+
     if (entry.additional.size())
         os << "\n" << err.str() << entry.additional;
 
     return os;
 }
 
+}

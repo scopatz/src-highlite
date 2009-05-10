@@ -10,6 +10,8 @@
 #include "highlightstate.h"
 #include "regexpreprocessor.h"
 
+namespace srchilite {
+
 /**
  * Build a non-marking group (i.e., (? ... ) starting from s
  * @param s
@@ -171,4 +173,6 @@ HighlightRule *RegexRuleFactory::createCompoundRule(
     }
 
     return rule;
+}
+
 }

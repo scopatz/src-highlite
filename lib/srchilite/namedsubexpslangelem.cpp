@@ -16,6 +16,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 NamedSubExpsLangElem::NamedSubExpsLangElem(const ElementNames *names, StringDef *def,
         bool ex, bool al) :
     StateStartLangElem("named subexps", ex, al), // "named subexps" is a bogus name
@@ -44,4 +46,6 @@ NamedSubExpsLangElem::toStringOriginal() const
   string res = StateStartLangElem::toString() + " " + collectionToString(elementNames, ',') +
   regexpDef->toStringOriginal();
   return res;
+}
+
 }

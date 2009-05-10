@@ -12,7 +12,8 @@
 #include <ostream>
 
 #include "textstyleformattercollection.h"
-#include "verbose.h"
+
+namespace srchilite {
 
 class FormatterManager;
 class PreFormatter;
@@ -25,15 +26,21 @@ class HighlightEventListener;
 class CTagsManager;
 class CTagsFormatter;
 class LineRanges;
+class RegexRanges;
 
 /**
- * The main class performing highlighting of a file
+ * The main class performing highlighting of an input file generating
+ * an output file.
  */
-class SourceHighlight: public Verbose {
+class SourceHighlight {
     /// the output language file name
     std::string outputLang;
 
-    /// path for several configuration files
+    /**
+     * Path for several configuration files.
+     * By default it contains the absolute data dir corresponding to the installation
+     * path, e.g., "$prefix/share/source-highlight"
+     */
     std::string dataDir;
 
     /// the background color
@@ -112,6 +119,9 @@ class SourceHighlight: public Verbose {
     /// the possible LineRanges (to check which lines should be printed)
     LineRanges *lineRanges;
 
+    /// the possible RegexRanges (to check which lines should be printed)
+    RegexRanges *regexRanges;
+
     /**
      * Whether to optmize output (e.g., adiacent text parts belonging
      * to the same element will be buffered and generated as a single text part)
@@ -139,6 +149,9 @@ class SourceHighlight: public Verbose {
     /// whether we can use stdout for generating the output (default true)
     bool canUseStdOut;
 
+    /// whether to open output files in binary mode (default false)
+    bool binaryOutput;
+
     /**
      * If greater than 0 it means that tabs will be replaced by tabSpaces
      * blank characters
@@ -152,7 +165,10 @@ class SourceHighlight: public Verbose {
     void updateBufferedOutput(BufferedOutput *output);
 
 public:
-    SourceHighlight(const std::string &outputLang);
+    /**
+     * @param outputLang the output lang file (default: html.lang)
+     */
+    SourceHighlight(const std::string &outputLang = "html.lang");
     ~SourceHighlight();
 
     /**
@@ -302,6 +318,10 @@ public:
         canUseStdOut = b;
     }
 
+    void setBinaryOutput(bool b = true) {
+        binaryOutput = b;
+    }
+
     void setHighlightEventListener(HighlightEventListener *l) {
         highlightEventListener = l;
     }
@@ -326,6 +346,14 @@ public:
         lineRanges = lr;
     }
 
+    RegexRanges *getRegexRanges() const {
+        return regexRanges;
+    }
+
+    void setRegexRanges(RegexRanges *rr) {
+        regexRanges = rr;
+    }
+
     void setCTagsManager(CTagsManager *m) {
         ctagsManager = m;
     }
@@ -334,5 +362,7 @@ public:
         tabSpaces = i;
     }
 };
+
+}
 
 #endif /*SOURCEHIGHLIGHT_H_*/

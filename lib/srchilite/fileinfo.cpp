@@ -14,6 +14,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 FileInfo::FileInfo(const string &input, const string &output) :
     ParserInfo(input), input_file_name(strip_file_path(input)),
             output_file_name(output), output_file_extension("."
@@ -23,3 +25,4 @@ FileInfo::FileInfo(const string &input, const string &output) :
 FileInfo::~FileInfo() {
 }
 
+}

@@ -12,3 +12,15 @@ doctemplate
 "
 end
 
+nodoctemplate
+"<table  BGCOLOR=\"$docbgcolor\" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<pre><tt>"
+"</tt></pre>
+</td>
+</tr>
+</table>
+"
+end
+

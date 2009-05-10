@@ -14,19 +14,27 @@
 
 #include <parserinfo.h>
 
-/**
- Information about the file we are processing
+namespace srchilite {
 
- @author Lorenzo Bettini
+/**
+ Information about the file we are processing.
+
  */
-struct FileInfo : public ParserInfo {
-    std::string input_file_name; // with no path
+struct FileInfo: public ParserInfo {
+    /// the input file name (without path)
+    std::string input_file_name;
+
+    /// the output file name
     std::string output_file_name;
+
+    /// the output file extension
     std::string output_file_extension;
 
     FileInfo(const std::string &input, const std::string &output);
 
     ~FileInfo();
 };
+
+}
 
 #endif

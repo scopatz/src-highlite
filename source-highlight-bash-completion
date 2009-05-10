@@ -12,7 +12,7 @@ _source_highlight()
     --lang-list --outlang-list -f --out-format -d --doc --no-doc -c --css \
     -T --title -t --tab -H --header -F --footer --style-file --outlang-def \
     --outlang-map --data-dir --output-dir --lang-def --lang-map --show-lang-elements \
-    --infer-lang -n --line-number --line-number-ref --line-range --range-separator --range-context --gen-references --ctags-file \
+    --infer-lang -n --line-number --line-number-ref --line-range --range-separator --range-context --regex-range --gen-references --ctags-file \
     --ctags -v --verbose --statistics --gen-version --check-lang --check-outlang \
     --failsafe -g --debug-langdef --show-regex"
 
@@ -22,7 +22,7 @@ _source_highlight()
     fi
 
     case "${prev}" in
-	-T|--title|-t|--tab|--gen-references|--line-range|--range-separator|--range-context)
+	-T|--title|-t|--tab|--gen-references|--line-range|--range-separator|--range-context|--regex-range)
 	    COMPREPLY=()
 	    ;;
 	-i|--input|-o|--output|-c|--css|-H|--header|-F|--footer|--style-file|--outlang-def|--outlang-map|--lang-def|--lang-map|--show-lang-elements|--ctags-file|--check-lang|--check-outlang|--show-regex)

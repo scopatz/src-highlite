@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <exception>
 
-#include "my_sstream.h"
+#include <sstream>
 
 static std::exception std_exception;
 
@@ -40,7 +40,7 @@ assertEquals(T expected, T actual)
         std::cerr << "assertEquals failed" << std::endl;
         std::cerr << "expected: " << expected << std::endl;
         std::cerr << "actual  : " << actual << std::endl;
-        
+
         exit(EXIT_FAILURE);
     }
 }
@@ -50,9 +50,9 @@ void
 assertEqualsException(const std::string &expected, T2 actual)
 {
     std::ostringstream o;
-    
+
     o << actual;
-    
+
     assertEquals(expected, o.str());
 }
 
@@ -63,23 +63,23 @@ assertEquals(const std::string &expected, const std::string &actual)
         std::cerr << "assertEquals failed" << std::endl;
         std::cerr << "expected: " << expected << std::endl;
         std::cerr << "actual  : " << actual << std::endl;
-        
+
         exit(EXIT_FAILURE);
     }
 }
 
 void
-assertTrue(bool actual) {
+assertTrue(bool actual, const std::string &expl = "") {
     if (!actual) {
-        std::cerr << "assertion failed!" << std::endl;
+        std::cerr << "assertion failed! " << expl << std::endl;
         exit(EXIT_FAILURE);
     }
 }
 
 void
-assertFalse(bool actual) {
+assertFalse(bool actual, const std::string &expl = "") {
     if (actual) {
-        std::cerr << "assertion failed!" << std::endl;
+        std::cerr << "assertion failed! " << expl << std::endl;
         exit(EXIT_FAILURE);
     }
 }
@@ -88,10 +88,10 @@ template <typename T1, typename T2>
 void
 assertEqualsCollections(const T1 &expected, const T2 &actual) {
     assertEquals(expected.size(), actual.size());
-    
+
     typename T1::const_iterator it1 = expected.begin();
     typename T2::const_iterator it2 = actual.begin();
-    
+
     for (; it1 != expected.end(); ++it1, ++it2)
         assertEquals(*it1, *it2);
 }

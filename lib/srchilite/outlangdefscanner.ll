@@ -18,7 +18,7 @@
  *
  */
 
-#include "my_sstream.h"
+#include <sstream>
 #include "outlangdefparser.h"
 #include "outlangdefscanner.h"
 #include "fileutil.h"
@@ -26,6 +26,8 @@
 
 #include <stack>
 #include <stdlib.h>
+
+using namespace srchilite;
 
 //#define DEBUG_SCANNER
 #ifdef DEBUG_SCANNER
@@ -203,11 +205,6 @@ const std::string *flush_buffer()
   return ret;
 }
 
-void open_outlang_file_to_scan(const string &path, const string &name)
-{
-  outlangdef_in = open_data_file_stream(path, name);
-}
-
 void open_include_file(const char *name)
 {
   string file_name = name;
@@ -228,6 +225,14 @@ void close_include_file()
   parsestructstack.pop();
 }
 
+
+namespace srchilite {
+
+void open_outlang_file_to_scan(const string &path, const string &name)
+{
+  outlangdef_in = open_data_file_stream(path, name);
+}
+
 void clear_outlangdefscanner() {
 	//delete stringTable;
 	outlangdef_lex_destroy();
@@ -240,4 +245,6 @@ void close_outlangdefinputfile() {
 	  	fclose(outlangdef_in);
   	  yypop_buffer_state();
     } while ( YY_CURRENT_BUFFER );
+}
+
 }

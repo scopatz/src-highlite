@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite">
+<title>html output formatted in html</title>
+</head>
+<body bgcolor="white">
+<pre><tt><b><font color="#000080">&lt;!doctype</font></b> <font color="#009900">HTML</font> <font color="#009900">PUBLIC</font> <font color="#FF0000">"-//IETF//DTD HTML//EN"</font><b><font color="#000080">&gt;</font></b>
+<b><font color="#0000FF">&lt;html&gt;</font></b>
+<b><font color="#0000FF">&lt;head&gt;</font></b>
+<b><font color="#0000FF">&lt;title&gt;</font></b>Check HTML features <b><font color="#000080">&amp;amp;</font></b> &lt;br&gt;<b><font color="#0000FF">&lt;/title&gt;</font></b>
+<b><font color="#0000FF">&lt;/head&gt;</font></b>
+<b><font color="#0000FF">&lt;body</font></b> <font color="#009900">bgcolor</font><font color="#990000">=</font><font color="#FF0000">"white"</font><b><font color="#0000FF">&gt;</font></b>
+<b><font color="#0000FF">&lt;body</font></b> <font color="#009900">bgcolor</font><font color="#990000">=</font><font color="#FF0000">'white'</font><b><font color="#0000FF">&gt;</font></b>
+<b><font color="#0000FF">&lt;body</font></b> <font color="#009900">bgcolor</font><font color="#990000">=</font><font color="#FF0000">white</font><b><font color="#0000FF">&gt;</font></b>
+<b><font color="#0000FF">&lt;pre&gt;&lt;tt&gt;&lt;i&gt;&lt;font</font></b> <font color="#009900">color</font><font color="#990000">=</font><font color="#FF0000">"#9A1900"</font><b><font color="#0000FF">&gt;</font></b>/*<b><font color="#0000FF">&lt;/font&gt;&lt;/i&gt;</font></b>
+
+<b><font color="#0000FF">&lt;Style</font></b> <font color="#009900">foo</font><font color="#990000">=</font><font color="#FF0000">"bar"</font><b><font color="#0000FF">&gt;</font></b> &amp;amp; &lt;br&gt; these must not be highlighted <b><font color="#0000FF">&lt;/STYle&gt;</font></b>
+
+<b><font color="#0000FF">&lt;NOSCRIPT</font></b> <font color="#009900">foo</font><font color="#990000">=</font><font color="#FF0000">"bar"</font><b><font color="#0000FF">&gt;</font></b> &amp;amp; 
+&lt;br&gt; 
+these must not be highlighted <b><font color="#0000FF">&lt;/noscript&gt;</font></b>
+
+   <b><font color="#0000FF">&lt;p</font></b> <font color="#009900">foo</font><font color="#990000">=</font><font color="#FF0000">/bar/</font><b><font color="#0000FF">&gt;</font></b>
+
+is syntactically valid and equivalent to
+
+   <b><font color="#0000FF">&lt;p</font></b> <font color="#009900">foo</font><font color="#990000">=</font><font color="#FF0000">"bar"</font><b><font color="#0000FF">&gt;</font></b>
+
+<b><font color="#0000FF">&lt;textarea&gt;</font></b>
+Here elements such as &lt;b&gt; are not highlighted
+while entities such as <b><font color="#000080">&amp;amp;</font></b> are highlighted
+<b><font color="#0000FF">&lt;/textarea&gt;</font></b>
+
+<b><font color="#0000FF">&lt;/body&gt;</font></b>
+<b><font color="#0000FF">&lt;/html&gt;</font></b>
+
+<i><font color="#9A1900">&lt;!-- this is an</font></i>
+<i><font color="#9A1900">     added HTML comment</font></i>
+<i><font color="#9A1900">     at the end of the file --&gt;</font></i>
+
+<b><font color="#0000FF">&lt;plaintext&gt;</font></b>
+
+From then on, everything else won't be highlighted
+
+&lt;textarea&gt;
+Here elements such as &lt;b&gt; are not highlighted
+while entities such as &amp;amp; are highlighted
+&lt;/textarea&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- this is an
+     added HTML comment
+     at the end of the file --&gt;
+</tt></pre>
+</body>
+</html>

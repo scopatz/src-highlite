@@ -13,7 +13,9 @@
 
 using std::string;
 
-StateStartLangElem::StateStartLangElem(const string &n, bool exit, bool all) :
+namespace srchilite {
+
+StateStartLangElem::StateStartLangElem(const string &n, unsigned int exit, bool all) :
     LangElem(n), exit(exit), exit_all(all), statelangelem(0)
 {
 }
@@ -29,3 +31,4 @@ StateStartLangElem::toString() const
   return res;
 }
 
+}

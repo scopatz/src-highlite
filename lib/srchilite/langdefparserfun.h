@@ -1,7 +1,7 @@
 //
 // C++ Interface: %{MODULE}
 //
-// Description: 
+// Description:
 //
 //
 // Author: %{AUTHOR} <%{EMAIL}>, (C) %{YEAR}
@@ -15,7 +15,11 @@
 
 #include "langelems.h"
 
+namespace srchilite {
+
 LangElems *parse_lang_def();
 LangElems *parse_lang_def(const char *path, const char *name);
+
+}
 
 #endif

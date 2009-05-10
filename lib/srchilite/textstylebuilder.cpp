@@ -13,35 +13,33 @@
 
 using namespace std;
 
-TextStyleBuilder::TextStyleBuilder(const std::string &st, const std::string &sep) :
-	start_(st), separator_(sep), added(false)
-{
+namespace srchilite {
+
+TextStyleBuilder::TextStyleBuilder(const std::string &st,
+        const std::string &sep) :
+    start_(st), separator_(sep), added(false) {
 }
 
-void
-TextStyleBuilder::start()
-{
-	buffer = TextStyle(start_);
-	added = false;
+void TextStyleBuilder::start() {
+    buffer = TextStyle(start_);
+    added = false;
 }
 
-void
-TextStyleBuilder::add(const TextStyle &textStyle)
-{
-  if (textStyle.empty())
-    return;
+void TextStyleBuilder::add(const TextStyle &textStyle) {
+    if (textStyle.empty())
+        return;
 
-  string separator = (added ? separator_ : "");
-  if (buffer.containsStyleVar()) {
-    buffer.update(TEXT_VAR_TEXT, separator + textStyle.toString());
-    added = true;
-  } else {
-	  buffer.update(separator + textStyle.toString());
-  }
+    string separator = (added ? separator_ : "");
+    if (buffer.containsStyleVar()) {
+        buffer.update(TEXT_VAR_TEXT, separator + textStyle.toString());
+        added = true;
+    } else {
+        buffer.update(separator + textStyle.toString());
+    }
 }
 
-TextStyle
-TextStyleBuilder::end()
-{
-	return TextStyle(buffer.toString());
+TextStyle TextStyleBuilder::end() {
+    return TextStyle(buffer.toString());
+}
+
 }

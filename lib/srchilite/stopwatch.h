@@ -14,10 +14,10 @@
 
 #include <time.h>
 
+namespace srchilite {
+
 /**
 Records elapsed time
-
-	@author Lorenzo Bettini <http://www.lorenzobettini.it>
 */
 class StopWatch{
   clock_t start;
@@ -35,5 +35,7 @@ public:
   ~StopWatch();
 
 };
+
+}
 
 #endif

@@ -7,12 +7,14 @@
 #ifndef HIGHLIGHTTOKEN_H_
 #define HIGHLIGHTTOKEN_H_
 
-class HighlightRule;
-
 #include <string>
 #include <list>
 #include <vector>
 #include <algorithm>
+
+namespace srchilite {
+
+class HighlightRule;
 
 /**
  * The matched element information by a rule. Each element of the collection is:
@@ -83,5 +85,7 @@ struct HighlightToken {
      */
     void addMatched(const std::string &elem, const std::string &s);
 };
+
+}
 
 #endif /*HIGHLIGHTTOKEN_H_*/

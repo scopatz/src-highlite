@@ -13,6 +13,8 @@
 
 using namespace std;
 
+namespace srchilite {
+
 PreFormatter::PreFormatter(PreFormatterPtr f) :
     decorator(f)
 {
@@ -23,10 +25,10 @@ PreFormatter::~PreFormatter()
 }
 
 void
-PreFormatter::setFormatter(PreFormatterPtr f)
+PreFormatter::setPreFormatter(PreFormatterPtr f)
 {
   if (decorator.get())
-    decorator->setFormatter(f);
+    decorator->setPreFormatter(f);
   else
     decorator = f;
 }
@@ -54,4 +56,4 @@ PreFormatter::doPreformat(const string &text)
   return text;
 }
 
-
+}

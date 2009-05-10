@@ -8,9 +8,11 @@
  */
 
 #include "textstyle.h"
-#include "my_sstream.h"
+#include <sstream>
 
 using namespace std;
+
+namespace srchilite {
 
 static SubstitutionMapping substitutionmapping;
 
@@ -43,18 +45,20 @@ TextStyle::~TextStyle()
  * constant parts and those that represent $text and $style variables.
  * For instance, if repr == "<span class=\"$style\">$text</span>", then we
  * have:
- *   parts[0] == "<span class=\""
- *   parts[1] == ""
- *   parts[2] == "\">"
- *   parts[3] == ""
- *   parts[4] == "</span>"
+ *
+ *   - parts[0] == "<span class=\""
+ *   - parts[1] == ""
+ *   - parts[2] == "\">"
+ *   - parts[3] == ""
+ *   - parts[4] == "</span>"
  *
  * Then style_substitutions contains the index(es) of parts corresponding to
  * $style variable occurrences that will be substituted with values
  * and text_substitutions is the same but for $text occurrences.  Thus, in this
  * case:
- * style_substitutions[0] = 1
- * text_substitutions[0] = 3
+ *
+ * - style_substitutions[0] = 1
+ * - text_substitutions[0] = 3
  */
 void
 TextStyle::build_vectors()
@@ -177,4 +181,6 @@ bool
 TextStyle::empty() const
 {
   return repr == STYLE_VAR_TEXT || repr == TEXT_VAR_TEXT;
+}
+
 }

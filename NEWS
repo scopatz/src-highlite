@@ -1,12 +1,31 @@
 source-highlight -- History of visible changes.
 
-Copyright (C) 1999-2008 Lorenzo Bettini
+Copyright (C) 1999-2009 Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite
 
 See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
+
+Version 3.0
+
+   * provides a library for highlighting that can be used
+     by other programs.
+   *  --regex-range (highlight only specified lines of an input file,
+     according to specific regular expressions describing the delimiting
+     lines).
+   * deal with HTML5 features (thanks to Simon Pieters)
+   * use --docdir for documentation directory
+   * --binary-output command line option to write output files in binary
+     mode
+   * Added the program source-highlight-settings to write a configuration
+     file for source-highlight (and its library) in the user home directory.
+   * languange definition for generic configuration files
+   * languange definition for pkg-config files
+   * the input language is now discovered also using the whole file
+     name (besides the file extension if any)
+   * in .lang files one can specify the exit level
 
 Version 2.11.1
 

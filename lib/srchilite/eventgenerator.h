@@ -9,6 +9,8 @@
 
 #include <list>
 
+namespace srchilite {
+
 /**
  * A generic event generator, for listeners of type EventListener and events of
  * type EventType.  EventListener must implement the method notify(const EventType &)
@@ -29,6 +31,10 @@ public:
         return listeners.size();
     }
 
+    /**
+     * Notifies all listeners of a specific event
+     * @param event the event
+     */
     void notify(const EventType &event) {
         for (typename std::list<EventListener *>::const_iterator it =
                 listeners.begin(); it != listeners.end(); ++it) {
@@ -36,5 +42,7 @@ public:
         }
     }
 };
+
+}
 
 #endif /*EVENTGENERATOR_H_*/

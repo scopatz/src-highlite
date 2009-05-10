@@ -6,6 +6,8 @@
 
 #include "bufferedoutput.h"
 
+namespace srchilite {
+
 using namespace std;
 
 BufferedOutput::BufferedOutput(std::ostream &os) :
@@ -47,4 +49,6 @@ void BufferedOutput::writePostLine(const std::string &prefix) {
 
 void BufferedOutput::writePostDoc(const std::string &prefix) {
     writePostInfo(postDocContents, prefix);
+}
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999, 2000, 2001  Lorenzo Bettini, http://www.lorenzobettini.it
+ * Copyright (C) 1999-2009  Lorenzo Bettini, http://www.lorenzobettini.it
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,6 @@
  *
  */
 
-// base class for char translators
-
 #ifndef _CHARTRANSLATOR_H
 #define _CHARTRANSLATOR_H
 
@@ -29,29 +27,60 @@
 
 #include "preformatter.h"
 
-class CharTranslator : public PreFormatter
-{
- protected:
-   unsigned int counter;
-   std::string translation_exp; // what to translate
-   std::string translation_format; // translate into
-   boost::regex *reg_exp;
-   bool bol; // whether we are at the beginning of a new line
+namespace srchilite {
 
-   virtual const std::string doPreformat(const std::string &text);
+/**
+ * Translates specific character sequences into corresponding ones;
+ * it can also use regualr expression for the characters to be translated.
+ * This is useful for translating some characters in the input which
+ * are special characters in the output formats, e.g., & in LaTeX, or
+ * < in HTML.
+ */
+class CharTranslator: public PreFormatter {
+protected:
+    /// keeps track of the translation patterns added
+    unsigned int counter;
+    /// the translation regular expression (for buffering)
+    std::string translation_exp;
+    /// the corresponding translated regular expression (for buffering)
+    std::string translation_format;
+    /// the actual regular expression
+    boost::regex *reg_exp;
+    /// whether we are at the beginning of a new line
+    bool bol;
 
- public:
-  CharTranslator(PreFormatterPtr f = PreFormatterPtr());
-  virtual ~CharTranslator();
+    /**
+     * The actual preformatting (char translation)
+     * @param text what to translate
+     * @return the translated string
+     */
+    virtual const std::string doPreformat(const std::string &text);
 
-  void set_translation(const std::string &s1, const std::string &s2);
+public:
+    /**
+     * @param f the decorated preformatter
+     */
+    CharTranslator(PreFormatterPtr f = PreFormatterPtr());
+    virtual ~CharTranslator();
 
-  const std::string toString() const
-  {
-    return translation_exp + " -> " + translation_format;
-  }
-} ;
+    /**
+     * Adds a translation pair
+     * @param s1 what to translate
+     * @param s2 the translated expression
+     */
+    void set_translation(const std::string &s1, const std::string &s2);
+
+    /**
+     * returns a string representation: what we translate
+     * and into what we translate
+     */
+    const std::string toString() const {
+        return translation_exp + " -> " + translation_format;
+    }
+};
 
 typedef boost::shared_ptr<CharTranslator> CharTranslatorPtr;
+
+}
 
 #endif // _CHARTRANSLATOR_H

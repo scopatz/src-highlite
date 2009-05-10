@@ -9,6 +9,12 @@
 
 #include "highlightrulefactory.h"
 
+namespace srchilite {
+
+/**
+ * Implementation of the abstract factory, creating highlighting rules
+ * based on boost::regex regular expressions.
+ */
 class RegexRuleFactory : public HighlightRuleFactory {
 public:
     RegexRuleFactory();
@@ -19,7 +25,7 @@ public:
 
     virtual HighlightRule *createWordListRule(const std::string &name,
                 const WordList &list, bool caseSensitve = true);
-    
+
     virtual HighlightRule *createListRule(const std::string &name,
                 const WordList &list, bool caseSensitve = true);
 
@@ -34,5 +40,7 @@ public:
     virtual HighlightRule *createCompoundRule(const ElemNameList &nameList,
             const std::string &rep);
 };
+
+}
 
 #endif /*REGEXRULEFACTORY_H_*/

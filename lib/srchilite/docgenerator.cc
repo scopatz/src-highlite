@@ -25,6 +25,8 @@
 
 using std::endl;
 
+namespace srchilite {
+
 void
 DocGenerator::generate_start_doc(std::ostream *sout)
 {
@@ -56,4 +58,6 @@ DocGenerator::generate_end_doc(std::ostream *sout)
             doc_footer,
             doc_background
         );
+}
+
 }

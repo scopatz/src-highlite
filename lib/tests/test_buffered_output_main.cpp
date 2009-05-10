@@ -1,11 +1,12 @@
 #include <iostream>
 #include <list>
 
-#include "my_sstream.h"
-#include "bufferedoutput.h"
+#include <sstream>
+#include "srchilite/bufferedoutput.h"
 #include "asserttestexit.h"
 
 using namespace std;
+using namespace srchilite;
 
 int main() {
     ostringstream os;

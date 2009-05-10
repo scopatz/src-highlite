@@ -10,6 +10,8 @@
 #include "textstyleformatter.h"
 #include "keys.h"
 
+namespace srchilite {
+
 TextStyleFormatterFactory::TextStyleFormatterFactory(TextStylesPtr _textStyles,
         PreFormatter *_preformatter, CTagsFormatter *_ctagsFormatter,
         FormatterManager *_formatterManager) :
@@ -158,3 +160,4 @@ void TextStyleFormatterFactory::addDefaultFormatter() {
     formatterManager->setDefaultFormatter(defaultFormatter);
 }
 
+}

@@ -1,10 +1,10 @@
 //
 // C++ Interface: delimitedlangelem
 //
-// Description: 
+// Description:
 //
 //
-// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004
+// Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2004-2009
 //
 // Copyright: See COPYING file that comes with this distribution
 //
@@ -14,13 +14,15 @@
 
 #include "statestartlangelem.h"
 
+namespace srchilite {
+
 class StringDef;
 
 /**
-represent a language element that is delimited by strings
+ A language element that is delimited by specific strings
+ (regular expressions)
 
-@author Lorenzo Bettini
-*/
+ */
 // doublecpp: forward declarations, DO NOT MODIFY
 class HighlightState; // file: highlightstate.h
 class HighlightStateBuilder; // file: highlightstatebuilder.h
@@ -28,7 +30,7 @@ class HighlightStateBuilder; // file: highlightstatebuilder.h
 
 class DelimitedLangElem : public StateStartLangElem
 {
-  private:
+private:
     StringDef *start;
     StringDef *end;
     StringDef *escape;
@@ -36,25 +38,72 @@ class DelimitedLangElem : public StateStartLangElem
     bool nested;
 
 public:
-    DelimitedLangElem(const std::string &n, StringDef *s, StringDef *e, StringDef *es, bool multi, bool nes);
+    /**
+     * @param n the name of the element
+     * @param s the starting regular expression for the element
+     * @param e the ending regular expression
+     * @param es the escaping sequence (if any)
+     * @param multi whether this element spans multiple lines
+     * @param nes whether this element can be nested
+     */
+    DelimitedLangElem(const std::string &n, StringDef *s, StringDef *e,
+            StringDef *es, bool multi, bool nes);
 
     ~DelimitedLangElem();
-    
+
+    /**
+     * return the string representation (with preprocessing)
+     * @return the string representation
+     */
     virtual const std::string toString() const;
-    
+
+    /**
+     * return the original representation (without any preprocessing);
+     * this is useful for printing errors
+     * @return the original representation
+     */
     virtual const std::string toStringOriginal() const;
-    
-    void set_escape(StringDef *e) { escape = e; }
-    
-    StringDef *getStart() const { return start; }
-    StringDef *getEnd() const { return end; }
-    StringDef *getEscape() const { return escape; }
-    bool isMultiline() const { return multiline; }
-    bool isNested() const { return nested; }    
+
+    /**
+     * @return the starting string
+     */
+    StringDef *getStart() const {
+        return start;
+    }
+
+    /**
+     * @return the ending string
+     */
+    StringDef *getEnd() const {
+        return end;
+    }
+
+    /**
+     * @return the escape string
+     */
+    StringDef *getEscape() const {
+        return escape;
+    }
+
+    /**
+     * @return whether this element can span multiple lines
+     */
+    bool isMultiline() const {
+        return multiline;
+    }
+
+    /**
+     * @return whether this element can be nested
+     */
+    bool isNested() const {
+        return nested;
+    }
 // doublecpp: dispatch methods, DO NOT MODIFY
 public:
 virtual void dispatch_build(HighlightStateBuilder *, HighlightState * state);
 // doublecpp: end, DO NOT MODIFY
 };
+
+}
 
 #endif

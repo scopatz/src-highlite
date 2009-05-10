@@ -1,0 +1,492 @@
+\input texinfo @c -*-texinfo-*-
+@c This file uses the @command command introduced in Texinfo 4.0.
+@c %**start of header
+@setfilename source-highlight-lib.info
+@include version-lib.texi
+@settitle GNU Source-highlight Library @value{VERSION}
+@finalout
+@c @setchapternewpage odd
+@c %**end of header
+
+@set myhomepage @uref{http://www.lorenzobettini.it}
+@set langfilesurl @uref{http://www.gnu.org/software/src-highlite/lang_files/}
+@set outlangfilesurl @uref{http://www.gnu.org/software/src-highlite/outlang_files/}
+@set srchilitelib Source-highlight library
+
+@macro cind {n}
+@cindex \n\
+\n\
+@end macro
+
+@macro classname {n}
+@cindex @code{\n\} class
+@code{\n\} class
+@end macro
+
+@macro methodname {n}
+@cindex @code{\n\} method
+@code{\n\} method
+@end macro
+
+@macro fieldname {n}
+@cindex @code{\n\} field
+@code{\n\} field
+@end macro
+
+@macro enumname {n}
+@cindex @code{\n\} enum
+@code{\n\} enum
+@end macro
+
+@macro sourcehighlightclass 
+@classname{SourceHighlight}
+@end macro
+
+@macro sourcehighlight
+@cindex @code{source-highlight}
+@code{source-highlight}
+@end macro
+
+@macro sourcehighlightsettings
+@cindex @code{source-highlight-settings}
+@code{source-highlight-settings}
+@end macro
+
+
+@copying
+This manual is for GNU Source-highlight Library 
+(version @value{VERSION}, @value{UPDATED}),
+which given a source file, produces a document with syntax highlighting.
+
+Copyright @copyright{} 2005-2008 Lorenzo Bettini, @value{myhomepage}.
+
+@quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with the Front-Cover Texts being ``A GNU Manual,''
+and with the Back-Cover Texts as in (a) below.  A copy of the
+license is included in the section entitled ``GNU Free Documentation
+License.''
+
+(a) The FSF's Back-Cover Text is: ``You have freedom to copy and modify
+this GNU Manual, like GNU software.  Copies published by the Free
+Software Foundation raise funds for GNU development.''
+@end quotation
+@end copying
+
+@dircategory Utilities
+@direntry
+* Source-highlight-lib: (source-highlight-lib).  Highlights contents
+@end direntry
+
+@titlepage
+@title GNU Source-highlight Library
+@subtitle given a source file, produces a document with syntax highlighting.
+@subtitle for GNU Source-highlight Version @value{VERSION}
+@subtitle updated on @value{UPDATED-MONTH}
+
+@author by Lorenzo Bettini, @value{myhomepage}
+
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Top, Introduction, (dir), (dir)
+@top GNU Source-highlight Library
+
+GNU Source-highlight, given a source file, produces a document with
+syntax highlighting.
+
+This is Edition @value{EDITION} of the Source-highlight Library manual.
+
+This file documents GNU Source-highlight Library version @value{VERSION}.
+
+@insertcopying
+@end ifnottex
+
+@c All the nodes can be updated using the EMACS command
+@c texinfo-every-node-update, which is normally bound to C-c C-u C-e.
+@c @node Top, Introduction, (dir), (dir)
+
+@c All the menus can be updated with the EMACS command
+@c texinfo-all-menus-update, which is normally bound to C-c C-u C-a.
+@menu
+* Introduction::                What's it for?
+* Installation::                
+* Use of GNU Source-highlight Library::  
+* Main Classes::                
+* Problems::                    Reporting bugs.
+* Mailing Lists::               
+* Concept Index::               Index of concepts.
+@end menu
+
+@node Introduction, Installation, Top, Top
+@chapter Introduction
+
+@cindex introduction
+@cindex features
+GNU Source-highlight, given a source file, produces a document with
+syntax highlighting.   @inforef{Introduction,,source-highlight} for a
+wider introduction about GNU Source-highlight.
+
+This file documents the Library provided by GNU Source-highlight, thus
+its audience is programmers only, who want to use source-highlight
+features inside their programs, not the users of Source-highlight.
+This library is part of GNU Source-highlight since version 3.0.
+
+However, the main principles of GNU Source-highlight will be given for
+granted, together with all the notions for writing language definition
+files, output definition files, and so on.  Again, we refer to the
+documentation of GNU Source-highlight for all these features.
+
+@node Installation, Use of GNU Source-highlight Library, Introduction, Top
+@chapter Installation
+
+GNU Source-highlight library is part of GNU Source-highlight, thus it
+will be installed together with Source-highlight itself; we refer to
+@inforef{Installation,,source-highlight} for further instructions on
+installing GNU Source-highlight.  Here we detail only the parts
+concerning the library.
+
+@cindex @code{--with-doxygen}
+@cindex doxygen
+If you want to build and install the API documentation of
+Source-highlight library, you need to run @code{configure} with the
+option @code{--with-doxygen}, but you need the program @emph{Doxygen},
+@url{http://www.doxygen.org}, to build the documentation.
+The documentation will be installed in the following directory:
+
+@table @code
+@item Library API documentation
+        @code{prefix/share/doc/source-highlight/api}
+@item library examples
+        @code{prefix/share/doc/source-highlight/examples}
+@end table
+
+@node Use of GNU Source-highlight Library, Main Classes, Installation, Top
+@chapter Use of GNU Source-highlight Library
+
+@cindex libsource-highlight
+You can use GNU Source-highlight library in your programs, by including
+its headers and linking to the file
+@file{libsource-highlight}.ext@footnote{The extension of course depends
+on the library being shared or static, e.g., @code{.so}, @code{.la},
+@code{.a}, and on the system}.
+
+@cindex namespace
+@cindex headers
+All the classes of the library are part of the namespace
+@code{srchilite}, and all the header files are in the subdirectory
+@code{srchilite}.
+
+@menu
+* Using Automake and Autotools::  
+@end menu
+
+@node Using Automake and Autotools,  , Use of GNU Source-highlight Library, Use of GNU Source-highlight Library
+@section Using Automake and Autotools
+
+@cindex autotools
+@cindex pkg-config
+The easiest way to use GNU Source-highlight library in your program is
+to rely on autotools, i.e., @emph{Automake}, @emph{Autoconf}, etc.  In
+particular, the library is installed with a
+@code{pkg-config}@footnote{@url{http://pkg-config.freedesktop.org}.} 
+configuration file (metadata file), @file{source-highlight.pc}.
+
+pkg-config is a tool for helping compiling applications and
+libraries. It helps you insert the correct compiler options on the
+command line so an application can use @value{srchilitelib} simply
+by running
+
+@example
+gcc -o test test.c `pkg-config --libs --cflags source-highlight`  
+@end example
+
+@noindent
+rather than hard-coding values on where to find the library.  Moreover,
+this will provide also with the correct compiler flags and libraries
+used by @value{srchilitelib} itself, e.g., Boost Regex library.
+
+@cindex @code{PKG_CONFIG_PATH}
+Note that @code{pkg-config} searches for @file{.pc} files in its
+standard directories.  If you installed the library in a non standard
+directory, you'll need to set the @code{PKG_CONFIG_PATH} environment
+variable accordingly.  
+For instance, if I install the library into
+@code{/usr/local/lib}, the @file{.pc} file will be installed into
+@code{/usr/local/lib/pkgconfig}, and then I'll need to call
+@code{pkg-config} as follows:
+
+@example
+PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
+        pkg-config --libs --cflags source-highlight
+@end example
+
+In your @file{configure.ac} you can use the autoconf macro provided
+by @code{pkg-config}; here is an example:
+
+@example
+# Checks for libraries.
+PKG_CHECK_MODULES(SRCHILITE, [source-highlight >= 3.0])
+AC_SUBST(SRCHILITE_CFLAGS)
+AC_SUBST(SRCHILITE_LIBS)
+@end example
+
+Then, you can use the variables @code{SRCHILITE_CFLAGS} and
+@code{SRCHILITE_LIBS} in your makefiles accordingly.
+For instance,
+
+@example
+...
+AM_CPPFLAGS = $(SRCHILITE_CFLAGS)
+...
+LDADD = $(SRCHILITE_LIBS)
+...
+@end example
+
+@node Main Classes, Problems, Use of GNU Source-highlight Library, Top
+@chapter Main Classes
+
+Here we present the main classes of the @value{srchilitelib},
+together with some example of use.
+For the documentation of all the classes (and methods of the classes)
+we refer to the generated API documentation (see @xref{Installation}).
+
+You will note that often, methods and constructors of the
+classes of the libraries do not take a pointer or a reference
+to a class, say @code{MyClass}, but an object of type @code{MyClassPtr};
+these are
+@cindex shared pointers
+@emph{shared pointers}, in particular the ones provided by the Boost
+libraries (they are typedefs using, e.g.,
+@code{boost::shared_ptr<MyClass>}).  This will avoid dangerous dangling
+pointers and possible memory leaks in the library.
+
+If on the contrary, a method or a constructor in a class of the library
+takes a standard pointer, say @code{MyClass *}, then that class will
+NEVER delete such pointer.  It is up to the actual owner the object of
+@code{MyClass *} to delete the object when it is not needed anymore.
+
+The classes of the libraries can raise exceptions if errors are
+encountered (e.g., an input file cannot be opened, or a language
+definition file cannot be parsed); the exception classes can be found in
+the API documentation, and all exception classes inherit from
+@classname{std::exception}.
+
+@menu
+* SourceHighlight class::       
+* Customizing Formatting::      
+* Events and Listeners::        
+@end menu
+
+@node SourceHighlight class, Customizing Formatting, Main Classes, Main Classes
+@section SourceHighlight class
+
+The @sourcehighlightclass{} is the class of the library that basically
+implements all the functionalities used by the program
+@sourcehighlight{} itself; thus it highlights an input file generating
+an output file.  It can be configured with many options, and basically
+it has a get/set methods for all the command line options of
+@sourcehighlight{} (we refer also to @inforef{Invoking
+source-highlight,,source-highlight}).
+
+For instance, the following example
+(@file{source-highlight-console-main.cpp}) highlights an input file to
+the console (the colors are obtained through ANSI color escape sequences
+(so you need a console program that supports this):
+
+@include source-highlight-console-main.cpp.texinfo
+
+Note that if a file name is passed at the command line, the program
+tries to detect the source language by using a @classname{LangMap}
+object, specifying the map file @file{lang.map}, which is the one
+mapping file extensions to language definition files (e.g., if the file
+name has extension @file{.java} it will use the corresponding
+@file{java.lang}).  Otherwise we assume that we want to highlight
+a C++ file.
+
+All the highlighting is performed by the @methodname{highlight}; since
+we don't specify an output file name it will output the highlighted
+result directly to the console.  In case we don't have an input filename
+either, @methodname{highlight} will read from the standard input.  Since
+the highlighting takes place one line per time, you can test the program
+this way: you'll enter a line on the console and when you press enter,
+the program will echo the same line highlighted.
+
+The @code{DATADIR} is not even mandatory, provided you installed
+Source-highlight correctly, or that you set it up, using
+@sourcehighlightsettings{} program.
+
+@node Customizing Formatting, Events and Listeners, SourceHighlight class, Main Classes
+@section Customizing Formatting
+
+The formatting of @value{srchilitelib}, i.e., how to actually perform
+the highlighting, or what to do when we need to highlight something, can
+be completely customized; the library detects (using regular expressions
+based on language definition files) that something must be highlighted
+as, say, a keyword, and you can then do whatever you want with this
+information.  The default formatting strategy is to output an
+highlighted text using a specific formatting format, but you're free to
+do whatever you like, if you want.
+
+This formatting abstraction is done through @classname{Formatter}, which
+basically declares only the abstract method @methodname{format} which
+takes as parameters the string to format, and further (possibly empty)
+additional parameters, implemented by @classname{FormatterParams}.  Note
+that the @methodname{format} does not get as an argument how the passed
+string must be formatted (e.g., as a keyword, as a type, etc.); this
+information must be stored in the formatter from the start.  Indeed, the
+mapping between a language element and a formatter is performed by
+@classname{FormatterManager}.  An object of this class must be created
+by specifying a default formatter object, that will be used when the
+formatter manager will be queried for a formatter for a specific
+language element that it is not able to handle (in this it will fall
+back by returning the default formatter).
+
+For instance, this is a customized formatter (@file{infoformatter.h})
+which, when requested to format a string, it simply writes this
+information specifying which kind of language element it is, and the
+position in the line (the @fieldname{start} in
+@classname{FormatterParams}).  Note that the language element is stored
+in a field of the class, and it is set at object creation time.  We
+avoid to write anything if we are requested to format something as
+@code{"normal"}, or if the string to format is empty.
+
+@include infoformatter.h.texinfo
+
+For convenience we also declare a typedef for the shared pointer (since
+the formatter manager takes only shared pointers to formatters).
+
+In order to customize the formatting, there are some more steps
+to do, and in particular, you cannot use @classname{SourceHighlight} anymore
+but you need to use more classes.
+
+First of all, you need @classname{LangDefManager} which takes care of
+building the regular expressions starting from a language definition
+file; in order to do this it uses a @classname{HighlightRuleFactory}
+object; for the moment, only the implementation based on boost regular
+expression exists, so you can simply pass an object of
+@classname{RegexRuleFactory}.  Once you have an object of
+@classname{LangDefManager}, you can use the
+@methodname{getHighlightState} to build the automaton to perform the
+highlight (in particular the initial state of such automaton, of
+@classname{HighlightState}), and you should pass this to an object that
+can use the automaton to perform the highlighting.  To do this, you can
+use @classname{SourceHighlighter} whose objects can be used to highlight
+a line of text, using @methodname{highlightParagraph}.
+
+You can then create a @classname{FormatterManager} object and populate
+it with your formatters and set it to the @classname{SourceHighlighter}
+object.  The following example (@file{infoformatter-main.cpp}) shows how
+to perform these steps; note that we can share the same formatter for
+different language elements:
+
+@include infoformatter-main.cpp.texinfo
+
+Note that, since we highlight a line a time, we must reset the
+@fieldname{start} each time we start to examine a new line.
+
+For simplicity this example highlights only C++ code and reads directly
+from the standard input and writes to the standard output.  This is a
+run of the example reading from the standard input (so each time you
+insert a line you get the output of your formatters):
+
+@example
+// this is a comment
+comment: //, start: 0
+comment:  this is a comment, start: 2
+#include <foobar.h>
+preproc: #include, start: 0
+string: <foobar.h>, start: 9
+int abc = 100 + 5;
+keyword: int, start: 0
+symbol: =, start: 8
+number: 100, start: 10
+symbol: +, start: 14
+number: 5, start: 16
+symbol: ;, start: 17
+@end example
+
+@node Events and Listeners,  , Customizing Formatting, Main Classes
+@section Events and Listeners
+
+During the highlighting (and regular expression matching) the library
+generates events that can be ``listened'' by using a customized event
+listener.  An event is represented by an object of
+@classname{HighlightEvent}, which stores the @classname{HighlightToken}
+object and the type (an @enumname{HighlightEventType}) of the event.
+
+A customized listener can be implemented by deriving from
+@classname{HighlightEventListener} and by defining the virtual method
+@methodname{notify}, which, of course, takes an
+@classname{HighlightEvent} object as parameter.
+
+For instance, @sourcehighlight{} implements the debugging
+functionalities by using a customized listener,
+@classname{DebugListener}, whose method implementation we report here as
+an example:
+
+@include debuglistener.cpp.texinfo
+
+@node Problems, Mailing Lists, Main Classes, Top
+@chapter Reporting Bugs
+@cindex bugs
+@cindex problems
+
+If you find a bug in @command{source-highlight}, please send electronic
+mail to
+
+@code{bug-source-highlight at gnu dot org}
+
+Include the version
+number, which you can find by running @w{@samp{source-highlight
+--version}}.  Also include in your message the output that the program
+produced and the output you expected.@refill
+
+If you have other questions, comments or suggestions about
+@command{source-highlight}, contact the author via electronic mail
+(find the address at @value{myhomepage}).  The author will try to help
+you out, although he may not have time to fix your problems.
+
+@node Mailing Lists, Concept Index, Problems, Top
+@chapter Mailing Lists
+@cindex mailing list
+
+The following mailing lists are available: 
+
+@code{help-source-highlight at gnu dot org}
+
+for generic discussions about the program and for asking for help about
+it (open mailing list),
+@uref{http://mail.gnu.org/mailman/listinfo/help-source-highlight}
+ 
+@code{info-source-highlight at gnu dot org}
+
+for receiving information about new releases and features (read-only
+mailing list),
+@uref{http://mail.gnu.org/mailman/listinfo/info-source-highlight}.
+ 
+If you want to subscribe to a mailing list just go to the URL and follow
+the instructions, or send me an e-mail and I'll subscribe you.
+
+I'll describe new features in new releases also in my blog, at
+this URL:
+
+@uref{http://tronprog.blogspot.com/search/label/source-highlight}
+
+@node Concept Index,  , Mailing Lists, Top
+@unnumbered Concept Index
+
+@cindex tail recursion
+@printindex cp
+
+@shortcontents
+
+
+@bye

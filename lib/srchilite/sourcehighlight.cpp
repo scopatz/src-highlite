@@ -32,19 +32,23 @@
 #include "highlightstateprinter.h"
 #include "langelemsprinter.hpp"
 #include "langelems.h"
+#include "verbosity.h"
+#include "settings.h"
 
 using namespace std;
 
+namespace srchilite {
+
 SourceHighlight::SourceHighlight(const std::string &_outputLang) :
-    outputLang(_outputLang), styleFile("default.style"), formatterManager(0),
-            preFormatter(0), langDefManager(
-                    new LangDefManager(new RegexRuleFactory)),
+    outputLang(_outputLang), dataDir(Settings::retrieveDataDir()), styleFile(
+            "default.style"), formatterManager(0), preFormatter(0),
+            langDefManager(new LangDefManager(new RegexRuleFactory)),
             lineNumGenerator(0), docGenerator(0), noDocGenerator(0),
             highlightEventListener(0), ctagsManager(0), ctagsFormatter(0),
-            lineRanges(0), optimize(true), generateLineNumbers(false),
-            generateLineNumberRefs(false), lineNumberPad('0'),
+            lineRanges(0), regexRanges(0), optimize(true), generateLineNumbers(
+                    false), generateLineNumberRefs(false), lineNumberPad('0'),
             generateEntireDoc(false), generateVersion(true),
-            canUseStdOut(true), tabSpaces(0) {
+            canUseStdOut(true), binaryOutput(false), tabSpaces(0) {
 }
 
 SourceHighlight::~SourceHighlight() {
@@ -82,8 +86,8 @@ void SourceHighlight::initialize() {
 
     if (tabSpaces) {
         preFormatter = new Untabifier(tabSpaces);
-        preFormatter->setFormatter(PreFormatterPtr(
-                new PreFormatter(textStyles->charTranslator)));
+        preFormatter->setPreFormatter(PreFormatterPtr(new PreFormatter(
+                textStyles->charTranslator)));
     } else {
         preFormatter = new PreFormatter(textStyles->charTranslator);
     }
@@ -125,16 +129,17 @@ void SourceHighlight::initialize() {
     TextStyleFormatter *lineNumFormatter =
             dynamic_cast<TextStyleFormatter *> (formatterManager->getFormatter(
                     "linenum").get());
-    lineNumGenerator
-            = new LineNumGenerator(lineNumFormatter->toString(), 5, lineNumberPad);
+    lineNumGenerator = new LineNumGenerator(lineNumFormatter->toString(), 5,
+            lineNumberPad);
     lineNumGenerator->setAnchorPrefix(lineNumberAnchorPrefix);
     if (generateLineNumberRefs)
         lineNumGenerator->setAnchorStyle(textStyles->refstyle.anchor);
 
-    docGenerator
-            = new DocGenerator(textStyles->docTemplate.toStringBegin(), textStyles->docTemplate.toStringEnd());
-    noDocGenerator
-            = new DocGenerator(textStyles->noDocTemplate.toStringBegin(), textStyles->noDocTemplate.toStringEnd());
+    docGenerator = new DocGenerator(textStyles->docTemplate.toStringBegin(),
+            textStyles->docTemplate.toStringEnd());
+    noDocGenerator = new DocGenerator(
+            textStyles->noDocTemplate.toStringBegin(),
+            textStyles->noDocTemplate.toStringEnd());
 
     docGenerator->set_gen_version(generateVersion);
     noDocGenerator->set_gen_version(generateVersion);
@@ -219,7 +224,7 @@ void SourceHighlight::highlight(const std::string &input,
             if (!outputFileExtension.size()) {
                 // we can't continue
                 ParserException e("missing file extension in " + outputLang,
-                        PACKAGE);
+                        "source-highlight");
                 e.additional
                         = "this is needed when the output file is not specified";
                 throw e;
@@ -229,7 +234,12 @@ void SourceHighlight::highlight(const std::string &input,
             output = createOutputFileName(input);
         }
 
-        os.open(output.c_str());
+        if (binaryOutput) {
+            os.open(output.c_str(), std::ios::out | std::ios::binary);
+        } else {
+            os.open(output.c_str());
+        }
+
         if (!os) {
             throw IOException("cannot open output file", output);
         }
@@ -259,7 +269,8 @@ void SourceHighlight::highlight(const std::string &input,
 }
 
 const string SourceHighlight::createOutputFileName(const std::string &inputFile) {
-    return ::createOutputFileName(inputFile, outputFileDir, outputFileExtension);
+    return srchilite::createOutputFileName(inputFile, outputFileDir,
+            outputFileExtension);
 }
 
 void SourceHighlight::highlight(std::istream &input, std::ostream &output,
@@ -277,12 +288,18 @@ void SourceHighlight::highlight(std::istream &input, std::ostream &output,
         highlighter.addListener(highlightEventListener);
 
     BufferedOutput bufferedOutput(output);
+
+    // if no optimization, then always flush the output
+    if (!optimize)
+        bufferedOutput.setAlwaysFlush(true);
+
     updateBufferedOutput(&bufferedOutput);
 
     SourceFileHighlighter fileHighlighter(inputFileName, &highlighter,
             &bufferedOutput);
 
     fileHighlighter.setLineRanges(lineRanges);
+    fileHighlighter.setRegexRanges(regexRanges);
 
     if (generateLineNumbers)
         fileHighlighter.setLineNumGenerator(lineNumGenerator);
@@ -363,4 +380,6 @@ void SourceHighlight::updateBufferedOutput(BufferedOutput *output) {
             formatterCollection.begin(); it != formatterCollection.end(); ++it) {
         (*it)->setBufferedOutput(output);
     }
+}
+
 }

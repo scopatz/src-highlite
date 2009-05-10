@@ -19,7 +19,9 @@
 #include "namedsubexpslangelem.h"
 #include "regexpreprocessor.h"
 #include "statelangelem.h"
-#include "my_sstream.h"
+#include <sstream>
+
+namespace srchilite {
 
 /**
  * Sets the exit level of the rule using the information contained in the passed elem
@@ -167,7 +169,7 @@ void HighlightStateBuilder::build(DelimitedLangElem *elem,
         // back reference number
         unsigned int max = ref_info.second;
         if (max > info.marked) {
-            ostringstream error;
+            std::ostringstream error;
             error << max << " subexpressions requested, but only "
                     << info.marked << " found";
             throw HighlightBuilderException(error.str(), elem);
@@ -317,7 +319,11 @@ void setExitLevel(const StateStartLangElem *elem, HighlightRule *rule,
         unsigned int inc) {
     if (elem->exitAll()) {
         rule->setExitLevel(-1); // exit all
-    } else if (elem->doExit()) {
-        rule->setExitLevel(1 + inc);
+    } else if (elem->getExit()) {
+        rule->setExitLevel(elem->getExit() + inc);
     }
+}
+
+#include "highlightstatebuilder_dbtab.cc"
+
 }
