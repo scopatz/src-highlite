@@ -1,4 +1,4 @@
-# Copyright (C) 1999-2007 Lorenzo Bettini <http://www.lorenzobettini.it>
+# Copyright (C) 1999-2009 Lorenzo Bettini <http://www.lorenzobettini.it>
 #
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without
@@ -9,7 +9,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(source-highlight,3.0)
+AC_INIT(source-highlight,3.0.1)
 
 # this is requested for the install-data-local of doxygen documentation
 AC_PREREQ([2.62])

@@ -8,6 +8,12 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 3.0.1
+
+   * fixed library manual link in index.html
+   * doxyfile is now distributed
+   * better formatting for < and > in latex output
+
 Version 3.0
 
    * provides a library for highlighting that can be used

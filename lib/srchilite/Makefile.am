@@ -143,7 +143,8 @@ INCLUDES = -I@top_srcdir@/src
 
 EXTRA_DIST = $(h_sources) \
 langelemsprinter_dbtab.cc \
-highlightstatebuilder_dbtab.cc
+highlightstatebuilder_dbtab.cc \
+$(DOXYFILE)
 
 BUILT_SOURCES = styleparser.cc styleparser.h \
 stylecssparser.cc stylecssparser.h \

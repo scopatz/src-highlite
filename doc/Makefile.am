@@ -257,7 +257,7 @@ sh_dull.css           sh_navy.css             sh_whatis.css \
 sh_easter.css         sh_nedit.css            sh_whitengrey.css \
 sh_emacs.css          sh_neon.css             sh_zellner.css
 
-EXTRA_DIST = colors.html source-highlight.html \
+EXTRA_DIST = colors.html source-highlight.html source-highlight-lib.html \
              Hello.java \
              header.html footer.html \
              gpl.texinfo flex_scanner.ll \

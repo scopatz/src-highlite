@@ -1,3 +1,10 @@
+2009-05-15  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* src/latex.outlang: use \textgreater and \textless for
+	formatting < > (thanks to Jan Schafer)
+
+	* lib/srchilite/Makefile.am (EXTRA_DIST): doxyfile added
+
 2009-05-10  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* doc/index.html: put examples in a separate file: examples.html
