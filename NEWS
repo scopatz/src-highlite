@@ -15,6 +15,7 @@ Version 3.0.1
    * better formatting for < and > in latex output
    * doxygen documentation can be built even when building in
      a separate directory
+   * added man page for source-highlight-settings
 
 Version 3.0
 

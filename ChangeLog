@@ -1,5 +1,10 @@
+2009-05-18  Cesare Tirabassi
+
+	* doc/source-highlight-settings.1: added 
+
 2009-05-18  bettini  <bettini@bettini-laptop>
 
+	* doc/source-highlight-settings.1: 
 	* lib/srchilite/srchilite.doxyfile.in: use an .in file
 	that is configured with the right source directory (so that
 	it works also if the build is in a different directory)

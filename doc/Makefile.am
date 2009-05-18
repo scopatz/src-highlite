@@ -262,7 +262,7 @@ EXTRA_DIST = colors.html source-highlight.html source-highlight-lib.html \
              header.html footer.html \
              gpl.texinfo flex_scanner.ll \
              example-u.diff example-c.diff example-n.diff \
-             source-highlight.1 check-regexp.1 index.html examples.html \
+             source-highlight.1 source-highlight-settings.1 check-regexp.1 index.html examples.html \
 	     comment-show.lang comment-show2.lang \
 	     SimpleClass.java SimpleClass-doc.html UsageExample.java \
 	     txt2texinfo.txt \
@@ -288,7 +288,7 @@ source_highlightdoc_DATA = colors.html source-highlight.html \
     style_examples.html
 
 # man page
-man_MANS = source-highlight.1 check-regexp.1
+man_MANS = source-highlight.1 source-highlight-settings.1 check-regexp.1
 
 # note that $(srcdir) actually points to doc dir
 
