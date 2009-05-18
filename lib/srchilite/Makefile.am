@@ -28,7 +28,7 @@ endif
 
 # for doxygen documentation
 if HAVE_DOXYGEN
-DOXYFILE=$(srcdir)/srchilite.doxyfile
+DOXYFILE=$(builddir)/srchilite.doxyfile
 
 help_dir=$(htmldir)/api
 
@@ -144,7 +144,7 @@ INCLUDES = -I@top_srcdir@/src
 EXTRA_DIST = $(h_sources) \
 langelemsprinter_dbtab.cc \
 highlightstatebuilder_dbtab.cc \
-$(DOXYFILE)
+srchilite.doxyfile.in
 
 BUILT_SOURCES = styleparser.cc styleparser.h \
 stylecssparser.cc stylecssparser.h \

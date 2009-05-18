@@ -13,6 +13,8 @@ Version 3.0.1
    * fixed library manual link in index.html
    * doxyfile is now distributed
    * better formatting for < and > in latex output
+   * doxygen documentation can be built even when building in
+     a separate directory
 
 Version 3.0
 

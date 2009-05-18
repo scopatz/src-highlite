@@ -1,3 +1,9 @@
+2009-05-18  bettini  <bettini@bettini-laptop>
+
+	* lib/srchilite/srchilite.doxyfile.in: use an .in file
+	that is configured with the right source directory (so that
+	it works also if the build is in a different directory)
+
 2009-05-15  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* src/latex.outlang: use \textgreater and \textless for

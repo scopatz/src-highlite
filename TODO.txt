@@ -72,3 +72,6 @@ objects consistent: e.g., if we change dataDir, then change it also in
 lang map objects. (?)
 
 move .lang, .outlang and others in another directory?
+
+Makefile.lang:
+- add VAR += VALUE and -= VALUE

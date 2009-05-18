@@ -271,6 +271,7 @@ src/src-hilite-lesspipe.sh
 doc/Makefile
 lib/Makefile
 lib/srchilite/Makefile
+lib/srchilite/srchilite.doxyfile
 lib/tests/Makefile
 lib/examples/Makefile
 tests/Makefile
