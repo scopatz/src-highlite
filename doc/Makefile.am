@@ -287,6 +287,8 @@ source_highlightdoc_DATA = colors.html source-highlight.html \
     UsageExample.java UsageExample.html \
     style_examples.html
 
+source_highlightdata_DATA = $(CSS_FILES)
+
 # man page
 man_MANS = source-highlight.1 source-highlight-settings.1 check-regexp.1
 
