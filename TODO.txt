@@ -75,3 +75,5 @@ move .lang, .outlang and others in another directory?
 
 Makefile.lang:
 - add VAR += VALUE and -= VALUE
+
+remove @author in files (and check doxygen documentation)

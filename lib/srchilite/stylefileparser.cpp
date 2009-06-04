@@ -8,12 +8,18 @@
 
 #include "stylefileparser.h"
 #include "parsestyles.h"
+#include "settings.h"
 
 namespace srchilite {
 
 void StyleFileParser::parseStyleFile(const std::string &name,
             FormatterFactory *formatterFactory, std::string &bodyBgColor) {
     parseStyles(name, formatterFactory, bodyBgColor);
+}
+
+void StyleFileParser::parseCssStyleFile(const std::string &name,
+            FormatterFactory *formatterFactory, std::string &bodyBgColor) {
+    parseCssStyles(Settings::retrieveDataDir(), name, formatterFactory, bodyBgColor);
 }
 
 }

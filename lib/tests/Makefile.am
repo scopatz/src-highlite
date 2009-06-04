@@ -25,7 +25,8 @@ VALGRIND_TESTS = test_regexrules test_formatter_manager test_highlighter \
 	test_langdefmanager test_sourcehighlight test_sourcehighlight_errors test_langinfer \
 	test_untabifier test_outlangparser test_outlang_errors test_events test_debuglistener \
 	test_regexpreprocessor test_filenotfound test_style_errors \
-	test_lineranges test_regexranges test_settings test_langmap
+	test_lineranges test_regexranges test_settings test_langmap \
+	test_utils
 
 if !NO_CTAGS
 VALGRIND_TESTS += test_ctagscollector test_ctagsformatter test_ctagsmanager \
@@ -118,6 +119,10 @@ test_regexpreprocessor_SOURCES = test_regexpreprocessor_main.cpp
 
 test_langmap_SOURCES = test_langmap_main.cpp 
 test_langmap_CXXFLAGS = -D BASEDIR="\"$(srcdir)/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
+
+test_utils_SOURCES = test_utils_main.cpp
+test_utils_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/src/\""
+
 
 mytags: $(top_srcdir)/lib/srchilite/test_readtags_main.cpp
 	$(CTAGS) --excmd=n --fields=+n -o mytags $(top_srcdir)/lib/srchilite/test_readtags_main.cpp $(top_srcdir)/lib/srchilite/readtags.h
@@ -220,6 +225,9 @@ check_test_settings: test_settings$(EXEEXT)
 
 check_test_langmap: test_langmap$(EXEEXT)
 	./test_langmap$(EXEEXT)
+
+check_test_utils: test_utils$(EXEEXT)
+	./test_utils$(EXEEXT)	
 
 VALGRINDTEST = $(builddir)/valgrind_test.sh
 

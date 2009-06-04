@@ -9,7 +9,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(source-highlight,3.0.1)
+AC_INIT(source-highlight,3.1)
 
 # this is requested for the install-data-local of doxygen documentation
 AC_PREREQ([2.62])
@@ -26,7 +26,7 @@ AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 #AC_SUBST(API_VERSION)
 
 #shared library versioning
-LIBRARY_VERSION=1:0:0
+LIBRARY_VERSION=2:0:1
 #               | | |
 #        +------+ | +---+
 #        |        |     |

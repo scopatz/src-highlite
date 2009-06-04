@@ -366,7 +366,8 @@ int main() {
     // check state copy
     HighlightStatePtr stateCopy = HighlightStatePtr(
             new HighlightState(*nextState));
-    assertEquals(stateCopy->getId(), nextState->getId());
+    // a new id must have been created for the copy
+    assertEquals(nextState->getId()+1, stateCopy->getId());
     rule = HighlightRulePtr(factory.createSimpleRule("foo", "foo"));
     // change the second rule of the state
     HighlightRulePtr oldRule = stateCopy->replaceRule(0, rule);

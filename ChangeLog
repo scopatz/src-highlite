@@ -1,3 +1,30 @@
+2009-05-27  bettini  <bettini@bettini-desktop>
+
+	* lib/srchilite/formattermanager.h (FormatterManager.getFormatterMap): return
+	a const reference to the formatter map
+
+2009-05-23  bettini  <bettini@bettini-laptop>
+
+	* lib/srchilite/highlightstate.cpp (HighlightState::HighlightState): the copy
+	constructor does NOT copy the id of the state, but generates a new one;
+	this is required for highlighting in contexts where the processing is not
+	sequential (e.g., in text editors)
+
+2009-05-21  bettini  <bettini@bettini-laptop>
+
+	* lib/srchilite/formattermanager.h (FormatterManager.reset): added method
+	to clear the formatter map
+
+2009-05-20  bettini  <bettini@bettini-laptop>
+
+	* lib/srchilite/sourcehighlightutils.h (SourceHighlightUtils): added class
+	with static methods for retrieving style files
+
+2009-05-19  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* doc/Makefile.am (source_highlightdata_DATA): install .css files
+	in the data dir
+
 2009-05-18  Cesare Tirabassi
 
 	* doc/source-highlight-settings.1: added 

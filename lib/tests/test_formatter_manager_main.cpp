@@ -30,6 +30,10 @@ int main() {
     assertTrue(formatterManager.hasFormatter("non existent").get() == 0);
     assertEquals(fooFormatter.get(), formatterManager.hasFormatter("foo").get());
 
+    // check that reset removes all elements in the map
+    formatterManager.reset();
+    assertTrue(formatterManager.getFormatterMap().size() == 0, "formatter map should be empty");
+
     cout << "test_formatter_manager: SUCCESS" << endl;
 
     return 0;

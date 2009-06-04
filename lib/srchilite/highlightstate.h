@@ -73,6 +73,12 @@ public:
      * @param e the element for strings when no rule matches (default: "normal")
      */
     HighlightState(const std::string &e = "normal");
+    /**
+     * Copies all the elements of the highlight state, except for the id: a new
+     * id will be used.
+     * @param copy
+     */
+    HighlightState(const HighlightState &copy);
     ~HighlightState();
 
     /**

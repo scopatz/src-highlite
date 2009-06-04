@@ -93,7 +93,8 @@ libsource_highlight_la_SOURCES = \
 	langdefparser.yy langdefscanner.ll \
 	languageinfer.cpp \
 	parserexception.cpp \
-	stringtable.cpp vardefinitions.cpp
+	stringtable.cpp vardefinitions.cpp \
+	sourcehighlightutils.cpp
 
 libsource_highlight_la_LIBADD = $(top_builddir)/gl/libgnu.la \
 	@LTLIBOBJS@ $(BOOST_REGEX_LIB)
@@ -137,7 +138,8 @@ h_sources = parsestyles.h \
              stylefileparser.h \
              settings.h \
              versions.h \
-             verbosity.h
+             verbosity.h \
+             sourcehighlightutils.h
 
 INCLUDES = -I@top_srcdir@/src
 

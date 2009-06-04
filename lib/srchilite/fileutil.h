@@ -46,6 +46,10 @@ string createOutputFileName(const string &inputFileName,
  */
 unsigned int get_line_count(istream &input);
 
+/**
+ * @param filename
+ * @return returns the file extension (without the dot)
+ */
 string get_file_extension(const string &filename);
 
 FILE * open_file_stream(const string &input_file_name);

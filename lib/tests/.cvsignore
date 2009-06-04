@@ -49,3 +49,4 @@ test_lineranges
 test_regexranges
 test_settings
 test_langmap
+test_utils

@@ -68,6 +68,20 @@ public:
      * @param formatter
      */
     void addFormatter(const std::string &elem, FormatterPtr formatter);
+
+    /**
+     * Resets this formatter manager: it removes all the current associations.
+     */
+    void reset() {
+        formatterMap.clear();
+    }
+
+    /**
+     * @return the formatter map of this formatter manager
+     */
+    const FormatterMap &getFormatterMap() const {
+        return formatterMap;
+    }
 };
 
 }

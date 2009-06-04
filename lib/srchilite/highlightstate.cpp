@@ -17,6 +17,11 @@ HighlightState::HighlightState(const std::string &e) :
     id(global_id++), defaultElement(e), needsReferenceReplacement(false) {
 }
 
+HighlightState::HighlightState(const HighlightState &copy) :
+    id(global_id++), defaultElement(copy.defaultElement), ruleList(copy.ruleList),
+            needsReferenceReplacement(copy.needsReferenceReplacement) {
+}
+
 HighlightState::~HighlightState() {
 }
 

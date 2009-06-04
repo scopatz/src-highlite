@@ -8,6 +8,10 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 3.1
+
+   * library utility functions to retrieve .style and .css files
+
 Version 3.0.1
 
    * fixed library manual link in index.html
