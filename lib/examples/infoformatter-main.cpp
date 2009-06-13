@@ -1,8 +1,9 @@
 /*
- * source-highlight-console.cpp
+ * infoformatter-main.cpp
  *
  *  Example of use of source-highlight library:
- *  highlights a source to the console
+ *  prints formatting information to the console: what is going to
+ *  be formatted and its position within the line
  *
  *  Created on: May 7, 2009
  *      Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2008

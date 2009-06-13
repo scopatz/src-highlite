@@ -75,7 +75,7 @@ Software Foundation raise funds for GNU development.''
 @end quotation
 @end copying
 
-@dircategory Utilities
+@dircategory C++ Libraries
 @direntry
 * Source-highlight-lib: (source-highlight-lib).  Highlights contents
 @end direntry
@@ -336,11 +336,11 @@ highlighted text using a specific formatting format, but you're free to
 do whatever you like, if you want.
 
 This formatting abstraction is done through @classname{Formatter}, which
-basically declares only the abstract method @methodname{format} which
-takes as parameters the string to format, and further (possibly empty)
-additional parameters, implemented by @classname{FormatterParams}.  Note
-that the @methodname{format} does not get as an argument how the passed
-string must be formatted (e.g., as a keyword, as a type, etc.); this
+basically declares only the abstract @methodname{format} which takes as
+parameters the string to format, and further (possibly empty) additional
+parameters, implemented by @classname{FormatterParams}.  Note that the
+@methodname{format} does not get as an argument how the passed string
+must be formatted (e.g., as a keyword, as a type, etc.); this
 information must be stored in the formatter from the start.  Indeed, the
 mapping between a language element and a formatter is performed by
 @classname{FormatterManager}.  An object of this class must be created
@@ -349,14 +349,22 @@ formatter manager will be queried for a formatter for a specific
 language element that it is not able to handle (in this it will fall
 back by returning the default formatter).
 
-For instance, this is a customized formatter (@file{infoformatter.h})
-which, when requested to format a string, it simply writes this
-information specifying which kind of language element it is, and the
-position in the line (the @fieldname{start} in
-@classname{FormatterParams}).  Note that the language element is stored
-in a field of the class, and it is set at object creation time.  We
-avoid to write anything if we are requested to format something as
-@code{"normal"}, or if the string to format is empty.
+@menu
+* Completely Customized Formatting::  
+* Style-based Customized Formatting::  
+@end menu
+
+@node Completely Customized Formatting, Style-based Customized Formatting, Customizing Formatting, Customizing Formatting
+@subsection Completely Customized Formatting
+
+You can implement a completely customized formatting strategy.  For
+instance, this is a customized formatter (@file{infoformatter.h}) which,
+when requested to format a string, it simply writes this information
+specifying which kind of language element it is, and the position in the
+line (the @fieldname{start} in @classname{FormatterParams}).  Note that
+the language element is stored in a field of the class, and it is set at
+object creation time.  We avoid to write anything if we are requested to
+format something as @code{"normal"}, or if the string to format is empty.
 
 @include infoformatter.h.texinfo
 
@@ -412,6 +420,87 @@ symbol: +, start: 14
 number: 5, start: 16
 symbol: ;, start: 17
 @end example
+
+@node Style-based Customized Formatting,  , Completely Customized Formatting, Customizing Formatting
+@subsection Style-based Customized Formatting
+
+Source-highlight can rely on style (and css style) files for generating
+formatting.  Usually, the formatters are built according to the output
+format, specified through @file{.outlang} files, @inforef{Output
+Language Definitions,,source-highlight}.  However, you can also create
+your own formatters based on the information of the style file (or css
+style file).  During the parsing of these style files, a
+@classname{FormatterFactory} object is used by the library, and you can
+provide a customized factory (the one that is used by the library is
+@classname{TextStyleFormatterFactory}).  The only abstract method
+of @classname{FormatterFactory} is @methodname{createFormatter}.
+
+In order to parse a style file, you can use the static methods of the
+@classname{StyleFileParser}, which require the file name of the style
+file (and possibly the path to search for the style file, otherwise the
+default one is used), the factory to create formatters, and a reference
+to a string where the document background color will be stored.  The
+methods are @methodname{parseStyleFile} and
+@methodname{parseCssStyleFile}.
+
+For instance, let's create a customized formatter
+@file{styleformatter.h} that simply prints how a language element will
+be formatted (but no formatting will take place); for the sake of
+simplicity we will use only public fields:
+
+@include styleformatter.h.texinfo
+
+Now, we create a customized factory (file
+@file{styleformatterfactory.h}), implementing the method
+@methodname{createFormatter}.  Note that the base class
+@classname{FormatterFactory} does not provide any means to store the
+created formatters, so it's up to the derived classes to store the
+created formatters somewhere:
+
+@include styleformatterfactory.h.texinfo
+
+The @methodname{createFormatter} will be called when parsing a style
+file to create a formatter corresponding to a specific language element;
+this method should return false if the creation of a formatter failed
+(e.g., in this case, if a formatter for a given element had already been
+created).  The method is passed the language element name, the colors
+for the element as specified in the style file (that can be empty if no
+color was specified), and a @enumname{StyleConstants} shared pointer
+with formatting informations such as, boldface, italics, etc.  The
+factory can use this information to create the customized formatter.
+
+Now, we can use this customized formatter factory in our program
+(file @file{styleformatter-main.cpp}):
+
+@include styleformatter-main.cpp.texinfo
+
+Note that, once we created all the formatters with our factory (while
+parsing the style file @file{default.style}), we still need to manually
+set these formatters in the @classname{FormatterManager} object used by
+our highlighter.
+
+For simplicity this example highlights only C++ code and reads directly
+from the standard input and writes to the standard output.  This is a
+run of the example reading from the standard input (so each time you
+insert a line you get the output of your formatters):
+
+@example
+/// my class TODO: nothing special
+comment: "///"
+formatted as: italic color: brown 
+comment: " my class "
+formatted as: italic color: brown 
+todo: "TODO:"
+formatted as: bold bgcolor: cyan
+comment: " nothing special"
+formatted as: italic color: brown 
+#include <foobar.h>
+preproc: "#include"
+formatted as: bold color: darkblue 
+string: "<foobar.h>"
+formatted as: color: red 
+@end example
+
 
 @node Events and Listeners,  , Customizing Formatting, Main Classes
 @section Events and Listeners

@@ -373,6 +373,15 @@ of source code fragments and whole files via source-highlight.
 
 @uref{http://jblevins.org/projects/ikiwiki/code}
 
+@item
+@cindex Wiki
+@cindex Php
+Pascal Bleser created a PHP extension that uses the GNU source-highlight
+library directly from PHP, instead of relying on spawning a process or
+using the source-highlight CGI.
+
+@uref{http://code.google.com/p/php-source-highlight/}
+
 
 @end itemize
 

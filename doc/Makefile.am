@@ -192,9 +192,20 @@ debuglistener.cpp.texinfo: $(top_srcdir)/lib/srchilite/debuglistener.cpp
 infoformatter.h.texinfo: $(top_srcdir)/lib/examples/infoformatter.h
 	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/infoformatter.h --regex-range="//> TEXINFO"
 
+styleformatter.h.texinfo: $(top_srcdir)/lib/examples/infoformatter.h
+	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/infoformatter.h --regex-range="//> TEXINFO"
+
 infoformatter-main.cpp.texinfo: $(top_srcdir)/lib/examples/infoformatter-main.cpp
 	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/infoformatter-main.cpp --regex-range="//> TEXINFO"
 
+styleformatter-main.cpp.texinfo: $(top_srcdir)/lib/examples/styleformatter-main.cpp
+	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/styleformatter-main.cpp --regex-range="//> TEXINFO"
+
+styleformatter.h.texinfo: $(top_srcdir)/lib/examples/styleformatter.h
+	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/styleformatter.h --regex-range="//> TEXINFO"
+
+styleformatterfactory.h.texinfo: $(top_srcdir)/lib/examples/styleformatterfactory.h
+	$(SRCHILITETEXINFO) $(top_srcdir)/lib/examples/styleformatterfactory.h --regex-range="//> TEXINFO"
 
 .lang.show.texinfo:
 	$(SRCHILITEEXE) --show-regex=$< | $(SRCHILITEPROG) -f texinfo --style-file=$(top_srcdir)/src/texinfo.style --lang-def=nohilite.lang > $@
@@ -232,13 +243,15 @@ endif
 endif
 
 AM_MAKEINFOHTMLFLAGS=--no-split
+# for including generated texinfo files
+AM_MAKEINFOFLAGS=-I$(srcdir)
 
 # these are distributed since they might depend on other programs
 DISTRIBUTEDINFOS = help-output.texinfo test_ref.h.texinfo 
 
 GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo test_lineranges1.java.texinfo test_lineranges2.java.texinfo test_regexrange1.java.texinfo test_regexrange_main.java.texinfo test_regexrange_methods.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo c.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo clike_vardeclaration.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo style.defaults.texinfo test_string_stop.lang.texinfo strategy_example.lang.texinfo test_vardecl.cc.texinfo test_nonewlines.lang.texinfo test_newlines.lang.texinfo
 
-EXAMPLEINFOS = source-highlight-console-main.cpp.texinfo infoformatter.h.texinfo infoformatter-main.cpp.texinfo debuglistener.cpp.texinfo
+EXAMPLEINFOS = source-highlight-console-main.cpp.texinfo infoformatter.h.texinfo infoformatter-main.cpp.texinfo debuglistener.cpp.texinfo styleformatter.h.texinfo styleformatterfactory.h.texinfo styleformatter-main.cpp.texinfo
 
 CSS_FILES = default.css \
 Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \

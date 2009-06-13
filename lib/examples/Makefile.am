@@ -19,10 +19,11 @@ LIBDIR = ../srchilite/
 
 INCLUDES = -I@top_srcdir@/src -I@srcdir@/..
 
-check_PROGRAMS = source-highlight-console infoformatter
+check_PROGRAMS = source-highlight-console infoformatter styleformatter
 
 source_highlight_console_SOURCES = source-highlight-console-main.cpp
 infoformatter_SOURCES = infoformatter-main.cpp infoformatter.h
+styleformatter_SOURCES = styleformatter-main.cpp styleformatter.h styleformatterfactory.h
 
 source_highlightlibexample_DATA = $(source_highlight_console_SOURCES) \
 	$(infoformatter_SOURCES)

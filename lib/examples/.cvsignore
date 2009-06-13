@@ -4,3 +4,4 @@ source-highlight-console
 Makefile
 .libs
 .deps
+styleformatter
