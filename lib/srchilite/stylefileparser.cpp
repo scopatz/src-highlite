@@ -22,4 +22,14 @@ void StyleFileParser::parseCssStyleFile(const std::string &name,
     parseCssStyles(Settings::retrieveDataDir(), name, formatterFactory, bodyBgColor);
 }
 
+void StyleFileParser::parseStyleFile(const std::string &path, const std::string &name,
+            FormatterFactory *formatterFactory, std::string &bodyBgColor) {
+    parseStyles(path, name, formatterFactory, bodyBgColor);
+}
+
+void StyleFileParser::parseCssStyleFile(const std::string &path, const std::string &name,
+            FormatterFactory *formatterFactory, std::string &bodyBgColor) {
+    parseCssStyles(path, name, formatterFactory, bodyBgColor);
+}
+
 }

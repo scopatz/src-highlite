@@ -13,3 +13,5 @@ attribute = type
 value = string
 predef_var = type
 predef_func = function
+atom = regexp
+meta = function

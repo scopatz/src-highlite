@@ -63,6 +63,7 @@ ml = caml.lang
 mli = caml.lang
 moc = cpp.lang
 outlang = outlang.lang
+oz = oz.lang
 pas = pascal.lang
 pascal = pascal.lang
 patch = diff.lang

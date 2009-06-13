@@ -1,3 +1,20 @@
+2009-06-13  bettini  <bettini@bettini-desktop>
+
+	* src/oz.lang: New file. taken from 
+	http://www.cs.unb.ca/~bremner//blog/posts/oz-source-highlight/
+
+2009-06-07  bettini  <bettini@bettini-laptop>
+
+	* lib/examples/styleformatter-main.cpp: Example using customized
+	FormatterFactory
+	* lib/examples/styleformatter.h: New file.
+	* lib/examples/styleformatterfactory.h: New file.
+	* doc/source-highlight-lib.texinfo: added example of customized
+	FormatterFactory 
+	* lib/srchilite/stylefileparser.cpp (StyleFileParser::parseStyleFile): 
+	(StyleFileParser::parseCssStyleFile): versions with explicit path 
+	* lib/srchilite/stylefileparser.h (StyleFileParser): Ditto
+
 2009-05-27  bettini  <bettini@bettini-desktop>
 
 	* lib/srchilite/formattermanager.h (FormatterManager.getFormatterMap): return

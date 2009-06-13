@@ -11,15 +11,13 @@ Please send source-highlight bug reports to bug-source-highlight at gnu.org
 Version 3.1
 
    * library utility functions to retrieve .style and .css files
-
-Version 3.0.1
-
    * fixed library manual link in index.html
    * doxyfile is now distributed
    * better formatting for < and > in latex output
    * doxygen documentation can be built even when building in
      a separate directory
    * added man page for source-highlight-settings
+   * language definition for Oz, thanks to David Bremners
 
 Version 3.0
 

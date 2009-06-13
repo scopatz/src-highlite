@@ -55,3 +55,7 @@ difflines blue;
 selector purple;
 property blue;
 value darkgreen i;
+
+// for oz
+atom orange;
+meta i;

@@ -46,6 +46,31 @@ public:
     static void parseCssStyleFile(const std::string &name,
             FormatterFactory *formatterFactory, std::string &bodyBgColor);
 
+    /**
+     * Parses the specified style file, in the specified path, and creates the corresponding formatters,
+     * using the passed FormatterFactory.
+     *
+     * @param path where to look for the file
+     * @param name the style file name
+     * @param formatterFactory
+     * @param bodyBgColor the background color for the document (output parameter)
+     * @throws ParserException in case of parsing error
+     */
+    static void parseStyleFile(const std::string &path, const std::string &name,
+            FormatterFactory *formatterFactory, std::string &bodyBgColor);
+
+    /**
+     * Parses the specified css style file, in the specified path, and creates the corresponding formatters,
+     * using the passed FormatterFactory.
+     *
+     * @param path where to look for the file
+     * @param name the css style file name
+     * @param formatterFactory
+     * @param bodyBgColor the background color for the document (output parameter)
+     * @throws ParserException in case of parsing error
+     */
+    static void parseCssStyleFile(const std::string &path, const std::string &name,
+            FormatterFactory *formatterFactory, std::string &bodyBgColor);
 };
 
 }

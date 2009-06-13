@@ -4,7 +4,10 @@ standard configure command:
 
 from msys mingw
 
-./configure --with-boost=/c/boost_mingw/
+in /etc/fstab
+c:/boost_mingw /boost_mingw
+
+./configure --with-boost=/boost_mingw
 
 for cygwin (building for mingw)
 

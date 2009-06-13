@@ -109,3 +109,4 @@ ada = ada.lang
 adb = ada.lang
 pc = pc.lang
 pkgconfig = pc.lang
+oz = oz.lang

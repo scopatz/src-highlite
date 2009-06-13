@@ -49,3 +49,7 @@ body {  background-color: white;  }
 .selector { color: purple; }
 .property { color: blue; }
 .value { color: darkgreen; font-style: italic; }
+
+/* for Oz */
+.atom { color: orange; }
+.meta { font-style: italic; }
