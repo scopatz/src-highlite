@@ -8,7 +8,7 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
-Version 3.1.1 (yet unreleased)
+Version 3.1.1
 
    * access to static global LangDefManager, LangMaps is provided
      through the class Instances
