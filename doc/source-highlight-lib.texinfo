@@ -120,6 +120,7 @@ This file documents GNU Source-highlight Library version @value{VERSION}.
 * Installation::                
 * Use of GNU Source-highlight Library::  
 * Main Classes::                
+* Global instances::            
 * Problems::                    Reporting bugs.
 * Mailing Lists::               
 * Concept Index::               Index of concepts.
@@ -166,6 +167,8 @@ The documentation will be installed in the following directory:
         @code{prefix/share/doc/source-highlight/api}
 @item library examples
         @code{prefix/share/doc/source-highlight/examples}
+@item conf files           
+        @code{prefix/share/source-highlight}
 @end table
 
 @node Use of GNU Source-highlight Library, Main Classes, Installation, Top
@@ -250,7 +253,7 @@ LDADD = $(SRCHILITE_LIBS)
 ...
 @end example
 
-@node Main Classes, Problems, Use of GNU Source-highlight Library, Top
+@node Main Classes, Global instances, Use of GNU Source-highlight Library, Top
 @chapter Main Classes
 
 Here we present the main classes of the @value{srchilitelib},
@@ -283,6 +286,8 @@ the API documentation, and all exception classes inherit from
 * SourceHighlight class::       
 * Customizing Formatting::      
 * Events and Listeners::        
+* Settings::                    
+* Utility functions::           
 @end menu
 
 @node SourceHighlight class, Customizing Formatting, Main Classes, Main Classes
@@ -382,7 +387,8 @@ object; for the moment, only the implementation based on boost regular
 expression exists, so you can simply pass an object of
 @classname{RegexRuleFactory}.  Once you have an object of
 @classname{LangDefManager}, you can use the
-@methodname{getHighlightState} to build the automaton to perform the
+@methodname{getHighlightState} to build the 
+@cind{automaton} to perform the
 highlight (in particular the initial state of such automaton, of
 @classname{HighlightState}), and you should pass this to an object that
 can use the automaton to perform the highlighting.  To do this, you can
@@ -502,7 +508,7 @@ formatted as: color: red
 @end example
 
 
-@node Events and Listeners,  , Customizing Formatting, Main Classes
+@node Events and Listeners, Settings, Customizing Formatting, Main Classes
 @section Events and Listeners
 
 During the highlighting (and regular expression matching) the library
@@ -523,7 +529,82 @@ an example:
 
 @include debuglistener.cpp.texinfo
 
-@node Problems, Mailing Lists, Main Classes, Top
+@node Settings, Utility functions, Events and Listeners, Main Classes
+@section Settings
+
+@value{srchilitelib} reads language map files, language definition files,
+output format definitions, styles, and other files it needs during the
+execution from a specific directory, which we call
+@cindex data dir
+@emph{data dir}; 
+the library comes with an hardcoded value for this path, which is
+based on the @code{--prefix} value specified at configuration
+time (in particular, it is @code{prefix/share/source-highlight}).
+In particular, the user can set the value also with the environment
+variable
+@cindex @code{SOURCE_HIGHLIGHT_DATADIR}
+@code{SOURCE_HIGHLIGHT_DATADIR} (see also the program
+@sourcehighlightsettings{} which can store settings in a configuration
+file of the user's home, @inforef{The program
+source-highlight-settings,,source-highlight}).
+
+When running the program @sourcehighlight{} this value can be overridden with
+the command line option @code{--data-dir}
+(@inforef{Configuration files,,source-highlight}).
+
+When using the @value{srchilitelib} from a program, one might need to
+change the value for data dir, dynamically, and in a consistent way,
+i.e., to have a static and single point where this setting can be set
+and retrieved.  Note that for the moment, the only setting you can
+manage is the value of data dir.
+
+The library provides the @classname{Settings} for this purpose.
+Although you can create objects of this class to mainuplate, check and
+save settings (you may want to look at the source code of the program
+@sourcehighlightsettings{}), you probably only need the static methods
+of this class.  You can set the global value of data dir with the
+@methodname{setGlobalDataDir}.  The @methodname{retrieveDataDir}
+retrieves the value for the data dir.  If the global value was set with
+@methodname{setGlobalDataDir} then always returns this global
+value. Otherwise, it returns the value of the environment variable
+@cindex @code{SOURCE_HIGHLIGHT_DATADIR}
+@code{SOURCE_HIGHLIGHT_DATADIR} if set. Otherwise, it returns the value
+read from the configuration file.  If also the reading of configuration
+file fails, then it returns the hardcoded value.
+
+@node Utility functions,  , Settings, Main Classes
+@section Utility functions
+
+If you need to get a list of all the files in the data dir with a
+specific role (e.g., language definition files, style files, etc.) you
+can use the static methods of the @classname{SourceHighlightUtils},
+which will take care of using the data dir specified in the settings
+(@ref{Settings}).
+
+@node Global instances, Problems, Main Classes, Top
+@section Global instances
+
+The @classname{Instances} provides access to static instances of some
+classes that can be used, e.g., to read a language definition file and
+create the @cind{automaton} for the highlighting, using
+@classname{LangDefManager}, or to access the map of language definition
+files, using @classname{LangMap}.  This class ensures that these
+instances use the global settings; in particular, if you change the
+global settings, you should call the static @methodname{reload}, so that
+the instances are updated.
+
+Using these instances also makes the use of some classes easier; for
+instance, the beginning part of the @code{main} of the examples shown in
+@ref{Customizing Formatting} can be written as follows:
+
+@include instances_example.cpp.texinfo
+
+If you know that you will not use these instances anymore in your
+application, and it is crucial to recover all the memory used by these
+instances, you then need to call the static @methodname{unload}, and the
+memory of these instances will be released.
+
+@node Problems, Mailing Lists, Global instances, Top
 @chapter Reporting Bugs
 @cindex bugs
 @cindex problems

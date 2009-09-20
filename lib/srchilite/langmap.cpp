@@ -124,4 +124,13 @@ std::set<std::string> LangMap::getMappedFileNames() const {
 
 }
 
+void LangMap::reload(const string &_path, const string &_filename) {
+    path = _path;
+    filename = _filename;
+    isOpen = false; // this will force reopening
+    langmap.clear();
+    open();
 }
+
+}
+

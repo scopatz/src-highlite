@@ -47,6 +47,22 @@ int main() {
     assertTrue(strings.find("default.css") != strings.end(),
                 "expected default.css");
 
+    strings = SourceHighlightUtils::getLangFileNames(BASEDIR);
+
+    printStringSet(strings);
+    cout << endl;
+
+    assertTrue(strings.find("java.lang") != strings.end(),
+                "expected java.lang");
+
+    strings = SourceHighlightUtils::getOutLangFileNames(BASEDIR);
+
+    printStringSet(strings);
+    cout << endl;
+
+    assertTrue(strings.find("html.outlang") != strings.end(),
+                "expected html.outlang");
+
     cout << "test_utils: SUCCESS" << endl;
 
     return 0;

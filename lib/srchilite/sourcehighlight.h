@@ -140,6 +140,13 @@ class SourceHighlight {
     /// the line number padding char (default '0')
     char lineNumberPad;
 
+    /**
+     * the number of digits for line numbers (if not specified this is
+     * computed automatically according to the lines in the input, if the
+     * input is a file name, otherwise it is set to a default value of 5)
+     */
+    unsigned int lineNumberDigits;
+
     /// whether to generate an entire document (default false)
     bool generateEntireDoc;
 
@@ -166,9 +173,9 @@ class SourceHighlight {
 
 public:
     /**
-     * @param outputLang the output lang file (default: html.lang)
+     * @param outputLang the output lang file (default: html.outlang)
      */
-    SourceHighlight(const std::string &outputLang = "html.lang");
+    SourceHighlight(const std::string &outputLang = "html.outlang");
     ~SourceHighlight();
 
     /**
@@ -306,6 +313,10 @@ public:
         lineNumberAnchorPrefix = _prefix;
     }
 
+    void setLineNumberDigits(unsigned int d) {
+        lineNumberDigits = d;
+    }
+
     void setGenerateEntireDoc(bool b = true) {
         generateEntireDoc = b;
     }
@@ -360,6 +371,15 @@ public:
 
     void setTabSpaces(unsigned int i) {
         tabSpaces = i;
+    }
+
+    /**
+     * Returns the file extension for the output file as specified in
+     * the output format definition file (initialize must have been called).
+     * @return the output file extension
+     */
+    const std::string &getOutputFileExtension() const {
+        return outputFileExtension;
     }
 };
 

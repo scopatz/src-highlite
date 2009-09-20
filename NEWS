@@ -8,6 +8,24 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 3.1.1 (yet unreleased)
+
+   * access to static global LangDefManager, LangMaps is provided
+     through the class Instances
+   * mechanism for setting a global data dir value (e.g., to ensure
+     consistency in a library) and for checking settings
+   * library utility functions to retrieve .lang and .outlang files
+   * fixed default output format to "html.outlang" not "html.lang"
+   * SourceHighlight class return the output file extension
+   * the background color for the document is kept empty if it is
+     not specified in the style file
+   * SourceHighlight.setLineNumberDigits: to
+	 explicitly set the number of digits for line numbers
+   * utils.h file is installed in the header directory
+   * white is a standard color in style files
+   * language definition file for Texinfo
+   * language definition file for Haskell (thanks to Sergey Astanin)
+
 Version 3.1
 
    * library utility functions to retrieve .style and .css files

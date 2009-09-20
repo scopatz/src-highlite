@@ -15,6 +15,18 @@ int main() {
     istringstream input;
     ostringstream output;
 
+    // test with error with an empty file name style file
+    try {
+        SourceHighlight sourcehighlight("html.outlang");
+        sourcehighlight.setDataDir(BASEDIR);
+        sourcehighlight.setStyleFile("");
+        sourcehighlight.highlight(BASEDIR "../doc/Hello.java", "Hello.java.html", TESTSDIR "wrong_var.lang");
+        assertTrue(false); // must not get here
+    } catch (IOException &e) {
+        //cout << "expected exception: " << e << endl;
+        assertEqualsException("empty file name.", e);
+    }
+
     // test with error in the style file
     try {
         SourceHighlight sourcehighlight("html.outlang");

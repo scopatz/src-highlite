@@ -21,8 +21,12 @@ else
 
 SUFFIXES = .text .hpp .h
 
+# we need to put doublecpp generated files in the srcdir
+# since we want to distribute them
+
 .h.hpp:
-	$(DOUBLECPP) --output-source-ext cc --invade-target --input-header-ext h --output-header-ext hpp --output-source-suff=_dbtab --verbose --assume-virtual -i $<
+	cd $(srcdir) && \
+	$(DOUBLECPP) --output-source-ext cc --invade-target --input-header-ext h --output-header-ext hpp --output-source-suff=_dbtab --verbose --assume-virtual -i $(notdir $<)
 	touch $@
 endif
 
@@ -63,7 +67,7 @@ libsource_highlight_la_SOURCES = \
 	copyright.c reportbugs.c \
 	fileutil.cc \
 	substfun.cpp \
-	stopwatch.cpp utils.cpp utils.h \
+	stopwatch.cpp utils.cpp \
 	ioexception.cpp \
 	settings.cpp \
 	versions.cpp \
@@ -94,12 +98,13 @@ libsource_highlight_la_SOURCES = \
 	languageinfer.cpp \
 	parserexception.cpp \
 	stringtable.cpp vardefinitions.cpp \
-	sourcehighlightutils.cpp
+	sourcehighlightutils.cpp \
+	instances.cpp
 
 libsource_highlight_la_LIBADD = $(top_builddir)/gl/libgnu.la \
 	@LTLIBOBJS@ $(BOOST_REGEX_LIB)
 
-libsource_highlight_la_LDFLAGS = -version-info $(LIBRARY_VERSION)
+libsource_highlight_la_LDFLAGS = $(AM_LDFLAGS) -version-info $(LIBRARY_VERSION)
 
 library_includedir=$(includedir)/$(LIBRARY_NAMESPACE)
 library_include_HEADERS = $(h_sources)
@@ -139,7 +144,8 @@ h_sources = parsestyles.h \
              settings.h \
              versions.h \
              verbosity.h \
-             sourcehighlightutils.h
+             sourcehighlightutils.h utils.h \
+             instances.h
 
 INCLUDES = -I@top_srcdir@/src
 

@@ -240,6 +240,9 @@ FILE *_open_data_file_stream(const string &path, const string &input_file_name) 
 
 FILE *open_data_file_stream(const string &path, const string &input_file_name,
         const string &start) {
+    if (!input_file_name.size())
+        throw IOException("empty file name", input_file_name);
+
     FILE *in = 0;
     if (input_file_name.size() && contains_path(input_file_name)) {
         in = _open_data_file_stream("", input_file_name);

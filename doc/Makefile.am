@@ -33,7 +33,7 @@ info_TEXINFOS = source-highlight.texinfo source-highlight-lib.texinfo
 source_highlight_TEXINFOS = $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
 source_highlight_lib_TEXINFOS = $(EXAMPLEINFOS)
 
-SUFFIXES = .txt .txt.texinfo .txt.texinfo.texinfo .lang .lang.texinfo .diff .diff.texinfo .css .css.texinfo .show.texinfo .defaults .defaults.texinfo
+SUFFIXES = .txt .txt.texinfo .txt.texinfo.texinfo .lang .lang.texinfo .diff .diff.texinfo .css .css.texinfo .show.texinfo .defaults .defaults.texinfo .cpp .cpp.texinfo
 
 #source-highlight.texinfo: $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
 
@@ -159,6 +159,9 @@ syslog.style.texinfo: $(top_srcdir)/tests/syslog.style
 .diff.diff.texinfo:
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
+.cpp.cpp.texinfo:
+	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
+
 .css.css.texinfo:
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $< --style-file=$(top_srcdir)/src/texinfo.style -o $@
 
@@ -251,7 +254,7 @@ DISTRIBUTEDINFOS = help-output.texinfo test_ref.h.texinfo
 
 GENERATEDINFOS = lang-list.texinfo outlang-list.texinfo test.java.texinfo test_lineranges1.java.texinfo test_lineranges2.java.texinfo test_regexrange1.java.texinfo test_regexrange_main.java.texinfo test_regexrange_methods.java.texinfo debug.java.texinfo default.style.texinfo texinfo.style.texinfo syslog.style.texinfo langdef.lang.texinfo style.lang.texinfo cpp.lang.texinfo c.lang.texinfo csharp.lang.texinfo c_comment.lang.texinfo clike_vardeclaration.lang.texinfo c_string.lang.texinfo symbols.lang.texinfo function.lang.texinfo example-u.diff.texinfo example-c.diff.texinfo example-n.diff.texinfo diff.lang.texinfo test_extreme_comment.cpp.texinfo extreme_comment.lang.texinfo test_extreme_comment_wrong.texinfo extreme_comment2.lang.texinfo test_extreme_comment_1.texinfo test_extreme_comment_wrong2.texinfo extreme_comment3.lang.texinfo test_extreme_comment_2.texinfo test_extreme_comment_3.texinfo comment-show.show.texinfo comment-show2.show.texinfo comment-show.lang.texinfo comment-show2.lang.texinfo html_common.outlang.texinfo javadoc.outlang.texinfo cpp.langelems.texinfo log.langelems.texinfo txt2texinfo.txt.texinfo txt2texinfo.txt.texinfo.texinfo css_example.css.texinfo default.css.texinfo style.defaults.texinfo test_string_stop.lang.texinfo strategy_example.lang.texinfo test_vardecl.cc.texinfo test_nonewlines.lang.texinfo test_newlines.lang.texinfo
 
-EXAMPLEINFOS = source-highlight-console-main.cpp.texinfo infoformatter.h.texinfo infoformatter-main.cpp.texinfo debuglistener.cpp.texinfo styleformatter.h.texinfo styleformatterfactory.h.texinfo styleformatter-main.cpp.texinfo
+EXAMPLEINFOS = source-highlight-console-main.cpp.texinfo infoformatter.h.texinfo infoformatter-main.cpp.texinfo debuglistener.cpp.texinfo styleformatter.h.texinfo styleformatterfactory.h.texinfo styleformatter-main.cpp.texinfo instances_example.cpp.texinfo
 
 CSS_FILES = default.css \
 Hello.css Hello2.css mono-alt.css mono.css cpp2html.css \
@@ -283,7 +286,8 @@ EXTRA_DIST = colors.html source-highlight.html source-highlight-lib.html \
 style_examples_footer.html style_examples_header.html \
 css_example.css \
 strategy_example.lang \
-highlight_type.style
+highlight_type.style \
+instances_example.cpp
 
 source_highlightdoc_DATA = colors.html source-highlight.html \
     Hello.java Hello1.html Hello2.html Hello3.html Hello4.html Hello5.html \

@@ -77,3 +77,12 @@ Makefile.lang:
 - add VAR += VALUE and -= VALUE
 
 remove @author in files (and check doxygen documentation)
+
+Java annotations @Override, etc.?
+
+accept rgb colors in the style and .outlang can
+express a way to use the colors in this format
+
+TextStyleFormatterFactory: PreFormatter is never used!
+
+

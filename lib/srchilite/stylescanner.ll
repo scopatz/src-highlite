@@ -73,7 +73,7 @@ STRING \"[^\"\n]*\"
 <COMMENT_STATE>[^\n] {}
 <COMMENT_STATE>\n { ++line;  BEGIN(INITIAL); }
 
-<INITIAL>"green"|"red"|"darkred"|"blue"|"brown"|"pink"|"yellow"|"cyan"|"purple"|"orange"|"brightorange"|"darkgreen"|"brightgreen"|"black"|"teal"|"gray"|"darkblue" { stylesc_lval.string = new std::string(yytext) ; return COLOR ; }
+<INITIAL>"green"|"red"|"darkred"|"blue"|"brown"|"pink"|"yellow"|"cyan"|"purple"|"orange"|"brightorange"|"darkgreen"|"brightgreen"|"black"|"teal"|"gray"|"darkblue"|"white" { stylesc_lval.string = new std::string(yytext) ; return COLOR ; }
 
 <INITIAL>"bgcolor" { return BODY_BG_COLOR ; }
 

@@ -1,9 +1,4 @@
-.deps
-Makefile
 Makefile.in
-.libs
-*.lo
-*.la
 getopt.h
 errno.h
 stdlib.h

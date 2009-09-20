@@ -8,5 +8,5 @@ Description: GNU Source-highlight library.
 URL: http://www.gnu.org/software/src-highlite/
 Version: @VERSION@
 Libs: -L${libdir} -lsource-highlight @BOOST_LDFLAGS@ @BOOST_REGEX_LIB@
-Cflags: -I${includedir} -I${libdir}/include @BOOST_CPPFLAGS@
+Cflags: -I${includedir} @BOOST_CPPFLAGS@
 

@@ -110,3 +110,7 @@ adb = ada.lang
 pc = pc.lang
 pkgconfig = pc.lang
 oz = oz.lang
+texinfo = texinfo.lang
+texi = texinfo.lang
+hs = haskell.lang
+haskell = haskell.lang

@@ -7,16 +7,10 @@
 
 
 
-<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="converted.config.269383760" moduleId="org.eclipse.cdt.core.settings" name="Configuration1">
+<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="converted.config.269383760" moduleId="org.eclipse.cdt.core.settings" name="build">
 <externalSettings/>
 <extensions>
-<extension id="org.eclipse.cdt.core.ctagsindexer" point="org.eclipse.cdt.core.CIndexer">
-<attribute key="ctagslocationtype" value="ctags_path_default"/>
-<attribute key="ctagsindexincludes" value="true"/>
-<attribute key="ctagfilelocation" value=""/>
-<attribute key="ctagslocation" value=""/>
-<attribute key="ctagfiletype" value="ctags_internal"/>
-</extension>
+<extension id="org.eclipse.cdt.core.ctagsindexer" point="org.eclipse.cdt.core.CIndexer"/>
 <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 <extension id="org.eclipse.cdt.core.VCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 <extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
@@ -34,24 +28,24 @@
 
 
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration buildProperties="" description="" errorParsers="" id="converted.config.269383760" name="Configuration1" parent="org.eclipse.cdt.build.core.prefbase.cfg">
+<configuration buildProperties="" description="build development" errorParsers="" id="converted.config.269383760" name="build" parent="org.eclipse.cdt.build.core.prefbase.cfg">
 <folderInfo id="converted.config.269383760." name="/" resourcePath="">
 <toolChain errorParsers="" id="org.eclipse.cdt.build.core.prefbase.toolchain.1829273978" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 <targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="converted.config.269383760..2039921858" name=""/>
-<builder appendEnvironment="true" arguments="-j3" autoBuildTarget="all" buildPath="" cleanBuildTarget="clean" command="make" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" environment="" errorParsers="org.eclipse.cdt.core.MakeErrorParser" id="org.eclipse.cdt.make.core.makeBuilder.1044444963" ignoreErrCmd="" incrementalBuildTarget="all" name="Gnu Make Builder.Configuration1" parallelBuildCmd="" stopOnErr="true" superClass="org.eclipse.cdt.build.core.settings.default.builder">
+<builder appendEnvironment="true" arguments="-j3" autoBuildTarget="all" buildPath="${workspace_loc:/src2tags/build}" cleanBuildTarget="clean" command="make" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" environment="" errorParsers="org.eclipse.cdt.core.MakeErrorParser" id="org.eclipse.cdt.make.core.makeBuilder.1044444963" ignoreErrCmd="" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" parallelBuildCmd="" stopOnErr="true" superClass="org.eclipse.cdt.build.core.settings.default.builder">
 <outputEntries>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name=""/>
 </outputEntries>
 </builder>
 <tool errorParsers="org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="org.eclipse.cdt.build.core.settings.holder.libs.598231089" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 <tool errorParsers="org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="org.eclipse.cdt.build.core.settings.holder.354337739" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
-<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.433769340" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" name="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.433769340" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 </tool>
 <tool errorParsers="org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="org.eclipse.cdt.build.core.settings.holder.678396809" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
-<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.17449735" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" name="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.17449735" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 </tool>
 <tool errorParsers="org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="org.eclipse.cdt.build.core.settings.holder.33181101" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
-<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1184463455" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" name="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1184463455" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 </tool>
 </toolChain>
 </folderInfo>
@@ -252,7 +246,15 @@
 
 <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 <buildTargets>
-<target name="test_regexrules" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="check" path="lib/examples" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<buildCommand>make</buildCommand>
+<buildArguments>-j3</buildArguments>
+<buildTarget>check</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+<runAllBuilders>true</runAllBuilders>
+</target>
+<target name="test_regexrules" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_regexrules</buildTarget>
@@ -260,7 +262,7 @@
 <useDefaultCommand>true</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="check" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="check" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check</buildTarget>
@@ -268,7 +270,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_formatter_manager" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_formatter_manager" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_formatter_manager</buildTarget>
@@ -276,7 +278,7 @@
 <useDefaultCommand>true</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_highlighter" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_highlighter" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_highlighter</buildTarget>
@@ -284,7 +286,7 @@
 <useDefaultCommand>true</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_exception" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_exception" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_exception</buildTarget>
@@ -292,7 +294,7 @@
 <useDefaultCommand>true</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_highlightbuilder" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_highlightbuilder" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_highlightbuilder</buildTarget>
@@ -300,7 +302,7 @@
 <useDefaultCommand>true</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_buffered_output" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_buffered_output" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_buffered_output</buildTarget>
@@ -308,7 +310,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_textstyleformatter" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_textstyleformatter" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_textstyleformatter</buildTarget>
@@ -316,7 +318,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_wordtokenizer" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_wordtokenizer" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_wordtokenizer</buildTarget>
@@ -324,7 +326,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_ctagscollector" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_ctagscollector" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_ctagscollector</buildTarget>
@@ -332,7 +334,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_ctagsformatter" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_ctagsformatter" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_ctagsformatter</buildTarget>
@@ -340,7 +342,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_formatreferences" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_formatreferences" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_formatreferences</buildTarget>
@@ -348,7 +350,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_sourcefilehighlighter" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_sourcefilehighlighter" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_sourcefilehighlighter</buildTarget>
@@ -356,7 +358,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_linenum" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_linenum" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_linenum</buildTarget>
@@ -364,7 +366,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_textstyleformatterfactory" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_textstyleformatterfactory" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_textstyleformatterfactory</buildTarget>
@@ -372,7 +374,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_langdefmanager" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_langdefmanager" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_langdefmanager</buildTarget>
@@ -380,7 +382,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_sourcehighlight" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_sourcehighlight" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_sourcehighlight</buildTarget>
@@ -388,7 +390,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_sourcehighlight_errors" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_sourcehighlight_errors" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_sourcehighlight_errors</buildTarget>
@@ -396,7 +398,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_langinfer" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_langinfer" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_langinfer</buildTarget>
@@ -404,7 +406,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_untabifier" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_untabifier" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_untabifier</buildTarget>
@@ -412,7 +414,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_outlang_errors" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_outlang_errors" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_outlang_errors</buildTarget>
@@ -420,7 +422,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_events" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_events" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_events</buildTarget>
@@ -428,7 +430,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_debuglistener" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_debuglistener" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_debuglistener</buildTarget>
@@ -436,7 +438,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_ctagsmanager" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_ctagsmanager" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_ctagsmanager</buildTarget>
@@ -444,7 +446,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_textstyle" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_textstyle" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_textstyle</buildTarget>
@@ -452,7 +454,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_textgenerator" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_textgenerator" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_textgenerator</buildTarget>
@@ -460,7 +462,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_outlangparser" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_outlangparser" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_outlangparser</buildTarget>
@@ -468,7 +470,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_regexpreprocessor" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_regexpreprocessor" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_regexpreprocessor</buildTarget>
@@ -476,7 +478,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_filenotfound" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_filenotfound" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_filenotfound</buildTarget>
@@ -484,7 +486,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_style_errors" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_style_errors" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_style_errors</buildTarget>
@@ -492,7 +494,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_lineranges" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_lineranges" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_lineranges</buildTarget>
@@ -500,7 +502,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_regexranges" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_regexranges" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_regexranges</buildTarget>
@@ -508,7 +510,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_settings" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_settings" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_settings</buildTarget>
@@ -516,7 +518,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_langmap" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_langmap" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_langmap</buildTarget>
@@ -524,7 +526,7 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="test_utils" path="lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_utils" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
 <buildTarget>check_test_utils</buildTarget>
@@ -532,10 +534,10 @@
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>
 </target>
-<target name="check" path="lib/examples" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<target name="test_instances" path="build/lib/tests" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 <buildCommand>make</buildCommand>
 <buildArguments>-j3</buildArguments>
-<buildTarget>check</buildTarget>
+<buildTarget>check_test_instances</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 <runAllBuilders>true</runAllBuilders>

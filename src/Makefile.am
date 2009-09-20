@@ -78,7 +78,8 @@ postscript.lang csharp.lang xml.lang sh.lang script_comment.lang \
 tcl.lang sql.lang bib.lang makefile.lang css.lang m4.lang \
 default.lang nohilite.lang slang.lang key_string.lang properties.lang \
 desktop.lang lsm.lang spec.lang haxe.lang ldap.lang glsl.lang xorg.lang \
-clike_vardeclaration.lang scala.lang ada.lang conf.lang pc.lang oz.lang
+clike_vardeclaration.lang scala.lang ada.lang conf.lang pc.lang oz.lang \
+texinfo.lang haskell.lang
 
 OUTLANGFILES = \
 css_common.outlang \

@@ -26,4 +26,4 @@ infoformatter_SOURCES = infoformatter-main.cpp infoformatter.h
 styleformatter_SOURCES = styleformatter-main.cpp styleformatter.h styleformatterfactory.h
 
 source_highlightlibexample_DATA = $(source_highlight_console_SOURCES) \
-	$(infoformatter_SOURCES)
+	$(infoformatter_SOURCES) $(styleformatter_SOURCES)

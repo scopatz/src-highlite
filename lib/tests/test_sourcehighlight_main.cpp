@@ -55,6 +55,7 @@ int main() {
     istringstream input2("this /* is a comment\nspanning more line */ end");
     output.str("");
 
+    // tests for line numbers
     sourcehighlight.setGenerateLineNumbers();
 
     sourcehighlight.highlight(input2, output, "c_comment.lang");
@@ -64,6 +65,22 @@ int main() {
             startDoc
                     + "<font color=\"#000000\">00001:</font> this <i><font color=\"#9A1900\">/* is a comment</font></i>\n\
 <font color=\"#000000\">00002:</font> <i><font color=\"#9A1900\">spanning more line */</font></i> end"
+                    + endDoc, output.str());
+
+    // tests for line numbers with explicit number of digits
+    sourcehighlight.setLineNumberDigits(2);
+
+    output.str("");
+
+    istringstream input_ndigits2("this /* is a comment\nspanning more line */ end");
+
+    sourcehighlight.highlight(input_ndigits2, output, "c_comment.lang");
+
+    cout << "formatted: " << output.str() << endl;
+    assertEquals(
+            startDoc
+                    + "<font color=\"#000000\">01:</font> this <i><font color=\"#9A1900\">/* is a comment</font></i>\n\
+<font color=\"#000000\">02:</font> <i><font color=\"#9A1900\">spanning more line */</font></i> end"
                     + endDoc, output.str());
 
     sourcehighlight.setGenerateLineNumbers(false);

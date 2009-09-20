@@ -1,0 +1,45 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">-- A test snippet based on</font></i>
+<i><font color="#9A1900">-- http://google-code-prettify.googlecode.com/svn/trunk/tests/prettify_test.html</font></i>
+<i><font color="#9A1900">--</font></i>
+<i><font color="#9A1900">-- A comment</font></i>
+<font color="#009900">These</font> <font color="#990000">--&gt;</font> are <font color="#990000">--|</font> not <font color="#990000">|--</font> comments
+<i><font color="#9A1900">--but this is a comment again</font></i>
+
+<b><font color="#0000FF">module</font></b> <font color="#009900">Foo</font><font color="#990000">(</font>bar<font color="#990000">)</font> <b><font color="#0000FF">where</font></b>
+<b><font color="#0000FF">import</font></b> <font color="#009900">Blah</font>
+<b><font color="#0000FF">import</font></b> <font color="#009900">BlahBlah</font><font color="#990000">(</font>blah<font color="#990000">)</font>
+<b><font color="#0000FF">import</font></b> <font color="#009900">Monads</font><font color="#990000">(</font><font color="#009900">Exception</font><font color="#990000">(..),</font> <font color="#009900">FIO</font><font color="#990000">(..),</font>unFIO<font color="#990000">,</font>handle<font color="#990000">,</font>runFIO<font color="#990000">,</font>fixFIO<font color="#990000">,</font>fio<font color="#990000">,</font>
+              write<font color="#990000">,</font>writeln<font color="#990000">,</font><font color="#009900">HasNext</font><font color="#990000">(..),</font><font color="#009900">HasOutput</font><font color="#990000">(..))</font>
+
+<i><font color="#9A1900">{- nested comments</font></i>
+<i><font color="#9A1900"> - should {- just -}  work -}</font></i>
+<b><font color="#0000FF">instance</font></b> <font color="#009900">Thingy</font> <font color="#009900">Foo</font> <b><font color="#0000FF">where</font></b>
+  a <font color="#990000">=</font> b
+
+<b><font color="#0000FF">data</font></b> <font color="#009900">Foo</font> <font color="#990000">::</font> <font color="#990000">(*</font> <font color="#990000">-&gt;</font> <font color="#990000">*</font> <font color="#990000">-&gt;</font> <font color="#990000">*)</font> <font color="#990000">-&gt;</font> <font color="#990000">*</font> <font color="#990000">&gt;</font> <font color="#990000">*</font> <font color="#990000">-&gt;</font> <font color="#990000">*</font> <b><font color="#0000FF">where</font></b>
+  <font color="#009900">Nil</font> <font color="#990000">::</font> <font color="#009900">Foo</font> a b c
+  <font color="#009900">Cons</font> <font color="#990000">::</font> a b c <font color="#990000">-&gt;</font> <font color="#009900">Foo</font> abc <font color="#990000">-&gt;</font> <font color="#009900">Foo</font> a b c
+
+str <font color="#990000">=</font> <font color="#FF0000">"Foo\\Bar"</font>
+chars <font color="#990000">=</font> <font color="#990000">[</font> <font color="#FF0000">'x'</font><font color="#990000">,</font> <font color="#FF0000">'\''</font><font color="#990000">,</font> <font color="#FF0000">'\\'</font><font color="#990000">,</font> <font color="#FF0000">'\"'</font><font color="#990000">,</font> <font color="#FF0000">'\120'</font><font color="#990000">,</font> <font color="#FF0000">'\o100'</font><font color="#990000">,</font> <font color="#FF0000">'\xbeef'</font> <font color="#990000">]</font> <i><font color="#9A1900">-- Escapes too</font></i>
+Not<font color="#990000">.</font>A<font color="#990000">.</font><font color="#009900">Char</font> <font color="#990000">=</font> 'too long'  <i><font color="#9A1900">-- Don't barf.  Show that 't is a lexical error.</font></i>
+
+<font color="#990000">(</font>ident<font color="#990000">,</font> ident', Fo''o.b'ar<font color="#990000">)</font>
+
+<font color="#990000">(</font><font color="#993399">0</font><font color="#990000">,</font> <font color="#993399">12</font><font color="#990000">,</font> <font color="#993399">0x45</font><font color="#990000">,</font> <font color="#993399">0xA7</font><font color="#990000">,</font> <font color="#993399">0o177</font><font color="#990000">,</font> <font color="#993399">0O377</font><font color="#990000">,</font> <font color="#993399">0.1</font><font color="#990000">,</font> <font color="#993399">1.0</font><font color="#990000">,</font> <font color="#993399">1e3</font><font color="#990000">,</font> <font color="#993399">0.5E-3</font><font color="#990000">,</font> <font color="#993399">1.0E+45</font><font color="#990000">)</font>
+
+<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">..</font><font color="#993399">10</font><font color="#990000">]</font>
+
+<font color="#990000">(#)</font> <font color="#990000">=</font> <font color="#990000">\</font>x y <font color="#990000">-&gt;</font> s x y
+  <b><font color="#0000FF">where</font></b> s x y <font color="#990000">=</font> <font color="#990000">(</font>x<font color="#990000">+</font>y<font color="#990000">)</font> <font color="#990000">`</font>mod<font color="#990000">`</font> <font color="#993399">13</font>
+
+bar <font color="#990000">(</font>x<font color="#990000">:</font><b><font color="#0000FF">_</font></b><font color="#990000">)</font> <font color="#990000">=</font> putStrLn x
+
+main <font color="#990000">=</font> <b><font color="#0000FF">do</font></b>
+  <b><font color="#0000FF">let</font></b> foo x <font color="#990000">=</font> <b><font color="#0000FF">do</font></b> <font color="#990000">{</font> spam <font color="#990000">$</font> eggs x <font color="#990000">}</font>
+  foo <font color="#990000">&gt;&gt;=</font> bar
+</tt></pre>

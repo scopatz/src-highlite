@@ -1,0 +1,74 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>(<b><font color="#0000FF">@ref</font></b><font color="#FF0000">{</font><font color="#FF0000">Generating References</font><font color="#FF0000">}</font>).
+\input texinfo <i><font color="#9A1900">@c -*-texinfo-*-</font></i>
+<i><font color="#9A1900">@c This file uses the @command command introduced in Texinfo 4.0.</font></i>
+<i><font color="#9A1900">@c %**start of header</font></i>
+<b><font color="#0000FF">@setfilename</font></b> source-highlight.info
+<b><font color="#000080">@include</font></b> version.texi
+<b><font color="#0000FF">@settitle</font></b> GNU Source-highlight <b><font color="#0000FF">@value</font></b><font color="#FF0000">{</font><font color="#009900">VERSION</font><font color="#FF0000">}</font>
+<b><font color="#0000FF">@finalout</font></b>
+<i><font color="#9A1900">@c @setchapternewpage odd</font></i>
+<i><font color="#9A1900">@c %**end of header</font></i>
+
+<b><font color="#0000FF">@example</font></b>
+my example
+<b><font color="#0000FF">@end example</font></b>
+
+<b><font color="#0000FF">@set</font></b> myhomepage <b><font color="#0000FF">@uref</font></b><font color="#FF0000">{</font><u><font color="#0000FF">http://www.lorenzobettini.it</font></u><font color="#FF0000">}</font>
+
+field names, etc.) by relying on the program <b><font color="#0000FF">@emph</font></b><font color="#FF0000">{</font><i><font color="#009900">ctags</font></i><font color="#FF0000">}</font>,
+<b><font color="#0000FF">@url</font></b><font color="#FF0000">{</font><u><font color="#0000FF">http://ctags.sourceforge.net</font></u><font color="#FF0000">}</font> 
+<b><font color="#0000FF">@xref</font></b><font color="#FF0000">{</font><font color="#FF0000">My Long</font>
+<font color="#FF0000">Reference</font><font color="#FF0000">}</font>.
+
+<b><font color="#0000FF">@inforef</font></b><font color="#FF0000">{</font><font color="#FF0000">Introduction,,source-highlight-info</font><font color="#FF0000">}</font>.
+
+<i><font color="#9A1900">@c All the menus can be updated with the EMACS command</font></i>
+<i><font color="#9A1900">@c texinfo-all-menus-update, which is normally bound to C-c C-u C-a.</font></i>
+<b><font color="#000080">@menu</font></b>
+<font color="#FF0000">* Introduction::</font>                What's it for?
+<font color="#FF0000">* Installation::</font>                Download and installation           
+<font color="#FF0000">* Invoking source-highlight::</font>   How to run <b><font color="#0000FF">@command</font></b><font color="#009900">{source-highlight}</font>.
+<font color="#FF0000">* Language Definitions::</font>        How to define an input language
+<font color="#FF0000">* Problems::</font>                    Reporting bugs.
+<font color="#FF0000">* Mailing Lists::</font>               
+<font color="#FF0000">* Concept Index::</font>               Index of concepts.
+<b><font color="#000080">@end menu</font></b>
+
+This is an escaped @@ at symbol.
+
+This ``is a string''.
+
+<b><font color="#0000FF">@example</font></b>
+<b><font color="#0000FF">@i</font></b><font color="#FF0000">{</font><i><font color="#009900">/// read the files </font></i><font color="#FF0000">}</font>FIXME<b><font color="#0000FF">@i</font></b><font color="#FF0000">{</font><i><font color="#009900"> of a directory </font></i><font color="#FF0000">}</font>@@param<b><font color="#0000FF">@i</font></b><font color="#FF0000">{</font><i><font color="#009900"> </font></i><font color="#FF0000">}</font><b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">&lt;f</font></b><font color="#FF0000">}</font> foo="bar"<b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">&gt;</font></b><font color="#FF0000">}</font>
+
+<b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">#include</font></b><font color="#FF0000">}</font> &lt;stddef.h&gt;
+<b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">#include</font></b><font color="#FF0000">}</font> &lt;stdio.h&gt;
+<b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">#include</font></b><font color="#FF0000">}</font> &lt;sys/types.h&gt;
+<b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">#include</font></b><font color="#FF0000">}</font> &lt;dirent.h&gt;
+
+int
+<b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">main</font></b><font color="#FF0000">}</font> (void)
+@{
+       DIR *dp;
+       <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">struct</font></b><font color="#FF0000">}</font> dirent *ep;
+     
+       dp = <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">opendir</font></b><font color="#FF0000">}</font> ("./");
+       <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">if</font></b><font color="#FF0000">}</font> (dp != NULL)
+         @{
+           <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">while</font></b><font color="#FF0000">}</font> (ep = <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">readdir</font></b><font color="#FF0000">}</font> (dp))
+             <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">puts</font></b><font color="#FF0000">}</font> (ep-&gt;d_name);
+           (void) <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">closedir</font></b><font color="#FF0000">}</font> (dp);
+         @}
+       <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">else</font></b><font color="#FF0000">}</font>
+         <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">perror</font></b><font color="#FF0000">}</font> ("Couldn't open the directory");
+     
+       <b><font color="#0000FF">@b</font></b><font color="#FF0000">{</font><b><font color="#009900">return</font></b><font color="#FF0000">}</font> 0;
+@}
+
+<b><font color="#0000FF">@end example</font></b>
+
+</tt></pre>

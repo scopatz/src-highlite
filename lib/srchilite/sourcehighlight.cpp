@@ -47,8 +47,9 @@ SourceHighlight::SourceHighlight(const std::string &_outputLang) :
             highlightEventListener(0), ctagsManager(0), ctagsFormatter(0),
             lineRanges(0), regexRanges(0), optimize(true), generateLineNumbers(
                     false), generateLineNumberRefs(false), lineNumberPad('0'),
-            generateEntireDoc(false), generateVersion(true),
-            canUseStdOut(true), binaryOutput(false), tabSpaces(0) {
+            lineNumberDigits(0), generateEntireDoc(false),
+            generateVersion(true), canUseStdOut(true), binaryOutput(false),
+            tabSpaces(0) {
 }
 
 SourceHighlight::~SourceHighlight() {
@@ -109,7 +110,9 @@ void SourceHighlight::initialize() {
     else
         parseStyles(dataDir, styleFile, &formatterFactory, backgroundColor);
 
-    backgroundColor = formatterFactory.preprocessColor(backgroundColor);
+    // keep the background color empty if none is specified
+    if (backgroundColor != "")
+        backgroundColor = formatterFactory.preprocessColor(backgroundColor);
 
     formatterFactory.addDefaultFormatter();
 
@@ -301,8 +304,12 @@ void SourceHighlight::highlight(std::istream &input, std::ostream &output,
     fileHighlighter.setLineRanges(lineRanges);
     fileHighlighter.setRegexRanges(regexRanges);
 
-    if (generateLineNumbers)
+    if (generateLineNumbers) {
         fileHighlighter.setLineNumGenerator(lineNumGenerator);
+        if (lineNumberDigits != 0) {
+            lineNumGenerator->setDigitNum(lineNumberDigits);
+        }
+    }
 
     // set the prefix for all lines
     fileHighlighter.setLinePrefix(linePrefix);

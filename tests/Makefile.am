@@ -10,6 +10,8 @@
 
 SUBDIRS = output_dir
 
+SUFFIXES = .lang .err_out .outlang .style .css .css.java.html .nf_css.java.html .css_doc.java.html .css_xhtml.java.html
+
 STD_STYLE = --style-file $(top_srcdir)/src/default.style
 STD_CSS_STYLE = --style-css-file $(top_srcdir)/src/default.css
 STD_STYLE_HTML = -f html $(STD_STYLE)
@@ -48,6 +50,8 @@ JAVA2XHTML = $(PROGNAME) -s java -f xhtml $(STD_STYLE) --lang-def=$(srcdir)/../s
 
 JAVA2XHTMLDOC = $(JAVA2XHTML) --doc
 
+# note that we don't use $(srcdir), since we're only interested in
+# the output of source-highlight to test it
 JAVA2XHTMLCSS = $(JAVA2XHTML) --css ../doc/mono.css --no-doc
 
 JAVA2XHTMLCSSDOC = $(JAVA2XHTML) --css ../doc/mono.css
@@ -170,7 +174,7 @@ OUTPUTWREFS=test_ref.html test_refs.h.html test_refs.cpp.html test_ref.tex test_
 TAGFILES=test_ref.tags test_ref_multi.tags
 
 EXTRA_DIST = test.java test.java.html test.java.doc.html \
-test.js test.js.html test.h test.h.html test.c test.c.html \
+test.js test.js.html test.h test.h.html test_c.c test_c.c.html \
 test_comments.cc test_comments.cc.html test_comments.java \
 test_comments.java.html test_template.cc test_template.cc.html \
 test.pl test.pl.html header.html footer.html test_header.html \
@@ -207,7 +211,7 @@ test2.diff test2.diff.html \
 test3.diff test3.diff.html \
 test.simple test.simple.html \
 test.unknown test.unknown.html \
-syslog.style \
+syslog.style syslog.style.html \
 test.tex test.tex.html \
 test.lgt test.lgt.html \
 $(OUTPUTWREFS) \
@@ -277,28 +281,14 @@ test_newlines.lang test_nonewlines.lang \
 test_linerange1.html test_linerange2.html \
 test_linerange_sep.html \
 test_regexrange1.html test_regexrange2.html \
-test_regexrange3.html test_regexrange4.html
-
-SUFFIXES = .cs .cs.html .h .h.html .cc .cc.html .c .c.html .java .java.html .java.doc.html .css .css.java.html .css_xhtml.java.html .css_doc.java.html .nf_css.java.html .debug .js .js.html .java.txt .java.tex .java.texinfo .h.docbook .pl .pl.html .pm .pm.html .php3 .php3.html .py .py.html .chlog .chlog.htm .chlog_css.html .l .l.html .y .y.html .rb .rb.html .lua .lua.html .ml .ml.html .sml .sml.html .log .log.html .tex .tex.html .lgt .lgt.html .diff .diff.html .pas .pas.html .htm .htm.html .xml .xml.html .sh .sh.html .url .url.html .txt .txt.html .unknown .unknown.html .style .style.html .ps .ps.html .sl .sl.html .simple .simple.html .isolate .isolate.html .backref .backref.html _state.ngroups _state.ngroups.html .ngroups .ngroups.html .lang .err .outlang .err_out .show .wdefault .wodefault .wdefault.html .wodefault.html .properties .properties.html .desktop .desktop.html .lsm .lsm.html .hx .hx.html .fortran .fortran.html .ldap .ldap.html .m4 .m4.html .glsl .glsl.html .conf .conf.html .xorg .xorg.html .scala .scala.html .adb .adb.html .pc .pc.html
-
-test_string_stop.java.html: $(srcdir)/test_string_stop.java
-	$(PROGNAME) --lang-def=$(srcdir)/test_string_stop.lang -i $< -o test_string_stop.java.html
-
-test_string_nostop.java.html: $(srcdir)/test_string_stop.java
-	$(PROGNAME) --lang-def=$(srcdir)/test_string_nostop.lang -i $< -o test_string_nostop.java.html
+test_regexrange3.html test_regexrange4.html \
+test_nobgcolor.cpp test_nobgcolor.html \
+test.texinfo test.texinfo.html \
+test.hs test.hs.html
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
 LINERANGESEPEXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3 --range-separator="<...>"
-
-test_linerange1.html: $(srcdir)/test.java
-	$(LINERANGE1EXE) < $(srcdir)/test.java > $@
-
-test_linerange2.html: $(srcdir)/test.java
-	$(LINERANGE2EXE) < $(srcdir)/test.java > $@
-
-test_linerange_sep.html: $(srcdir)/test.java
-	$(LINERANGESEPEXE) < $(srcdir)/test.java > $@
 
 REGEXRANGE1EXE=$(JAVA2HTML) --regex-range="/// [[:alpha:]]+" --line-number
 
@@ -308,297 +298,15 @@ REGEXRANGE3EXE=$(JAVA2HTML) --regex-range="/\\* main \\*/","/\\* mymethod \\*/" 
 
 REGEXRANGE4EXE=$(JAVA2HTML) --regex-range="/\\* [[:alpha:]]+ \\*/" --line-number
 
-test_regexrange1.html: $(srcdir)/test.java
-	$(REGEXRANGE1EXE) < $(srcdir)/test.java > $@
-
-test_regexrange2.html: $(srcdir)/test.java
-	$(REGEXRANGE2EXE) < $(srcdir)/test.java > $@
-
-test_regexrange3.html: $(srcdir)/test.java
-	$(REGEXRANGE3EXE) < $(srcdir)/test.java > $@
-
-test_regexrange4.html: $(srcdir)/test.java
-	$(REGEXRANGE4EXE) < $(srcdir)/test.java > $@
-
-
-c_comment.show: $(top_srcdir)/src/c_comment.lang
-	$(PROGEXE) --show-regex=$(top_srcdir)/src/c_comment.lang > $@
-
-.lang.show:
-	$(PROGEXE) --show-regex=$< > $@
-
-cpp.langelems: $(top_srcdir)/src/cpp.lang
-	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$(top_srcdir)/src/cpp.lang > $@
-
-lang.list: $(top_srcdir)/src/lang.map
-	$(PROGEXE) $(DATADIROPTION) --lang-list > $@
-
-outlang.list: $(top_srcdir)/src/lang.map
-	$(PROGEXE) $(DATADIROPTION) --outlang-list > $@
-
-.cc.cc.html:
-	$(CPP2HTML) -i $< -o $@
-
-.c.c.html:
-	$(C2HTML) -i $< -o $@
-
-.cs.cs.html:
-	$(CSHARP2HTML) -i $< -o $@
-
-.h.h.html:
-	$(CPP2HTML) -i $< -o $@
-
-.java.java.html:
-	$(JAVA2HTML) -i $< -o $@
-
-.java.java.doc.html:
-	$(JAVA2HTMLDOC) -i $< -o $@
-
-# these are files processed using a css as the style file
-.java.css.java.html:
-	$(PROGNAME_CSSSTYLE) -i $< -o $@
-
-# these are files processed using a css as the style file
-.java.css_xhtml.java.html:
-	$(PROGNAME_CSSSTYLE) -i $< -o $@ -f xhtml
-
-# these are files processed using a css as the style file
-.java.css_doc.java.html:
-	$(PROGNAME_CSSSTYLE) -i $< -o $@ --title="This is the title"
-
-# these are files processed using a css as the style file and a non fixed html
-.java.nf_css.java.html:
-	$(PROGNAME_CSSSTYLE) -i $< -o $@ --outlang-def=$(srcdir)/../src/html_notfixed.outlang
-
-debug.java.html: debug.java
-	$(DEBUGLANG) -i $(srcdir)/debug.java -o debug.java.html > /dev/null
-
-.java.debug:
-	$(DEBUGLANG) -i $< -o debug.java.html > $@
-
-.js.js.html:
-	$(JS2HTML) $< 
-
-.java.java.txt:
-	$(JAVA2ESC) --line-number $< 
-
-.java.java.tex:
-	$(JAVA2TEX) --line-number=" " -i $< -o $@
-
-.java.java.texinfo:
-	$(JAVA2TEXINFO) --line-number -i $< -o $@
-
-.h.h.docbook:
-	$(PROGNAME_DOCBOOK) --line-number -i $< -o $@
-
-.pl.pl.html:
-	$(PROLOG2HTML) $<
-
-.pm.pm.html:
-	$(PERL2HTML) $<
-
-.php3.php3.html:
-	$(PHP32HTML) $<
-
-.py.py.html:
-	$(PYTHON2HTML) $<
-
-.chlog.chlog.htm:
-	$(CHANGELOG2HTML) $<
-
-.chlog.chlog_css.html:
-	$(CHANGELOG2HTMLCSS) -i $< > $@
-
-.l.l.html:
-	$(FLEX2HTML) $<
-
-.y.y.html:
-	$(BISON2HTML) $<
-
-.rb.rb.html:
-	$(RUBY2HTML) $<
-
-.lua.lua.html:
-	$(LUA2HTML) $<
-
-.ml.ml.html:
-	$(CAML2HTML) $<
-
-.sml.sml.html:
-	$(SML2HTML) $<
-
-.log.log.html:
-	$(LOG2HTML) $<
-
-.tex.tex.html:
-	$(LATEX2HTML) $<
-
-.lgt.lgt.html:
-	$(LOGTALK2HTML) $<
-
-.diff.diff.html:
-	$(DIFF2HTML) $<
-
-.pas.pas.html:
-	$(PROGNAME) $<
-
-.htm.htm.html:
-	$(PROGNAME) $< --title="html output formatted in html"
-
-.xml.xml.html:
-	$(PROGNAME) $< --title="xml formatted in html"
-
-.sh.sh.html:
-	$(PROGNAME) $< 
-
-.url.url.html:
-	$(URL2HTML) $< 
-
-.txt.txt.html:
-	$(TXT2HTML) $< 
-
-.unknown.unknown.html:
-	$(FAILSAFE) $< 
-
-log.lang.html: $(top_srcdir)/src/log.lang
-	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o $@
-
-c.lang.html: $(top_srcdir)/src/c.lang
-	$(LANG2HTML) -i $(top_srcdir)/src/c.lang -o $@
-
-default.style.html: $(top_srcdir)/src/default.style
-	$(STYLE2HTML) -i $(top_srcdir)/src/default.style -o $@
-
-.style.style.html:
-	$(STYLE2HTML) -i $< -o $@
-
-.properties.properties.html:
-	$(PROPERTIES2HTML) -i $< -o $@
-
-.desktop.desktop.html:
-	$(DESKTOP2HTML) -i $< -o $@
-
-.lsm.lsm.html:
-	$(DESKTOP2HTML) -i $< -o $@
-
-.hx.hx.html:
-	$(HAXE2HTML) -i $< -o $@
-
-.ldap.ldap.html:
-	$(PROGNAME_STD) -i $< -o $@
-
-.m4.m4.html:
-	$(PROGNAME_STD) -i $< -o $@
-
-.glsl.glsl.html:
-	$(PROGNAME_STD) -i $< -o $@
-
-.conf.conf.html:
-	$(PROGNAME_STD) -i $< -o $@ -s conf
-
-.xorg.xorg.html:
-	$(PROGNAME_STD) -i $< -o $@ -s xorg
-
-.scala.scala.html:
-	$(PROGNAME_STD) -i $< -o $@ -s scala
-
-.adb.adb.html:
-	$(PROGNAME_STD) -i $< -o $@ -s ada
-
-.pc.pc.html:
-	$(PROGNAME_STD) -i $< -o $@ -s pkgconfig
-
-.fortran.fortran.html:
-	$(FORTRAN2HTML) -i $< -o $@
-
-test.fixed-fortran.html: $(srcdir)/test.fortran
-	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -s fixed-fortran -o $@
-
-test.spec.html: $(srcdir)/test.spec
-	$(PROGNAME) -i $(srcdir)/test.spec -o $@
-
-.ps.ps.html:
-	$(PROGNAME) -i $< -o $@
-
-.java.htm:
-	$(JAVA2HTML) -i $< --title="Java formatted in html" > $@
-	echo "" >> $@
-	echo "<!-- this is an" >> $@
-	echo "     added HTML comment" >> $@
-	echo "     at the end of the file -->" >> $@
-
-.sl.sl.html:
-	$(PROGNAME) -i $< -o $@ --title="S-LANG test"
-
-.simple.simple.html:
-	$(SIMPLE) -i $< -o $@
-
-.wdefault.wdefault.html:
-	$(TESTWDEFAULTS) -i $< -o $@
-
-.wodefault.wodefault.html:
-	$(TESTWODEFAULTS) -i $< -o $@
-
-.isolate.isolate.html:
-	$(TESTISOLATE) -i $< -o $@
-
-.backref.backref.html:
-	$(TESTBACKREF) -i $< -o $@
-
-_state.ngroups_state.ngroups.html:
-	$(NAMEDGROUPS_STATE) -i $< -o $@
-
-.ngroups.ngroups.html:
-	$(NAMEDGROUPS) -i $< -o $@
-
 WRONGLINERANGEEXE=$(PROGEXE) --line-range="a-b"  --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null
 
 WRONGREGEXRANGEEXE=$(PROGEXE) --regex-range="ab","foobar","{wrong"  --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null
 
 
-#WRONGLINERANGECMDEXE=$(PROGEXE) --range-context=5  --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null
-
-wrong_line_range.err:
-	$(WRONGLINERANGEEXE) 2> wrong_line_range.err || true
-
-wrong_regex_range.err:
-	$(WRONGREGEXRANGEEXE) 2> wrong_regex_range.err || true
-
-
-#wrong_line_range_cmd.err:
-#	$(WRONGLINERANGECMDEXE) 2> wrong_line_range_cmd.err || true
-
 WRONGSYNTAXMODEEXE=$(PROGEXE) --data-dir=$(top_srcdir)/src -o /dev/null $(srcdir)/test.java
-
-wrong_syntax_mode.err:
-	$(WRONGSYNTAXMODEEXE) 2> wrong_syntax_mode.err || true
-
-.lang.err:
-	$(CHECKLANG) ./$< 2> $@ || true;
-	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
-
-.outlang.err:
-	$(CHECKOUTLANG) ./$< 2> $@ || true
-	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
-
-.style.err:
-	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style-file=./$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true
-	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
-
-.css.err:
-	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style-css=./$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true
-	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
 PROG_NOLANGDEF=$(PROGEXE) --outlang-def=$(srcdir)/simple.outlang $(STD_STYLE) --data-dir=$(srcdir)/ $(STD_STYLE_DEFAULTS)
 PROG_NOOUTLANGDEF=$(PROGEXE) --lang-def=$(srcdir)/simple.lang $(STD_STYLE) $(STD_STYLE_DEFAULTS) --quiet
-
-missing_langmap.err: test.simple
-	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap.err || true;
-	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_langmap.err && rm -f *testtmp
-
-missing_extension.err: test.simple
-	$(PROG_NOOUTLANGDEF) --outlang-def=$(srcdir)/simple.outlang $(srcdir)/test.simple 2> missing_extension.err || true;
-	sed -itesttmp -f $(srcdir)/erasedir2.sed missing_extension.err && rm -f *testtmp
 
 CPP2HTML_WHEADERS = $(CPP2HTML) --header=$(srcdir)/header.html --footer=$(srcdir)/footer.html
 
@@ -619,102 +327,21 @@ CPP2XHTML_WREFS = $(PROGNAME) -s cpp -f xhtml --css ../src/default.css --gen-ref
 
 CTAGS_CMD=$(CTAGS) --excmd=number --tag-relative=yes 
 
-test_header.html: test.h
-	$(CPP2HTML_WHEADERS) -i test.h -o $@
+# these are files processed using a css as the style file
+.java.css.java.html:
+	$(PROGNAME_CSSSTYLE) -i $< -o $@
 
-test_ref.tags: test.h
-	$(CTAGS_CMD) -o test_ref.tags $(srcdir)/test.h
+# these are files processed using a css as the style file
+.java.css_doc.java.html:
+	$(PROGNAME_CSSSTYLE) -i $< -o $@ --title="This is the title"
 
-test_ref_multi.tags: test.h
-	$(CTAGS_CMD) -o test_ref_multi.tags $(srcdir)/test_refs.h $(srcdir)/test_refs.cpp
+# these are files processed using a css as the style file and a non fixed html
+.java.nf_css.java.html:
+	$(PROGNAME_CSSSTYLE) -i $< -o $@ --outlang-def=$(srcdir)/../src/html_notfixed.outlang
 
-test_ref.html: test.h
-	$(CPP2HTML_WREFS) -i $(srcdir)/test.h -o test_ref.html $(CTAGS_COMMAND)
-
-test_ref.tex: test.h 
-	$(CPP2LATEX_WREFS) -i $(srcdir)/test.h -o test_ref.tex $(CTAGS_COMMAND)
-
-test_ref.docbook: test.h 
-	$(CPP2DOCBOOK_WREFS) -i $(srcdir)/test.h -o test_ref.docbook $(CTAGS_COMMAND)
-
-test_ref.xhtml: test.h 
-	$(CPP2XHTML_WREFS) -i $(srcdir)/test.h -o test_ref.xhtml $(CTAGS_COMMAND)
-
-test_ref_post.tex: test.h 
-	$(CPP2LATEX_WREFSPOST) -i $(srcdir)/test.h -o test_ref_post.tex $(CTAGS_COMMAND)
-
-test_ref.texinfo: test.h 
-	$(CPP2TEXINFO_WREFS) -i $(srcdir)/test.h -o test_ref.texinfo $(CTAGS_COMMAND)
-
-# -r 's/\"([^[:blank:]]*)\/([[:alnum:]\._]*\#[[:alnum:]\._]+)\"/\"\2\"/g' -i
-test_refs.h.html: test_refs.h test_refs.cpp
-	$(CPP2HTML_WREFS) --line-number test_refs.h test_refs.cpp $(CTAGS_COMMAND_MULTI)
-	sed -itesttmp -f $(srcdir)/erasedir3.sed test_refs.h.html test_refs.cpp.html  && rm -f *testtmp # eliminate leading paths
-
-test_refs.cpp.html: test_refs.h.html
-
-test_java_lines.html: test.java
-	$(JAVA2HTML) --line-number-ref -i test.java -o $@
-
-test_xhtml.html: test.java
-	$(JAVA2XHTML) < $(srcdir)/test.java > $@
-
-test_xhtml_doc.html: test.java
-	$(JAVA2XHTMLDOC) < $(srcdir)/test.java > $@
-
-test_xhtml_css.html: test.java
-	$(JAVA2XHTMLCSS) < $(srcdir)/test.java > $@
-
-test_xhtml_css_doc.html: test.java
-	$(JAVA2XHTMLCSSDOC) < $(srcdir)/test.java > $@
-
-test_notfixed.html: test.java
-	$(JAVA2HTMLNOTFIXED) < $(srcdir)/test.java > $@
-
-test_xhtml_notfixed.html: test.java
-	$(JAVA2XHTMLNOTFIXED) < $(srcdir)/test.java > $@
-
-test_css.html: test.java
-	$(JAVA2HTMLCSS) < test.java > $@
-
-test_css_nodoc.html: test.java
-	$(JAVA2HTMLCSSNODOC) < test.java > $@
-
-test_cpp_lines.html: test.h
-	$(CPP2HTML) --line-number -i test.h -o $@
-
-test_pl_lines.html: test.pl
-	$(PROLOG2HTML) --line-number -i test.pl -o $@
-
-test2.pl.html: test2.pl
-	$(INFER) -i test2.pl -o $@
-
-test.tcl.html: test.tcl
-	$(INFER) -i test.tcl -o $@
-
-test.sql.html: test.sql
-	$(PROGNAME) -i test.sql -o $@
-
-test.bib.html: test.bib
-	$(PROGNAME) -i test.bib -o $@
-
-test.makefile.html: test.makefile
-	$(PROGNAME) -i test.makefile -o $@
-
-test.css.html: test.css
-	$(PROGNAME) -i test.css -o $@
-
-test_perl_lines.html: test.pm
-	$(PERL2HTML) --line-number -i test.pm -o $@
-
-test_php3_lines.html: test.php3
-	$(PHP32HTML) --line-number -i test.php3 -o $@
-
-test_python_lines.html: test.py
-	$(PYTHON2HTML) --line-number -i test.py -o $@
-
-test_py_comments_lines.html: test_comments.py
-	$(PYTHON2HTML) --line-number -i test_comments.py -o $@
+# these are files processed using a css as the style file
+.java.css_xhtml.java.html:
+	$(PROGNAME_CSSSTYLE) -i $< -o $@ -f xhtml
 
 check: check_java2html check_javascript \
 check_java2xhtml check_cpp2html check_csharp2html \
@@ -762,6 +389,8 @@ check_conf \
 check_scala \
 check_ada \
 check_pkgconfig \
+check_texinfo \
+check_haskell \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -770,7 +399,8 @@ check_wrong_lineranges \
 check_wrong_regexranges \
 check_wrong_syntaxmode \
 check_lineranges \
-check_regexranges
+check_regexranges \
+check_nobgcolor
 
 remove_css_html_files:
 	rm -f *.css.java.html *.nf_css.java.html
@@ -781,7 +411,7 @@ remove_css_xhtml_files:
 remove_css_doc_files:
 	rm -f *.css_doc.java.html
 
-check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.java.doc.html test.java.txt test.java.tex test.java.texinfo test_notfixed.html test_css.html test_css_nodoc.html test_comments.java.html test_java_lines.html test.css.java.html test.nf_css.java.html test.css_doc.java.html
+check_java2html: remove_css_html_files remove_css_doc_files test.css.java.html test.nf_css.java.html test.css_doc.java.html
 	$(JAVA2HTML) -i $(srcdir)/test.java -o test.java.out.html
 	$(JAVA2HTMLDOC) -i $(srcdir)/test.java -o test.java.doc.out.html
 	$(JAVA2HTMLNOTFIXED) < $(srcdir)/test.java > test_notfixed.out.html
@@ -810,12 +440,12 @@ check_java2html: remove_css_html_files remove_css_doc_files test.java.html test.
 	$(DIFF) $(srcdir)/test_notfixed.html test.nf_css.java.html
 	$(DIFF) $(srcdir)/test.java.doc.html test.css_doc.java.html
 
-check_javascript: test.js.html
+check_javascript: 
 	$(JS2HTML) < $(srcdir)/test.js -o test.js.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.js.html test.js.out.html
 
-check_java2xhtml: remove_css_xhtml_files test_xhtml.html test_xhtml_notfixed.html test_xhtml_doc.html test_xhtml_css.html test_xhtml_css_doc.html test.css_xhtml.java.html
+check_java2xhtml: remove_css_xhtml_files test.css_xhtml.java.html
 	$(JAVA2XHTML) < $(srcdir)/test.java -o test_xhtml.out.html
 	$(JAVA2XHTMLNOTFIXED) < $(srcdir)/test.java -o test_xhtml_notfixed.out.html
 	$(JAVA2XHTMLDOC) < $(srcdir)/test.java -o test_xhtml_doc.out.html
@@ -829,39 +459,39 @@ check_java2xhtml: remove_css_xhtml_files test_xhtml.html test_xhtml_notfixed.htm
 	$(DIFF) $(srcdir)/test_xhtml_css_doc.html test_xhtml_css_doc.out.html
 	$(DIFF) $(srcdir)/test_xhtml.html test.css_xhtml.java.html
 
-check_cpp2html: test.h.html test_comments.cc.html test_template.cc.html test_header.html test_cpp_lines.html test.c.html
+check_cpp2html: 
 	$(CPP2HTML) -i $(srcdir)/test.h -o test.h.out.html
 	$(CPP2HTML) -i $(srcdir)/test_comments.cc -o test_comments.cc.out.html
 	$(CPP2HTML) -i $(srcdir)/test_template.cc -o test_template.cc.out.html
 	$(CPP2HTML_WHEADERS) -i $(srcdir)/test.h -o test_header.out.html
 	$(CPP2HTML) -n -i $(srcdir)/test.h -o test_cpp_lines.out.html
-	$(C2HTML) -i $(srcdir)/test.c -o test.c.out.html
+	$(C2HTML) -i $(srcdir)/test_c.c -o test_c.c.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.h.html test.h.out.html
 	$(DIFF) $(srcdir)/test_comments.cc.html test_comments.cc.out.html
 	$(DIFF) $(srcdir)/test_template.cc.html test_template.cc.out.html
 	$(DIFF) $(srcdir)/test_header.html test_header.out.html
 	$(DIFF) $(srcdir)/test_cpp_lines.html test_cpp_lines.out.html
-	$(DIFF) $(srcdir)/test.c.html test.c.out.html
+	$(DIFF) $(srcdir)/test_c.c.html test_c.c.out.html
 
-check_csharp2html: test.cs.html 
+check_csharp2html: 
 	$(CSHARP2HTML) -i $(srcdir)/test.cs -o test.cs.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.cs.html test.cs.out.html
 
-check_prolog2html: test.pl.html test_pl_lines.html
+check_prolog2html: 
 	$(PROLOG2HTML) < $(srcdir)/test.pl -o test.pl.out.html
 	$(PROLOG2HTML) -n -i $(srcdir)/test.pl -o test_pl_lines.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.pl.html test.pl.out.html
 	$(DIFF) $(srcdir)/test_pl_lines.html test_pl_lines.out.html
 
-check_logtalk2html: test.lgt.html
+check_logtalk2html:
 	$(LOGTALK2HTML) < $(srcdir)/test.lgt -o test.lgt.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.lgt.html test.lgt.out.html
 
-check_perl2html: test.pm.html test_comments.pm.html test_perl_lines.html
+check_perl2html:
 	$(PERL2HTML) < $(srcdir)/test.pm -o test.pm.out.html
 	$(PERL2HTML) < $(srcdir)/test_comments.pm -o test_comments.pm.out.html
 	$(PERL2HTML) -n -i $(srcdir)/test.pm -o test_perl_lines.out.html
@@ -870,14 +500,14 @@ check_perl2html: test.pm.html test_comments.pm.html test_perl_lines.html
 	$(DIFF) $(srcdir)/test_comments.pm.html test_comments.pm.out.html 
 	$(DIFF) $(srcdir)/test_perl_lines.html test_perl_lines.out.html
 
-check_php32html: test.php3.html test_php3_lines.html
+check_php32html:
 	$(PHP32HTML) < $(srcdir)/test.php3 -o test.php3.out.html
 	$(PHP32HTML) -n -i $(srcdir)/test.php3 -o test_php3_lines.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.php3.html test.php3.out.html
 	$(DIFF) $(srcdir)/test_php3_lines.html test_php3_lines.out.html
 
-check_python2html: test.py.html test_python_lines.html test_comments.py.html test_py_comments_lines.html
+check_python2html:
 	$(PYTHON2HTML) < $(srcdir)/test.py -o test.py.out.html
 	$(PYTHON2HTML) < $(srcdir)/test_comments.py -o test_comments.py.out.html
 	$(PYTHON2HTML) -n -i $(srcdir)/test.py -o test_python_lines.out.html
@@ -888,46 +518,46 @@ check_python2html: test.py.html test_python_lines.html test_comments.py.html tes
 	$(DIFF) $(srcdir)/test_python_lines.html test_python_lines.out.html
 	$(DIFF) $(srcdir)/test_py_comments_lines.html test_py_comments_lines.out.html
 
-check_changelog: test.chlog.html test.chlog_css.html
+check_changelog:
 	$(CHANGELOG2HTML) < $(srcdir)/test.chlog -o test.chlog.out.html
 	$(CHANGELOG2HTMLCSS) -i $(srcdir)/test.chlog -o test.chlog_css.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.chlog.html test.chlog.out.html
 	$(DIFF) $(srcdir)/test.chlog_css.html test.chlog_css.out.html
 
-check_flex: test.l.html
+check_flex:
 	$(FLEX2HTML) < $(srcdir)/test.l -o test.l.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.l.html test.l.out.html
 
-check_bison: test.y.html
+check_bison:
 	$(BISON2HTML) < $(srcdir)/test.y -o test.y.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.y.html test.y.out.html
 
-check_ruby: test.rb.html test_comments.rb.html
+check_ruby:
 	$(RUBY2HTML) < $(srcdir)/test.rb -o test.rb.out.html
 	$(RUBY2HTML) < $(srcdir)/test_comments.rb -o test_comments.rb.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.rb.html test.rb.out.html
 	$(DIFF) $(srcdir)/test_comments.rb.html test_comments.rb.out.html
 
-check_lua: test.lua.html
+check_lua:
 	$(LUA2HTML) < $(srcdir)/test.lua -o test.lua.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.lua.html test.lua.out.html
 
-check_ml: test.ml.html
+check_ml:
 	$(CAML2HTML) < $(srcdir)/test.ml -o test.ml.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.ml.html test.ml.out.html
 
-check_sml: test.sml.html
+check_sml:
 	$(SML2HTML) < $(srcdir)/test.sml -o test.sml.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.sml.html test.sml.out.html
 
-check_log: test.log.html access.log.html auth.log.html error.log.html syslog.log.html
+check_log:
 	$(LOG2HTML) < $(srcdir)/test.log -o test.log.out.html
 	$(LOG2HTML) < $(srcdir)/access.log -o access.log.out.html
 	$(LOG2HTML) < $(srcdir)/auth.log -o auth.log.out.html
@@ -940,7 +570,7 @@ check_log: test.log.html access.log.html auth.log.html error.log.html syslog.log
 	$(DIFF) $(srcdir)/error.log.html error.log.out.html
 	$(DIFF) $(srcdir)/syslog.log.html syslog.log.out.html
 
-check_diff: test.diff.html test2.diff.html test3.diff.html
+check_diff:
 	$(DIFF2HTML) < $(srcdir)/test.diff -o test.diff.out.html
 	$(DIFF2HTML) < $(srcdir)/test2.diff -o test2.diff.out.html
 	$(DIFF2HTML) < $(srcdir)/test3.diff -o test3.diff.out.html
@@ -949,12 +579,12 @@ check_diff: test.diff.html test2.diff.html test3.diff.html
 	$(DIFF) $(srcdir)/test2.diff.html test2.diff.out.html
 	$(DIFF) $(srcdir)/test3.diff.html test3.diff.out.html
 
-check_pascal: test.pas.html
+check_pascal:
 	$(PROGNAME) -i $(srcdir)/test.pas -o test.pas.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.pas.html test.pas.out.html
 
-check_html: test.htm.html test2.htm.html test_html5.htm.html
+check_html:
 	$(PROGNAME) -i $(srcdir)/test.htm --title="html output formatted in html" -o test.htm.out.html
 	$(PROGNAME) -i $(srcdir)/test2.htm --title="html output formatted in html" -o test2.htm.out.html
 	$(PROGNAME) -i $(srcdir)/test_html5.htm --title="html output formatted in html" -o test_html5.htm.out.html
@@ -963,101 +593,111 @@ check_html: test.htm.html test2.htm.html test_html5.htm.html
 	$(DIFF) $(srcdir)/test2.htm.html test2.htm.out.html
 	$(DIFF) $(srcdir)/test_html5.htm.html test_html5.htm.out.html
 
-check_xml: test.xml.html
+check_xml:
 	$(PROGNAME) -i $(srcdir)/test.xml --title="xml formatted in html" -o test.xml.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.xml.html test.xml.out.html
 
-check_sh: test.sh.html test2.sh.html
+check_sh:
 	$(PROGNAME) -i $(srcdir)/test.sh -o test.sh.out.html
 	$(PROGNAME) -i $(srcdir)/test2.sh -o test2.sh.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.sh.html test.sh.out.html
 	$(DIFF) $(srcdir)/test2.sh.html test2.sh.out.html
 
-check_slang: test.sl.html
+check_slang:
 	$(PROGNAME) -i $(srcdir)/test.sl -o test.sl.out.html --title="S-LANG test"
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.sl.html test.sl.out.html
 
-check_url: test.url.html
+check_url:
 	$(URL2HTML) -i $(srcdir)/test.url -o test.url.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.url.html test.url.out.html
 
-check_properties: test.properties.html
+check_properties:
 	$(PROPERTIES2HTML) -i $(srcdir)/test.properties -o test.properties.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.properties.html test.properties.out.html
 
-check_desktop: test.desktop.html
+check_desktop:
 	$(DESKTOP2HTML) -i $(srcdir)/test.desktop -o test.desktop.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.desktop.html test.desktop.out.html
 
-check_lsm: test.lsm.html
+check_lsm:
 	$(LSM2HTML) -i $(srcdir)/test.lsm -o test.lsm.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.lsm.html test.lsm.out.html
 
-check_haxe: test.hx.html
+check_haxe:
 	$(HAXE2HTML) -i $(srcdir)/test.hx -o test.hx.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.hx.html test.hx.out.html
 
-check_ldap: test.ldap.html
+check_ldap:
 	$(PROGNAME_STD) -i $(srcdir)/test.ldap -o test.ldap.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.ldap.html test.ldap.out.html
 
-check_m4: test.m4.html
+check_m4:
 	$(PROGNAME_STD) -i $(srcdir)/test.m4 -o test.m4.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.m4.html test.m4.out.html
 
-check_glsl: test.glsl.html
+check_glsl:
 	$(PROGNAME_STD) -i $(srcdir)/test.glsl -o test.glsl.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.glsl.html test.glsl.out.html
 
-check_xorg: test.xorg.html
+check_xorg:
 	$(PROGNAME_STD) -i $(srcdir)/test.xorg -s xorg  -o test.xorg.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.xorg.html test.xorg.out.html
 
-check_conf: test.conf.html
+check_conf:
 	$(PROGNAME_STD) -i $(srcdir)/test.conf -s conf  -o test.conf.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.conf.html test.conf.out.html
 
-check_scala: test.scala.html
+check_scala:
 	$(PROGNAME_STD) -i $(srcdir)/test.scala -s scala  -o test.scala.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.scala.html test.scala.out.html
 
-check_ada: test.adb.html
+check_ada:
 	$(PROGNAME_STD) -i $(srcdir)/test.adb -s ada  -o test.adb.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.adb.html test.adb.out.html
 
-check_pkgconfig: test.pc.html
+check_pkgconfig:
 	$(PROGNAME_STD) -i $(srcdir)/test.pc -s pc  -o test.pc.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.pc.html test.pc.out.html
 
-check_fortran: test.fortran.html test.fixed-fortran.html
+check_texinfo:
+	$(PROGNAME_STD) -i $(srcdir)/test.texinfo -o test.texinfo.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.texinfo.html test.texinfo.out.html
+
+check_haskell:
+	$(PROGNAME_STD) -i $(srcdir)/test.hs -o test.hs.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.hs.html test.hs.out.html
+
+check_fortran:
 	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -o test.fortran.out.html
 	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -s fixed-fortran -o test.fixed-fortran.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.fortran.html test.fortran.out.html
 	$(DIFF) $(srcdir)/test.fixed-fortran.html test.fixed-fortran.out.html
 
-check_spec: test.spec.html
+check_spec:
 	$(SPEC2HTML) -i $(srcdir)/test.spec -o test.spec.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.spec.html test.spec.out.html
 
-check_txt: test.txt.html
+check_txt:
 	$(TXT2HTML) -i $(srcdir)/test.txt -o test.txt.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.txt.html test.txt.out.html
@@ -1065,7 +705,7 @@ check_txt: test.txt.html
 myscript: test.sh
 	cp $(srcdir)/test.sh $@
 
-check_infer: test2.pl.html myscript test.sh.html test.tcl.html
+check_infer: myscript
 	rm -f myscript.html
 	$(INFER) -i $(srcdir)/test2.pl -o test2.pl.out.html
 	$(INFER) -i $(srcdir)/test.tcl -o test.tcl.out.html
@@ -1075,70 +715,72 @@ check_infer: test2.pl.html myscript test.sh.html test.tcl.html
 	$(DIFF) $(srcdir)/test.tcl.html test.tcl.out.html
 	$(DIFF) $(srcdir)/test.sh.html myscript.html
 
-check_latex: test.tex.html test.java.tex.html
+check_latex:
 	$(PROGNAME) -i $(srcdir)/test.tex  -o test.tex.out.html
 	$(PROGNAME) -i $(srcdir)/test.java.tex  -o test.java.tex.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.tex.html test.tex.out.html
 	$(DIFF) $(srcdir)/test.java.tex.html test.java.tex.out.html
 
-check_docbook: test.h.docbook
+check_docbook:
 	$(PROGNAME_DOCBOOK) -i $(srcdir)/test.h --line-number -o test.h.out.docbook
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.h.docbook test.h.out.docbook
 
-check_sql: test.sql.html
+check_sql:
 	$(PROGNAME) -i $(srcdir)/test.sql -o test.sql.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.sql.html test.sql.out.html
 
-check_bib: test.bib.html
+check_bib:
 	$(PROGNAME) -i $(srcdir)/test.bib -o test.bib.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.bib.html test.bib.out.html
 
-check_makefile: test.makefile.html
+check_makefile:
 	$(PROGNAME) -i $(srcdir)/test.makefile -o test.makefile.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.makefile.html test.makefile.out.html
 
-check_css: test.css.html
+check_css:
 	$(PROGNAME) -i $(srcdir)/test.css -o test.css.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.css.html test.css.out.html
 
-check_ps: test.ps.html
+check_ps:
 	$(PROGNAME) -i $(srcdir)/test.ps -o test.ps.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.ps.html test.ps.out.html
 
-check_lang: log.lang.html c.lang.html default.style.html
+check_lang:
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o log.lang.out.html
 	$(LANG2HTML) -i $(top_srcdir)/src/c.lang -o c.lang.out.html
 	$(STYLE2HTML) -i $(top_srcdir)/src/default.style -o default.style.out.html
+	$(STYLE2HTML) -i $(srcdir)/syslog.style -o syslog.style.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/log.lang.html log.lang.out.html
 	$(DIFF) $(srcdir)/c.lang.html c.lang.out.html
 	$(DIFF) $(srcdir)/default.style.html default.style.out.html
+	$(DIFF) $(srcdir)/syslog.style.html syslog.style.out.html
 
-check_simple: test.simple.html
+check_simple:
 	$(SIMPLE) -i $(srcdir)/test.simple -o test.simple.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.simple.html test.simple.out.html
 
-check_isolate: test.isolate.html
+check_isolate:
 	$(TESTISOLATE) -i $(srcdir)/test.isolate -o test.isolate.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.isolate.html test.isolate.out.html
 
-check_backref: test.backref.html test2.backref.html
+check_backref:
 	$(TESTBACKREF) -i $(srcdir)/test.backref -o test.backref.out.html
 	$(TESTBACKREF) -i $(srcdir)/test2.backref -o test2.backref.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.backref.html test.backref.out.html
 	$(DIFF) $(srcdir)/test2.backref.html test2.backref.out.html
 
-check_namedgroups: test.ngroups.html test_state.ngroups.html
+check_namedgroups:
 	$(NAMEDGROUPS) -i $(srcdir)/test.ngroups -o test.ngroups.out.html
 	$(NAMEDGROUPS_STATE) -i $(srcdir)/test_state.ngroups -o test_state.ngroups.out.html
 	@echo expect no output from diff
@@ -1161,7 +803,7 @@ check_namedgroups: test.ngroups.html test_state.ngroups.html
 	$(PROGEXE) --lang-def=$(srcdir)/simple.lang --style-css=./$< --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null 2> $@ || true;
 	sed -itesttmp -f $(srcdir)/erasedir.sed $@ && rm -f *testtmp
 
-check_wrong: $(WRONGFILESOUT) $(WRONGSTYLESOUT)
+check_wrong:
 	rm -f *.err_out
 	$(MAKE) wrong_exp.err_out
 	$(MAKE) wrong_syntax.err_out
@@ -1217,7 +859,7 @@ check_wrong_syntaxmode:
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/wrong_syntax_mode.err wrong_syntax_mode.err_out
 
-check_lineranges: test_linerange1.html test_linerange2.html test_linerange_sep.html
+check_lineranges:
 	$(LINERANGE1EXE) < $(srcdir)/test.java -o test_linerange1.out.html
 	$(LINERANGE2EXE) < $(srcdir)/test.java -o test_linerange2.out.html
 	$(LINERANGESEPEXE) < $(srcdir)/test.java -o test_linerange_sep.out.html
@@ -1226,7 +868,7 @@ check_lineranges: test_linerange1.html test_linerange2.html test_linerange_sep.h
 	$(DIFF) $(srcdir)/test_linerange2.html test_linerange2.out.html
 	$(DIFF) $(srcdir)/test_linerange_sep.html test_linerange_sep.out.html
 
-check_regexranges: test_regexrange1.html test_regexrange2.html test_regexrange3.html test_regexrange4.html
+check_regexranges:
 	$(REGEXRANGE1EXE) < $(srcdir)/test.java -o test_regexrange1.out.html
 	$(REGEXRANGE2EXE) < $(srcdir)/test.java -o test_regexrange2.out.html
 	$(REGEXRANGE3EXE) < $(srcdir)/test.java -o test_regexrange3.out.html
@@ -1237,11 +879,17 @@ check_regexranges: test_regexrange1.html test_regexrange2.html test_regexrange3.
 	$(DIFF) $(srcdir)/test_regexrange3.html test_regexrange3.out.html
 	$(DIFF) $(srcdir)/test_regexrange4.html test_regexrange4.out.html
 
+check_nobgcolor:
+	$(PROGEXE) $(DATADIROPTION) --style-file=texinfo.style --doc --title="source file" -i $(srcdir)/test_nobgcolor.cpp -o test_nobgcolor.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test_nobgcolor.html test_nobgcolor.out.html
+
+
 #$(PROG_NOOUTLANGDEF) -i $(srcdir)/test.simple -o test.err_out --data-dir=/tmp 2-o missing_langmap2.err_out || true
 #sed -r -i -f $(srcdir)/erasedir2.sed missing_langmap2.err_out
 #diff $(srcdir)/missing_langmap2.err missing_langmap2.err_out
 
-check_missing: missing_extension.err missing_langmap.err
+check_missing:
 	rm -f *.err_out
 	$(PROG_NOLANGDEF) -i $(srcdir)/test.simple -o test.err_out 2> missing_langmap.err_out || true
 	$(PROG_NOOUTLANGDEF) --outlang-def=$(srcdir)/simple.outlang $(srcdir)/test.simple 2> missing_extension.err_out || true
@@ -1252,12 +900,12 @@ check_missing: missing_extension.err missing_langmap.err
 	$(DIFF) $(srcdir)/missing_extension.err missing_extension.err_out
 	rm -f *testtmp
 
-check_failsafe: test.unknown.html
+check_failsafe:
 	$(FAILSAFE) -i $(srcdir)/test.unknown -o test.unknown.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.unknown.html test.unknown.out.html
 
-check_debug: debug.debug debug.java.html
+check_debug:
 	rm -f *.out.debug
 	$(DEBUGLANG) -i $(srcdir)/debug.java -o debug.java.out.html > debug.out.debug
 	tr -d '\r' < debug.out.debug > temp.output && cp -f temp.output debug.out.debug
@@ -1265,7 +913,7 @@ check_debug: debug.debug debug.java.html
 	$(DIFF) $(srcdir)/debug.debug debug.out.debug
 	$(DIFF) $(srcdir)/debug.java.html debug.java.out.html
 
-check_defaults: lang4defaults.lang test.defaults test.wdefault.html test.wodefault.html
+check_defaults:
 	$(TESTWDEFAULTS) -i $(srcdir)/test.wdefault -o test.wdefault.out.html
 	$(TESTWODEFAULTS) -i $(srcdir)/test.wodefault -o test.wodefault.out.html
 	@echo expect no output from diff
@@ -1281,7 +929,7 @@ check_ref:
 	@echo because we could not find a usable ctags program
 else
 # sed -i -r 's/([.\/[:alnum:]]+)\/(test\.h\:[[:alnum:]\._]+)/\2/g' test_ref.out.html # eliminate leading paths
-check_ref: $(OUTPUTWREFS)
+check_ref:
 	$(CPP2HTML_WREFS) -i $(srcdir)/test.h -o test_ref.out.html $(CTAGS_COMMAND_TMP)
 	sed -itesttmp -e 's/test\_ref\.out\.html/test\_ref\.html/g' test_ref.out.html
 	sed -itesttmp -f $(srcdir)/erasedir3.sed test_ref.out.html # eliminate leading paths
@@ -1314,7 +962,7 @@ check_ref: $(OUTPUTWREFS)
 	rm -f test_refs_tmp.* *testtmp $(TEMP_TAGFILE)
 endif
 
-check_show: namedgroups_state.show
+check_show:
 	$(PROGEXE) --show-regex=$(top_srcdir)/src/c_comment.lang > c_comment.out.show
 	tr -d '\r' < c_comment.out.show > temp.output && cp -f temp.output c_comment.out.show
 	$(PROGEXE) --show-regex=$(srcdir)/namedgroups_state.lang > namedgroups_state.out.show
@@ -1323,13 +971,13 @@ check_show: namedgroups_state.show
 	$(DIFF) $(srcdir)/c_comment.show c_comment.out.show
 	$(DIFF) $(srcdir)/namedgroups_state.show namedgroups_state.out.show
 
-check_langelems: cpp.langelems
+check_langelems:
 	$(PROGEXE) $(DATADIROPTION) --show-lang-elements=$(top_srcdir)/src/cpp.lang > cpp.out.langelems
 	tr -d '\r' < cpp.out.langelems > temp.output && cp -f temp.output cpp.out.langelems
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/cpp.langelems cpp.out.langelems
 
-check_list: lang.list outlang.list
+check_list:
 	$(PROGEXE) $(DATADIROPTION) --lang-list > lang.out.list
 	tr -d '\r' < lang.out.list > temp.output && cp -f temp.output lang.out.list
 	$(PROGEXE) $(DATADIROPTION) --outlang-list > outlang.out.list
@@ -1338,14 +986,14 @@ check_list: lang.list outlang.list
 	$(DIFF) $(srcdir)/lang.list lang.out.list
 	$(DIFF) $(srcdir)/outlang.list outlang.out.list
 
-check_stop: test_string_stop.java.html test_java_stop.java.html
+check_stop:
 	$(PROGNAME) --lang-def=$(srcdir)/test_string_stop.lang -i $(srcdir)/test_string_stop.java -o test_string_stop.java.out.html
 	$(JAVA2HTML) -i $(srcdir)/test_java_stop.java -o test_java_stop.java.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test_string_stop.java.html test_string_stop.java.out.html
 	$(DIFF) $(srcdir)/test_java_stop.java.html test_java_stop.java.out.html
 
-check_vardecl: test_vardecl.java.html test_vardecl.cc.html
+check_vardecl:
 	$(JAVA2HTML) -i $(srcdir)/test_vardecl.java -o test_vardecl.java.out.html
 	$(CPP2HTML) -i $(srcdir)/test_vardecl.cc -o test_vardecl.cc.out.html
 	@echo expect no output from diff
@@ -1406,6 +1054,6 @@ CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug 
 clean_html:
 	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html *.fortran.html *.fixed-fortran.html *.hx.html *.m4.html *.scala.html *.adb.html *.conf.html *.xorg.html
 
-DISTCLEANFILES=my_test_ref_tmp.tags $(TEMP_TAGFILE) syslog.style.html
+DISTCLEANFILES=my_test_ref_tmp.tags $(TEMP_TAGFILE)
 
 #DISTCLEANFILES=test_ref.xhtml test_ref.tags test_ref.tags tags test_ref.tex test_ref_post.tex test_ref.texinfo syslog.style.html test_ref.docbook

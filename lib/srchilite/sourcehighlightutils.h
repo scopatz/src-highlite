@@ -19,6 +19,8 @@ typedef std::set<std::string> StringSet;
 
 /**
  * Class with some utility static methods.
+ *
+ * @since 3.1
  */
 class SourceHighlightUtils {
 public:
@@ -44,6 +46,22 @@ public:
      * @throw IOException if it cannot open the specified path
      */
     static StringSet getCssStyleFileNames(const std::string path = "");
+
+    /**
+     * @param path the path to search for files (if left empty, it uses the standard data dir path)
+     * @return a set of string with file names of lang definition files
+     * @throw IOException if it cannot open the specified path
+     * @since 3.1.1
+     */
+    static StringSet getLangFileNames(const std::string path = "");
+
+    /**
+     * @param path the path to search for files (if left empty, it uses the standard data dir path)
+     * @return a set of string with file names of outlang definition files
+     * @throw IOException if it cannot open the specified path
+     * @since 3.1.1
+     */
+    static StringSet getOutLangFileNames(const std::string path = "");
 };
 
 }

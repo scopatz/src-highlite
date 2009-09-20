@@ -54,11 +54,10 @@ public:
      * - a partial range (e.g., 10- : from line 10 to the end,
      *   -20 : from the beginning to line 20)
      *
-     * @param first
-     * @param second
+     * @param range the string representing the range.
      * @return code specifying a possible error
      */
-    RangeError addRange(const std::string &first);
+    RangeError addRange(const std::string &range);
 
     const LineRangeSet &getLineRangeSet() const {
         return lineRangeSet;

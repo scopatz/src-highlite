@@ -57,4 +57,20 @@ StringSet SourceHighlightUtils::getCssStyleFileNames(const std::string _path) {
     return getFileNames(path, "css");
 }
 
+StringSet SourceHighlightUtils::getLangFileNames(const std::string _path) {
+    string path = _path;
+    if (path == "")
+        path = Settings::retrieveDataDir();
+
+    return getFileNames(path, "lang");
+}
+
+StringSet SourceHighlightUtils::getOutLangFileNames(const std::string _path) {
+    string path = _path;
+    if (path == "")
+        path = Settings::retrieveDataDir();
+
+    return getFileNames(path, "outlang");
+}
+
 }

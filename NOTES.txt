@@ -2,6 +2,11 @@ standard configure command:
 
 ./configure CXX="ccache g++" CXXFLAGS=-g --enable-warnings --enable-maintainer-mode --prefix=$HOME/usr/local --with-doxygen
 
+static build
+
+../configure --prefix=/home/bettini/usr/static --with-boost=/home/bettini/boost --disable-shared LDFLAGS=-static --enable-maintainer-mode
+make LDFLAGS=-all-static
+
 from msys mingw
 
 in /etc/fstab

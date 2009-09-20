@@ -34,7 +34,11 @@ class LangMap {
     /// whether the corresponding file is opened
     bool isOpen;
 
-    const std::string path, filename;
+    /// the path for searching for the map file name
+    std::string path;
+
+    /// the map file name
+    std::string filename;
 
 public:
     /**
@@ -147,6 +151,14 @@ public:
      * @return the lang file names of this map
      */
     std::set<std::string> getMappedFileNames() const;
+
+    /**
+     * Reloads the contents of this map, using the (new) path and
+     * filename
+     * @param path the path where to search for the filename
+     * @param filename the map file
+     */
+    void reload(const std::string &path, const std::string &filename);
 
 };
 

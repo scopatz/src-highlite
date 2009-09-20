@@ -24,6 +24,9 @@ using namespace std;
 
 namespace srchilite {
 
+/// if set (i.e., not empty), retrieveDataDir() always returns this value
+string globalDataDir = "";
+
 /// the regular expression for the conf file syntax
 boost::regex
         datadir_exp(
@@ -108,6 +111,9 @@ SettingError Settings::save() {
 }
 
 const string Settings::retrieveDataDir(bool reload) {
+    if (globalDataDir != "")
+        return globalDataDir;
+
     static string dataDir;
 
     if (dataDir != "" && !reload)
@@ -135,6 +141,21 @@ const string Settings::retrieveDataDir(bool reload) {
     VERBOSELN("using datadir value from conf file " + dataDir);
 
     return dataDir;
+}
+
+const std::string Settings::getDefaultDataDir() {
+    return ABSOLUTEDATADIR;
+}
+
+void Settings::setGlobalDataDir(const std::string &dataDir) {
+    globalDataDir = dataDir;
+}
+
+bool Settings::checkSettings() {
+    static Settings settings;
+
+    settings.setDataDir(retrieveDataDir());
+    return settings.checkForTestFile();
 }
 
 }

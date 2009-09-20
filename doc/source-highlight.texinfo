@@ -183,6 +183,11 @@ In particular, the stored configuration file will be called
 For the moment, this file only stores the default value for
 the @code{--data-dir} option.
 
+The user can always override the contents of this configuration file,
+and the default hardcoded value, by using the environment variable
+@cindex @code{SOURCE_HIGHLIGHT_DATADIR}
+@code{SOURCE_HIGHLIGHT_DATADIR}.
+
 @node Notes on some languages, Using source-highlight as a simple formatter, The program source-highlight-settings, Introduction
 @section Notes on some languages
 
@@ -981,6 +986,12 @@ explicit path name, the installation directory name is
 still used, but relative to the explicit path name.
 @end itemize
 
+In particular, the user can set the value also with the environment
+variable
+@cindex @code{SOURCE_HIGHLIGHT_DATADIR}
+@code{SOURCE_HIGHLIGHT_DATADIR} (see also @ref{The program
+source-highlight-settings}).
+
 If you want to be sure about which file is used during the
 execution, you can use the command line option @code{--verbose}.
 
@@ -1124,7 +1135,8 @@ brightgreen
 darkgreen 
 teal 
 gray 
-darkblue 
+darkblue
+white
 @end example
 
 @cindex direct color scheme

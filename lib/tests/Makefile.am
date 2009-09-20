@@ -26,7 +26,7 @@ VALGRIND_TESTS = test_regexrules test_formatter_manager test_highlighter \
 	test_untabifier test_outlangparser test_outlang_errors test_events test_debuglistener \
 	test_regexpreprocessor test_filenotfound test_style_errors \
 	test_lineranges test_regexranges test_settings test_langmap \
-	test_utils
+	test_utils test_instances
 
 if !NO_CTAGS
 VALGRIND_TESTS += test_ctagscollector test_ctagsformatter test_ctagsmanager \
@@ -111,7 +111,8 @@ test_outlangparser_CXXFLAGS = -D BASEDIR="\"$(srcdir)/\"" -D TESTSDIR="\"$(top_s
 test_langinfer_SOURCES = test_langinfer_main.cpp
 
 test_settings_SOURCES = test_settings_main.cpp
-test_settings_CXXFLAGS = -D BASEDIR="\"$(srcdir)/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
+test_settings_CXXFLAGS = -D BASEDIR="\"$(srcdir)/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\"" \
+	-D MAINSRCDIR="\"$(top_srcdir)/src/\""
 
 test_events_SOURCES = test_events_main.cpp
 
@@ -122,6 +123,9 @@ test_langmap_CXXFLAGS = -D BASEDIR="\"$(srcdir)/\"" -D TESTSDIR="\"$(top_srcdir)
 
 test_utils_SOURCES = test_utils_main.cpp
 test_utils_CXXFLAGS = -D BASEDIR="\"$(top_srcdir)/src/\""
+
+test_instances_SOURCES = test_instances_main.cpp
+test_instances_CXXFLAGS = -D BASEDIR="\"$(srcdir)/\"" -D TESTSDIR="\"$(top_srcdir)/tests/\""
 
 
 mytags: $(top_srcdir)/lib/srchilite/test_readtags_main.cpp
@@ -228,6 +232,9 @@ check_test_langmap: test_langmap$(EXEEXT)
 
 check_test_utils: test_utils$(EXEEXT)
 	./test_utils$(EXEEXT)	
+
+check_test_instances: test_instances$(EXEEXT)
+	./test_instances$(EXEEXT)	
 
 VALGRINDTEST = $(builddir)/valgrind_test.sh
 

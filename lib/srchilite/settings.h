@@ -13,6 +13,7 @@
 
 namespace srchilite {
 
+/// an error dealing with setting configuration file
 enum SettingError {
     NO_SETTING_ERROR = 0, CANT_CREATE_DIR, CANT_CREATE_FILE
 };
@@ -48,8 +49,8 @@ enum SettingError {
  * configuration file (it also creates the directory if it does not exist).
  *
  * This class also provides a static method retrieveDataDir() which uses
- * an object of this class to retrieve datadir only if the environment
- * variable SOURCE_HIGHLIGHT_DATADIR is not set.
+ * an object of this class to retrieve datadir (if the environment
+ * variable SOURCE_HIGHLIGHT_DATADIR is not set).
  * If also the reading of configuration file fails, then it returns the
  * hardcoded value.
  *
@@ -58,6 +59,11 @@ enum SettingError {
  * the datadir value.  The other methods of this class should be used
  * when (possibly) configuring the library from within the program itself.
  * For instance this is done by the program source-highlight-settings.
+ *
+ * An alternative use, is to set a global data dir value with
+ * setGlobalDataDir(); this way, retrieveDataDir() will always return
+ * the global value (this enforces consistency in a library using
+ * the source-highlight library).
  */
 class Settings {
     /// the home directory of the user
@@ -131,19 +137,49 @@ public:
     SettingError save();
 
     /**
-     * Uses an object of this class to retrieve datadir only if the environment
-     * variable SOURCE_HIGHLIGHT_DATADIR is not set.  Thus, the users of the
-     * library should always rely on this static method for retrieving
+     * Retrieves the value for the data dir.
+     *
+     * If the global value was set with setGlobalDataDir() then always returns this
+     * global value.  It returns the value of the environment
+     * variable SOURCE_HIGHLIGHT_DATADIR if set.  Otherwise, it returns the
+     * value read from the configuration file.
+     *
+     * Thus, the users of the library should always rely on this static method for retrieving
      * the datadir value.
      *
      * If also the reading of configuration file fails, then it returns the
      * hardcoded value.
+     *
+     * If the global data dir was set (and it's not empty) with setGlobalDataDir, then this
+     * method will always return the global value, without inspecting the environment
+     * variable nor the configuration file.
      *
      * @param reload whether to perform the retrieval from scratch (otherwise it is
      * cached)
      * @return the value for datadir
      */
     static const std::string retrieveDataDir(bool reload = false);
+
+    /**
+     * @return the hardcoded datadir value
+     */
+    static const std::string getDefaultDataDir();
+
+    /**
+     * Sets the global data dir value.  If the passed value is not empty,
+     * then retrieveDataDir() will always return this value (and it won't
+     * read the configuration file).
+     * @param dataDir
+     */
+    static void setGlobalDataDir(const std::string &dataDir);
+
+    /**
+     * Checks whether the current retrieved data dir is a valid
+     * data dir value for source-highlight
+     * @return whether the current retrieved data dir is a valid
+     * data dir value for source-highlight.
+     */
+    static bool checkSettings();
 };
 
 }

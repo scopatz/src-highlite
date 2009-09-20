@@ -1,0 +1,69 @@
+(@ref{Generating References}).
+\input texinfo @c -*-texinfo-*-
+@c This file uses the @command command introduced in Texinfo 4.0.
+@c %**start of header
+@setfilename source-highlight.info
+@include version.texi
+@settitle GNU Source-highlight @value{VERSION}
+@finalout
+@c @setchapternewpage odd
+@c %**end of header
+
+@example
+my example
+@end example
+
+@set myhomepage @uref{http://www.lorenzobettini.it}
+
+field names, etc.) by relying on the program @emph{ctags},
+@url{http://ctags.sourceforge.net} 
+@xref{My Long
+Reference}.
+
+@inforef{Introduction,,source-highlight-info}.
+
+@c All the menus can be updated with the EMACS command
+@c texinfo-all-menus-update, which is normally bound to C-c C-u C-a.
+@menu
+* Introduction::                What's it for?
+* Installation::                Download and installation           
+* Invoking source-highlight::   How to run @command{source-highlight}.
+* Language Definitions::        How to define an input language
+* Problems::                    Reporting bugs.
+* Mailing Lists::               
+* Concept Index::               Index of concepts.
+@end menu
+
+This is an escaped @@ at symbol.
+
+This ``is a string''.
+
+@example
+@i{/// read the files }FIXME@i{ of a directory }@@param@i{ }@b{<f} foo="bar"@b{>}
+
+@b{#include} <stddef.h>
+@b{#include} <stdio.h>
+@b{#include} <sys/types.h>
+@b{#include} <dirent.h>
+
+int
+@b{main} (void)
+@{
+       DIR *dp;
+       @b{struct} dirent *ep;
+     
+       dp = @b{opendir} ("./");
+       @b{if} (dp != NULL)
+         @{
+           @b{while} (ep = @b{readdir} (dp))
+             @b{puts} (ep->d_name);
+           (void) @b{closedir} (dp);
+         @}
+       @b{else}
+         @b{perror} ("Couldn't open the directory");
+     
+       @b{return} 0;
+@}
+
+@end example
+

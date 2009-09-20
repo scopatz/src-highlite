@@ -25,6 +25,7 @@ colormap
 "teal" "#008080"
 "gray" "#808080"
 "darkblue" "#000080"
+"white" "#FFFFFF"
 default "#000000"
 end
 

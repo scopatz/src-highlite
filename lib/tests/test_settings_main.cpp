@@ -36,6 +36,25 @@ int main() {
     cout << "read datadir: " << settings.getDataDir() << endl;
     assertEquals("foo", settings.getDataDir());
 
+    // test the static method
+    string readDataDir = Settings::retrieveDataDir();
+    cout << "retrieved data dir: " << readDataDir << endl;
+
+    // now set the global value
+    string globalValue = "global";
+    Settings::setGlobalDataDir(globalValue);
+
+    assertEquals(globalValue, Settings::retrieveDataDir());
+
+    // now set the global value as empty, and check that the previous
+    // value is returned now
+    Settings::setGlobalDataDir("");
+    assertEquals(readDataDir, Settings::retrieveDataDir());
+
+    // test global check settings
+    Settings::setGlobalDataDir(MAINSRCDIR);
+    assertTrue(Settings::checkSettings(), "check setting should succeed");
+
     cout << "test_settings: SUCCESS!" << endl;
 
     return 0;
