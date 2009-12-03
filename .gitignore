@@ -8,9 +8,7 @@ autoscan.log
 configure.scan
 sourcehighlight.kdevelop.pcs
 sourcehighlight.kdevses
-build_cygwin
-build_msys
+build_*
 build
-build_static
 *~
 *.pro.user
