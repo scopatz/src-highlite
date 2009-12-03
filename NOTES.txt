@@ -14,6 +14,9 @@ c:/boost_mingw /boost_mingw
 
 ./configure --with-boost=/boost_mingw
 
+MAKEINFO=/c/cygwin/bin/makeinfo.exe ../configure --with-boost=/boost_mingw --
+prefix=/mingw/ --disable-shared
+
 for cygwin (building for mingw)
 
 make sure to have a link to the actual boost mingw installation:
@@ -25,3 +28,5 @@ run configure with
 CXX="ccache g++" CXXFLAGS="-mno-cygwin" CFLAGS="-mno-cygwin" --with-boost=/boost_mingw
 
 
+make[2]: *** No rule to make target `help-output.texinfo', needed by `../../doc/source-highlight.info'.  Stop.
+make: *** No rule to make target `test_ref.h.texinfo', needed by `../../doc/source-highlight.info'.  Stop.

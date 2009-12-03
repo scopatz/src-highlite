@@ -1,0 +1,6 @@
+no need to highlight this
+c:\f\g\Makefile:1346:10: warning: overriding commands for target `styleformatter.h.texinfo' foo
+/f/g/Makefile:1346:10: warning: overriding commands for target `styleformatter.h.texinfo' foo
+/foo/bar/Makefile:1337: error: ignoring old commands for target 'styleformatter.h.texinfo' bar
+\foo\bar\Makefile:1346: warning: overriding commands for target `styleformatter.h.texinfo'
+Makefile:1337: warning: ignoring old commands for target `styleformatter.h.texinfo'

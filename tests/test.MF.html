@@ -1,0 +1,29 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><font color="#FF0000">Manifest-Version</font><font color="#990000">:</font> <font color="#993399">1.0</font>
+<font color="#FF0000">Bundle-ManifestVersion</font><font color="#990000">:</font> <font color="#993399">2</font>
+<font color="#FF0000">Bundle-Name</font><font color="#990000">:</font> <font color="#FF6600">%pluginName</font>
+<font color="#FF0000">Bundle-SymbolicName</font><font color="#990000">:</font> org.eclipse.mindmap.diagram;<font color="#009900"> singleton</font><font color="#990000">:=</font>true
+<font color="#FF0000">Bundle-Version</font><font color="#990000">:</font> <font color="#993399">1.0</font>.<font color="#993399">0</font>.qualifier
+<font color="#FF0000">Bundle-ClassPath</font><font color="#990000">:</font> .
+<font color="#FF0000">Bundle-Activator</font><font color="#990000">:</font> org.eclipse.mindmap.diagram.part.MindmapDiagramEditorPlugin
+<font color="#FF0000">Bundle-Vendor</font><font color="#990000">:</font> <font color="#FF6600">%providerName</font>
+<font color="#FF0000">Bundle-Localization</font><font color="#990000">:</font> plugin
+<font color="#FF0000">Export-Package</font><font color="#990000">:</font> org.eclipse.mindmap.diagram.edit.parts,
+ org.eclipse.mindmap.diagram.part,
+ org.eclipse.mindmap.diagram.providers
+<font color="#FF0000">Require-Bundle</font><font color="#990000">:</font> org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.core.expressions,
+ org.eclipse.draw2d;<font color="#009900">visibility</font><font color="#990000">:=</font>reexport,
+ org.eclipse.gmf.runtime.draw2d.ui;<font color="#009900">visibility</font><font color="#990000">:=</font>reexport,
+ org.eclipse.mindmap;<font color="#009900">visibility</font><font color="#990000">:=</font>reexport,
+ org.eclipse.mindmap.edit;<font color="#009900">visibility</font><font color="#990000">:=</font>reexport,
+ org.eclipse.gef;<font color="#009900">visibility</font><font color="#990000">:=</font>reexport,
+ org.eclipse.ocl.ecore;<font color="#009900">visibility</font><font color="#990000">:=</font>reexport,
+ org.eclipse.emf.validation;<font color="#009900">visibility</font><font color="#990000">:=</font>reexport,
+ org.eclipse.emf.validation.ocl;<font color="#009900">visibility</font><font color="#990000">:=</font>reexport
+<font color="#FF0000">Eclipse-LazyStart</font><font color="#990000">:</font> true
+</tt></pre>

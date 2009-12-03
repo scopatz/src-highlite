@@ -4,7 +4,7 @@
 <meta name="Author" content="Lorenzo Bettini"><title>GNU Source-highlight - GNU Project - Free Software Foundation (FSF)</title></head>
 <body style="background-color: rgb(255, 255, 255);">
 <h1><a class="mozTocH1" name="mozTocId593827"></a>
-GNU Source-highlight 3.1.1</h1>
+GNU Source-highlight 3.1.2</h1>
 <p>by <a href="http://www.lorenzobettini.it">Lorenzo
 Bettini</a> </p>
 <p>This program, <i>given a source file, produces a
@@ -51,20 +51,28 @@ supported
 </p>
 <ul>
 <li> <i>Ada</i></li>
+<li> <i>Asm</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>Applescript</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>Awk</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>Autoconf files</i></li>
-<li> <i>C/C++</i></li>
-<li> <i>C#</i></li>
-<li> <i>Configuration files (generic)</i></li>
+<li> <i>Bat</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>Bib</i></li>
 <li> <i>Bison</i></li>
+<li> <i>C/C++</i></li>
+<li> <i>C#</i></li>
+<li> <i>Clipper</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>Cobol</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>Configuration files (generic)</i></li>
 <li> <i>Caml</i></li>
 <li> <i>Changelog</i></li>
 <li> <i>Css</i></li>
+<li> <i>D</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>Diff</i></li>
+<li> <i>errors (compiler output)</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>Flex</i></li>
 <li> <i>Fortran</i></li>
 <li> <i>GLSL</i></li>
-<li> <i>Haskell</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>Haskell</i></li>
 <li> <i>Haxe</i></li>
 <li> <i>Html</i></li>
 <li> <i>ini files</i></li>
@@ -78,6 +86,7 @@ supported
 <li> <i>lsm files (Linux Software Map)</i></li>
 <li> <i>Lua</i></li>
 <li> <i>Makefile</i></li>
+<li> <i>Manifest</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>M4</i></li>
 <li> <i>ML</i></li>
 <li> <i>Oz</i></li>
@@ -96,7 +105,8 @@ supported
 <li> <i>S-Lang</i></li>
 <li> <i>Sql</i></li>
 <li> <i>Tcl</i></li>
-<li> <i>Texinfo</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
+<li> <i>Texinfo</i></li>
+<li> <i>VBscript</i>&nbsp; &nbsp; &nbsp;<font color="red">(new)</font></li>
 <li> <i>XML</i></li>
 <li> <i>XOrg conf files</i></li>
 </ul>
@@ -154,7 +164,7 @@ definitions.
 <p>
 If you want to use source-highlight library inside your C++
 programs, you may want to read the <a href="source-highlight-lib.html">manual of the library</a> and the <a href="api/index.html">API documentation</a>.
-<h2><a class="mozTocH2" name="mozTocId127780"></a>
+</p><h2><a class="mozTocH2" name="mozTocId127780"></a>
 Download</h2>
 You can download it from GNU's ftp site: <br>
 <a href="ftp://ftp.gnu.org/gnu/src-highlite/">ftp://ftp.gnu.org/gnu/src-highlite/</a>
@@ -178,12 +188,12 @@ binaries personally, and they might be out of date.
 which are part of source-highlight distribution, can also be downloaded
 independently from, respectively:
 
-<ul>
+</p><ul>
 <li><a href="http://www.gnu.org/software/src-highlite/lang_files/">http://www.gnu.org/software/src-highlite/lang_files/</a></li>
 <li><a href="http://www.gnu.org/software/src-highlite/outlang_files/">http://www.gnu.org/software/src-highlite/outlang_files/</a></li>
 </ul>
 
-</p>
+<p></p>
 
 <p>
 However, note that the files you find at the above urls are tested with the
@@ -209,12 +219,11 @@ through cvs, say, e.g., version X.Y.Z, you must specify the tag
 update</tt>
 command.</p>
 <p>NOTICE: This convention holds since release 2.1.</p>
-<p>When you compile the sources that you get through the cvs
+<p>When you compile the sources that you get from the cvs
 repository,
 before running the <tt>configure</tt> and <tt>make</tt>
-commands, you
-should, at least the first time, run the command:</p>
-<pre> sh autogen.sh<br></pre>
+commands, you must run the command:</p>
+<pre>autoreconf -i<br></pre>
 <p>This will run the autotools commands in the correct order, and
 also copy
 possibly missing files. You should have installed recent versions of
@@ -247,7 +256,22 @@ Software and Links</h2>
 sense that
 it uses it as a backend (i.e., provides an interface to
 source-highlight) or it uses some of its features (e.g., definition
-files): </p>
+files):</p><ul><li>Source-highlight-qt is a library for performing syntax highlighting in
+Qt documents by relying on GNU Source-Highlight library.  This library
+provides an implementation of the qt abstract class QSyntaxHighlighter
+class, and it deals both with Qt3 and Qt4.
+
+     <p><a href="http://srchiliteqt.sourceforge.net/">http://srchiliteqt.sourceforge.net</a>.
+
+     </p></li><li>QSource-Highlight is a Qt4 front-end for GNU Source-Highlight (it relies
+on the library Source-Highlight-Qt).  You can highlight your code on the
+fly, and have the highlighted output in all the formats supported by
+source-highlight (e.g., HTML, LaTeX, Texinfo, etc.). You can then copy
+the formatted output and paste it (e.g., in your blog), or save it to a
+file.  A preview of the highlighted output is available for some output
+formats (e.g., HTML, XHTML, etc.).
+
+     <p><a href="http://qsrchilite.sourceforge.net/">http://qsrchilite.sourceforge.net</a>.</p></li></ul>
 <ul>
 <li>SourceHighlightIDE is a small IDE (for KDE) I wrote for
 developing

@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.mindmap.diagram; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipse.mindmap.diagram.part.MindmapDiagramEditorPlugin
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.mindmap.diagram.edit.parts,
+ org.eclipse.mindmap.diagram.part,
+ org.eclipse.mindmap.diagram.providers
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.core.expressions,
+ org.eclipse.draw2d;visibility:=reexport,
+ org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
+ org.eclipse.mindmap;visibility:=reexport,
+ org.eclipse.mindmap.edit;visibility:=reexport,
+ org.eclipse.gef;visibility:=reexport,
+ org.eclipse.ocl.ecore;visibility:=reexport,
+ org.eclipse.emf.validation;visibility:=reexport,
+ org.eclipse.emf.validation.ocl;visibility:=reexport
+Eclipse-LazyStart: true

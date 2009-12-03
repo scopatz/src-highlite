@@ -1,0 +1,68 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">;</font></i>
+<i><font color="#9A1900">; screen handling primitives</font></i>
+<i><font color="#9A1900">;</font></i>
+
+<b><font color="#000080">.model</font></b> <b><font color="#0000FF">large</font></b>
+
+<b><font color="#000080">.data</font></b>
+
+vseg    <b><font color="#0000FF">dw</font></b>      <font color="#993399">0b000h</font>
+vmode   <b><font color="#0000FF">db</font></b>      <font color="#990000">?</font>
+x       <b><font color="#0000FF">dw</font></b>      <font color="#993399">0</font>
+y       <b><font color="#0000FF">dw</font></b>      <font color="#993399">0</font>
+color   <b><font color="#0000FF">db</font></b>      <font color="#993399">07h</font>
+ofs     <b><font color="#0000FF">dw</font></b>      <font color="#993399">0</font>
+xhite   <b><font color="#0000FF">db</font></b>      <font color="#993399">8</font>
+
+<i><font color="#9A1900">; video information block</font></i>
+
+VIOinfo <b><font color="#0000FF">struc</font></b>
+	level   <b><font color="#0000FF">db</font></b>      <font color="#990000">?</font>
+		<b><font color="#0000FF">db</font></b>      <font color="#990000">?</font>
+		<b><font color="#0000FF">dw</font></b>      <font color="#990000">?</font>
+	flags   <b><font color="#0000FF">dw</font></b>      <font color="#990000">?</font>
+	mode    <b><font color="#0000FF">db</font></b>      <font color="#990000">?</font>
+		<b><font color="#0000FF">db</font></b>      <font color="#990000">?</font>
+	colors  <b><font color="#0000FF">dw</font></b>      <font color="#990000">?</font>
+	pixcol  <b><font color="#0000FF">dw</font></b>      <font color="#990000">?</font>
+	pixrow  <b><font color="#0000FF">dw</font></b>      <font color="#990000">?</font>
+	txtcol  <b><font color="#0000FF">dw</font></b>      <font color="#990000">?</font>
+	txtrow  <b><font color="#0000FF">dw</font></b>      <font color="#990000">?</font>
+VIOinfo <b><font color="#0000FF">ends</font></b>
+
+info    VIOinfo <font color="#990000">&lt;</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">14</font><font color="#990000">,</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">80</font><font color="#990000">,</font><font color="#993399">25</font><font color="#990000">&gt;</font>
+
+<b><font color="#000080">.code</font></b>
+
+<b><font color="#0000FF">public</font></b> _VIOopen<font color="#990000">,</font> _VIOclose<font color="#990000">,</font> _VIOcolumns<font color="#990000">,</font> _VIOrows<font color="#990000">,</font> _VIOmode
+
+_VIOheight <b><font color="#0000FF">proc</font></b>
+
+	<b><font color="#0000FF">mov</font></b> <font color="#009900">al</font><font color="#990000">,</font> xhite<i><font color="#9A1900">;</font></i>
+	<b><font color="#0000FF">xor</font></b> <font color="#009900">ah</font><font color="#990000">,</font><font color="#009900">ah</font><i><font color="#9A1900">;</font></i>
+	<b><font color="#0000FF">ret</font></b>
+
+_VIOheight <b><font color="#0000FF">endp</font></b>
+
+<b><font color="#000080">odos4:</font></b>  <b><font color="#0000FF">mov</font></b> <font color="#009900">ax</font><font color="#990000">,</font><font color="#993399">440</font><font color="#009900">ch</font>
+	<b><font color="#0000FF">mov</font></b> <font color="#009900">bx</font><font color="#990000">,</font><font color="#993399">0</font>
+	<b><font color="#0000FF">mov</font></b> <font color="#009900">cx</font><font color="#990000">,</font><font color="#993399">037fh</font>
+	<b><font color="#0000FF">mov</font></b> <font color="#009900">dx</font><font color="#990000">,</font><b><font color="#0000FF">offset</font></b> info
+	<b><font color="#0000FF">int</font></b> <font color="#993399">21h</font>
+	<b><font color="#0000FF">jnc</font></b> l<font color="#993399">1</font>
+	<b><font color="#0000FF">pop</font></b> <font color="#009900">ds</font>
+	<b><font color="#0000FF">ret</font></b>
+
+<b><font color="#000080">cga:</font></b>    <b><font color="#0000FF">mov</font></b> info<font color="#990000">.</font>txtrow<font color="#990000">,</font><font color="#993399">25</font>
+
+	<b><font color="#0000FF">mov</font></b> <font color="#009900">ax</font><font color="#990000">,[</font><font color="#009900">bp</font><font color="#990000">+</font><font color="#993399">8</font><font color="#990000">]</font>
+	<b><font color="#0000FF">mov</font></b> <font color="#009900">bx</font><font color="#990000">,[</font><font color="#009900">bp</font><font color="#990000">+</font><font color="#993399">12</font><font color="#990000">]</font>
+
+_VIOsetCols <b><font color="#0000FF">endp</font></b>
+
+<b><font color="#0000FF">end</font></b>
+</tt></pre>

@@ -1,0 +1,123 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">#!/usr/bin/dmd -run</font></i>
+<i><font color="#9A1900">/* sh style script syntax is supported */</font></i>
+
+<i><font color="#9A1900">/* Hello World in D</font></i>
+<i><font color="#9A1900">   To compile:</font></i>
+<i><font color="#9A1900">     dmd hello.d</font></i>
+<i><font color="#9A1900">   or to optimize:</font></i>
+<i><font color="#9A1900">     dmd -O -inline -release hello.d</font></i>
+<i><font color="#9A1900">*/</font></i>
+
+<i><font color="#9A1900">/+ </font></i>
+<i><font color="#9A1900">  a nested /+</font></i>
+<i><font color="#9A1900">  comment</font></i>
+<i><font color="#9A1900">  +/</font></i>
+<i><font color="#9A1900">+/</font></i>
+
+a <font color="#990000">=</font> <i><font color="#9A1900">/+ // +/</font></i> <font color="#993399">1</font><font color="#990000">;</font>		<i><font color="#9A1900">// parses as if 'a = 1;'</font></i>
+a <font color="#990000">=</font> <i><font color="#9A1900">/+ "+/</font></i><font color="#FF0000">" +/ 1"</font><font color="#990000">;</font>	<i><font color="#9A1900">// parses as if 'a = " +/ 1";'</font></i>
+a <font color="#990000">=</font> <i><font color="#9A1900">/+ /* +/</font></i> <font color="#990000">*/</font> <font color="#993399">3</font><font color="#990000">;</font>	<i><font color="#9A1900">// parses as if 'a = */ 3;'</font></i>
+
+<font color="#FF0000">r"hello"</font>
+<font color="#FF0000">r"c:\root\foo.exe"</font>
+<font color="#FF0000">r"ab\n"</font>			<i><font color="#9A1900">// string is 4 characters, 'a', 'b', '\', 'n'</font></i>
+
+<font color="#FF0000">`hello`</font>
+<font color="#FF0000">`c:\root\foo.exe`</font>
+<font color="#FF0000">`ab\n`</font>			<i><font color="#9A1900">// string is 4 characters, 'a', 'b', '\', 'n'</font></i>
+
+<font color="#FF0000">x"0A"</font>			<i><font color="#9A1900">// same as "\x0A"</font></i>
+<font color="#FF0000">x"00 FBCD 32FD 0A"</font>	<i><font color="#9A1900">// same as "\x00\xFB\xCD\x32\xFD\x0A"</font></i>
+
+<font color="#FF0000">"hello"c</font>          <i><font color="#9A1900">// char[]</font></i>
+<font color="#FF0000">"hello"w</font>          <i><font color="#9A1900">// wchar[]</font></i>
+<font color="#FF0000">"hello"d</font>          <i><font color="#9A1900">// dchar[]</font></i>
+
+<b><font color="#000080">import</font></b> std<font color="#990000">.</font>stdio<font color="#990000">;</font>
+
+<b><font color="#0000FF">void</font></b> <b><font color="#000000">main</font></b><font color="#990000">(</font>string<font color="#990000">[]</font> args<font color="#990000">)</font>
+<font color="#FF0000">{</font>
+    <b><font color="#000000">writefln</font></b><font color="#990000">(</font><font color="#FF0000">"Hello World, Reloaded"</font><font color="#990000">);</font>
+
+    <i><font color="#9A1900">// auto type inference and built-in foreach</font></i>
+    <b><font color="#0000FF">foreach</font></b> <font color="#990000">(</font>argc<font color="#990000">,</font> argv<font color="#990000">;</font> args<font color="#990000">)</font>
+    <font color="#FF0000">{</font>
+        <i><font color="#9A1900">// Object Oriented Programming</font></i>
+        <b><font color="#0000FF">auto</font></b> cl <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">CmdLin</font></b><font color="#990000">(</font>argc<font color="#990000">,</font> argv<font color="#990000">);</font>
+        <i><font color="#9A1900">// Improved typesafe printf</font></i>
+        <b><font color="#000000">writeln</font></b><font color="#990000">(</font>cl<font color="#990000">.</font>argnum<font color="#990000">,</font> cl<font color="#990000">.</font>suffix<font color="#990000">,</font> <font color="#FF0000">" arg: "</font><font color="#990000">,</font> cl<font color="#990000">.</font>argv<font color="#990000">);</font>
+        <i><font color="#9A1900">// Automatic or explicit memory management</font></i>
+        <b><font color="#0000FF">delete</font></b> cl<font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+
+    <i><font color="#9A1900">// Nested structs and classes</font></i>
+    <b><font color="#0000FF">struct</font></b> <font color="#008080">specs</font>
+    <font color="#FF0000">{</font>
+        <i><font color="#9A1900">// all members automatically initialized</font></i>
+        <font color="#009900">int</font> count<font color="#990000">,</font> allocated<font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+
+    <i><font color="#9A1900">// Nested functions can refer to outer</font></i>
+    <i><font color="#9A1900">// variables like args</font></i>
+    <font color="#008080">specs</font> <b><font color="#000000">argspecs</font></b><font color="#990000">()</font>
+    <font color="#FF0000">{</font>
+        specs<font color="#990000">*</font> s <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> specs<font color="#990000">;</font>
+        <i><font color="#9A1900">// no need for '-&gt;'</font></i>
+        s<font color="#990000">.</font>count <font color="#990000">=</font> args<font color="#990000">.</font>length<font color="#990000">;</font>		   <i><font color="#9A1900">// get length of array with .length</font></i>
+        s<font color="#990000">.</font>allocated <font color="#990000">=</font> <b><font color="#0000FF">typeof</font></b><font color="#990000">(</font>args<font color="#990000">).</font>sizeof<font color="#990000">;</font> <i><font color="#9A1900">// built-in native type properties</font></i>
+        <b><font color="#0000FF">foreach</font></b> <font color="#990000">(</font>argv<font color="#990000">;</font> args<font color="#990000">)</font>
+            s<font color="#990000">.</font>allocated <font color="#990000">+=</font> argv<font color="#990000">.</font>length <font color="#990000">*</font> <b><font color="#0000FF">typeof</font></b><font color="#990000">(</font>argv<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]).</font>sizeof<font color="#990000">;</font>
+        <b><font color="#0000FF">return</font></b> <font color="#990000">*</font>s<font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+
+    <i><font color="#9A1900">// built-in string and common string operations</font></i>
+    <b><font color="#000000">writefln</font></b><font color="#990000">(</font><font color="#FF0000">"argc = %d, "</font> <font color="#990000">~</font> <font color="#FF0000">"allocated = %d"</font><font color="#990000">,</font>
+	<b><font color="#000000">argspecs</font></b><font color="#990000">().</font>count<font color="#990000">,</font> <b><font color="#000000">argspecs</font></b><font color="#990000">().</font>allocated<font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#0000FF">class</font></b> <font color="#008080">CmdLin</font>
+<font color="#FF0000">{</font>
+    <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> _argc<font color="#990000">;</font>
+    <b><font color="#0000FF">private</font></b> string _argv<font color="#990000">;</font>
+
+<b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+    <b><font color="#0000FF">this</font></b><font color="#990000">(</font><font color="#009900">int</font> argc<font color="#990000">,</font> <font color="#008080">string</font> argv<font color="#990000">)</font>	<i><font color="#9A1900">// constructor</font></i>
+    <font color="#FF0000">{</font>
+        _argc <font color="#990000">=</font> argc<font color="#990000">;</font>
+        _argv <font color="#990000">=</font> argv<font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+
+    <font color="#009900">int</font> <b><font color="#000000">argnum</font></b><font color="#990000">()</font>
+    <font color="#FF0000">{</font>
+        <b><font color="#0000FF">return</font></b> _argc <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+
+    <font color="#008080">string</font> <b><font color="#000000">argv</font></b><font color="#990000">()</font>
+    <font color="#FF0000">{</font>
+        <b><font color="#0000FF">return</font></b> _argv<font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+
+    <font color="#008080">string</font> <b><font color="#000000">suffix</font></b><font color="#990000">()</font>
+    <font color="#FF0000">{</font>
+        <font color="#008080">string</font> suffix <font color="#990000">=</font> <font color="#FF0000">"th"</font><font color="#990000">;</font>
+        <b><font color="#0000FF">switch</font></b> <font color="#990000">(</font>_argc<font color="#990000">)</font>
+        <font color="#FF0000">{</font>
+          <b><font color="#0000FF">case</font></b> <font color="#993399">0</font><font color="#990000">:</font>
+            suffix <font color="#990000">=</font> <font color="#FF0000">"st"</font><font color="#990000">;</font>
+            <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+          <b><font color="#0000FF">case</font></b> <font color="#993399">1</font><font color="#990000">:</font>
+            suffix <font color="#990000">=</font> <font color="#FF0000">"nd"</font><font color="#990000">;</font>
+            <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+          <b><font color="#0000FF">case</font></b> <font color="#993399">2</font><font color="#990000">:</font>
+            suffix <font color="#990000">=</font> <font color="#FF0000">"rd"</font><font color="#990000">;</font>
+            <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+          <b><font color="#0000FF">default</font></b><font color="#990000">:</font>
+	    <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+        <font color="#FF0000">}</font>
+        <b><font color="#0000FF">return</font></b> suffix<font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+<font color="#FF0000">}</font></tt></pre>

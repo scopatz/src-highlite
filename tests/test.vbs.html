@@ -1,0 +1,57 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">' The script can be called via</font></i>
+
+<font color="#990000">&lt;%</font>@LANGUAGE<font color="#990000">=</font><font color="#FF0000">"VBSCRIPT"</font> CODEPAGE<font color="#990000">=</font><font color="#FF0000">"1252"</font><font color="#990000">%&gt;</font>
+
+<b><font color="#0000FF">if</font></b> AQresponse <font color="#990000">&lt;&gt;</font> <font color="#FF0000">""</font> <b><font color="#0000FF">then</font></b>
+  <b><font color="#0000FF">response</font></b><font color="#990000">.</font><b><font color="#000000">write</font></b><font color="#990000">(</font>AQresponse<font color="#990000">)</font>
+<b><font color="#0000FF">else</font></b>
+  <b><font color="#0000FF">response</font></b><font color="#990000">.</font><b><font color="#000000">write</font></b><font color="#990000">(</font><font color="#FF0000">"ERROR"</font><font color="#990000">)</font>
+<b><font color="#0000FF">end</font></b> <b><font color="#0000FF">if</font></b>
+
+<font color="#990000">%&gt;</font>
+
+<i><font color="#9A1900">' Actual script follows. This could be placed in a separate file, </font></i>
+<i><font color="#9A1900">' such as the smslib.asp file described above</font></i>
+
+<font color="#990000">&lt;%</font>
+<b><font color="#0000FF">Dim</font></b> method<font color="#990000">,</font> secured<font color="#990000">,</font> error_on_length<font color="#990000">,</font> username<font color="#990000">,</font> password<font color="#990000">,</font> AQresponse
+  <i><font color="#9A1900">' User Editable Variables</font></i>
+  secured <font color="#990000">=</font> <font color="#993399">0</font>                       <i><font color="#9A1900">' Set to either 1 for SSL connection </font></i>
+                                    <i><font color="#9A1900">' or 0 for normal connection.</font></i>
+  error_on_length <font color="#990000">=</font> <font color="#993399">1</font>               <i><font color="#9A1900">' Whether to give and error on messages over 160 chracters. </font></i>
+                                    <i><font color="#9A1900">' 1 for true, 0 for false.</font></i>
+  username <font color="#990000">=</font> <font color="#FF0000">"testusername"</font>         <i><font color="#9A1900">' Your aql username, can either be set here </font></i>
+                                    <i><font color="#9A1900">' or done on a per call basis from the function.</font></i>
+  password <font color="#990000">=</font> <font color="#FF0000">"testpassword"</font>         <i><font color="#9A1900">' Your aql password, can either be set here</font></i>
+                                    <i><font color="#9A1900">' or done on a per call basis from the function.</font></i>
+
+<b><font color="#0000FF">Dim</font></b> objXMLHTTP<font color="#990000">,</font> xml
+  message <font color="#990000">=</font> <b><font color="#000000">replace</font></b><font color="#990000">(</font>message<font color="#990000">,</font><font color="#FF0000">" "</font><font color="#990000">,</font><font color="#FF0000">"+"</font><font color="#990000">)</font>
+  <b><font color="#0000FF">Set</font></b> xml <font color="#990000">=</font> <b><font color="#0000FF">Server</font></b><font color="#990000">.</font><b><font color="#0000FF">CreateObject</font></b><font color="#990000">(</font><font color="#FF0000">"Microsoft.XMLHTTP"</font><font color="#990000">)</font> 
+  <b><font color="#0000FF">if</font></b> secured <font color="#990000">=</font> <b><font color="#0000FF">null</font></b> or secured <font color="#990000">=</font> <font color="#993399">0</font> <b><font color="#0000FF">then</font></b>
+    xml<font color="#990000">.</font>Open <font color="#FF0000">"POST"</font><font color="#990000">,</font> <font color="#FF0000">"http://gw1.aql.com/sms/sms_gw.php"</font><font color="#990000">,</font> <b><font color="#0000FF">False</font></b>
+    xml<font color="#990000">.</font>setRequestHeader <font color="#FF0000">"Content-Type"</font><font color="#990000">,</font> <font color="#FF0000">"application/x-www-form-urlencoded"</font>
+    xml<font color="#990000">.</font>Send <font color="#FF0000">"username="</font> <font color="#990000">&amp;</font> username <font color="#990000">&amp;</font> <font color="#FF0000">"&amp;password="</font> <font color="#990000">&amp;</font> password <font color="#990000">&amp;</font> <font color="#FF0000">"&amp;destination="</font> <font color="#990000">&amp;</font> destination <font color="#990000">&amp;</font> 
+             <font color="#FF0000">"&amp;message="</font> <font color="#990000">&amp;</font> message <font color="#990000">&amp;</font> <font color="#FF0000">"&amp;originator="</font> <font color="#990000">&amp;</font> originator <font color="#990000">&amp;</font> <font color="#FF0000">"&amp;flash="</font> <font color="#990000">&amp;</font> flash
+  <b><font color="#0000FF">else</font></b> <b><font color="#0000FF">if</font></b> secured <font color="#990000">=</font> <font color="#993399">1</font> <b><font color="#0000FF">then</font></b>
+    xml<font color="#990000">.</font>Open <font color="#FF0000">"POST"</font><font color="#990000">,</font> <font color="#FF0000">"https://gw1.aql.com/sms/sms_gw.php"</font><font color="#990000">,</font> <b><font color="#0000FF">False</font></b>
+    xml<font color="#990000">.</font>setRequestHeader <font color="#FF0000">"Content-Type"</font><font color="#990000">,</font> <font color="#FF0000">"application/x-www-form-urlencoded"</font>
+    xml<font color="#990000">.</font>Send <font color="#FF0000">"username="</font> <font color="#990000">&amp;</font> username <font color="#990000">&amp;</font> <font color="#FF0000">"&amp;password="</font> <font color="#990000">&amp;</font> password <font color="#990000">&amp;</font> <font color="#FF0000">"&amp;destination="</font> <font color="#990000">&amp;</font> destination <font color="#990000">&amp;</font> 
+             <font color="#FF0000">"&amp;message="</font> <font color="#990000">&amp;</font> message <font color="#990000">&amp;</font> <font color="#FF0000">"&amp;originator="</font> <font color="#990000">&amp;</font> originator <font color="#990000">&amp;</font> <font color="#FF0000">"&amp;flash="</font> <font color="#990000">&amp;</font> flash
+  <b><font color="#0000FF">else</font></b>
+    <b><font color="#0000FF">call</font></b> <b><font color="#000000">senderror</font></b><font color="#990000">(</font><font color="#993399">7</font><font color="#990000">)</font>
+    <b><font color="#0000FF">end</font></b> <b><font color="#0000FF">if</font></b>
+   <b><font color="#0000FF">end</font></b> <b><font color="#0000FF">if</font></b>
+
+AQresponse <font color="#990000">=</font> xml<font color="#990000">.</font>responseText
+<b><font color="#0000FF">Set</font></b> xml <font color="#990000">=</font> <b><font color="#0000FF">nothing</font></b>
+
+<b><font color="#0000FF">End</font></b> <b><font color="#0000FF">Function</font></b> 
+
+
+<font color="#990000">%&gt;</font>
+</tt></pre>

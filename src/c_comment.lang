@@ -1,13 +1,11 @@
 # c_comment.lang
 
-vardef TODO = '(TODO|FIXME|BUG)([:]?)'
-
 # comments with documentation tags
 environment comment start "///" begin
   include "url.lang"
   include "html.lang"
   type = '@[[:alpha:]]+'
-  todo = $TODO
+  include "todo.lang"
 end
 
 comment start "//"
@@ -17,11 +15,11 @@ environment comment delim "/**" "*/" multiline begin
   include "url.lang"
   include "html.lang"
   type = '@[[:alpha:]]+'
-  todo = $TODO
+  include "todo.lang"
 end
 
 # standard comments
 environment comment delim "/*" "*/" multiline begin
   include "url.lang"
-  todo = $TODO
+  include "todo.lang"
 end

@@ -1,0 +1,30 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>      $ <b><font color="#0000FF">SET</font></b> SOURCEFORMAT <font color="#FF0000">"FREE"</font>
+<b><font color="#0000FF">IDENTIFICATION</font></b> <b><font color="#0000FF">DIVISION</font></b><font color="#990000">.</font>
+<b><font color="#0000FF">PROGRAM-ID</font></b><font color="#990000">.</font>  ShortestProgram<font color="#990000">.</font>
+
+<b><font color="#0000FF">PROCEDURE</font></b> <b><font color="#0000FF">DIVISION</font></b><font color="#990000">.</font>
+DisplayPrompt<font color="#990000">.</font>
+    <b><font color="#0000FF">DISPLAY</font></b> <font color="#FF0000">"I did it"</font><font color="#990000">.</font>
+    <b><font color="#0000FF">STOP</font></b> <b><font color="#0000FF">RUN</font></b><font color="#990000">.</font>
+<i><font color="#9A1900">* Uses the ACCEPT and DISPLAY verbs to accept a student record </font></i>
+<i><font color="#9A1900">* from the user and display some of the fields.  Also shows how</font></i>
+<i><font color="#9A1900">* the ACCEPT may be used to get the system date and time.</font></i>
+<b><font color="#0000FF">WORKING-STORAGE</font></b> <b><font color="#0000FF">SECTION</font></b><font color="#990000">.</font>
+<font color="#993399">01</font>  Num1                                <b><font color="#0000FF">PIC</font></b> <font color="#993399">9</font>  <b><font color="#0000FF">VALUE</font></b> <b><font color="#0000FF">ZEROS</font></b><font color="#990000">.</font>
+<font color="#993399">01</font>  Num2                                <b><font color="#0000FF">PIC</font></b> <font color="#993399">9</font>  <b><font color="#0000FF">VALUE</font></b> <b><font color="#0000FF">ZEROS</font></b><font color="#990000">.</font>
+<font color="#993399">01</font>  Result                              <b><font color="#0000FF">PIC</font></b> <font color="#993399">99</font> <b><font color="#0000FF">VALUE</font></b> <b><font color="#0000FF">ZEROS</font></b><font color="#990000">.</font>
+
+<b><font color="#0000FF">PROCEDURE</font></b> <b><font color="#0000FF">DIVISION</font></b><font color="#990000">.</font>
+    <b><font color="#0000FF">DISPLAY</font></b> <font color="#FF0000">"Enter first number  (1 digit) : "</font> WITH <b><font color="#0000FF">NO</font></b> <b><font color="#0000FF">ADVANCING</font></b><font color="#990000">.</font>
+    <b><font color="#0000FF">ACCEPT</font></b> Num1<font color="#990000">.</font>
+    <b><font color="#0000FF">DISPLAY</font></b> <font color="#FF0000">"Enter second number (1 digit) : "</font> WITH <b><font color="#0000FF">NO</font></b> <b><font color="#0000FF">ADVANCING</font></b><font color="#990000">.</font>
+    <b><font color="#0000FF">ACCEPT</font></b> Num2<font color="#990000">.</font>
+    <b><font color="#0000FF">MULTIPLY</font></b> Num1 <b><font color="#0000FF">BY</font></b> Num2 <b><font color="#0000FF">GIVING</font></b> Result<font color="#990000">.</font>
+    <b><font color="#0000FF">DISPLAY</font></b> <font color="#FF0000">"Result is = "</font><font color="#990000">,</font> Result<font color="#990000">.</font>
+    <b><font color="#0000FF">STOP</font></b> <b><font color="#0000FF">RUN</font></b><font color="#990000">.</font>
+
+</tt></pre>

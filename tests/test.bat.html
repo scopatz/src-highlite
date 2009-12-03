@@ -1,0 +1,38 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>@<b><font color="#000000">ECHO</font></b> OFF
+<i><font color="#9A1900">REM - LABEL INDICATING THE BEGINNING OF THE DOCUMENT.</font></i>
+<b><font color="#008080">:BEGIN</font></b>
+<b><font color="#000000">CLS</font></b>
+<i><font color="#9A1900">REM - THE BELOW LINE GIVES THE USER 3 CHOICES (DEFINED AFTER /C:)</font></i>
+<b><font color="#000000">CHOICE</font></b> <font color="#990000">/</font>N <font color="#990000">/</font><font color="#FF6600">C:123</font> PICK A NUMBER <font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">,</font> or <font color="#993399">3</font><font color="#990000">)</font><font color="#009900">%1</font>
+<i><font color="#9A1900">REM - THE NEXT THREE LINES ARE DIRECTING USER DEPENDING UPON INPUT</font></i>
+<b><font color="#0000FF">IF</font></b> <b><font color="#0000FF">ERRORLEVEL</font></b> <font color="#990000">==</font><font color="#993399">3</font> <b><font color="#0000FF">GOTO</font></b> THREE
+<b><font color="#0000FF">IF</font></b> <b><font color="#0000FF">ERRORLEVEL</font></b> <font color="#990000">==</font><font color="#993399">2</font> <b><font color="#0000FF">GOTO</font></b> TWO
+<b><font color="#0000FF">IF</font></b> <b><font color="#0000FF">ERRORLEVEL</font></b> <font color="#990000">==</font><font color="#993399">1</font> <b><font color="#0000FF">GOTO</font></b> ONE
+<b><font color="#0000FF">GOTO</font></b> <b><font color="#0000FF">END</font></b>
+<b><font color="#008080">:THREE</font></b>
+<b><font color="#000000">ECHO</font></b> YOU HAVE PRESSED THREE
+<b><font color="#0000FF">GOTO</font></b> <b><font color="#0000FF">END</font></b>
+<b><font color="#008080">:TWO</font></b>
+<b><font color="#000000">ECHO</font></b> YOU HAVE PRESSED TWO
+<b><font color="#0000FF">GOTO</font></b> <b><font color="#0000FF">END</font></b>
+<b><font color="#008080">:ONE</font></b>
+<b><font color="#000000">ECHO</font></b> YOU HAVE PRESSED ONE
+<b><font color="#008080">:END</font></b>
+
+<i><font color="#9A1900">:: Renames a Text File with the Current Date as the Name</font></i>
+<i><font color="#9A1900">:: The File Extension is Kept</font></i>
+<i><font color="#9A1900">::</font></i>
+<font color="#FF6600">C:\BATCH\DOS\XSET</font> <b><font color="#000000">CUR-DATE</font></b> <b><font color="#000000">DATE</font></b> YY<font color="#990000">-</font>MM<font color="#990000">-</font>DD
+<b><font color="#000000">REN</font></b> <font color="#009900">%1</font><font color="#990000">.*</font> <font color="#990000">%</font><b><font color="#000000">CUR-DATE</font></b><font color="#990000">%.*</font>
+
+<b><font color="#0000FF">IF</font></b> <font color="#FF0000">"</font><font color="#CC33CC">%1</font><font color="#FF0000">"</font> <font color="#990000">==</font> <font color="#FF0000">""</font> <b><font color="#000000">XCOPY</font></b> <font color="#FF6600">B:\</font><font color="#990000">*.*</font>       
+<b><font color="#0000FF">IF</font></b> <b><font color="#0000FF">NOT</font></b> <font color="#FF0000">"</font><font color="#CC33CC">%1</font><font color="#FF0000">"</font> <font color="#990000">==</font> <font color="#FF0000">""</font> <b><font color="#000000">XCOPY</font></b> <font color="#FF6600">B:\</font><font color="#009900">%1</font>    
+<b><font color="#000000">ECHO</font></b><font color="#990000">.</font>                            
+<font color="#FF6600">C:\BATCH\DR</font>
+
+<b><font color="#0000FF">FOR</font></b> <font color="#009900">%%F</font> IN <font color="#990000">(</font><font color="#009900">%1</font> <font color="#009900">%2</font> <font color="#009900">%3</font> <font color="#009900">%4</font> <font color="#009900">%5</font> <font color="#009900">%6</font> <font color="#009900">%7</font> <font color="#009900">%8</font> <font color="#009900">%9</font><font color="#990000">)</font> <b><font color="#0000FF">DO</font></b> <b><font color="#000000">DEL</font></b> <font color="#009900">%%F</font> 
+       </tt></pre>

@@ -8,6 +8,15 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 3.1.2 (yet unreleased)
+
+   * infer language for files starting with <? and <!doctype
+   * language definition for manifest files, asm, applescript,
+     vbscript, awk, bat, clipper, cobol, D
+   * lang def file for compiler output errors
+   * style for label and path
+   * label element recognized in C/C++
+
 Version 3.1.1
 
    * access to static global LangDefManager, LangMaps is provided

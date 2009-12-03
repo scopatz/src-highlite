@@ -1,6 +1,8 @@
 # definitions for C
 include "c_comment.lang"
 
+label = '^[[:blank:]]*[[:alnum:]]+:[[:blank:]]*\z'
+
 (keyword,normal,classname) = 
   `(\<struct)([[:blank:]]+)([[:alnum:]_]+)`
 

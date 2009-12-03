@@ -1,0 +1,23 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#0000FF">Function</font></b> <b><font color="#000000">MAIN</font></b><font color="#990000">()</font>
+<b><font color="#0000FF">LOCAL</font></b> number
+<b><font color="#0000FF">INPUT</font></b> <font color="#FF0000">"Key in a number: "</font> <b><font color="#0000FF">TO</font></b> number
+<b><font color="#0000FF">IF</font></b> number <font color="#990000">%</font> <font color="#993399">2</font> <font color="#990000">=</font> <font color="#993399">0</font>
+   <font color="#990000">?</font> <font color="#FF0000">"You keyed in an even number"</font>
+   <font color="#990000">?</font> <font color="#FF0000">"I can prove it:"</font>
+   <font color="#990000">?</font> <font color="#FF0000">"the result of "</font><font color="#990000">,</font>number<font color="#990000">,</font><font color="#FF0000">" % 2 = 0 is "</font><font color="#990000">,</font> number <font color="#990000">%</font> <font color="#993399">2</font> <font color="#990000">=</font> <font color="#993399">0</font>
+<b><font color="#0000FF">ELSE</font></b>
+   <font color="#990000">?</font> <font color="#FF0000">"You keyed in an odd number"</font>
+   <font color="#990000">?</font> <font color="#FF0000">"I can prove it:"</font>
+   <font color="#990000">?</font> <font color="#FF0000">"the result of "</font><font color="#990000">,</font>number<font color="#990000">,</font><font color="#FF0000">" % 2 = 0 is "</font><font color="#990000">,</font> number <font color="#990000">%</font> <font color="#993399">2</font> <font color="#990000">=</font> <font color="#993399">0</font>
+<b><font color="#0000FF">ENDIF</font></b>
+<b><font color="#0000FF">RETURN</font></b>
+
+<i><font color="#9A1900">/* Load the table.dbf and table.cdx, on unix,</font></i>
+<i><font color="#9A1900">           you should ensure that file extensions are on</font></i>
+<i><font color="#9A1900">           lowercase.*/</font></i>
+        <b><font color="#0000FF">USE</font></b> table <b><font color="#0000FF">INDEX</font></b> table VIA <font color="#FF0000">"DBFCDX"</font>
+        <b><font color="#0000FF">REINDEX</font></b></tt></pre>

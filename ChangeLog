@@ -1,3 +1,35 @@
+2009-10-19  bettini  <bettini@bettini-laptop>
+
+	* src/errors.lang: lang definition file for compiler output errors.
+
+2009-10-13  bettini  <bettini@bettini-desktop-mint>
+
+	* src/d.lang: lang for D
+
+2009-10-11  bettini  <bettini@bettini-desktop-mint>
+
+	* src/cobol.lang: lang for Cobol 
+
+2009-10-11  bettini  <bettini@bettini-laptop>
+
+	* src/clipper.lang: lang for Clipper 
+	* src/c.lang: label element
+	* src/bat.lang: lang for DOS batch files.
+	* src/default.style: style for label and path
+	* src/style.defaults: style for label and path
+
+2009-10-05  bettini  <bettini@bettini-laptop>
+
+	* src/vbscript.lang: lang file for vbscript.
+	* src/applescript.lang: lang file for applescript.
+	* src/todo.lang: isolated TODO elements.
+	* src/asm.lang: lang file for asm.
+	* src/manifest.lang: lang file for Manifest files.
+	* tests/test.ecore.html: test for inference of <?xml.
+	* lib/srchilite/languageinfer.cpp (LanguageInfer::infer): regexs
+	are now static local variables.
+	(LanguageInfer::infer): check also for <?xml and <!doctype 
+
 2009-09-20  Sergey Astanin
 
 	* src/haskell.lang: language definition for haskell

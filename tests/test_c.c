@@ -5,3 +5,11 @@
 int this = 0;
 char *class = "foo";
 struct private { };
+
+begin:
+
+goto end;
+
+end:
+
+goto begin;

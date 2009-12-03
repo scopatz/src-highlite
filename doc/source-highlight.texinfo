@@ -303,6 +303,29 @@ files):
 @itemize
 
 @item
+@cindex Source-Highlight-Qt
+@cindex Qt
+Source-highlight-qt is a library for performing syntax highlighting in
+Qt documents by relying on GNU Source-Highlight library.  This library
+provides an implementation of the qt abstract class QSyntaxHighlighter
+class, and it deals both with Qt3 and Qt4.
+
+@uref{http://srchiliteqt.sourceforge.net}.
+
+@item
+@cindex QSource-Highlight
+@cindex Qt
+QSource-Highlight is a Qt4 front-end for GNU Source-Highlight (it relies
+on the library Source-Highlight-Qt).  You can highlight your code on the
+fly, and have the highlighted output in all the formats supported by
+source-highlight (e.g., HTML, LaTeX, Texinfo, etc.). You can then copy
+the formatted output and paste it (e.g., in your blog), or save it to a
+file.  A preview of the highlighted output is available for some output
+formats (e.g., HTML, XHTML, etc.).
+
+@uref{http://qsrchilite.sourceforge.net}.
+
+@item
 @cindex SourceHighlightIDE
 @cindex KDE
 SourceHighlightIDE is a small IDE (for KDE) I wrote for developing
@@ -540,9 +563,9 @@ command.
 
 NOTE: This convention holds since release 2.1.
 
-When you compile the sources that you get through the cvs repository,
+When you compile the sources that you get from the cvs repository,
 before running the @code{configure} and @code{make} commands, you
-should, at least the first time, run the command:
+must run the command:
 
 @cindex autogen.sh
 @example
@@ -556,7 +579,10 @@ possibly missing files.  You should have installed recent versions of
 @cindex autoconf
 @cindex libtool
 @code{automake}, @code{autoconf} and @code{libtool} in order for this to
-succeed.  You will also need @code{flex} and @code{bison}.
+succeed.  
+@cindex flex
+@cindex bison
+You will also need @code{flex} and @code{bison}.
 
 Instead of running @code{autogen.sh} another option is to run
 
@@ -1563,14 +1589,14 @@ of a script contains a line such as, e.g.,
 #!/bin/sh
 @end example
 
-It also detects script languages specified by using the @code{env}
+It detects script languages specified by using the @code{env}
 program@footnote{Since version 2.7.}:
 
 @example
 #!/usr/bin/env perl
 @end example
 
-Finally, it also recognizes the Emacs convention, of declaring the Emacs
+It recognizes the Emacs convention, of declaring the Emacs
 major mode using the format @code{-*- lang -*-}.
 
 For instance, a script starting as the following one:
@@ -1582,6 +1608,10 @@ For instance, a script starting as the following one:
 
 @noindent
 will be interpreted as a Tcl script, and not as bash script.
+
+Finally, it recognizes @code{<?} specifications (e.g.,
+@code{<?php} and @code{<?xml}) and @code{<!doctype} (in that case,
+it infers it is an xml file)@footnote{Since version 3.1.2.}.
 
 This inference mechanism is performed, by default, in case the input
 language is neither explicitly specified nor found in the language map

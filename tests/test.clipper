@@ -1,0 +1,19 @@
+Function MAIN()
+LOCAL number
+INPUT "Key in a number: " TO number
+IF number % 2 = 0
+   ? "You keyed in an even number"
+   ? "I can prove it:"
+   ? "the result of ",number," % 2 = 0 is ", number % 2 = 0
+ELSE
+   ? "You keyed in an odd number"
+   ? "I can prove it:"
+   ? "the result of ",number," % 2 = 0 is ", number % 2 = 0
+ENDIF
+RETURN
+
+/* Load the table.dbf and table.cdx, on unix,
+           you should ensure that file extensions are on
+           lowercase.*/
+        USE table INDEX table VIA "DBFCDX"
+        REINDEX

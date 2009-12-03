@@ -1,4 +1,4 @@
-c_comment.lang:24
+c_comment.lang:22
 expression: "/\*"
 formatting "/*" as comment
 entering state: 43
@@ -7,7 +7,7 @@ formatting "  " as default
 url.lang:3
 expression: "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))"
 formatting "http://www.lorenzobettini.it" as url
-c_comment.lang:24
+c_comment.lang:22
 expression: "\*/"
 formatting "*/" as comment
 exiting state, level: 1
@@ -42,12 +42,12 @@ java.lang:22
 expression: "(?:\{|\})"
 formatting "{" as cbracket
 formatting "	" as default
-c_comment.lang:13
+c_comment.lang:11
 expression: "//"
 formatting "//" as comment
 entering state: 22
 formatting " just some greetings ;-)  /*" as default
-c_comment.lang:13
+c_comment.lang:11
 expression: "\z"
 formatting "" as comment
 exiting state, level: 1

@@ -1,0 +1,135 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><font color="#009900">$6</font> <font color="#990000">!~</font> <font color="#FF6600">/^ack/</font> <font color="#990000">&amp;&amp;</font> <font color="#009900">$5</font> <font color="#990000">!~</font> <font color="#FF6600">/[SFR]/</font>   <font color="#FF0000">{</font>
+        <i><font color="#9A1900"># given a tcpdump ftp trace, output one line for each send</font></i>
+        <i><font color="#9A1900"># in the form</font></i>
+        <i><font color="#9A1900">#   &lt;send time&gt; &lt;seq no&gt;</font></i>
+        <i><font color="#9A1900"># where &lt;send time&gt; is the time packet was sent (in seconds with</font></i>
+        <i><font color="#9A1900"># zero at time of first packet) and &lt;seq no&gt; is the tcp sequence</font></i>
+        <i><font color="#9A1900"># number of the packet divided by 1024 (i.e., Kbytes sent).</font></i>
+        <i><font color="#9A1900">#</font></i>
+        <i><font color="#9A1900"># convert time to seconds</font></i>
+        n <font color="#990000">=</font> <b><font color="#0000FF">split</font></b> <font color="#990000">(</font><font color="#009900">$1</font><font color="#990000">,</font>t<font color="#990000">,</font><font color="#FF0000">":"</font><font color="#990000">)</font>
+        tim <font color="#990000">=</font> t<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">]*</font><font color="#993399">3600</font> <font color="#990000">+</font> t<font color="#990000">[</font><font color="#993399">2</font><font color="#990000">]*</font><font color="#993399">60</font> <font color="#990000">+</font> t<font color="#990000">[</font><font color="#993399">3</font><font color="#990000">]</font>
+        <b><font color="#0000FF">if</font></b> <font color="#990000">(!</font> tzero<font color="#990000">)</font> <font color="#FF0000">{</font>
+                tzero <font color="#990000">=</font> tim
+                OFS <font color="#990000">=</font> <font color="#FF0000">"</font><font color="#CC33CC">\t</font><font color="#FF0000">"</font>
+        <font color="#FF0000">}</font>
+        <i><font color="#9A1900"># get packet sequence number</font></i>
+        i <font color="#990000">=</font> <b><font color="#0000FF">index</font></b><font color="#990000">(</font><font color="#009900">$6</font><font color="#990000">,</font><font color="#FF0000">":"</font><font color="#990000">)</font>
+        <b><font color="#0000FF">printf</font></b> <font color="#FF0000">"%7.2f</font><font color="#CC33CC">\t</font><font color="#FF0000">%g</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">,</font> tim-tzero<font color="#990000">,</font> <b><font color="#0000FF">substr</font></b><font color="#990000">(</font><font color="#009900">$6</font><font color="#990000">,</font><font color="#993399">1</font><font color="#990000">,</font>i-<font color="#993399">1</font><font color="#990000">)/</font><font color="#993399">1024</font>
+        <font color="#FF0000">}</font>
+
+<b><font color="#0000FF">BEGIN</font></b><font color="#FF0000">{</font>
+  buffer <font color="#990000">=</font> <font color="#FF0000">""</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\015*$/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/\015*$/</font><font color="#990000">,</font> <font color="#FF0000">""</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/^%%S NL/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">print</font></b> <font color="#FF0000">""</font><font color="#990000">;</font>
+  <b><font color="#0000FF">next</font></b><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/^%%S/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b> <font color="#990000">(</font><font color="#FF6600">/^%%S/</font><font color="#990000">,</font> <font color="#FF0000">"%%"</font> <font color="#990000">);</font>
+  <b><font color="#0000FF">print</font></b><font color="#990000">;</font>
+  <b><font color="#0000FF">next</font></b><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/^\\Syntax/</font> <font color="#FF0000">{</font>
+  printing <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+  indentation <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+  <b><font color="#0000FF">next</font></b><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">//</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>buffer <font color="#990000">!=</font> <font color="#FF0000">""</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+    <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/^ */</font><font color="#990000">,</font> <font color="#FF0000">""</font><font color="#990000">);</font>
+    <font color="#009900">$0</font> <font color="#990000">=</font> buffer <font color="#009900">$0</font><font color="#990000">;</font>
+  <font color="#FF0000">}</font>
+  buffer <font color="#990000">=</font> <font color="#FF0000">""</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\|\|/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/\|\|/</font><font color="#990000">,</font> <font color="#FF0000">"-"</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/^  */</font><font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/^  */</font><font color="#990000">,</font> indspaces<font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Something/</font> <font color="#FF0000">{</font>
+  <font color="#009900">$0</font> <font color="#990000">=</font> <b><font color="#000000">gensub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Something *{([^}]*)}/</font><font color="#990000">,</font> <font color="#FF0000">"&lt;</font><font color="#CC33CC">\\</font><font color="#FF0000">1&gt;"</font><font color="#990000">,</font> <font color="#FF0000">"g"</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Literal/</font> <font color="#FF0000">{</font>
+  <font color="#009900">$0</font> <font color="#990000">=</font> <b><font color="#000000">gensub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Literal *{([^}]*)}/</font><font color="#990000">,</font> <font color="#FF0000">"</font><font color="#CC33CC">\\</font><font color="#FF0000">1"</font><font color="#990000">,</font> <font color="#FF0000">"g"</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Tex/</font> <font color="#FF0000">{</font>
+  <font color="#009900">$0</font> <font color="#990000">=</font> <b><font color="#000000">gensub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Tex *{([^}]*)}/</font><font color="#990000">,</font> <font color="#FF0000">"</font><font color="#CC33CC">\\</font><font color="#FF0000">1"</font><font color="#990000">,</font> <font color="#FF0000">"g"</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Optional/</font> <font color="#FF0000">{</font>
+  <font color="#009900">$0</font> <font color="#990000">=</font> <b><font color="#000000">gensub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Optional *{([^}]*)}/</font><font color="#990000">,</font> <font color="#FF0000">"[</font><font color="#CC33CC">\\</font><font color="#FF0000">1]"</font><font color="#990000">,</font> <font color="#FF0000">"g"</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Means/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Means/</font><font color="#990000">,</font> <font color="#FF0000">"--&gt;"</font><font color="#990000">);</font>
+  indentation <font color="#990000">=</font> <b><font color="#0000FF">match</font></b><font color="#990000">(</font><font color="#009900">$0</font><font color="#990000">,</font> <font color="#FF6600">/--&gt;/</font><font color="#990000">);</font>
+  indspaces <font color="#990000">=</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+  <b><font color="#0000FF">for</font></b><font color="#990000">(</font><font color="#009900">i</font><font color="#990000">=</font><font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> indentation<font color="#990000">;</font> i<font color="#990000">++)</font>
+    indspaces <font color="#990000">=</font> indspaces <font color="#FF0000">" "</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Lbrace/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Lbrace/</font><font color="#990000">,</font> <font color="#FF0000">"{"</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Rbrace/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Rbrace/</font><font color="#990000">,</font> <font color="#FF0000">"}"</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Or/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Or/</font><font color="#990000">,</font> <font color="#FF0000">"|"</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Next/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Next /</font><font color="#990000">,</font> <font color="#FF0000">""</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/\\Whatever/</font> <font color="#FF0000">{</font>
+  whatind <font color="#990000">=</font> <font color="#993399">57</font><font color="#990000">;</font>
+  whatpos <font color="#990000">=</font> <b><font color="#0000FF">match</font></b><font color="#990000">(</font><font color="#009900">$0</font><font color="#990000">,</font> <font color="#FF6600">/\\Whatever/</font><font color="#990000">);</font>
+  b <font color="#990000">=</font> <b><font color="#0000FF">substr</font></b><font color="#990000">(</font><font color="#009900">$0</font><font color="#990000">,</font> <font color="#993399">0</font><font color="#990000">,</font> whatpos - <font color="#993399">1</font><font color="#990000">)</font>
+  c <font color="#990000">=</font> <b><font color="#0000FF">substr</font></b><font color="#990000">(</font><font color="#009900">$0</font><font color="#990000">,</font> whatpos<font color="#990000">)</font>
+  c <font color="#990000">=</font> <b><font color="#000000">gensub</font></b><font color="#990000">(</font><font color="#FF6600">/\\Whatever *{([^}]*)}/</font><font color="#990000">,</font> <font color="#FF0000">"(</font><font color="#CC33CC">\\</font><font color="#FF0000">1)"</font><font color="#990000">,</font> <font color="#FF0000">"g"</font><font color="#990000">,</font> c<font color="#990000">);</font>
+  <font color="#009900">$0</font> <font color="#990000">=</font> b<font color="#990000">;</font>
+  <b><font color="#0000FF">for</font></b><font color="#990000">(</font>i <font color="#990000">=</font> whatpos<font color="#990000">;</font> i <font color="#990000">&lt;</font> whatind<font color="#990000">;</font> i<font color="#990000">++)</font>
+    <font color="#009900">$0</font> <font color="#990000">=</font> <font color="#009900">$0</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+  <font color="#009900">$0</font> <font color="#990000">=</font> <font color="#009900">$0</font> c<font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/^}/</font> <font color="#FF0000">{</font>printing <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font><font color="#FF0000">}</font>
+
+<font color="#FF6600">/% *$/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/% *$/</font><font color="#990000">,</font> <font color="#FF0000">""</font><font color="#990000">);</font>
+  buffer <font color="#990000">=</font> <font color="#009900">$0</font><font color="#990000">;</font>
+  <b><font color="#0000FF">next</font></b><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/^ *$/</font> <font color="#FF0000">{</font>
+  <font color="#009900">$0</font> <font color="#990000">=</font> <font color="#FF0000">"================= ERROR"</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF6600">/  *$/</font> <font color="#FF0000">{</font>
+  <b><font color="#0000FF">gsub</font></b><font color="#990000">(</font><font color="#FF6600">/  *$/</font><font color="#990000">,</font> <font color="#FF0000">""</font><font color="#990000">);</font>
+<font color="#FF0000">}</font>
+
+<font color="#FF0000">{</font> <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>printing<font color="#990000">)</font> <b><font color="#0000FF">print</font></b><font color="#990000">;</font> <font color="#FF0000">}</font>
+</tt></pre>

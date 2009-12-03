@@ -1,0 +1,42 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">(*</font></i>
+<b>TODO</b><i><font color="#9A1900"> just a comment</font></i>
+
+<i><font color="#9A1900">foo bar</font></i>
+<i><font color="#9A1900">*)</font></i>
+
+<b><font color="#000000">displayName</font></b><font color="#990000">(</font><b><font color="#0000FF">choose</font></b> <b><font color="#0000FF">file</font></b> <b><font color="#0000FF">with</font></b> prompt <font color="#FF0000">"Select a file:"</font><font color="#990000">)</font> <i><font color="#9A1900">--if double-clicked</font></i>
+<b><font color="#0000FF">return</font></b> <i><font color="#9A1900">-- not needed, but shows that the script stops here when "run"</font></i>
+
+<b><font color="#0000FF">on</font></b> <b><font color="#0000FF">open</font></b> <b><font color="#0000FF">of</font></b> finderObjects <i><font color="#9A1900">-- "open" handler triggered by drag'n'drop launches</font></i>
+  <b><font color="#0000FF">repeat</font></b> <b><font color="#0000FF">with</font></b> i <b><font color="#0000FF">in</font></b> <font color="#990000">(</font>finderObjects<font color="#990000">)</font> <i><font color="#9A1900">-- in case multiple objects dropped on applet</font></i>
+    <b><font color="#000000">displayName</font></b><font color="#990000">(</font>i<font color="#990000">)</font> <i><font color="#9A1900">-- show file/folder's info</font></i>
+    <b><font color="#0000FF">if</font></b> <b><font color="#0000FF">folder</font></b> <b><font color="#0000FF">of</font></b> <font color="#990000">(</font>info <b><font color="#0000FF">for</font></b> i<font color="#990000">)</font> <b><font color="#0000FF">is</font></b> <b><font color="#0000FF">true</font></b> <b><font color="#0000FF">then</font></b> <i><font color="#9A1900">-- process folder's contents too</font></i>
+      <b><font color="#0000FF">tell</font></b> <b><font color="#0000FF">application</font></b> <font color="#FF0000">"Finder"</font> <b><font color="#0000FF">to</font></b> <b><font color="#0000FF">set</font></b> temp <b><font color="#0000FF">to</font></b> <font color="#990000">(</font>entire <b><font color="#0000FF">contents</font></b> <b><font color="#0000FF">of</font></b> i<font color="#990000">)</font>
+      <b><font color="#0000FF">repeat</font></b> <b><font color="#0000FF">with</font></b> j <b><font color="#0000FF">in</font></b> <font color="#990000">(</font>temp<font color="#990000">)</font>
+        <b><font color="#0000FF">display</font></b> <b><font color="#0000FF">dialog</font></b> j <b><font color="#0000FF">as</font></b> <b><font color="#0000FF">string</font></b> <i><font color="#9A1900">-- example of doing something with each item</font></i>
+      <b><font color="#0000FF">end</font></b> <b><font color="#0000FF">repeat</font></b>
+    <b><font color="#0000FF">end</font></b> <b><font color="#0000FF">if</font></b>
+  <b><font color="#0000FF">end</font></b> <b><font color="#0000FF">repeat</font></b>
+<b><font color="#0000FF">end</font></b> <b><font color="#0000FF">open</font></b>
+
+<b><font color="#0000FF">if</font></b> CurState <b><font color="#0000FF">is</font></b> <font color="#993399">0</font> <b><font color="#0000FF">then</font></b>
+	connect configuration <font color="#FF0000">"pccard-serial"</font>
+<b><font color="#0000FF">end</font></b> <b><font color="#0000FF">if</font></b>
+
+<b><font color="#0000FF">on</font></b> <b><font color="#000000">GetParentPath</font></b><font color="#990000">(</font>myPath<font color="#990000">)</font>
+  <b><font color="#0000FF">set</font></b> oldDelimiters <b><font color="#0000FF">to</font></b> <b><font color="#0000FF">AppleScript</font></b>'s <b><font color="#0000FF">text</font></b> <b><font color="#0000FF">item</font></b> delimiters <i><font color="#9A1900">-- always preserve original delimiters</font></i>
+  <b><font color="#0000FF">set</font></b> <b><font color="#0000FF">AppleScript</font></b>'s <b><font color="#0000FF">text</font></b> <b><font color="#0000FF">item</font></b> delimiters <b><font color="#0000FF">to</font></b> <font color="#FF0000">{</font><font color="#FF0000">":"</font><font color="#FF0000">}</font>
+  <b><font color="#0000FF">set</font></b> pathItems <b><font color="#0000FF">to</font></b> <b><font color="#0000FF">text</font></b> <b><font color="#0000FF">items</font></b> <b><font color="#0000FF">of</font></b> <font color="#990000">(</font>myPath <b><font color="#0000FF">as</font></b> <b><font color="#0000FF">text</font></b><font color="#990000">)</font>
+  <b><font color="#0000FF">if</font></b> <b><font color="#0000FF">last</font></b> <b><font color="#0000FF">item</font></b> <b><font color="#0000FF">of</font></b> pathItems <b><font color="#0000FF">is</font></b> <font color="#FF0000">""</font> <b><font color="#0000FF">then</font></b> <b><font color="#0000FF">set</font></b> pathItems <b><font color="#0000FF">to</font></b> <b><font color="#0000FF">items</font></b> <font color="#993399">1</font> thru <font color="#990000">-</font><font color="#993399">2</font> <b><font color="#0000FF">of</font></b> pathItems <i><font color="#9A1900">-- its a folder</font></i>
+  <b><font color="#0000FF">set</font></b> parentPath <b><font color="#0000FF">to</font></b> <font color="#990000">((</font>reverse <b><font color="#0000FF">of</font></b> <b><font color="#0000FF">the</font></b> rest <b><font color="#0000FF">of</font></b> reverse <b><font color="#0000FF">of</font></b> pathItems<font color="#990000">)</font> <b><font color="#0000FF">as</font></b> <b><font color="#0000FF">string</font></b><font color="#990000">)</font> <font color="#990000">&amp;</font> <font color="#FF0000">":"</font>
+  <i><font color="#9A1900">(* The above line works better than the more obvious set parentPath to ((items 1 thru -2 of pathItems) as string) &amp; ":"</font></i>
+<i><font color="#9A1900">     because it will not return an error when passed a path for a volume, i.e., "Macintosh HD:", but rather will return ":"</font></i>
+<i><font color="#9A1900">     indicating the desktop is the root of the given path. Andy Bachorski </font></i><u><font color="#0000FF">&lt;andyb@APPLE.COM&gt;</font></u><i><font color="#9A1900"> *)</font></i>
+  <b><font color="#0000FF">set</font></b> <b><font color="#0000FF">AppleScript</font></b>'s <b><font color="#0000FF">text</font></b> <b><font color="#0000FF">item</font></b> delimiters <b><font color="#0000FF">to</font></b> oldDelimiters <i><font color="#9A1900">-- always restore original delimiters</font></i>
+  <b><font color="#0000FF">return</font></b> parentPath
+<b><font color="#0000FF">end</font></b> GetParentPath
+</tt></pre>

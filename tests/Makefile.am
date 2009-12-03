@@ -284,7 +284,18 @@ test_regexrange1.html test_regexrange2.html \
 test_regexrange3.html test_regexrange4.html \
 test_nobgcolor.cpp test_nobgcolor.html \
 test.texinfo test.texinfo.html \
-test.hs test.hs.html
+test.hs test.hs.html \
+test.ecore test.ecore.html \
+test.MF test.MF.html \
+test.asm test.asm.html \
+test.scpt test.scpt.html \
+test.vbs test.vbs.html \
+test.awk test.awk.html \
+test.bat test.bat.html \
+test.clipper test.clipper.html \
+test.cobol test.cobol.html \
+test.d test.d.html \
+test.errors test.errors.html
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
@@ -369,6 +380,7 @@ check_debug \
 check_ref \
 check_show \
 check_makefile \
+check_asm \
 check_css \
 check_ps \
 check_docbook \
@@ -391,6 +403,15 @@ check_ada \
 check_pkgconfig \
 check_texinfo \
 check_haskell \
+check_manifest \
+check_applescript \
+check_vbscript \
+check_awk \
+check_bat \
+check_clipper \
+check_cobol \
+check_d \
+check_errors \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -685,6 +706,56 @@ check_haskell:
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.hs.html test.hs.out.html
 
+check_manifest:
+	$(PROGNAME_STD) -i $(srcdir)/test.MF -o test.MF.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.MF.html test.MF.out.html
+
+check_asm:
+	$(PROGNAME_STD) -i $(srcdir)/test.asm -o test.asm.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.asm.html test.asm.out.html
+
+check_applescript:
+	$(PROGNAME_STD) -i $(srcdir)/test.scpt -o test.scpt.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.scpt.html test.scpt.out.html
+
+check_vbscript:
+	$(PROGNAME_STD) -i $(srcdir)/test.vbs -o test.vbs.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.vbs.html test.vbs.out.html
+
+check_awk:
+	$(PROGNAME_STD) -i $(srcdir)/test.awk -o test.awk.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.awk.html test.awk.out.html
+
+check_bat:
+	$(PROGNAME_STD) -i $(srcdir)/test.bat -o test.bat.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.bat.html test.bat.out.html
+
+check_clipper:
+	$(PROGNAME_STD) -i $(srcdir)/test.clipper -o test.clipper.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.clipper.html test.clipper.out.html
+
+check_cobol:
+	$(PROGNAME_STD) -i $(srcdir)/test.cobol -o test.cobol.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.cobol.html test.cobol.out.html
+
+check_d:
+	$(PROGNAME_STD) -i $(srcdir)/test.d -o test.d.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.d.html test.d.out.html
+
+check_errors:
+	$(PROGNAME_STD) -i $(srcdir)/test.errors -o test.errors.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.errors.html test.errors.out.html
+
 check_fortran:
 	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -o test.fortran.out.html
 	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -s fixed-fortran -o test.fixed-fortran.out.html
@@ -705,15 +776,28 @@ check_txt:
 myscript: test.sh
 	cp $(srcdir)/test.sh $@
 
-check_infer: myscript
+myimplicitxml.foo: test.xml
+	cp $(srcdir)/test.xml $@
+
+myimplicitphp.foo: test.php3
+	cp $(srcdir)/test.php3 $@
+
+check_infer: myscript myimplicitxml.foo myimplicitphp.foo
 	rm -f myscript.html
+	rm -f myimplicitxml.foo.html
 	$(INFER) -i $(srcdir)/test2.pl -o test2.pl.out.html
 	$(INFER) -i $(srcdir)/test.tcl -o test.tcl.out.html
 	$(INFERIMPLICIT) -i myscript -o myscript.html
+	$(INFERIMPLICIT) -i $(srcdir)/test.ecore -o test.ecore.out.html
+	$(INFERIMPLICIT) --title="xml formatted in html" -i myimplicitxml.foo -o myimplicitxml.foo.html
+	$(INFERIMPLICIT) -i myimplicitphp.foo -o myimplicitphp.foo.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test2.pl.html test2.pl.out.html
 	$(DIFF) $(srcdir)/test.tcl.html test.tcl.out.html
 	$(DIFF) $(srcdir)/test.sh.html myscript.html
+	$(DIFF) $(srcdir)/test.ecore.html test.ecore.out.html
+	$(DIFF) $(srcdir)/test.xml.html myimplicitxml.foo.html
+	$(DIFF) $(srcdir)/test.php3.html myimplicitphp.foo.html
 
 check_latex:
 	$(PROGNAME) -i $(srcdir)/test.tex  -o test.tex.out.html
@@ -1049,7 +1133,7 @@ check-valgrind:
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp
 	rm -f test_refs_tmp.*
 
-CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml *.out.langelems *.out.list test_newlines.out test_nonewlines.out temp.output
+CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* myimplicitxml* myimplicitphp* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml *.out.langelems *.out.list test_newlines.out test_nonewlines.out temp.output
 
 clean_html:
 	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html *.fortran.html *.fixed-fortran.html *.hx.html *.m4.html *.scala.html *.adb.html *.conf.html *.xorg.html

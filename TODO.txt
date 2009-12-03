@@ -85,4 +85,30 @@ express a way to use the colors in this format
 
 TextStyleFormatterFactory: PreFormatter is never used!
 
+3.1.2
 
+improve source-highlight-settings interface
+add help and some command lines (--show)
+
+in less handle file names with spaces (use " ?)
+
+increment x:X:x for library (languageinfer.cpp)
+
+string delim "\"" '\"(c|w|d)' build a multiline regex!
+
+  rule (string) "`(?:[^`])*`" (exit level: 0, next: 0)
+  rule (string) "\"" (exit level: 0, next: 4)
+    STATE 4 default: string
+      rule (string) "\"(?:c|w|d)" (exit level: 1, next: 0)
+
+move .lang, .outlang, .map, etc in a share directory
+in source folder, together with style and css files.
+
+in this case
+
+df =
+include "c_comment.lang"
+
+reports as file name error c_comment.lang!
+
+if the included file cannot be found it does not report an error?

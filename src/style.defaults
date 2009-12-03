@@ -15,3 +15,7 @@ predef_var = type
 predef_func = function
 atom = regexp
 meta = function
+path = regexp
+label = preproc
+error = string
+warning = type

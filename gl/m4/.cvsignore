@@ -1,5 +1,4 @@
 *.lnk
-gnulib-comp.m4
 libtool.m4
 lt~obsolete.m4
 ltoptions.m4

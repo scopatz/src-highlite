@@ -59,3 +59,13 @@ value darkgreen i;
 // for oz
 atom orange;
 meta i;
+
+// for file system
+path orange;
+
+// for C (or other language) labels
+label teal b;
+
+// for errors
+error purple;
+warning darkgreen;

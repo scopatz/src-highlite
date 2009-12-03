@@ -1,6 +1,1 @@
 Makefile.in
-getopt.h
-errno.h
-stdlib.h
-string.h
-unistd.h
