@@ -13,3 +13,4 @@ build_msys
 build
 build_static
 *~
+*.pro.user

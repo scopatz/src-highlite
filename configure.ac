@@ -274,6 +274,7 @@ lib/srchilite/Makefile
 lib/srchilite/srchilite.doxyfile
 lib/tests/Makefile
 lib/examples/Makefile
+lib/compat/Makefile
 tests/Makefile
 tests/output_dir/Makefile
 source-highlight.spec])

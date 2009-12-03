@@ -17,7 +17,8 @@ EXTRA_DIST = \
 	TODO.txt \
 	CREDITS gl/m4/gnulib-cache.m4 \
 	source-highlight-bash-completion \
-        _sstream
+        _sstream \
+        source-highlight.pro defines.pri
 
 source_highlightdoc_DATA = \
 	ChangeLog \

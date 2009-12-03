@@ -8,7 +8,9 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-SUBDIRS = srchilite tests examples
+SUBDIRS = srchilite tests examples compat
 
 DIST_SUBDIRS = $(SUBDIRS)
+
+EXTRA_DIST = lib.pro
 

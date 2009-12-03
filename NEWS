@@ -16,6 +16,8 @@ Version 3.1.2 (yet unreleased)
    * lang def file for compiler output errors
    * style for label and path
    * label element recognized in C/C++
+   * qmake based build system available
+   * searches for home directory also on windows
 
 Version 3.1.1
 

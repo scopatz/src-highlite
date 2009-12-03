@@ -19,6 +19,14 @@
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
+
+// this is glib related so don't use it when compiling with qmake
+#include "progname.h"
+
+#else
+
+#define set_program_name(x) ;
+
 #endif
 
 #include <cstdlib>
@@ -28,8 +36,8 @@
 
 #include "srchilite/sourcehighlight.h"
 
-#include "srchilite/copyright.h"
-#include "srchilite/reportbugs.h"
+//#include "srchilite/copyright.h"
+//#include "srchilite/reportbugs.h"
 #include "srchilite/fileutil.h"
 #include "srchilite/verbosity.h"
 #include "srchilite/langmap.h"
@@ -46,8 +54,6 @@
 #include "srchilite/settings.h"
 
 #include "cmdline.h"
-
-#include "progname.h"
 
 using namespace std;
 using namespace srchilite;
@@ -362,7 +368,7 @@ int main(int argc, char * argv[]) {
         InferPolicy inferPolicy = (args_info.infer_lang_given ? INFERFIRST
                 : INFERATLAST);
 
-        RefPosition refposition;
+        RefPosition refposition = INLINE;
         string gen_references_arg = args_info.gen_references_arg;
         if (gen_references_arg == "inline")
             refposition = INLINE;
@@ -450,6 +456,15 @@ int main(int argc, char * argv[]) {
 
 void print_copyright() {
     int i;
+    int copyright_text_length = 5;
+    const char *copyright_text[] = {
+  "copyright.text",
+  "Copyright (C) 1999-2008 Lorenzo Bettini <http://www.lorenzobettini.it>",
+  "This program comes with ABSOLUTELY NO WARRANTY.",
+  "This is free software; you may redistribute copies of the program",
+  "under the terms of the GNU General Public License.",
+  "For more information about these matters, see the file named COPYING.",
+  0 };
 
     for (i = 1; i <= copyright_text_length; ++i)
         cout << copyright_text[i] << endl;;
@@ -457,6 +472,13 @@ void print_copyright() {
 
 void print_reportbugs() {
     int i;
+    int reportbugs_text_length = 3;
+    const char *reportbugs_text[] = {
+  "reportbugs.text",
+  "",
+  "Maintained by Lorenzo Bettini <http://www.lorenzobettini.it>",
+  "Report bugs to <bug-source-highlight at gnu.org>",
+  0 };
 
     for (i = 1; i <= reportbugs_text_length; ++i)
         cout << reportbugs_text[i] << endl;
