@@ -37,23 +37,33 @@ const string LanguageInfer::infer(const string &filename) {
 const string LanguageInfer::infer(istream &stream) {
     // the regular expression for finding the language specification in a script file
     // this such as #! /bin/bash
-    boost::regex
-            langRegEx("#[[:blank:]]*![[:blank:]]*(?:[\\./]*)(?:[[:alnum:]]+[\\./]+)*([[:alnum:]]+)");
+    static boost::regex
+            langRegEx(
+                    "#[[:blank:]]*![[:blank:]]*(?:[\\./]*)(?:[[:alnum:]]+[\\./]+)*([[:alnum:]]+)");
 
     // the regular expression for finding the language specification in a script file
     // this such as #! /usr/bin/env perl
-    boost::regex
-            langEnvRegEx("#[[:blank:]]*![[:blank:]]*(?:[\\./]*)(?:[[:alnum:]]+[\\./]+)*(?:env)[[:blank:]]+([[:alnum:]]+)");
+    static boost::regex
+            langEnvRegEx(
+                    "#[[:blank:]]*![[:blank:]]*(?:[\\./]*)(?:[[:alnum:]]+[\\./]+)*(?:env)[[:blank:]]+([[:alnum:]]+)");
 
     // the regular expression for finding the language specification in a script file
     // according to Emacs convention: # -*- language -*-
-    boost::regex langRegExEmacs("-\\*-[[:blank:]]*([[:alnum:]]+).*-\\*-");
+    static boost::regex
+            langRegExEmacs("-\\*-[[:blank:]]*([[:alnum:]]+).*-\\*-");
 
     // the Emacs specification has the precedence in order to correctly infer
     // that scripts of the shape
     // #!/bin/sh
     // #  -*- tcl -*-
     // are Tcl scripts and not shell scripts
+
+    // the regular expression for scripts starting with <?...
+    // such as xml and php
+    static boost::regex langXMLLikeScripts("<\\?([[:alnum:]]+)");
+
+    // the regular expression for <!DOCTYPE
+    static boost::regex langDocType("<![Dd][Oo][Cc][Tt][Yy][Pp][Ee]");
 
     string firstLine;
     string secondLine;
@@ -87,11 +97,25 @@ const string LanguageInfer::infer(istream &stream) {
     if (whatEnv[1].matched)
         return whatEnv[1];
 
-    // finally try the sha-bang specification
+    // try the sha-bang specification
     boost::regex_search(firstLine, what, langRegEx, boost::match_default);
 
     if (what[1].matched)
         return what[1];
+
+    // the xml like starting scripts
+    boost::regex_search(firstLine, what, langXMLLikeScripts,
+            boost::match_default);
+
+    if (what[1].matched)
+        return what[1];
+
+    // the doctype case
+    boost::regex_search(firstLine, what, langDocType,
+            boost::match_default);
+
+    if (what[0].matched)
+        return "xml";
 
     return "";
 }
