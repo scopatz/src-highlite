@@ -13,7 +13,7 @@
 
 namespace srchilite {
 
-class FormatterParams;
+struct FormatterParams;
 
 /**
  * The base abstract class for formatting strings.  Derived classes must

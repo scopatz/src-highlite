@@ -9,7 +9,7 @@
 
 namespace srchilite {
 
-class HighlightEvent;
+struct HighlightEvent;
 
 /**
  * Base class for listeners of HighlightEvent.  Subclasses must implement notify()

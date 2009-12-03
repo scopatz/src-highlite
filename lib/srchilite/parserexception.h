@@ -13,7 +13,7 @@
 
 namespace srchilite {
 
-class ParseStruct;
+struct ParseStruct;
 
 /**
  * Represents an exception during parsing, for instance,

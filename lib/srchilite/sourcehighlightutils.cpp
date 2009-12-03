@@ -12,7 +12,15 @@
 #include "settings.h"
 
 #include <stdio.h>
+
+#ifndef USE_MSVC
+// msvc does not provide this header
 #include <dirent.h>
+#else
+#include <direct.h>
+#define mkdir(path,mode) _mkdir (path)
+#include <compat_dirent.h>
+#endif
 
 using namespace std;
 

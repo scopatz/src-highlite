@@ -14,8 +14,8 @@
 
 namespace srchilite {
 
-class HighlightToken;
-class MatchingParameters;
+struct HighlightToken;
+struct MatchingParameters;
 
 /// list representing the names of parts of a program
 typedef std::deque<std::string> ElemList;

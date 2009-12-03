@@ -29,6 +29,10 @@
 #include "verbosity.h"
 #include "ioexception.h"
 
+#ifndef CHROOT_INPUT_DIR
+#define CHROOT_INPUT_DIR ""
+#endif
+
 using namespace std;
 
 namespace srchilite {

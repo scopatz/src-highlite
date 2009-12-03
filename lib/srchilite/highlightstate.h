@@ -15,8 +15,8 @@
 namespace srchilite {
 
 class HighlightRule;
-class HighlightToken;
-class MatchingParameters;
+struct HighlightToken;
+struct MatchingParameters;
 
 /**
  * Shared pointer for HighlightRule.

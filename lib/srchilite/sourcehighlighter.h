@@ -18,10 +18,10 @@
 namespace srchilite {
 
 class FormatterManager;
-class HighlightToken;
-class FormatterParams;
+struct HighlightToken;
+struct FormatterParams;
 class HighlightEventListener;
-class HighlightEvent;
+struct HighlightEvent;
 
 typedef std::stack<HighlightStatePtr> HighlightStateStack;
 typedef boost::shared_ptr<HighlightStateStack> HighlightStateStackPtr;

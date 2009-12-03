@@ -6,10 +6,23 @@
  *  Copyright: See COPYING file that comes with this distribution
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "settings.h"
 
-#include <config.h>
+#ifndef USE_MSVC
+// msvc does not provide this header
 #include <dirent.h>
+#else
+#include <direct.h>
+#define mkdir(path,mode) _mkdir (path)
+#include <compat_dirent.h>
+#endif
+
+#include <io.h>
+
 #include <sys/stat.h>
 
 #include <cstdlib>
@@ -19,6 +32,13 @@
 
 #include "fileutil.h"
 #include "verbosity.h"
+
+#ifdef USE_MINGW
+// mingw's mkdir() function has 1 argument, but we pass 2 arguments.
+// so we use its version _mkdir()
+#undef mkdir
+#define mkdir(path,mode) _mkdir (path)
+#endif
 
 using namespace std;
 
@@ -35,13 +55,33 @@ boost::regex
 #define DEFAULT_CONF_DIR ".source-highlight"
 #define DEFAULT_CONF_FILE "source-highlight.conf"
 
+static string findHomeDirectory() {
+    const char *home = getenv("HOME");
+    if (home) {
+        return home;
+    }
+
+    // let's try other variables in windows
+    char * homedrive = getenv("HOMEDRIVE");	// Drive containing Windows
+    char * homepath = getenv("HOMEPATH");	// Path to the user directory into the Windows drive
+    if (homedrive && homepath) {
+        return string(homedrive) + string(homepath);
+    }
+
+    // last chance in windows
+    home = getenv("USERPROFILE");
+    if (home) {
+        return home;
+    }
+
+    // nothing found...
+    return "";
+}
+
 Settings::Settings() :
     confFileName(DEFAULT_CONF_FILE),
     testFileName("lang.map"), dataDir(ABSOLUTEDATADIR) {
-    const char *home = getenv("HOME");
-    if (home) {
-        homeDir = home;
-    }
+    const string homeDir = findHomeDirectory();
 
     confDir = (homeDir != "" ? homeDir + "/" + DEFAULT_CONF_DIR + "/" : string(
             DEFAULT_CONF_DIR) + "/");
