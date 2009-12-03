@@ -55,6 +55,13 @@ int main() {
     cout << "lowered string: " << Utils::tolower("Php3") << endl;
     assertEquals("php3", Utils::tolower("Php3"));
 
+    // try with scripts starting with <?
+    testInfer("<?php", "php");
+    testInfer("<?xml", "xml");
+
+    // try xml like
+    testInfer("<!DOCTYPE kpartgui ", "xml");
+
     cout << "test_langinfer: SUCCESS" << endl;
 
     return 0;
