@@ -16,12 +16,11 @@
 // msvc does not provide this header
 #include <dirent.h>
 #else
+#include <io.h>
 #include <direct.h>
 #define mkdir(path,mode) _mkdir (path)
 #include <compat_dirent.h>
 #endif
-
-#include <io.h>
 
 #include <sys/stat.h>
 
