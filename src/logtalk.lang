@@ -1,7 +1,7 @@
 # highlighting for Logtalk source files (http://logtalk.org/)
 #
 #	written by Paulo Moura (pmoura@logtalk.org)
-#	last revised on 10 May 2008
+#	last revised on 5 December 2009
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
@@ -25,7 +25,7 @@ keyword =	'\<(abolish|c(urrent|reate))_(object|protocol|category)(?=\()',
 keyword =	'\<(after|before)(?=\()',
 			'\<(parameter|this|se(lf|nder))(?=\()',
 			'\<(current_predicate|predicate_property)(?=\()',
-			'\<(expand_term|(goal|term)_expansion|phrase)(?=\()',
+			'\<(expand_(goal|term)|(goal|term)_expansion|phrase)(?=\()',
 			'\<(clause|retract(all)?)(?=\()',
 			'\<a(bolish|ssert(a|z))(?=\()',
 			'\<(ca(ll|tch)|throw)(?=\()',
@@ -63,8 +63,8 @@ variable =	'\<[A-Z_][A-Za-z0-9_]*'
 
 cbracket =	"{|}"
 
-preproc =	'^[[:blank:]]*:-[[:blank:]](ca(lls|tegory)|p(ublic|r(ot(ocol|ected)|ivate))|e(ncoding|xports)|in(fo|itialization)|alias|d(ynamic|iscontiguous)|m(eta_predicate|od(e|ule)|ultifile)|synchronized|o(bject|p)|use(s|_module))(?=\()',
-			'^[[:blank:]]*:-[[:blank:]](end_(category|object|protocol)|dynamic|synchronized|threaded)\.'
+preproc =	'^[[:blank:]]*:-[[:blank:]](ca(lls|tegory)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(fo|itialization))|alias|d(ynamic|iscontiguous)|m(eta_predicate|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=\()',
+			'^[[:blank:]]*:-[[:blank:]](end(if|_(category|object|protocol))|dynamic|synchronized|threaded)\.'
 
 preproc =	'\<(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?=\()'
 
@@ -72,7 +72,8 @@ normal =	'\<[a-z][A-Za-z0-9_]*'
 
 number =	'0\'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|[0-9]+(\.[0-9]+)?([eE]([-+])?[0-9]+)?'
 
-symbol =	"::", "^^", ":",
+symbol =	"^",
+			"::", "^^", ":",
 			">>", "<<", "/\\", "\\/", "\\",
 			"=:=", "=\\=", "<", "=<", ">", ">=",
 			"=..",
