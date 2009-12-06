@@ -1,3 +1,8 @@
+2009-12-06  Lorenzo Bettini  <bettini@bettini-laptop-karmic>
+
+	* lib/srchilite/Makefile.am: flex and bison generated files are
+	generated in the source directory (available in repository)
+
 2009-11-23  bettini  <bettini@dellbettini>
 
 	* defines.pri: use version number for dynamically linking in mingw

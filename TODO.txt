@@ -125,8 +125,6 @@ texinfo generate html and put in the doc source folder
 
 remove copyright.c reportbugs.c
 
-generate bison and flex files in sourcedirectory
-
 common.pri for files in src
 
 INCREMENT REVISION

@@ -163,30 +163,30 @@ langelemsprinter.hpp langelemsprinter_dbtab.cc \
 highlightstatebuilder.hpp highlightstatebuilder_dbtab.cc
 
 langdefscanner.cc: $(srcdir)/langdefscanner.ll
-	$(LEX) $(LFLAGS) -o $@ $(srcdir)/langdefscanner.ll
+	$(LEX) $(LFLAGS) -o $(srcdir)/langdefscanner.cc $(srcdir)/langdefscanner.ll
 
 langdefparser.cc: $(srcdir)/langdefparser.yy
-	$(YACC) -p langdef_ -o $@ $(srcdir)/langdefparser.yy --defines=$*.h
+	$(YACC) -p langdef_ -o $(srcdir)/langdefparser.cc $(srcdir)/langdefparser.yy --defines=$(srcdir)/langdefparser.h
 
 langdefparser.h: langdefparser.cc
 
 outlangdefscanner.cc: $(srcdir)/outlangdefscanner.ll
-	$(LEX) $(LFLAGS) -o $@ $(srcdir)/outlangdefscanner.ll
+	$(LEX) $(LFLAGS) -o $(srcdir)/outlangdefscanner.cc $(srcdir)/outlangdefscanner.ll
 
 outlangdefparser.cc outlangdefparser.h: $(srcdir)/outlangdefparser.yy
-	$(YACC) -p outlangdef_ -o $@ $(srcdir)/outlangdefparser.yy --defines=$*.h
+	$(YACC) -p outlangdef_ -o $(srcdir)/outlangdefparser.cc $(srcdir)/outlangdefparser.yy --defines=$(srcdir)/outlangdefparser.h
 
 stylescanner.cc: $(srcdir)/stylescanner.ll
-	$(LEX) $(LFLAGS) -o $@ $(srcdir)/stylescanner.ll
+	$(LEX) $(LFLAGS) -o $(srcdir)/stylescanner.cc $(srcdir)/stylescanner.ll
 
 stylecssscanner.cc: $(srcdir)/stylecssscanner.ll
-	$(LEX) $(LFLAGS) -o $@ $(srcdir)/stylecssscanner.ll
+	$(LEX) $(LFLAGS) -o $(srcdir)/stylecssscanner.cc $(srcdir)/stylecssscanner.ll
 
 styleparser.cc styleparser.h: $(srcdir)/styleparser.yy
-	$(YACC) -p stylesc_ -o $@ $(srcdir)/styleparser.yy --defines=$*.h
+	$(YACC) -p stylesc_ -o $(srcdir)/styleparser.cc $(srcdir)/styleparser.yy --defines=$(srcdir)/styleparser.h
 
 stylecssparser.cc stylecssparser.h: $(srcdir)/stylecssparser.yy
-	$(YACC) -p stylecsssc_ -o $@ $(srcdir)/stylecssparser.yy --defines=$*.h
+	$(YACC) -p stylecsssc_ -o $(srcdir)/stylecssparser.cc $(srcdir)/stylecssparser.yy --defines=$(srcdir)/stylecssparser.h
 
 if !NO_CTAGS
 EXTRA_PROGRAMS = test_readtags

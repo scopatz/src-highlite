@@ -1,24 +1,23 @@
-/* A Bison parser, made by GNU Bison 2.3.  */
+
+/* A Bison parser, made by GNU Bison 2.4.1.  */
 
 /* Skeleton implementation for Bison's Yacc-like parsers in C
-
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
+   
+      Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
    Free Software Foundation, Inc.
-
-   This program is free software; you can redistribute it and/or modify
+   
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-
+   
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -29,7 +28,7 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-
+   
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
@@ -47,7 +46,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "2.3"
+#define YYBISON_VERSION "2.4.1"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -55,81 +54,28 @@
 /* Pure parsers.  */
 #define YYPURE 0
 
+/* Push parsers.  */
+#define YYPUSH 0
+
+/* Pull parsers.  */
+#define YYPULL 1
+
 /* Using locations.  */
 #define YYLSP_NEEDED 1
 
 /* Substitute the variable and function names.  */
-#define yyparse langdef_parse
-#define yylex   langdef_lex
-#define yyerror langdef_error
-#define yylval  langdef_lval
-#define yychar  langdef_char
-#define yydebug langdef_debug
-#define yynerrs langdef_nerrs
-#define yylloc langdef_lloc
-
-/* Tokens.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     BEGIN_T = 258,
-     END_T = 259,
-     ENVIRONMENT_T = 260,
-     STATE_T = 261,
-     MULTILINE_T = 262,
-     DELIM_T = 263,
-     START_T = 264,
-     ESCAPE_T = 265,
-     NESTED_T = 266,
-     EXIT_ALL = 267,
-     EXIT_T = 268,
-     VARDEF_T = 269,
-     REDEF_T = 270,
-     SUBST_T = 271,
-     NONSENSITIVE_T = 272,
-     WRONG_BACKREFERENCE = 273,
-     LEVEL = 274,
-     KEY = 275,
-     STRINGDEF = 276,
-     REGEXPNOPREPROC = 277,
-     VARUSE = 278,
-     BACKREFVAR = 279,
-     WRONG_INCLUDE_FILE = 280,
-     REGEXPDEF = 281
-   };
-#endif
-/* Tokens.  */
-#define BEGIN_T 258
-#define END_T 259
-#define ENVIRONMENT_T 260
-#define STATE_T 261
-#define MULTILINE_T 262
-#define DELIM_T 263
-#define START_T 264
-#define ESCAPE_T 265
-#define NESTED_T 266
-#define EXIT_ALL 267
-#define EXIT_T 268
-#define VARDEF_T 269
-#define REDEF_T 270
-#define SUBST_T 271
-#define NONSENSITIVE_T 272
-#define WRONG_BACKREFERENCE 273
-#define LEVEL 274
-#define KEY 275
-#define STRINGDEF 276
-#define REGEXPNOPREPROC 277
-#define VARUSE 278
-#define BACKREFVAR 279
-#define WRONG_INCLUDE_FILE 280
-#define REGEXPDEF 281
-
-
-
+#define yyparse         langdef_parse
+#define yylex           langdef_lex
+#define yyerror         langdef_error
+#define yylval          langdef_lval
+#define yychar          langdef_char
+#define yydebug         langdef_debug
+#define yynerrs         langdef_nerrs
+#define yylloc          langdef_lloc
 
 /* Copy the first part of user declarations.  */
+
+/* Line 189 of yacc.c  */
 #line 1 "../../../lib/srchilite/langdefparser.yy"
 
 /*
@@ -221,6 +167,9 @@ struct ElementNamesList : ElementNames {
 
 
 
+/* Line 189 of yacc.c  */
+#line 172 "../../../lib/srchilite/langdefparser.cc"
+
 /* Enabling traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -239,10 +188,75 @@ struct ElementNamesList : ElementNames {
 # define YYTOKEN_TABLE 0
 #endif
 
+
+/* Tokens.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+   /* Put the tokens into the symbol table, so that GDB and other debuggers
+      know about them.  */
+   enum yytokentype {
+     BEGIN_T = 258,
+     END_T = 259,
+     ENVIRONMENT_T = 260,
+     STATE_T = 261,
+     MULTILINE_T = 262,
+     DELIM_T = 263,
+     START_T = 264,
+     ESCAPE_T = 265,
+     NESTED_T = 266,
+     EXIT_ALL = 267,
+     EXIT_T = 268,
+     VARDEF_T = 269,
+     REDEF_T = 270,
+     SUBST_T = 271,
+     NONSENSITIVE_T = 272,
+     WRONG_BACKREFERENCE = 273,
+     LEVEL = 274,
+     KEY = 275,
+     STRINGDEF = 276,
+     REGEXPNOPREPROC = 277,
+     VARUSE = 278,
+     BACKREFVAR = 279,
+     WRONG_INCLUDE_FILE = 280,
+     REGEXPDEF = 281
+   };
+#endif
+/* Tokens.  */
+#define BEGIN_T 258
+#define END_T 259
+#define ENVIRONMENT_T 260
+#define STATE_T 261
+#define MULTILINE_T 262
+#define DELIM_T 263
+#define START_T 264
+#define ESCAPE_T 265
+#define NESTED_T 266
+#define EXIT_ALL 267
+#define EXIT_T 268
+#define VARDEF_T 269
+#define REDEF_T 270
+#define SUBST_T 271
+#define NONSENSITIVE_T 272
+#define WRONG_BACKREFERENCE 273
+#define LEVEL 274
+#define KEY 275
+#define STRINGDEF 276
+#define REGEXPNOPREPROC 277
+#define VARUSE 278
+#define BACKREFVAR 279
+#define WRONG_INCLUDE_FILE 280
+#define REGEXPDEF 281
+
+
+
+
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 91 "../../../lib/srchilite/langdefparser.yy"
 {
+
+/* Line 214 of yacc.c  */
+#line 91 "../../../lib/srchilite/langdefparser.yy"
+
   int tok ; /* command */
   bool booloption ;
   const std::string * string ; /* string : id, ... */
@@ -257,13 +271,15 @@ typedef union YYSTYPE
   struct ElementNamesList *keys;
   int flag ;
   unsigned int level;
-}
-/* Line 187 of yacc.c.  */
-#line 263 "langdefparser.cc"
-	YYSTYPE;
+
+
+
+/* Line 214 of yacc.c  */
+#line 279 "../../../lib/srchilite/langdefparser.cc"
+} YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
-# define YYSTYPE_IS_TRIVIAL 1
 #endif
 
 #if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
@@ -283,8 +299,8 @@ typedef struct YYLTYPE
 /* Copy the second part of user declarations.  */
 
 
-/* Line 216 of yacc.c.  */
-#line 288 "langdefparser.cc"
+/* Line 264 of yacc.c  */
+#line 304 "../../../lib/srchilite/langdefparser.cc"
 
 #ifdef short
 # undef short
@@ -359,14 +375,14 @@ typedef short int yytype_int16;
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 static int
-YYID (int i)
+YYID (int yyi)
 #else
 static int
-YYID (i)
-    int i;
+YYID (yyi)
+    int yyi;
 #endif
 {
-  return i;
+  return yyi;
 }
 #endif
 
@@ -448,9 +464,9 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 /* A type that is properly aligned for any stack member.  */
 union yyalloc
 {
-  yytype_int16 yyss;
-  YYSTYPE yyvs;
-    YYLTYPE yyls;
+  yytype_int16 yyss_alloc;
+  YYSTYPE yyvs_alloc;
+  YYLTYPE yyls_alloc;
 };
 
 /* The size of the maximum gap between one aligned stack and the next.  */
@@ -485,12 +501,12 @@ union yyalloc
    elements in the stack, and YYPTR gives the new location of the
    stack.  Advance YYPTR to a properly aligned location for the next
    stack.  */
-# define YYSTACK_RELOCATE(Stack)					\
+# define YYSTACK_RELOCATE(Stack_alloc, Stack)				\
     do									\
       {									\
 	YYSIZE_T yynewbytes;						\
-	YYCOPY (&yyptr->Stack, Stack, yysize);				\
-	Stack = &yyptr->Stack;						\
+	YYCOPY (&yyptr->Stack_alloc, Stack, yysize);			\
+	Stack = &yyptr->Stack_alloc;					\
 	yynewbytes = yystacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
 	yyptr += yynewbytes / sizeof (*yyptr);				\
       }									\
@@ -919,17 +935,20 @@ yy_symbol_print (yyoutput, yytype, yyvaluep, yylocationp)
 #if (defined __STDC__ || defined __C99__FUNC__ \
      || defined __cplusplus || defined _MSC_VER)
 static void
-yy_stack_print (yytype_int16 *bottom, yytype_int16 *top)
+yy_stack_print (yytype_int16 *yybottom, yytype_int16 *yytop)
 #else
 static void
-yy_stack_print (bottom, top)
-    yytype_int16 *bottom;
-    yytype_int16 *top;
+yy_stack_print (yybottom, yytop)
+    yytype_int16 *yybottom;
+    yytype_int16 *yytop;
 #endif
 {
   YYFPRINTF (stderr, "Stack now");
-  for (; bottom <= top; ++bottom)
-    YYFPRINTF (stderr, " %d", *bottom);
+  for (; yybottom <= yytop; yybottom++)
+    {
+      int yybot = *yybottom;
+      YYFPRINTF (stderr, " %d", yybot);
+    }
   YYFPRINTF (stderr, "\n");
 }
 
@@ -964,11 +983,11 @@ yy_reduce_print (yyvsp, yylsp, yyrule)
   /* The symbols being reduced.  */
   for (yyi = 0; yyi < yynrhs; yyi++)
     {
-      fprintf (stderr, "   $%d = ", yyi + 1);
+      YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr, yyrhs[yyprhs[yyrule] + yyi],
 		       &(yyvsp[(yyi + 1) - (yynrhs)])
 		       , &(yylsp[(yyi + 1) - (yynrhs)])		       );
-      fprintf (stderr, "\n");
+      YYFPRINTF (stderr, "\n");
     }
 }
 
@@ -1246,62 +1265,84 @@ yydestruct (yymsg, yytype, yyvaluep, yylocationp)
   switch (yytype)
     {
       case 34: /* "elemdefs" */
+
+/* Line 1000 of yacc.c  */
 #line 126 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->langelems);
 };
-#line 1255 "langdefparser.cc"
+
+/* Line 1000 of yacc.c  */
+#line 1278 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 35: /* "elemdef" */
+
+/* Line 1000 of yacc.c  */
 #line 126 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->langelem);
 };
-#line 1263 "langdefparser.cc"
+
+/* Line 1000 of yacc.c  */
+#line 1290 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 37: /* "key" */
+
+/* Line 1000 of yacc.c  */
 #line 126 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->key);
 };
-#line 1271 "langdefparser.cc"
+
+/* Line 1000 of yacc.c  */
+#line 1302 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 38: /* "keys" */
+
+/* Line 1000 of yacc.c  */
 #line 126 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->keys);
 };
-#line 1279 "langdefparser.cc"
+
+/* Line 1000 of yacc.c  */
+#line 1314 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 47: /* "stringdefs" */
+
+/* Line 1000 of yacc.c  */
 #line 126 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->stringdefs);
 };
-#line 1287 "langdefparser.cc"
+
+/* Line 1000 of yacc.c  */
+#line 1326 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 49: /* "stringdef" */
+
+/* Line 1000 of yacc.c  */
 #line 126 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->stringdef);
 };
-#line 1295 "langdefparser.cc"
+
+/* Line 1000 of yacc.c  */
+#line 1338 "../../../lib/srchilite/langdefparser.cc"
 	break;
 
       default:
 	break;
     }
 }
-
 
 /* Prevent warnings from -Wmissing-prototypes.  */
-
 #ifdef YYPARSE_PARAM
 #if defined __STDC__ || defined __cplusplus
 int yyparse (void *YYPARSE_PARAM);
@@ -1317,23 +1358,23 @@ int yyparse ();
 #endif /* ! YYPARSE_PARAM */
 
 
-
-/* The look-ahead symbol.  */
+/* The lookahead symbol.  */
 int yychar;
 
-/* The semantic value of the look-ahead symbol.  */
+/* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
+
+/* Location data for the lookahead symbol.  */
+YYLTYPE yylloc;
 
 /* Number of syntax errors so far.  */
 int yynerrs;
-/* Location data for the look-ahead symbol.  */
-YYLTYPE yylloc;
 
 
 
-/*----------.
-| yyparse.  |
-`----------*/
+/*-------------------------.
+| yyparse or yypush_parse.  |
+`-------------------------*/
 
 #ifdef YYPARSE_PARAM
 #if (defined __STDC__ || defined __C99__FUNC__ \
@@ -1357,14 +1398,49 @@ yyparse ()
 #endif
 #endif
 {
-  
-  int yystate;
+
+
+    int yystate;
+    /* Number of tokens to shift before error messages enabled.  */
+    int yyerrstatus;
+
+    /* The stacks and their tools:
+       `yyss': related to states.
+       `yyvs': related to semantic values.
+       `yyls': related to locations.
+
+       Refer to the stacks thru separate pointers, to allow yyoverflow
+       to reallocate them elsewhere.  */
+
+    /* The state stack.  */
+    yytype_int16 yyssa[YYINITDEPTH];
+    yytype_int16 *yyss;
+    yytype_int16 *yyssp;
+
+    /* The semantic value stack.  */
+    YYSTYPE yyvsa[YYINITDEPTH];
+    YYSTYPE *yyvs;
+    YYSTYPE *yyvsp;
+
+    /* The location stack.  */
+    YYLTYPE yylsa[YYINITDEPTH];
+    YYLTYPE *yyls;
+    YYLTYPE *yylsp;
+
+    /* The locations where the error started and ended.  */
+    YYLTYPE yyerror_range[2];
+
+    YYSIZE_T yystacksize;
+
   int yyn;
   int yyresult;
-  /* Number of tokens to shift before error messages enabled.  */
-  int yyerrstatus;
-  /* Look-ahead token as an internal (translated) token number.  */
-  int yytoken = 0;
+  /* Lookahead token as an internal (translated) token number.  */
+  int yytoken;
+  /* The variables used to return semantic value and location from the
+     action routines.  */
+  YYSTYPE yyval;
+  YYLTYPE yyloc;
+
 #if YYERROR_VERBOSE
   /* Buffer for error messages, and its allocated size.  */
   char yymsgbuf[128];
@@ -1372,63 +1448,37 @@ yyparse ()
   YYSIZE_T yymsg_alloc = sizeof yymsgbuf;
 #endif
 
-  /* Three stacks and their tools:
-     `yyss': related to states,
-     `yyvs': related to semantic values,
-     `yyls': related to locations.
-
-     Refer to the stacks thru separate pointers, to allow yyoverflow
-     to reallocate them elsewhere.  */
-
-  /* The state stack.  */
-  yytype_int16 yyssa[YYINITDEPTH];
-  yytype_int16 *yyss = yyssa;
-  yytype_int16 *yyssp;
-
-  /* The semantic value stack.  */
-  YYSTYPE yyvsa[YYINITDEPTH];
-  YYSTYPE *yyvs = yyvsa;
-  YYSTYPE *yyvsp;
-
-  /* The location stack.  */
-  YYLTYPE yylsa[YYINITDEPTH];
-  YYLTYPE *yyls = yylsa;
-  YYLTYPE *yylsp;
-  /* The locations where the error started and ended.  */
-  YYLTYPE yyerror_range[2];
-
 #define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N), yylsp -= (N))
-
-  YYSIZE_T yystacksize = YYINITDEPTH;
-
-  /* The variables used to return semantic value and location from the
-     action routines.  */
-  YYSTYPE yyval;
-  YYLTYPE yyloc;
 
   /* The number of symbols on the RHS of the reduced rule.
      Keep to zero when no symbol should be popped.  */
   int yylen = 0;
+
+  yytoken = 0;
+  yyss = yyssa;
+  yyvs = yyvsa;
+  yyls = yylsa;
+  yystacksize = YYINITDEPTH;
 
   YYDPRINTF ((stderr, "Starting parse\n"));
 
   yystate = 0;
   yyerrstatus = 0;
   yynerrs = 0;
-  yychar = YYEMPTY;		/* Cause a token to be read.  */
+  yychar = YYEMPTY; /* Cause a token to be read.  */
 
   /* Initialize stack pointers.
      Waste one element of value and location stack
      so that they stay on the same level as the state stack.
      The wasted elements are never initialized.  */
-
   yyssp = yyss;
   yyvsp = yyvs;
   yylsp = yyls;
+
 #if YYLTYPE_IS_TRIVIAL
   /* Initialize the default location before parsing starts.  */
   yylloc.first_line   = yylloc.last_line   = 1;
-  yylloc.first_column = yylloc.last_column = 0;
+  yylloc.first_column = yylloc.last_column = 1;
 #endif
 
   goto yysetstate;
@@ -1467,6 +1517,7 @@ yyparse ()
 		    &yyvs1, yysize * sizeof (*yyvsp),
 		    &yyls1, yysize * sizeof (*yylsp),
 		    &yystacksize);
+
 	yyls = yyls1;
 	yyss = yyss1;
 	yyvs = yyvs1;
@@ -1488,9 +1539,9 @@ yyparse ()
 	  (union yyalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (yystacksize));
 	if (! yyptr)
 	  goto yyexhaustedlab;
-	YYSTACK_RELOCATE (yyss);
-	YYSTACK_RELOCATE (yyvs);
-	YYSTACK_RELOCATE (yyls);
+	YYSTACK_RELOCATE (yyss_alloc, yyss);
+	YYSTACK_RELOCATE (yyvs_alloc, yyvs);
+	YYSTACK_RELOCATE (yyls_alloc, yyls);
 #  undef YYSTACK_RELOCATE
 	if (yyss1 != yyssa)
 	  YYSTACK_FREE (yyss1);
@@ -1511,6 +1562,9 @@ yyparse ()
 
   YYDPRINTF ((stderr, "Entering state %d\n", yystate));
 
+  if (yystate == YYFINAL)
+    YYACCEPT;
+
   goto yybackup;
 
 /*-----------.
@@ -1519,16 +1573,16 @@ yyparse ()
 yybackup:
 
   /* Do appropriate processing given the current state.  Read a
-     look-ahead token if we need one and don't already have one.  */
+     lookahead token if we need one and don't already have one.  */
 
-  /* First try to decide what to do without reference to look-ahead token.  */
+  /* First try to decide what to do without reference to lookahead token.  */
   yyn = yypact[yystate];
   if (yyn == YYPACT_NINF)
     goto yydefault;
 
-  /* Not known => get a look-ahead token if don't already have one.  */
+  /* Not known => get a lookahead token if don't already have one.  */
 
-  /* YYCHAR is either YYEMPTY or YYEOF or a valid look-ahead symbol.  */
+  /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
   if (yychar == YYEMPTY)
     {
       YYDPRINTF ((stderr, "Reading a token: "));
@@ -1560,20 +1614,16 @@ yybackup:
       goto yyreduce;
     }
 
-  if (yyn == YYFINAL)
-    YYACCEPT;
-
   /* Count tokens shifted since error; after three, turn off error
      status.  */
   if (yyerrstatus)
     yyerrstatus--;
 
-  /* Shift the look-ahead token.  */
+  /* Shift the lookahead token.  */
   YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
 
-  /* Discard the shifted token unless it is eof.  */
-  if (yychar != YYEOF)
-    yychar = YYEMPTY;
+  /* Discard the shifted token.  */
+  yychar = YYEMPTY;
 
   yystate = yyn;
   *++yyvsp = yylval;
@@ -1614,6 +1664,8 @@ yyreduce:
   switch (yyn)
     {
         case 2:
+
+/* Line 1455 of yacc.c  */
 #line 134 "../../../lib/srchilite/langdefparser.yy"
     {
           /* no definitions (i.e., empty a .lang file with no definition) */
@@ -1627,11 +1679,15 @@ yyreduce:
     break;
 
   case 3:
+
+/* Line 1455 of yacc.c  */
 #line 143 "../../../lib/srchilite/langdefparser.yy"
     { current_lang_elems = (yyvsp[(1) - (1)].langelems); }
     break;
 
   case 4:
+
+/* Line 1455 of yacc.c  */
 #line 146 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.langelems) = (yyvsp[(1) - (2)].langelems);
@@ -1640,6 +1696,8 @@ yyreduce:
     break;
 
   case 5:
+
+/* Line 1455 of yacc.c  */
 #line 150 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.langelems) = new LangElems;
@@ -1648,6 +1706,8 @@ yyreduce:
     break;
 
   case 6:
+
+/* Line 1455 of yacc.c  */
 #line 157 "../../../lib/srchilite/langdefparser.yy"
     {
             (yyval.langelem) = (yyvsp[(2) - (3)].statestartlangelem);
@@ -1660,6 +1720,8 @@ yyreduce:
     break;
 
   case 7:
+
+/* Line 1455 of yacc.c  */
 #line 166 "../../../lib/srchilite/langdefparser.yy"
     {
             StateLangElem *statelangelem = new StateLangElem((yyvsp[(3) - (6)].statestartlangelem)->getName(), (yyvsp[(3) - (6)].statestartlangelem), (yyvsp[(5) - (6)].langelems), !(yyvsp[(2) - (6)].booloption));
@@ -1671,6 +1733,8 @@ yyreduce:
     break;
 
   case 8:
+
+/* Line 1455 of yacc.c  */
 #line 173 "../../../lib/srchilite/langdefparser.yy"
     {
             vardefinitions->add(*(yyvsp[(2) - (4)].string), (yyvsp[(4) - (4)].stringdefs));
@@ -1679,6 +1743,8 @@ yyreduce:
     break;
 
   case 9:
+
+/* Line 1455 of yacc.c  */
 #line 177 "../../../lib/srchilite/langdefparser.yy"
     {
             // this token is used by the scanner to signal an error
@@ -1692,6 +1758,8 @@ yyreduce:
     break;
 
   case 10:
+
+/* Line 1455 of yacc.c  */
 #line 189 "../../../lib/srchilite/langdefparser.yy"
     {
                   (yyval.statestartlangelem) = new DelimitedLangElem(*((yyvsp[(1) - (7)].key)->key), (yyvsp[(3) - (7)].stringdef), (yyvsp[(4) - (7)].stringdef), (yyvsp[(5) - (7)].stringdef), (yyvsp[(6) - (7)].booloption), (yyvsp[(7) - (7)].booloption));
@@ -1702,6 +1770,8 @@ yyreduce:
     break;
 
   case 11:
+
+/* Line 1455 of yacc.c  */
 #line 195 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.statestartlangelem) = new DelimitedLangElem(*((yyvsp[(1) - (3)].key)->key), (yyvsp[(3) - (3)].stringdef), 0, 0, false, false);
@@ -1711,6 +1781,8 @@ yyreduce:
     break;
 
   case 12:
+
+/* Line 1455 of yacc.c  */
 #line 200 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.statestartlangelem) = new StringListLangElem(*((yyvsp[(1) - (4)].key)->key), (yyvsp[(3) - (4)].stringdefs), (yyvsp[(4) - (4)].booloption));
@@ -1721,6 +1793,8 @@ yyreduce:
     break;
 
   case 13:
+
+/* Line 1455 of yacc.c  */
 #line 206 "../../../lib/srchilite/langdefparser.yy"
     {
           		(yyval.statestartlangelem) = new NamedSubExpsLangElem((yyvsp[(2) - (5)].keys), new StringDef(*(yyvsp[(5) - (5)].string)));
@@ -1729,6 +1803,8 @@ yyreduce:
     break;
 
   case 14:
+
+/* Line 1455 of yacc.c  */
 #line 212 "../../../lib/srchilite/langdefparser.yy"
     {
     (yyval.key) = new Key;
@@ -1738,6 +1814,8 @@ yyreduce:
     break;
 
   case 15:
+
+/* Line 1455 of yacc.c  */
 #line 220 "../../../lib/srchilite/langdefparser.yy"
     {
         (yyval.keys) = (yyvsp[(1) - (3)].keys);
@@ -1746,6 +1824,8 @@ yyreduce:
     break;
 
   case 16:
+
+/* Line 1455 of yacc.c  */
 #line 225 "../../../lib/srchilite/langdefparser.yy"
     {
     	(yyval.keys) = new ElementNamesList;
@@ -1754,101 +1834,141 @@ yyreduce:
     break;
 
   case 17:
+
+/* Line 1455 of yacc.c  */
 #line 231 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.stringdef) = (yyvsp[(2) - (2)].stringdef); }
     break;
 
   case 18:
+
+/* Line 1455 of yacc.c  */
 #line 232 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.stringdef) = 0; }
     break;
 
   case 19:
+
+/* Line 1455 of yacc.c  */
 #line 235 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = -1; }
     break;
 
   case 20:
+
+/* Line 1455 of yacc.c  */
 #line 236 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = (yyvsp[(2) - (2)].level); }
     break;
 
   case 21:
+
+/* Line 1455 of yacc.c  */
 #line 237 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = 0; }
     break;
 
   case 22:
+
+/* Line 1455 of yacc.c  */
 #line 240 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.level) = (yyvsp[(1) - (1)].level); }
     break;
 
   case 23:
+
+/* Line 1455 of yacc.c  */
 #line 241 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.level) = 1; }
     break;
 
   case 24:
+
+/* Line 1455 of yacc.c  */
 #line 244 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = true; }
     break;
 
   case 25:
+
+/* Line 1455 of yacc.c  */
 #line 245 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = false; }
     break;
 
   case 26:
+
+/* Line 1455 of yacc.c  */
 #line 248 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = true; }
     break;
 
   case 27:
+
+/* Line 1455 of yacc.c  */
 #line 249 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = false; }
     break;
 
   case 28:
+
+/* Line 1455 of yacc.c  */
 #line 252 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = 1; }
     break;
 
   case 29:
+
+/* Line 1455 of yacc.c  */
 #line 253 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = 2; }
     break;
 
   case 30:
+
+/* Line 1455 of yacc.c  */
 #line 254 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = 0; }
     break;
 
   case 31:
+
+/* Line 1455 of yacc.c  */
 #line 257 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = true; }
     break;
 
   case 32:
+
+/* Line 1455 of yacc.c  */
 #line 258 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = false; }
     break;
 
   case 33:
+
+/* Line 1455 of yacc.c  */
 #line 261 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = true; }
     break;
 
   case 34:
+
+/* Line 1455 of yacc.c  */
 #line 262 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = false; }
     break;
 
   case 35:
+
+/* Line 1455 of yacc.c  */
 #line 265 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.stringdefs) = (yyvsp[(1) - (3)].stringdefs); (yyval.stringdefs)->push_back((yyvsp[(3) - (3)].stringdef)); }
     break;
 
   case 36:
+
+/* Line 1455 of yacc.c  */
 #line 266 "../../../lib/srchilite/langdefparser.yy"
     {
                 (yyval.stringdefs) = new StringDefs;
@@ -1856,6 +1976,8 @@ yyreduce:
     break;
 
   case 37:
+
+/* Line 1455 of yacc.c  */
 #line 271 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = (yyvsp[(1) - (1)].stringdef);
@@ -1863,6 +1985,8 @@ yyreduce:
     break;
 
   case 38:
+
+/* Line 1455 of yacc.c  */
 #line 274 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string), true);
@@ -1870,6 +1994,8 @@ yyreduce:
     break;
 
   case 39:
+
+/* Line 1455 of yacc.c  */
 #line 277 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string));
@@ -1877,6 +2003,8 @@ yyreduce:
     break;
 
   case 40:
+
+/* Line 1455 of yacc.c  */
 #line 280 "../../../lib/srchilite/langdefparser.yy"
     {
               if (! vardefinitions->contains(*(yyvsp[(1) - (1)].string))) {
@@ -1888,6 +2016,8 @@ yyreduce:
     break;
 
   case 41:
+
+/* Line 1455 of yacc.c  */
 #line 287 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string));
@@ -1896,6 +2026,8 @@ yyreduce:
     break;
 
   case 42:
+
+/* Line 1455 of yacc.c  */
 #line 291 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = StringDef::concat((yyvsp[(1) - (3)].stringdef), (yyvsp[(3) - (3)].stringdef));
@@ -1905,6 +2037,8 @@ yyreduce:
     break;
 
   case 43:
+
+/* Line 1455 of yacc.c  */
 #line 296 "../../../lib/srchilite/langdefparser.yy"
     {
             // this token is used by the scanner to signal an error
@@ -1917,6 +2051,8 @@ yyreduce:
     break;
 
   case 44:
+
+/* Line 1455 of yacc.c  */
 #line 306 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = (yyvsp[(1) - (1)].stringdef);
@@ -1924,6 +2060,8 @@ yyreduce:
     break;
 
   case 45:
+
+/* Line 1455 of yacc.c  */
 #line 309 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string), true);
@@ -1931,6 +2069,8 @@ yyreduce:
     break;
 
   case 46:
+
+/* Line 1455 of yacc.c  */
 #line 312 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string));
@@ -1938,6 +2078,8 @@ yyreduce:
     break;
 
   case 47:
+
+/* Line 1455 of yacc.c  */
 #line 315 "../../../lib/srchilite/langdefparser.yy"
     {
               if (! vardefinitions->contains(*(yyvsp[(1) - (1)].string))) {
@@ -1949,6 +2091,8 @@ yyreduce:
     break;
 
   case 48:
+
+/* Line 1455 of yacc.c  */
 #line 322 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = StringDef::concat((yyvsp[(1) - (3)].stringdef), (yyvsp[(3) - (3)].stringdef));
@@ -1958,6 +2102,8 @@ yyreduce:
     break;
 
   case 49:
+
+/* Line 1455 of yacc.c  */
 #line 327 "../../../lib/srchilite/langdefparser.yy"
     {
             // this token is used by the scanner to signal an error
@@ -1970,8 +2116,9 @@ yyreduce:
     break;
 
 
-/* Line 1267 of yacc.c.  */
-#line 1975 "langdefparser.cc"
+
+/* Line 1455 of yacc.c  */
+#line 2122 "../../../lib/srchilite/langdefparser.cc"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2047,7 +2194,7 @@ yyerrlab:
 
   if (yyerrstatus == 3)
     {
-      /* If just tried and failed to reuse look-ahead token after an
+      /* If just tried and failed to reuse lookahead token after an
 	 error, discard it.  */
 
       if (yychar <= YYEOF)
@@ -2064,7 +2211,7 @@ yyerrlab:
 	}
     }
 
-  /* Else will try to reuse look-ahead token after shifting the error
+  /* Else will try to reuse lookahead token after shifting the error
      token.  */
   goto yyerrlab1;
 
@@ -2122,14 +2269,11 @@ yyerrlab1:
       YY_STACK_PRINT (yyss, yyssp);
     }
 
-  if (yyn == YYFINAL)
-    YYACCEPT;
-
   *++yyvsp = yylval;
 
   yyerror_range[1] = yylloc;
   /* Using YYLLOC is tempting, but would change the location of
-     the look-ahead.  YYLOC is available though.  */
+     the lookahead.  YYLOC is available though.  */
   YYLLOC_DEFAULT (yyloc, (yyerror_range - 1), 2);
   *++yylsp = yyloc;
 
@@ -2154,7 +2298,7 @@ yyabortlab:
   yyresult = 1;
   goto yyreturn;
 
-#ifndef yyoverflow
+#if !defined(yyoverflow) || YYERROR_VERBOSE
 /*-------------------------------------------------.
 | yyexhaustedlab -- memory exhaustion comes here.  |
 `-------------------------------------------------*/
@@ -2165,7 +2309,7 @@ yyexhaustedlab:
 #endif
 
 yyreturn:
-  if (yychar != YYEOF && yychar != YYEMPTY)
+  if (yychar != YYEMPTY)
      yydestruct ("Cleanup: discarding lookahead",
 		 yytoken, &yylval, &yylloc);
   /* Do not reclaim the symbols of the rule which action triggered
@@ -2191,6 +2335,8 @@ yyreturn:
 }
 
 
+
+/* Line 1675 of yacc.c  */
 #line 337 "../../../lib/srchilite/langdefparser.yy"
 
 
