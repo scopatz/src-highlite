@@ -564,12 +564,11 @@ command.
 NOTE: This convention holds since release 2.1.
 
 When you compile the sources that you get from the cvs repository,
-before running the @code{configure} and @code{make} commands, you
-must run the command:
+before running the @code{configure} and @code{make} commands for the
+first time, you must run the command:
 
-@cindex autogen.sh
 @example
-sh autogen.sh
+autoreconf -i
 @end example
 
 @noindent
@@ -579,16 +578,7 @@ possibly missing files.  You should have installed recent versions of
 @cindex autoconf
 @cindex libtool
 @code{automake}, @code{autoconf} and @code{libtool} in order for this to
-succeed.  
-@cindex flex
-@cindex bison
-You will also need @code{flex} and @code{bison}.
-
-Instead of running @code{autogen.sh} another option is to run
-
-@example
-autoreconf -i
-@end example
+succeed.
 
 @node What you need to build source-highlight, Tips on installing Boost Regex library, Anonymous CVS Access, Installation
 @section What you need to build source-highlight
@@ -617,7 +607,7 @@ If you want to use a specific version of the Boost regex library
 @end example
 
 Source-highlight has been developed under GNU/Linux, using gcc (C++),
-and bison (yacc) and flex (lex), and ported under Win32 with Cygnus
+and bison (yacc) and flex (lex), and ported under Win32 with Cygwin
 C/C++compiler, available at @uref{http://www.cygwin.com}.  
 
 I use the excellent 
