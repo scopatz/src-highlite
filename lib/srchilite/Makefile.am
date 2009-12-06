@@ -10,16 +10,11 @@
 
 #SUBDIRS = includes
 
-.text.c:
-	$(TXTC) -c $<
-
 if NO_DOUBLECPP
-
-SUFFIXES = .text
 
 else
 
-SUFFIXES = .text .hpp .h
+SUFFIXES = .hpp .h
 
 # we need to put doublecpp generated files in the srcdir
 # since we want to distribute them
@@ -64,7 +59,6 @@ LDADD = $(top_builddir)/gl/libgnu.la
 lib_LTLIBRARIES = libsource-highlight.la
 
 libsource_highlight_la_SOURCES = \
-	copyright.c reportbugs.c \
 	fileutil.cc \
 	substfun.cpp \
 	stopwatch.cpp utils.cpp \
@@ -137,7 +131,6 @@ h_sources = parsestyles.h \
              fileutil.h \
              chartranslator.h \
              docgenerator.h \
-             copyright.h reportbugs.h \
              srcuntabifier.h colormap.h \
              langdefparser.h outlangdefparser.h \
              stylefileparser.h \
@@ -201,7 +194,7 @@ mytags: $(srcdir)/test_readtags_main.cpp
 
 CLEANFILES = doxygen.stamp
 
-DISTCLEANFILES = mytags copyright.c reportbugs.c
+DISTCLEANFILES = mytags
 
 MAINTAINERCLEANFILES = styleparser.cc styleparser.h stylescanner.cc \
 langdefparser.cc langdefparser.h langdefscanner.cc \

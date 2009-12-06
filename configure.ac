@@ -135,9 +135,6 @@ AC_ARG_WITH([bash-completion],
 
 AC_SUBST(BASH_COMPLETION_DIR)
 
-dnl for txtc (Text-to-C compiler)
-LF_PROG_TXTC
-
 dnl for yacc or bison
 AC_PROG_YACC
 
@@ -260,7 +257,6 @@ fi
 AC_CONFIG_FILES(
 [
 Makefile
-txtc.sh
 source-highlight.pc
 m4/Makefile
 gl/Makefile

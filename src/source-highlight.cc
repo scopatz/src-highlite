@@ -36,8 +36,6 @@
 
 #include "srchilite/sourcehighlight.h"
 
-//#include "srchilite/copyright.h"
-//#include "srchilite/reportbugs.h"
 #include "srchilite/fileutil.h"
 #include "srchilite/verbosity.h"
 #include "srchilite/langmap.h"

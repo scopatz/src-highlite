@@ -37,7 +37,6 @@ HEADERS = parsestyles.h \
              fileutil.h \
              chartranslator.h \
              docgenerator.h \
-             copyright.h reportbugs.h \
              srcuntabifier.h colormap.h \
              langdefparser.h outlangdefparser.h \
              stylefileparser.h \

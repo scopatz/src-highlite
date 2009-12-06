@@ -123,8 +123,6 @@ BOOST_REGEX=name of the library
 
 texinfo generate html and put in the doc source folder
 
-remove copyright.c reportbugs.c
-
 common.pri for files in src
 
 INCREMENT REVISION
