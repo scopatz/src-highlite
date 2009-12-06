@@ -132,3 +132,5 @@ cobol = cobol.lang
 dmd = d.lang
 d = d.lang
 errors = errors.lang
+erl = erlang.lang
+erlang = erlang.lang

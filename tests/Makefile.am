@@ -295,7 +295,8 @@ test.bat test.bat.html \
 test.clipper test.clipper.html \
 test.cobol test.cobol.html \
 test.d test.d.html \
-test.errors test.errors.html
+test.errors test.errors.html \
+test.erl test.erl.html
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
@@ -412,6 +413,7 @@ check_clipper \
 check_cobol \
 check_d \
 check_errors \
+check_erlang \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -755,6 +757,11 @@ check_errors:
 	$(PROGNAME_STD) -i $(srcdir)/test.errors -o test.errors.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.errors.html test.errors.out.html
+
+check_erlang:
+	$(PROGNAME_STD) -i $(srcdir)/test.erl -o test.erl.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.erl.html test.erl.out.html
 
 check_fortran:
 	$(FORTRAN2HTML) -i $(srcdir)/test.fortran -o test.fortran.out.html

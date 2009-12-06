@@ -1,5 +1,7 @@
 2009-12-06  Lorenzo Bettini  <bettini@bettini-laptop-karmic>
 
+	* src/erlang.lang: added
+
 	* lib/srchilite/reportbugs.text copyright.text: removed
 	
 	* lib/srchilite/Makefile.am: flex and bison generated files are

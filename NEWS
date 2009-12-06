@@ -12,7 +12,7 @@ Version 3.1.2 (yet unreleased)
 
    * infer language for files starting with <? and <!doctype
    * language definition for manifest files, asm, applescript,
-     vbscript, awk, bat, clipper, cobol, D
+     vbscript, awk, bat, clipper, cobol, D, Erlang
    * lang def file for compiler output errors
    * style for label and path
    * label element recognized in C/C++

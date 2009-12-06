@@ -82,7 +82,7 @@ desktop.lang lsm.lang spec.lang haxe.lang ldap.lang glsl.lang xorg.lang \
 clike_vardeclaration.lang scala.lang ada.lang conf.lang pc.lang oz.lang \
 texinfo.lang haskell.lang manifest.lang asm.lang todo.lang applescript.lang \
 vbscript.lang awk.lang bat.lang clipper.lang cobol.lang d.lang \
-errors.lang
+errors.lang erlang.lang
 
 OUTLANGFILES = \
 css_common.outlang \
