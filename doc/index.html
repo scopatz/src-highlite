@@ -135,7 +135,7 @@ program and its main home page is at GNU site: <br>
 <li><a href="#mozTocId127780"> Download</a>
 <ol>
 <li><a href="#mozTocId637057"> Anonymous
-CVS Access</a></li>
+Git Checkout</a></li>
 </ol>
 </li>
 <li><a href="#mozTocId579563"> Changes in this
@@ -203,24 +203,36 @@ that are not present in an earlier version of source-highlight);
 </p>
 
 <h3><a class="mozTocH3" name="mozTocId637057"></a>
-Anonymous CVS Access</h3>
-This project's CVS repository can be checked out through anonymous
-(pserver) CVS with the following instruction:
-<pre>cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/src-highlite co src-highlite</pre>
-Further instructions can be found at the address: <a href="http://savannah.gnu.org/projects/src-highlite">http://savannah.gnu.org/projects/src-highlite</a>.
-<p>Please notice that this way you will get the latest
+Anonymous Git Checkout</h3>
+
+This project's git repository can be checked out through the following
+clone instruction:
+
+<pre>git clone git://git.savannah.gnu.org/src-highlite.git</pre>
+
+   <p>Further instructions can be found at the address:
+
+   <p><a href="http://savannah.gnu.org/projects/src-highlite">http://savannah.gnu.org/projects/src-highlite</a>.
+
+   <p>And the git repository can also browsed on-line at
+<a href="http://git.savannah.gnu.org/cgit/src-highlite.git">http://git.savannah.gnu.org/cgit/src-highlite.git</a>.
+
+<p><i>NOTE: Since version 3.1.2 of Source-highlight the
+CVS repository was dismissed in favor of Git
+(<a href="http://git-scm.com/">http://git-scm.com/</a>)</i>.
+
+<p>
+Please notice that this way you will get the latest
 development sources
 of Source-highlight, which may also be unstable. This solution is the
 best if you intend to correct/extend this program: you should send me
-patches against the latest cvs repository sources.</p>
+patches against the latest git repository sources.</p>
 <p>If, on the contrary, you want to get the sources of a given
 release,
-through cvs, say, e.g., version X.Y.Z, you must specify the tag
-<tt>rel_X_Y_Z</tt> when you run the cvs command or the <tt>cvs
-update</tt>
-command.</p>
-<p>NOTICE: This convention holds since release 2.1.</p>
-<p>When you compile the sources that you get from the cvs
+through git, say, e.g., version X.Y.Z, you must specify the git tag
+<tt>rel_X_Y_Z</tt>.</p>
+
+<p>When you compile the sources that you get from the git
 repository,
 before running the <tt>configure</tt> and <tt>make</tt>
 commands, you must run the command:</p>

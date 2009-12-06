@@ -12,13 +12,14 @@ You can download it from GNU's ftp site:
 ftp://ftp.gnu.org/gnu/src-highlite/ or from one of its mirrors (see
 http://www.gnu.org/prep/ftp.html).
 
-This project's CVS repository can be checked out through anonymous
-(pserver) CVS with the following instruction:
+This project's git repository can be checked out through
+the following clone instruction:
 
-cvs -z3 -d:pserver:anonymous@@cvs.savannah.gnu.org:/sources/src-highlite co src-highlite
+git clone git://git.savannah.gnu.org/src-highlite.git
 
 Further instructions can be found at the address:
-http://savannah.gnu.org/projects/src-highlite.
+
+http://savannah.gnu.org/projects/src-highlite. 
 
 Installation
 
