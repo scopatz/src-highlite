@@ -100,7 +100,7 @@ struct ElementNamesList : ElementNames {
   class LangElems *langelems;
   class NamedSubExpsLangElem *namedsubexpslangelem;
   struct Key *key;
-  class ElementNamesList *keys;
+  struct ElementNamesList *keys;
   int flag ;
   unsigned int level;
 };

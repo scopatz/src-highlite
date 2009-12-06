@@ -16,7 +16,7 @@ namespace srchilite {
 
 class PreFormatter;
 class CTagsCollector;
-class FormatterParams;
+struct FormatterParams;
 
 /// collection of strings to be written after (post) a line or a doc
 typedef std::list<std::string> postResults;

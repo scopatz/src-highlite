@@ -112,3 +112,21 @@ include "c_comment.lang"
 reports as file name error c_comment.lang!
 
 if the included file cannot be found it does not report an error?
+
+QMAKE
+-----
+ABSOLUTEDATADIR=\\\"/usr/local\\\" make it configurable
+
+PREFIX variable to pass to qmake
+
+BOOST_REGEX=name of the library
+
+texinfo generate html and put in the doc source folder
+
+remove copyright.c reportbugs.c
+
+generate bison and flex files in sourcedirectory
+
+common.pri for files in src
+
+INCREMENT REVISION

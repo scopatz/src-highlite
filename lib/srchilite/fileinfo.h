@@ -12,7 +12,7 @@
 #ifndef FILEINFO_H
 #define FILEINFO_H
 
-#include <parserinfo.h>
+#include "parserinfo.h"
 
 namespace srchilite {
 

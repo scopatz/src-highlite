@@ -970,7 +970,6 @@ cmdline_parser_required (struct gengetopt_args_info *args_info, const char *prog
 int
 cmdline_parser_required2 (struct gengetopt_args_info *args_info, const char *prog_name, const char *additional_error)
 {
-  FIX_UNUSED (additional_error);
   int error = 0;
 
   /* checks for required options */
@@ -1028,7 +1027,6 @@ int update_arg(void *field, char **orig_field,
                const char *long_opt, char short_opt,
                const char *additional_error)
 {
-  FIX_UNUSED (field);
   char *stop_char = 0;
   const char *val = value;
   int found;

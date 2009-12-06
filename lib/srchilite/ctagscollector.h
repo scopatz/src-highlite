@@ -15,7 +15,7 @@
 
 namespace srchilite {
 
-class FormatterParams;
+struct FormatterParams;
 
 /**
  * Information about a tag.  This structure is used to

@@ -9,7 +9,7 @@
 
 namespace srchilite {
 
-class HighlightToken;
+struct HighlightToken;
 
 /**
  * Event concerning an highlighting operation (e.g., formatting, entering

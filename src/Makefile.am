@@ -64,7 +64,8 @@ cpp2html.in \
 src-hilite-lesspipe.sh.in \
 envmapper.h \
 cmdline.ggo check-regexp_cmd.ggo \
-$(source_highlightdata_DATA)
+$(source_highlightdata_DATA) \
+src.pro source-highlight.pro source-highlight-settings.pro
 
 LANGFILES = \
 bison.lang      c.lang cpp.lang       javascript.lang  perl.lang    ruby.lang \

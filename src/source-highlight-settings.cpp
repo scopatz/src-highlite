@@ -26,7 +26,19 @@
 
 #include "srchilite/settings.h"
 #include "srchilite/versions.h"
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+
+// this is glib related so don't use it when compiling with qmake
 #include "progname.h"
+
+#else
+
+#define set_program_name(x) ;
+
+#endif
+
 
 using namespace std;
 using namespace srchilite;

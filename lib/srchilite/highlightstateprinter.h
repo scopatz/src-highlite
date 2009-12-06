@@ -15,7 +15,7 @@ namespace srchilite {
 
 class HighlightState;
 class HighlightRule;
-class HighlightToken;
+struct HighlightToken;
 
 typedef std::set<int> StateIdSet;
 

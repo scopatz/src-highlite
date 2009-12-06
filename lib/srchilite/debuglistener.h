@@ -13,7 +13,7 @@
 
 namespace srchilite {
 
-class HighlightEvent;
+struct HighlightEvent;
 
 /**
  * Implementation of highlight events that prints debug information.

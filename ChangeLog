@@ -1,3 +1,93 @@
+2009-11-23  bettini  <bettini@dellbettini>
+
+	* defines.pri: use version number for dynamically linking in mingw
+	forces CONFIG+=static in case of msvc
+
+2009-11-22  bettini  <bettini@dellbettini>
+
+	* lib\compat\compat_dirent.cpp: Needed only for compilation with msvc.
+	* lib\compat\compat_dirent.h: Ditto.
+	* lib\compat\getopt.c: Ditto.
+	* lib\compat\getopt.h: Ditto.
+	* lib\compat\getopt1.c: Ditto.
+	* lib\compat\getopt_int.h: Ditto.
+	* lib\compat\Makefile.am: Ditto.
+	* lib\compat\unistd.h: Ditto.
+	* defines.pri: check for msvc 
+	* lib\srchilite\ctagscollector.h: forward declaration to a struct is
+	NOT expressed with a class
+	* lib\srchilite\ctagsformatter.h: Ditto. 
+	* lib\srchilite\debuglistener.h: Ditto.
+	* lib\srchilite\formatter.h: Ditto.
+	* lib\srchilite\highlightbuilderexception.h: Ditto.
+	* lib\srchilite\highlightevent.h: Ditto.
+	* lib\srchilite\highlighteventlistener.h: Ditto.
+	* lib\srchilite\highlightrule.h: Ditto.
+	* lib\srchilite\highlightstate.h: Ditto.
+	* lib\srchilite\highlightstateprinter.h: Ditto.
+	* lib\srchilite\langdefparser.yy: Ditto.
+	* lib\srchilite\parserexception.h: Ditto.
+	* lib\srchilite\sourcehighlighter.h: Ditto.
+	* lib\srchilite\settings.cpp: Deal with opendir, mkdir for msvc
+	* lib\srchilite\sourcehighlightutils.cpp: Ditto.
+	* src\source-highlight.pro: boost regex library is linked as the last
+	* src\source-highlight-settings.pro: Ditto. 
+	* src\cmdline.c (update_arg): removed FIX_UNUSED, which does not
+	compile in msvc
+	* src\source-highlight.cc (print_copyright): inserted string 
+	(print_reportbugs): Ditto.
+
+2009-11-19  bettini  <bettini@dellbettini>
+
+	* lib\srchilite\fileinfo.h: include parserinfo.h with "" instead of <>
+	* lib\srchilite\settings.cpp (Settings::Settings): 
+	(findHomeDirectory): searches for home directory in other
+	standard windows environment variable besides HOME 
+	* defines.pri: use CONFIG += console otherwise no output is
+	shown 
+
+2009-11-18  bettini  <bettini@dellbettini>
+
+	* defines.pri: additional libraries variable (boost_regex)
+	check the variable USE_MINGW
+	* lib\srchilite\settings.cpp: try to do a manual fix when compiling
+	with qmake and using mingw
+	* lib\srchilite\srchilite.pro:  
+	* src\source-highlight-settings.pro: 
+	* src\source-highlight.pro: 
+
+2009-11-18  bettini  <bettini@bettini-laptop>
+
+	* src/source-highlight-settings.pro: New file.
+	* src/source-highlight.pro: New file.
+	* src/source-highlight-settings.cpp: deal with progname.h when compiling
+	with qmake
+
+2009-11-17  bettini  <bettini@bettini-laptop>
+
+	* defines.pri: New file.
+	* lib/lib.pro: qmake pro file.
+	* source-highlight.pro: New file.
+	* src/src.pro: New file.
+	* lib/srchilite/langdefparser.cc: bison and flex generated files
+	are in the CVS now
+	* lib/srchilite/langdefparser.h: New file.
+	* lib/srchilite/langdefscanner.cc: New file.
+	* lib/srchilite/outlangdefparser.cc: New file.
+	* lib/srchilite/outlangdefparser.h: New file.
+	* lib/srchilite/outlangdefscanner.cc: New file.
+	* lib/srchilite/srchilite.pro: New file.
+	* lib/srchilite/stylecssparser.cc: New file.
+	* lib/srchilite/stylecssparser.h: New file.
+	* lib/srchilite/stylecssscanner.cc: New file.
+	* lib/srchilite/styleparser.cc: New file.
+	* lib/srchilite/styleparser.h: New file.
+	* lib/srchilite/stylescanner.cc: New file.
+	* lib/srchilite/fileutil.cc: default CHROOT_INPUT_DIR 
+	* lib/srchilite/settings.cpp: include config.h selectively
+	* src/source-highlight.cc (main): deal with progname.h when compiling
+	with qmake
+
 2009-10-19  bettini  <bettini@bettini-laptop>
 
 	* src/errors.lang: lang definition file for compiler output errors.

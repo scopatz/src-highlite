@@ -13,7 +13,7 @@
 
 namespace srchilite {
 
-class ParserInfo;
+struct ParserInfo;
 
 struct HighlightBuilderException : public std::exception {
     /// detailed message for this exception
