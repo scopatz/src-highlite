@@ -5,7 +5,7 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><b><font color="#000080">-module</font></b>(sudoku)<font color="#990000">.</font>
 <b><font color="#000080">-author</font></b>(<u><font color="#0000FF">vmiklos@frugalware.org</font></u>)<font color="#990000">.</font>
 <b><font color="#000080">-vsn</font></b>(<font color="#FF0000">'2009-11-10'</font>)<font color="#990000">.</font>
-<b><font color="#000080">-export</font></b>([sudoku<font color="#990000">/</font><font color="#993399">1</font>])<font color="#990000">.</font>
+<b><font color="#000080">-compile</font></b>(export<font color="#990000">_</font>all)<font color="#990000">.</font>
 
 <i><font color="#9A1900">% Return the value of Fun or an empty list based on the value of If.</font></i>
 <i><font color="#9A1900">% </font></i><font color="#009900">@spec</font><i><font color="#9A1900"> fun_or_empty(If::bool(), Fun::fun() -&gt; [any()]) -&gt; Ret::[any()]</font></i>
@@ -27,6 +27,14 @@ http://www.gnu.org/software/src-highlite -->
 		<b><font color="#0000FF">true</font></b> <font color="#990000">-&gt;</font> <font color="#993399">0</font>;
 		<font color="#990000">_</font> <font color="#990000">-&gt;</font> <b><font color="#000000">lists:nth</font></b>((I<font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font>M<font color="#990000">+</font>J, Table)
 	<b><font color="#0000FF">end</font></b><font color="#990000">.</font>
+
+<i><font color="#9A1900">% Return a cell from a field.</font></i>
+<i><font color="#9A1900">% </font></i><font color="#009900">@spec</font><i><font color="#9A1900"> field(I::integer(), J::integer(), Table::[[any()]]) -&gt;</font></i>
+<i><font color="#9A1900">% 	Ret::any()</font></i>
+<i><font color="#9A1900">% Ret is the cell in the Ith row and Jth column of Table.</font></i>
+<b><font color="#000000">field</font></b>(I, J, Table) <font color="#990000">-&gt;</font>
+	<b><font color="#000000">lists:nth</font></b>(J, <b><font color="#000000">lists:nth</font></b>(I, Table))<font color="#990000">.</font>
+
 
 <i><font color="#9A1900">% Round up.</font></i>
 <i><font color="#9A1900">% </font></i><font color="#009900">@spec</font><i><font color="#9A1900"> ceil(X::float()) -&gt; Ret::integer().</font></i>
@@ -95,5 +103,4 @@ http://www.gnu.org/software/src-highlite -->
 		I <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(Y <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(Y <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> K),
 		(I<font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font>M<font color="#990000">+</font>J <font color="#990000">&lt;</font> <b><font color="#0000FF">length</font></b>(L)<font color="#990000">+</font><font color="#993399">1</font>],
 	Ok <font color="#990000">--</font> <b><font color="#000000">lists:append</font></b>([Swdeny, Rulesdeny, Rowdeny, Coldeny, Subdeny])<font color="#990000">.</font>
-
 </tt></pre>

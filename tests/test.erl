@@ -1,7 +1,7 @@
 -module(sudoku).
 -author(vmiklos@frugalware.org).
 -vsn('2009-11-10').
--export([sudoku/1]).
+-compile(export_all).
 
 % Return the value of Fun or an empty list based on the value of If.
 % @spec fun_or_empty(If::bool(), Fun::fun() -> [any()]) -> Ret::[any()]
@@ -23,6 +23,14 @@ field(I, J, Table, M) ->
 		true -> 0;
 		_ -> lists:nth((I-1)*M+J, Table)
 	end.
+
+% Return a cell from a field.
+% @spec field(I::integer(), J::integer(), Table::[[any()]]) ->
+% 	Ret::any()
+% Ret is the cell in the Ith row and Jth column of Table.
+field(I, J, Table) ->
+	lists:nth(J, lists:nth(I, Table)).
+
 
 % Round up.
 % @spec ceil(X::float()) -> Ret::integer().
@@ -91,4 +99,3 @@ possible(_P = {N, Rules, M, K}, L) ->
 		I <- lists:seq((ceil(Y / K) - 1)* K + 1, (ceil(Y / K) - 1)* K + K),
 		(I-1)*M+J < length(L)+1],
 	Ok -- lists:append([Swdeny, Rulesdeny, Rowdeny, Coldeny, Subdeny]).
-
