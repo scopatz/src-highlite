@@ -1,3 +1,7 @@
+2009-12-09  Lorenzo Bettini  <bettini@bettini-laptop-karmic>
+
+	* src/url.lang: improved email regular expression
+
 2009-12-06  Lorenzo Bettini  <bettini@bettini-laptop-karmic>
 
 	* src/erlang.lang: added

@@ -18,6 +18,8 @@ Version 3.1.2 (yet unreleased)
    * label element recognized in C/C++
    * qmake based build system available
    * searches for home directory also on windows
+   * improved logtalk.lang
+   * improved email regular expression in url.lang
 
 Version 3.1.1
 

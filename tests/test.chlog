@@ -1,11 +1,11 @@
-2002-08-08  Lorenzo Bettini  <lb-bl@foo>
+2002-08-08  Lorenzo Bettini  <lb-bl@foo.it>
 
 	* src/Makefile.am (source_highlight_SOURCES): correctly include
 	changelog_scanner.ll
 
         * this is a comment without a file name
 
-2002-08-02  John Millaway  <millaway-bar@foo_bar-com>
+2002-08-02  John Millaway  <millaway-bar@foo_bar-com.com>
 
 	* src/flex_scanner.ll: Added scanner for flex
 

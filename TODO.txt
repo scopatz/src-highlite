@@ -125,7 +125,4 @@ texinfo generate html and put in the doc source folder
 
 common.pri for files in src
 
-A better expression for email, which catches only valid emails,
-e.g., not foo@bar.
-
 INCREMENT REVISION

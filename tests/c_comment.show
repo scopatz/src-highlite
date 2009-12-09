@@ -2,7 +2,7 @@ STATE 1 default: normal
   rule (comment) "///" (exit level: 0, next: 2)
     STATE 2 default: comment
       rule (comment) "\z" (exit level: 1, next: 0)
-      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+\.[[:word:]]+(?:>?))" (exit level: 0, next: 0)
       rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
       rule (keyword) "(?:<(?:(?:[sS][tT][yY][lL][eE])|(?:(?:[nN][oO])?[sS][cC][rR][iI][pP][tT])|(?:[xX][mM][pP])|(?:[iI][fF][rR][aA][mM][eE])|(?:[nN][oO][eE][mM][bB][eE][dD])|(?:[nN][oO][fF][rR][aA][mM][eE][sS])))" (exit level: 0, next: 3)
         STATE 3 default: normal
@@ -105,7 +105,7 @@ STATE 1 default: normal
   rule (comment) "/\*\*" (exit level: 0, next: 23)
     STATE 23 default: comment
       rule (comment) "\*/" (exit level: 1, next: 0)
-      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+\.[[:word:]]+(?:>?))" (exit level: 0, next: 0)
       rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
       rule (keyword) "(?:<(?:(?:[sS][tT][yY][lL][eE])|(?:(?:[nN][oO])?[sS][cC][rR][iI][pP][tT])|(?:[xX][mM][pP])|(?:[iI][fF][rR][aA][mM][eE])|(?:[nN][oO][eE][mM][bB][eE][dD])|(?:[nN][oO][fF][rR][aA][mM][eE][sS])))" (exit level: 0, next: 24)
         STATE 24 default: normal
@@ -205,6 +205,6 @@ STATE 1 default: normal
   rule (comment) "/\*" (exit level: 0, next: 43)
     STATE 43 default: comment
       rule (comment) "\*/" (exit level: 1, next: 0)
-      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
+      rule (url) "(?:(?:<?)[[:word:]\./\-_~]+\@[[:word:]\./\-_~]+\.[[:word:]]+(?:>?))" (exit level: 0, next: 0)
       rule (url) "(?:(?:<?)[[:word:]]+://[[:word:]\./\-_~]+(?:>?))" (exit level: 0, next: 0)
       rule (todo) "(?:(?:TODO|FIXME|BUG)(?:[:]?))" (exit level: 0, next: 0)
