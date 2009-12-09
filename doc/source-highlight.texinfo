@@ -11,6 +11,8 @@
 @set myhomepage @uref{http://www.lorenzobettini.it}
 @set langfilesurl @uref{http://www.gnu.org/software/src-highlite/lang_files/}
 @set outlangfilesurl @uref{http://www.gnu.org/software/src-highlite/outlang_files/}
+@set srchilite Source-highlight
+@set srchilitelib Source-highlight library
 
 @copying
 This manual is for GNU Source-highlight 
@@ -497,6 +499,7 @@ together with Source-highlight in order to facilitate the migration
 (however their use is not advised and it is deprecated).
 
 @menu
+* Building with qmake::         
 * Download::                    
 * Anonymous Git Checkout::      
 * What you need to build source-highlight::  
@@ -507,7 +510,65 @@ together with Source-highlight in order to facilitate the migration
 * Building .rpm::               
 @end menu
 
-@node Download, Anonymous Git Checkout, Installation, Installation
+@node Building with qmake, Download, Installation, Installation
+@section Building with qmake
+@cindex qmake
+
+Since version 3.1.2, @value{srchilite} can be built also using
+@code{qmake}, the build tool from Qt libraries (@uref{http://qt.nokia.com}).
+This was made available to build @value{srchilite} on Windows based systems
+without using a Unix shell, and in particular to build @value{srchilite}
+@cindex MSVC
+with Microsoft MSVC compiler.  You should use this method only if you
+don't have a Unix shell or if you really need to use the MSVC compiler
+(e.g., if you want to build @value{srchilitelib} to be used in MSVC
+based programs.
+@cindex boost
+You still need the boost regex library, and if you
+use MSVC, you can find installation packages for this library at
+@url{http://www.boostpro.com}.
+
+This build mechanism is still experimental, and, when using MSVC, only
+a static version of @value{srchilitelib} can be built (not a .dll).
+@cindex MinGW
+You can also use this method if you have the MinGW compiler,
+@uref{http://www.mingw.org}, (e.g.,
+the one that comes with Qt Windows distribution) and you don't have
+@cindex msys
+Msys (@uref{http://www.mingw.org/wiki/MSYS}).  Otherwise, you should
+still use the @code{configure} based mechanims.
+
+Using @code{qmake}, only a few options can be specified during the building
+(besides the ones you usually use with qmake), and these options can
+be specified only using environment variables:
+
+@table @code
+@item BOOST_REGEX
+By default, @code{boost_regex} will be used to link the boost library
+(i.e., @code{-lboost_regex}); if your boost regex library has a different
+name you must specify this name using this environment variable; e.g.,
+if the library file is called @code{libboost_regex-mt.lib} or
+@code{boost_regex-mt.dll} you must set this variable to
+@code{boost_regex-mt}.
+@item INCPATH
+Specify the path of the boost header files.
+@item LIBS
+Specify the path of the boost lib files.
+@end table
+
+Please, take into consideration that specifying the boost library
+include and library paths is completely up to you, using
+@code{INCPATH} and @code{LIBS}, if they're not in the system
+path directories.
+
+Also remember to always use the option @code{-recursive} when running
+qmake.
+
+If you then want to run @code{make install}, you can use the
+variable @code{INSTALL_ROOT} to prefix the installation path, which,
+otherwise, is the root directory.
+
+@node Download, Anonymous Git Checkout, Building with qmake, Installation
 @section Download
 @cindex download
 
@@ -589,6 +650,7 @@ succeed.
 @cindex compilation requirements
 @cindex building requirements
 
+@cindex boost
 Since version 2.0 Source-highlight relies on regular expressions as
 provided by boost (@uref{http://www.boost.org}), so you need to install at
 least the regex library from boost.  

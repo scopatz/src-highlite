@@ -50,13 +50,23 @@ have compiled fine, so you can run 'make check'.
 
 Files will be installed in the following directories:
 
-    * Executables          -> /prefix/bin
-    * docs and samples     -> /prefix/share/doc/source-highlight
-    * conf files           -> /prefix/share/source-highlight
+Executables
+    prefix/bin
+docs and output examples
+    prefix/share/doc/source-highlight
+library examples
+    prefix/share/doc/source-highlight/examples
+library API documentation
+    prefix/share/doc/source-highlight/api
+conf files
+    prefix/share/source-highlight 
 
 Default value for prefix is /usr/local but you may change it with
 --prefix option to configure (see above).
 
+You can also build source-highlight using qmake.
+For further information, please look at the section
+"Building with qmake" in the manual.
 
 Building .rpm
 
