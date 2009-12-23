@@ -66,9 +66,9 @@ libsource_highlight_la_SOURCES = \
 	settings.cpp \
 	versions.cpp \
 	verbosity.cpp \
-	sourcehighlight.cpp styleparser.yy \
-	stylescanner.ll outlangdefparser.yy \
-	stylecssparser.yy stylecssscanner.ll outlangdefscanner.ll \
+	sourcehighlight.cpp styleparser.cc \
+	stylescanner.cc outlangdefparser.cc \
+	stylecssparser.cc stylecssscanner.cc outlangdefscanner.cc \
 	debuglistener.cpp langmap.cpp stylefileparser.cpp \
 	langelem.cpp statelangelem.cpp \
 	langelems.cpp statestartlangelem.cpp stringlistlangelem.cpp \
@@ -88,7 +88,7 @@ libsource_highlight_la_SOURCES = \
 	regexpreprocessor.cpp \
 	highlightstatebuilder.cpp highlightstatebuilder.hpp \
 	highlightbuilderexception.cpp langdefmanager.cpp \
-	langdefparser.yy langdefscanner.ll \
+	langdefparser.cc langdefscanner.cc \
 	languageinfer.cpp \
 	parserexception.cpp \
 	stringtable.cpp vardefinitions.cpp \
@@ -146,7 +146,11 @@ EXTRA_DIST = $(h_sources) \
 langelemsprinter_dbtab.cc \
 highlightstatebuilder_dbtab.cc \
 srchilite.doxyfile.in \
-srchilite.pro
+srchilite.pro \
+styleparser.yy \
+stylescanner.ll outlangdefparser.yy \
+stylecssparser.yy stylecssscanner.ll outlangdefscanner.ll \
+langdefparser.yy langdefscanner.ll
 
 BUILT_SOURCES = styleparser.cc styleparser.h \
 stylecssparser.cc stylecssparser.h \

@@ -11,15 +11,15 @@
 SUFFIXES = .ggo
 
 if NO_GENGETOPT
-.ggo.c:
-	touch $@
+#.ggo.c:
+#	touch $@
 else
 
 check-regexp_cmd.c: $(srcdir)/check-regexp_cmd.ggo
-	$(GENGETOPT) --input $(srcdir)/check-regexp_cmd.ggo --unamed-opts -F check-regexp_cmd
+	$(GENGETOPT) --input $(srcdir)/check-regexp_cmd.ggo --unamed-opts -F check-regexp_cmd --output-dir=$(srcdir)
 
 .ggo.c:
-	$(GENGETOPT) --input $< --unamed-opts --no-handle-help --no-handle-version
+	$(GENGETOPT) --input $< --unamed-opts --no-handle-help --no-handle-version --output-dir=$(srcdir)
 endif
 
 # in order to make it work with parallel make we need to make

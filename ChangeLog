@@ -1,3 +1,11 @@
+2009-12-23  Lorenzo Bettini  <bettini@bettini-prog-karmic>
+
+	* lib/srchilite/Makefile.am (libsource_highlight_la_SOURCES): put
+	generated bison and flex files in sources
+
+	* src/Makefile.am: when gengetopt is missing don't do
+	anything (don't touch files)
+
 2009-12-09  Lorenzo Bettini  <bettini@bettini-laptop-karmic>
 
 	* src/url.lang: improved email regular expression
