@@ -8,7 +8,7 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
-Version 3.1.2 (yet unreleased)
+Version 3.1.2
 
    * infer language for files starting with <? and <!doctype
    * language definition for manifest files, asm, applescript,

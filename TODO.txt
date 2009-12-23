@@ -119,10 +119,7 @@ ABSOLUTEDATADIR=\\\"/usr/local\\\" make it configurable
 
 PREFIX variable to pass to qmake
 
-BOOST_REGEX=name of the library
-
 texinfo generate html and put in the doc source folder
 
 common.pri for files in src
 
-INCREMENT REVISION

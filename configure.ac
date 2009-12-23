@@ -26,7 +26,7 @@ AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 #AC_SUBST(API_VERSION)
 
 #shared library versioning
-LIBRARY_VERSION=3:0:0
+LIBRARY_VERSION=3:1:0
 #               | | |
 #        +------+ | +---+
 #        |        |     |
