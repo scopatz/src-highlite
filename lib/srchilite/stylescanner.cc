@@ -1,6 +1,6 @@
-#line 2 "stylescanner.cc"
+#line 2 "../../../lib/srchilite/stylescanner.cc"
 
-#line 4 "stylescanner.cc"
+#line 4 "../../../lib/srchilite/stylescanner.cc"
 
 #define  YY_INT_ALIGNED short int
 
@@ -607,7 +607,7 @@ static void buffer(const char *s);
 static const std::string *flush_buffer();
 
 
-#line 611 "stylescanner.cc"
+#line 611 "../../../lib/srchilite/stylescanner.cc"
 
 #define INITIAL 0
 #define COMMENT_STATE 1
@@ -799,7 +799,7 @@ YY_DECL
 #line 66 "../../../lib/srchilite/stylescanner.ll"
 
 
-#line 803 "stylescanner.cc"
+#line 803 "../../../lib/srchilite/stylescanner.cc"
 
 	if ( !(yy_init) )
 		{
@@ -1020,7 +1020,7 @@ YY_RULE_SETUP
 #line 106 "../../../lib/srchilite/stylescanner.ll"
 ECHO;
 	YY_BREAK
-#line 1024 "stylescanner.cc"
+#line 1024 "../../../lib/srchilite/stylescanner.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT_STATE):
 case YY_STATE_EOF(STRING_STATE):
