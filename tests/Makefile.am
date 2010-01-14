@@ -283,6 +283,7 @@ test_linerange_sep.html \
 test_regexrange1.html test_regexrange2.html \
 test_regexrange3.html test_regexrange4.html \
 test_nobgcolor.cpp test_nobgcolor.html \
+test_tabs.java.html \
 test.texinfo test.texinfo.html \
 test.hs test.hs.html \
 test.ecore test.ecore.html \
