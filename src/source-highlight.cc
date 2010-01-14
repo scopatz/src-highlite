@@ -334,6 +334,11 @@ int main(int argc, char * argv[]) {
             sourcehighlight.setOptimize(false);
         }
 
+        int tabs = 0;
+        if (args_info.tab_given) {
+            tabs = args_info.tab_arg;
+        }
+
         if (args_info.header_given)
             sourcehighlight.setHeaderFileName(args_info.header_arg);
 
@@ -359,7 +364,11 @@ int main(int argc, char * argv[]) {
             // when generating line numbers tabs must be translated
             // otherwise the output line will not be aligned
             // due to the presence of line numbers
-            sourcehighlight.setTabSpaces(8);
+            sourcehighlight.setTabSpaces(tabs ? tabs : 8);
+        }
+
+        if (tabs) {
+            sourcehighlight.setTabSpaces(tabs);
         }
 
         // whether to give precedence to language inference

@@ -423,7 +423,8 @@ check_wrong_regexranges \
 check_wrong_syntaxmode \
 check_lineranges \
 check_regexranges \
-check_nobgcolor
+check_nobgcolor \
+check_tabs
 
 remove_css_html_files:
 	rm -f *.css.java.html *.nf_css.java.html
@@ -971,9 +972,14 @@ check_regexranges:
 	$(DIFF) $(srcdir)/test_regexrange4.html test_regexrange4.out.html
 
 check_nobgcolor:
-	$(PROGEXE) $(DATADIROPTION) --style-file=texinfo.style --doc --title="source file" -i $(srcdir)/test_nobgcolor.cpp -o test_nobgcolor.out.html
+	$(PROGNAME) --style-file=texinfo.style --doc --title="source file" -i $(srcdir)/test_nobgcolor.cpp -o test_nobgcolor.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test_nobgcolor.html test_nobgcolor.out.html
+
+check_tabs:
+	$(JAVA2HTML) --tab=4 -i $(srcdir)/test.java -o test_tabs.java.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test_tabs.java.html test_tabs.java.out.html
 
 
 #$(PROG_NOOUTLANGDEF) -i $(srcdir)/test.simple -o test.err_out --data-dir=/tmp 2-o missing_langmap2.err_out || true

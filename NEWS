@@ -8,6 +8,10 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 3.1.3
+
+   * --tab option is correcly handled
+
 Version 3.1.2
 
    * infer language for files starting with <? and <!doctype

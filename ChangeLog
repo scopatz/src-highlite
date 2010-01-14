@@ -1,3 +1,7 @@
+2010-01-14  bettini  <bettini@bettini-laptop>
+
+	* src/source-highlight.cc (main): tab option is handled
+
 2009-12-23  Lorenzo Bettini  <bettini@bettini-prog-karmic>
 
 	* lib/srchilite/Makefile.am (libsource_highlight_la_SOURCES): put
