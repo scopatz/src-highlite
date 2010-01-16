@@ -11,6 +11,8 @@ Please send source-highlight bug reports to bug-source-highlight at gnu.org
 Version 3.1.3
 
    * --tab option is correcly handled
+   * install script with the executable bit
+   * bash is highlighted
 
 Version 3.1.2
 

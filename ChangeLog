@@ -1,3 +1,7 @@
+2010-01-16  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* src/lang.map: bash mapped to sh.lang
+
 2010-01-14  bettini  <bettini@bettini-laptop>
 
 	* src/source-highlight.cc (main): tab option is handled

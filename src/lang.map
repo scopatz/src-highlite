@@ -72,6 +72,7 @@ docbook = xml.lang
 kidl = xml.lang
 xml = xml.lang
 xhtml = xml.lang
+bash = sh.lang
 sh = sh.lang
 csh = sh.lang
 ksh = sh.lang
