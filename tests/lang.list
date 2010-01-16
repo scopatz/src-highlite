@@ -8,6 +8,7 @@ applescript = applescript.lang
 asm = asm.lang
 autoconf = m4.lang
 awk = awk.lang
+bash = sh.lang
 bat = bat.lang
 batch = bat.lang
 bib = bib.lang
