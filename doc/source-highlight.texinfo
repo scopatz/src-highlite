@@ -522,7 +522,7 @@ without using a Unix shell, and in particular to build @value{srchilite}
 with Microsoft MSVC compiler.  You should use this method only if you
 don't have a Unix shell or if you really need to use the MSVC compiler
 (e.g., if you want to build @value{srchilitelib} to be used in MSVC
-based programs.
+based programs).
 @cindex boost
 You still need the boost regex library, and if you
 use MSVC, you can find installation packages for this library at

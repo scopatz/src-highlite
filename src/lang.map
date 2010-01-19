@@ -20,6 +20,7 @@ php3 = php.lang
 php4 = php.lang
 php5 = php.lang
 php = php.lang
+ctp = php.lang
 python = python.lang
 py = python.lang
 ruby = ruby.lang
