@@ -72,7 +72,8 @@ bison.lang      c.lang cpp.lang       javascript.lang  perl.lang    ruby.lang \
 c_comment.lang  flex.lang      log.lang         php.lang     sml.lang \
 caml.lang       function.lang  lua.lang         prolog.lang  symbols.lang \
 changelog.lang  java.lang      number.lang      python.lang  url.lang \
-pascal.lang fortran.lang fixed-fortran.lang html.lang latex.lang logtalk.lang \
+pascal.lang fortran.lang fixed-fortran.lang \
+html.lang html_simple.lang latex.lang logtalk.lang \
 diff.lang c_string.lang langdef.lang outlang.lang style.lang \
 extreme_comment.lang extreme_comment2.lang extreme_comment3.lang \
 postscript.lang csharp.lang xml.lang sh.lang script_comment.lang \

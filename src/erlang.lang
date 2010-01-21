@@ -8,7 +8,7 @@ keyword = "div|rem|or|xor|bor|bxor|bsl|bsr|and|band|not|bnot|abs|alive|apply|ato
 
 environment comment start "%" begin
   include "url.lang"
-  include "html.lang"
+  include "html_simple.lang"
   type = '@[[:alpha:]]+'
   include "todo.lang"
 end

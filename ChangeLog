@@ -1,3 +1,9 @@
+2010-01-21  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* src/html_simple.lang: version with only html features
+	no other languages (to be used for inclusion in comment
+	environments)
+
 2010-01-16  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* src/lang.map: bash mapped to sh.lang

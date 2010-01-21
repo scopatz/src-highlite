@@ -27,6 +27,7 @@ cs = csharp.lang
 csh = sh.lang
 csharp = csharp.lang
 css = css.lang
+ctp = php.lang
 d = d.lang
 desktop = desktop.lang
 diff = diff.lang
