@@ -1,25 +1,26 @@
-preproc = "include|include_once|require|require_once"
+state symbol delim "<?php" "?>" multiline begin
 
-comment start "//"
-include "script_comment.lang"
+  preproc = "include|include_once|require|require_once"
 
-include "number.lang"
+  comment start "//"
+  include "script_comment.lang"
 
-string delim "\"" "\"" escape "\\" multiline
-string delim "'" "'"  escape "\\" multiline
+  include "number.lang"
 
-keyword = "and|or|xor|__FILE__|exception|php_user_filter|__LINE__|array|as|break|case|cfunction|class|const|continue|declare|default|die|do|each|echo|else|elseif|empty|enddeclare|endfor|endforeach|endif|endswitch|endwhile|eval|exit|extends|for|foreach|function|global|if|isset|list|new|old_function|print|return|static|switch|unset|use|var|while|__FUNCTION__|__CLASS__|__METHOD__"
+  string delim "\"" "\"" escape "\\" multiline
+  string delim "'" "'"  escape "\\" multiline
 
-include "c_comment.lang"
+  keyword = "and|or|xor|__FILE__|exception|php_user_filter|__LINE__|array|as|break|case|cfunction|class|const|continue|declare|default|die|do|each|echo|else|elseif|empty|enddeclare|endfor|endforeach|endif|endswitch|endwhile|eval|exit|extends|for|foreach|function|global|if|isset|list|new|old_function|print|return|static|switch|unset|use|var|while|__FUNCTION__|__CLASS__|__METHOD__|null|false|true"
 
-variable = '(?:\$[#]?|@|%)[[:word:]]+'
+  include "c_comment.lang"
 
-symbol = "<?php"
+  variable = '(?:\$[#]?|@|%)[[:word:]]+'
 
-include "symbols.lang"
+  include "symbols.lang"
 
-cbracket = "{|}"
+  cbracket = "{|}"
 
-include "function.lang"
+  include "function.lang"
+end
 
-
+include "html.lang"

@@ -1,0 +1,61 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#000080">&lt;!DOCTYPE</font></b> <font color="#009900">html</font> <font color="#009900">PUBLIC</font> <font color="#FF0000">"-//W3C//DTD XHTML 1.0 Transitional//EN"</font> <font color="#FF0000">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</font><b><font color="#000080">&gt;</font></b>
+<b><font color="#0000FF">&lt;html</font></b> <font color="#009900">xmlns</font><font color="#990000">=</font><font color="#FF0000">"http://www.w3.org/1999/xhtml"</font><b><font color="#0000FF">&gt;</font></b>
+<b><font color="#0000FF">&lt;head&gt;</font></b>
+	<font color="#990000">&lt;?php</font> <b><font color="#0000FF">echo</font></b> <font color="#009900">$html</font><font color="#990000">-&gt;</font><b><font color="#000000">charset</font></b><font color="#990000">();</font> <font color="#990000">?&gt;</font>
+	<b><font color="#0000FF">&lt;title&gt;</font></b>
+		&lt;?php __('PhpBibliography:'); ?&gt;
+		&lt;?php echo $title_for_layout; ?&gt;
+	<b><font color="#0000FF">&lt;/title&gt;</font></b>
+<b><font color="#0000FF">&lt;meta</font></b> <font color="#009900">name</font><font color="#990000">=</font><font color="#FF0000">"GENERATOR"</font> <font color="#009900">content</font><font color="#990000">=</font><font color="#FF0000">"PhpBibliography &lt;?php echo $phpbibliography_version;?&gt;, http://phpbibliography.sf.net"</font> <b><font color="#0000FF">/&gt;</font></b>
+	<font color="#990000">&lt;?php</font>
+		<b><font color="#0000FF">echo</font></b> <font color="#009900">$html</font><font color="#990000">-&gt;</font><b><font color="#000000">meta</font></b><font color="#990000">(</font><font color="#FF0000">'icon'</font><font color="#990000">);</font>
+
+		<b><font color="#0000FF">echo</font></b> <font color="#009900">$html</font><font color="#990000">-&gt;</font><b><font color="#000000">css</font></b><font color="#990000">(</font><font color="#FF0000">'phpbibliography'</font><font color="#990000">);</font>
+		<i><font color="#9A1900">//echo $html-&gt;css('cake.generic');</font></i>
+		
+		<b><font color="#0000FF">echo</font></b> <font color="#009900">$scripts_for_layout</font><font color="#990000">;</font>
+	<font color="#990000">?&gt;</font>
+<b><font color="#0000FF">&lt;/head&gt;</font></b>
+<b><font color="#0000FF">&lt;body&gt;</font></b>
+	<b><font color="#0000FF">&lt;div</font></b> <font color="#009900">id</font><font color="#990000">=</font><font color="#FF0000">"container"</font><b><font color="#0000FF">&gt;</font></b>
+		<b><font color="#0000FF">&lt;div</font></b> <font color="#009900">id</font><font color="#990000">=</font><font color="#FF0000">"header"</font><b><font color="#0000FF">&gt;</font></b>
+			<b><font color="#0000FF">&lt;h1&gt;</font></b><font color="#990000">&lt;?php</font> <i><font color="#9A1900">/* echo $html-&gt;link(__('CakePHP: the rapid development php framework', true), '</font></i><u><font color="#0000FF">http://cakephp.org</font></u><i><font color="#9A1900">'); */</font></i> <font color="#990000">?&gt;</font><b><font color="#0000FF">&lt;/h1&gt;</font></b>
+			<b><font color="#0000FF">&lt;cake:nocache&gt;</font></b>
+			<font color="#990000">&lt;?php</font> 
+			<b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#009900">$session</font><font color="#990000">-&gt;</font><b><font color="#000000">check</font></b><font color="#990000">(</font><font color="#FF0000">'User'</font><font color="#990000">))</font> <font color="#FF0000">{</font>
+				<b><font color="#0000FF">echo</font></b> <b><font color="#000000">__</font></b><font color="#990000">(</font><font color="#FF0000">'Logged in as: '</font><font color="#990000">,</font><b><font color="#0000FF">true</font></b><font color="#990000">);</font>
+				<b><font color="#0000FF">echo</font></b> <font color="#009900">$html</font><font color="#990000">-&gt;</font><b><font color="#000000">link</font></b><font color="#990000">(</font><font color="#009900">$session</font><font color="#990000">-&gt;</font><b><font color="#000000">read</font></b><font color="#990000">(</font><font color="#FF0000">'User.username'</font><font color="#990000">),</font> 
+					<b><font color="#0000FF">array</font></b><font color="#990000">(</font><font color="#FF0000">'controller'</font> <font color="#990000">=&gt;</font> <font color="#FF0000">'admins'</font><font color="#990000">,</font> <font color="#FF0000">'action'</font> <font color="#990000">=&gt;</font> <font color="#FF0000">'edit'</font><font color="#990000">,</font> <font color="#009900">$session</font><font color="#990000">-&gt;</font><b><font color="#000000">read</font></b><font color="#990000">(</font><font color="#FF0000">'User.id'</font><font color="#990000">),</font> <font color="#FF0000">'admin'</font> <font color="#990000">=&gt;</font> <b><font color="#0000FF">true</font></b><font color="#990000">));</font>
+				<b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#009900">$session</font><font color="#990000">-&gt;</font><b><font color="#000000">read</font></b><font color="#990000">(</font><font color="#FF0000">'User.superuser'</font><font color="#990000">))</font> <font color="#FF0000">{</font>
+					<b><font color="#0000FF">echo</font></b> <font color="#FF0000">' '</font><font color="#990000">.</font><b><font color="#000000">__</font></b><font color="#990000">(</font><font color="#FF0000">'(superuser)'</font><font color="#990000">,</font> <b><font color="#0000FF">true</font></b><font color="#990000">);</font>
+				<font color="#FF0000">}</font>
+				<b><font color="#0000FF">echo</font></b> <font color="#FF0000">' - '</font><font color="#990000">;</font>
+				<b><font color="#0000FF">echo</font></b> <font color="#009900">$html</font><font color="#990000">-&gt;</font><b><font color="#000000">link</font></b><font color="#990000">(</font><b><font color="#000000">__</font></b><font color="#990000">(</font><font color="#FF0000">'Logout'</font><font color="#990000">,</font> <b><font color="#0000FF">true</font></b><font color="#990000">),</font> 
+					<b><font color="#0000FF">array</font></b><font color="#990000">(</font><font color="#FF0000">'controller'</font> <font color="#990000">=&gt;</font> <font color="#FF0000">'admins'</font><font color="#990000">,</font> <font color="#FF0000">'action'</font> <font color="#990000">=&gt;</font> <font color="#FF0000">'logout'</font><font color="#990000">,</font> <font color="#FF0000">'admin'</font> <font color="#990000">=&gt;</font> <b><font color="#0000FF">false</font></b><font color="#990000">));</font>
+			<font color="#FF0000">}</font> 
+			<font color="#990000">?&gt;</font>
+			<b><font color="#0000FF">&lt;/cake:nocache&gt;</font></b>
+		<b><font color="#0000FF">&lt;/div&gt;</font></b>
+		<b><font color="#0000FF">&lt;div</font></b> <font color="#009900">id</font><font color="#990000">=</font><font color="#FF0000">"content"</font><b><font color="#0000FF">&gt;</font></b>
+
+			<font color="#990000">&lt;?php</font> <font color="#009900">$session</font><font color="#990000">-&gt;</font><b><font color="#000000">flash</font></b><font color="#990000">();</font> <font color="#990000">?&gt;</font>
+
+			<font color="#990000">&lt;?php</font> <b><font color="#0000FF">echo</font></b> <font color="#009900">$content_for_layout</font><font color="#990000">;</font> <font color="#990000">?&gt;</font>
+
+		<b><font color="#0000FF">&lt;/div&gt;</font></b>
+		<b><font color="#0000FF">&lt;div</font></b> <font color="#009900">id</font><font color="#990000">=</font><font color="#FF0000">"footer"</font><b><font color="#0000FF">&gt;</font></b>
+			<font color="#990000">&lt;?php</font> <b><font color="#0000FF">echo</font></b> <font color="#009900">$html</font><font color="#990000">-&gt;</font><b><font color="#000000">link</font></b><font color="#990000">(</font>
+					<font color="#FF0000">'Powered by PhpBibliography'</font><font color="#990000">,</font>
+					<font color="#FF0000">'http://phpbibliography.sourceforge.net/'</font><font color="#990000">,</font>
+					<b><font color="#0000FF">array</font></b><font color="#990000">(</font><font color="#FF0000">'target'</font><font color="#990000">=&gt;</font><font color="#FF0000">'_blank'</font><font color="#990000">),</font> <b><font color="#0000FF">null</font></b><font color="#990000">,</font> <b><font color="#0000FF">false</font></b>
+				<font color="#990000">);</font>
+			<font color="#990000">?&gt;</font>
+		<b><font color="#0000FF">&lt;/div&gt;</font></b>
+	<b><font color="#0000FF">&lt;/div&gt;</font></b>
+	<font color="#990000">&lt;?php</font> <b><font color="#0000FF">echo</font></b> <font color="#009900">$cakeDebug</font><font color="#990000">;</font> <font color="#990000">?&gt;</font>
+<b><font color="#0000FF">&lt;/body&gt;</font></b>
+<b><font color="#0000FF">&lt;/html&gt;</font></b></tt></pre>

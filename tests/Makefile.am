@@ -90,7 +90,7 @@ PROLOG2HTML = $(PROGNAME) -s prolog $(STD_STYLE_HTML) --lang-def=$(srcdir)/../sr
 
 PERL2HTML = $(PROGNAME) -s perl $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/perl.lang
 
-PHP32HTML = $(PROGNAME) -s php3 $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/php.lang
+PHP2HTML = $(PROGNAME) -s php3 $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/php.lang
 
 PYTHON2HTML = $(PROGNAME) -s python $(STD_STYLE_HTML) --lang-def=$(srcdir)/../src/python.lang
 
@@ -526,10 +526,12 @@ check_perl2html:
 	$(DIFF) $(srcdir)/test_perl_lines.html test_perl_lines.out.html
 
 check_php32html:
-	$(PHP32HTML) < $(srcdir)/test.php3 -o test.php3.out.html
-	$(PHP32HTML) -n -i $(srcdir)/test.php3 -o test_php3_lines.out.html
+	$(PHP2HTML) < $(srcdir)/test.php3 -o test.php3.out.html
+	$(PHP2HTML) < $(srcdir)/test_with_html.php -o test_with_html.php.out.html
+	$(PHP2HTML) -n -i $(srcdir)/test.php3 -o test_php3_lines.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.php3.html test.php3.out.html
+	$(DIFF) $(srcdir)/test_with_html.php.html test_with_html.php.out.html
 	$(DIFF) $(srcdir)/test_php3_lines.html test_php3_lines.out.html
 
 check_python2html:
