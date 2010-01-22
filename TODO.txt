@@ -123,9 +123,7 @@ texinfo generate html and put in the doc source folder
 
 common.pri for files in src
 
-embed html in php, css and javascript in html
 doxygen
-doxygen in javascript
 doxygen in C/C++ (\ syntax)
 
 deal with php in html title and other special cases
