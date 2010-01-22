@@ -1,6 +1,7 @@
 2010-01-22  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* src/html.lang: handle embedded css
+	handle embedded javascript
 
 2010-01-21  Lorenzo Bettini  <bettini@bettini-laptop>
 
