@@ -1,2 +1,11 @@
+# deal with embedded CSS
+state keyword = "<style" begin
+    include "key_string.lang"
+    state keyword = '>' begin
+    	keyword = "</style>" exit 2
+	include "css.lang"
+    end
+end
+
 include "html_simple.lang"
 

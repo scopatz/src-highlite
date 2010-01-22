@@ -1,3 +1,7 @@
+2010-01-22  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* src/html.lang: handle embedded css
+
 2010-01-21  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* src/php.lang: added keywords null, false, true

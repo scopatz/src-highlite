@@ -182,6 +182,7 @@ test_java_lines.html test_cpp_lines.html test_pl_lines.html \
 test.pm test_comments.pm test.pm.html test_comments.pm.html \
 test_perl_lines.html \
 test.php3 test.php3.html test_php3_lines.html \
+test_with_html.php.html test_with_html.php \
 test.py test.py.html test_python_lines.html \
 test_comments.py test_comments.py.html test_py_comments_lines.html \
 test_xhtml.html test_xhtml_notfixed.html test_xhtml_doc.html \
@@ -204,6 +205,7 @@ error.log error.log.html \
 syslog.log syslog.log.html \
 test.pas test.pas.html \
 test.htm test.htm.html \
+test_with_embed.htm test_with_embed.htm.html \
 test_html5.htm test_html5.htm.html \
 test2.htm test2.htm.html \
 test.diff test.diff.html \
@@ -615,10 +617,12 @@ check_html:
 	$(PROGNAME) -i $(srcdir)/test.htm --title="html output formatted in html" -o test.htm.out.html
 	$(PROGNAME) -i $(srcdir)/test2.htm --title="html output formatted in html" -o test2.htm.out.html
 	$(PROGNAME) -i $(srcdir)/test_html5.htm --title="html output formatted in html" -o test_html5.htm.out.html
+	$(PROGNAME) -i $(srcdir)/test_with_embed.htm --title="html output formatted in html" -o test_with_embed.htm.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.htm.html test.htm.out.html
 	$(DIFF) $(srcdir)/test2.htm.html test2.htm.out.html
 	$(DIFF) $(srcdir)/test_html5.htm.html test_html5.htm.out.html
+	$(DIFF) $(srcdir)/test_with_embed.htm.html test_with_embed.htm.out.html
 
 check_xml:
 	$(PROGNAME) -i $(srcdir)/test.xml --title="xml formatted in html" -o test.xml.out.html
