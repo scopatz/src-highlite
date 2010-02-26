@@ -412,6 +412,15 @@ using the source-highlight CGI.
 
 @uref{http://code.google.com/p/php-source-highlight/}
 
+@item
+@cindex SIP
+@cindex Pythin
+@cindex PyQt
+Roberto Alsina made a partial python binding using SIP so 
+that you can use Source-Highlight-Qt in PyQt programs.
+
+@uref{http://marave.googlecode.com/svn/trunk/marave/highlight/}
+
 
 @end itemize
 
