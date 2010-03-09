@@ -1,0 +1,61 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">// Created from samples at</font></i>
+<i><font color="#9A1900">// http://code.google.com/apis/protocolbuffers/docs/proto.html</font></i>
+<b><font color="#000080">import</font></b> <font color="#FF0000">"google/protobuf/descriptor.proto"</font>
+
+<b><font color="#000080">option</font></b> optimize_for <font color="#990000">=</font> CODE_SIZE<font color="#990000">;</font>
+
+<b><font color="#000080">package</font></b> test<font color="#990000">;</font>
+
+<b><font color="#0000FF">extend</font></b> google.protobuf.FileOptions <font color="#FF0000">{</font>
+  <b><font color="#0000FF">optional</font></b> <font color="#009900">string</font> my_file_option <font color="#990000">=</font> <font color="#993399">50000</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+<b><font color="#0000FF">extend</font></b> google.protobuf.MessageOptions <font color="#FF0000">{</font>
+  <b><font color="#0000FF">optional</font></b> <font color="#009900">int32</font> my_message_option <font color="#990000">=</font> <font color="#993399">50001</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+<b><font color="#0000FF">extend</font></b> google.protobuf.FieldOptions <font color="#FF0000">{</font>
+  <b><font color="#0000FF">optional</font></b> <font color="#009900">float</font> my_field_option <font color="#990000">=</font> <font color="#993399">50002</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+<b><font color="#0000FF">extend</font></b> google.protobuf.EnumOptions <font color="#FF0000">{</font>
+  <b><font color="#0000FF">optional</font></b> <font color="#009900">bool</font> my_enum_option <font color="#990000">=</font> <font color="#993399">50003</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+<b><font color="#0000FF">extend</font></b> google.protobuf.EnumValueOptions <font color="#FF0000">{</font>
+  <b><font color="#0000FF">optional</font></b> <font color="#009900">uint32</font> my_enum_value_option <font color="#990000">=</font> <font color="#993399">50004</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+<b><font color="#0000FF">extend</font></b> google.protobuf.ServiceOptions <font color="#FF0000">{</font>
+  <b><font color="#0000FF">optional</font></b> MyEnum my_service_option <font color="#990000">=</font> <font color="#993399">50005</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+<b><font color="#0000FF">extend</font></b> google.protobuf.MethodOptions <font color="#FF0000">{</font>
+  <b><font color="#0000FF">optional</font></b> MyMessage my_method_option <font color="#990000">=</font> <font color="#993399">50006</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#000080">option</font></b> <font color="#990000">(</font>my_file_option<font color="#990000">)</font> <font color="#990000">=</font> <font color="#FF0000">"Hello world!"</font><font color="#990000">;</font>
+
+<b><font color="#0000FF">message</font></b> <font color="#008080">MyMessage</font> <font color="#FF0000">{</font>
+  <b><font color="#000080">option</font></b> <font color="#990000">(</font>my_message_option<font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">1234</font><font color="#990000">;</font>
+
+  <b><font color="#0000FF">optional</font></b> <font color="#009900">int32</font> foo <font color="#990000">=</font> <font color="#993399">1</font> <font color="#990000">[(</font>my_field_option<font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">4.5</font><font color="#990000">];</font>
+  <b><font color="#0000FF">optional</font></b> <font color="#009900">string</font> bar <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#0000FF">enum</font></b> MyEnum <font color="#FF0000">{</font>
+  <b><font color="#000080">option</font></b> <font color="#990000">(</font>my_enum_option<font color="#990000">)</font> <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+
+  FOO <font color="#990000">=</font> <font color="#993399">1</font> <font color="#990000">[(</font>my_enum_value_option<font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">321</font><font color="#990000">];</font>
+  BAR <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#0000FF">service</font></b> <font color="#008080">MyService</font> <font color="#FF0000">{</font>
+  <b><font color="#000080">option</font></b> <font color="#990000">(</font>my_service_option<font color="#990000">)</font> <font color="#990000">=</font> FOO<font color="#990000">;</font>
+
+  <b><font color="#0000FF">method</font></b> MyMethod<font color="#990000">()</font> <font color="#FF0000">{</font>
+    <i><font color="#9A1900">// Note:  my_method_option has type MyMessage.  We can set each field</font></i>
+    <i><font color="#9A1900">//   within it using a separate "option" line.</font></i>
+    <b><font color="#000080">option</font></b> <font color="#990000">(</font>my_method_option<font color="#990000">)</font>.foo <font color="#990000">=</font> <font color="#993399">567</font><font color="#990000">;</font>
+    <b><font color="#000080">option</font></b> <font color="#990000">(</font>my_method_option<font color="#990000">)</font>.bar <font color="#990000">=</font> <font color="#FF0000">"Some string"</font><font color="#990000">;</font>
+  <font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+</tt></pre>
