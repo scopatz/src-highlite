@@ -14,6 +14,7 @@ Version 3.1.4
    * html handles embedded css and javascript
    * Google's Protocol Buffers language definition added
      (thanks to Joel Smith)
+   * CakePhp template files highlighted as php
 
 Version 3.1.3
 
