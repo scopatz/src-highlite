@@ -330,7 +330,8 @@ formats (e.g., HTML, XHTML, etc.).
 @item
 @cindex SourceHighlightIDE
 @cindex KDE
-SourceHighlightIDE is a small IDE (for KDE) I wrote for developing
+SourceHighlightIDE is a small IDE (based on Qt4 and
+Source-highlight-qt) I wrote for developing
 and debugging new language definitions for source-highlight:
 
 @uref{http://srchighliteide.sourceforge.net}.
@@ -421,6 +422,18 @@ that you can use Source-Highlight-Qt in PyQt programs.
 
 @uref{http://marave.googlecode.com/svn/trunk/marave/highlight/}
 
+@item
+@cindex Perl
+A perl binding for source-highlight is available at CPAN:
+
+@uref{http://search.cpan.org/perldoc?Syntax::SourceHighlight}
+
+@item
+@cindex Pastebin
+Danijel Tasov wrote a pastebin service based on
+perl source-highlight binding:
+
+@uref{http://pb.rbfh.de}
 
 @end itemize
 
