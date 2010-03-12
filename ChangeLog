@@ -1,3 +1,8 @@
+2010-03-12  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* src/proto.lang: Google's Protocol Buffers language 
+	definition added (thanks to Joel Smith)
+
 2010-01-22  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* src/html.lang: handle embedded css

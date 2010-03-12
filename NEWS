@@ -12,6 +12,8 @@ Version 3.1.4
 
    * php handles embedded html
    * html handles embedded css and javascript
+   * Google's Protocol Buffers language definition added
+     (thanks to Joel Smith)
 
 Version 3.1.3
 
