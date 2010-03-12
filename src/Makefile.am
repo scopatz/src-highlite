@@ -81,7 +81,8 @@ tcl.lang sql.lang bib.lang makefile.lang css.lang m4.lang \
 default.lang nohilite.lang slang.lang key_string.lang properties.lang \
 desktop.lang lsm.lang spec.lang haxe.lang ldap.lang glsl.lang xorg.lang \
 clike_vardeclaration.lang scala.lang ada.lang conf.lang pc.lang oz.lang \
-texinfo.lang haskell.lang manifest.lang asm.lang todo.lang applescript.lang \
+texinfo.lang haskell.lang haskell_literate.lang \
+manifest.lang asm.lang todo.lang applescript.lang \
 vbscript.lang awk.lang bat.lang clipper.lang cobol.lang d.lang \
 errors.lang erlang.lang proto.lang
 

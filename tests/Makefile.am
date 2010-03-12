@@ -288,6 +288,7 @@ test_nobgcolor.cpp test_nobgcolor.html \
 test_tabs.java.html \
 test.texinfo test.texinfo.html \
 test.hs test.hs.html \
+test.lhs test.lhs.html \
 test.ecore test.ecore.html \
 test.MF test.MF.html \
 test.asm test.asm.html \
@@ -715,8 +716,10 @@ check_texinfo:
 
 check_haskell:
 	$(PROGNAME_STD) -i $(srcdir)/test.hs -o test.hs.out.html
+	$(PROGNAME) $(STD_STYLE) -f xhtml  -i $(srcdir)/test.lhs -o test.lhs.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.hs.html test.hs.out.html
+	$(DIFF) $(srcdir)/test.lhs.html test.lhs.out.html
 
 check_manifest:
 	$(PROGNAME_STD) -i $(srcdir)/test.MF -o test.MF.out.html

@@ -19,3 +19,4 @@ path = regexp
 label = preproc
 error = string
 warning = type
+code = preproc

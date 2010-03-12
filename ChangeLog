@@ -1,5 +1,8 @@
 2010-03-12  Lorenzo Bettini  <bettini@bettini-laptop>
 
+	* src/haskell_literate.lang: literate programming for
+	haskell in bird and latex style
+
 	* src/proto.lang: Google's Protocol Buffers language 
 	definition added (thanks to Joel Smith)
 

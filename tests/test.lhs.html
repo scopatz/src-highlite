@@ -1,0 +1,24 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>This is a test
+of Haskel literate programming;
+Bird style
+
+<span style="font-weight: bold"><span style="background-color: #33FF33">&gt;</span></span> fact <span style="color: #990000">::</span> <span style="color: #009900">Integer</span> <span style="color: #990000">-&gt;</span> <span style="color: #009900">Integer</span>
+<span style="font-weight: bold"><span style="background-color: #33FF33">&gt;</span></span> fact <span style="color: #993399">0</span> <span style="color: #990000">=</span> <span style="color: #993399">1</span>
+<span style="font-weight: bold"><span style="background-color: #33FF33">&gt;</span></span> fact n <span style="color: #990000">=</span> n <span style="color: #990000">*</span> fact <span style="color: #990000">(</span>n<span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span>
+
+while this is not considered code
+fact :: Integer -&gt; Integer
+
+This is the Latex style
+
+<span style="font-weight: bold"><span style="background-color: #33FF33">\begin{code}</span></span>
+tsort <span style="color: #990000">[]</span>     <span style="color: #990000">=</span> <span style="color: #990000">[]</span>
+tsort <span style="color: #990000">(</span>x<span style="color: #990000">:</span>xs<span style="color: #990000">)</span> <span style="color: #990000">=</span> tsort <span style="color: #990000">[</span>y <span style="color: #990000">|</span> y<span style="color: #990000">&lt;-</span>xs<span style="color: #990000">,</span> y<span style="color: #990000">&gt;</span>x<span style="color: #990000">]</span> <span style="color: #990000">++</span> <span style="color: #990000">[</span>x<span style="color: #990000">]</span> <span style="color: #990000">++</span> tsort <span style="color: #990000">[</span>y <span style="color: #990000">|</span> y<span style="color: #990000">&lt;-</span>xs<span style="color: #990000">,</span> y<span style="color: #990000">&lt;=</span>x<span style="color: #990000">]</span>
+<span style="font-weight: bold"><span style="background-color: #33FF33">\end{code}</span></span>
+
+and the code will be formatted as you requested.
+</tt></pre>
