@@ -32,8 +32,8 @@ See the file INSTALL for detailed building and installation
 instructions; anyway if you're used to compiling Linux software that
 comes with sources you may simply follow the usual procedure:
 
-cd /<source code main directory>
-/./configure
+cd <source code main directory>
+./configure
 make
 make install
 
@@ -42,7 +42,7 @@ option of configure (e.g. ./configure --prefix=/<your home>/), you must
 be root to 'make install'.
 
 It is also possible to specify as following option for
-/configure/:/--enable-input-chroot/ to hardcode in the program the path
+configure: --enable-input-chroot to hardcode in the program the path
 to prefix for input files.
 
 Before you run 'make install' you may want to check that the programs

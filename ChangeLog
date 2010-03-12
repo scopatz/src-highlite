@@ -1,5 +1,7 @@
 2010-03-12  Lorenzo Bettini  <bettini@bettini-laptop>
 
+	* autogen.sh: removed
+
 	* src/haskell_literate.lang: literate programming for
 	haskell in bird and latex style
 

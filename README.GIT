@@ -1,10 +1,8 @@
-If you got the sources of source-highlight through the CVS repository,
+If you got the sources of source-highlight through the git repository,
 please remember to run the following command before anything else:
 
-	sh autogen.sh
+	autoreconf -i
 
 This will run all the autotools in the correct order.  You should have
 installed recent versions of automake, autoconf and libtool in order for this
 to succeed.
-
-Notice that you will also need Flex and Bison.

@@ -13,7 +13,6 @@ SUBDIRS = m4 gl lib src doc tests
 EXTRA_DIST = \
 	source-highlight.spec.in \
 	source-highlight.spec \
-	autogen.sh \
 	TODO.txt \
 	CREDITS gl/m4/gnulib-cache.m4 \
 	source-highlight-bash-completion \
