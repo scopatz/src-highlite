@@ -1,0 +1,6 @@
+# Haskel literate programming
+# both Bird and Latex style
+
+environment code start '^>' begin
+  include "haskell.lang"
+end
