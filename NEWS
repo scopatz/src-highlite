@@ -10,6 +10,7 @@ Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
 Version 3.1.4
 
+   * fixed compilation problems for Sun CC
    * php handles embedded html
    * html handles embedded css and javascript
    * Google's Protocol Buffers language definition added

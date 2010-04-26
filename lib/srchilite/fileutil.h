@@ -9,10 +9,12 @@
 
 #include <iostream>
 #include <string>
+#include <cstdio>
 #include "ioexception.h"
 
 using std::istream;
 using std::string;
+using std::FILE;
 
 namespace srchilite {
 

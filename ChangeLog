@@ -1,3 +1,8 @@
+2010-04-26  Lorenzo Bettini  <bettini@bettini-desk-lucid>
+
+	* lib/srchilite/fileutil.h: include <cstdio> to solve compilation
+	problems in Sun CC.
+
 2010-03-12  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* autogen.sh: removed
