@@ -2,7 +2,7 @@
 # by Luca Bruno.
 
 string delim "\"\"\"" "\"\"\"" multiline
-preproc = '^[[:blank:]]*\[.+\]'
+#preproc = '^[[:blank:]]*\[.+\]'
 
 include "csharp.lang"
 

@@ -4,7 +4,7 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">interface</font></b> TestIface <font color="#990000">:</font> Object
 <font color="#FF0000">{</font>
-<b><font color="#000080">	[CCode (cname = "test_preproc")]</font></b>
+	<font color="#990000">[</font><b><font color="#000000">CCode</font></b> <font color="#990000">(</font>cname <font color="#990000">=</font> <font color="#FF0000">"test_preproc"</font><font color="#990000">)]</font>
 	<b><font color="#0000FF">public</font></b> <b><font color="#0000FF">virtual</font></b> <b><font color="#000000">test_method</font></b> <font color="#990000">()</font>
 	<font color="#FF0000">{</font>
 		stdout<font color="#990000">.</font><b><font color="#000000">printf</font></b> <font color="#990000">(</font><font color="#FF0000">"""multiline \literal string"""</font><font color="#990000">);</font>
