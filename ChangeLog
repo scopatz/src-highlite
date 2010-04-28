@@ -1,3 +1,7 @@
+2010-04-28  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* src/vala.lang: Vala language definition
+
 2010-04-26  Lorenzo Bettini  <bettini@bettini-desk-lucid>
 
 	* lib/srchilite/fileutil.h: include <cstdio> to solve compilation

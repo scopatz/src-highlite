@@ -1,0 +1,19 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">interface</font></b> TestIface <font color="#990000">:</font> Object
+<font color="#FF0000">{</font>
+<b><font color="#000080">	[CCode (cname = "test_preproc")]</font></b>
+	<b><font color="#0000FF">public</font></b> <b><font color="#0000FF">virtual</font></b> <b><font color="#000000">test_method</font></b> <font color="#990000">()</font>
+	<font color="#FF0000">{</font>
+		stdout<font color="#990000">.</font><b><font color="#000000">printf</font></b> <font color="#990000">(</font><font color="#FF0000">"""multiline \literal string"""</font><font color="#990000">);</font>
+	<font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#0000FF">public</font></b> <b><font color="#0000FF">abstract</font></b> <b><font color="#0000FF">class</font></b> <font color="#008080">TestClass</font> <font color="#990000">:</font> Object<font color="#990000">,</font> TestIface
+<font color="#FF0000">{</font>
+<b><font color="#000080">	#if</font></b> <font color="#993399">0</font>
+	<b><font color="#0000FF">public</font></b> <b><font color="#0000FF">signal</font></b> <font color="#009900">void</font> <b><font color="#000000">test_signal</font></b> <font color="#990000">(</font><font color="#009900">size_t</font> size<font color="#990000">);</font>
+<b><font color="#000080">	#endif</font></b>
+<font color="#FF0000">}</font></tt></pre>

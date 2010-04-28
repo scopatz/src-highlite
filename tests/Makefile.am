@@ -301,7 +301,8 @@ test.cobol test.cobol.html \
 test.d test.d.html \
 test.errors test.errors.html \
 test.erl test.erl.html \
-test.proto test.proto.html
+test.proto test.proto.html \
+test.vala test.vala.html 
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
@@ -420,6 +421,7 @@ check_d \
 check_errors \
 check_erlang \
 check_proto \
+check_vala \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -787,6 +789,11 @@ check_proto:
 	$(PROGNAME_STD) -i $(srcdir)/test.proto -o test.proto.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.proto.html test.proto.out.html
+
+check_vala:
+	$(PROGNAME_STD) -i $(srcdir)/test.vala -o test.vala.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.vala.html test.vala.out.html
 
 check_spec:
 	$(SPEC2HTML) -i $(srcdir)/test.spec -o test.spec.out.html

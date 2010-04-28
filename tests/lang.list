@@ -131,6 +131,7 @@ texinfo = texinfo.lang
 tk = tcl.lang
 txt = nohilite.lang
 ui = xml.lang
+vala = vala.lang
 vbs = vbscript.lang
 vbscript = vbscript.lang
 xhtml = xml.lang
