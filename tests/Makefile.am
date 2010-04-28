@@ -302,7 +302,8 @@ test.d test.d.html \
 test.errors test.errors.html \
 test.erl test.erl.html \
 test.proto test.proto.html \
-test.vala test.vala.html 
+test.vala test.vala.html \
+test.lisp test.lisp.html 
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
@@ -422,6 +423,7 @@ check_errors \
 check_erlang \
 check_proto \
 check_vala \
+check_lisp \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -794,6 +796,11 @@ check_vala:
 	$(PROGNAME_STD) -i $(srcdir)/test.vala -o test.vala.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.vala.html test.vala.out.html
+
+check_lisp:
+	$(PROGNAME_STD) -i $(srcdir)/test.lisp -o test.lisp.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.lisp.html test.lisp.out.html
 
 check_spec:
 	$(SPEC2HTML) -i $(srcdir)/test.spec -o test.spec.out.html

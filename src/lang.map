@@ -141,3 +141,4 @@ errors = errors.lang
 erl = erlang.lang
 erlang = erlang.lang
 vala = vala.lang
+lisp = lisp.lang

@@ -1,5 +1,7 @@
 2010-04-28  Lorenzo Bettini  <bettini@bettini-laptop>
 
+	* src/lisp.lang: Lisp language definition
+
 	* src/vala.lang: Vala language definition
 
 2010-04-26  Lorenzo Bettini  <bettini@bettini-desk-lucid>

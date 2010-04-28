@@ -70,6 +70,7 @@ ldif = ldap.lang
 lex = flex.lang
 lgt = logtalk.lang
 lhs = haskell_literate.lang
+lisp = lisp.lang
 ll = flex.lang
 log = log.lang
 logtalk = logtalk.lang

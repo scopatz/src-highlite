@@ -18,6 +18,7 @@ Version 3.1.4
    * CakePhp template files highlighted as php
    * haskell literate programming highlighting
    * vala language definition (thanks to Luca Bruno)
+   * lisp language definition (thanks to Michael McDermott)
 
 Version 3.1.3
 
