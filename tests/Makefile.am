@@ -362,7 +362,18 @@ CTAGS_CMD=$(CTAGS) --excmd=number --tag-relative=yes
 .java.css_xhtml.java.html:
 	$(PROGNAME_CSSSTYLE) -i $< -o $@ -f xhtml
 
-check: check_java2html check_javascript \
+if MAINTAINER_MODE
+check: check-produced-output \
+check_wrong check_missing \
+check_wrong_lineranges \
+check_wrong_regexranges \
+check_wrong_syntaxmode
+else
+check: check-produced-output
+endif
+
+check-produced-output: \
+check_java2html check_javascript \
 check_java2xhtml check_cpp2html check_csharp2html \
 check_prolog2html check_logtalk2html \
 check_perl2html \
@@ -383,7 +394,6 @@ check_txt \
 check_sql \
 check_bib \
 check_infer \
-check_wrong check_failsafe check_missing \
 check_debug \
 check_ref \
 check_show \
@@ -428,13 +438,11 @@ check-output-dir \
 check_stop \
 check_vardecl \
 check_newlines \
-check_wrong_lineranges \
-check_wrong_regexranges \
-check_wrong_syntaxmode \
 check_lineranges \
 check_regexranges \
 check_nobgcolor \
-check_tabs
+check_tabs \
+check_failsafe
 
 remove_css_html_files:
 	rm -f *.css.java.html *.nf_css.java.html

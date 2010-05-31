@@ -1,3 +1,8 @@
+2010-05-31  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* tests/Makefile.am (check): enable some tests only in
+	maintainer-mode
+
 2010-04-28  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* src/lisp.lang: Lisp language definition
