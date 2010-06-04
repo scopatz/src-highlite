@@ -1,6 +1,6 @@
-#line 2 "outlangdefscanner.cc"
+#line 2 "../../../lib/srchilite/outlangdefscanner.cc"
 
-#line 4 "outlangdefscanner.cc"
+#line 4 "../../../lib/srchilite/outlangdefscanner.cc"
 
 #define  YY_INT_ALIGNED short int
 
@@ -720,7 +720,7 @@ typedef std::stack<ParseStructPtr> ParseStructStack;
 static ParseStructStack parsestructstack;
 
 
-#line 724 "outlangdefscanner.cc"
+#line 724 "../../../lib/srchilite/outlangdefscanner.cc"
 
 #define INITIAL 0
 #define COMMENT_STATE 1
@@ -927,7 +927,7 @@ YY_DECL
 #line 77 "../../../lib/srchilite/outlangdefscanner.ll"
 
 
-#line 931 "outlangdefscanner.cc"
+#line 931 "../../../lib/srchilite/outlangdefscanner.cc"
 
 	if ( !(yy_init) )
 		{
@@ -1345,7 +1345,7 @@ YY_RULE_SETUP
 #line 184 "../../../lib/srchilite/outlangdefscanner.ll"
 ECHO;
 	YY_BREAK
-#line 1349 "outlangdefscanner.cc"
+#line 1349 "../../../lib/srchilite/outlangdefscanner.cc"
 
 	case YY_END_OF_BUFFER:
 		{

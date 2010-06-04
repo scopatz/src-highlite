@@ -1,6 +1,6 @@
-#line 2 "langdefscanner.cc"
+#line 2 "../../../lib/srchilite/langdefscanner.cc"
 
-#line 4 "langdefscanner.cc"
+#line 4 "../../../lib/srchilite/langdefscanner.cc"
 
 #define  YY_INT_ALIGNED short int
 
@@ -664,7 +664,7 @@ updateTokenInfo()
 
 
 
-#line 668 "langdefscanner.cc"
+#line 668 "../../../lib/srchilite/langdefscanner.cc"
 
 #define INITIAL 0
 #define COMMENT_STATE 1
@@ -859,7 +859,7 @@ YY_DECL
 #line 86 "../../../lib/srchilite/langdefscanner.ll"
 
 
-#line 863 "langdefscanner.cc"
+#line 863 "../../../lib/srchilite/langdefscanner.cc"
 
 	if ( !(yy_init) )
 		{
@@ -1283,7 +1283,7 @@ YY_RULE_SETUP
 #line 196 "../../../lib/srchilite/langdefscanner.ll"
 ECHO;
 	YY_BREAK
-#line 1287 "langdefscanner.cc"
+#line 1287 "../../../lib/srchilite/langdefscanner.cc"
 
 	case YY_END_OF_BUFFER:
 		{

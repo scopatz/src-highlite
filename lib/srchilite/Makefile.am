@@ -152,10 +152,12 @@ stylescanner.ll outlangdefparser.yy \
 stylecssparser.yy stylecssscanner.ll outlangdefscanner.ll \
 langdefparser.yy langdefscanner.ll
 
-BUILT_SOURCES = styleparser.cc styleparser.h \
+BUILT_SOURCES = \
+langdefparser.cc langdefparser.h langdefscanner.cc \
+outlangdefparser.cc outlangdefparser.h outlangdefscanner.cc \
+styleparser.cc styleparser.h \
 stylecssparser.cc stylecssparser.h \
 stylescanner.cc stylecssscanner.cc \
-langdefparser.cc langdefparser.h langdefscanner.cc \
 langelemsprinter.hpp langelemsprinter_dbtab.cc \
 highlightstatebuilder.hpp highlightstatebuilder_dbtab.cc
 
