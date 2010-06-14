@@ -7,31 +7,31 @@ http://www.gnu.org/software/src-highlite -->
 
 <font color="#FF0000">(</font><b><font color="#0000FF">defpackage</font></b> <b><font color="#000080">:foobar</font></b> <font color="#FF0000">(</font><b><font color="#000080">:use</font></b> <b><font color="#000080">:common-lisp-user</font></b> <b><font color="#000080">:common-lisp</font></b><font color="#FF0000">))</font>
   
-<font color="#FF0000">(</font><b><font color="#000000">in-package</font></b> <b><font color="#000080">:foobar</font></b><font color="#FF0000">)</font>
-<font color="#FF0000">(</font><b><font color="#000000">export</font></b> '<font color="#FF0000">(</font><b><font color="#000000">new-obj</font></b> mapobj parent call<font color="#990000">-</font>if<font color="#990000">-</font>exists ?call
-	  call super super<font color="#990000">-</font>if<font color="#990000">-</font>exists ?super slot<font color="#990000">-</font>val
-	  slot<font color="#990000">-</font>obj mset meth meth<font color="#990000">-</font>func func<font color="#990000">-</font>meth
-	  this meth<font color="#990000">-</font>owner meth<font color="#990000">-</font>name
-	  set<font color="#990000">-</font>original<font color="#990000">-</font>slot <font color="#009900">*foo-version*</font>
+<font color="#FF0000">(</font><b><font color="#0000FF">in-package</font></b> <b><font color="#000080">:foobar</font></b><font color="#FF0000">)</font>
+<font color="#FF0000">(</font>export '<font color="#FF0000">(</font>new-obj mapobj parent call-if-exists ?call
+	  call super super-if-exists ?super slot-val
+	  slot-obj mset meth meth-func func-meth
+	  this meth-owner meth-name
+	  set-original-slot <font color="#009900">*foo-version*</font>
 	  <font color="#009900">*print-foo-objects-verbosely*</font><font color="#FF0000">))</font>
 
 <font color="#FF0000">(</font><b><font color="#0000FF">defconstant</font></b> <font color="#009900">*foobar-version*</font> <font color="#993399">3</font> <font color="#FF0000">"Foobar's Version Number"</font><font color="#FF0000">)</font>
 
 <font color="#FF0000">(</font><b><font color="#0000FF">defparameter</font></b> <font color="#009900">*print-foobar-objects-verbosely*</font> nil<font color="#FF0000">)</font>
 
-<font color="#FF0000">(</font><b><font color="#0000FF">defmacro</font></b> definline <font color="#FF0000">(</font><b><font color="#000000">name</font></b> &amp;rest stuff<font color="#FF0000">)</font>
+<font color="#FF0000">(</font><b><font color="#0000FF">defmacro</font></b> definline <font color="#FF0000">(</font>name &amp;rest stuff<font color="#FF0000">)</font>
   <font color="#FF0000">"Defines a function and declares it to be inlined"</font>  <i><font color="#9A1900">;; convenient, no?</font></i>
-  `<font color="#FF0000">(</font><b><font color="#000000">progn</font></b> <font color="#FF0000">(</font><b><font color="#000000">declaim</font></b> <font color="#FF0000">(</font><b><font color="#000000">inline</font></b> ,name<font color="#FF0000">))</font>
+  `<font color="#FF0000">(</font><b><font color="#0000FF">progn</font></b> <font color="#FF0000">(</font>declaim <font color="#FF0000">(</font>inline ,name<font color="#FF0000">))</font>
 	  <font color="#FF0000">(</font><b><font color="#0000FF">defun</font></b> ,name ,@stuff<font color="#FF0000">)))</font>
 
-<font color="#FF0000">(</font><b><font color="#0000FF">defstruct</font></b> <font color="#FF0000">(</font><b><font color="#000000">foobar-object</font></b> <font color="#FF0000">(</font><b><font color="#000080">:print-object</font></b> print<font color="#990000">-</font>foobar<font color="#990000">-</font>object<font color="#FF0000">))</font> slots parent<font color="#FF0000">)</font>
+<font color="#FF0000">(</font><b><font color="#0000FF">defstruct</font></b> <font color="#FF0000">(</font>foobar-object <font color="#FF0000">(</font><b><font color="#000080">:print-object</font></b> print-foobar-object<font color="#FF0000">))</font> slots parent<font color="#FF0000">)</font>
 
-  <font color="#FF0000">(</font><b><font color="#0000FF">defun</font></b> mapobj <font color="#FF0000">(</font><b><font color="#000000">func</font></b> obj &amp;optional <font color="#FF0000">(</font><b><font color="#000000">deeply</font></b> nil<font color="#FF0000">))</font>
+  <font color="#FF0000">(</font><b><font color="#0000FF">defun</font></b> mapobj <font color="#FF0000">(</font>func obj &amp;optional <font color="#FF0000">(</font>deeply nil<font color="#FF0000">))</font>
     <font color="#FF0000">"Maps FUNC over all of the slots in OBJ.  FUNC must take THREE</font>
 <font color="#FF0000">arguments: (1) the object defining the slot, (2) the slot name.</font>
 <font color="#FF0000">That is, only one slot</font>
 <font color="#FF0000">is mapped for a given slot name.  nil is returned."</font>
-    <font color="#FF0000">(</font><b><font color="#000000">simple-error-check</font></b> obj
+    <font color="#FF0000">(</font>simple-error-check obj
 
 <i><font color="#9A1900">;;; OTHER STUFF INSIDE A METHOD</font></i>
 <i><font color="#9A1900">;;; @  macro</font></i>
