@@ -1,3 +1,7 @@
+2010-06-17  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* m4/Makefile.am (EXTRA_DIST): don't install boost m4 macros
+
 2010-05-31  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* tests/Makefile.am (check): enable some tests only in

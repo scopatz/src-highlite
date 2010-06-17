@@ -10,5 +10,4 @@
 
 DIST_SUBDIRS = $(SUBDIRS)
 
-aclocaldir = $(datadir)/aclocal
-aclocal_DATA = ax_boost_base.m4 ax_boost_regex.m4
+EXTRA_DIST = ax_boost_base.m4 ax_boost_regex.m4
