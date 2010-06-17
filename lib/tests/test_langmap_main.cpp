@@ -10,7 +10,7 @@
 using namespace std;
 using namespace srchilite;
 
-LangMap langmap(BASEDIR "/test.map");
+LangMap langmap(BASEDIR "test.map");
 
 static void testMapFromFileName(const string &input, const string &expected);
 
@@ -25,7 +25,7 @@ void testMapFromFileName(const string &input, const string &expected) {
 int main() {
     langmap.open();
 
-    cout << "test.map contents: " << endl;
+    cout << BASEDIR << "test.map contents: " << endl;
     langmap.print();
 
     testMapFromFileName("foo.C", "cpp.lang");
