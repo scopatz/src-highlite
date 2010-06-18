@@ -123,7 +123,11 @@ texinfo generate html and put in the doc source folder
 
 common.pri for files in src
 
+LANGUAGES
+
 doxygen
 doxygen in C/C++ (\ syntax)
 
 deal with php in html title and other special cases
+
+qmake .pro and .pri files
