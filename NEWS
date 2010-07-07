@@ -8,6 +8,8 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+   * updated php lang definition with new php 5 keywords
+
 Version 3.1.5
 
    * boost m4 macro files are not installed

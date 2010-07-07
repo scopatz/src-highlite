@@ -11,4 +11,4 @@ sourcehighlight.kdevses
 build_*
 build
 *~
-*.pro.user
+*.pro.user*
