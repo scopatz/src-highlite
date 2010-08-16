@@ -1,0 +1,100 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">#|</font></i>
+<i><font color="#9A1900">multiline</font></i>
+<i><font color="#9A1900">comment</font></i>
+<i><font color="#9A1900">|#</font></i>
+
+<font color="#FF0000">"string with special </font><font color="#CC33CC">\n</font><font color="#FF0000"> </font><font color="#CC33CC">\t</font><font color="#FF0000"> chars"</font>
+
+<i><font color="#9A1900">; comment</font></i>
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">fn</font></b> a<font color="#FF0000">)</font>
+  <font color="#FF0000">(</font><b><font color="#0000FF">let*</font></b> <font color="#FF0000">((</font>b <font color="#FF0000">(</font>+ a <font color="#993399">1</font><font color="#FF0000">)))</font>
+    <font color="#FF0000">(</font><b><font color="#0000FF">if</font></b> <font color="#FF0000">(</font>= a <font color="#993399">1</font><font color="#FF0000">)</font>
+        <font color="#009900">#t</font>
+        <font color="#009900">#f</font><font color="#FF0000">)))</font> <i><font color="#9A1900">;; another comment</font></i>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <b><font color="#000000">c</font></b> <font color="#FF0000">(</font><b><font color="#0000FF">lambda</font></b> <font color="#FF0000">(</font>x<font color="#FF0000">)</font>
+            <font color="#FF0000">(</font><b><font color="#0000FF">let</font></b> <b><font color="#000000">loop</font></b> <font color="#FF0000">((</font>i <font color="#993399">0</font><font color="#FF0000">))</font>
+              <font color="#FF0000">(</font>unless <font color="#FF0000">(</font>= i <font color="#993399">10</font><font color="#FF0000">)</font>
+                      <i><font color="#9A1900">;; print some chars</font></i>
+                      <font color="#FF0000">(</font>display #\' #\#<font color="#FF0000">)</font>
+                      <font color="#FF0000">(</font>loop <font color="#FF0000">(</font>+ i <font color="#993399">1</font><font color="#FF0000">))))))</font>
+
+<font color="#FF0000">((</font><b><font color="#0000FF">if</font></b> <font color="#FF0000">(</font>= <font color="#993399">0</font> <font color="#993399">0</font><font color="#FF0000">)</font> * +<font color="#FF0000">)</font> <font color="#993399">5</font> <font color="#993399">2</font><font color="#FF0000">)</font>
+
+<i><font color="#9A1900">;; numbers</font></i>
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <b><font color="#000000">pi</font></b> <font color="#993399">3.14159</font><font color="#FF0000">)</font>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <b><font color="#000000">circle-area</font></b>
+    <font color="#FF0000">(</font><b><font color="#0000FF">lambda</font></b> <font color="#FF0000">(</font>radius<font color="#FF0000">)</font>
+      <font color="#FF0000">(</font>* pi radius radius<font color="#FF0000">)))</font>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">circle-area</font></b> radius<font color="#FF0000">)</font>
+    <font color="#FF0000">(</font>* pi radius radius<font color="#FF0000">))</font>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">blah</font></b><font color="#FF0000">)</font>
+  <font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">foo</font></b><font color="#FF0000">)</font> <font color="#993399">55</font><font color="#FF0000">)</font>
+  <font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">woo</font></b><font color="#FF0000">)</font> <font color="#993399">42</font><font color="#FF0000">)</font>
+  <font color="#FF0000">(</font>+ <font color="#FF0000">(</font>foo<font color="#FF0000">)</font> <font color="#FF0000">(</font>woo<font color="#FF0000">)))</font>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">repeat-forever</font></b><font color="#FF0000">)</font>
+  <font color="#FF0000">(</font>display <font color="#FF0000">"I will not play with Scheme in class."</font><font color="#FF0000">)</font>
+  <font color="#FF0000">(</font>repeat-forever<font color="#FF0000">))</font>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">all-atoms-are-numeric?</font></b> tree<font color="#FF0000">)</font>
+  <font color="#FF0000">(</font><b><font color="#0000FF">call-with-current-continuation</font></b>
+   <font color="#FF0000">(</font><b><font color="#0000FF">lambda</font></b> <font color="#FF0000">(</font>return<font color="#FF0000">)</font>                     <i><font color="#9A1900">;bind RETURN to the current cont</font></i>
+
+     <font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">walk</font></b> tree<font color="#FF0000">)</font>
+       <font color="#FF0000">(</font><b><font color="#0000FF">cond</font></b> <font color="#FF0000">((</font>null? tree<font color="#FF0000">))</font>
+             <font color="#FF0000">((</font>pair? tree<font color="#FF0000">)</font>              <i><font color="#9A1900">;pair? is like consp</font></i>
+              <font color="#FF0000">(</font>walk <font color="#FF0000">(</font>car tree<font color="#FF0000">))</font>
+              <font color="#FF0000">(</font>walk <font color="#FF0000">(</font>cdr tree<font color="#FF0000">)))</font>
+             <font color="#FF0000">((</font>number? tree<font color="#FF0000">))</font>
+             <font color="#FF0000">(</font><b><font color="#0000FF">else</font></b> <font color="#FF0000">(</font>return <font color="#009900">#f</font><font color="#FF0000">))))</font>       <i><font color="#9A1900">;found a non-number -- return false</font></i>
+
+     <font color="#FF0000">(</font>walk tree<font color="#FF0000">)</font>
+     <font color="#009900">#t</font><font color="#FF0000">)))</font>                              <i><font color="#9A1900">;else return true</font></i>
+
+
+<font color="#FF0000">(</font><b><font color="#0000FF">cond</font></b> <font color="#FF0000">((</font>number? x<font color="#FF0000">)</font> <font color="#FF0000">"A number."</font><font color="#FF0000">)</font>
+      <font color="#FF0000">((</font>string? x<font color="#FF0000">)</font> <font color="#FF0000">"A string."</font><font color="#FF0000">)</font>
+      <font color="#FF0000">(</font><b><font color="#0000FF">else</font></b> <font color="#FF0000">"Beats me!"</font><font color="#FF0000">))</font>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">cond</font></b> <font color="#FF0000">((</font>assoc key a-list<font color="#FF0000">)</font> =&gt; cdr<font color="#FF0000">)</font>
+      <font color="#FF0000">(</font><b><font color="#0000FF">else</font></b> <font color="#009900">#f</font><font color="#FF0000">))</font>
+
+
+<font color="#FF0000">(</font><b><font color="#0000FF">letrec</font></b> <font color="#FF0000">((</font>even? <font color="#FF0000">(</font><b><font color="#0000FF">lambda</font></b> <font color="#FF0000">(</font>n<font color="#FF0000">)</font> <font color="#FF0000">(</font><b><font color="#0000FF">if</font></b> <font color="#FF0000">(</font>= n <font color="#993399">0</font><font color="#FF0000">)</font> <font color="#009900">#t</font> <font color="#FF0000">(</font>odd? <font color="#FF0000">(</font>- n <font color="#993399">1</font><font color="#FF0000">)))))</font>
+         <font color="#FF0000">(</font>odd?  <font color="#FF0000">(</font><b><font color="#0000FF">lambda</font></b> <font color="#FF0000">(</font>n<font color="#FF0000">)</font> <font color="#FF0000">(</font><b><font color="#0000FF">if</font></b> <font color="#FF0000">(</font>= n <font color="#993399">0</font><font color="#FF0000">)</font> <font color="#009900">#f</font> <font color="#FF0000">(</font>even? <font color="#FF0000">(</font>- n <font color="#993399">1</font><font color="#FF0000">))))))</font>
+  <font color="#FF0000">(</font>even? <font color="#993399">42</font><font color="#FF0000">))</font>
+
+
+<font color="#FF0000">(</font><b><font color="#0000FF">let</font></b> <b><font color="#000000">counting</font></b> <font color="#FF0000">((</font>n <font color="#993399">10</font><font color="#FF0000">))</font>
+  <font color="#FF0000">(</font><b><font color="#0000FF">cond</font></b> <font color="#FF0000">((</font>&lt; <font color="#993399">0</font> n<font color="#FF0000">)</font>
+         <font color="#FF0000">(</font>write n<font color="#FF0000">)</font>
+         <font color="#FF0000">(</font>counting <font color="#FF0000">(</font>- n <font color="#993399">1</font><font color="#FF0000">)))))</font>
+
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define</font></b> <font color="#FF0000">(</font><b><font color="#000000">list</font></b> . arguments<font color="#FF0000">)</font> arguments<font color="#FF0000">)</font>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define-syntax</font></b> <b><font color="#000000">my-or</font></b>
+  <font color="#FF0000">(</font><b><font color="#0000FF">syntax-rules</font></b> <font color="#FF0000">()</font>
+    <font color="#FF0000">((</font>my-or<font color="#FF0000">)</font> <font color="#009900">#f</font><font color="#FF0000">)</font>
+    <font color="#FF0000">((</font>my-or e<font color="#FF0000">)</font> e<font color="#FF0000">)</font>
+    <font color="#FF0000">((</font>my-or e1 e2 ...<font color="#FF0000">)</font>
+     <font color="#FF0000">(</font><b><font color="#0000FF">let</font></b> <font color="#FF0000">((</font>temp e1<font color="#FF0000">))</font>
+       <font color="#FF0000">(</font><b><font color="#0000FF">if</font></b> temp temp <font color="#FF0000">(</font>my-or e2 ...<font color="#FF0000">))))))</font>
+
+<font color="#FF0000">(</font><b><font color="#0000FF">define-syntax</font></b> <b><font color="#000000">syntax-rules</font></b>
+  <font color="#FF0000">(</font><b><font color="#0000FF">lambda</font></b> <font color="#FF0000">(</font>x<font color="#FF0000">)</font>
+    <font color="#FF0000">(</font><b><font color="#0000FF">syntax-case</font></b> x <font color="#FF0000">()</font>
+      <font color="#FF0000">((</font>_ <font color="#FF0000">(</font>i ...<font color="#FF0000">)</font> <font color="#FF0000">((</font>keyword . pattern<font color="#FF0000">)</font> template<font color="#FF0000">)</font> ...<font color="#FF0000">)</font>
+       <font color="#FF0000">(</font>syntax <font color="#FF0000">(</font><b><font color="#0000FF">lambda</font></b> <font color="#FF0000">(</font>x<font color="#FF0000">)</font>
+                 <font color="#FF0000">(</font><b><font color="#0000FF">syntax-case</font></b> x <font color="#FF0000">(</font>i ...<font color="#FF0000">)</font>
+                   <font color="#FF0000">((</font>dummy . pattern<font color="#FF0000">)</font> <font color="#FF0000">(</font>syntax template<font color="#FF0000">))</font>
+                   ...<font color="#FF0000">)))))))</font>
+</tt></pre>

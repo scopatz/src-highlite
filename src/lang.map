@@ -142,3 +142,5 @@ erl = erlang.lang
 erlang = erlang.lang
 vala = vala.lang
 lisp = lisp.lang
+scm = scheme.lang
+scheme = scheme.lang

@@ -84,7 +84,8 @@ clike_vardeclaration.lang scala.lang ada.lang conf.lang pc.lang oz.lang \
 texinfo.lang haskell.lang haskell_literate.lang \
 manifest.lang asm.lang todo.lang applescript.lang \
 vbscript.lang awk.lang bat.lang clipper.lang cobol.lang d.lang \
-errors.lang erlang.lang proto.lang vala.lang lisp.lang
+errors.lang erlang.lang proto.lang vala.lang lisp.lang \
+scheme.lang
 
 OUTLANGFILES = \
 css_common.outlang \
