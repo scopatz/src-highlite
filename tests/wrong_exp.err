@@ -1,2 +1,2 @@
 wrong_exp.lang:2: problem in this expression: keyword (notclosed
-wrong_exp.lang:2: Caused by: Unmatched ( or \(
+wrong_exp.lang:2: Caused by: Unmatched marking parenthesis ( or \(.  The error occured while parsing the regular expression fragment: 'notclosed)>>>HERE>>>'.

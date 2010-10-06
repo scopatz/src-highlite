@@ -1,2 +1,2 @@
 wrong_dyn_backref.lang:2: 3 subexpressions requested, but only 2 found
-wrong_dyn_backref.lang:2: Caused by: Invalid regular expression
+wrong_dyn_backref.lang:2: Caused by: Invalid regular expression.
