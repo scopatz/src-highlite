@@ -17,8 +17,9 @@ keyword = "abstract|case|catch|class|def",
           "object|override|package|private|protected",
           "requires|return|sealed|super|this",
           "throw|trait|try|true|type",
-          "val|var|while|with|yield",
-          "_|:|=>|=|<-|<:|<%|>:|#|@" 
+          "val|var|while|with|yield"
+
+keyword = "_|:|=>|=|<-|<:|<%|>:|#|@" 
 
 type = "Int|Byte|Boolean|Char|Long|Float|Double|Short|Nil"
 

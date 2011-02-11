@@ -32,3 +32,5 @@ ShapeDrawer ! "exit"
 // => Rectangle(Point(0.0,0.0),2.0,5.0)
 // => Error: Unknown message! 3.14159
 // => exiting...
+
+Server.fork;

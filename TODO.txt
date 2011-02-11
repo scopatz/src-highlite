@@ -133,3 +133,6 @@ deal with php in html title and other special cases
 qmake .pro and .pri files
 
 .ini files (e.g., php.ini) comment lines start with ;
+
+in latex.outlang
+"~" "{\\raise.17ex\\hbox{$\\scriptstyle\\sim$}}"

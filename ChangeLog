@@ -1,3 +1,8 @@
+2011-02-11  Lorenzo Bettini  <bettini@bettini-desk-lucid>
+
+	* src/scala.lang: fixed separation between string keywords
+	and symbol keywords
+
 2011-01-27  Gary Funck
 
 	* m4/ax_boost_regex.m4: new upstream version that fixes for finding
