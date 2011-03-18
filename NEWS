@@ -15,6 +15,7 @@ Version 3.1.5
    * updated php lang definition with new php 5 keywords
    * language definition for Scheme (thanks to Orlando Hill)
    * fixed a bug in scala.lang dealing with keywords
+   * updated sql.lang (thanks to Xavier-Emmanuel Vincent)
 
 Version 3.1.4
 

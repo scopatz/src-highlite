@@ -1,3 +1,7 @@
+2011-03-18  Lorenzo Bettini  <bettini@bettini-laptop>
+
+	* src/sql.lang: added UNION as a keyword
+
 2011-02-11  Lorenzo Bettini  <bettini@bettini-desk-lucid>
 
 	* src/scala.lang: fixed separation between string keywords
