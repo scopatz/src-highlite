@@ -1,7 +1,7 @@
 # highlighting for Logtalk source files (http://logtalk.org/)
 #
 #	written by Paulo Moura (pmoura@logtalk.org)
-#	last revised on 5 December 2009
+#	last revised on January 18, 2011
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
@@ -14,13 +14,13 @@ end
 
 keyword =	'\<(abolish|c(urrent|reate))_(object|protocol|category)(?=\()',
 			'\<(object|protocol|category)_property(?=\()',
-			'\<complements_object(?=\()',
+			'\<co(mplements_object|nforms_to_protocol)(?=\()',
 			'\<extends_(object|protocol|category)(?=\()',
 			'\<imp(lements_protocol|orts_category)(?=\()',
 			'\<(instantiat|specializ)es_class(?=\()',
 			'\<(current_event|(abolish|define)_events)(?=\()',
 			'\<(current|set)_logtalk_flag(?=\()',
-			'\<logtalk_(compile|l(oad|ibrary_path))(?=\()'
+			'\<logtalk_(compile|l(oad|oad_context|ibrary_path))(?=\()'
 
 keyword =	'\<(after|before)(?=\()',
 			'\<(parameter|this|se(lf|nder))(?=\()',
@@ -32,12 +32,13 @@ keyword =	'\<(after|before)(?=\()',
 			'\<((bag|set)of|f(ind|or)all)(?=\()',
 			'\<threaded(_(call|once|ignore|exit|peek|wait|notify))?(?=\()',
 			'\<unify_with_occurs_check(?=\()',
-			'\<(functor|arg|copy_term)(?=\()',
+			'\<(functor|arg|copy_term|numbervars)(?=\()',
 			'\<(rem|mod|abs|sign)(?=\()',
 			'\<(float_(integer|fractional)_part|float)(?=\()',
 			'\<(floor|truncate|round|ceiling)(?=\()',
 			'\<(cos|atan|exp|log|s(in|qrt))(?=\()',
-			'\<(var|atom(ic)?|integer|float|compound|n(onvar|umber))(?=\()',
+			'\<(var|atom(ic)?|integer|float|c(allable|ompound)|n(onvar|umber)|ground)(?=\()',
+			'\<compare(?=\()',
 			'\<(curren|se)t_(in|out)put(?=\()',
 			'\<(open|close)(?=\()',
 			'\<flush_output(?=\()',
@@ -54,17 +55,18 @@ keyword =	'\<(after|before)(?=\()',
 			'\<number_(c(har|ode)s)(?=\()',
 			'\<(set|current)_prolog_flag(?=\()',
 			'\<halt(?=\()', '\<(halt)\>',
-			'\<once(?=\()',
+			'\<(ignore|once)(?=\()',
+			'\<((key)?sort)(?=\()',
 			'\<(true|fail|repeat)\>',
-			'\<(is|rem|mod)\>'
+			'\<(e|pi|is|rem|mod)\>'
 
 
 variable =	'\<[A-Z_][A-Za-z0-9_]*'
 
 cbracket =	"{|}"
 
-preproc =	'^[[:blank:]]*:-[[:blank:]](ca(lls|tegory)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(fo|itialization))|alias|d(ynamic|iscontiguous)|m(eta_predicate|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=\()',
-			'^[[:blank:]]*:-[[:blank:]](end(if|_(category|object|protocol))|dynamic|synchronized|threaded)\.'
+preproc =	'^[[:blank:]]*:-[[:blank:]](c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(fo|itialization))|alias|d(ynamic|iscontiguous)|m(eta_predicate|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=\()',
+			'^[[:blank:]]*:-[[:blank:]](e(lse|nd(if|_(category|object|protocol)))|dynamic|synchronized|threaded)\.'
 
 preproc =	'\<(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?=\()'
 

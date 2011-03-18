@@ -17,6 +17,7 @@ Version 3.1.5
    * fixed a bug in scala.lang dealing with keywords
    * updated sql.lang (thanks to Xavier-Emmanuel Vincent)
    * Emacs lisp files highlighted as List (thanks to Xavier-Emmanuel Vincent)
+   * improved logtalk.lang (thanks to Paulo Moura)
 
 Version 3.1.4
 

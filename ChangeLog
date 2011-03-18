@@ -1,5 +1,7 @@
 2011-03-18  Lorenzo Bettini  <bettini@bettini-laptop>
 
+	* src/logtalk.lang: improved definition
+
 	* src/lang.map: emacs lisp files highlighted as lisp
 
 	* src/sql.lang: added UNION as a keyword
