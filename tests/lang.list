@@ -34,6 +34,7 @@ diff = diff.lang
 dmd = d.lang
 docbook = xml.lang
 dtx = latex.lang
+el = lisp.lang
 eps = postscript.lang
 erl = erlang.lang
 erlang = erlang.lang

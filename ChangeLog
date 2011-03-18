@@ -1,5 +1,7 @@
 2011-03-18  Lorenzo Bettini  <bettini@bettini-laptop>
 
+	* src/lang.map: emacs lisp files highlighted as lisp
+
 	* src/sql.lang: added UNION as a keyword
 
 2011-02-11  Lorenzo Bettini  <bettini@bettini-desk-lucid>
