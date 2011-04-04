@@ -31,6 +31,7 @@ void
 DocGenerator::generate_start_doc(std::ostream *sout)
 {
     bool docTitle = (title.size () > 0);
+    bool docInputLang = (input_lang.size () > 0);
     bool inputFileName = (input_file_name.size () > 0);
 
     *sout <<
@@ -42,7 +43,8 @@ DocGenerator::generate_start_doc(std::ostream *sout)
             "\nby Lorenzo Bettini\nhttp://www.lorenzobettini.it\nhttp://www.gnu.org/software/src-highlite",
             doc_header,
             doc_footer,
-            doc_background
+            doc_background,
+	    docInputLang ? input_lang: "unknown"
         );
 }
 
@@ -56,7 +58,8 @@ DocGenerator::generate_end_doc(std::ostream *sout)
             "\nby Lorenzo Bettini\nhttp://www.lorenzobettini.it\nhttp://www.gnu.org/software/src-highlite",
             doc_header,
             doc_footer,
-            doc_background
+            doc_background,
+	    ""
         );
 }
 

@@ -74,9 +74,9 @@ int main() {
     DocTemplate docTemplate(start, end);
 
     string transformed_start = docTemplate.output_begin("TITLE", "CSS",
-            "ADDITIONAL", "HEADER\n", "\nFOOTER", "");
+            "ADDITIONAL", "HEADER\n", "\nFOOTER", "", "INPUTLANG");
     string transformed_end = docTemplate.output_end("TITLE", "CSS",
-            "ADDITIONAL", "HEADER\n", "\nFOOTER", "");
+            "ADDITIONAL", "HEADER\n", "\nFOOTER", "", "INPUTLANG");
 
     cout << "orig start : " << start << endl;
     cout << "transformed: " << transformed_start << endl;

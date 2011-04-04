@@ -47,16 +47,18 @@ protected:
     string css_url;
     string doc_background;
     bool entire_doc;
+    string input_lang;
 
     DocTemplate docTemplate;
 
 public:
     DocGenerator(const string &s, const string &i, const string &h,
-            const string &f, const string &c, const string &back, bool entire,
+            const string &f, const string &c, const string &back, bool entire, 
+	    const string &l,
             const string &start_tmpl, const string &end_tmpl) :
         title(s), gen_source_highlight_version(true), input_file_name(i),
                 doc_header(h), doc_footer(f), css_url(c), doc_background(back),
-                entire_doc(entire), docTemplate(DocTemplate(start_tmpl,
+	  entire_doc(entire), input_lang(l), docTemplate(DocTemplate(start_tmpl,
                         end_tmpl)) {
     }
     DocGenerator(const string &start_tmpl, const string &end_tmpl) :
@@ -95,6 +97,10 @@ public:
 
     void setTitle(const std::string &_title) {
         title = _title;
+    }
+
+    void setInputLang(const std::string &_input_lang) {
+      input_lang = _input_lang;
     }
 
     void setBackgroundColor(const std::string &bg) {

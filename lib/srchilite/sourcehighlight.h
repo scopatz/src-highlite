@@ -64,6 +64,9 @@ class SourceHighlight {
     /// the title for the output document (defaults to the source file name)
     std::string title;
 
+    /// the input lang for the output document
+    std::string inputLang;
+
     /// the value for the css
     std::string css;
 
@@ -271,6 +274,10 @@ public:
 
     void setTitle(const std::string &_title) {
         title = _title;
+    }
+    
+    void setInputLang(const std::string &_inputLang) {
+        inputLang = _inputLang;
     }
 
     void setCss(const std::string &_css) {

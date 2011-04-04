@@ -22,10 +22,12 @@ public:
 
     std::string output_begin(const std::string &title, const std::string &cs,
             const std::string &add, const std::string &header,
-            const std::string &footer, const std::string &background);
+            const std::string &footer, const std::string &background,
+	    const std::string &input_lang = "");
     std::string output_end(const std::string &title, const std::string &cs,
             const std::string &add, const std::string &header,
-            const std::string &footer, const std::string &background);
+            const std::string &footer, const std::string &background,
+	    const std::string &input_lang = "unknown");
 
     const std::string &toStringBegin() const {
         return begin_repr;

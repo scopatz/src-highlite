@@ -257,6 +257,9 @@ void SourceHighlight::highlight(const std::string &input,
         noDocGenerator->setTitle(input);
     }
 
+    docGenerator->setInputLang(inputLang);
+    noDocGenerator->setInputLang(inputLang);      
+
     if (ctagsFormatter) {
         // if we need to generate references, then set the file info
         ctagsFormatter->setFileInfo(input, output);
@@ -333,6 +336,8 @@ void SourceHighlight::highlight(std::istream &input, std::ostream &output,
         // for each output set the title
         documentGenerator->setTitle(title);
     }
+
+    documentGenerator->setInputLang(inputLang);
 
     // first generate the start of the output file
     documentGenerator->generate_start_doc(&output);

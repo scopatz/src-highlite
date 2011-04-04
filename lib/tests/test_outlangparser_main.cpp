@@ -45,7 +45,7 @@ this is simply the footer: $footer",
             textstyles->docTemplate.toStringEnd());
 
     string start = textstyles->docTemplate.output_begin("title", "css",
-            "additional", "header", "footer", "");
+            "additional", "header", "footer", "", "inputlang");
     cout << "DocTemplate start:\n" << start << endl;
 
     assertEquals(
@@ -59,7 +59,7 @@ and this is some additional stuff: additional",
             start);
 
     string end = textstyles->docTemplate.output_end("title", "css",
-            "additional", "header", "footer", "");
+            "additional", "header", "footer", "", "inputlang");
     cout << "DocTemplate end:\n" << end << endl;
 
     assertEquals(
