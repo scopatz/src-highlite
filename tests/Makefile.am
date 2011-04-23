@@ -250,6 +250,7 @@ $(WRONGCMDLINEPARAMS) \
 valgrind_tests.sh.in valgrind_suppressions.sh.in \
 valgrind_test.sh.in suppressions.supp \
 erasedir.sed erasedir2.sed erasedir3.sed \
+erasedir_inputlang.sed \
 namedgroups.lang namedgroups_state.lang \
 test.ngroups test.ngroups.html \
 test_state.ngroups test_state.ngroups.html \
@@ -493,8 +494,10 @@ check_java2xhtml: remove_css_xhtml_files test.css_xhtml.java.html
 	$(JAVA2XHTML) < $(srcdir)/test.java -o test_xhtml.out.html
 	$(JAVA2XHTMLNOTFIXED) < $(srcdir)/test.java -o test_xhtml_notfixed.out.html
 	$(JAVA2XHTMLDOC) < $(srcdir)/test.java -o test_xhtml_doc.out.html
+	sed -itesttmp -f $(srcdir)/erasedir_inputlang.sed test_xhtml_doc.out.html
 	$(JAVA2XHTMLCSS) < $(srcdir)/test.java -o test_xhtml_css.out.html
 	$(JAVA2XHTMLCSSDOC) < $(srcdir)/test.java -o test_xhtml_css_doc.out.html
+	sed -itesttmp -f $(srcdir)/erasedir_inputlang.sed test_xhtml_css_doc.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test_xhtml.html test_xhtml.out.html
 	$(DIFF) $(srcdir)/test_xhtml_notfixed.html test_xhtml_notfixed.out.html
