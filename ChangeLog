@@ -1,3 +1,7 @@
+2011-04-23  Masatake YAMATO <yamato@redhat.com>
+
+	* lib/srchilite/docgenerator.cc: added inputlang in the output file
+
 2011-03-18  Lorenzo Bettini  <bettini@bettini-laptop>
 
 	* src/logtalk.lang: improved definition
