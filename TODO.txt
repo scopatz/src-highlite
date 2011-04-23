@@ -136,3 +136,5 @@ qmake .pro and .pri files
 
 in latex.outlang
 "~" "{\\raise.17ex\\hbox{$\\scriptstyle\\sim$}}"
+
+texinfo generated files in the doc source folder
