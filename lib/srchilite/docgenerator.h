@@ -54,11 +54,11 @@ protected:
 public:
     DocGenerator(const string &s, const string &i, const string &h,
             const string &f, const string &c, const string &back, bool entire, 
-	    const string &l,
+	    const string &inputlang,
             const string &start_tmpl, const string &end_tmpl) :
         title(s), gen_source_highlight_version(true), input_file_name(i),
                 doc_header(h), doc_footer(f), css_url(c), doc_background(back),
-	  entire_doc(entire), input_lang(l), docTemplate(DocTemplate(start_tmpl,
+	  entire_doc(entire), input_lang(inputlang), docTemplate(DocTemplate(start_tmpl,
                         end_tmpl)) {
     }
     DocGenerator(const string &start_tmpl, const string &end_tmpl) :
