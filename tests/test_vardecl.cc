@@ -10,3 +10,5 @@ MyType *t;
 MyType **t;
 const MyType &t;
 if (argc > 0) { }
+__mytype _i;
+typedef _mytype __i;

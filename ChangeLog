@@ -1,3 +1,8 @@
+2011-05-02  Lorenzo Bettini  <bettini@bettini-desk-lucid>
+
+	* src/clike_vardeclaration.lang: detect also _ in type and variable
+	name
+
 2011-04-23  Masatake YAMATO <yamato@redhat.com>
 
 	* lib/srchilite/docgenerator.cc: added inputlang in the output file
