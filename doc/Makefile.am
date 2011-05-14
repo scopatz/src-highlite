@@ -229,7 +229,7 @@ $(top_srcdir)/doc/help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
 	$(GENGETOPT) --show-detailed-help -i $(top_srcdir)/src/cmdline.ggo --set-package="source-highlight" --set-version="" > $@
 endif
 
-test_ref.h.texinfo: $(top_srcdir)/tests/test.h
+$(top_srcdir)/doc/test_ref.h.texinfo: $(top_srcdir)/tests/test.h
 	$(SRCHILITEEXE) --data-dir=$(top_srcdir)/src/ -f texinfo -i $(top_srcdir)/tests/test.h --style-file=$(top_srcdir)/src/texinfo.style -n --gen-references=postline > $@
 
 # the dependence on config.h is to ensure the correct version number

@@ -1,0 +1,183 @@
+@c Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+@example
+@t{01:} @r{@i{/**}}
+@t{02:} @r{@i{** Copyright (C) 1999-2007 Lorenzo Bettini}}
+@t{03:} @r{@i{**  }}
+@t{04:} @r{@i{  }}@t{http://www.lorenzobettini.it}
+@t{05:} @r{@i{  }}
+@t{06:} @r{@i{  r2 = r2 XOR (1<<10);}}
+@t{07:} @r{@i{  cout << "hello world" << endl;}}
+@t{08:} @r{@i{**  }}
+@t{09:} @r{@i{*/}}
+@t{10:} 
+@t{11:} @r{@i{// this file also contains the definition of mysum as a #define}}
+@t{12:} 
+@t{13:} @r{@i{// textgenerator.h : Text Generator class &&}}
+@t{14:} 
+@t{15:} @b{#ifndef} _TEXTGEN_H
+@flushright
+@r{@i{@xref{test.h:16,_TEXTGEN_H,_TEXTGEN_H ../../tests/test.h:16}.}}
+@end flushright
+@t{16:} @b{#define} @anchor{test.h:16}_TEXTGEN_H
+@t{17:} 
+@t{18:} @b{#define} @anchor{test.h:18}foo(x) (x + 1)
+@t{19:} 
+@t{20:} @b{#define} @anchor{test.h:20}mysum myfunbody 
+@t{21:} 
+@t{22:} @b{#include} @t{<iostream.h>} @r{@i{// for cerr}}
+@t{23:} 
+@t{24:} @b{#include} @t{"genfun.h"} @r{@i{/* for generating functions */}}
+@t{25:} 
+@t{26:} @b{class} @anchor{test.h:26}TextGenerator @{
+@t{27:}   @b{public} :
+@t{28:}     @b{virtual} @b{void} @anchor{test.h:28}generate( @b{const} @b{char} *s ) @b{const} @{ (*sout) << s ; @}
+@t{29:}     @b{virtual} @b{void} @anchor{test.h:29}generate( @b{const} @b{char} *s, @b{int} start, @b{int} end ) @b{const} 
+@t{30:}       @{
+@t{31:}         @b{for} ( @b{int} i = start ; i <= end ; ++i )
+@t{32:}           (*sout) << s[i] ;
+@t{33:}         @b{return} a<p->b ? a : 3;
+@t{34:}       @}
+@t{35:}     @b{virtual} @b{void} @anchor{test.h:35}generateln( @b{const} @b{char} *s ) @b{const}
+@t{36:}         @{ 
+@t{37:}             generate( s ) ;
+@flushright
+@r{@i{@xref{test.h:28,generate,generate ../../tests/test.h:28}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:29,generate,generate ../../tests/test.h:29}.}}
+@end flushright
+@t{38:}             (*sout) << endl ; 
+@t{39:}         @}
+@t{40:}     @b{virtual} @b{void} @anchor{test.h:40}generateEntire( @b{const} @b{char} *s ) @b{const}
+@t{41:}         @{
+@t{42:}             startTextGeneration() ;
+@flushright
+@r{@i{@xref{test.h:46,startTextGeneration,startTextGeneration ../../tests/test.h:46}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:70,startTextGeneration,startTextGeneration ../../tests/test.h:70}.}}
+@end flushright
+@t{43:}             generate(s) ;
+@flushright
+@r{@i{@xref{test.h:28,generate,generate ../../tests/test.h:28}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:29,generate,generate ../../tests/test.h:29}.}}
+@end flushright
+@t{44:}             endTextGeneration() ;
+@flushright
+@r{@i{@xref{test.h:47,endTextGeneration,endTextGeneration ../../tests/test.h:47}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:76,endTextGeneration,endTextGeneration ../../tests/test.h:76}.}}
+@end flushright
+@t{45:}         @}
+@t{46:}     @b{virtual} @b{void} @anchor{test.h:46}startTextGeneration() @b{const} @{@}
+@t{47:}     @b{virtual} @b{void} @anchor{test.h:47}endTextGeneration() @b{const} @{@}
+@t{48:}     @b{virtual} @b{void} @anchor{test.h:48}beginText( @b{const} @b{char} *s ) @b{const}
+@t{49:}         @{
+@t{50:}             startTextGeneration() ;
+@flushright
+@r{@i{@xref{test.h:46,startTextGeneration,startTextGeneration ../../tests/test.h:46}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:70,startTextGeneration,startTextGeneration ../../tests/test.h:70}.}}
+@end flushright
+@t{51:}             @b{if} ( s )
+@t{52:}                 generate( s ) ;
+@flushright
+@r{@i{@xref{test.h:28,generate,generate ../../tests/test.h:28}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:29,generate,generate ../../tests/test.h:29}.}}
+@end flushright
+@t{53:}         @}
+@t{54:}     @b{virtual} @b{void} @anchor{test.h:54}endText( @b{const} @b{char} *s ) @b{const}
+@t{55:}         @{
+@t{56:}             @b{if} ( s )
+@t{57:}                 generate( s ) ;
+@flushright
+@r{@i{@xref{test.h:28,generate,generate ../../tests/test.h:28}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:29,generate,generate ../../tests/test.h:29}.}}
+@end flushright
+@t{58:}             endTextGeneration() ;
+@flushright
+@r{@i{@xref{test.h:47,endTextGeneration,endTextGeneration ../../tests/test.h:47}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:76,endTextGeneration,endTextGeneration ../../tests/test.h:76}.}}
+@end flushright
+@t{59:}         @}
+@t{60:} @} ;
+@t{61:} 
+@t{62:} @r{@i{// Decorator}}
+@t{63:} @b{class} @anchor{test.h:63}TextDecorator : @b{public} TextGenerator @{
+@flushright
+@r{@i{@xref{test.h:26,TextGenerator,TextGenerator ../../tests/test.h:26}.}}
+@end flushright
+@t{64:}   @b{protected} :
+@t{65:}     TextGenerator *@anchor{test.h:65}decorated ;
+@flushright
+@r{@i{@xref{test.h:26,TextGenerator,TextGenerator ../../tests/test.h:26}.}}
+@end flushright
+@t{66:}   
+@t{67:}   @b{public} :
+@t{68:}     @anchor{test.h:68}TextDecorator( TextGenerator *t ) : decorated( t ) @{@}
+@flushright
+@r{@i{@xref{test.h:26,TextGenerator,TextGenerator ../../tests/test.h:26}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:65,decorated,decorated ../../tests/test.h:65}.}}
+@end flushright
+@t{69:} 
+@t{70:}     @b{virtual} @b{void} @anchor{test.h:70}startTextGeneration() @b{const} 
+@t{71:}     @{ 
+@t{72:}         startDecorate() ;
+@t{73:}         @b{if} ( decorated )
+@flushright
+@r{@i{@xref{test.h:65,decorated,decorated ../../tests/test.h:65}.}}
+@end flushright
+@t{74:}             decorated->startTextGeneration() ;
+@flushright
+@r{@i{@xref{test.h:46,startTextGeneration,startTextGeneration ../../tests/test.h:46}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:65,decorated,decorated ../../tests/test.h:65}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:70,startTextGeneration,startTextGeneration ../../tests/test.h:70}.}}
+@end flushright
+@t{75:}     @}
+@t{76:}     @b{virtual} @b{void} @anchor{test.h:76}endTextGeneration() @b{const} 
+@t{77:}     @{ 
+@t{78:}         @b{if} ( decorated )
+@flushright
+@r{@i{@xref{test.h:65,decorated,decorated ../../tests/test.h:65}.}}
+@end flushright
+@t{79:}             decorated->endTextGeneration() ;
+@flushright
+@r{@i{@xref{test.h:47,endTextGeneration,endTextGeneration ../../tests/test.h:47}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:65,decorated,decorated ../../tests/test.h:65}.}}
+@end flushright
+@flushright
+@r{@i{@xref{test.h:76,endTextGeneration,endTextGeneration ../../tests/test.h:76}.}}
+@end flushright
+@t{80:}         endDecorate() ;
+@t{81:}         mysum;
+@flushright
+@r{@i{@xref{test.h:20,mysum,mysum ../../tests/test.h:20}.}}
+@end flushright
+@t{82:}     @}
+@t{83:} 
+@t{84:}     @r{@i{// pure virtual functions}}
+@t{85:}     @b{virtual} @b{void} startDecorate() @b{const} = 0 ;
+@t{86:}     @b{virtual} @b{void} endDecorate() @b{const} = 0 ;
+@t{87:} @} ;
+@t{88:} 
+@t{89:} @b{#endif} @r{@i{// _TEXTGEN_H}}
+@t{90:} 
+@end example
