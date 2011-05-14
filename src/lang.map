@@ -145,3 +145,5 @@ lisp = lisp.lang
 el = lisp.lang
 scm = scheme.lang
 scheme = scheme.lang
+po = po.lang
+pot = po.lang

@@ -1,0 +1,70 @@
+# translation of eu_to_be_translate.po to Basque
+# Vasco translation of sound-juicer.
+# Copyright (C) 2004 THE sound-juicer'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the sound-juicer package.
+#
+# Mikel Olasagasti <hey_neken@mundurat.net>, 2004, 2005.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2004, 2005, 2006, 2008, 2009, 2010.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: eu_to_be_translate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-06 22:54+0200\n"
+"PO-Revision-Date: 2010-10-06 22:55+0200\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
+"Language-Team: Basque <itzulpena@euskalgnu.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/sound-juicer.desktop.in.in.h:1
+msgid "Audio CD Extractor"
+msgstr "Audio CD erauzlea"
+
+#: ../data/sound-juicer.desktop.in.in.h:2
+msgid "Copy music from your CDs"
+msgstr "Kopiatu musika zure CD-etatik"
+
+#: ../data/sound-juicer.schemas.in.h:2
+#, no-c-format
+msgid ""
+"%at -- album title %aT -- album title (lowercase) %aa -- album artist %aA -- "
+"album artist (lowercase) %as -- album artist (sortable) %aS -- album artist "
+"(sortable lowercase) %ay -- album year %tt -- track title %tT -- track title "
+"(lowercase) %ta -- track artist %tA -- track artist (lowercase) %ts -- track "
+"artist (sortable) %tS -- track artist (sortable lowercase)"
+msgstr ""
+"%at -- albumaren titulua %aT -- albumaren titulua (letra-xehez) %aa -- "
+"albumaren artista %aA -- albumaren artista (letra-xehez) %as -- albumaren "
+"artista (ordena daiteke) %aS -- albumaren artista (letra-xehez ordena "
+"daiteke) %ay -- albumaren urtea %tt -- pistaren titulua %tT -- pistaren "
+"titulua (letra-xehez) %ta -- pistaren artista %tA -- pistaren artista (letra-"
+"xehez) %ts -- pistaren artista (ordena daiteke) %tS pistaren artista (letra-"
+"xehez ordena daiteke)"
+
+#: ../data/sound-juicer.schemas.in.h:6
+#, no-c-format
+msgid ""
+"Do not specify an extension. %at -- album title %aT -- album title "
+"(lowercase) %aa -- album artist %aA -- album artist (lowercase) %as -- album "
+"artist (sortable) %aS -- album artist (sortable lowercase) %tn -- track "
+"number (i.e 8) %tN -- track number, zero padded (i.e 08) %tt -- track title %"
+"tT -- track title (lowercase) %ta -- track artist %tA -- track artist "
+"(lowercase) %ts -- track artist (sortable) %tS -- track artist (sortable "
+"lowercase) %dn -- disc and track number (i.e Disk 2 - 6, or 6) %dN -- disc "
+"number, zero padded (i.e d02t06, or 06)"
+msgstr ""
+"Ez zehaztu luzapenik. %at -- albumaren titulua %aT -- albumaren titulua "
+"(letra-xehez) %aa -- albumaren artista %aA -- albumaren artista (letra-"
+"xehez) %as -- albumaren artista (ordena daiteke)  %aS -- albumaren artista "
+"(letra-xehez ordena daiteke) %tn -- pistaren zenbakia (adib. 8) %tN -- "
+"pistaren zenbakia, zeroz betea (adib. 08) %tt -- pistaren titulua %tT -- "
+"pistaren titulua (letra-xehez) %ta -- pistaren artista %tA -- pistaren "
+"artista (letra-xehez) %ts -- pistaren artista (ordena daiteke) %tS pistaren "
+"artista (letra-xehez ordena daiteke) %dn -- disko eta pistaren zenbakia "
+"(adib. diskoa 2 - 6, edo 6) %dN -- diskoaren zenbakia, zeroz betea (adib. "
+"d02t06, edo 06)"
+

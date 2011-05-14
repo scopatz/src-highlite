@@ -437,6 +437,7 @@ check_proto \
 check_vala \
 check_lisp \
 check_scheme \
+check_po \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -819,6 +820,11 @@ check_scheme:
 	$(PROGNAME_STD) -i $(srcdir)/test.scm -o test.scm.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.scm.html test.scm.out.html
+
+check_po:
+	$(PROGNAME_STD) -i $(srcdir)/test.po -o test.po.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.po.html test.po.out.html
 
 check_spec:
 	$(SPEC2HTML) -i $(srcdir)/test.spec -o test.spec.out.html
