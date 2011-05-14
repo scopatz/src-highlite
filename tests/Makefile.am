@@ -305,7 +305,8 @@ test.erl test.erl.html \
 test.proto test.proto.html \
 test.vala test.vala.html \
 test.lisp test.lisp.html \
-test.scm test.scm.html
+test.scm test.scm.html \
+test.po test.po.html
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
