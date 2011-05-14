@@ -222,10 +222,10 @@ if MAINTAINER_MODE
 #	$(SRCHILITEEXE) --help | sed -e 's/@/@@/' > $@
 
 if NO_GENGETOPT
-help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
+$(top_srcdir)/doc/help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
 	touch $@
 else
-help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
+$(top_srcdir)/doc/help-output.texinfo: $(top_srcdir)/src/cmdline.ggo
 	$(GENGETOPT) --show-detailed-help -i $(top_srcdir)/src/cmdline.ggo --set-package="source-highlight" --set-version="" > $@
 endif
 
