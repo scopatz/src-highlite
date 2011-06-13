@@ -84,6 +84,7 @@ mf = manifest.lang
 ml = caml.lang
 mli = caml.lang
 moc = cpp.lang
+opa = opa.lang
 outlang = outlang.lang
 oz = oz.lang
 pas = pascal.lang
