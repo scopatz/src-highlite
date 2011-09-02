@@ -4448,6 +4448,10 @@ number, which you can find by running @w{@samp{source-highlight
 --version}}.  Also include in your message the output that the program
 produced and the output you expected.@refill
 
+Even better, please file a bug report at Savannah site:
+
+@uref{https://savannah.gnu.org/bugs/?group=src-highlite}
+
 If you have other questions, comments or suggestions about
 @command{source-highlight}, contact the author via electronic mail
 (find the address at @value{myhomepage}).  The author will try to help
