@@ -143,3 +143,5 @@ BEFORE RELEASING
 
 remember to update the version and library version in
 defines.pri
+
+include config.h in all source files to deal with gnulib?

@@ -306,7 +306,8 @@ test.proto test.proto.html \
 test.vala test.vala.html \
 test.lisp test.lisp.html \
 test.scm test.scm.html \
-test.po test.po.html
+test.po test.po.html \
+test.javalog test.javalog.html
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
@@ -440,6 +441,7 @@ check_lisp \
 check_scheme \
 check_po \
 check_opa \
+check_javalog \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -832,6 +834,11 @@ check_opa:
 	$(PROGNAME_STD) -i $(srcdir)/test.opa -o test.opa.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.opa.html test.opa.out.html
+
+check_javalog:
+	$(PROGNAME) --style-file $(top_srcdir)/src/javalog.style -i $(srcdir)/test.javalog -o test.javalog.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.javalog.html test.javalog.out.html
 
 check_spec:
 	$(SPEC2HTML) -i $(srcdir)/test.spec -o test.spec.out.html

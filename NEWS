@@ -16,6 +16,7 @@ Version 3.1.5
    * language definition for Scheme (thanks to Orlando Hill)
    * language definition for Po files (thanks to Mikel Olasagasti)
    * language definition for Opa (thanks to Valentin Gatien-Baron)
+   * language definition for Javalog (thanks to Mark Silberbauer)
    * fixed a bug in scala.lang dealing with keywords
    * updated sql.lang (thanks to Xavier-Emmanuel Vincent)
    * Emacs lisp files highlighted as List (thanks to Xavier-Emmanuel Vincent)

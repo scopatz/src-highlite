@@ -148,3 +148,4 @@ scheme = scheme.lang
 po = po.lang
 pot = po.lang
 opa = opa.lang
+javalog = javalog.lang

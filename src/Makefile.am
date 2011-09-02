@@ -85,7 +85,7 @@ texinfo.lang haskell.lang haskell_literate.lang \
 manifest.lang asm.lang todo.lang applescript.lang \
 vbscript.lang awk.lang bat.lang clipper.lang cobol.lang d.lang \
 errors.lang erlang.lang proto.lang vala.lang lisp.lang \
-scheme.lang po.lang opa.lang
+scheme.lang po.lang opa.lang javalog.lang
 
 OUTLANGFILES = \
 css_common.outlang \
@@ -114,6 +114,7 @@ source_highlightdata_DATA = \
 $(LANGFILES) $(OUTLANGFILES) \
 $(STYLEFILES) \
 default.style style2.style style3.style \
+javalog.style \
 lang.map outlang.map \
 default.css \
 style.defaults

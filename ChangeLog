@@ -1,3 +1,7 @@
+2011-09-02  Mark Silberbauer <mark@stonethree.com>
+
+	* src/javalog.lang: lang file for javalog files
+
 2011-05-02  Lorenzo Bettini  <bettini@bettini-desk-lucid>
 
 	* src/clike_vardeclaration.lang: detect also _ in type and variable

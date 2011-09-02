@@ -1,0 +1,8 @@
+08 Aug 2011 8:56:40 AM main main
+INFO: Test 123. Identifiers like adsf_134 are also shown highlighted.
+08 Aug 2011 8:56:40 AM main main
+WARNING: A warning message. Numbers like 12341341234 should be in blue.
+08 Aug 2011 8:56:40 AM main main
+SEVERE: This is a sever message. As far as I remember the whole message is in red.
+Exception in thread "main" java.lang.RuntimeException: Here is an exception with a stacktrace. This should be in red as well.
+	at main.main(main.java:13)
