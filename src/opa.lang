@@ -1,4 +1,4 @@
-# written by Valentin Gatien-Baron, MLstate
+# written by Valentin Gatien-Baron <valentin.gatien-baron@mlstate.com>, MLstate
 # (licensed as GPL3 with permission from MLstate)
 
 vardef IDENT = '([a-zA-Z_][a-zA-Z_0-9]*|`[^`]*`)'
