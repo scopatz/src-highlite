@@ -1,3 +1,7 @@
+2011-09-02  Viraj Sinha <viraj@intrepid.com>
+
+	* src/upc.lang: UPC language definition file
+
 2011-09-02  Mark Silberbauer <mark@stonethree.com>
 
 	* src/javalog.lang: lang file for javalog files
