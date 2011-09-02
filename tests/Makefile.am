@@ -307,6 +307,7 @@ test.vala test.vala.html \
 test.lisp test.lisp.html \
 test.scm test.scm.html \
 test.po test.po.html \
+test.opa test.opa.html \
 test.javalog test.javalog.html \
 test.upc test.upc.html
 
