@@ -20,7 +20,7 @@ Version 3.1.5
    * language definition for UPC (thanks to Viraj Sinha)
    * fixed a bug in scala.lang dealing with keywords
    * updated sql.lang (thanks to Xavier-Emmanuel Vincent)
-   * Emacs lisp files highlighted as List (thanks to Xavier-Emmanuel Vincent)
+   * Emacs lisp files highlighted as Lisp (thanks to Xavier-Emmanuel Vincent)
    * improved logtalk.lang (thanks to Paulo Moura)
    * embed inputlang in the output file (thanks to Masatake Yamato)
    * highlight _ in variable declarations (thanks to Masatake Yamato)
