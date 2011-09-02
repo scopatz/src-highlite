@@ -175,6 +175,9 @@ TAGFILES=test_ref.tags test_ref_multi.tags
 
 EXTRA_DIST = test.java test.java.html test.java.doc.html \
 test.js test.js.html test.h test.h.html test_c.c test_c.c.html \
+test_no_line_at_the_end.c test_no_line_at_the_end.c.html \
+test_line_at_the_end.c test_line_at_the_end.c.html \
+test_no_line_at_the_end.java test_no_line_at_the_end.java.html \
 test_comments.cc test_comments.cc.html test_comments.java \
 test_comments.java.html test_template.cc test_template.cc.html \
 test.pl test.pl.html header.html footer.html test_header.html \
@@ -475,6 +478,7 @@ check_java2html: remove_css_html_files remove_css_doc_files test.css.java.html t
 	tr -d '\r' < test_css_nodoc.out.html > temp.output && cp -f temp.output test_css_nodoc.out.html
 	$(JAVA2HTML) -i $(srcdir)/test_comments.java -o test_comments.java.out.html
 	$(JAVA2HTML) -n --line-number-ref -i $(srcdir)/test.java -o test_java_lines.out.html
+	$(JAVA2HTML) -n -i $(srcdir)/test_no_line_at_the_end.java -o test_no_line_at_the_end.java.out.html
 	$(JAVA2ESC) -n -i $(srcdir)/test.java -o test.java.out.txt
 	$(JAVA2TEX) --line-number=" " -i $(srcdir)/test.java -o test.java.out.tex
 	$(JAVA2TEXINFO) -n -i $(srcdir)/test.java -o test.java.out.texinfo
@@ -486,6 +490,7 @@ check_java2html: remove_css_html_files remove_css_doc_files test.css.java.html t
 	$(DIFF) $(srcdir)/test_css_nodoc.html test_css_nodoc.out.html
 	$(DIFF) $(srcdir)/test_comments.java.html test_comments.java.out.html
 	$(DIFF) $(srcdir)/test_java_lines.html test_java_lines.out.html
+	$(DIFF) $(srcdir)/test_no_line_at_the_end.java.html test_no_line_at_the_end.java.out.html
 	$(DIFF) $(srcdir)/test.java.txt test.java.out.txt
 	$(DIFF) $(srcdir)/test.java.tex test.java.out.tex
 	$(DIFF) $(srcdir)/test.java.texinfo test.java.out.texinfo
@@ -520,6 +525,8 @@ check_cpp2html:
 	$(CPP2HTML) -i $(srcdir)/test_template.cc -o test_template.cc.out.html
 	$(CPP2HTML_WHEADERS) -i $(srcdir)/test.h -o test_header.out.html
 	$(CPP2HTML) -n -i $(srcdir)/test.h -o test_cpp_lines.out.html
+	$(CPP2HTML) -n -i $(srcdir)/test_no_line_at_the_end.c -o test_no_line_at_the_end.c.out.html
+	$(CPP2HTML) -n -i $(srcdir)/test_line_at_the_end.c -o test_line_at_the_end.c.out.html
 	$(C2HTML) -i $(srcdir)/test_c.c -o test_c.c.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.h.html test.h.out.html
@@ -527,6 +534,8 @@ check_cpp2html:
 	$(DIFF) $(srcdir)/test_template.cc.html test_template.cc.out.html
 	$(DIFF) $(srcdir)/test_header.html test_header.out.html
 	$(DIFF) $(srcdir)/test_cpp_lines.html test_cpp_lines.out.html
+	$(DIFF) $(srcdir)/test_no_line_at_the_end.c.html test_no_line_at_the_end.c.out.html
+	$(DIFF) $(srcdir)/test_line_at_the_end.c.html test_line_at_the_end.c.out.html
 	$(DIFF) $(srcdir)/test_c.c.html test_c.c.out.html
 
 check_csharp2html: 
