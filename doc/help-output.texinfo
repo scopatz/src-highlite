@@ -12,9 +12,17 @@ Usage:  [OPTIONS]... < input_file > output_file
                                   options, and exit
   -V, --version                 Print version and exit
   -i, --input=filename          input file. default std input
-  -o, --output=filename         output file. default std output. If STDOUT is 
+  -o, --output=filename         output file. default std output (when the third 
+                                  invocation form is used). If STDOUT is 
                                   specified, the output is directed to standard 
                                   output
+
+you can simply specify some files at the command line and also use regular 
+expressions (for instance *.java).  In this case the name for the output files 
+will be formed using the name of the source file with a .<ext> appended, where 
+<ext> is the extension chosen according to the output format specified (for 
+instance .html).
+
   -s, --src-lang=STRING         source language (use --lang-list to get the 
                                   complete list).  If not specified, the source 
                                   language will be guessed from the file 
