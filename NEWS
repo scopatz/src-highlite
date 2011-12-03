@@ -1,12 +1,18 @@
 source-highlight -- History of visible changes.
 
-Copyright (C) 1999-2009 Lorenzo Bettini
+Copyright (C) 1999-2011 Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite
 
 See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
+
+Version 3.1.6
+
+   * new output format: ODF (e.g. for LibreOffice or to generate ODF 
+     color-highlighted snippets to be used by ODF back-ends,
+     like asciidoc-odf).  Thanks to Dag Wieers.
 
 Version 3.1.5
 

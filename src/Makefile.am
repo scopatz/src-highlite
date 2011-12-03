@@ -106,7 +106,9 @@ xhtml_notfixed.outlang \
 xhtmltable.outlang \
 texinfo.outlang \
 javadoc.outlang \
-docbook.outlang
+docbook.outlang \
+odf.outlang
+
 
 STYLEFILES = texinfo.style esc.style
 

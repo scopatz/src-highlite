@@ -42,6 +42,10 @@ JAVA2HTML = $(PROGNAME) -s java $(STD_STYLE_HTML)
 
 JAVA2HTMLDOC = $(JAVA2HTML) --title="This is the title"
 
+JAVA2ODF = $(PROGNAME) -s java -f odf
+
+JAVA2ODFDOC = $(JAVA2ODF) --title="This is the title"
+
 JS2HTML = $(PROGNAME) -s javascript $(STD_STYLE_HTML) 
 
 URL2HTML = $(PROGNAME) --lang-def=url.lang $(STD_STYLE_HTML) 
@@ -197,6 +201,7 @@ test.y test.y.html \
 test.rb test_comments.rb test.rb.html test_comments.rb.html \
 test.java.txt \
 test.java.tex test.java.tex.html \
+test.java.fodt test.java.doc.fodt \
 test.java.texinfo \
 test.lua test.lua.html \
 test.ml test.ml.html \
@@ -482,6 +487,8 @@ check_java2html: remove_css_html_files remove_css_doc_files test.css.java.html t
 	$(JAVA2ESC) -n -i $(srcdir)/test.java -o test.java.out.txt
 	$(JAVA2TEX) --line-number=" " -i $(srcdir)/test.java -o test.java.out.tex
 	$(JAVA2TEXINFO) -n -i $(srcdir)/test.java -o test.java.out.texinfo
+	$(JAVA2ODF) --line-number=" " -i $(srcdir)/test.java -o test.java.out.fodt
+	$(JAVA2ODFDOC) --line-number=" " -i $(srcdir)/test.java -o test.java.out.doc.fodt
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.java.html test.java.out.html
 	$(DIFF) $(srcdir)/test.java.doc.html test.java.doc.out.html
@@ -494,6 +501,8 @@ check_java2html: remove_css_html_files remove_css_doc_files test.css.java.html t
 	$(DIFF) $(srcdir)/test.java.txt test.java.out.txt
 	$(DIFF) $(srcdir)/test.java.tex test.java.out.tex
 	$(DIFF) $(srcdir)/test.java.texinfo test.java.out.texinfo
+	$(DIFF) $(srcdir)/test.java.fodt test.java.out.fodt
+	$(DIFF) $(srcdir)/test.java.doc.fodt test.java.out.doc.fodt
 	$(DIFF) $(srcdir)/test.java.html test.css.java.html
 	$(DIFF) $(srcdir)/test_notfixed.html test.nf_css.java.html
 	$(DIFF) $(srcdir)/test.java.doc.html test.css_doc.java.html

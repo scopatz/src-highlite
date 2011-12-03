@@ -10,3 +10,4 @@ latexcolor = latexcolor.outlang
 texinfo = texinfo.outlang
 javadoc = javadoc.outlang
 docbook = docbook.outlang
+odf = odf.outlang

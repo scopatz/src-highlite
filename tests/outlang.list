@@ -6,6 +6,7 @@ htmltable = htmltable.outlang
 javadoc = javadoc.outlang
 latex = latex.outlang
 latexcolor = latexcolor.outlang
+odf = odf.outlang
 texinfo = texinfo.outlang
 xhtml = xhtml.outlang
 xhtml-css = xhtmlcss.outlang

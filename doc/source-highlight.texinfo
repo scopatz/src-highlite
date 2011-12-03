@@ -999,6 +999,7 @@ for further information).
 * Texinfo output::              
 * DocBook output::              
 * ANSI color escape sequences::  
+* Odf output::                  
 @end menu
 
 @node HTML and XHTML output, LaTeX output, Simple Usage, Simple Usage
@@ -1049,7 +1050,7 @@ DocBook output is generated using the @code{<programlisting>} tag.  If
 the @code{--doc} command line option is given, an @code{<article>}
 document is generated.
 
-@node ANSI color escape sequences,  , DocBook output, Simple Usage
+@node ANSI color escape sequences, Odf output, DocBook output, Simple Usage
 @section ANSI color escape sequences
 @cindex ANSI color
 
@@ -1058,6 +1059,15 @@ If you're using this output format, for instance together with
 want to use the @file{esc.style}, which comes with the source-highlight
 distribution, with the option @code{--style-file}.  This should
 result in a more pleasant coloring output.
+
+@node Odf output,  , ANSI color escape sequences, Simple Usage
+@section Odf output
+
+The ODF language output for GNU source-highlight enables the user to
+generate color-highlighted ODF output of source code files. Or to
+generate ODF color-highlighted snippets to be used by ODF back-ends
+(like asciidoc-odf).  We create an @code{.fodt} file, which is a Text
+document that newer versions of LibreOffice can open.
 
 @node Configuration files, Invoking source-highlight, Simple Usage, Top
 @chapter Configuration files
