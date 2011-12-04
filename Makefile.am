@@ -15,7 +15,7 @@ EXTRA_DIST = \
 	source-highlight.spec \
 	TODO.txt \
 	CREDITS gl/m4/gnulib-cache.m4 \
-	source-highlight-bash-completion \
+	completion/source-highlight \
         _sstream \
         source-highlight.pro defines.pri
 
@@ -30,7 +30,7 @@ source_highlightdoc_DATA = \
 	CREDITS
 
 if USE_BASH_COMPLETION
-bash_completion_DATA = source-highlight-bash-completion
+bash_completion_DATA = completion/source-highlight
 else
 bash_completion_DATA = 
 endif
