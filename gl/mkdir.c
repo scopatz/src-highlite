@@ -1,7 +1,7 @@
 /* On some systems, mkdir ("foo/", 0700) fails because of the trailing
    slash.  On those systems, this wrapper removes the trailing slash.
 
-   Copyright (C) 2001, 2003, 2006, 2008 Free Software Foundation, Inc.
+   Copyright (C) 2001, 2003, 2006, 2008-2011 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,15 +21,14 @@
 #include <config.h>
 
 /* Specification.  */
-#include <sys/types.h>
 #include <sys/stat.h>
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "dirname.h"
-#include "xalloc.h"
 
 /* Disable the definition of mkdir to rpl_mkdir (from the <sys/stat.h>
    substitute) in this file.  Otherwise, we'd get an endless recursion.  */
@@ -37,10 +36,11 @@
 
 /* mingw's _mkdir() function has 1 argument, but we pass 2 arguments.
    Additionally, it declares _mkdir (and depending on compile flags, an
-   alias mkdir), only in the nonstandard io.h.  */
+   alias mkdir), only in the nonstandard includes <direct.h> and <io.h>,
+   which are included in the <sys/stat.h> override.  */
 #if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
 # define mkdir(name,mode) _mkdir (name)
-# define maybe_unused _UNUSED_PARAMETER_
+# define maybe_unused _GL_UNUSED
 #else
 # define maybe_unused /* empty */
 #endif
@@ -56,13 +56,33 @@ rpl_mkdir (char const *dir, mode_t mode maybe_unused)
 
   if (len && dir[len - 1] == '/')
     {
-      tmp_dir = xstrdup (dir);
+      tmp_dir = strdup (dir);
+      if (!tmp_dir)
+        {
+          /* Rather than rely on strdup-posix, we set errno ourselves.  */
+          errno = ENOMEM;
+          return -1;
+        }
       strip_trailing_slashes (tmp_dir);
     }
   else
     {
       tmp_dir = (char *) dir;
     }
+#if FUNC_MKDIR_DOT_BUG
+  /* Additionally, cygwin 1.5 mistakenly creates a directory "d/./".  */
+  {
+    char *last = last_component (tmp_dir);
+    if (*last == '.' && (last[1] == '\0'
+                         || (last[1] == '.' && last[2] == '\0')))
+      {
+        struct stat st;
+        if (stat (tmp_dir, &st) == 0)
+          errno = EEXIST;
+        return -1;
+      }
+  }
+#endif /* FUNC_MKDIR_DOT_BUG */
 
   ret_val = mkdir (tmp_dir, mode);
 
