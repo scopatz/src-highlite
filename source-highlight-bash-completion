@@ -37,7 +37,7 @@ _source_highlight()
 	    ;;
 	-f|--out-format)
 	    COMPREPLY=($(compgen -W "docbook esc html html-css htmltable\
-	    javadoc latex latexcolor texinfo xhtml xhtml-css xhtmltable" -- "${cur}"))
+	    javadoc latex latexcolor odf texinfo xhtml xhtml-css xhtmltable" -- "${cur}"))
 	    ;;
 	--data-dir|--output-dir)
 	    COMPREPLY=($(compgen -A directory -- "${cur}"))
