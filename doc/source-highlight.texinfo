@@ -789,10 +789,30 @@ ln -s /usr/include/boost-1_33/boost /usr/include/boost
 @end example
 
 @noindent
+@cindex @code{CXXFLAGS}
 Alternatively, you might run source-highlight's configure as follows:
 
 @example
 ./configure CXXFLAGS=-I/usr/include/boost-1_33/
+@end example
+
+If you install (or build) the Boost Regex library in a non standard
+path, e.g., somewhere in your home directory, say
+@file{/home/myhome/boost-1_33}, you'll have to update the
+@code{CXXFLAGS} variable accordingly on the @code{configure} command
+line; in this particular case, you might also have to specify the path
+of actual library files (@code{CXXFLAGS} will only specify the path of
+header files).  In particular, you'll have to know where the lib files
+are within the boost installation (or build directory); for instance,
+if they are in @file{/home/myhome/boost-1_33/stage/lib}, while the
+header files (i.e., the @file{boost} header files directory) are in
+@file{/home/myhome/boost-1_33}, the complete @code{configure} command
+should be
+
+@cindex @code{LDFLAGS}
+@example
+./configure CXXFLAGS=-I/home/myhome/boost-1_33 \
+            LDFLAGS=-L/home/myhome/boost-1_33/stage/lib
 @end example
 
 If then @code{./configure} command of source-highlight reports this
