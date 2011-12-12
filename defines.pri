@@ -16,7 +16,7 @@ win32-msvc*:    COMPILER = msvc
 linux-g++:      COMPILER = gcc
 
 DEFINES += ABSOLUTEDATADIR=\\\"/usr/local/share/source-highlight/\\\" \
-    VERSION=\\\"3.1.5\\\" \
+    VERSION=\\\"3.1.6\\\" \
     LIBRARY_VERSION=\\\"4.0.0\\\" \
     PACKAGE=\\\"source-highlight\\\" \
     RELATIVEDATADIR=\\\"../share/source-highlight\\\"
