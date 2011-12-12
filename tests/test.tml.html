@@ -1,0 +1,233 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#0000FF">%META:DATUM{</font></b><font color="#009900">key=</font><font color="#FF0000">"value"</font><b><font color="#0000FF"> </font></b><font color="#009900">anotherkey=</font><font color="#FF0000">"anothervalue"</font><b><font color="#0000FF">}%</font></b>
+
+<i><font color="#9A1900">&lt;!-- Set statements --&gt;</font></i>
+
+   <b><font color="#000080">* Set</font></b> <b><font color="#0000FF">MACRO</font></b> = value value value
+   morevalue
+   morevalue
+   <b><font color="#000080">* Set</font></b> <b><font color="#0000FF">ONELINER</font></b> = Value <b><font color="#0000FF">%value%</font></b>
+      <b><font color="#000080">* Set</font></b> <b><font color="#0000FF">ANOTHERMACRO</font></b> = value
+         <b><font color="#000080">* Set</font></b> <b><font color="#0000FF">YETANOTHERMACRO</font></b> = value
+
+<i><font color="#9A1900">&lt;!-- "important" HTML tags --&gt;</font></i>
+
+<b><font color="#0000FF">&lt;img</font></b> <font color="#009900">src</font><font color="#990000">=</font><font color="#FF0000">"%ATTACHURLPATH%"</font><b><font color="#0000FF">/&gt;</font></b>
+
+<b><font color="#0000FF">&lt;br/&gt;</font></b>
+
+<b><font color="#0000FF">&lt;form</font></b> <font color="#009900">action</font><font color="#990000">=</font><font color="#FF0000">"%SCRIPTURLPATH{"</font><font color="#009900">save</font><font color="#FF0000">"}%"</font> <font color="#009900">method</font><font color="#990000">=</font><font color="#FF0000">"post"</font><b><font color="#0000FF">&gt;</font></b>
+<b><font color="#0000FF">&lt;input</font></b> <font color="#009900">type</font><font color="#990000">=</font><font color="#FF0000">"hidden"</font> <font color="#009900">name</font><font color="#990000">=</font><font color="#FF0000">"topic"</font> <font color="#009900">value</font><font color="#990000">=</font><font color="#FF0000">"Web.Topic"</font><b><font color="#0000FF">/&gt;</font></b>
+<b><font color="#0000FF">&lt;input</font></b> <font color="#009900">type</font><font color="#990000">=</font><font color="#FF0000">"submit"</font><b><font color="#0000FF">/&gt;</font></b>
+<b><font color="#0000FF">&lt;/form&gt;</font></b>
+
+<b><font color="#0000FF">&lt;u&gt;</font></b>underlined text<b><font color="#0000FF">&lt;/u&gt;</font></b>
+<b><font color="#0000FF">&lt;s&gt;</font></b>strike-out text<b><font color="#0000FF">&lt;/s&gt;</font></b>
+<b><font color="#0000FF">&lt;strike&gt;</font></b>strike-out text<b><font color="#0000FF">&lt;/strike&gt;</font></b>
+<b><font color="#0000FF">&lt;del&gt;</font></b>strike-out text<b><font color="#0000FF">&lt;/del&gt;</font></b>
+
+<i><font color="#9A1900">&lt;!-- not really HTML --&gt;</font></i>
+<b><font color="#000080">&lt;nop&gt;</font></b> <b><font color="#0000FF">&lt;nop/&gt;</font></b>
+<b><font color="#0000FF">&lt;noautolink&gt;</font></b>This is NotAutoLinked, so there<b><font color="#0000FF">&lt;/noautolink&gt;</font></b>
+<b><font color="#0000FF">&lt;sticky&gt;&lt;div</font></b> <font color="#009900">class</font><font color="#990000">=</font><font color="#FF0000">"to be protected by WYSIWYG"</font><b><font color="#0000FF">&gt;</font></b>markup!<b><font color="#0000FF">&lt;/div&gt;&lt;/sticky&gt;</font></b>
+<b><font color="#0000FF">&lt;literal&gt;</font></b>So, *none* of _this_ is =styled=, but <b><font color="#0000FF">%MACROS{</font></b><font color="#009900">still=</font><font color="#FF0000">"work"</font><b><font color="#0000FF"> </font></b><font color="#009900">as=</font><font color="#FF0000">"normal"</font><b><font color="#0000FF">}%&lt;/literal&gt;</font></b>
+<b><font color="#0000FF">&lt;verbatim</font></b> <font color="#009900">class</font><font color="#990000">=</font><font color="#FF0000">"tml"</font><b><font color="#0000FF">&gt;</font></b>So, *none* of _this_ is =styled=, and <b><font color="#0000FF">%MACROS{</font></b><font color="#009900">are=</font><font color="#FF0000">"disabled"</font><b><font color="#0000FF">}%&lt;/verbatim&gt;</font></b>
+<b><font color="#0000FF">&lt;verbatim</font></b> <font color="#009900">class</font><font color="#990000">=</font><font color="#FF0000">"tml"</font><b><font color="#0000FF">&gt;</font></b>Only the outer verbatim does anything; <b><font color="#0000FF">&lt;verbatim&gt;</font></b>inner<b><font color="#0000FF">&lt;/verbatim&gt;</font></b> are ignored (displayed as normal text)<b><font color="#0000FF">&lt;/verbatim&gt;</font></b>
+
+<i><font color="#9A1900">&lt;!-- not-really-HTML plugin syntax --&gt;</font></i>
+<b><font color="#0000FF">&lt;dot&gt;</font></b>DirectedGraphPlugin<b><font color="#0000FF">&lt;/dot&gt;</font></b>
+
+1st
+paragraph
+
+2nd
+paragraph
+
+*Bold text*
+
+_Underlined text_
+
+__Bold italic text__
+
+=monospaced text=
+
+==bold monospaced text==
+
+<i><font color="#9A1900">&lt;!-- Horizontal rule: --&gt;</font></i>
+
+---
+
+   * Bullet
+      * Con
+        tinued
+   * Bullet
+
+   1. Number
+      1. Con
+         tinued
+   1. Number
+
+   A. Alpha
+      A. Con
+         tinued
+   A. Alpha
+
+   a. alpha
+      a. Con
+         tinued
+   a. alpha
+
+   I. Roman
+      I. Con
+         tinued
+   I. Roman
+
+   i. roman
+      i. Con
+         tinued
+   i. roman
+
+   $ Term: Definition
+
+<i><font color="#9A1900">&lt;!-- table --&gt;</font></i>
+
+| *L* | *C* | *R* |
+| A2 |  B2  |  C2 |
+| A3 |  B3  |  C3 |
+| multi span |||
+| A5-7 |  5  |  5 |
+|^| six | six |
+|^| seven | seven |
+| split\
+| over\
+| 3 lines |
+| A9 |  B9  |  C9 |
+
+WikiWord
+
+Web.WikiWord
+
+Web.SubWeb.WikiWord
+
+<b><font color="#000080">&lt;nop&gt;</font></b>NotAutoLinked
+
+!NotAutoLinked
+
+ACRONYM
+
+Web.ACRONYM
+
+Web.SubWeb.ACRONYM
+
+<b><font color="#000080">&lt;nop&gt;</font></b>ACRONYMNOTAUTOLINKED
+
+!ACRONYMNOTAUTOLINKED
+
+#MyAnchor
+
+<u><font color="#0000FF">[[topic name]]</font></u>
+
+<u><font color="#0000FF">[[TopicName]]</font></u>
+
+<u><font color="#0000FF">[[Web.My topic name]]</font></u>
+
+!<u><font color="#0000FF">[[not a link]]</font></u>
+
+<u><font color="#0000FF">[[TopicName][link text]]</font></u>
+
+http://example.org/autolinked
+
+a@b.com
+
+<u><font color="#0000FF">[[mailto:a@b.com]\</font></u>
+<u><font color="#0000FF">[Mail]]</font></u>
+
+<u><font color="#0000FF">[[mailto:?subject=\</font></u>
+<u><font color="#0000FF">Hi][Hi]]</font></u>
+
+<b><font color="#0000FF">&lt;noautolink&gt;</font></b>NotAutoLinked<b><font color="#0000FF">&lt;/noautolink&gt;</font></b>
+
+<b><font color="#0000FF">&lt;literal&gt;</font></b>
+| Not | A | Table |
+*Not bolded*
+<u><font color="#0000FF">[[not linked]]</font></u>
+<b><font color="#0000FF">%MACROS{</font></b><font color="#009900">still=</font><font color="#FF0000">"work"</font><b><font color="#0000FF"> </font></b><font color="#009900">as=</font><font color="#FF0000">"normal"</font><b><font color="#0000FF">}%</font></b>
+<b><font color="#0000FF">&lt;/literal&gt;</font></b>
+
+<b><font color="#0000FF">&lt;verbatim</font></b> <font color="#009900">class</font><font color="#990000">=</font><font color="#FF0000">"bash"</font><b><font color="#0000FF">&gt;</font></b>
+#!/bin/bash
+while [ -n "$(ls . ~/ \
+~/pub* /var/www 2&gt;/dev/null \
+ | fgrep foswiki )" ] ; do
+  clear
+  printf "\nFoswiki rules!\n"
+  sleep 10
+  clear
+  printf "\nFoswiki still rules!\n"
+  sleep 10
+  done; exit 0
+
+<b><font color="#0000FF">%MACROS{</font></b><font color="#009900">not=</font><font color="#FF0000">"expanded"</font><b><font color="#0000FF">}%</font></b>
+<b><font color="#0000FF">&lt;/verbatim&gt;</font></b>
+
+<i><font color="#9A1900">&lt;!-- Table Of Contents --&gt;</font></i>
+
+<b><font color="#0000FF">%TOC%</font></b>
+<b><font color="#000080">---+</font></b> Heading 1
+<b><font color="#000080">---+!!</font></b> Heading 1 not in TOC
+<b><font color="#000080">---++</font></b> Heading 2
+<b><font color="#000080">---++!!</font></b> Heading 2 not in TOC
+<b><font color="#000080">---+++</font></b> Heading 3
+<b><font color="#000080">---+++!!</font></b> Heading 3 not in TOC
+<b><font color="#000080">---++++</font></b> Heading 4
+<b><font color="#000080">---++++!!</font></b> Heading 4 not in TOC
+<b><font color="#000080">---+++++</font></b> Heading 5
+<b><font color="#000080">---+++++!!</font></b> Heading 5 not in TOC
+<b><font color="#000080">---++++++</font></b> Heading 6
+<b><font color="#000080">---++++++!!</font></b> Heading 6 not in TOC
+
+<i><font color="#9A1900">&lt;!-- Non-trivial %MACRO expressions --&gt;</font></i>
+
+<b><font color="#0000FF">%MACRO{</font></b>
+<b><font color="#0000FF">  </font></b><font color="#009900">format=</font><font color="#FF0000">"   * </font><b><font color="#000000">$token(</font></b><font color="#008080">Argument</font><b><font color="#000000">)</font></b><font color="#FF0000"> </font><b><font color="#000000">$foo</font></b><font color="#FF0000"> </font><u><font color="#0000FF">[[/path/</font></u><b><font color="#0000FF">%to%</font></b><u><font color="#0000FF">/</font></u><b><font color="#000000">$bar</font></b><u><font color="#0000FF">][text]]</font></u>
+<font color="#FF0000">    </font><b><font color="#0000FF">%WITHIN{</font></b>
+<b><font color="#0000FF">      </font></b><font color="#009900">format=</font><font color="#FF0000">"   * </font><b><font color="#000000">$token(</font></b><font color="#008080">Argument</font><b><font color="#000000">)</font></b><font color="#FF0000"> </font><b><font color="#000000">$foo</font></b><font color="#FF0000"> </font><u><font color="#0000FF">[[/path/</font></u><b><font color="#0000FF">%to%</font></b><u><font color="#0000FF">/</font></u><b><font color="#000000">$bar</font></b><u><font color="#0000FF">][text]]</font></u>
+<font color="#FF0000">        </font><b><font color="#0000FF">%NESTED{</font></b>
+<b><font color="#0000FF">          </font></b><font color="#009900">macro=</font><font color="#FF0000">"   * </font><b><font color="#000000">$token(</font></b><font color="#008080">Argument</font><b><font color="#000000">)</font></b><font color="#FF0000"> </font><b><font color="#000000">$foo</font></b><font color="#FF0000"> </font><u><font color="#0000FF">[[/path/</font></u><b><font color="#0000FF">%to%</font></b><u><font color="#0000FF">/</font></u><b><font color="#000000">$bar</font></b><u><font color="#0000FF">][text]]</font></u><font color="#FF0000">"</font>
+<b><font color="#0000FF">        }%</font></b><font color="#FF0000">"</font>
+<b><font color="#0000FF">    }%</font></b><font color="#FF0000">"</font>
+<b><font color="#0000FF">}%</font></b>
+
+<b><font color="#0000FF">%INCLUDE{</font></b>
+<b><font color="#0000FF">  </font></b><font color="#FF0000">"</font><b><font color="#0000FF">%QUERY{</font></b>
+<b><font color="#0000FF">    </font></b><font color="#FF0000">"'</font><b><font color="#0000FF">%SYSTEMWEB%</font></b><font color="#FF0000">.FAQWhatIsWikiWiki'/TopicClassification"</font>
+<b><font color="#0000FF">  }%</font></b><font color="#FF0000">"</font>
+<b><font color="#0000FF">  </font></b><font color="#009900">section=</font><font color="#FF0000">"Summary"</font>
+<b><font color="#0000FF">}%</font></b>
+
+<b><font color="#0000FF">%MACRO{</font></b>
+<b><font color="#0000FF">  </font></b><font color="#009900">format=</font><font color="#FF0000">"   * </font><b><font color="#000000">$token(</font></b><font color="#008080">Argument</font><b><font color="#000000">)</font></b><font color="#FF0000"> </font><b><font color="#000000">$foo</font></b><font color="#FF0000"> </font><u><font color="#0000FF">[[/path/</font></u><b><font color="#0000FF">%to%</font></b><u><font color="#0000FF">/</font></u><b><font color="#000000">$bar</font></b><u><font color="#0000FF">][text]]</font></u><font color="#FF0000"> </font><b><font color="#0000FF">$percntWITHIN{</font></b>
+<b><font color="#0000FF">    </font></b><font color="#009900">format=</font><font color="#FF0000">\"   </font><b><font color="#000000">$token(</font></b><font color="#008080">Argument</font><b><font color="#000000">)</font></b><font color="#FF0000"> </font><b><font color="#000000">$foo</font></b><font color="#FF0000"> </font><u><font color="#0000FF">[[/path/</font></u><b><font color="#0000FF">%to%</font></b><u><font color="#0000FF">/</font></u><b><font color="#000000">$bar</font></b><u><font color="#0000FF">][text]]</font></u><font color="#FF0000"> </font><b><font color="#0000FF">$percntNESTED{</font></b>
+<b><font color="#0000FF">      </font></b><font color="#009900">format=</font><font color="#FF0000">\"   * </font><b><font color="#000000">$token(</font></b><font color="#008080">Argument</font><b><font color="#000000">)</font></b><font color="#FF0000"> </font><b><font color="#000000">$foo</font></b><font color="#FF0000"> </font><u><font color="#0000FF">[[/path/</font></u><b><font color="#0000FF">%to%</font></b><u><font color="#0000FF">/</font></u><b><font color="#000000">$bar</font></b><u><font color="#0000FF">][text]]</font></u><font color="#FF0000"> </font><b><font color="#0000FF">$percntDELAYED{</font></b>
+<b><font color="#0000FF">        </font></b><font color="#009900">macro=</font><font color="#FF0000">\"test\"</font>
+<b><font color="#0000FF">      }$percnt</font></b><font color="#FF0000">\"</font>
+<b><font color="#0000FF">    }$percnt</font></b><font color="#FF0000">\"</font>
+<b><font color="#0000FF">  }$percnt</font></b><font color="#FF0000">"</font>
+<b><font color="#0000FF">}%</font></b>
+
+<b><font color="#0000FF">%SEARCH{</font></b>
+<b><font color="#0000FF">  </font></b><font color="#FF0000">"info.date &gt;= d2n('2009-01-01') AND info.date &lt;= d2n('2009-12-31')"</font>
+<b><font color="#0000FF">  </font></b><font color="#009900">type=</font><font color="#FF0000">"query"</font>
+<b><font color="#0000FF">  </font></b><font color="#009900">limit=</font><font color="#FF0000">"2"</font>
+<b><font color="#0000FF">  </font></b><font color="#009900">nonoise=</font><font color="#FF0000">"on"</font>
+<b><font color="#0000FF">  </font></b><font color="#009900">format=</font><font color="#FF0000">"   * &lt;img src=\"</font><b><font color="#0000FF">$percentICONURL{</font></b>
+<b><font color="#0000FF">    </font></b><font color="#FF0000">\"</font><b><font color="#0000FF">$percentIF{</font></b>
+<b><font color="#0000FF">      </font></b><font color="#FF0000">\"'</font><b><font color="#000000">$topic</font></b><font color="#FF0000">'/parent.name='UserDocumentationCategory'\"</font>
+<b><font color="#0000FF">      </font></b><font color="#009900">then=</font><font color="#FF0000">\"info\"</font><b><font color="#0000FF"> </font></b><font color="#009900">else=</font><font color="#FF0000">\"gear\"</font>
+<b><font color="#0000FF">    }$percent</font></b><font color="#FF0000">\"</font>
+<b><font color="#0000FF">  }$percent</font></b><font color="#FF0000">\"/&gt; </font><u><font color="#0000FF">[[</font></u><b><font color="#000000">$topic</font></b><u><font color="#0000FF">]]</font></u><font color="#FF0000">"</font>
+<b><font color="#0000FF">}%</font></b>
+</tt></pre>

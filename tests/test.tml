@@ -1,0 +1,228 @@
+%META:DATUM{key="value" anotherkey="anothervalue"}%
+
+<!-- Set statements -->
+
+   * Set MACRO = value value value
+   morevalue
+   morevalue
+   * Set ONELINER = Value %value%
+      * Set ANOTHERMACRO = value
+         * Set YETANOTHERMACRO = value
+
+<!-- "important" HTML tags -->
+
+<img src="%ATTACHURLPATH%"/>
+
+<br/>
+
+<form action="%SCRIPTURLPATH{"save"}%" method="post">
+<input type="hidden" name="topic" value="Web.Topic"/>
+<input type="submit"/>
+</form>
+
+<u>underlined text</u>
+<s>strike-out text</s>
+<strike>strike-out text</strike>
+<del>strike-out text</del>
+
+<!-- not really HTML -->
+<nop> <nop/>
+<noautolink>This is NotAutoLinked, so there</noautolink>
+<sticky><div class="to be protected by WYSIWYG">markup!</div></sticky>
+<literal>So, *none* of _this_ is =styled=, but %MACROS{still="work" as="normal"}%</literal>
+<verbatim class="tml">So, *none* of _this_ is =styled=, and %MACROS{are="disabled"}%</verbatim>
+<verbatim class="tml">Only the outer verbatim does anything; <verbatim>inner</verbatim> are ignored (displayed as normal text)</verbatim>
+
+<!-- not-really-HTML plugin syntax -->
+<dot>DirectedGraphPlugin</dot>
+
+1st
+paragraph
+
+2nd
+paragraph
+
+*Bold text*
+
+_Underlined text_
+
+__Bold italic text__
+
+=monospaced text=
+
+==bold monospaced text==
+
+<!-- Horizontal rule: -->
+
+---
+
+   * Bullet
+      * Con
+        tinued
+   * Bullet
+
+   1. Number
+      1. Con
+         tinued
+   1. Number
+
+   A. Alpha
+      A. Con
+         tinued
+   A. Alpha
+
+   a. alpha
+      a. Con
+         tinued
+   a. alpha
+
+   I. Roman
+      I. Con
+         tinued
+   I. Roman
+
+   i. roman
+      i. Con
+         tinued
+   i. roman
+
+   $ Term: Definition
+
+<!-- table -->
+
+| *L* | *C* | *R* |
+| A2 |  B2  |  C2 |
+| A3 |  B3  |  C3 |
+| multi span |||
+| A5-7 |  5  |  5 |
+|^| six | six |
+|^| seven | seven |
+| split\
+| over\
+| 3 lines |
+| A9 |  B9  |  C9 |
+
+WikiWord
+
+Web.WikiWord
+
+Web.SubWeb.WikiWord
+
+<nop>NotAutoLinked
+
+!NotAutoLinked
+
+ACRONYM
+
+Web.ACRONYM
+
+Web.SubWeb.ACRONYM
+
+<nop>ACRONYMNOTAUTOLINKED
+
+!ACRONYMNOTAUTOLINKED
+
+#MyAnchor
+
+[[topic name]]
+
+[[TopicName]]
+
+[[Web.My topic name]]
+
+![[not a link]]
+
+[[TopicName][link text]]
+
+http://example.org/autolinked
+
+a@b.com
+
+[[mailto:a@b.com]\
+[Mail]]
+
+[[mailto:?subject=\
+Hi][Hi]]
+
+<noautolink>NotAutoLinked</noautolink>
+
+<literal>
+| Not | A | Table |
+*Not bolded*
+[[not linked]]
+%MACROS{still="work" as="normal"}%
+</literal>
+
+<verbatim class="bash">
+#!/bin/bash
+while [ -n "$(ls . ~/ \
+~/pub* /var/www 2>/dev/null \
+ | fgrep foswiki )" ] ; do
+  clear
+  printf "\nFoswiki rules!\n"
+  sleep 10
+  clear
+  printf "\nFoswiki still rules!\n"
+  sleep 10
+  done; exit 0
+
+%MACROS{not="expanded"}%
+</verbatim>
+
+<!-- Table Of Contents -->
+
+%TOC%
+---+ Heading 1
+---+!! Heading 1 not in TOC
+---++ Heading 2
+---++!! Heading 2 not in TOC
+---+++ Heading 3
+---+++!! Heading 3 not in TOC
+---++++ Heading 4
+---++++!! Heading 4 not in TOC
+---+++++ Heading 5
+---+++++!! Heading 5 not in TOC
+---++++++ Heading 6
+---++++++!! Heading 6 not in TOC
+
+<!-- Non-trivial %MACRO expressions -->
+
+%MACRO{
+  format="   * $token(Argument) $foo [[/path/%to%/$bar][text]]
+    %WITHIN{
+      format="   * $token(Argument) $foo [[/path/%to%/$bar][text]]
+        %NESTED{
+          macro="   * $token(Argument) $foo [[/path/%to%/$bar][text]]"
+        }%"
+    }%"
+}%
+
+%INCLUDE{
+  "%QUERY{
+    "'%SYSTEMWEB%.FAQWhatIsWikiWiki'/TopicClassification"
+  }%"
+  section="Summary"
+}%
+
+%MACRO{
+  format="   * $token(Argument) $foo [[/path/%to%/$bar][text]] $percntWITHIN{
+    format=\"   $token(Argument) $foo [[/path/%to%/$bar][text]] $percntNESTED{
+      format=\"   * $token(Argument) $foo [[/path/%to%/$bar][text]] $percntDELAYED{
+        macro=\"test\"
+      }$percnt\"
+    }$percnt\"
+  }$percnt"
+}%
+
+%SEARCH{
+  "info.date >= d2n('2009-01-01') AND info.date <= d2n('2009-12-31')"
+  type="query"
+  limit="2"
+  nonoise="on"
+  format="   * <img src=\"$percentICONURL{
+    \"$percentIF{
+      \"'$topic'/parent.name='UserDocumentationCategory'\"
+      then=\"info\" else=\"gear\"
+    }$percent\"
+  }$percent\"/> [[$topic]]"
+}%

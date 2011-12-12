@@ -10,6 +10,8 @@ Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
 Version 3.1.6
 
+   * language definition file for T/Foswiki TML markup (thanks to
+     Paul W. Harvey)
    * new output format: ODF (e.g. for LibreOffice or to generate ODF 
      color-highlighted snippets to be used by ODF back-ends,
      like asciidoc-odf).  Thanks to Dag Wieers.

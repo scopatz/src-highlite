@@ -137,6 +137,7 @@ tex = latex.lang
 texi = texinfo.lang
 texinfo = texinfo.lang
 tk = tcl.lang
+tml = tml.lang
 txt = nohilite.lang
 ui = xml.lang
 upc = upc.lang
