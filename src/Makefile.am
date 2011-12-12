@@ -85,11 +85,13 @@ texinfo.lang haskell.lang haskell_literate.lang \
 manifest.lang asm.lang todo.lang applescript.lang \
 vbscript.lang awk.lang bat.lang clipper.lang cobol.lang d.lang \
 errors.lang erlang.lang proto.lang vala.lang lisp.lang \
-scheme.lang po.lang opa.lang javalog.lang upc.lang \
+scheme.lang po.lang opa.lang javalog.lang upc.lang tml.lang
+
+LANGFILES_NOTTOCHECK= \
 tml_formatting_all.lang  tml_macrolinks.lang      tml_macrosdelayed2.lang \
 tml_formatting.lang      tml_macros1.lang         tml_macrosdelayed3.lang \
 tml_glue.lang            tml_macros2.lang         tml_macros.lang \
-tml.lang                 tml_macrosdelayed1.lang  tml_macrotokens.lang
+tml_macrosdelayed1.lang  tml_macrotokens.lang
 
 OUTLANGFILES = \
 css_common.outlang \
@@ -117,7 +119,7 @@ odf.outlang
 STYLEFILES = texinfo.style esc.style
 
 source_highlightdata_DATA = \
-$(LANGFILES) $(OUTLANGFILES) \
+$(LANGFILES) $(LANGFILES_NOTTOCHECK) $(OUTLANGFILES) \
 $(STYLEFILES) \
 default.style style2.style style3.style \
 javalog.style \
