@@ -257,6 +257,23 @@ possibly missing files. You should have installed recent versions of
 <tt>automake</tt>, <tt>autoconf</tt> and <tt>libtool</tt>
 in order for this to succeed.</p>
 
+<p>
+We strongly suggest to use shadow builds, thus, create a build
+directory, say <tt>build</tt> and run configuration and make in that
+directory.  To summarize, the steps to get the sources from git and make the first build
+are:
+
+<pre>     git clone git://git.savannah.gnu.org/src-highlite.git
+     cd src-highlite
+     autoreconf -i
+     mkdir build
+     cd build
+     ../configure
+     make
+</pre>
+</p>
+
+
 <h3><a class="mozTocH3" name="Installation"></a>
 Installation</h3>
 

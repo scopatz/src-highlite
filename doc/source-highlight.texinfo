@@ -442,6 +442,7 @@ perl source-highlight binding:
 @chapter Installation
 @cindex installation
 
+@cindex compilation
 See the file @file{INSTALL} for detailed building and  installation
 instructions; anyway if you're used to compiling Linux software that
 comes with sources you may simply follow the usual procedure, i.e., untar
@@ -450,6 +451,20 @@ the file you downloaded in a directory and then:
 @example
 cd <source code main directory>
 ./configure
+make
+make install
+@end example
+
+@cindex shadow build
+We strongly suggest to use shadow builds, thus, create a build
+directory, say @file{build} and run configuration and make in that
+directory:
+
+@example
+cd <source code main directory>
+mkdir build
+cd build
+../configure
 make
 make install
 @end example
@@ -665,6 +680,33 @@ possibly missing files.  You should have installed recent versions of
 @cindex libtool
 @code{automake}, @code{autoconf} and @code{libtool} in order for this to
 succeed.
+
+@cindex shadow build
+We strongly suggest to use shadow builds, thus, create a build
+directory, say @file{build} and run configuration and make in that
+directory:
+
+@example
+cd <source code main directory>
+mkdir build
+cd build
+../configure
+make
+make install
+@end example
+
+To summarize, the steps to get the sources from git and make the first build
+are:
+
+@example
+git clone git://git.savannah.gnu.org/src-highlite.git
+cd src-highlite
+autoreconf -i
+mkdir build
+cd build
+../configure
+make
+@end example
 
 @node What you need to build source-highlight, Tips on installing Boost Regex library, Anonymous Git Checkout, Installation
 @section What you need to build source-highlight
