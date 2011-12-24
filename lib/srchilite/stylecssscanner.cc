@@ -1,6 +1,6 @@
-#line 2 "stylecssscanner.cc"
+#line 2 "../../../lib/srchilite/stylecssscanner.cc"
 
-#line 4 "stylecssscanner.cc"
+#line 4 "../../../lib/srchilite/stylecssscanner.cc"
 
 #define  YY_INT_ALIGNED short int
 
@@ -743,7 +743,7 @@ extern int line ;
 #endif
 
 
-#line 747 "stylecssscanner.cc"
+#line 747 "../../../lib/srchilite/stylecssscanner.cc"
 
 #define INITIAL 0
 #define COMMENT_STATE 1
@@ -944,7 +944,7 @@ YY_DECL
 #line 65 "../../../lib/srchilite/stylecssscanner.ll"
 
 
-#line 948 "stylecssscanner.cc"
+#line 948 "../../../lib/srchilite/stylecssscanner.cc"
 
 	if ( !(yy_init) )
 		{
@@ -1290,7 +1290,7 @@ YY_RULE_SETUP
 #line 212 "../../../lib/srchilite/stylecssscanner.ll"
 ECHO;
 	YY_BREAK
-#line 1294 "stylecssscanner.cc"
+#line 1294 "../../../lib/srchilite/stylecssscanner.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT_STATE):
 case YY_STATE_EOF(MULTI_COMMENT_STATE):
