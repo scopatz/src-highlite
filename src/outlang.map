@@ -11,3 +11,4 @@ texinfo = texinfo.outlang
 javadoc = javadoc.outlang
 docbook = docbook.outlang
 odf = odf.outlang
+mediawiki = mediawiki.outlang

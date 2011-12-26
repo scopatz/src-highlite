@@ -113,7 +113,8 @@ xhtmltable.outlang \
 texinfo.outlang \
 javadoc.outlang \
 docbook.outlang \
-odf.outlang
+odf.outlang \
+mediawiki.outlang
 
 
 STYLEFILES = texinfo.style esc.style

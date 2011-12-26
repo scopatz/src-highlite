@@ -15,6 +15,7 @@ Version 3.1.6
    * new output format: ODF (e.g. for LibreOffice or to generate ODF 
      color-highlighted snippets to be used by ODF back-ends,
      like asciidoc-odf).  Thanks to Dag Wieers.
+   * new output format: MediaWiki thanks to Abe Skolnik
 
 Version 3.1.5
 

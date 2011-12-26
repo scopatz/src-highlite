@@ -1,0 +1,60 @@
+<i><span style="color:#9A1900;">/*</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;This&nbsp;is&nbsp;a&nbsp;classical&nbsp;Hello&nbsp;program</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;to&nbsp;test&nbsp;source-highlight&nbsp;with&nbsp;Java&nbsp;programs.</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;to&nbsp;have&nbsp;an&nbsp;html&nbsp;translation&nbsp;type</span></i><br/>
+<br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;source-highlight&nbsp;-s&nbsp;java&nbsp;-f&nbsp;html&nbsp;--input&nbsp;Hello.java&nbsp;--output&nbsp;Hello.html</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;source-highlight&nbsp;-s&nbsp;java&nbsp;-f&nbsp;html&nbsp;&lt;&nbsp;Hello.java&nbsp;&gt;&nbsp;Hello.html</span></i><br/>
+<br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;or&nbsp;type&nbsp;source-highlight&nbsp;--help&nbsp;for&nbsp;the&nbsp;list&nbsp;of&nbsp;options</span></i><br/>
+<br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;written&nbsp;by</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;Lorenzo&nbsp;Bettini</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;</span></i><u><span style="color:#0000FF;">http://www.lorenzobettini.it</span></u><br/>
+<i><span style="color:#9A1900;">&nbsp;&nbsp;</span></i><u><span style="color:#0000FF;">http://www.gnu.org/software/src-highlite</span></u><br/>
+<i><span style="color:#9A1900;">*/</span></i><br/>
+<br/>
+<b><span style="color:#000080;">package</span></b>&nbsp;hello<span style="color:#990000;">;</span><br/>
+<br/>
+<b><span style="color:#000080;">import</span></b>&nbsp;java<span style="color:#990000;">.</span>io<span style="color:#990000;">.*</span>&nbsp;<span style="color:#990000;">;</span><br/>
+<br/>
+<i><span style="color:#9A1900;">/**</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;*&nbsp;</span></i><b><span style="color:#0000FF;">&lt;p&gt;</span></b><br/>
+<i><span style="color:#9A1900;">&nbsp;*&nbsp;A&nbsp;simple&nbsp;Hello&nbsp;World&nbsp;class,&nbsp;used&nbsp;to&nbsp;demonstrate&nbsp;some</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;*&nbsp;features&nbsp;of&nbsp;Java&nbsp;source&nbsp;highlighting.</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;*&nbsp;</span></i><b><span style="color:#0000FF;">&lt;/p&gt;</span></b><br/>
+<i><span style="color:#9A1900;">&nbsp;*&nbsp;</span></i><b>TODO:</b><i><span style="color:#9A1900;">&nbsp;nothing,&nbsp;just&nbsp;to&nbsp;show&nbsp;an&nbsp;highlighted&nbsp;</span></i><b>TODO</b><i><span style="color:#9A1900;">&nbsp;or&nbsp;</span></i><b>FIXME</b><br/>
+<i><span style="color:#9A1900;">&nbsp;*</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;*&nbsp;</span></i><span style="color:#009900;">@author</span><i><span style="color:#9A1900;">&nbsp;Lorenzo&nbsp;Bettini</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;*&nbsp;</span></i><span style="color:#009900;">@version</span><i><span style="color:#9A1900;">&nbsp;2.0</span></i><br/>
+<i><span style="color:#9A1900;">&nbsp;*/</span></i>&nbsp;<i><span style="color:#9A1900;">///&nbsp;class</span></i><br/>
+<b><span style="color:#0000FF;">public</span></b>&nbsp;<b><span style="color:#0000FF;">class</span></b>&nbsp;<span style="color:#008080;">Hello</span>&nbsp;<span style="color:#FF0000;">{</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#009900;">int</span>&nbsp;foo&nbsp;<span style="color:#990000;">=</span>&nbsp;<span style="color:#993399;">1998</span>&nbsp;<span style="color:#990000;">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#009900;">int</span>&nbsp;hex_foo&nbsp;<span style="color:#990000;">=</span>&nbsp;<span style="color:#993399;">0xCAFEBABE</span><span style="color:#990000;">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#009900;">boolean</span>&nbsp;b&nbsp;<span style="color:#990000;">=</span>&nbsp;<b><span style="color:#0000FF;">false</span></b><span style="color:#990000;">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#008080;">Integer</span>&nbsp;i&nbsp;<span style="color:#990000;">=</span>&nbsp;<b><span style="color:#0000FF;">null</span></b>&nbsp;<span style="color:#990000;">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#009900;">char</span>&nbsp;c&nbsp;<span style="color:#990000;">=</span>&nbsp;<span style="color:#FF0000;">'</span><span style="color:#CC33CC;">\'</span><span style="color:#FF0000;">'</span><span style="color:#990000;">,</span>&nbsp;d&nbsp;<span style="color:#990000;">=</span>&nbsp;<span style="color:#FF0000;">'n'</span><span style="color:#990000;">,</span>&nbsp;e&nbsp;<span style="color:#990000;">=</span>&nbsp;<span style="color:#FF0000;">'</span><span style="color:#CC33CC;">\\</span><span style="color:#FF0000;">'</span>&nbsp;<span style="color:#990000;">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#008080;">String</span>&nbsp;xml&nbsp;<span style="color:#990000;">=</span>&nbsp;<span style="color:#FF0000;">"&lt;tag&nbsp;attr=</span><span style="color:#CC33CC;">\"</span><span style="color:#FF0000;">value</span><span style="color:#CC33CC;">\"</span><span style="color:#FF0000;">&gt;&amp;auml;&lt;/tag&gt;"</span><span style="color:#990000;">,</span>&nbsp;foo2&nbsp;<span style="color:#990000;">=</span>&nbsp;<span style="color:#FF0000;">"</span><span style="color:#CC33CC;">\\</span><span style="color:#FF0000;">"</span>&nbsp;<span style="color:#990000;">;</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<i><span style="color:#9A1900;">/*&nbsp;mymethod&nbsp;*/</span></i><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b><span style="color:#0000FF;">public</span></b>&nbsp;<span style="color:#009900;">void</span>&nbsp;<b><span style="color:#000000;">mymethod</span></b><span style="color:#990000;">(</span><span style="color:#009900;">int</span>&nbsp;i<span style="color:#990000;">)</span>&nbsp;<span style="color:#FF0000;">{</span><br/>
+&nbsp;&nbsp;<i><span style="color:#9A1900;">//&nbsp;just&nbsp;a&nbsp;foo&nbsp;method</span></i><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#FF0000;">}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<i><span style="color:#9A1900;">/*&nbsp;mymethod&nbsp;*/</span></i><br/>
+&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<i><span style="color:#9A1900;">/*&nbsp;main&nbsp;*/</span></i><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<b><span style="color:#0000FF;">public</span></b>&nbsp;<b><span style="color:#0000FF;">static</span></b>&nbsp;<span style="color:#009900;">void</span>&nbsp;<b><span style="color:#000000;">main</span></b><span style="color:#990000;">(</span>&nbsp;<span style="color:#008080;">String</span>&nbsp;args<span style="color:#990000;">[]</span>&nbsp;<span style="color:#990000;">)</span>&nbsp;<span style="color:#FF0000;">{</span><br/>
+&nbsp;&nbsp;<i><span style="color:#9A1900;">//&nbsp;just&nbsp;some&nbsp;greetings&nbsp;;-)&nbsp;&nbsp;/*</span></i><br/>
+&nbsp;&nbsp;System<span style="color:#990000;">.</span>out<span style="color:#990000;">.</span><b><span style="color:#000000;">println</span></b><span style="color:#990000;">(</span>&nbsp;<span style="color:#FF0000;">"Hello&nbsp;from&nbsp;java2html&nbsp;:-)"</span>&nbsp;<span style="color:#990000;">)</span>&nbsp;<span style="color:#990000;">;</span><br/>
+&nbsp;&nbsp;System<span style="color:#990000;">.</span>out<span style="color:#990000;">.</span><b><span style="color:#000000;">println</span></b><span style="color:#990000;">(</span>&nbsp;<span style="color:#FF0000;">"</span><span style="color:#CC33CC;">\t</span><span style="color:#FF0000;">by&nbsp;Lorenzo&nbsp;Bettini"</span>&nbsp;<span style="color:#990000;">)</span>&nbsp;<span style="color:#990000;">;</span><br/>
+&nbsp;&nbsp;System<span style="color:#990000;">.</span>out<span style="color:#990000;">.</span><b><span style="color:#000000;">println</span></b><span style="color:#990000;">(</span>&nbsp;<span style="color:#FF0000;">"</span><span style="color:#CC33CC;">\t</span><span style="color:#FF0000;">http://www.lorenzobettini.it"</span>&nbsp;<span style="color:#990000;">)</span>&nbsp;<span style="color:#990000;">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><span style="color:#0000FF;">if</span></b>&nbsp;<span style="color:#990000;">(</span>argc&nbsp;<span style="color:#990000;">&gt;</span>&nbsp;<span style="color:#993399;">0</span><span style="color:#990000;">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#008080;">String</span>&nbsp;param&nbsp;<span style="color:#990000;">=</span>&nbsp;argc<span style="color:#990000;">[</span><span style="color:#993399;">0</span><span style="color:#990000;">];</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><span style="color:#9A1900;">//System.out.println(&nbsp;"bye&nbsp;bye...&nbsp;:-D"&nbsp;)&nbsp;;&nbsp;//&nbsp;see&nbsp;you&nbsp;soon</span></i><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#FF0000;">}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<i><span style="color:#9A1900;">/*&nbsp;main&nbsp;*/</span></i><br/>
+<span style="color:#FF0000;">}</span><br/>
+<i><span style="color:#9A1900;">///&nbsp;class</span></i><br/>
+<br/>
+<i><span style="color:#9A1900;">//&nbsp;end&nbsp;of&nbsp;file&nbsp;test.java</span></i>

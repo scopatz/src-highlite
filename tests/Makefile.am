@@ -46,6 +46,8 @@ JAVA2ODF = $(PROGNAME) -s java -f odf
 
 JAVA2ODFDOC = $(JAVA2ODF) --title="This is the title"
 
+JAVA2MEDIAWIKI = $(PROGNAME) -s java -f mediawiki
+
 JS2HTML = $(PROGNAME) -s javascript $(STD_STYLE_HTML) 
 
 URL2HTML = $(PROGNAME) --lang-def=url.lang $(STD_STYLE_HTML) 
@@ -202,6 +204,7 @@ test.rb test_comments.rb test.rb.html test_comments.rb.html \
 test.java.txt \
 test.java.tex test.java.tex.html \
 test.java.fodt test.java.doc.fodt \
+test.java.mediawiki \
 test.java.texinfo \
 test.lua test.lua.html \
 test.ml test.ml.html \
@@ -491,6 +494,7 @@ check_java2html: remove_css_html_files remove_css_doc_files test.css.java.html t
 	$(JAVA2TEXINFO) -n -i $(srcdir)/test.java -o test.java.out.texinfo
 	$(JAVA2ODF) --line-number=" " -i $(srcdir)/test.java -o test.java.out.fodt
 	$(JAVA2ODFDOC) --line-number=" " -i $(srcdir)/test.java -o test.java.out.doc.fodt
+	$(JAVA2MEDIAWIKI) -i $(srcdir)/test.java -o test.java.out.mediawiki
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.java.html test.java.out.html
 	$(DIFF) $(srcdir)/test.java.doc.html test.java.doc.out.html
@@ -505,6 +509,7 @@ check_java2html: remove_css_html_files remove_css_doc_files test.css.java.html t
 	$(DIFF) $(srcdir)/test.java.texinfo test.java.out.texinfo
 	$(DIFF) $(srcdir)/test.java.fodt test.java.out.fodt
 	$(DIFF) $(srcdir)/test.java.doc.fodt test.java.out.doc.fodt
+	$(DIFF) $(srcdir)/test.java.mediawiki test.java.out.mediawiki
 	$(DIFF) $(srcdir)/test.java.html test.css.java.html
 	$(DIFF) $(srcdir)/test_notfixed.html test.nf_css.java.html
 	$(DIFF) $(srcdir)/test.java.doc.html test.css_doc.java.html
@@ -1248,7 +1253,7 @@ check-valgrind:
 	$(VALGRINDTEST) $(CPP2HTML) --gen-references=inline --ctags-file=my_test_ref.tags --line-number test_refs_tmp.h test_refs_tmp.cpp
 	rm -f test_refs_tmp.*
 
-CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* myimplicitxml* myimplicitphp* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml *.out.langelems *.out.list test_newlines.out test_nonewlines.out temp.output *.out.fodt *.out.doc.fodt
+CLEANFILES = *.out.html *.out.txt *.out.tex *.err_out *.unknown_out *.out.debug *.out.texinfo *_tmp.* *.out.show myscript* myimplicitxml* myimplicitphp* *.css.java.html *.nf_css.java.html *.css_xhtml.java.html *.css_doc.java.html *.out.docbook *.out.xhtml *.out.langelems *.out.list test_newlines.out test_nonewlines.out temp.output *.out.fodt *.out.doc.fodt *.out.mediawiki
 
 clean_html:
 	rm -f *.h.html *.java.html *.cc.html *.pas.html *.pl.html *.pm.html *.php3.html *.py.html *.chlog.html *.chlog_css.html *.l.html test_xhtml*.html test_notfixed.html test_css.html test_css_nodoc.html test_header.html *.rb.html *.js.html *.java.txt *.java.tex *.h.docbook *.java.texinfo *.lua.html *.ml.html *.sml.html test_*_lines.html *.log.html *.y.html *.simple.html *.ngroups.html *.tex.html *.lgt.html *.diff.html *.lang.html *.htm.html *.style.html *.cs.html *.xml.html *.sh.html *.url.html *.txt.html *.unknown.html *.tcl.html *.bib.html *.makefile.html *.css.html *.ps.html *.sl.html *.isolate.html *.backref.html *.c.html *.wdefault.html *.wodefault.html *.properties.html *.desktop.html *.lsm.html *.spec.html *.hx.html *.fortran.html *.fixed-fortran.html *.hx.html *.m4.html *.scala.html *.adb.html *.conf.html *.xorg.html

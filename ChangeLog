@@ -1,3 +1,7 @@
+2011-12-26  Lorenzo Bettini  <bettini@bettini>
+
+	* src/mediawiki.outlang: Added, thanks to Abe Skolnik
+
 2011-12-12  Paul W. Harvey <Paul.W.Harvey@csiro.au>
 
 	* src/tml.lang: TML language definition file
