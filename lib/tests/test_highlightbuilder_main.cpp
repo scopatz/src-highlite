@@ -382,7 +382,7 @@ int main() {
 
     // test whether delimited elems that start a state are generated correctly
     DelimitedLangElem delimStartingState("delim", new StringDef("<"), new StringDef(">"), new StringDef("\\\\"), false, false);
-    StateLangElem fooStateElem("foo", 0, false, false);
+    StateLangElem fooStateElem("foo", 0, 0, false);
     delimStartingState.setStateLangElem(&fooStateElem);
 
     mainState = HighlightStatePtr(new HighlightState);
