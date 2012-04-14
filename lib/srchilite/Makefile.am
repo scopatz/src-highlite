@@ -51,7 +51,7 @@ clean-local:
 	rm -f $(builddir)/html/*
 endif
 
-AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl $(BOOST_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl -I$(top_srcdir)/src $(BOOST_CPPFLAGS)
 AM_LDFLAGS = $(BOOST_LDFLAGS)
 
 LDADD = $(top_builddir)/gl/libgnu.la
@@ -139,8 +139,6 @@ h_sources = parsestyles.h \
              verbosity.h \
              sourcehighlightutils.h utils.h \
              instances.h
-
-INCLUDES = -I@top_srcdir@/src
 
 EXTRA_DIST = $(h_sources) \
 langelemsprinter_dbtab.cc \

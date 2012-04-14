@@ -8,15 +8,17 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl $(BOOST_CPPFLAGS)
+AM_CPPFLAGS = \
+	-I$(top_srcdir)/gl \
+	-I$(top_builddir)/gl \
+	-I$(top_srcdir)/src -I$(srcdir)/..
+	$(BOOST_CPPFLAGS)
 AM_LDFLAGS = $(BOOST_LDFLAGS) -no-install
 
 LDADD = $(top_builddir)/gl/libgnu.la $(LIBDIR)/libsource-highlight.la $(BOOST_REGEX_LIB)
 
 #LIBDIR = $(top_builddir)/lib/srchilite/
 LIBDIR = ../srchilite/
-
-INCLUDES = -I@top_srcdir@/src -I@srcdir@/..
 
 VALGRIND_TESTS = test_regexrules test_formatter_manager test_highlighter \
 	test_exception test_highlightbuilder test_buffered_output \

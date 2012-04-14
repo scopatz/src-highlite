@@ -34,9 +34,7 @@ EXTRA_PROGRAMS = source-highlight-cgi
 
 SRCHILITE = $(top_builddir)/src/source-highlight$(EXEEXT)
 
-INCLUDES = -I@top_srcdir@/lib
-
-AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl $(BOOST_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir)/gl -I$(top_builddir)/gl -I$(top_srcdir)/lib $(BOOST_CPPFLAGS)
 AM_LDFLAGS = $(BOOST_LDFLAGS)
 
 LDADD = $(top_builddir)/gl/libgnu.la
