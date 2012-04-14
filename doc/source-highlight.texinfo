@@ -930,6 +930,7 @@ simple make should do).
 @node Using source-highlight with less, Using source-highlight as a CGI, Patching from a previous version, Installation
 @section Using source-highlight with less
 
+@cindex src-hilite-lesspipe.sh
 This was suggested by Konstantine Serebriany.   The script
 @file{src-hilite-lesspipe.sh} will be installed together with
 source-highlight.  You can use the following environment variables:
@@ -941,6 +942,14 @@ export LESS=' -R '
 
 This way, when you use less to browse a file, if it is a source file
 handled by source-highlight, it will be automatically highlighted.
+
+@cindex source-highlight-esc.sh
+Xavier-Emmanuel Vincent recently provided an alternative version of
+ANSI color scheme, @file{esc256.style}: some terminals can handle 256
+colors.  Xavier also provided a script which checks how many colors
+your terminal can handle, and in case, uses the 256 variant.  The
+script is called @file{source-highlight-esc.sh} and it will be
+installed together with the other binaries.
 
 @node Using source-highlight as a CGI, Building .rpm, Using source-highlight with less, Installation
 @section Using source-highlight as a CGI
@@ -1117,10 +1126,11 @@ document is generated.
 @cindex ANSI color
 
 If you're using this output format, for instance together with
-@code{less} (see @ref{Using source-highlight with less}), you may
-want to use the @file{esc.style}, which comes with the source-highlight
-distribution, with the option @code{--style-file}.  This should
-result in a more pleasant coloring output.
+@code{less} (see @ref{Using source-highlight with less}), you may want
+to use the @file{esc.style} (or @file{esc256.style} if your terminal
+can handle 256 colors), which comes with the source-highlight
+distribution, with the option @code{--style-file}.  This should result
+in a more pleasant coloring output.
 
 @node Odf output,  , ANSI color escape sequences, Simple Usage
 @section Odf output

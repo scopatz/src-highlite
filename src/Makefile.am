@@ -28,7 +28,8 @@ cmdline.h: cmdline.c
 
 #bin_PROGRAMS = check-regexp source-highlight
 bin_PROGRAMS = check-regexp source-highlight source-highlight-settings
-bin_SCRIPTS = java2html cpp2html src-hilite-lesspipe.sh
+bin_SCRIPTS = java2html cpp2html src-hilite-lesspipe.sh \
+	source-highlight-esc.sh
 
 EXTRA_PROGRAMS = source-highlight-cgi 
 

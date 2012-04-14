@@ -264,6 +264,7 @@ src/Makefile
 src/java2html
 src/cpp2html
 src/src-hilite-lesspipe.sh
+src/source-highlight-esc.sh
 doc/Makefile
 lib/Makefile
 lib/srchilite/Makefile
