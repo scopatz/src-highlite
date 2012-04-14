@@ -55,6 +55,7 @@ html = html.lang
 hx = haxe.lang
 in = makefile.lang
 ini = desktop.lang
+islisp = islisp.lang
 java = java.lang
 javalog = javalog.lang
 javascript = javascript.lang

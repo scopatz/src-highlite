@@ -144,6 +144,7 @@ erlang = erlang.lang
 vala = vala.lang
 lisp = lisp.lang
 el = lisp.lang
+islisp = islisp.lang
 scm = scheme.lang
 scheme = scheme.lang
 po = po.lang

@@ -14,6 +14,7 @@ Version 3.1.7
      Trevor Spiteri)
    * language definition for Lilypond (thanks to Federico Bruni)
    * language definition for R statistics programming language
+   * language definition for ISLISP (thanks to Christian Jullien)
    * improved Erlang definition file (thanks to Erik Søe Sørensen)
    * new output format: ESC 256 ascii code (thanks to
      Xavier-Emmanuel Vincent).
