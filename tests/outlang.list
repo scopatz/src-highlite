@@ -1,5 +1,6 @@
 docbook = docbook.outlang
 esc = esc.outlang
+esc256 = esc256.outlang
 html = html.outlang
 html-css = htmlcss.outlang
 htmltable = htmltable.outlang

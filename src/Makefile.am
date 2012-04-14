@@ -95,6 +95,7 @@ tml_macrosdelayed1.lang  tml_macrotokens.lang
 OUTLANGFILES = \
 css_common.outlang \
 esc.outlang \
+esc256.outlang \
 html_common.outlang \
 html_ref.outlang \
 html_notfixed.outlang \
@@ -116,7 +117,7 @@ odf.outlang \
 mediawiki.outlang
 
 
-STYLEFILES = texinfo.style esc.style lilypond.style
+STYLEFILES = texinfo.style esc.style esc256.style lilypond.style
 
 source_highlightdata_DATA = \
 $(LANGFILES) $(LANGFILES_NOTTOCHECK) $(OUTLANGFILES) \
