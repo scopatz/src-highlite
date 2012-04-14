@@ -1,7 +1,7 @@
 Makefile.in
 source-highlight.info
-version-lib.texi
-version.texi
+#version-lib.texi
+#version.texi
 stamp-1
 source-highlight-lib.info
 stamp-vti
