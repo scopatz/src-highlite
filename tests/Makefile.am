@@ -321,7 +321,8 @@ test.po test.po.html \
 test.opa test.opa.html \
 test.javalog test.javalog.html \
 test.upc test.upc.html \
-test.tml test.tml.html
+test.tml test.tml.html \
+test.ly test.ly.html
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
@@ -457,6 +458,7 @@ check_po \
 check_opa \
 check_javalog \
 check_upc \
+check_lilypond \
 check_tml \
 check-output-dir \
 check_stop \
@@ -872,6 +874,11 @@ check_upc:
 	$(PROGNAME_STD) -i $(srcdir)/test.upc -o test.upc.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.upc.html test.upc.out.html
+
+check_lilypond:
+	$(PROGNAME) --style-file $(top_srcdir)/src/lilypond.style -i $(srcdir)/test.ly -o test.ly.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.ly.html test.ly.out.html
 
 check_tml:
 	$(PROGNAME_STD) -i $(srcdir)/test.tml -o test.tml.out.html

@@ -151,3 +151,5 @@ opa = opa.lang
 javalog = javalog.lang
 upc = upc.lang
 tml = tml.lang
+lilypond = lilypond.lang
+ly = lilypond.lang

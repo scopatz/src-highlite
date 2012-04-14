@@ -1,0 +1,114 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#000000">\version</font></b> <font color="#C20F0F">"2.14.2"</font>
+
+<font color="#A04900">#(define (naturalize-pitch p)</font>
+<font color="#A04900">  </font><font color="#C20F0F">"Strings should be read"</font>
+<font color="#A04900">   (let ((o (ly:pitch-octave p))</font>
+<font color="#A04900">         (a (* 4 (ly:pitch-alteration p)))</font>
+<font color="#A04900">         </font><i><font color="#808080">;; alteration, a, in quarter tone steps,</font></i>
+<font color="#A04900">         </font><i><font color="#808080">;; for historical reasons</font></i>
+<font color="#A04900">         (n (ly:pitch-notename p)))</font>
+<font color="#A04900">     (cond</font>
+<font color="#A04900">      ((and (&gt; a 1) (or (eq? n 6) (eq? n 2)))</font>
+<font color="#A04900">       (set! a (- a 2))</font>
+<font color="#A04900">       (set! n (+ n 1)))</font>
+<font color="#A04900">      ((and (&lt; a -1) (or (eq? n 0) (eq? n 3)))</font>
+<font color="#A04900">       (set! a (+ a 2))</font>
+<font color="#A04900">       (set! n (- n 1))))</font>
+<font color="#A04900">     (cond</font>
+<font color="#A04900">      ((&gt; a 2) (set! a (- a 4)) (set! n (+ n 1)))</font>
+<font color="#A04900">      ((&lt; a -2) (set! a (+ a 4)) (set! n (- n 1))))</font>
+<font color="#A04900">     (if (&lt; n 0) (begin (set! o (- o 1)) (set! n (+ n 7))))</font>
+<font color="#A04900">     (if (&gt; n 6) (begin (set! o (+ o 1)) (set! n (- n 7))))</font>
+<font color="#A04900">     (ly:make-pitch o n (/ a 4))))</font>
+
+<b><font color="#000000">\header</font></b> <b><font color="#000000">{</font></b>
+  <font color="#0000FF">title</font> = <font color="#C20F0F">"Maple Leaf Rag"</font>
+  <font color="#0000FF">composer</font> = <font color="#C20F0F">"Scott Joplin"</font>
+  <font color="#0000FF">piece</font> = <font color="#C20F0F">"Tempo di marcia"</font>
+  <font color="#0000FF">tagline</font> =
+    \markup {
+      <font color="#008000">\override</font> <font color="#A04900">#'(box-padding . 1.0)</font> <font color="#008000">\override</font> <font color="#A04900">#'(baseline-skip . 2.7)</font> <font color="#008000">\box</font>
+      <font color="#008000">\center-column</font> <b><font color="#000000">{</font></b>
+        <font color="#008000">\small</font> <font color="#008000">\line</font> <b><font color="#000000">{</font></b> Sheet music from <font color="#008000">\with-url</font> #<font color="#C20F0F">"http://www.MutopiaProject.org"</font>
+          <font color="#008000">\line</font> <b><font color="#000000">{</font></b> <font color="#008000">\teeny</font> www. <font color="#008000">\hspace</font> <font color="#A04900">#-0.5</font> MutopiaProject <font color="#008000">\hspace</font> <font color="#A04900">#-0.5</font> <font color="#008000">\teeny</font> .org <font color="#008000">\hspace</font> <font color="#A04900">#0.5</font> } 
+        <b><font color="#000000">}</font></b>
+      <b><font color="#000000">}</font></b>
+    <b><font color="#000000">}</font></b>
+<b><font color="#000000">}</font></b>
+
+<b><font color="#000000">\paper</font></b> <b><font color="#000000">{</font></b>
+  <font color="#0000FF">top-margin</font> = <font color="#808000">15</font>
+  <font color="#0000FF">ragged-right</font> = <font color="#A04900">##t</font>
+  <font color="#0000FF">system-system-spacing</font> <font color="#A04900">#'padding</font> = <font color="#A04900">#8</font>
+  <font color="#0000FF">score-system-spacing</font> =
+    <font color="#A04900">#'((basic-distance . 12)</font>
+<font color="#A04900">       (minimum-distance . 6)</font>
+<font color="#A04900">       (padding . 1)</font>
+<font color="#A04900">       (stretchability . 12))</font>
+<b><font color="#000000">}</font></b>
+
+top =  <b><font color="#0000C0">\relative</font></b> c' <b><font color="#000000">{</font></b>
+ <b><font color="#000000">\override</font></b> <font color="#C000C0">TextScript</font>   <font color="#A04900">#'padding</font> = <font color="#A04900">#2</font>
+ 
+ <b><font color="#0000C0">\key</font></b> as <font color="#0000FF">\major</font>
+ <b><font color="#0000C0">\time</font></b> <font color="#808000">2/4</font>
+ <b><font color="#0000C0">\clef</font></b> <font color="#0000FF">treble</font>
+ <b><font color="#0000C0">\partial</font></b> <font color="#808000">8</font>
+ r<font color="#008080">8</font> <b><font color="#FF8000">\f</font></b> |
+ <b><font color="#0000C0">\repeat</font></b> <font color="#0000FF">volta</font> <font color="#808000">2</font> <b><font color="#000000">{</font></b>
+  r<font color="#008080">16</font> as' &lt;es' es,&gt; as, c &lt;es es,&gt;<font color="#008080">8</font> g,<font color="#008080">16</font> |
+  &lt;es' es,&gt;<font color="#008080">16</font> g, bes &lt;es es,&gt; <b><font color="#C000C0">~</font></b> &lt;es es,&gt;<font color="#008080">4</font> |
+  r<font color="#008080">16</font> as, &lt;es' es,&gt; as, c &lt;es es,&gt;<font color="#008080">8</font> g,<font color="#008080">16</font> |
+  &lt;es' es,&gt;<font color="#008080">16</font> g, bes &lt;es es,&gt; <b><font color="#C000C0">~</font></b> &lt;es es,&gt;<font color="#008080">8</font> r<font color="#008080">16</font> &lt;es es,&gt; |
+  r<font color="#008080">16</font> as, ces &lt;fes fes,&gt; r<font color="#008080">16</font> &lt;es es,&gt; r<font color="#008080">16</font> &lt;es es,&gt; |
+  r<font color="#008080">16</font> as, ces &lt;fes fes,&gt; r<font color="#008080">16</font> &lt;es es,&gt; r<font color="#008080">8</font> |
+  <b><font color="#0000C0">\change</font></b> <b><font color="#C000C0">Staff</font></b> = <font color="#C20F0F">"down"</font>
+   <b><font color="#0000C0">\stemUp</font></b> r<font color="#008080">16</font><b><font color="#C000C0">^</font></b><b><font color="#FF8000">\p</font></b> as,,,-<b><font color="#C000C0">(</font></b> ces as'-<b><font color="#C000C0">)</font></b> r as-<b><font color="#C000C0">(</font></b> ces as'-<b><font color="#C000C0">)</font></b> <b><font color="#0000C0">\stemNeutral</font></b> |
+  <b><font color="#0000C0">\change</font></b> <b><font color="#C000C0">Staff</font></b> = <font color="#C20F0F">"up"</font>
+  r<font color="#008080">16</font> as-<b><font color="#C000C0">(</font></b> ces as'-<b><font color="#C000C0">)</font></b> r as-<b><font color="#C000C0">(</font></b> ces as'-<b><font color="#C000C0">)</font></b> |
+  <b><font color="#000000">}</font></b>
+<b><font color="#000000">}</font></b>
+
+bottom =  <b><font color="#0000C0">\relative</font></b> c <b><font color="#000000">{</font></b>
+ <b><font color="#0000C0">\key</font></b> as <font color="#0000FF">\major</font>
+ <b><font color="#0000C0">\time</font></b> <font color="#808000">2/4</font>
+ <b><font color="#0000C0">\clef</font></b> <font color="#0000FF">bass</font>
+ <b><font color="#0000C0">\partial</font></b> <font color="#808000">8</font>
+ &lt;es es,&gt;<font color="#008080">8</font> |
+ <b><font color="#0000C0">\repeat</font></b> <font color="#0000FF">volta</font> <font color="#808000">2</font> <b><font color="#000000">{</font></b>
+  &lt;as as,&gt; &lt;c as es&gt; &lt;c as es&gt; &lt;a a,&gt; |
+  &lt;bes bes,&gt; &lt;des g, es&gt; &lt;des g, es&gt; &lt;es, es,&gt; |
+  &lt;as as,&gt; &lt;c as es&gt; &lt;c as es&gt; &lt;a a,&gt; |
+  &lt;bes bes,&gt; &lt;des g, es&gt; &lt;des g, es&gt; &lt;es, es,&gt; |
+  &lt;fes fes,&gt;<font color="#008080">4</font> &lt;es es,&gt;<font color="#008080">8</font> &lt;es es,&gt; |
+  &lt;fes fes,&gt;<font color="#008080">4</font> &lt;es es,&gt;<font color="#008080">8</font> r |
+  <b><font color="#0000C0">\stemDown</font></b> as,, r as' r <b><font color="#0000C0">\stemNeutral</font></b> |
+  as' r as' r <b><font color="#0000C0">\clef</font></b> <font color="#0000FF">treble</font> |
+  <b><font color="#000000">}</font></b>
+<b><font color="#000000">}</font></b>
+
+<b><font color="#000000">\score</font></b> <b><font color="#000000">{</font></b>
+  <b><font color="#000000">\context</font></b> <b><font color="#C000C0">PianoStaff</font></b> <b><font color="#000000">&lt;&lt;</font></b>
+  <b><font color="#000000">\context</font></b> <b><font color="#C000C0">Staff</font></b> = <font color="#C20F0F">"up"</font>
+   <b><font color="#0000C0">\applyMusic</font></b> <font color="#A04900">#unfold-repeats</font> <b><font color="#0000C0">\top</font></b> 
+  <b><font color="#000000">\context</font></b> <b><font color="#C000C0">Staff</font></b> = <font color="#C20F0F">"down"</font>
+   <b><font color="#0000C0">\applyMusic</font></b> <font color="#A04900">#unfold-repeats</font> <b><font color="#0000C0">\bottom</font></b>
+ <b><font color="#000000">&gt;&gt;</font></b>
+ 
+  <b><font color="#000000">\midi</font></b> <b><font color="#000000">{</font></b>
+    <b><font color="#000000">\context</font></b> <b><font color="#000000">{</font></b>
+      <b><font color="#C000C0">\Score</font></b> <font color="#0000FF">tempoWholesPerMinute</font> = <font color="#A04900">#(ly:make-moment 120 4)</font>
+    <b><font color="#000000">}</font></b>
+    <b><font color="#000000">\context</font></b> <b><font color="#000000">{</font></b>
+      <b><font color="#C000C0">\Voice</font></b>
+      <b><font color="#000000">\remove</font></b> Dynamic<b><font color="#C000C0">_</font></b>performer
+    <b><font color="#000000">}</font></b>
+  <b><font color="#000000">}</font></b>
+  <b><font color="#000000">\layout</font></b><b><font color="#000000">{}</font></b>
+<b><font color="#000000">}</font></b>
+
+</tt></pre>
