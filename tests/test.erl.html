@@ -2,17 +2,17 @@
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><b><font color="#000080">-module</font></b>(sudoku)<font color="#990000">.</font>
+<pre><tt><b><font color="#000080">-module</font></b>(<font color="#FF6600">sudoku</font>)<font color="#990000">.</font>
 <b><font color="#000080">-author</font></b>(<u><font color="#0000FF">vmiklos@frugalware.org</font></u>)<font color="#990000">.</font>
-<b><font color="#000080">-vsn</font></b>(<font color="#FF0000">'2009-11-10'</font>)<font color="#990000">.</font>
-<b><font color="#000080">-compile</font></b>(export<font color="#990000">_</font>all)<font color="#990000">.</font>
+<b><font color="#000080">-vsn</font></b>(<font color="#FF6600">'2009-11-10'</font>)<font color="#990000">.</font>
+<b><font color="#000080">-compile</font></b>(<font color="#FF6600">export_all</font>)<font color="#990000">.</font>
 
 <i><font color="#9A1900">% Return the value of Fun or an empty list based on the value of If.</font></i>
 <i><font color="#9A1900">% </font></i><font color="#009900">@spec</font><i><font color="#9A1900"> fun_or_empty(If::bool(), Fun::fun() -&gt; [any()]) -&gt; Ret::[any()]</font></i>
 <i><font color="#9A1900">% Ret = Fun() if If is true, [] otherwise.</font></i>
-<b><font color="#000000">fun_or_empty</font></b>(If, Fun) <font color="#990000">-&gt;</font>
-	<b><font color="#0000FF">case</font></b> If <b><font color="#0000FF">of</font></b>
-		<b><font color="#0000FF">true</font></b> <font color="#990000">-&gt;</font> <b><font color="#000000">Fun</font></b>();
+<b><font color="#000000">fun_or_empty</font></b>(<font color="#009900">If</font>, <font color="#009900">Fun</font>) <font color="#990000">-&gt;</font>
+	<b><font color="#0000FF">case</font></b> <font color="#009900">If</font> <b><font color="#0000FF">of</font></b>
+		<font color="#000080">true</font> <font color="#990000">-&gt;</font> <font color="#009900">Fun</font>();
 		<font color="#990000">_</font> <font color="#990000">-&gt;</font> []
 	<b><font color="#0000FF">end</font></b><font color="#990000">.</font>
 
@@ -21,29 +21,29 @@ http://www.gnu.org/software/src-highlite -->
 <i><font color="#9A1900">% 	Ret::any()</font></i>
 <i><font color="#9A1900">% Table is a flatten list of lists, M is the length of a row,</font></i>
 <i><font color="#9A1900">% representing a matrix, Ret is the cell in the Ith row and Jth column.</font></i>
-<b><font color="#000000">field</font></b>(I, J, Table, M) <font color="#990000">-&gt;</font>
-	P <font color="#990000">=</font> (I<font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font>M<font color="#990000">+</font>J,
-	<b><font color="#0000FF">case</font></b> P <font color="#990000">&gt;</font> <b><font color="#0000FF">length</font></b>(Table) <b><font color="#0000FF">of</font></b>
-		<b><font color="#0000FF">true</font></b> <font color="#990000">-&gt;</font> <font color="#993399">0</font>;
-		<font color="#990000">_</font> <font color="#990000">-&gt;</font> <b><font color="#000000">lists:nth</font></b>((I<font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font>M<font color="#990000">+</font>J, Table)
+<b><font color="#000000">field</font></b>(<font color="#009900">I</font>, <font color="#009900">J</font>, <font color="#009900">Table</font>, <font color="#009900">M</font>) <font color="#990000">-&gt;</font>
+	<font color="#009900">P</font> <font color="#990000">=</font> (<font color="#009900">I</font><font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font><font color="#009900">M</font><font color="#990000">+</font><font color="#009900">J</font>,
+	<b><font color="#0000FF">case</font></b> <font color="#009900">P</font> <font color="#990000">&gt;</font> <b><font color="#000080">length</font></b>(<font color="#009900">Table</font>) <b><font color="#0000FF">of</font></b>
+		<font color="#000080">true</font> <font color="#990000">-&gt;</font> <font color="#993399">0</font>;
+		<font color="#990000">_</font> <font color="#990000">-&gt;</font> <b><font color="#000000">lists:nth</font></b>((<font color="#009900">I</font><font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font><font color="#009900">M</font><font color="#990000">+</font><font color="#009900">J</font>, <font color="#009900">Table</font>)
 	<b><font color="#0000FF">end</font></b><font color="#990000">.</font>
 
 <i><font color="#9A1900">% Return a cell from a field.</font></i>
 <i><font color="#9A1900">% </font></i><font color="#009900">@spec</font><i><font color="#9A1900"> field(I::integer(), J::integer(), Table::[[any()]]) -&gt;</font></i>
 <i><font color="#9A1900">% 	Ret::any()</font></i>
 <i><font color="#9A1900">% Ret is the cell in the Ith row and Jth column of Table.</font></i>
-<b><font color="#000000">field</font></b>(I, J, Table) <font color="#990000">-&gt;</font>
-	<b><font color="#000000">lists:nth</font></b>(J, <b><font color="#000000">lists:nth</font></b>(I, Table))<font color="#990000">.</font>
+<b><font color="#000000">field</font></b>(<font color="#009900">I</font>, <font color="#009900">J</font>, <font color="#009900">Table</font>) <font color="#990000">-&gt;</font>
+	<b><font color="#000000">lists:nth</font></b>(<font color="#009900">J</font>, <b><font color="#000000">lists:nth</font></b>(<font color="#009900">I</font>, <font color="#009900">Table</font>))<font color="#990000">.</font>
 
 
 <i><font color="#9A1900">% Round up.</font></i>
 <i><font color="#9A1900">% </font></i><font color="#009900">@spec</font><i><font color="#9A1900"> ceil(X::float()) -&gt; Ret::integer().</font></i>
 <i><font color="#9A1900">% Ret is the value of X, rounded up to an integer.</font></i>
-<b><font color="#000000">ceil</font></b>(X) <font color="#990000">-&gt;</font>
-	T <font color="#990000">=</font> <b><font color="#0000FF">trunc</font></b>(X),
-	<b><font color="#0000FF">case</font></b> X <font color="#990000">-</font> T <font color="#990000">==</font> <font color="#993399">0</font> <b><font color="#0000FF">of</font></b>
-		<b><font color="#0000FF">true</font></b> <font color="#990000">-&gt;</font> T;
-		<b><font color="#0000FF">false</font></b> <font color="#990000">-&gt;</font> T <font color="#990000">+</font> <font color="#993399">1</font>
+<b><font color="#000000">ceil</font></b>(<font color="#009900">X</font>) <font color="#990000">-&gt;</font>
+	<font color="#009900">T</font> <font color="#990000">=</font> <b><font color="#000080">trunc</font></b>(<font color="#009900">X</font>),
+	<b><font color="#0000FF">case</font></b> <font color="#009900">X</font> <font color="#990000">-</font> <font color="#009900">T</font> <font color="#990000">==</font> <font color="#993399">0</font> <b><font color="#0000FF">of</font></b>
+		<font color="#000080">true</font> <font color="#990000">-&gt;</font> <font color="#009900">T</font>;
+		<font color="#000080">false</font> <font color="#990000">-&gt;</font> <font color="#009900">T</font> <font color="#990000">+</font> <font color="#993399">1</font>
 	<b><font color="#0000FF">end</font></b><font color="#990000">.</font>
 
 <i><font color="#9A1900">% This is the same as lists:seq(), but it returns an empty list if the</font></i>
@@ -51,7 +51,7 @@ http://www.gnu.org/software/src-highlite -->
 <i><font color="#9A1900">% just with R13.</font></i>
 <i><font color="#9A1900">% </font></i><font color="#009900">@spec</font><i><font color="#9A1900"> seq(N::integer(), M::integer()) -&gt; Ret::[integer()].</font></i>
 <b><font color="#000000">seq</font></b>(<font color="#990000">_</font>, <font color="#993399">0</font>) <font color="#990000">-&gt;</font> [];
-<b><font color="#000000">seq</font></b>(N, M) <font color="#990000">-&gt;</font> <b><font color="#000000">lists:seq</font></b>(N, M)<font color="#990000">.</font>
+<b><font color="#000000">seq</font></b>(<font color="#009900">N</font>, <font color="#009900">M</font>) <font color="#990000">-&gt;</font> <b><font color="#000000">lists:seq</font></b>(<font color="#009900">N</font>, <font color="#009900">M</font>)<font color="#990000">.</font>
 
 <i><font color="#9A1900">% Finds possible values for a cell.</font></i>
 <i><font color="#9A1900">% </font></i><font color="#009900">@spec</font><i><font color="#9A1900"> possible({N::integer(), Rules::[[s | w | integer()]],</font></i>
@@ -62,45 +62,45 @@ http://www.gnu.org/software/src-highlite -->
 <i><font color="#9A1900">% L is a partial solution.</font></i>
 <i><font color="#9A1900">% Ret is a list of possible values for the next cell if the list of</font></i>
 <i><font color="#9A1900">% already filled ones is L.</font></i>
-<b><font color="#000000">possible</font></b>(<font color="#990000">_</font>P <font color="#990000">=</font> {N, Rules, M, K}, L) <font color="#990000">-&gt;</font>
-	X <font color="#990000">=</font> (<b><font color="#0000FF">length</font></b>(L) <b><font color="#0000FF">rem</font></b> M)<font color="#990000">+</font><font color="#993399">1</font>,
-	Y <font color="#990000">=</font> (<b><font color="#0000FF">length</font></b>(L) <b><font color="#0000FF">div</font></b> M)<font color="#990000">+</font><font color="#993399">1</font>,
-	Ok <font color="#990000">=</font> <b><font color="#000000">lists:seq</font></b>(<font color="#993399">1</font>, M),
-	R <font color="#990000">=</font> <b><font color="#000000">field</font></b>(Y, X, Rules),
-	Integers <font color="#990000">=</font> [I || I <font color="#990000">&lt;-</font> R, <b><font color="#000000">is_integer</font></b>(I)],
+<b><font color="#000000">possible</font></b>(<font color="#009900">_P</font> <font color="#990000">=</font> {<font color="#009900">N</font>, <font color="#009900">Rules</font>, <font color="#009900">M</font>, <font color="#009900">K</font>}, <font color="#009900">L</font>) <font color="#990000">-&gt;</font>
+	<font color="#009900">X</font> <font color="#990000">=</font> (<b><font color="#000080">length</font></b>(<font color="#009900">L</font>) <b><font color="#0000FF">rem</font></b> <font color="#009900">M</font>)<font color="#990000">+</font><font color="#993399">1</font>,
+	<font color="#009900">Y</font> <font color="#990000">=</font> (<b><font color="#000080">length</font></b>(<font color="#009900">L</font>) <b><font color="#0000FF">div</font></b> <font color="#009900">M</font>)<font color="#990000">+</font><font color="#993399">1</font>,
+	<font color="#009900">Ok</font> <font color="#990000">=</font> <b><font color="#000000">lists:seq</font></b>(<font color="#993399">1</font>, <font color="#009900">M</font>),
+	<font color="#009900">R</font> <font color="#990000">=</font> <b><font color="#000000">field</font></b>(<font color="#009900">Y</font>, <font color="#009900">X</font>, <font color="#009900">Rules</font>),
+	<font color="#009900">Integers</font> <font color="#990000">=</font> [<font color="#009900">I</font> || <font color="#009900">I</font> <font color="#990000">&lt;-</font> <font color="#009900">R</font>, <b><font color="#000080">is_integer</font></b>(<font color="#009900">I</font>)],
 	<i><font color="#9A1900">% first exclude values based on the s, w and integer info rules</font></i>
 	<i><font color="#9A1900">% and the values of both the already filled list and the</font></i>
 	<i><font color="#9A1900">% Rules matrix</font></i>
-	Swdeny <font color="#990000">=</font> <b><font color="#000000">lists:append</font></b>([
-		<b><font color="#000000">fun_or_empty</font></b>(X <font color="#990000">&gt;</font> <font color="#993399">1</font> andalso <b><font color="#000000">lists:member</font></b>(w, R),
-			<b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> X1 <font color="#990000">=</font> <b><font color="#000000">field</font></b>(Y, X<font color="#990000">-</font><font color="#993399">1</font>, L, M), Ok <font color="#990000">--</font> [X1<font color="#990000">+</font>N, X1<b><font color="#000080">-N</font></b>] <b><font color="#0000FF">end</font></b>),
-		<b><font color="#000000">fun_or_empty</font></b>(X <font color="#990000">&gt;</font> <font color="#993399">1</font> andalso <b><font color="#0000FF">not</font></b> <b><font color="#000000">lists:member</font></b>(w, R),
-			<b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> X1 <font color="#990000">=</font> <b><font color="#000000">field</font></b>(Y, X<font color="#990000">-</font><font color="#993399">1</font>, L, M), [X1<font color="#990000">+</font>N, X1<b><font color="#000080">-N</font></b>] <b><font color="#0000FF">end</font></b>),
-		<b><font color="#000000">fun_or_empty</font></b>(Y <font color="#990000">&gt;</font> <font color="#993399">1</font> andalso <b><font color="#000000">lists:member</font></b>(s, <b><font color="#000000">field</font></b>(Y<font color="#990000">-</font><font color="#993399">1</font>, X, Rules)),
-			<b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> Y1 <font color="#990000">=</font> <b><font color="#000000">field</font></b>(Y<font color="#990000">-</font><font color="#993399">1</font>, X, L, M), Ok <font color="#990000">--</font> [Y1<font color="#990000">+</font>N, Y1<b><font color="#000080">-N</font></b>] <b><font color="#0000FF">end</font></b>),
-		<b><font color="#000000">fun_or_empty</font></b>(Y <font color="#990000">&gt;</font> <font color="#993399">1</font> andalso <b><font color="#0000FF">not</font></b> <b><font color="#000000">lists:member</font></b>(s, <b><font color="#000000">field</font></b>(Y<font color="#990000">-</font><font color="#993399">1</font>, X, Rules)),
-			<b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> Y1 <font color="#990000">=</font> <b><font color="#000000">field</font></b>(Y<font color="#990000">-</font><font color="#993399">1</font>, X, L, M), [Y1<font color="#990000">+</font>N, Y1<b><font color="#000080">-N</font></b>] <b><font color="#0000FF">end</font></b>),
-		<b><font color="#000000">fun_or_empty</font></b>(<b><font color="#0000FF">length</font></b>(Integers) <font color="#990000">&gt;</font> <font color="#993399">0</font>, <b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> Ok <font color="#990000">--</font> Integers <b><font color="#0000FF">end</font></b>)
+	<font color="#009900">Swdeny</font> <font color="#990000">=</font> <b><font color="#000000">lists:append</font></b>([
+		<b><font color="#000000">fun_or_empty</font></b>(<font color="#009900">X</font> <font color="#990000">&gt;</font> <font color="#993399">1</font> <b><font color="#0000FF">andalso</font></b> <b><font color="#000000">lists:member</font></b>(<font color="#FF6600">w</font>, <font color="#009900">R</font>),
+			<b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> <font color="#009900">X1</font> <font color="#990000">=</font> <b><font color="#000000">field</font></b>(<font color="#009900">Y</font>, <font color="#009900">X</font><font color="#990000">-</font><font color="#993399">1</font>, <font color="#009900">L</font>, <font color="#009900">M</font>), <font color="#009900">Ok</font> <font color="#990000">--</font> [<font color="#009900">X1</font><font color="#990000">+</font><font color="#009900">N</font>, <font color="#009900">X1</font><b><font color="#000080">-N</font></b>] <b><font color="#0000FF">end</font></b>),
+		<b><font color="#000000">fun_or_empty</font></b>(<font color="#009900">X</font> <font color="#990000">&gt;</font> <font color="#993399">1</font> <b><font color="#0000FF">andalso</font></b> <b><font color="#0000FF">not</font></b> <b><font color="#000000">lists:member</font></b>(<font color="#FF6600">w</font>, <font color="#009900">R</font>),
+			<b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> <font color="#009900">X1</font> <font color="#990000">=</font> <b><font color="#000000">field</font></b>(<font color="#009900">Y</font>, <font color="#009900">X</font><font color="#990000">-</font><font color="#993399">1</font>, <font color="#009900">L</font>, <font color="#009900">M</font>), [<font color="#009900">X1</font><font color="#990000">+</font><font color="#009900">N</font>, <font color="#009900">X1</font><b><font color="#000080">-N</font></b>] <b><font color="#0000FF">end</font></b>),
+		<b><font color="#000000">fun_or_empty</font></b>(<font color="#009900">Y</font> <font color="#990000">&gt;</font> <font color="#993399">1</font> <b><font color="#0000FF">andalso</font></b> <b><font color="#000000">lists:member</font></b>(<font color="#FF6600">s</font>, <b><font color="#000000">field</font></b>(<font color="#009900">Y</font><font color="#990000">-</font><font color="#993399">1</font>, <font color="#009900">X</font>, <font color="#009900">Rules</font>)),
+			<b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> <font color="#009900">Y1</font> <font color="#990000">=</font> <b><font color="#000000">field</font></b>(<font color="#009900">Y</font><font color="#990000">-</font><font color="#993399">1</font>, <font color="#009900">X</font>, <font color="#009900">L</font>, <font color="#009900">M</font>), <font color="#009900">Ok</font> <font color="#990000">--</font> [<font color="#009900">Y1</font><font color="#990000">+</font><font color="#009900">N</font>, <font color="#009900">Y1</font><b><font color="#000080">-N</font></b>] <b><font color="#0000FF">end</font></b>),
+		<b><font color="#000000">fun_or_empty</font></b>(<font color="#009900">Y</font> <font color="#990000">&gt;</font> <font color="#993399">1</font> <b><font color="#0000FF">andalso</font></b> <b><font color="#0000FF">not</font></b> <b><font color="#000000">lists:member</font></b>(<font color="#FF6600">s</font>, <b><font color="#000000">field</font></b>(<font color="#009900">Y</font><font color="#990000">-</font><font color="#993399">1</font>, <font color="#009900">X</font>, <font color="#009900">Rules</font>)),
+			<b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> <font color="#009900">Y1</font> <font color="#990000">=</font> <b><font color="#000000">field</font></b>(<font color="#009900">Y</font><font color="#990000">-</font><font color="#993399">1</font>, <font color="#009900">X</font>, <font color="#009900">L</font>, <font color="#009900">M</font>), [<font color="#009900">Y1</font><font color="#990000">+</font><font color="#009900">N</font>, <font color="#009900">Y1</font><b><font color="#000080">-N</font></b>] <b><font color="#0000FF">end</font></b>),
+		<b><font color="#000000">fun_or_empty</font></b>(<b><font color="#000080">length</font></b>(<font color="#009900">Integers</font>) <font color="#990000">&gt;</font> <font color="#993399">0</font>, <b><font color="#0000FF">fun</font></b>() <font color="#990000">-&gt;</font> <font color="#009900">Ok</font> <font color="#990000">--</font> <font color="#009900">Integers</font> <b><font color="#0000FF">end</font></b>)
 	]),
 	<i><font color="#9A1900">% these exclude values based on row / column rules and the</font></i>
 	<i><font color="#9A1900">% values of the Rules matrix</font></i>
-	Rulesdeny <font color="#990000">=</font> <b><font color="#0000FF">case</font></b> [I || I <font color="#990000">&lt;-</font> R, <b><font color="#000000">is_integer</font></b>(I)] <font color="#990000">=:=</font> [] <b><font color="#0000FF">of</font></b>
-		<b><font color="#0000FF">true</font></b> <font color="#990000">-&gt;</font> <b><font color="#000000">lists:append</font></b>(
-				<b><font color="#000000">lists:nth</font></b>(Y, Rules) <font color="#990000">++</font> <i><font color="#9A1900">% row</font></i>
-				[<b><font color="#000000">lists:nth</font></b>(X, I) || I <font color="#990000">&lt;-</font> Rules] <font color="#990000">++</font> <i><font color="#9A1900">% column</font></i>
-				[<b><font color="#000000">field</font></b>(I, J, Rules) || <i><font color="#9A1900">% subcell</font></i>
-					J <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(X <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(X <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> K),
-					I <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(Y <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(Y <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> K)]
+	<font color="#009900">Rulesdeny</font> <font color="#990000">=</font> <b><font color="#0000FF">case</font></b> [<font color="#009900">I</font> || <font color="#009900">I</font> <font color="#990000">&lt;-</font> <font color="#009900">R</font>, <b><font color="#000080">is_integer</font></b>(<font color="#009900">I</font>)] <font color="#990000">=:=</font> [] <b><font color="#0000FF">of</font></b>
+		<font color="#000080">true</font> <font color="#990000">-&gt;</font> <b><font color="#000000">lists:append</font></b>(
+				<b><font color="#000000">lists:nth</font></b>(<font color="#009900">Y</font>, <font color="#009900">Rules</font>) <font color="#990000">++</font> <i><font color="#9A1900">% row</font></i>
+				[<b><font color="#000000">lists:nth</font></b>(<font color="#009900">X</font>, <font color="#009900">I</font>) || <font color="#009900">I</font> <font color="#990000">&lt;-</font> <font color="#009900">Rules</font>] <font color="#990000">++</font> <i><font color="#9A1900">% column</font></i>
+				[<b><font color="#000000">field</font></b>(<font color="#009900">I</font>, <font color="#009900">J</font>, <font color="#009900">Rules</font>) || <i><font color="#9A1900">% subcell</font></i>
+					<font color="#009900">J</font> <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(<font color="#009900">X</font> <font color="#990000">/</font> <font color="#009900">K</font>) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> <font color="#009900">K</font> <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(<font color="#009900">X</font> <font color="#990000">/</font> <font color="#009900">K</font>) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> <font color="#009900">K</font> <font color="#990000">+</font> <font color="#009900">K</font>),
+					<font color="#009900">I</font> <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(<font color="#009900">Y</font> <font color="#990000">/</font> <font color="#009900">K</font>) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> <font color="#009900">K</font> <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(<font color="#009900">Y</font> <font color="#990000">/</font> <font color="#009900">K</font>) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> <font color="#009900">K</font> <font color="#990000">+</font> <font color="#009900">K</font>)]
 			);
 		<font color="#990000">_</font> <font color="#990000">-&gt;</font> []
 	<b><font color="#0000FF">end</font></b>,
 	<i><font color="#9A1900">% these exclude values based on row, column and subcell rules,</font></i>
 	<i><font color="#9A1900">% based on the already filled values</font></i>
-	Rowdeny <font color="#990000">=</font> <b><font color="#000000">lists:nthtail</font></b>((<b><font color="#0000FF">length</font></b>(L) <b><font color="#0000FF">div</font></b> M)<font color="#990000">*</font>M, L),
-	Coldeny <font color="#990000">=</font> [<b><font color="#000000">lists:nth</font></b>(M<font color="#990000">*</font>(I<font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">+</font>X, L) || I <font color="#990000">&lt;-</font> <b><font color="#000000">seq</font></b>(<font color="#993399">1</font>, Y<font color="#990000">-</font><font color="#993399">1</font>)],
-	Subdeny <font color="#990000">=</font> [<b><font color="#000000">lists:nth</font></b>((I<font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font>M<font color="#990000">+</font>J, L) ||
-		J <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(X <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(X <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> K),
-		I <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(Y <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(Y <font color="#990000">/</font> K) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> K <font color="#990000">+</font> K),
-		(I<font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font>M<font color="#990000">+</font>J <font color="#990000">&lt;</font> <b><font color="#0000FF">length</font></b>(L)<font color="#990000">+</font><font color="#993399">1</font>],
-	Ok <font color="#990000">--</font> <b><font color="#000000">lists:append</font></b>([Swdeny, Rulesdeny, Rowdeny, Coldeny, Subdeny])<font color="#990000">.</font>
+	<font color="#009900">Rowdeny</font> <font color="#990000">=</font> <b><font color="#000000">lists:nthtail</font></b>((<b><font color="#000080">length</font></b>(<font color="#009900">L</font>) <b><font color="#0000FF">div</font></b> <font color="#009900">M</font>)<font color="#990000">*</font><font color="#009900">M</font>, <font color="#009900">L</font>),
+	<font color="#009900">Coldeny</font> <font color="#990000">=</font> [<b><font color="#000000">lists:nth</font></b>(<font color="#009900">M</font><font color="#990000">*</font>(<font color="#009900">I</font><font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">+</font><font color="#009900">X</font>, <font color="#009900">L</font>) || <font color="#009900">I</font> <font color="#990000">&lt;-</font> <b><font color="#000000">seq</font></b>(<font color="#993399">1</font>, <font color="#009900">Y</font><font color="#990000">-</font><font color="#993399">1</font>)],
+	<font color="#009900">Subdeny</font> <font color="#990000">=</font> [<b><font color="#000000">lists:nth</font></b>((<font color="#009900">I</font><font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font><font color="#009900">M</font><font color="#990000">+</font><font color="#009900">J</font>, <font color="#009900">L</font>) ||
+		<font color="#009900">J</font> <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(<font color="#009900">X</font> <font color="#990000">/</font> <font color="#009900">K</font>) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> <font color="#009900">K</font> <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(<font color="#009900">X</font> <font color="#990000">/</font> <font color="#009900">K</font>) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> <font color="#009900">K</font> <font color="#990000">+</font> <font color="#009900">K</font>),
+		<font color="#009900">I</font> <font color="#990000">&lt;-</font> <b><font color="#000000">lists:seq</font></b>((<b><font color="#000000">ceil</font></b>(<font color="#009900">Y</font> <font color="#990000">/</font> <font color="#009900">K</font>) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> <font color="#009900">K</font> <font color="#990000">+</font> <font color="#993399">1</font>, (<b><font color="#000000">ceil</font></b>(<font color="#009900">Y</font> <font color="#990000">/</font> <font color="#009900">K</font>) <font color="#990000">-</font> <font color="#993399">1</font>)<font color="#990000">*</font> <font color="#009900">K</font> <font color="#990000">+</font> <font color="#009900">K</font>),
+		(<font color="#009900">I</font><font color="#990000">-</font><font color="#993399">1</font>)<font color="#990000">*</font><font color="#009900">M</font><font color="#990000">+</font><font color="#009900">J</font> <font color="#990000">&lt;</font> <b><font color="#000080">length</font></b>(<font color="#009900">L</font>)<font color="#990000">+</font><font color="#993399">1</font>],
+	<font color="#009900">Ok</font> <font color="#990000">--</font> <b><font color="#000000">lists:append</font></b>([<font color="#009900">Swdeny</font>, <font color="#009900">Rulesdeny</font>, <font color="#009900">Rowdeny</font>, <font color="#009900">Coldeny</font>, <font color="#009900">Subdeny</font>])<font color="#990000">.</font>
 </tt></pre>
