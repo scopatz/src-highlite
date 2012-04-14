@@ -124,6 +124,7 @@ manifest = manifest.lang
 mf = manifest.lang
 asm = asm.lang
 s = asm.lang
+r = asm.lang
 applescript = applescript.lang
 scpt = applescript.lang
 vbscript = vbscript.lang

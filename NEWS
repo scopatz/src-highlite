@@ -13,6 +13,7 @@ Version 3.1.7
    * fixed compilation bugs in MacOsX systems (thanks to 
      Trevor Spiteri)
    * language definition for Lilypond (thanks to Federico Bruni)
+   * language definition for R statistics programming language
 
 Version 3.1.6
 
