@@ -9,6 +9,11 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "statestartlangelem.h"
 
 using std::string;

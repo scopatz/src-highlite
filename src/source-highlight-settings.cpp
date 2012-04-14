@@ -21,6 +21,10 @@
  * This program is part of GNU source-highlight
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <cstdlib>
 #include <iostream>
 
@@ -28,8 +32,6 @@
 #include "srchilite/versions.h"
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
-
 // this is glib related so don't use it when compiling with qmake
 #include "progname.h"
 

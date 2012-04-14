@@ -10,6 +10,10 @@
 //
 //
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "langelemsprinter.hpp"
 
 #include "statelangelem.h"

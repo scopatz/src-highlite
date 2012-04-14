@@ -97,6 +97,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -135,7 +139,7 @@ static bool includedFileNotFound = false;
 
 
 /* Line 189 of yacc.c  */
-#line 139 "../../../lib/srchilite/outlangdefparser.cc"
+#line 143 "../../../lib/srchilite/outlangdefparser.cc"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -232,7 +236,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 58 "../../../lib/srchilite/outlangdefparser.yy"
+#line 62 "../../../lib/srchilite/outlangdefparser.yy"
 
   int tok ; /* command */
   bool booloption ;
@@ -242,7 +246,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 246 "../../../lib/srchilite/outlangdefparser.cc"
+#line 250 "../../../lib/srchilite/outlangdefparser.cc"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -254,7 +258,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 258 "../../../lib/srchilite/outlangdefparser.cc"
+#line 262 "../../../lib/srchilite/outlangdefparser.cc"
 
 #ifdef short
 # undef short
@@ -551,10 +555,10 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    74,    74,    77,    78,    81,    88,    95,   101,   107,
-     113,   119,   125,   131,   137,   143,   149,   155,   161,   167,
-     173,   179,   190,   196,   202,   208,   213,   217,   227,   230,
-     232,   235,   242,   249,   252,   254,   257
+       0,    78,    78,    81,    82,    85,    92,    99,   105,   111,
+     117,   123,   129,   135,   141,   147,   153,   159,   165,   171,
+     177,   183,   194,   200,   206,   212,   217,   221,   231,   234,
+     236,   239,   246,   253,   256,   258,   261
 };
 #endif
 
@@ -1499,7 +1503,7 @@ yyreduce:
         case 5:
 
 /* Line 1455 of yacc.c  */
-#line 82 "../../../lib/srchilite/outlangdefparser.yy"
+#line 86 "../../../lib/srchilite/outlangdefparser.yy"
     {
     textstyles->docTemplate = DocTemplate(*(yyvsp[(2) - (4)].string), *(yyvsp[(3) - (4)].string));
     delete (yyvsp[(2) - (4)].string);
@@ -1510,7 +1514,7 @@ yyreduce:
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 89 "../../../lib/srchilite/outlangdefparser.yy"
+#line 93 "../../../lib/srchilite/outlangdefparser.yy"
     {
     textstyles->noDocTemplate = DocTemplate(*(yyvsp[(2) - (4)].string), *(yyvsp[(3) - (4)].string));
     delete (yyvsp[(2) - (4)].string);
@@ -1521,7 +1525,7 @@ yyreduce:
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 96 "../../../lib/srchilite/outlangdefparser.yy"
+#line 100 "../../../lib/srchilite/outlangdefparser.yy"
     {
     textstyles->starting_template = *(yyvsp[(2) - (2)].string);
     delete (yyvsp[(2) - (2)].string);
@@ -1531,7 +1535,7 @@ yyreduce:
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 102 "../../../lib/srchilite/outlangdefparser.yy"
+#line 106 "../../../lib/srchilite/outlangdefparser.yy"
     {
     textstyles->style_separator = *(yyvsp[(2) - (2)].string);
     delete (yyvsp[(2) - (2)].string);
@@ -1541,7 +1545,7 @@ yyreduce:
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 108 "../../../lib/srchilite/outlangdefparser.yy"
+#line 112 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->bold = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1551,7 +1555,7 @@ yyreduce:
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 114 "../../../lib/srchilite/outlangdefparser.yy"
+#line 118 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->italics = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1561,7 +1565,7 @@ yyreduce:
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 120 "../../../lib/srchilite/outlangdefparser.yy"
+#line 124 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->underline = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1571,7 +1575,7 @@ yyreduce:
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 126 "../../../lib/srchilite/outlangdefparser.yy"
+#line 130 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->fixed = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1581,7 +1585,7 @@ yyreduce:
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 132 "../../../lib/srchilite/outlangdefparser.yy"
+#line 136 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->notfixed = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1591,7 +1595,7 @@ yyreduce:
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 138 "../../../lib/srchilite/outlangdefparser.yy"
+#line 142 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->color = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1601,7 +1605,7 @@ yyreduce:
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 144 "../../../lib/srchilite/outlangdefparser.yy"
+#line 148 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->bg_color = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1611,7 +1615,7 @@ yyreduce:
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 150 "../../../lib/srchilite/outlangdefparser.yy"
+#line 154 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->onestyle = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1621,7 +1625,7 @@ yyreduce:
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 156 "../../../lib/srchilite/outlangdefparser.yy"
+#line 160 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->file_extension = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1631,7 +1635,7 @@ yyreduce:
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 162 "../../../lib/srchilite/outlangdefparser.yy"
+#line 166 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->refstyle.anchor = TextStyle(*(yyvsp[(2) - (2)].string), anchor_vars);
   delete (yyvsp[(2) - (2)].string);
@@ -1641,7 +1645,7 @@ yyreduce:
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 168 "../../../lib/srchilite/outlangdefparser.yy"
+#line 172 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->line_prefix = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1651,7 +1655,7 @@ yyreduce:
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 174 "../../../lib/srchilite/outlangdefparser.yy"
+#line 178 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->linenum = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(2) - (2)].string);
@@ -1661,7 +1665,7 @@ yyreduce:
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 180 "../../../lib/srchilite/outlangdefparser.yy"
+#line 184 "../../../lib/srchilite/outlangdefparser.yy"
     {
   if (textstyles->refstyle.inline_reference.empty())
     textstyles->refstyle.inline_reference = TextStyle(*(yyvsp[(2) - (2)].string), reference_vars);
@@ -1676,7 +1680,7 @@ yyreduce:
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 191 "../../../lib/srchilite/outlangdefparser.yy"
+#line 195 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->refstyle.inline_reference = TextStyle(*(yyvsp[(2) - (2)].string), reference_vars);
   delete (yyvsp[(2) - (2)].string);
@@ -1686,7 +1690,7 @@ yyreduce:
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 197 "../../../lib/srchilite/outlangdefparser.yy"
+#line 201 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->refstyle.postline_reference = TextStyle(*(yyvsp[(2) - (2)].string), reference_vars);
   delete (yyvsp[(2) - (2)].string);
@@ -1696,7 +1700,7 @@ yyreduce:
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 203 "../../../lib/srchilite/outlangdefparser.yy"
+#line 207 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->refstyle.postdoc_reference = TextStyle(*(yyvsp[(2) - (2)].string), reference_vars);
   delete (yyvsp[(2) - (2)].string);
@@ -1706,7 +1710,7 @@ yyreduce:
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 209 "../../../lib/srchilite/outlangdefparser.yy"
+#line 213 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->colorMap = colorMap;
 }
@@ -1715,7 +1719,7 @@ yyreduce:
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 214 "../../../lib/srchilite/outlangdefparser.yy"
+#line 218 "../../../lib/srchilite/outlangdefparser.yy"
     {
   textstyles->charTranslator = charTranslator;
 }
@@ -1724,7 +1728,7 @@ yyreduce:
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 217 "../../../lib/srchilite/outlangdefparser.yy"
+#line 221 "../../../lib/srchilite/outlangdefparser.yy"
     {
             // this token is used by the scanner to signal an error
             // in opening an include file
@@ -1738,7 +1742,7 @@ yyreduce:
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 236 "../../../lib/srchilite/outlangdefparser.yy"
+#line 240 "../../../lib/srchilite/outlangdefparser.yy"
     {
   (*colorMap)[*(yyvsp[(1) - (2)].string)] = *(yyvsp[(2) - (2)].string);
   delete (yyvsp[(1) - (2)].string);
@@ -1749,7 +1753,7 @@ yyreduce:
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 243 "../../../lib/srchilite/outlangdefparser.yy"
+#line 247 "../../../lib/srchilite/outlangdefparser.yy"
     {
   colorMap->setDefault(*(yyvsp[(2) - (2)].string));
   delete (yyvsp[(2) - (2)].string);
@@ -1759,7 +1763,7 @@ yyreduce:
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 258 "../../../lib/srchilite/outlangdefparser.yy"
+#line 262 "../../../lib/srchilite/outlangdefparser.yy"
     {
   charTranslator->set_translation(*(yyvsp[(1) - (2)].string), *(yyvsp[(2) - (2)].string));
   delete (yyvsp[(1) - (2)].string);
@@ -1770,7 +1774,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1774 "../../../lib/srchilite/outlangdefparser.cc"
+#line 1778 "../../../lib/srchilite/outlangdefparser.cc"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1982,7 +1986,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 264 "../../../lib/srchilite/outlangdefparser.yy"
+#line 268 "../../../lib/srchilite/outlangdefparser.yy"
 
 
 extern int outlangdef_lex_destroy (void);

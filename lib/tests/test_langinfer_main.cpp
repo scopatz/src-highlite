@@ -2,6 +2,10 @@
  * Tests for language inference, class LanguageInfer
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "srchilite/languageinfer.h"
 #include <sstream>
 #include "asserttestexit.h"

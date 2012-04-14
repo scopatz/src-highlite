@@ -75,7 +75,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 62 "../../../lib/srchilite/styleparser.yy"
+#line 66 "../../../lib/srchilite/styleparser.yy"
 
   int tok ; /* command */
   const std::string * string ; /* string : id, ... */

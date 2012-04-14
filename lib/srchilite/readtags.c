@@ -8,6 +8,10 @@
 *   This module contains functions for reading tag files.
 */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 /*
 *   INCLUDE FILES
 */

@@ -577,6 +577,10 @@ char *stylesc_text;
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <stdlib.h>
 
 #include "stylekey.h"
@@ -607,7 +611,7 @@ static void buffer(const char *s);
 static const std::string *flush_buffer();
 
 
-#line 611 "../../../lib/srchilite/stylescanner.cc"
+#line 615 "../../../lib/srchilite/stylescanner.cc"
 
 #define INITIAL 0
 #define COMMENT_STATE 1
@@ -796,10 +800,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 66 "../../../lib/srchilite/stylescanner.ll"
+#line 70 "../../../lib/srchilite/stylescanner.ll"
 
 
-#line 803 "../../../lib/srchilite/stylescanner.cc"
+#line 807 "../../../lib/srchilite/stylescanner.cc"
 
 	if ( !(yy_init) )
 		{
@@ -884,143 +888,143 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 68 "../../../lib/srchilite/stylescanner.ll"
+#line 72 "../../../lib/srchilite/stylescanner.ll"
 {}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 70 "../../../lib/srchilite/stylescanner.ll"
+#line 74 "../../../lib/srchilite/stylescanner.ll"
 {}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 72 "../../../lib/srchilite/stylescanner.ll"
+#line 76 "../../../lib/srchilite/stylescanner.ll"
 { BEGIN(COMMENT_STATE); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 73 "../../../lib/srchilite/stylescanner.ll"
+#line 77 "../../../lib/srchilite/stylescanner.ll"
 {}
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 74 "../../../lib/srchilite/stylescanner.ll"
+#line 78 "../../../lib/srchilite/stylescanner.ll"
 { ++line;  BEGIN(INITIAL); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 76 "../../../lib/srchilite/stylescanner.ll"
+#line 80 "../../../lib/srchilite/stylescanner.ll"
 { stylesc_lval.string = new std::string(stylesc_text) ; return COLOR ; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 78 "../../../lib/srchilite/stylescanner.ll"
+#line 82 "../../../lib/srchilite/stylescanner.ll"
 { return BODY_BG_COLOR ; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 80 "../../../lib/srchilite/stylescanner.ll"
+#line 84 "../../../lib/srchilite/stylescanner.ll"
 { return BG_T ; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 82 "../../../lib/srchilite/stylescanner.ll"
+#line 86 "../../../lib/srchilite/stylescanner.ll"
 { stylesc_lval.flag = ISBOLD ; return BOLD ; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 83 "../../../lib/srchilite/stylescanner.ll"
+#line 87 "../../../lib/srchilite/stylescanner.ll"
 { stylesc_lval.flag = ISITALIC ; return ITALICS ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 84 "../../../lib/srchilite/stylescanner.ll"
+#line 88 "../../../lib/srchilite/stylescanner.ll"
 { stylesc_lval.flag = ISUNDERLINE ; return UNDERLINE ; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 85 "../../../lib/srchilite/stylescanner.ll"
+#line 89 "../../../lib/srchilite/stylescanner.ll"
 { stylesc_lval.flag = ISFIXED; return FIXED; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 86 "../../../lib/srchilite/stylescanner.ll"
+#line 90 "../../../lib/srchilite/stylescanner.ll"
 { stylesc_lval.flag = ISNOTFIXED; return NOTFIXED; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 87 "../../../lib/srchilite/stylescanner.ll"
+#line 91 "../../../lib/srchilite/stylescanner.ll"
 { stylesc_lval.flag = ISNOREF; return NOREF; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 89 "../../../lib/srchilite/stylescanner.ll"
+#line 93 "../../../lib/srchilite/stylescanner.ll"
 { return ',' ; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 90 "../../../lib/srchilite/stylescanner.ll"
+#line 94 "../../../lib/srchilite/stylescanner.ll"
 { return ';' ; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 91 "../../../lib/srchilite/stylescanner.ll"
+#line 95 "../../../lib/srchilite/stylescanner.ll"
 { return ':' ; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 93 "../../../lib/srchilite/stylescanner.ll"
+#line 97 "../../../lib/srchilite/stylescanner.ll"
 { stylesc_lval.string = new std::string(stylesc_text) ; return KEY ; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 95 "../../../lib/srchilite/stylescanner.ll"
+#line 99 "../../../lib/srchilite/stylescanner.ll"
 { BEGIN(STRING_STATE); DEB("STRING_STATE"); buffer( stylesc_text ) ; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 96 "../../../lib/srchilite/stylescanner.ll"
+#line 100 "../../../lib/srchilite/stylescanner.ll"
 {  buffer( stylesc_text ) ; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 97 "../../../lib/srchilite/stylescanner.ll"
+#line 101 "../../../lib/srchilite/stylescanner.ll"
 {  buffer( "\"" ) ; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 98 "../../../lib/srchilite/stylescanner.ll"
+#line 102 "../../../lib/srchilite/stylescanner.ll"
 { BEGIN(INITIAL) ; buffer( stylesc_text ) ; DEB("END STRING_STATE"); stylesc_lval.string = flush_buffer() ; return STRINGDEF; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 99 "../../../lib/srchilite/stylescanner.ll"
+#line 103 "../../../lib/srchilite/stylescanner.ll"
 {  buffer( stylesc_text ) ; }
 	YY_BREAK
 case 24:
 /* rule 24 can match eol */
 YY_RULE_SETUP
-#line 100 "../../../lib/srchilite/stylescanner.ll"
+#line 104 "../../../lib/srchilite/stylescanner.ll"
 {  buffer( "\n" ) ; }
 	YY_BREAK
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 102 "../../../lib/srchilite/stylescanner.ll"
+#line 106 "../../../lib/srchilite/stylescanner.ll"
 { ++line ; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 104 "../../../lib/srchilite/stylescanner.ll"
+#line 108 "../../../lib/srchilite/stylescanner.ll"
 { /* anything else will generate a parsing error */ return stylesc_text[0] ; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 106 "../../../lib/srchilite/stylescanner.ll"
+#line 110 "../../../lib/srchilite/stylescanner.ll"
 ECHO;
 	YY_BREAK
-#line 1024 "../../../lib/srchilite/stylescanner.cc"
+#line 1028 "../../../lib/srchilite/stylescanner.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT_STATE):
 case YY_STATE_EOF(STRING_STATE):
@@ -2020,7 +2024,7 @@ void stylesc_free (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 106 "../../../lib/srchilite/stylescanner.ll"
+#line 110 "../../../lib/srchilite/stylescanner.ll"
 
 
 

@@ -4,6 +4,10 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "highlightstate.h"
 #include "highlightrule.h"
 #include "tostringcollection.h"

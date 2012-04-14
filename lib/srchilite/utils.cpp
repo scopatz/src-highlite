@@ -9,6 +9,11 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "utils.h"
 #include <algorithm>
 #include <cctype>      // old <ctype.h>

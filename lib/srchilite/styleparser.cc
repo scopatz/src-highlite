@@ -97,6 +97,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -139,7 +143,7 @@ static string errorBuffer;
 
 
 /* Line 189 of yacc.c  */
-#line 143 "../../../lib/srchilite/styleparser.cc"
+#line 147 "../../../lib/srchilite/styleparser.cc"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -202,7 +206,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 62 "../../../lib/srchilite/styleparser.yy"
+#line 66 "../../../lib/srchilite/styleparser.yy"
 
   int tok ; /* command */
   const std::string * string ; /* string : id, ... */
@@ -213,7 +217,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 217 "../../../lib/srchilite/styleparser.cc"
+#line 221 "../../../lib/srchilite/styleparser.cc"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -225,7 +229,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 229 "../../../lib/srchilite/styleparser.cc"
+#line 233 "../../../lib/srchilite/styleparser.cc"
 
 #ifdef short
 # undef short
@@ -516,9 +520,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    86,    86,    87,    90,    91,    94,    95,    99,    98,
-     134,   140,   148,   149,   150,   153,   154,   155,   158,   159,
-     162,   163,   166,   167,   170,   171,   172,   173,   174,   175
+       0,    90,    90,    91,    94,    95,    98,    99,   103,   102,
+     138,   144,   152,   153,   154,   157,   158,   159,   162,   163,
+     166,   167,   170,   171,   174,   175,   176,   177,   178,   179
 };
 #endif
 
@@ -1137,86 +1141,86 @@ yydestruct (yymsg, yytype, yyvaluep)
       case 9: /* "KEY" */
 
 /* Line 1000 of yacc.c  */
-#line 79 "../../../lib/srchilite/styleparser.yy"
+#line 83 "../../../lib/srchilite/styleparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1148 "../../../lib/srchilite/styleparser.cc"
+#line 1152 "../../../lib/srchilite/styleparser.cc"
 	break;
       case 10: /* "COLOR" */
 
 /* Line 1000 of yacc.c  */
-#line 79 "../../../lib/srchilite/styleparser.yy"
+#line 83 "../../../lib/srchilite/styleparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1160 "../../../lib/srchilite/styleparser.cc"
+#line 1164 "../../../lib/srchilite/styleparser.cc"
 	break;
       case 11: /* "BG_COLOR" */
 
 /* Line 1000 of yacc.c  */
-#line 79 "../../../lib/srchilite/styleparser.yy"
+#line 83 "../../../lib/srchilite/styleparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1172 "../../../lib/srchilite/styleparser.cc"
+#line 1176 "../../../lib/srchilite/styleparser.cc"
 	break;
       case 12: /* "STRINGDEF" */
 
 /* Line 1000 of yacc.c  */
-#line 79 "../../../lib/srchilite/styleparser.yy"
+#line 83 "../../../lib/srchilite/styleparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1184 "../../../lib/srchilite/styleparser.cc"
+#line 1188 "../../../lib/srchilite/styleparser.cc"
 	break;
       case 24: /* "keylist" */
 
 /* Line 1000 of yacc.c  */
-#line 79 "../../../lib/srchilite/styleparser.yy"
+#line 83 "../../../lib/srchilite/styleparser.yy"
 	{
 	if ((yyvaluep->keylist))
 	  delete (yyvaluep->keylist);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1196 "../../../lib/srchilite/styleparser.cc"
+#line 1200 "../../../lib/srchilite/styleparser.cc"
 	break;
       case 25: /* "color" */
 
 /* Line 1000 of yacc.c  */
-#line 79 "../../../lib/srchilite/styleparser.yy"
+#line 83 "../../../lib/srchilite/styleparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1208 "../../../lib/srchilite/styleparser.cc"
+#line 1212 "../../../lib/srchilite/styleparser.cc"
 	break;
       case 26: /* "bgcolor" */
 
 /* Line 1000 of yacc.c  */
-#line 79 "../../../lib/srchilite/styleparser.yy"
+#line 83 "../../../lib/srchilite/styleparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1220 "../../../lib/srchilite/styleparser.cc"
+#line 1224 "../../../lib/srchilite/styleparser.cc"
 	break;
 
       default:
@@ -1521,14 +1525,14 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 86 "../../../lib/srchilite/styleparser.yy"
+#line 90 "../../../lib/srchilite/styleparser.yy"
     { /* allow empty files */ }
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 99 "../../../lib/srchilite/styleparser.yy"
+#line 103 "../../../lib/srchilite/styleparser.yy"
     {
                  //printSequence( $1 ) ;
                  //printMessage_noln( ": " ) ;
@@ -1541,7 +1545,7 @@ yyreduce:
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 107 "../../../lib/srchilite/styleparser.yy"
+#line 111 "../../../lib/srchilite/styleparser.yy"
     {
                KeyType key;
                KeyList *keylist = (yyvsp[(1) - (6)].keylist);
@@ -1572,7 +1576,7 @@ yyreduce:
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 135 "../../../lib/srchilite/styleparser.yy"
+#line 139 "../../../lib/srchilite/styleparser.yy"
     {
               (yyvsp[(1) - (3)].keylist)->push_back(*(yyvsp[(3) - (3)].string));
               (yyval.keylist) = (yyvsp[(1) - (3)].keylist);
@@ -1583,7 +1587,7 @@ yyreduce:
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 141 "../../../lib/srchilite/styleparser.yy"
+#line 145 "../../../lib/srchilite/styleparser.yy"
     {
               (yyval.keylist) = new KeyList;
               (yyval.keylist)->push_back(*(yyvsp[(1) - (1)].string));
@@ -1594,133 +1598,133 @@ yyreduce:
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 148 "../../../lib/srchilite/styleparser.yy"
+#line 152 "../../../lib/srchilite/styleparser.yy"
     { (yyval.string) = 0; }
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 149 "../../../lib/srchilite/styleparser.yy"
+#line 153 "../../../lib/srchilite/styleparser.yy"
     { (yyval.string) = (yyvsp[(1) - (1)].string);}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 150 "../../../lib/srchilite/styleparser.yy"
+#line 154 "../../../lib/srchilite/styleparser.yy"
     { (yyval.string) = (yyvsp[(1) - (1)].string); }
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 153 "../../../lib/srchilite/styleparser.yy"
+#line 157 "../../../lib/srchilite/styleparser.yy"
     { (yyval.string) = 0; }
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 154 "../../../lib/srchilite/styleparser.yy"
+#line 158 "../../../lib/srchilite/styleparser.yy"
     { (yyval.string) = (yyvsp[(3) - (3)].string);}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 155 "../../../lib/srchilite/styleparser.yy"
+#line 159 "../../../lib/srchilite/styleparser.yy"
     { (yyval.string) = (yyvsp[(3) - (3)].string); }
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 158 "../../../lib/srchilite/styleparser.yy"
+#line 162 "../../../lib/srchilite/styleparser.yy"
     { updateBgColor((yyvsp[(2) - (3)].string)); }
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 159 "../../../lib/srchilite/styleparser.yy"
+#line 163 "../../../lib/srchilite/styleparser.yy"
     { updateBgColor((yyvsp[(2) - (3)].string)); }
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 162 "../../../lib/srchilite/styleparser.yy"
+#line 166 "../../../lib/srchilite/styleparser.yy"
     { (yyval.styleconstants) = 0 ; }
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 163 "../../../lib/srchilite/styleparser.yy"
+#line 167 "../../../lib/srchilite/styleparser.yy"
     { (yyval.styleconstants) = (yyvsp[(1) - (1)].styleconstants); }
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 166 "../../../lib/srchilite/styleparser.yy"
+#line 170 "../../../lib/srchilite/styleparser.yy"
     { (yyval.styleconstants) = (yyvsp[(1) - (3)].styleconstants); (yyval.styleconstants)->push_back((yyvsp[(3) - (3)].flag)) ; }
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 167 "../../../lib/srchilite/styleparser.yy"
+#line 171 "../../../lib/srchilite/styleparser.yy"
     { (yyval.styleconstants) = new StyleConstants; (yyval.styleconstants)->push_back((yyvsp[(1) - (1)].flag)); }
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 170 "../../../lib/srchilite/styleparser.yy"
+#line 174 "../../../lib/srchilite/styleparser.yy"
     { (yyval.flag) = ISBOLD ; }
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 171 "../../../lib/srchilite/styleparser.yy"
+#line 175 "../../../lib/srchilite/styleparser.yy"
     { (yyval.flag) = ISITALIC ; }
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 172 "../../../lib/srchilite/styleparser.yy"
+#line 176 "../../../lib/srchilite/styleparser.yy"
     { (yyval.flag) = ISUNDERLINE ; }
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 173 "../../../lib/srchilite/styleparser.yy"
+#line 177 "../../../lib/srchilite/styleparser.yy"
     { (yyval.flag) = ISFIXED ; }
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 174 "../../../lib/srchilite/styleparser.yy"
+#line 178 "../../../lib/srchilite/styleparser.yy"
     { (yyval.flag) = ISNOTFIXED ; }
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 175 "../../../lib/srchilite/styleparser.yy"
+#line 179 "../../../lib/srchilite/styleparser.yy"
     { (yyval.flag) = ISNOREF ; }
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1724 "../../../lib/srchilite/styleparser.cc"
+#line 1728 "../../../lib/srchilite/styleparser.cc"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1932,7 +1936,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 178 "../../../lib/srchilite/styleparser.yy"
+#line 182 "../../../lib/srchilite/styleparser.yy"
 
 
 string current_file;

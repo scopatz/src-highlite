@@ -4,6 +4,10 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "highlightrule.h"
 
 namespace srchilite {

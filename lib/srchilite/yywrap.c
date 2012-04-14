@@ -8,6 +8,10 @@
   I don't know about lex; anyway this should worry only who implements.
 */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 int
 yywrap()
 {

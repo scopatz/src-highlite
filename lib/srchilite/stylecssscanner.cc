@@ -716,6 +716,10 @@ char *stylecsssc_text;
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -743,7 +747,7 @@ extern int line ;
 #endif
 
 
-#line 747 "../../../lib/srchilite/stylecssscanner.cc"
+#line 751 "../../../lib/srchilite/stylecssscanner.cc"
 
 #define INITIAL 0
 #define COMMENT_STATE 1
@@ -941,10 +945,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 65 "../../../lib/srchilite/stylecssscanner.ll"
+#line 69 "../../../lib/srchilite/stylecssscanner.ll"
 
 
-#line 948 "../../../lib/srchilite/stylecssscanner.cc"
+#line 952 "../../../lib/srchilite/stylecssscanner.cc"
 
 	if ( !(yy_init) )
 		{
@@ -1029,49 +1033,49 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 67 "../../../lib/srchilite/stylecssscanner.ll"
+#line 71 "../../../lib/srchilite/stylecssscanner.ll"
 {}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 69 "../../../lib/srchilite/stylecssscanner.ll"
+#line 73 "../../../lib/srchilite/stylecssscanner.ll"
 {}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 71 "../../../lib/srchilite/stylecssscanner.ll"
+#line 75 "../../../lib/srchilite/stylecssscanner.ll"
 { BEGIN(MULTI_COMMENT_STATE); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 72 "../../../lib/srchilite/stylecssscanner.ll"
+#line 76 "../../../lib/srchilite/stylecssscanner.ll"
 {}
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 73 "../../../lib/srchilite/stylecssscanner.ll"
+#line 77 "../../../lib/srchilite/stylecssscanner.ll"
 { ++line;  BEGIN(INITIAL); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 76 "../../../lib/srchilite/stylecssscanner.ll"
+#line 80 "../../../lib/srchilite/stylecssscanner.ll"
 { return ',' ; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 77 "../../../lib/srchilite/stylecssscanner.ll"
+#line 81 "../../../lib/srchilite/stylecssscanner.ll"
 { stylecsssc_lval.string = new std::string(stylecsssc_text) ; return KEY ; }
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 79 "../../../lib/srchilite/stylecssscanner.ll"
+#line 83 "../../../lib/srchilite/stylecssscanner.ll"
 { ++line ; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 81 "../../../lib/srchilite/stylecssscanner.ll"
+#line 85 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_SELECTOR) ;
   DEB("CSS SELECTOR");
@@ -1079,7 +1083,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 85 "../../../lib/srchilite/stylecssscanner.ll"
+#line 89 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_SELECTOR) ;
   DEB("BODY CSS SELECTOR");
@@ -1089,7 +1093,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 92 "../../../lib/srchilite/stylecssscanner.ll"
+#line 96 "../../../lib/srchilite/stylecssscanner.ll"
 {
   // in case of comma separated selectors
   DEB("CSS SELECTOR");
@@ -1097,7 +1101,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 96 "../../../lib/srchilite/stylecssscanner.ll"
+#line 100 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   DEB("CSS PROPERTIES");
@@ -1105,7 +1109,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 100 "../../../lib/srchilite/stylecssscanner.ll"
+#line 104 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_COLOR);
   DEB("CSS COLOR");
@@ -1113,7 +1117,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 104 "../../../lib/srchilite/stylecssscanner.ll"
+#line 108 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   stylecsssc_lval.string = new std::string(stylecsssc_text) ;
@@ -1123,7 +1127,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 110 "../../../lib/srchilite/stylecssscanner.ll"
+#line 114 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   DEB2("CSS COLOR", stylecsssc_text);
@@ -1137,7 +1141,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 120 "../../../lib/srchilite/stylecssscanner.ll"
+#line 124 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_BG_COLOR);
   DEB("CSS BACKGROUND COLOR");
@@ -1145,7 +1149,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 124 "../../../lib/srchilite/stylecssscanner.ll"
+#line 128 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   stylecsssc_lval.string = new std::string(stylecsssc_text) ;
@@ -1155,7 +1159,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 130 "../../../lib/srchilite/stylecssscanner.ll"
+#line 134 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   DEB2("CSS BG COLOR", stylecsssc_text);
@@ -1169,7 +1173,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 140 "../../../lib/srchilite/stylecssscanner.ll"
+#line 144 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_FONT_WEIGHT);
   DEB("CSS FONT WEIGHT");
@@ -1177,7 +1181,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 144 "../../../lib/srchilite/stylecssscanner.ll"
+#line 148 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   if (strcmp(stylecsssc_text, "bold") == 0) {
@@ -1190,7 +1194,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 153 "../../../lib/srchilite/stylecssscanner.ll"
+#line 157 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_FONT_STYLE);
   DEB("CSS FONT STYLE");
@@ -1198,7 +1202,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 157 "../../../lib/srchilite/stylecssscanner.ll"
+#line 161 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   if (strcmp(stylecsssc_text, "italic") == 0) {
@@ -1211,7 +1215,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 166 "../../../lib/srchilite/stylecssscanner.ll"
+#line 170 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_FONT_FAMILY);
   DEB("CSS FONT FAMILY");
@@ -1219,7 +1223,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 170 "../../../lib/srchilite/stylecssscanner.ll"
+#line 174 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   if (strcmp(stylecsssc_text, "monospace") == 0) {
@@ -1232,7 +1236,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 179 "../../../lib/srchilite/stylecssscanner.ll"
+#line 183 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_TEXT_DECORATION);
   DEB("CSS TEXT DECORATION");
@@ -1240,7 +1244,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 183 "../../../lib/srchilite/stylecssscanner.ll"
+#line 187 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(CSS_PROPERTIES);
   if (strcmp(stylecsssc_text, "underline") == 0) {
@@ -1253,7 +1257,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 192 "../../../lib/srchilite/stylecssscanner.ll"
+#line 196 "../../../lib/srchilite/stylecssscanner.ll"
 {
   BEGIN(INITIAL);
   DEB("CSS END PROPERTIES");
@@ -1266,7 +1270,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 201 "../../../lib/srchilite/stylecssscanner.ll"
+#line 205 "../../../lib/srchilite/stylecssscanner.ll"
 {
   /* discard other characters */
   DEB2("CSS discarding", stylecsssc_text);
@@ -1274,7 +1278,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 205 "../../../lib/srchilite/stylecssscanner.ll"
+#line 209 "../../../lib/srchilite/stylecssscanner.ll"
 {
   /* discard other properties */
   DEB2("CSS PROPERTIES discarding", stylecsssc_text);
@@ -1282,15 +1286,15 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 210 "../../../lib/srchilite/stylecssscanner.ll"
+#line 214 "../../../lib/srchilite/stylecssscanner.ll"
 { return stylecsssc_text[0] ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 212 "../../../lib/srchilite/stylecssscanner.ll"
+#line 216 "../../../lib/srchilite/stylecssscanner.ll"
 ECHO;
 	YY_BREAK
-#line 1294 "../../../lib/srchilite/stylecssscanner.cc"
+#line 1298 "../../../lib/srchilite/stylecssscanner.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT_STATE):
 case YY_STATE_EOF(MULTI_COMMENT_STATE):
@@ -2299,7 +2303,7 @@ void stylecsssc_free (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 212 "../../../lib/srchilite/stylecssscanner.ll"
+#line 216 "../../../lib/srchilite/stylecssscanner.ll"
 
 
 

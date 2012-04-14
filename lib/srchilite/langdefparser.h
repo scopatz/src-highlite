@@ -99,7 +99,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 91 "../../../lib/srchilite/langdefparser.yy"
+#line 95 "../../../lib/srchilite/langdefparser.yy"
 
   int tok ; /* command */
   bool booloption ;

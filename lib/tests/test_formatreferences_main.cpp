@@ -1,5 +1,9 @@
 // tests for class TextStyle
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <iostream>
 
 #include "asserttestexit.h"

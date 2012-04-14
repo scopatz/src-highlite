@@ -97,6 +97,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -168,7 +172,7 @@ struct ElementNamesList : ElementNames {
 
 
 /* Line 189 of yacc.c  */
-#line 172 "../../../lib/srchilite/langdefparser.cc"
+#line 176 "../../../lib/srchilite/langdefparser.cc"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -255,7 +259,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 91 "../../../lib/srchilite/langdefparser.yy"
+#line 95 "../../../lib/srchilite/langdefparser.yy"
 
   int tok ; /* command */
   bool booloption ;
@@ -275,7 +279,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 279 "../../../lib/srchilite/langdefparser.cc"
+#line 283 "../../../lib/srchilite/langdefparser.cc"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -300,7 +304,7 @@ typedef struct YYLTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 304 "../../../lib/srchilite/langdefparser.cc"
+#line 308 "../../../lib/srchilite/langdefparser.cc"
 
 #ifdef short
 # undef short
@@ -602,11 +606,11 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   134,   134,   143,   146,   150,   156,   165,   173,   177,
-     188,   195,   200,   206,   212,   219,   224,   231,   232,   235,
-     236,   237,   240,   241,   244,   245,   248,   249,   252,   253,
-     254,   257,   258,   261,   262,   265,   266,   271,   274,   277,
-     280,   287,   291,   296,   306,   309,   312,   315,   322,   327
+       0,   138,   138,   147,   150,   154,   160,   169,   177,   181,
+     192,   199,   204,   210,   216,   223,   228,   235,   236,   239,
+     240,   241,   244,   245,   248,   249,   252,   253,   256,   257,
+     258,   261,   262,   265,   266,   269,   270,   275,   278,   281,
+     284,   291,   295,   300,   310,   313,   316,   319,   326,   331
 };
 #endif
 
@@ -1267,74 +1271,74 @@ yydestruct (yymsg, yytype, yyvaluep, yylocationp)
       case 34: /* "elemdefs" */
 
 /* Line 1000 of yacc.c  */
-#line 126 "../../../lib/srchilite/langdefparser.yy"
+#line 130 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->langelems);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1278 "../../../lib/srchilite/langdefparser.cc"
+#line 1282 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 35: /* "elemdef" */
 
 /* Line 1000 of yacc.c  */
-#line 126 "../../../lib/srchilite/langdefparser.yy"
+#line 130 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->langelem);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1290 "../../../lib/srchilite/langdefparser.cc"
+#line 1294 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 37: /* "key" */
 
 /* Line 1000 of yacc.c  */
-#line 126 "../../../lib/srchilite/langdefparser.yy"
+#line 130 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->key);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1302 "../../../lib/srchilite/langdefparser.cc"
+#line 1306 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 38: /* "keys" */
 
 /* Line 1000 of yacc.c  */
-#line 126 "../../../lib/srchilite/langdefparser.yy"
+#line 130 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->keys);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1314 "../../../lib/srchilite/langdefparser.cc"
+#line 1318 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 47: /* "stringdefs" */
 
 /* Line 1000 of yacc.c  */
-#line 126 "../../../lib/srchilite/langdefparser.yy"
+#line 130 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->stringdefs);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1326 "../../../lib/srchilite/langdefparser.cc"
+#line 1330 "../../../lib/srchilite/langdefparser.cc"
 	break;
       case 49: /* "stringdef" */
 
 /* Line 1000 of yacc.c  */
-#line 126 "../../../lib/srchilite/langdefparser.yy"
+#line 130 "../../../lib/srchilite/langdefparser.yy"
 	{
 	//std::cout << "freeing discarded symbol" << std::endl;
 	delete (yyvaluep->stringdef);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1338 "../../../lib/srchilite/langdefparser.cc"
+#line 1342 "../../../lib/srchilite/langdefparser.cc"
 	break;
 
       default:
@@ -1666,7 +1670,7 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 134 "../../../lib/srchilite/langdefparser.yy"
+#line 138 "../../../lib/srchilite/langdefparser.yy"
     {
           /* no definitions (i.e., empty a .lang file with no definition) */
           /* such as, default.lang */
@@ -1681,14 +1685,14 @@ yyreduce:
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 143 "../../../lib/srchilite/langdefparser.yy"
+#line 147 "../../../lib/srchilite/langdefparser.yy"
     { current_lang_elems = (yyvsp[(1) - (1)].langelems); }
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 146 "../../../lib/srchilite/langdefparser.yy"
+#line 150 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.langelems) = (yyvsp[(1) - (2)].langelems);
               ADD_ELEMENT((yyval.langelems), (yyvsp[(2) - (2)].langelem));
@@ -1698,7 +1702,7 @@ yyreduce:
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 150 "../../../lib/srchilite/langdefparser.yy"
+#line 154 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.langelems) = new LangElems;
               ADD_ELEMENT((yyval.langelems), (yyvsp[(1) - (1)].langelem));
@@ -1708,7 +1712,7 @@ yyreduce:
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 157 "../../../lib/srchilite/langdefparser.yy"
+#line 161 "../../../lib/srchilite/langdefparser.yy"
     {
             (yyval.langelem) = (yyvsp[(2) - (3)].statestartlangelem);
             if ((yyvsp[(3) - (3)].tok) < 0)
@@ -1722,7 +1726,7 @@ yyreduce:
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 166 "../../../lib/srchilite/langdefparser.yy"
+#line 170 "../../../lib/srchilite/langdefparser.yy"
     {
             StateLangElem *statelangelem = new StateLangElem((yyvsp[(3) - (6)].statestartlangelem)->getName(), (yyvsp[(3) - (6)].statestartlangelem), (yyvsp[(5) - (6)].langelems), !(yyvsp[(2) - (6)].booloption));
             (yyval.langelem) = statelangelem;
@@ -1735,7 +1739,7 @@ yyreduce:
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 173 "../../../lib/srchilite/langdefparser.yy"
+#line 177 "../../../lib/srchilite/langdefparser.yy"
     {
             vardefinitions->add(*(yyvsp[(2) - (4)].string), (yyvsp[(4) - (4)].stringdefs));
             (yyval.langelem) = 0;
@@ -1745,7 +1749,7 @@ yyreduce:
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 177 "../../../lib/srchilite/langdefparser.yy"
+#line 181 "../../../lib/srchilite/langdefparser.yy"
     {
             // this token is used by the scanner to signal an error
             // in opening an include file
@@ -1760,7 +1764,7 @@ yyreduce:
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 189 "../../../lib/srchilite/langdefparser.yy"
+#line 193 "../../../lib/srchilite/langdefparser.yy"
     {
                   (yyval.statestartlangelem) = new DelimitedLangElem(*((yyvsp[(1) - (7)].key)->key), (yyvsp[(3) - (7)].stringdef), (yyvsp[(4) - (7)].stringdef), (yyvsp[(5) - (7)].stringdef), (yyvsp[(6) - (7)].booloption), (yyvsp[(7) - (7)].booloption));
                   (yyval.statestartlangelem)->setParserInfo((yyvsp[(1) - (7)].key));
@@ -1772,7 +1776,7 @@ yyreduce:
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 195 "../../../lib/srchilite/langdefparser.yy"
+#line 199 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.statestartlangelem) = new DelimitedLangElem(*((yyvsp[(1) - (3)].key)->key), (yyvsp[(3) - (3)].stringdef), 0, 0, false, false);
               (yyval.statestartlangelem)->setParserInfo((yyvsp[(1) - (3)].key));
@@ -1783,7 +1787,7 @@ yyreduce:
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 200 "../../../lib/srchilite/langdefparser.yy"
+#line 204 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.statestartlangelem) = new StringListLangElem(*((yyvsp[(1) - (4)].key)->key), (yyvsp[(3) - (4)].stringdefs), (yyvsp[(4) - (4)].booloption));
               (yyval.statestartlangelem)->setParserInfo((yyvsp[(1) - (4)].key));
@@ -1795,7 +1799,7 @@ yyreduce:
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 206 "../../../lib/srchilite/langdefparser.yy"
+#line 210 "../../../lib/srchilite/langdefparser.yy"
     {
           		(yyval.statestartlangelem) = new NamedSubExpsLangElem((yyvsp[(2) - (5)].keys), new StringDef(*(yyvsp[(5) - (5)].string)));
                         (yyval.statestartlangelem)->setParserInfo(parsestruct->file_name, (yylsp[(1) - (5)]).first_line);
@@ -1805,7 +1809,7 @@ yyreduce:
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 212 "../../../lib/srchilite/langdefparser.yy"
+#line 216 "../../../lib/srchilite/langdefparser.yy"
     {
     (yyval.key) = new Key;
     (yyval.key)->key = (yyvsp[(1) - (1)].string);
@@ -1816,7 +1820,7 @@ yyreduce:
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 220 "../../../lib/srchilite/langdefparser.yy"
+#line 224 "../../../lib/srchilite/langdefparser.yy"
     {
         (yyval.keys) = (yyvsp[(1) - (3)].keys);
         (yyval.keys)->push_back(*(yyvsp[(3) - (3)].string));
@@ -1826,7 +1830,7 @@ yyreduce:
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 225 "../../../lib/srchilite/langdefparser.yy"
+#line 229 "../../../lib/srchilite/langdefparser.yy"
     {
     	(yyval.keys) = new ElementNamesList;
     	(yyval.keys)->push_back(*(yyvsp[(1) - (1)].string));
@@ -1836,140 +1840,140 @@ yyreduce:
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 231 "../../../lib/srchilite/langdefparser.yy"
+#line 235 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.stringdef) = (yyvsp[(2) - (2)].stringdef); }
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 232 "../../../lib/srchilite/langdefparser.yy"
+#line 236 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.stringdef) = 0; }
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 235 "../../../lib/srchilite/langdefparser.yy"
+#line 239 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = -1; }
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 236 "../../../lib/srchilite/langdefparser.yy"
+#line 240 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = (yyvsp[(2) - (2)].level); }
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 237 "../../../lib/srchilite/langdefparser.yy"
+#line 241 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = 0; }
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 240 "../../../lib/srchilite/langdefparser.yy"
+#line 244 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.level) = (yyvsp[(1) - (1)].level); }
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 241 "../../../lib/srchilite/langdefparser.yy"
+#line 245 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.level) = 1; }
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 244 "../../../lib/srchilite/langdefparser.yy"
+#line 248 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = true; }
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 245 "../../../lib/srchilite/langdefparser.yy"
+#line 249 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = false; }
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 248 "../../../lib/srchilite/langdefparser.yy"
+#line 252 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = true; }
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 249 "../../../lib/srchilite/langdefparser.yy"
+#line 253 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = false; }
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 252 "../../../lib/srchilite/langdefparser.yy"
+#line 256 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = 1; }
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 253 "../../../lib/srchilite/langdefparser.yy"
+#line 257 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = 2; }
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 254 "../../../lib/srchilite/langdefparser.yy"
+#line 258 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.tok) = 0; }
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 257 "../../../lib/srchilite/langdefparser.yy"
+#line 261 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = true; }
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 258 "../../../lib/srchilite/langdefparser.yy"
+#line 262 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = false; }
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 261 "../../../lib/srchilite/langdefparser.yy"
+#line 265 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = true; }
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 262 "../../../lib/srchilite/langdefparser.yy"
+#line 266 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.booloption) = false; }
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 265 "../../../lib/srchilite/langdefparser.yy"
+#line 269 "../../../lib/srchilite/langdefparser.yy"
     { (yyval.stringdefs) = (yyvsp[(1) - (3)].stringdefs); (yyval.stringdefs)->push_back((yyvsp[(3) - (3)].stringdef)); }
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 266 "../../../lib/srchilite/langdefparser.yy"
+#line 270 "../../../lib/srchilite/langdefparser.yy"
     {
                 (yyval.stringdefs) = new StringDefs;
                 (yyval.stringdefs)->push_back((yyvsp[(1) - (1)].stringdef)); }
@@ -1978,7 +1982,7 @@ yyreduce:
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 271 "../../../lib/srchilite/langdefparser.yy"
+#line 275 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = (yyvsp[(1) - (1)].stringdef);
             }
@@ -1987,7 +1991,7 @@ yyreduce:
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 274 "../../../lib/srchilite/langdefparser.yy"
+#line 278 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string), true);
             }
@@ -1996,7 +2000,7 @@ yyreduce:
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 277 "../../../lib/srchilite/langdefparser.yy"
+#line 281 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string));
             }
@@ -2005,7 +2009,7 @@ yyreduce:
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 280 "../../../lib/srchilite/langdefparser.yy"
+#line 284 "../../../lib/srchilite/langdefparser.yy"
     {
               if (! vardefinitions->contains(*(yyvsp[(1) - (1)].string))) {
                 yyerror("undefined variable " + *(yyvsp[(1) - (1)].string));
@@ -2018,7 +2022,7 @@ yyreduce:
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 287 "../../../lib/srchilite/langdefparser.yy"
+#line 291 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string));
               (yyval.stringdef)->setBackRef(true);
@@ -2028,7 +2032,7 @@ yyreduce:
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 291 "../../../lib/srchilite/langdefparser.yy"
+#line 295 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = StringDef::concat((yyvsp[(1) - (3)].stringdef), (yyvsp[(3) - (3)].stringdef));
               delete (yyvsp[(1) - (3)].stringdef);
@@ -2039,7 +2043,7 @@ yyreduce:
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 296 "../../../lib/srchilite/langdefparser.yy"
+#line 300 "../../../lib/srchilite/langdefparser.yy"
     {
             // this token is used by the scanner to signal an error
             // in scanning a string with backreference
@@ -2053,7 +2057,7 @@ yyreduce:
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 306 "../../../lib/srchilite/langdefparser.yy"
+#line 310 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = (yyvsp[(1) - (1)].stringdef);
             }
@@ -2062,7 +2066,7 @@ yyreduce:
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 309 "../../../lib/srchilite/langdefparser.yy"
+#line 313 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string), true);
             }
@@ -2071,7 +2075,7 @@ yyreduce:
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 312 "../../../lib/srchilite/langdefparser.yy"
+#line 316 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = new StringDef(*(yyvsp[(1) - (1)].string));
             }
@@ -2080,7 +2084,7 @@ yyreduce:
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 315 "../../../lib/srchilite/langdefparser.yy"
+#line 319 "../../../lib/srchilite/langdefparser.yy"
     {
               if (! vardefinitions->contains(*(yyvsp[(1) - (1)].string))) {
                 yyerror("undefined variable " + *(yyvsp[(1) - (1)].string));
@@ -2093,7 +2097,7 @@ yyreduce:
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 322 "../../../lib/srchilite/langdefparser.yy"
+#line 326 "../../../lib/srchilite/langdefparser.yy"
     {
               (yyval.stringdef) = StringDef::concat((yyvsp[(1) - (3)].stringdef), (yyvsp[(3) - (3)].stringdef));
               delete (yyvsp[(1) - (3)].stringdef);
@@ -2104,7 +2108,7 @@ yyreduce:
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 327 "../../../lib/srchilite/langdefparser.yy"
+#line 331 "../../../lib/srchilite/langdefparser.yy"
     {
             // this token is used by the scanner to signal an error
             // in scanning a string with backreference
@@ -2118,7 +2122,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 2122 "../../../lib/srchilite/langdefparser.cc"
+#line 2126 "../../../lib/srchilite/langdefparser.cc"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2337,7 +2341,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 337 "../../../lib/srchilite/langdefparser.yy"
+#line 341 "../../../lib/srchilite/langdefparser.yy"
 
 
 extern int langdef_lex_destroy (void);

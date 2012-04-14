@@ -681,6 +681,10 @@ char *outlangdef_text;
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <sstream>
 #include "outlangdefparser.h"
 #include "outlangdefscanner.h"
@@ -720,7 +724,7 @@ typedef std::stack<ParseStructPtr> ParseStructStack;
 static ParseStructStack parsestructstack;
 
 
-#line 724 "../../../lib/srchilite/outlangdefscanner.cc"
+#line 728 "../../../lib/srchilite/outlangdefscanner.cc"
 
 #define INITIAL 0
 #define COMMENT_STATE 1
@@ -924,10 +928,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 77 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 81 "../../../lib/srchilite/outlangdefscanner.ll"
 
 
-#line 931 "../../../lib/srchilite/outlangdefscanner.cc"
+#line 935 "../../../lib/srchilite/outlangdefscanner.cc"
 
 	if ( !(yy_init) )
 		{
@@ -1012,163 +1016,163 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 79 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 83 "../../../lib/srchilite/outlangdefscanner.ll"
 {}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 81 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 85 "../../../lib/srchilite/outlangdefscanner.ll"
 {}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 83 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 87 "../../../lib/srchilite/outlangdefscanner.ll"
 { PUSH(COMMENT_STATE); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 84 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 88 "../../../lib/srchilite/outlangdefscanner.ll"
 {}
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 85 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 89 "../../../lib/srchilite/outlangdefscanner.ll"
 { ++(outlang_parsestruct->line);  POP(); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 87 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 91 "../../../lib/srchilite/outlangdefscanner.ll"
 { return NODOC_TEMPLATE_T ; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 88 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 92 "../../../lib/srchilite/outlangdefscanner.ll"
 { return DOC_TEMPLATE_T ; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 89 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 93 "../../../lib/srchilite/outlangdefscanner.ll"
 { return STYLE_TEMPLATE_T ; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 90 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 94 "../../../lib/srchilite/outlangdefscanner.ll"
 { return STYLE_SEPARATOR_T ; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 91 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 95 "../../../lib/srchilite/outlangdefscanner.ll"
 { return BOLD_T ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 92 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 96 "../../../lib/srchilite/outlangdefscanner.ll"
 { return ITALICS_T ; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 93 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 97 "../../../lib/srchilite/outlangdefscanner.ll"
 { return UNDERLINE_T ; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 94 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 98 "../../../lib/srchilite/outlangdefscanner.ll"
 { return NOTFIXED_T ; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 95 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 99 "../../../lib/srchilite/outlangdefscanner.ll"
 { return FIXED_T ; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 96 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 100 "../../../lib/srchilite/outlangdefscanner.ll"
 { return COLORMAP_T ; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 97 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 101 "../../../lib/srchilite/outlangdefscanner.ll"
 { return BG_COLOR_T ; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 98 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 102 "../../../lib/srchilite/outlangdefscanner.ll"
 { return COLOR_T ; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 99 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 103 "../../../lib/srchilite/outlangdefscanner.ll"
 { return DEFAULT_T ; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 100 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 104 "../../../lib/srchilite/outlangdefscanner.ll"
 { return ONESTYLE_T ; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 101 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 105 "../../../lib/srchilite/outlangdefscanner.ll"
 { return EXTENSION_T ; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 102 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 106 "../../../lib/srchilite/outlangdefscanner.ll"
 { return ANCHOR_T ; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 103 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 107 "../../../lib/srchilite/outlangdefscanner.ll"
 { return INLINE_REFERENCE_T ; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 104 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 108 "../../../lib/srchilite/outlangdefscanner.ll"
 { return POSTLINE_REFERENCE_T ; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 105 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 109 "../../../lib/srchilite/outlangdefscanner.ll"
 { return POSTDOC_REFERENCE_T ; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 106 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 110 "../../../lib/srchilite/outlangdefscanner.ll"
 { return REFERENCE_T ; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 107 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 111 "../../../lib/srchilite/outlangdefscanner.ll"
 { return LINE_PREFIX_T; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 108 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 112 "../../../lib/srchilite/outlangdefscanner.ll"
 { return LINENUM_T; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 109 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 113 "../../../lib/srchilite/outlangdefscanner.ll"
 { BEGIN(TRANSLATION_STATE); return TRANSLATIONS_T ; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 110 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 114 "../../../lib/srchilite/outlangdefscanner.ll"
 { return BEGIN_T ; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 111 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 115 "../../../lib/srchilite/outlangdefscanner.ll"
 { BEGIN(INITIAL); return END_T ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 113 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 117 "../../../lib/srchilite/outlangdefscanner.ll"
 { BEGIN(INCLUDE_STATE); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 114 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 118 "../../../lib/srchilite/outlangdefscanner.ll"
 {
   char *file_name = &outlangdef_text[1];
   file_name[strlen(file_name)-1] = '\0';
@@ -1193,7 +1197,7 @@ case YY_STATE_EOF(TRANSLATION_STATE):
 case YY_STATE_EOF(REGEX_STATE):
 case YY_STATE_EOF(LITERAL_STATE):
 case YY_STATE_EOF(TRANSLATED_STATE):
-#line 130 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 134 "../../../lib/srchilite/outlangdefscanner.ll"
 {
   fclose(outlangdef_in);
   outlangdef_in = 0;
@@ -1209,32 +1213,32 @@ case YY_STATE_EOF(TRANSLATED_STATE):
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 143 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 147 "../../../lib/srchilite/outlangdefscanner.ll"
 { DEB2("KEY",outlangdef_text); outlangdef_lval.string = new std::string(outlangdef_text) ; return KEY ; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 144 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 148 "../../../lib/srchilite/outlangdefscanner.ll"
 { return '=' ; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 145 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 149 "../../../lib/srchilite/outlangdefscanner.ll"
 { return ',' ; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 146 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 150 "../../../lib/srchilite/outlangdefscanner.ll"
 { return '+' ; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 148 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 152 "../../../lib/srchilite/outlangdefscanner.ll"
 { BEGIN(STRING_STATE) ; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 149 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 153 "../../../lib/srchilite/outlangdefscanner.ll"
 {
   string s = &outlangdef_text[1];
   s = "0" + s;
@@ -1244,78 +1248,78 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 155 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 159 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( outlangdef_text ) ; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 156 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 160 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( "\"" ) ; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 157 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 161 "../../../lib/srchilite/outlangdefscanner.ll"
 { BEGIN(INITIAL) ; outlangdef_lval.string = flush_buffer() ; DEB2("STRINGDEF",outlangdef_lval.string); return STRINGDEF; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 158 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 162 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( outlangdef_text ) ; }
 	YY_BREAK
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
-#line 159 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 163 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( "\n" ) ; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 161 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 165 "../../../lib/srchilite/outlangdefscanner.ll"
 { BEGIN(LITERAL_STATE) ; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 162 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 166 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer_escape( outlangdef_text ) ; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 163 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 167 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( outlangdef_text ) ; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 164 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 168 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( outlangdef_text ) ; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 165 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 169 "../../../lib/srchilite/outlangdefscanner.ll"
 { BEGIN(TRANSLATION_STATE) ; outlangdef_lval.string = flush_buffer() ; DEB2("STRINGDEF",loutlangdef_lval.string); return REGEXDEF; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 166 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 170 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( outlangdef_text ) ; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 168 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 172 "../../../lib/srchilite/outlangdefscanner.ll"
 { BEGIN(REGEX_STATE) ; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 169 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 173 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( outlangdef_text ) ; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 170 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 174 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( "'" ) ; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 171 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 175 "../../../lib/srchilite/outlangdefscanner.ll"
 {
     BEGIN(TRANSLATED_STATE) ;
     // entering TRANSLATED_STATE makes sure that 'regex' is used only
@@ -1326,26 +1330,26 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 178 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 182 "../../../lib/srchilite/outlangdefscanner.ll"
 {  buffer( outlangdef_text ) ; }
 	YY_BREAK
 case 55:
 /* rule 55 can match eol */
 YY_RULE_SETUP
-#line 180 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 184 "../../../lib/srchilite/outlangdefscanner.ll"
 { DEB("NEWLINE"); ++(outlang_parsestruct->line) ; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 182 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 186 "../../../lib/srchilite/outlangdefscanner.ll"
 { return outlangdef_text[0] ; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 184 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 188 "../../../lib/srchilite/outlangdefscanner.ll"
 ECHO;
 	YY_BREAK
-#line 1349 "../../../lib/srchilite/outlangdefscanner.cc"
+#line 1353 "../../../lib/srchilite/outlangdefscanner.cc"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2386,7 +2390,7 @@ void outlangdef_free (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 184 "../../../lib/srchilite/outlangdefscanner.ll"
+#line 188 "../../../lib/srchilite/outlangdefscanner.ll"
 
 
 

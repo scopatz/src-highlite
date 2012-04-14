@@ -2,6 +2,10 @@
  * Tests for SourceHighlightUtils
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "srchilite/sourcehighlightutils.h"
 #include <sstream>
 #include <iostream>

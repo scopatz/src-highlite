@@ -2,6 +2,10 @@
  * Tests for language inference, class LanguageInfer
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "srchilite/instances.h"
 #include "srchilite/langdefmanager.h"
 #include "srchilite/langmap.h"

@@ -97,6 +97,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -147,7 +151,7 @@ static string errorBuffer;
 
 
 /* Line 189 of yacc.c  */
-#line 151 "../../../lib/srchilite/stylecssparser.cc"
+#line 155 "../../../lib/srchilite/stylecssparser.cc"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -208,7 +212,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 70 "../../../lib/srchilite/stylecssparser.yy"
+#line 74 "../../../lib/srchilite/stylecssparser.yy"
 
   int tok ; /* command */
   const std::string * string ; /* string : id, ... */
@@ -219,7 +223,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 223 "../../../lib/srchilite/stylecssparser.cc"
+#line 227 "../../../lib/srchilite/stylecssparser.cc"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -231,7 +235,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 235 "../../../lib/srchilite/stylecssparser.cc"
+#line 239 "../../../lib/srchilite/stylecssparser.cc"
 
 #ifdef short
 # undef short
@@ -520,9 +524,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    90,    90,    91,    94,    95,    98,   102,   101,   143,
-     149,   157,   158,   161,   162,   163,   166,   171,   178,   183,
-     190,   191,   192,   193,   194,   195
+       0,    94,    94,    95,    98,    99,   102,   106,   105,   147,
+     153,   161,   162,   165,   166,   167,   170,   175,   182,   187,
+     194,   195,   196,   197,   198,   199
 };
 #endif
 
@@ -1136,62 +1140,62 @@ yydestruct (yymsg, yytype, yyvaluep)
       case 9: /* "KEY" */
 
 /* Line 1000 of yacc.c  */
-#line 83 "../../../lib/srchilite/stylecssparser.yy"
+#line 87 "../../../lib/srchilite/stylecssparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1147 "../../../lib/srchilite/stylecssparser.cc"
+#line 1151 "../../../lib/srchilite/stylecssparser.cc"
 	break;
       case 10: /* "COLOR" */
 
 /* Line 1000 of yacc.c  */
-#line 83 "../../../lib/srchilite/stylecssparser.yy"
+#line 87 "../../../lib/srchilite/stylecssparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1159 "../../../lib/srchilite/stylecssparser.cc"
+#line 1163 "../../../lib/srchilite/stylecssparser.cc"
 	break;
       case 11: /* "BG_COLOR" */
 
 /* Line 1000 of yacc.c  */
-#line 83 "../../../lib/srchilite/stylecssparser.yy"
+#line 87 "../../../lib/srchilite/stylecssparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1171 "../../../lib/srchilite/stylecssparser.cc"
+#line 1175 "../../../lib/srchilite/stylecssparser.cc"
 	break;
       case 12: /* "STRINGDEF" */
 
 /* Line 1000 of yacc.c  */
-#line 83 "../../../lib/srchilite/stylecssparser.yy"
+#line 87 "../../../lib/srchilite/stylecssparser.yy"
 	{
 	if ((yyvaluep->string))
 	  delete (yyvaluep->string);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1183 "../../../lib/srchilite/stylecssparser.cc"
+#line 1187 "../../../lib/srchilite/stylecssparser.cc"
 	break;
       case 22: /* "keylist" */
 
 /* Line 1000 of yacc.c  */
-#line 83 "../../../lib/srchilite/stylecssparser.yy"
+#line 87 "../../../lib/srchilite/stylecssparser.yy"
 	{
 	if ((yyvaluep->keylist))
 	  delete (yyvaluep->keylist);
 };
 
 /* Line 1000 of yacc.c  */
-#line 1195 "../../../lib/srchilite/stylecssparser.cc"
+#line 1199 "../../../lib/srchilite/stylecssparser.cc"
 	break;
 
       default:
@@ -1496,14 +1500,14 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 90 "../../../lib/srchilite/stylecssparser.yy"
+#line 94 "../../../lib/srchilite/stylecssparser.yy"
     { /* allow empty files */ }
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 102 "../../../lib/srchilite/stylecssparser.yy"
+#line 106 "../../../lib/srchilite/stylecssparser.yy"
     {
                //printSequence( $1 ) ;
                //printMessage_noln( ": " ) ;
@@ -1516,7 +1520,7 @@ yyreduce:
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 110 "../../../lib/srchilite/stylecssparser.yy"
+#line 114 "../../../lib/srchilite/stylecssparser.yy"
     {
                KeyType key;
                KeyList *keylist = (yyvsp[(1) - (4)].keylist);
@@ -1553,7 +1557,7 @@ yyreduce:
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 144 "../../../lib/srchilite/stylecssparser.yy"
+#line 148 "../../../lib/srchilite/stylecssparser.yy"
     {
               (yyvsp[(1) - (3)].keylist)->push_back(*(yyvsp[(3) - (3)].string));
               (yyval.keylist) = (yyvsp[(1) - (3)].keylist);
@@ -1564,7 +1568,7 @@ yyreduce:
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 150 "../../../lib/srchilite/stylecssparser.yy"
+#line 154 "../../../lib/srchilite/stylecssparser.yy"
     {
               (yyval.keylist) = new KeyList;
               (yyval.keylist)->push_back(*(yyvsp[(1) - (1)].string));
@@ -1575,14 +1579,14 @@ yyreduce:
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 157 "../../../lib/srchilite/stylecssparser.yy"
+#line 161 "../../../lib/srchilite/stylecssparser.yy"
     {}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 167 "../../../lib/srchilite/stylecssparser.yy"
+#line 171 "../../../lib/srchilite/stylecssparser.yy"
     {
           currentColor = *(yyvsp[(1) - (1)].string);
           delete (yyvsp[(1) - (1)].string);
@@ -1592,7 +1596,7 @@ yyreduce:
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 172 "../../../lib/srchilite/stylecssparser.yy"
+#line 176 "../../../lib/srchilite/stylecssparser.yy"
     {
           currentColor = *(yyvsp[(1) - (1)].string);
           delete (yyvsp[(1) - (1)].string);
@@ -1602,7 +1606,7 @@ yyreduce:
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 179 "../../../lib/srchilite/stylecssparser.yy"
+#line 183 "../../../lib/srchilite/stylecssparser.yy"
     {
           currentBGColor = *(yyvsp[(1) - (1)].string);
           delete (yyvsp[(1) - (1)].string);
@@ -1612,7 +1616,7 @@ yyreduce:
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 184 "../../../lib/srchilite/stylecssparser.yy"
+#line 188 "../../../lib/srchilite/stylecssparser.yy"
     {
           currentBGColor = *(yyvsp[(1) - (1)].string);
           delete (yyvsp[(1) - (1)].string);
@@ -1622,49 +1626,49 @@ yyreduce:
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 190 "../../../lib/srchilite/stylecssparser.yy"
+#line 194 "../../../lib/srchilite/stylecssparser.yy"
     { currentStyleConstants->push_back(ISBOLD); }
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 191 "../../../lib/srchilite/stylecssparser.yy"
+#line 195 "../../../lib/srchilite/stylecssparser.yy"
     { currentStyleConstants->push_back(ISITALIC); }
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 192 "../../../lib/srchilite/stylecssparser.yy"
+#line 196 "../../../lib/srchilite/stylecssparser.yy"
     { currentStyleConstants->push_back(ISUNDERLINE); }
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 193 "../../../lib/srchilite/stylecssparser.yy"
+#line 197 "../../../lib/srchilite/stylecssparser.yy"
     { currentStyleConstants->push_back(ISFIXED); }
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 194 "../../../lib/srchilite/stylecssparser.yy"
+#line 198 "../../../lib/srchilite/stylecssparser.yy"
     { currentStyleConstants->push_back(ISNOTFIXED); }
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 195 "../../../lib/srchilite/stylecssparser.yy"
+#line 199 "../../../lib/srchilite/stylecssparser.yy"
     { currentStyleConstants->push_back(ISNOREF); }
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1668 "../../../lib/srchilite/stylecssparser.cc"
+#line 1672 "../../../lib/srchilite/stylecssparser.cc"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1876,7 +1880,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 198 "../../../lib/srchilite/stylecssparser.yy"
+#line 202 "../../../lib/srchilite/stylecssparser.yy"
 
 
 // string current_file; defined in styleparser

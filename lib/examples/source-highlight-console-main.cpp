@@ -8,6 +8,11 @@
  *      Author: Lorenzo Bettini <http://www.lorenzobettini.it>, (C) 2008
  *  Copyright: See COPYING file that comes with this distribution
  */ //> TEXINFO
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <iostream>
 #include "srchilite/sourcehighlight.h"
 #include "srchilite/langmap.h"

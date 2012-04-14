@@ -9,6 +9,11 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "regexpreprocessor.h"
 #include <boost/regex.hpp>
 #include <sstream>
