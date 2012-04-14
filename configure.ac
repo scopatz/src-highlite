@@ -9,7 +9,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(source-highlight,3.1.6)
+AC_INIT(source-highlight,3.1.7)
 
 # this is requested for the install-data-local of doxygen documentation
 AC_PREREQ([2.62])
