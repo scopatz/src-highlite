@@ -143,3 +143,5 @@ BEFORE RELEASING
 
 remember to update the version and library version in
 defines.pri
+
+remember to update the version in .directive
