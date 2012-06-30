@@ -1,5 +1,5 @@
 MAJOR_VERSION = 3
-VERSION = $${MAJOR_VERSION}.0.1
+VERSION = $${MAJOR_VERSION}.1.7
 
 # better to avoid both builds (especially on windows)
 CONFIG-=debug_and_release
@@ -16,7 +16,7 @@ win32-msvc*:    COMPILER = msvc
 linux-g++:      COMPILER = gcc
 
 DEFINES += ABSOLUTEDATADIR=\\\"/usr/local/share/source-highlight/\\\" \
-    VERSION=\\\"3.1.6\\\" \
+    VERSION=\\\"3.1.7\\\" \
     LIBRARY_VERSION=\\\"4.0.0\\\" \
     PACKAGE=\\\"source-highlight\\\" \
     RELATIVEDATADIR=\\\"../share/source-highlight\\\"
