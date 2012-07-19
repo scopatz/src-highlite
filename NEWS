@@ -8,6 +8,10 @@ See the end for copying conditions.
 
 Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
+Version 3.1.8
+
+   * fixed tcl.lang (thanks to Martin Heinrich)
+
 Version 3.1.7
 
    * fixed compilation bugs in MacOsX systems (thanks to 
