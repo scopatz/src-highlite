@@ -32,4 +32,4 @@ keyword = "proc|global|upvar|if|then|else|elseif|for|foreach",
 
 vardef ID = '[[:word:]]+'
 
-variable = '\$' + $ID
+variable = "$" + $ID + "|${" + $ID + "}" 

@@ -1,3 +1,7 @@
+2012-07-19  Lorenzo Bettini  <bettini@bettini>
+
+	* src/tcl.lang: Fixed some definitions
+
 2011-12-26  Lorenzo Bettini  <bettini@bettini>
 
 	* src/mediawiki.outlang: Added, thanks to Abe Skolnik

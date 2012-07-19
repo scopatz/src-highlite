@@ -18,6 +18,8 @@ pack .hello
 
 $myvar
 
+${myothervar}
+
 # Local Variables:
 # mode: tcl
 # End:
