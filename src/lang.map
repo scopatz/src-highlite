@@ -46,6 +46,7 @@ syslog = log.lang
 log = log.lang
 pas = pascal.lang
 pascal = pascal.lang 	
+f = fortran.lang
 fortran = fortran.lang
 free-fortran = fortran.lang
 fixed-fortran = fixed-fortran.lang

@@ -1,5 +1,6 @@
 2012-11-09  bettini  <bettini@bettini-laptop-quantal>
 
+	* src/lang.map: .f mapped to fotran
 	* src/sh.lang: do not consider $' a variable
 	https://savannah.gnu.org/bugs/?36613
 

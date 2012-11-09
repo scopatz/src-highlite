@@ -39,6 +39,7 @@ eps = postscript.lang
 erl = erlang.lang
 erlang = erlang.lang
 errors = errors.lang
+f = fortran.lang
 fixed-fortran = fixed-fortran.lang
 flex = flex.lang
 fortran = fortran.lang
