@@ -55,3 +55,8 @@ do
 done
 ;;
   esac
+
+local x=$'\t'   # This line caused the problem of bug 36613
+
+a=1
+echo hello

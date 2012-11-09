@@ -27,7 +27,7 @@ variable = '([[:alpha:]]|_)[[:word:]]*(?==)'
 variable = '\$\{([^[:blank:]]+)\}'
 variable = '\$\(([^[:blank:]]+)\)'
 variable = '\$([[:alpha:]]|_)[[:word:]]*'
-variable = '\$([^[:blank:]]{1})'
+variable = '\$([^[:blank:]\']{1})'
 
 # notice that - is not a symbol since it can be used in command line parameters
 symbol = "~","!","%","^","*","(",")","+","=","[",

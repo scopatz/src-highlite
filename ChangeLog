@@ -1,3 +1,8 @@
+2012-11-09  bettini  <bettini@bettini-laptop-quantal>
+
+	* src/sh.lang: do not consider $' a variable
+	https://savannah.gnu.org/bugs/?36613
+
 2012-07-19  Lorenzo Bettini  <bettini@bettini>
 
 	* src/tcl.lang: Fixed some definitions
