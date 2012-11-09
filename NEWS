@@ -10,7 +10,8 @@ Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
 Version 3.1.8
 
-   * fixed tcl.lang (thanks to Martin Heinrich)
+   * fixed tcl.lang (thanks to Martin Heinrich) (bugs #36859, #36860)
+   * fixed bash.lang (bug #36613)
 
 Version 3.1.7
 
@@ -19,7 +20,7 @@ Version 3.1.7
    * language definition for Lilypond (thanks to Federico Bruni)
    * language definition for R statistics programming language
    * language definition for ISLISP (thanks to Christian Jullien)
-   * improved Erlang definition file (thanks to Erik Søe Sørensen)
+   * improved Erlang definition file (thanks to Erik Sï¿½e Sï¿½rensen)
    * new output format: ESC 256 ascii code (thanks to
      Xavier-Emmanuel Vincent).
 

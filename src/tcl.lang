@@ -30,6 +30,6 @@ keyword = "proc|global|upvar|if|then|else|elseif|for|foreach",
 	"cd|clock|exec|exit|glob|pid|pwd|time",
 	"dde|registry|resource"
 
-vardef ID = '[[:word:]]+'
+vardef ID = '[[:word:]:-]+'
 
 variable = "$" + $ID + "|${" + $ID + "}" 
