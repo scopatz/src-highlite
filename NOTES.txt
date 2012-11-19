@@ -52,3 +52,6 @@ Don't forget to
   - mention "-I gl/m4" in ACLOCAL_AMFLAGS in Makefile.am,
   - invoke gl_EARLY in ./configure.ac, right after AC_PROG_CC,
   - invoke gl_INIT in ./configure.ac.
+
+
+CXX="ccache g++" CC="ccache gcc" make distcheck

@@ -12,6 +12,7 @@ Version 3.1.8
 
    * fixed tcl.lang (thanks to Martin Heinrich) (bugs #36859, #36860)
    * fixed bash.lang (bug #36613)
+   * added coffeescript.lang (thanks to Nick Gauthier)
 
 Version 3.1.7
 
