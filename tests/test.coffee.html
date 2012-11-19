@@ -1,0 +1,115 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900"># Examples from coffeescript.org</font></i>
+
+<i><font color="#9A1900"># Assignment:</font></i>
+number   <font color="#990000">=</font> <font color="#993399">42</font>
+opposite <font color="#990000">=</font> <b><font color="#0000FF">true</font></b>
+
+<i><font color="#9A1900"># Conditions:</font></i>
+number <font color="#990000">=</font> <font color="#990000">-</font><font color="#993399">42</font> <b><font color="#0000FF">if</font></b> opposite
+
+<i><font color="#9A1900"># Functions:</font></i>
+square <font color="#990000">=</font> <font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">-&gt;</font> x <font color="#990000">*</font> x
+
+<i><font color="#9A1900"># Arrays:</font></i>
+list <font color="#990000">=</font> <font color="#990000">[</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">5</font><font color="#990000">]</font>
+
+<i><font color="#9A1900"># Objects:</font></i>
+math <font color="#990000">=</font>
+  root<font color="#990000">:</font>   Math<font color="#990000">.</font>sqrt
+  square<font color="#990000">:</font> square
+  cube<font color="#990000">:</font>   <font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">-&gt;</font> x <font color="#990000">*</font> square x
+
+<i><font color="#9A1900"># Splats:</font></i>
+race <font color="#990000">=</font> <font color="#990000">(</font>winner<font color="#990000">,</font> runners<font color="#990000">...)</font> <font color="#990000">-&gt;</font>
+  print winner<font color="#990000">,</font> runners
+
+<i><font color="#9A1900"># Existence:</font></i>
+alert <font color="#FF0000">"I knew it!"</font> <b><font color="#0000FF">if</font></b> elvis<font color="#990000">?</font>
+
+<i><font color="#9A1900"># Array comprehensions:</font></i>
+cubes <font color="#990000">=</font> <font color="#990000">(</font>math<font color="#990000">.</font>cube num <b><font color="#0000FF">for</font></b> num <b><font color="#0000FF">in</font></b> list<font color="#990000">)</font>
+
+
+<i><font color="#9A1900"># Conditionals</font></i>
+mood <font color="#990000">=</font> greatlyImproved <b><font color="#0000FF">if</font></b> singing
+
+<b><font color="#0000FF">if</font></b> happy <b><font color="#0000FF">and</font></b> knowsIt
+  <b><font color="#000000">clapsHands</font></b><font color="#990000">()</font>
+  <b><font color="#000000">chaChaCha</font></b><font color="#990000">()</font>
+<b><font color="#0000FF">else</font></b>
+  <b><font color="#000000">showIt</font></b><font color="#990000">()</font>
+
+date <font color="#990000">=</font> <b><font color="#0000FF">if</font></b> friday <b><font color="#0000FF">then</font></b> sue <b><font color="#0000FF">else</font></b> jill
+
+<i><font color="#9A1900"># Splats</font></i>
+awardMedals <font color="#990000">=</font> <font color="#990000">(</font>first<font color="#990000">,</font> second<font color="#990000">,</font> others<font color="#990000">...)</font> <font color="#990000">-&gt;</font>
+  gold   <font color="#990000">=</font> first
+  silver <font color="#990000">=</font> second
+  rest   <font color="#990000">=</font> others
+
+
+<i><font color="#9A1900"># Loops and comprehensions</font></i>
+eat food <b><font color="#0000FF">for</font></b> food <b><font color="#0000FF">in</font></b> <font color="#990000">[</font><font color="#FF0000">'toast'</font><font color="#990000">,</font> <font color="#FF0000">'cheese'</font><font color="#990000">,</font> <font color="#FF0000">'wine'</font><font color="#990000">]</font>
+
+courses <font color="#990000">=</font> <font color="#990000">[</font><font color="#FF0000">'greens'</font><font color="#990000">,</font> <font color="#FF0000">'caviar'</font><font color="#990000">,</font> <font color="#FF0000">'truffles'</font><font color="#990000">,</font> <font color="#FF0000">'roast'</font><font color="#990000">,</font> <font color="#FF0000">'cake'</font><font color="#990000">]</font>
+menu i <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">,</font> dish <b><font color="#0000FF">for</font></b> dish<font color="#990000">,</font> i <b><font color="#0000FF">in</font></b> courses
+
+foods <font color="#990000">=</font> <font color="#990000">[</font><font color="#FF0000">'broccoli'</font><font color="#990000">,</font> <font color="#FF0000">'spinach'</font><font color="#990000">,</font> <font color="#FF0000">'chocolate'</font><font color="#990000">]</font>
+eat food <b><font color="#0000FF">for</font></b> food <b><font color="#0000FF">in</font></b> foods <b><font color="#0000FF">when</font></b> food <b><font color="#0000FF">isnt</font></b> <font color="#FF0000">'chocolate'</font>
+
+<i><font color="#9A1900"># Classes</font></i>
+<b><font color="#0000FF">class</font></b> Animal
+  constructor<font color="#990000">:</font> <font color="#990000">(</font>@name<font color="#990000">)</font> <font color="#990000">-&gt;</font>
+
+  move<font color="#990000">:</font> <font color="#990000">(</font>meters<font color="#990000">)</font> <font color="#990000">-&gt;</font>
+    alert @name <font color="#990000">+</font> <font color="#FF0000">" moved #{meters}m."</font>
+
+<b><font color="#0000FF">class</font></b> Snake <b><font color="#0000FF">extends</font></b> Animal
+  move<font color="#990000">:</font> <font color="#990000">-&gt;</font>
+    alert <font color="#FF0000">"Slithering..."</font>
+    <b><font color="#0000FF">super</font></b> <font color="#993399">5</font>
+
+<b><font color="#0000FF">class</font></b> Horse <b><font color="#0000FF">extends</font></b> Animal
+  move<font color="#990000">:</font> <font color="#990000">-&gt;</font>
+    alert <font color="#FF0000">"Galloping..."</font>
+    <b><font color="#0000FF">super</font></b> <font color="#993399">45</font>
+
+sam <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Snake <font color="#FF0000">"Sammy the Python"</font>
+tom <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Horse <font color="#FF0000">"Tommy the Palomino"</font>
+
+sam<font color="#990000">.</font><b><font color="#000000">move</font></b><font color="#990000">()</font>
+tom<font color="#990000">.</font><b><font color="#000000">move</font></b><font color="#990000">()</font>
+
+<i><font color="#9A1900"># Switch</font></i>
+<b><font color="#0000FF">switch</font></b> day
+  <b><font color="#0000FF">when</font></b> <font color="#FF0000">"Mon"</font> <b><font color="#0000FF">then</font></b> go work
+  <b><font color="#0000FF">when</font></b> <font color="#FF0000">"Tue"</font> <b><font color="#0000FF">then</font></b> go relax
+  <b><font color="#0000FF">when</font></b> <font color="#FF0000">"Thu"</font> <b><font color="#0000FF">then</font></b> go iceFishing
+  <b><font color="#0000FF">when</font></b> <font color="#FF0000">"Fri"</font><font color="#990000">,</font> <font color="#FF0000">"Sat"</font>
+    <b><font color="#0000FF">if</font></b> day <b><font color="#0000FF">is</font></b> bingoDay
+      go bingo
+      go dancing
+  <b><font color="#0000FF">when</font></b> <font color="#FF0000">"Sun"</font> <b><font color="#0000FF">then</font></b> go church
+  <b><font color="#0000FF">else</font></b> go work
+
+<i><font color="#9A1900"># try catch finally</font></i>
+<b><font color="#0000FF">try</font></b>
+  <b><font color="#000000">allHellBreaksLoose</font></b><font color="#990000">()</font>
+  <b><font color="#000000">catsAndDogsLivingTogether</font></b><font color="#990000">()</font>
+<b><font color="#0000FF">catch</font></b> error
+  print error
+<b><font color="#0000FF">finally</font></b>
+  <b><font color="#000000">cleanUp</font></b><font color="#990000">()</font>
+
+<i><font color="#9A1900"># block strings</font></i>
+html <font color="#990000">=</font> <font color="#FF0000">"""</font>
+<font color="#FF0000">       &lt;strong&gt;</font>
+<font color="#FF0000">         cup of coffeescript</font>
+<font color="#FF0000">       &lt;/strong&gt;</font>
+<font color="#FF0000">       """</font>
+
+</tt></pre>

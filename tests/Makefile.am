@@ -322,7 +322,8 @@ test.opa test.opa.html \
 test.javalog test.javalog.html \
 test.upc test.upc.html \
 test.tml test.tml.html \
-test.ly test.ly.html
+test.ly test.ly.html \
+test.coffee test.coffee.html
 
 LINERANGE1EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number
 LINERANGE2EXE=$(JAVA2HTML) --line-range="12-18","29-34" --line-number --range-context=3
@@ -460,6 +461,7 @@ check_javalog \
 check_upc \
 check_lilypond \
 check_tml \
+check_coffeescript \
 check-output-dir \
 check_stop \
 check_vardecl \
@@ -879,6 +881,11 @@ check_lilypond:
 	$(PROGNAME) --style-file $(top_srcdir)/src/lilypond.style -i $(srcdir)/test.ly -o test.ly.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.ly.html test.ly.out.html
+
+check_coffeescript:
+	$(PROGNAME_STD) -i $(srcdir)/test.coffee -o test.coffee.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.coffee.html test.coffee.out.html
 
 check_tml:
 	$(PROGNAME_STD) -i $(srcdir)/test.tml -o test.tml.out.html

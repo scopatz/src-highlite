@@ -21,6 +21,7 @@ changelog = changelog.lang
 clipper = clipper.lang
 cls = latex.lang
 cobol = cobol.lang
+coffee = coffeescript.lang
 coffeescript = coffeescript.lang
 conf = conf.lang
 cpp = cpp.lang

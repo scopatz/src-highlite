@@ -4,6 +4,7 @@ cpp = cpp.lang
 c = c.lang
 C = cpp.lang
 cc = cpp.lang
+coffee = coffeescript.lang
 coffeescript = coffeescript.lang
 cs = csharp.lang
 csharp = csharp.lang
