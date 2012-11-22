@@ -258,6 +258,7 @@ AC_CONFIG_FILES(
 [
 Makefile
 source-highlight.pc
+src-highlite.directive
 m4/Makefile
 gl/Makefile
 src/Makefile
