@@ -29,6 +29,8 @@ const char *gengetopt_args_info_purpose = "Tries to match the regular expression
 
 const char *gengetopt_args_info_usage = "Usage: check-regexp 'regular expression' 'string1' 'string2' ...";
 
+const char *gengetopt_args_info_versiontext = "";
+
 const char *gengetopt_args_info_description = "";
 
 const char *gengetopt_args_info_help[] = {
@@ -83,6 +85,9 @@ cmdline_parser_print_version (void)
   printf ("%s %s\n",
      (strlen(CMDLINE_PARSER_PACKAGE_NAME) ? CMDLINE_PARSER_PACKAGE_NAME : CMDLINE_PARSER_PACKAGE),
      CMDLINE_PARSER_VERSION);
+
+  if (strlen(gengetopt_args_info_versiontext) > 0)
+    printf("\n%s\n", gengetopt_args_info_versiontext);
 }
 
 static void print_help_common(void) {
@@ -299,7 +304,7 @@ cmdline_parser_internal (
 {
   int c;	/* Character of the parsed option.  */
 
-  int error = 0;
+  int error_occurred = 0;
   struct gengetopt_args_info local_args_info;
   
   int override;
@@ -367,7 +372,7 @@ cmdline_parser_internal (
 
   cmdline_parser_release (&local_args_info);
 
-  if ( error )
+  if ( error_occurred )
     return (EXIT_FAILURE);
 
   if (optind < argc)

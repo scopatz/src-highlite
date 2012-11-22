@@ -25,70 +25,72 @@
 
 #include "cmdline.h"
 
-const char *gengetopt_args_info_purpose = "Highlight the syntax of a source file (e.g. Java) into a specific format (e.g. \nHTML)";
+const char *gengetopt_args_info_purpose = "Highlight the syntax of a source file (e.g. Java) into a specific format (e.g.\nHTML)";
 
 const char *gengetopt_args_info_usage = "Usage: " CMDLINE_PARSER_PACKAGE " [OPTIONS]... < input_file > output_file\n       source-highlight [OPTIONS]... -i input_file -o output_file\n       source-highlight [OPTIONS]... [FILES]...";
+
+const char *gengetopt_args_info_versiontext = "";
 
 const char *gengetopt_args_info_description = "";
 
 const char *gengetopt_args_info_detailed_help[] = {
   "  -h, --help                    Print help and exit",
-  "      --detailed-help           Print help, including all details and hidden \n                                  options, and exit",
+  "      --detailed-help           Print help, including all details and hidden\n                                  options, and exit",
   "  -V, --version                 Print version and exit",
   "  -i, --input=filename          input file. default std input",
-  "  -o, --output=filename         output file. default std output (when the third \n                                  invocation form is used). If STDOUT is \n                                  specified, the output is directed to standard \n                                  output",
-  "\nyou can simply specify some files at the command line and also use regular \nexpressions (for instance *.java).  In this case the name for the output files \nwill be formed using the name of the source file with a .<ext> appended, where \n<ext> is the extension chosen according to the output format specified (for \ninstance .html).\n",
-  "  -s, --src-lang=STRING         source language (use --lang-list to get the \n                                  complete list).  If not specified, the source \n                                  language will be guessed from the file \n                                  extension.",
-  "      --lang-list               list all the supported language and associated \n                                  language definition file",
-  "      --outlang-list            list all the supported output language and \n                                  associated language definition file",
-  "  -f, --out-format=STRING       output format (use --outlang-list to get the \n                                  complete list)  (default=`html')",
-  "  -d, --doc                     create an output file that can be used as a \n                                  stand alone document (e.g., not to be \n                                  included in another one)",
-  "      --no-doc                  cancel the --doc option even if it is implied \n                                  (e.g., when css is given)",
-  "  -c, --css=filename            the external style sheet filename.  Implies \n                                  --doc",
-  "  -T, --title=STRING            give a title to the output document.  Implies \n                                  --doc",
+  "  -o, --output=filename         output file. default std output (when the third\n                                  invocation form is used). If STDOUT is\n                                  specified, the output is directed to standard\n                                  output",
+  "\nyou can simply specify some files at the command line and also use regular\nexpressions (for instance *.java).  In this case the name for the output files\nwill be formed using the name of the source file with a .<ext> appended, where\n<ext> is the extension chosen according to the output format specified (for\ninstance .html).\n",
+  "  -s, --src-lang=STRING         source language (use --lang-list to get the\n                                  complete list).  If not specified, the source\n                                  language will be guessed from the file\n                                  extension.",
+  "      --lang-list               list all the supported language and associated\n                                  language definition file",
+  "      --outlang-list            list all the supported output language and\n                                  associated language definition file",
+  "  -f, --out-format=STRING       output format (use --outlang-list to get the\n                                  complete list)  (default=`html')",
+  "  -d, --doc                     create an output file that can be used as a\n                                  stand alone document (e.g., not to be\n                                  included in another one)",
+  "      --no-doc                  cancel the --doc option even if it is implied\n                                  (e.g., when css is given)",
+  "  -c, --css=filename            the external style sheet filename.  Implies\n                                  --doc",
+  "  -T, --title=STRING            give a title to the output document.  Implies\n                                  --doc",
   "  -t, --tab=INT                 specify tab length.  (default=`8')",
   "  -H, --header=filename         file to insert as header",
   "  -F, --footer=filename         file to insert as footer",
-  "      --style-file=filename     specify the file containing format options  \n                                  (default=`default.style')",
-  "      --style-css-file=filename specify the file containing format options (in \n                                  css syntax)",
-  "      --style-defaults=filename specify the file containing defaults for format \n                                  options  (default=`style.defaults')",
+  "      --style-file=filename     specify the file containing format options\n                                  (default=`default.style')",
+  "      --style-css-file=filename specify the file containing format options (in\n                                  css syntax)",
+  "      --style-defaults=filename specify the file containing defaults for format\n                                  options  (default=`style.defaults')",
   "      --outlang-def=filename    output language definition file",
-  "      --outlang-map=filename    output language map file  \n                                  (default=`outlang.map')",
-  "      --data-dir=path           directory where language definition files and \n                                  language maps are searched for.  If not \n                                  specified these files are searched for in the \n                                  current directory and in the data dir \n                                  installation directory",
+  "      --outlang-map=filename    output language map file\n                                  (default=`outlang.map')",
+  "      --data-dir=path           directory where language definition files and\n                                  language maps are searched for.  If not\n                                  specified these files are searched for in the\n                                  current directory and in the data dir\n                                  installation directory",
   "      --output-dir=path         output directory",
   "      --lang-def=filename       language definition file",
   "      --lang-map=filename       language map file  (default=`lang.map')",
-  "      --show-lang-elements=filename\n                                prints the language elements that are defined \n                                  in the language definition file",
-  "      --infer-lang              force to infer source script language \n                                  (overriding given language specification)",
+  "      --show-lang-elements=filename\n                                prints the language elements that are defined\n                                  in the language definition file",
+  "      --infer-lang              force to infer source script language\n                                  (overriding given language specification)",
   "\nLines:",
-  "  -n, --line-number[=padding]   number all output lines, using the specified \n                                  padding character  (default=`0')",
-  "      --line-number-ref[=prefix]\n                                number all output lines and generate an anchor, \n                                  made of the specified prefix + the line \n                                  number  (default=`line')",
+  "  -n, --line-number[=padding]   number all output lines, using the specified\n                                  padding character  (default=`0')",
+  "      --line-number-ref[=prefix]\n                                number all output lines and generate an anchor,\n                                  made of the specified prefix + the line\n                                  number  (default=`line')",
   "\nFiltering output:",
   "\n Mode: linerange\n  specifying line ranges",
-  "      --line-range=STRING       generate only the lines in the specified \n                                  range(s)",
+  "      --line-range=STRING       generate only the lines in the specified\n                                  range(s)",
   "  each range can be of the shape: \n  	single line (e.g., --line-range=50)\n  	full range (e.g., --line-range=2-10)\n  	partial range (e.g., --line-range=-30, first 30 lines, \n  	--line-range=40- from line 40 to the end\n",
-  "      --range-separator=STRING  the optional separator to be printed among \n                                  ranges (e.g., \"...\")",
-  "      --range-context=INT       number of (context) lines generated even if not \n                                  in range",
+  "      --range-separator=STRING  the optional separator to be printed among\n                                  ranges (e.g., \"...\")",
+  "      --range-context=INT       number of (context) lines generated even if not\n                                  in range",
   "  The optional --range-context specifies the number of lines that are not in\n  	range that will be printed anyway (before and after the lines in range);\n  	These lines will be formatted according to the \"context\" style.\n",
   "\n Mode: regexrange\n  specifying regular expression delimited ranges",
-  "      --regex-range=STRING      generate only the lines within the specified \n                                  regular expressions",
-  "  when a line containing the specified regular expression is found, then\n  the lines after this one are actually generated, until another line, \n  containing the same regular expression is found (this last line is not \n  generated).\n  More than one regular expression can be specified.",
+  "      --regex-range=STRING      generate only the lines within the specified\n                                  regular expressions",
+  "  when a line containing the specified regular expression is found, then\n  the lines after this one are actually generated, until another line, \n  containing the same regular expression is found (this last line is not\n  generated).\n  More than one regular expression can be specified.",
   "\nreference generation:",
-  "      --gen-references=STRING   generate references  (possible \n                                  values=\"inline\", \"postline\", \"postdoc\" \n                                  default=`inline')",
-  "      --ctags-file=filename     specify the file generated by ctags that will \n                                  be used to generate references  \n                                  (default=`tags')",
-  "      --ctags=cmd               how to run the ctags command.  If this option \n                                  is not specified, ctags will be executed with \n                                  the default value.  If it is specified with \n                                  an empty string, ctags will not be executed \n                                  at all  (default=`ctags --excmd=n \n                                  --tag-relative=yes')",
+  "      --gen-references=STRING   generate references  (possible\n                                  values=\"inline\", \"postline\", \"postdoc\"\n                                  default=`inline')",
+  "      --ctags-file=filename     specify the file generated by ctags that will\n                                  be used to generate references\n                                  (default=`tags')",
+  "      --ctags=cmd               how to run the ctags command.  If this option\n                                  is not specified, ctags will be executed with\n                                  the default value.  If it is specified with\n                                  an empty string, ctags will not be executed\n                                  at all  (default=`ctags --excmd=n\n                                  --tag-relative=yes')",
   "\ntesting:",
   "  -v, --verbose                 verbose mode on",
   "  -q, --quiet                   print no progress information",
   "      --binary-output           write output files in binary mode",
-  "  This is useful for testing purposes, since you may want to make\n  sure that output files are always generated with a final newline character \n  only",
+  "  This is useful for testing purposes, since you may want to make\n  sure that output files are always generated with a final newline character\n  only",
   "      --statistics              print some statistics (i.e., elapsed time)",
-  "      --gen-version             put source-highlight version in the generated \n                                  file  (default=on)",
-  "      --check-lang=filename     only check the correctness of a language \n                                  definition file",
-  "      --check-outlang=filename  only check the correctness of an output \n                                  language definition file",
-  "      --failsafe                if no language definition is found for the \n                                  input, it is simply copied to the output",
-  "  -g, --debug-langdef[=type]    debug a language definition.  In dump mode just \n                                  dumps all the steps; in interactive, at each \n                                  step, waits for some input (press ENTER to \n                                  step)  (possible values=\"interactive\", \n                                  \"dump\" default=`dump')",
-  "      --show-regex=filename     show the regular expression automaton \n                                  corresponding to a language definition file",
+  "      --gen-version             put source-highlight version in the generated\n                                  file  (default=on)",
+  "      --check-lang=filename     only check the correctness of a language\n                                  definition file",
+  "      --check-outlang=filename  only check the correctness of an output\n                                  language definition file",
+  "      --failsafe                if no language definition is found for the\n                                  input, it is simply copied to the output",
+  "  -g, --debug-langdef[=type]    debug a language definition.  In dump mode just\n                                  dumps all the steps; in interactive, at each\n                                  step, waits for some input (press ENTER to\n                                  step)  (possible values=\"interactive\",\n                                  \"dump\" default=`dump')",
+  "      --show-regex=filename     show the regular expression automaton\n                                  corresponding to a language definition file",
     0
 };
 
@@ -366,6 +368,9 @@ cmdline_parser_print_version (void)
   printf ("%s %s\n",
      (strlen(CMDLINE_PARSER_PACKAGE_NAME) ? CMDLINE_PARSER_PACKAGE_NAME : CMDLINE_PARSER_PACKAGE),
      CMDLINE_PARSER_VERSION);
+
+  if (strlen(gengetopt_args_info_versiontext) > 0)
+    printf("\n%s\n", gengetopt_args_info_versiontext);
 }
 
 static void print_help_common(void) {
@@ -861,7 +866,7 @@ check_multiple_option_occurrences(const char *prog_name, unsigned int option_giv
 int
 check_multiple_option_occurrences(const char *prog_name, unsigned int option_given, unsigned int min, unsigned int max, const char *option_desc)
 {
-  int error = 0;
+  int error_occurred = 0;
 
   if (option_given && (min > 0 || max > 0))
     {
@@ -874,7 +879,7 @@ check_multiple_option_occurrences(const char *prog_name, unsigned int option_giv
                 {
                   fprintf (stderr, "%s: %s option occurrences must be %d\n",
                     prog_name, option_desc, min);
-                  error = 1;
+                  error_occurred = 1;
                 }
             }
           else if (option_given < (unsigned int) min
@@ -883,7 +888,7 @@ check_multiple_option_occurrences(const char *prog_name, unsigned int option_giv
               /* range occurrences */
               fprintf (stderr, "%s: %s option occurrences must be between %d and %d\n",
                 prog_name, option_desc, min, max);
-              error = 1;
+              error_occurred = 1;
             }
         }
       else if (min > 0)
@@ -893,7 +898,7 @@ check_multiple_option_occurrences(const char *prog_name, unsigned int option_giv
             {
               fprintf (stderr, "%s: %s option occurrences must be at least %d\n",
                 prog_name, option_desc, min);
-              error = 1;
+              error_occurred = 1;
             }
         }
       else if (max > 0)
@@ -903,12 +908,12 @@ check_multiple_option_occurrences(const char *prog_name, unsigned int option_giv
             {
               fprintf (stderr, "%s: %s option occurrences must be at most %d\n",
                 prog_name, option_desc, max);
-              error = 1;
+              error_occurred = 1;
             }
         }
     }
     
-  return error;
+  return error_occurred;
 }
 int
 cmdline_parser (int argc, char **argv, struct gengetopt_args_info *args_info)
@@ -975,30 +980,30 @@ cmdline_parser_required (struct gengetopt_args_info *args_info, const char *prog
 int
 cmdline_parser_required2 (struct gengetopt_args_info *args_info, const char *prog_name, const char *additional_error)
 {
-  int error = 0;
+  int error_occurred = 0;
   FIX_UNUSED (additional_error);
 
   /* checks for required options */
   if (args_info->linerange_mode_counter && check_multiple_option_occurrences(prog_name, args_info->line_range_given, args_info->line_range_min, args_info->line_range_max, "'--line-range'"))
-     error = 1;
+     error_occurred = 1;
   
   if (args_info->regexrange_mode_counter && check_multiple_option_occurrences(prog_name, args_info->regex_range_given, args_info->regex_range_min, args_info->regex_range_max, "'--regex-range'"))
-     error = 1;
+     error_occurred = 1;
   
   
   /* checks for dependences among options */
   if (args_info->range_separator_given && ! args_info->line_range_given)
     {
       fprintf (stderr, "%s: '--range-separator' option depends on option 'line-range'%s\n", prog_name, (additional_error ? additional_error : ""));
-      error = 1;
+      error_occurred = 1;
     }
   if (args_info->range_context_given && ! args_info->line_range_given)
     {
       fprintf (stderr, "%s: '--range-context' option depends on option 'line-range'%s\n", prog_name, (additional_error ? additional_error : ""));
-      error = 1;
+      error_occurred = 1;
     }
 
-  return error;
+  return error_occurred;
 }
 
 
@@ -1292,7 +1297,7 @@ cmdline_parser_internal (
 
   struct generic_list * line_range_list = NULL;
   struct generic_list * regex_range_list = NULL;
-  int error = 0;
+  int error_occurred = 0;
   struct gengetopt_args_info local_args_info;
   
   int override;
@@ -2025,17 +2030,17 @@ cmdline_parser_internal (
     const char *linerange_desc[] = {"--line-range", "--range-separator", "--range-context",  0};
     int regexrange_given[] = {args_info->regex_range_given,  -1};
     const char *regexrange_desc[] = {"--regex-range",  0};
-    error += check_modes(linerange_given, linerange_desc, regexrange_given, regexrange_desc);
+    error_occurred += check_modes(linerange_given, linerange_desc, regexrange_given, regexrange_desc);
   }
   
   if (check_required)
     {
-      error += cmdline_parser_required2 (args_info, argv[0], additional_error);
+      error_occurred += cmdline_parser_required2 (args_info, argv[0], additional_error);
     }
 
   cmdline_parser_release (&local_args_info);
 
-  if ( error )
+  if ( error_occurred )
     return (EXIT_FAILURE);
 
   if (optind < argc)
