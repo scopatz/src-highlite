@@ -31,7 +31,7 @@ namespace srchilite {
 
 /**
  * Translates specific character sequences into corresponding ones;
- * it can also use regualr expression for the characters to be translated.
+ * it can also use regular expression for the characters to be translated.
  * This is useful for translating some characters in the input which
  * are special characters in the output formats, e.g., & in LaTeX, or
  * < in HTML.
