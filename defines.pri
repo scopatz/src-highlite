@@ -1,5 +1,5 @@
 MAJOR_VERSION = 3
-VERSION = $${MAJOR_VERSION}.1.7
+VERSION = $${MAJOR_VERSION}.1.8
 
 # better to avoid both builds (especially on windows)
 CONFIG-=debug_and_release
