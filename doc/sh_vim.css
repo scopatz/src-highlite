@@ -11,6 +11,12 @@ body {
   font-style: normal;
 }
 
+.variable {
+  color: #A3007A
+  font-weight: normal;
+  font-style: normal;
+}
+
 .type {
   color: #00ff00;
   font-weight: normal;
