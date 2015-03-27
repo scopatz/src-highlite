@@ -94,14 +94,14 @@ bool Settings::checkForTestFile() {
     string file = dataDir + "/" + testFileName;
     ifstream i(file.c_str());
 
-    return (i != 0);
+    return (!i.fail());
 }
 
 bool Settings::checkForConfFile() {
     string file = confDir + confFileName;
     ifstream i(file.c_str());
 
-    return (i != 0);
+    return (!i.fail());
 }
 
 bool Settings::readDataDir() {
@@ -109,7 +109,7 @@ bool Settings::readDataDir() {
     ifstream i(file.c_str());
 
     string line;
-    if (i != 0) {
+    if (!i.fail()) {
         while (read_line(&i, line)) {
             if (line.size()) {
                 boost::cmatch what;

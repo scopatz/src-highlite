@@ -160,7 +160,9 @@ AC_HEADER_STDC
 AC_CHECK_HEADERS(unistd.h)
 
 # For gnulib.
+AC_LANG_PUSH([C])
 gl_INIT
+AC_LANG_POP([C])
 
 dnl needed by readtags.c
 AC_TYPE_OFF_T
