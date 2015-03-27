@@ -85,7 +85,8 @@ manifest.lang asm.lang todo.lang applescript.lang \
 vbscript.lang awk.lang bat.lang clipper.lang cobol.lang d.lang \
 errors.lang erlang.lang proto.lang vala.lang lisp.lang islisp.lang \
 scheme.lang po.lang opa.lang javalog.lang upc.lang tml.lang \
-lilypond.lang coffeescript.lang
+lilypond.lang coffeescript.lang \
+r.lang s.lang
 
 LANGFILES_NOTTOCHECK= \
 tml_formatting_all.lang  tml_macrolinks.lang      tml_macrosdelayed2.lang \
@@ -118,7 +119,7 @@ odf.outlang \
 mediawiki.outlang
 
 
-STYLEFILES = texinfo.style esc.style esc256.style lilypond.style
+STYLEFILES = texinfo.style esc.style esc256.style lilypond.style r.style
 
 source_highlightdata_DATA = \
 $(LANGFILES) $(LANGFILES_NOTTOCHECK) $(OUTLANGFILES) \
