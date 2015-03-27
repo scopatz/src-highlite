@@ -3213,9 +3213,7 @@ you will get, on the standard output, the following output@footnote{Up
 to version 2.9 the output of @code{--show-regex} was a little bit more
 complex to read; hopefully this output is better.}:
 
-@smallexample
 @include comment-show.show.texinfo
-@end smallexample
 
 @noindent
 This shows the states and highlight rules of the regular expression
@@ -3262,9 +3260,7 @@ Let us now consider a variation of the previous example:
 
 and let us see the output of @code{--show-regex}
 
-@smallexample
 @include comment-show2.show.texinfo
-@end smallexample
 
 Since in the rule @code{regexp} we used the @code{`} regular expression
 (see @ref{Ways of specifying regular expressions}), then, the marked
