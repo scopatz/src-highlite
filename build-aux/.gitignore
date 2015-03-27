@@ -7,3 +7,5 @@ mdate-sh
 missing
 texinfo.tex
 ylwrap
+compile
+test-driver
