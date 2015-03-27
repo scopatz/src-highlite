@@ -171,7 +171,7 @@ WRONGFILES = wrong_exp.lang wrong_var.lang wrong_trans.outlang wrong_syntax_simp
 WRONGFILESOUT = wrong_exp.err wrong_var.err wrong_trans.err missing_langmap.err missing_extension.err wrong_syntax_simple.err wrong_syntax.err wrong_syntax_include.err wrong_namedgroups.err wrong_namedgroups_subexps.err wrong_namedgroups_subexps2.err wrong_backref.err wrong_backref2.err wrong_dyn_backref.err wrong_dyn_backref2.err wrong_include.err wrong_outlang_include.err
 WRONGSTYLES = wrong_dircolor.style wrong_already_defined.style wrong_already_defined_css.css
 WRONGSTYLESOUT = wrong_dircolor.err wrong_already_defined.err wrong_already_defined_css.err
-WRONGCMDLINEPARAMS = wrong_line_range.err wrong_regex_range.err \
+WRONGCMDLINEPARAMS = wrong_line_range.err \
  wrong_syntax_mode.err
 # missing_langmap2.err
 
@@ -339,7 +339,9 @@ REGEXRANGE4EXE=$(JAVA2HTML) --regex-range="/\\* [[:alpha:]]+ \\*/" --line-number
 
 WRONGLINERANGEEXE=$(PROGEXE) --line-range="a-b"  --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null
 
-WRONGREGEXRANGEEXE=$(PROGEXE) --regex-range="ab","foobar","{wrong"  --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null
+# this is not wrong anymore
+# https://savannah.gnu.org/bugs/index.php?41786
+#WRONGREGEXRANGEEXE=$(PROGEXE) --regex-range="ab","foobar","{wrong"  --data-dir=$(top_srcdir)/src < $(srcdir)/test.java > /dev/null
 
 
 WRONGSYNTAXMODEEXE=$(PROGEXE) --data-dir=$(top_srcdir)/src -o /dev/null $(srcdir)/test.java
@@ -1060,11 +1062,13 @@ check_wrong_lineranges:
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/wrong_line_range.err wrong_line_range.err_out
 
+# this is not wrong anymore
+# https://savannah.gnu.org/bugs/index.php?41786
 check_wrong_regexranges:
-	rm -f *.err_out
-	$(WRONGREGEXRANGEEXE) 2> wrong_regex_range.err_out || true
-	@echo expect no output from diff
-	$(DIFF) $(srcdir)/wrong_regex_range.err wrong_regex_range.err_out
+#	rm -f *.err_out
+#	$(WRONGREGEXRANGEEXE) 2> wrong_regex_range.err_out || true
+#	@echo expect no output from diff
+#	$(DIFF) $(srcdir)/wrong_regex_range.err wrong_regex_range.err_out
 
 check_wrong_syntaxmode:
 	rm -f *.err_out
