@@ -116,7 +116,8 @@ texinfo.outlang \
 javadoc.outlang \
 docbook.outlang \
 odf.outlang \
-mediawiki.outlang
+mediawiki.outlang \
+sexp.outlang
 
 
 STYLEFILES = texinfo.style esc.style esc256.style lilypond.style r.style

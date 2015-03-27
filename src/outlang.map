@@ -13,3 +13,4 @@ javadoc = javadoc.outlang
 docbook = docbook.outlang
 odf = odf.outlang
 mediawiki = mediawiki.outlang
+sexp = sexp.outlang
