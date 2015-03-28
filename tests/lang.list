@@ -49,6 +49,7 @@ fortran = fortran.lang
 free-fortran = fortran.lang
 glsl = glsl.lang
 go = go.lang
+groovy = groovy.lang
 h = cpp.lang
 haskell = haskell.lang
 haxe = haxe.lang

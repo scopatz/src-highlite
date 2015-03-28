@@ -255,6 +255,7 @@ test.makefile test.makefile.html \
 test.css test.css.html \
 test.ps test.ps.html \
 test.go test.go.html \
+test.groovy test.groovy.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
@@ -425,6 +426,7 @@ check_asm \
 check_css \
 check_ps \
 check_go \
+check_groovy \
 check_docbook \
 check_namedgroups \
 check_slang \
@@ -973,6 +975,11 @@ check_go:
 	$(PROGNAME) -i $(srcdir)/test.go -o test.go.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.go.html test.go.out.html
+
+check_groovy:
+	$(PROGNAME) -i $(srcdir)/test.groovy -o test.groovy.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.groovy.html test.groovy.out.html
 
 check_lang:
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o log.lang.out.html

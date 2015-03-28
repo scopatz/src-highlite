@@ -86,7 +86,7 @@ vbscript.lang awk.lang bat.lang clipper.lang cobol.lang d.lang \
 errors.lang erlang.lang proto.lang vala.lang lisp.lang islisp.lang \
 scheme.lang po.lang opa.lang javalog.lang upc.lang tml.lang \
 lilypond.lang coffeescript.lang go.lang \
-r.lang s.lang zsh.lang
+r.lang s.lang zsh.lang groovy.lang
 
 LANGFILES_NOTTOCHECK= \
 tml_formatting_all.lang  tml_macrolinks.lang      tml_macrosdelayed2.lang \

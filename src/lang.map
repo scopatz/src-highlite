@@ -162,3 +162,4 @@ upc = upc.lang
 tml = tml.lang
 lilypond = lilypond.lang
 ly = lilypond.lang
+groovy = groovy.lang

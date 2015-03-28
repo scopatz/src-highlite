@@ -1,0 +1,46 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#0000FF">class</font></b> <font color="#008080">Movie</font> <font color="#FF0000">{</font>
+	<b><font color="#0000FF">def</font></b> name<font color="#990000">,</font> price
+	<b><font color="#0000FF">boolean</font></b> watched
+	<font color="#008080">String</font> <b><font color="#000000">toString</font></b><font color="#990000">()</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> name <font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#0000FF">def</font></b> movies <font color="#990000">=</font> <font color="#990000">[</font><b><font color="#0000FF">new</font></b> <b><font color="#000000">Movie</font></b><font color="#990000">(</font>name<font color="#990000">:</font><font color="#FF0000">'Orph'</font><font color="#990000">,</font> watched<font color="#990000">:</font><b><font color="#0000FF">true</font></b><font color="#990000">,</font> price<font color="#990000">:</font><font color="#993399">20</font><font color="#990000">),</font>
+	<b><font color="#0000FF">new</font></b> <b><font color="#000000">Movie</font></b><font color="#990000">(</font>name<font color="#990000">:</font><font color="#FF0000">'Iron Man'</font><font color="#990000">,</font> watched<font color="#990000">:</font><b><font color="#0000FF">true</font></b><font color="#990000">,</font> price<font color="#990000">:</font><font color="#993399">20</font><font color="#990000">),</font>
+	<b><font color="#0000FF">new</font></b> <b><font color="#000000">Movie</font></b><font color="#990000">(</font>name<font color="#990000">:</font><font color="#FF0000">'Whale Rider'</font><font color="#990000">,</font> watched<font color="#990000">:</font><b><font color="#0000FF">false</font></b><font color="#990000">,</font> price<font color="#990000">:</font><font color="#993399">15</font><font color="#990000">),</font>
+	<b><font color="#0000FF">new</font></b> <b><font color="#000000">Movie</font></b><font color="#990000">(</font>name<font color="#990000">:</font><font color="#FF0000">'Das Boot'</font><font color="#990000">,</font> watched<font color="#990000">:</font><b><font color="#0000FF">false</font></b><font color="#990000">,</font> price<font color="#990000">:</font><font color="#993399">30</font><font color="#990000">)]</font>
+
+<b><font color="#0000FF">def</font></b> <b><font color="#000000">watchedMovies</font></b><font color="#990000">(</font>movies<font color="#990000">)</font> <font color="#FF0000">{</font>
+	movies<font color="#990000">.</font>findAll <font color="#FF0000">{</font> e <font color="#990000">-&gt;</font> e<font color="#990000">.</font><b><font color="#000000">isManager</font></b><font color="#990000">()</font> <font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#0000FF">assert</font></b> movies<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">..</font><font color="#993399">1</font><font color="#990000">]</font> <font color="#990000">==</font> <b><font color="#000000">watchedMovies</font></b><font color="#990000">(</font>movies<font color="#990000">)</font> <i><font color="#9A1900">// [Orph, Iron Man]</font></i>
+
+<b><font color="#0000FF">def</font></b> <b><font color="#000000">highPaid</font></b><font color="#990000">(</font>movies<font color="#990000">)</font> <font color="#FF0000">{</font>
+	threshold <font color="#990000">=</font> <font color="#993399">15</font>
+	movies<font color="#990000">.</font>findAll <font color="#FF0000">{</font> e <font color="#990000">-&gt;</font> e<font color="#990000">.</font>price <font color="#990000">&gt;</font> threshold <font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+
+<b><font color="#0000FF">assert</font></b> movies<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">..</font><font color="#993399">2</font><font color="#990000">]</font> <font color="#990000">==</font> <b><font color="#000000">highPaid</font></b><font color="#990000">(</font>movies<font color="#990000">)</font> <i><font color="#9A1900">// [Orph, Iron Man, Das Boot]</font></i>
+
+<b><font color="#0000FF">def</font></b> <b><font color="#000000">paidMore</font></b><font color="#990000">(</font>amount<font color="#990000">)</font> <font color="#FF0000">{</font>
+	<font color="#FF0000">{</font> e <font color="#990000">-&gt;</font> e<font color="#990000">.</font>price <font color="#990000">&gt;</font> amount<font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+<b><font color="#0000FF">def</font></b> highPaid <font color="#990000">=</font> <b><font color="#000000">paidMore</font></b><font color="#990000">(</font><font color="#993399">15</font><font color="#990000">)</font>
+
+<b><font color="#0000FF">assert</font></b> <b><font color="#000000">highPaid</font></b><font color="#990000">(</font>movies<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">])</font> <i><font color="#9A1900">// true</font></i>
+<b><font color="#0000FF">assert</font></b> movies<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">..</font><font color="#993399">2</font><font color="#990000">]</font> <font color="#990000">==</font> movies<font color="#990000">.</font><b><font color="#000000">findAll</font></b><font color="#990000">(</font>highPaid<font color="#990000">)</font>
+
+<b><font color="#0000FF">def</font></b> filename <font color="#990000">=</font> <font color="#FF0000">'movies.txt'</font>
+<b><font color="#0000FF">new</font></b> <b><font color="#000000">File</font></b><font color="#990000">(</font>filename<font color="#990000">).</font>withReader<font color="#FF0000">{</font> reader <font color="#990000">-&gt;</font> <b><font color="#000000">doSomethingWith</font></b><font color="#990000">(</font>reader<font color="#990000">)</font> <font color="#FF0000">}</font>
+
+<b><font color="#0000FF">def</font></b> readersText
+<b><font color="#0000FF">def</font></b> <b><font color="#000000">doSomethingWith</font></b><font color="#990000">(</font>reader<font color="#990000">)</font> <font color="#FF0000">{</font> readersText <font color="#990000">=</font> reader<font color="#990000">.</font>text <font color="#FF0000">}</font>
+
+<b><font color="#0000FF">assert</font></b> <b><font color="#0000FF">new</font></b> <b><font color="#000000">File</font></b><font color="#990000">(</font>filename<font color="#990000">).</font>text <font color="#990000">==</font> readersText
+
+
+</tt></pre>
