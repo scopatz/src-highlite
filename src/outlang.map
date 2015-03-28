@@ -1,6 +1,7 @@
 html = html.outlang
 htmltable = htmltable.outlang
 html-css = htmlcss.outlang
+html5 = html5.outlang
 xhtml = xhtml.outlang
 xhtmltable = xhtmltable.outlang
 xhtml-css = xhtmlcss.outlang

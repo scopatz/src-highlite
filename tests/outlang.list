@@ -3,6 +3,7 @@ esc = esc.outlang
 esc256 = esc256.outlang
 html = html.outlang
 html-css = htmlcss.outlang
+html5 = html5.outlang
 htmltable = htmltable.outlang
 javadoc = javadoc.outlang
 latex = latex.outlang

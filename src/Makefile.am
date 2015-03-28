@@ -105,6 +105,8 @@ htmlcss.outlang \
 htmltable.outlang \
 htmltablelinenum.outlang \
 html.outlang \
+html5.outlang \
+html5_common.outlang \
 latex.outlang \
 latexcolor.outlang \
 xhtml_common.outlang \
