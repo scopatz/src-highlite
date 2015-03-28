@@ -9,6 +9,7 @@ coffee = coffeescript.lang
 coffeescript = coffeescript.lang
 cs = csharp.lang
 csharp = csharp.lang
+go = go.lang
 h = cpp.lang
 hh = cpp.lang
 H = cpp.lang

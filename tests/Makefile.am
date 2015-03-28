@@ -254,6 +254,7 @@ test.bib test.bib.html \
 test.makefile test.makefile.html \
 test.css test.css.html \
 test.ps test.ps.html \
+test.go test.go.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
@@ -423,6 +424,7 @@ check_makefile \
 check_asm \
 check_css \
 check_ps \
+check_go \
 check_docbook \
 check_namedgroups \
 check_slang \
@@ -966,6 +968,11 @@ check_ps:
 	$(PROGNAME) -i $(srcdir)/test.ps -o test.ps.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.ps.html test.ps.out.html
+
+check_go:
+	$(PROGNAME) -i $(srcdir)/test.go -o test.go.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.go.html test.go.out.html
 
 check_lang:
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o log.lang.out.html
