@@ -1,4 +1,6 @@
 C = cpp.lang
+F77 = fortran.lang
+F90 = fortran.lang
 H = cpp.lang
 ac = m4.lang
 ada = ada.lang
@@ -43,6 +45,8 @@ erl = erlang.lang
 erlang = erlang.lang
 errors = errors.lang
 f = fortran.lang
+f77 = fortran.lang
+f90 = fortran.lang
 fixed-fortran = fixed-fortran.lang
 flex = flex.lang
 fortran = fortran.lang
