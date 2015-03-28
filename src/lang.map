@@ -87,6 +87,7 @@ csh = sh.lang
 ksh = sh.lang
 tcsh = sh.lang
 shell = sh.lang
+zsh = zsh.lang
 tcl = tcl.lang
 tk = tcl.lang
 txt = nohilite.lang

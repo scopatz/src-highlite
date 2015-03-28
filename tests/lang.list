@@ -160,3 +160,4 @@ xorg = xorg.lang
 y = bison.lang
 yacc = bison.lang
 yy = bison.lang
+zsh = zsh.lang
