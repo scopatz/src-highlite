@@ -256,6 +256,7 @@ test.css test.css.html \
 test.ps test.ps.html \
 test.go test.go.html \
 test.groovy test.groovy.html \
+test.json test.json.html \
 $(WRONGFILES) \
 $(WRONGFILESOUT) \
 $(WRONGSTYLES) $(WRONGSTYLESOUT) \
@@ -427,6 +428,7 @@ check_css \
 check_ps \
 check_go \
 check_groovy \
+check_json \
 check_docbook \
 check_namedgroups \
 check_slang \
@@ -980,6 +982,11 @@ check_groovy:
 	$(PROGNAME) -i $(srcdir)/test.groovy -o test.groovy.out.html
 	@echo expect no output from diff
 	$(DIFF) $(srcdir)/test.groovy.html test.groovy.out.html
+
+check_json:
+	$(PROGNAME) --style-file=json.style -i $(srcdir)/test.json -o test.json.out.html
+	@echo expect no output from diff
+	$(DIFF) $(srcdir)/test.json.html test.json.out.html
 
 check_lang:
 	$(LANG2HTML) -i $(top_srcdir)/src/log.lang -o log.lang.out.html

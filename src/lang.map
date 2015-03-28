@@ -163,3 +163,5 @@ tml = tml.lang
 lilypond = lilypond.lang
 ly = lilypond.lang
 groovy = groovy.lang
+json = json.lang
+

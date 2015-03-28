@@ -67,6 +67,7 @@ java = java.lang
 javalog = javalog.lang
 javascript = javascript.lang
 js = javascript.lang
+json = json.lang
 kcfg = xml.lang
 kdevelop = xml.lang
 kidl = xml.lang
