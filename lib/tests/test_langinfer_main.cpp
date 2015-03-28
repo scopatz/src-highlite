@@ -40,11 +40,15 @@ int main() {
 
     // now test emacs specifications
     testInfer("# -*- perl -*-", "perl");
-    testInfer("# -*- perl, as specified in Emacs -*-", "perl");
-    testInfer("# -*- Perl, as specified in Emacs -*-", "Perl");
-    testInfer("# -*- php3, as specified in Emacs -*-", "php3");
+    //testInfer("# -*- perl, as specified in Emacs -*-", "perl");
+    //testInfer("# -*- Perl, as specified in Emacs -*-", "Perl");
+    //testInfer("# -*- php3, as specified in Emacs -*-", "php3");
 
-    testInfer("#!/bin/sh\n# -*- tcl, as specified in Emacs -*-", "tcl");
+    // https://savannah.gnu.org/patch/?8175
+    testInfer("# -*- mode: perl -*-", "perl");
+
+    // Emacs has precedence
+    testInfer("#!/bin/sh\n# -*- tcl -*-", "tcl");
 
     // try with the env specification
     testInfer("#! /usr/bin/env python", "python");
