@@ -53,3 +53,12 @@ body {  background-color: white;  }
 /* for Oz */
 .atom { color: orange; }
 .meta { font-style: italic; }
+
+/* for feature/cucumber files */
+.cuketag { color: green; }
+.gherken { color: blue; }
+.given { color: red; }
+.when { color: cyan; }
+.then { color: yellow; }
+.and_but { color: pink; }
+.table { color: gray; }

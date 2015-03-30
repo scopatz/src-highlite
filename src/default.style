@@ -70,3 +70,12 @@ label teal b;
 // for errors
 error purple;
 warning darkgreen;
+
+// for feature (Cucumber) files
+cuketag green ;
+gherken blue ;
+given red ;
+when cyan ;
+then yellow ;
+and_but pink ;
+table gray ;

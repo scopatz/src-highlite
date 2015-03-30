@@ -1,0 +1,44 @@
+<!-- Generator: GNU source-highlight 
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#0000FF">Feature</font></b>: Accident Report Email notifications 
+  In order to keep track of what's going on
+  As the incident manager
+  I want to receive emails when a significant event occurs
+
+  <b><font color="#0000FF">Background</font></b>:
+<font color="#FF0000">    Given</font> I perform HTTP authentication as a <font color="#FF0000">"user"</font>
+<font color="#66FFFF">    When</font> I go to the homepage
+<font color="#FFCC00">    Then</font> I should see <font color="#FF0000">"WARNING! This site is restricted"</font>
+
+  <font color="#33CC00">@active</font>  <font color="#33CC00">@testing</font> <font color="#33CC00">@another</font>
+  <b><font color="#0000FF">Scenario</font></b>: Notification of a new Accident Report
+<font color="#FF0000">    Given</font> a clear email queue
+<font color="#CC33CC">    And</font> I am on the new_accident_report page
+<font color="#FFCC00">    Then</font> I should see <font color="#FF0000">"New Accident Report"</font>
+    <i><font color="#9A1900">#  When I build a "accident_report" instance from FactoryGirl</font></i>
+<font color="#CC33CC">    And</font> I create an accident report
+<font color="#808080">      | field                 | value             |</font>
+<font color="#808080">      | accident_date         | 2013-01-20        |</font>
+<font color="#808080">      | accident_time         | 10:00             |</font>
+<font color="#808080">      | accident_location     | Here and there    |</font>
+<font color="#808080">      | accident_description  | I came, I saw, I hit him |</font>
+<font color="#808080">      | drivers_name          | Bilbo Baggins     |</font>
+<font color="#808080">      | drivers_license_no    | N4445555          |</font>
+<font color="#CC33CC">    And</font> I press <font color="#FF0000">"Create Accident report"</font>
+<font color="#FFCC00">    Then</font> I should see <font color="#FF0000">"Accident report was successfully created"</font>
+<font color="#CC33CC">    But</font> I should not see <font color="#FF0000">"Error"</font>
+
+  <b><font color="#0000FF">Scenario</font></b> Outline: Send notification emails
+<font color="#FF0000">    Given</font> a clear email queue
+<font color="#66FFFF">    When</font> I create an email template with <font color="#FF0000">&lt;message&gt;</font>
+<font color="#CC33CC">    And</font> I email <font color="#FF0000">&lt;addressee&gt;</font>
+<font color="#FFCC00">    Then</font> <font color="#FF0000">"manager@biz.com"</font> should receive an email
+<font color="#CC33CC">    And</font> they should see <font color="#FF0000">&lt;message&gt;</font> in the email
+
+    <b><font color="#0000FF">Examples</font></b>:
+<font color="#808080">      | addressee | message |</font>
+<font color="#808080">      | j@s.com | Finished  |</font>
+<font color="#808080">      | b@j.com | All done! |</font>
+</tt></pre>

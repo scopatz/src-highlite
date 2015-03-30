@@ -47,6 +47,7 @@ errors = errors.lang
 f = fortran.lang
 f77 = fortran.lang
 f90 = fortran.lang
+feature = feature.lang
 fixed-fortran = fixed-fortran.lang
 flex = flex.lang
 fortran = fortran.lang

@@ -33,3 +33,12 @@ difflines blue;
 selector purple;
 property blue;
 value darkgreen i;
+
+// for feature (Cucumber) files
+cuketag green ;
+gherken blue ;
+given red ;
+when cyan ;
+then yellow ;
+and_but pink ;
+table white ;
