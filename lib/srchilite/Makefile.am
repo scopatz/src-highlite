@@ -198,7 +198,7 @@ mytags: $(srcdir)/test_readtags_main.cpp
 
 CLEANFILES = doxygen.stamp
 
-DISTCLEANFILES = mytags
+DISTCLEANFILES = mytags doxygen_sqlite3.db
 
 MAINTAINERCLEANFILES = styleparser.cc styleparser.h stylescanner.cc \
 langdefparser.cc langdefparser.h langdefscanner.cc \
