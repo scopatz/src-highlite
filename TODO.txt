@@ -139,8 +139,6 @@ in latex.outlang
 
 texinfo generated files in the doc source folder
 
-doc/Makefile.am:32: warning: suffix '.texinfo' for Texinfo files is discouraged; use '.texi' instead
-
 BEFORE RELEASING
 
 remember to update the version and library version in
