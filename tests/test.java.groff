@@ -1,0 +1,63 @@
+
+.nf
+ \fC 1:\fP \fB/*\fP
+ \fC 2:\fP \fB  This is a classical Hello program\fP
+ \fC 3:\fP \fB  to test source-highlight with Java programs.\fP
+ \fC 4:\fP \fB  \fP
+ \fC 5:\fP \fB  to have an html translation type\fP
+ \fC 6:\fP 
+ \fC 7:\fP \fB        source-highlight -s java -f html input Hello.java output Hello.html\fP
+ \fC 8:\fP \fB        source-highlight -s java -f html < Hello.java > Hello.html\fP
+ \fC 9:\fP 
+ \fC10:\fP \fB  or type source-highlight help for the list of options\fP
+ \fC11:\fP 
+ \fC12:\fP \fB  written by\fP
+ \fC13:\fP \fB  Lorenzo Bettini\fP
+ \fC14:\fP \fB  \fP\fH\fChttp://www.lorenzobettini.it\fP\fP
+ \fC15:\fP \fB  \fP\fH\fChttp://www.gnu.org/software/src-highlite\fP\fP
+ \fC16:\fP \fB*/\fP
+ \fC17:\fP 
+ \fC18:\fP \fBpackage\fP hello;
+ \fC19:\fP 
+ \fC20:\fP \fBimport\fP java.io.* ;
+ \fC21:\fP 
+ \fC22:\fP \fB/**\fP
+ \fC23:\fP \fB * \fP\fB<p>\fP
+ \fC24:\fP \fB * A simple Hello World class, used to demonstrate some\fP
+ \fC25:\fP \fB * features of Java source highlighting.\fP
+ \fC26:\fP \fB * \fP\fB</p>\fP
+ \fC27:\fP \fB * \fP\fBTODO:\fP\fB nothing, just to show an highlighted \fP\fBTODO\fP\fB or \fP\fBFIXME\fP
+ \fC28:\fP \fB *\fP
+ \fC29:\fP \fB * \fP@author\fB Lorenzo Bettini\fP
+ \fC30:\fP \fB * \fP@version\fB 2.0\fP
+ \fC31:\fP \fB */\fP \fB/// class\fP
+ \fC32:\fP \fBpublic\fP \fBclass\fP Hello {
+ \fC33:\fP     int foo = 1998 ;
+ \fC34:\fP     int hex_foo = 0xCAFEBABE;
+ \fC35:\fP     boolean b = \fBfalse\fP;
+ \fC36:\fP     Integer i = \fBnull\fP ;
+ \fC37:\fP     char c = \fC'\fP\fC\'\fP\fC'\fP, d = \fC'n'\fP, e = \fC'\fP\fC\\\fP\fC'\fP ;
+ \fC38:\fP     String xml = \fC"<tag attr=\fP\fC\"\fP\fCvalue\fP\fC\"\fP\fC>&auml;</tag>"\fP, foo2 = \fC"\fP\fC\\\fP\fC"\fP ;
+ \fC39:\fP 
+ \fC40:\fP     \fB/* mymethod */\fP
+ \fC41:\fP     \fBpublic\fP void \fBmymethod\fP(int i) {
+ \fC42:\fP         \fB// just a foo method\fP
+ \fC43:\fP     }
+ \fC44:\fP     \fB/* mymethod */\fP
+ \fC45:\fP    
+ \fC46:\fP     \fB/* main */\fP
+ \fC47:\fP     \fBpublic\fP \fBstatic\fP void \fBmain\fP( String args[] ) {
+ \fC48:\fP         \fB// just some greetings ;-)  /*\fP
+ \fC49:\fP         System.out.\fBprintln\fP( \fC"Hello from java2html :-)"\fP ) ;
+ \fC50:\fP         System.out.\fBprintln\fP( \fC"\fP\fC\t\fP\fCby Lorenzo Bettini"\fP ) ;
+ \fC51:\fP         System.out.\fBprintln\fP( \fC"\fP\fC\t\fP\fChttp://www.lorenzobettini.it"\fP ) ;
+ \fC52:\fP         \fBif\fP (argc > 0)
+ \fC53:\fP             String param = argc[0];
+ \fC54:\fP         \fB//System.out.println( "bye bye... :-D" ) ; // see you soon\fP
+ \fC55:\fP     }
+ \fC56:\fP     \fB/* main */\fP
+ \fC57:\fP }
+ \fC58:\fP \fB/// class\fP
+ \fC59:\fP 
+ \fC60:\fP \fB// end of file test.java\fP
+.fi
