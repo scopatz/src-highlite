@@ -29,7 +29,7 @@ FLEX2HTML = $(SRCHILITEPROG) -s flex -f html $(STD_STYLE)
 
 OUTPUT_HERE = --output-dir=$(top_builddir)/doc
 
-info_TEXINFOS = source-highlight.texinfo source-highlight-lib.texinfo
+info_TEXINFOS = source-highlight.texi source-highlight-lib.texi
 source_highlight_TEXINFOS = $(GENERATEDINFOS) $(DISTRIBUTEDINFOS)
 source_highlight_lib_TEXINFOS = $(EXAMPLEINFOS)
 
