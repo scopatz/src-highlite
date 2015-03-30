@@ -15,3 +15,6 @@ docbook = docbook.outlang
 odf = odf.outlang
 mediawiki = mediawiki.outlang
 sexp = sexp.outlang
+groff_man = groff_man.outlang
+groff_mm = groff_mm.outlang
+groff_mm_color = groff_mm_color.outlang

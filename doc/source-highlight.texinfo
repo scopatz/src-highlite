@@ -1066,6 +1066,7 @@ for further information).
 * DocBook output::              
 * ANSI color escape sequences::  
 * Odf output::                  
+* Groff output::                
 @end menu
 
 @node HTML and XHTML output, LaTeX output, Simple Usage, Simple Usage
@@ -1127,7 +1128,7 @@ can handle 256 colors), which comes with the source-highlight
 distribution, with the option @code{--style-file}.  This should result
 in a more pleasant coloring output.
 
-@node Odf output,  , ANSI color escape sequences, Simple Usage
+@node Odf output, Groff output, ANSI color escape sequences, Simple Usage
 @section Odf output
 
 The ODF language output for GNU source-highlight enables the user to
@@ -1135,6 +1136,17 @@ generate color-highlighted ODF output of source code files. Or to
 generate ODF color-highlighted snippets to be used by ODF back-ends
 (like asciidoc-odf).  We create an @code{.fodt} file, which is a Text
 document that newer versions of LibreOffice can open.
+
+@node Groff output
+@section Groff output
+
+The Groff language output for GNU source-highlight enables the user to
+generate black and white or color-highlighted Groff output using using
+groff's Memorandum Macros (the output formats to specify on the
+command line are @code{groff_mm} and @code{groff_mm_color},
+respectively) or for Man pages (output format to specify on the
+command line: @code{groff_man}).  Such formats have been contributed
+by this project @url{https://github.com/papoanaya/emacs_utils}.
 
 @node Configuration files, Invoking source-highlight, Simple Usage, Top
 @chapter Configuration files

@@ -119,8 +119,10 @@ javadoc.outlang \
 docbook.outlang \
 odf.outlang \
 mediawiki.outlang \
-sexp.outlang
-
+sexp.outlang \
+groff_man.outlang \
+groff_mm.outlang \
+groff_mm_color.outlang
 
 STYLEFILES = texinfo.style esc.style esc256.style lilypond.style r.style json.style
 

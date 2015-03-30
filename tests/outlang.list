@@ -1,6 +1,9 @@
 docbook = docbook.outlang
 esc = esc.outlang
 esc256 = esc256.outlang
+groff_man = groff_man.outlang
+groff_mm = groff_mm.outlang
+groff_mm_color = groff_mm_color.outlang
 html = html.outlang
 html-css = htmlcss.outlang
 html5 = html5.outlang
