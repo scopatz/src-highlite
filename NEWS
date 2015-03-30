@@ -10,9 +10,20 @@ Please send source-highlight bug reports to bug-source-highlight at gnu.org
 
 Version 3.1.8
 
-   * fixed tcl.lang (thanks to Martin Heinrich) (bugs #36859, #36860)
-   * fixed bash.lang (bug #36613)
-   * added coffeescript.lang (thanks to Nick Gauthier)
+   * fixed some compilation bugs in some systems
+   * fixed tcl.lang
+   * fixed bash.lang
+   * New language definition files:
+   * added coffeescript
+   * added Cucumber / feature
+   * added Go
+   * added Groovy
+   * added Json
+   * added Zsh
+   * New output formats:
+   * added HTML5
+   * added S-expressions
+   * added Groff
 
 Version 3.1.7
 
